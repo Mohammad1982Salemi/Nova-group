@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="assets/css/style.css?v=12">
+<link rel="stylesheet" href="assets/css/style.css?v=13">
 
 <!-- Runs before first paint so the page never flashes in the wrong language or direction. -->
 <script>
@@ -159,30 +159,55 @@
       </div>
 <div class="tracks">
   <article class="track glow reveal">
-    <!-- resting quotes on both sides of the mid -->
-    <svg class="track-viz" viewBox="0 0 240 64" aria-hidden="true">
-      <line x1="120" y1="6" x2="120" y2="58" class="v-mid"/>
-      <rect x="44" y="18" width="68" height="10" rx="3" class="v-bid v-pulse"/>
-      <rect x="66" y="36" width="46" height="10" rx="3" class="v-bid v-dim"/>
-      <rect x="128" y="18" width="68" height="10" rx="3" class="v-ask v-pulse"/>
-      <rect x="128" y="36" width="46" height="10" rx="3" class="v-ask v-dim"/>
-    </svg>
     <span class="track-tag">Maker</span>
     <h3><span class="t-fa">نگاه مارکت میکر</span><span class="t-en">The market-maker view</span></h3>
-    <p><span class="t-fa">عرضه‌ی نقدینگی و ساخت بازار.</span><span class="t-en">Supplying liquidity and making markets.</span></p>
+    <p><span class="t-fa">عرضه‌ی نقدینگی و ساخت بازار: سفارش ما دو طرف قیمت می‌نشیند و دیگران با آن معامله می‌کنند.</span><span class="t-en">Supplying liquidity and making markets: our orders rest on both sides of the price, and others trade against them.</span></p>
+
+    <!-- our two quotes rest either side of the mid; other people's orders arrive and hit them -->
+    <svg class="track-viz" viewBox="0 0 420 150" aria-hidden="true">
+      <text x="152" y="15" class="v-label">SELLER ARRIVES</text>
+      <text x="268" y="15" class="v-label">BUYER ARRIVES</text>
+      <circle cx="152" cy="26" r="5" class="v-drop v-drop-a"/>
+      <circle cx="268" cy="26" r="5" class="v-drop v-drop-b"/>
+
+      <rect x="40" y="64" width="62" height="22" rx="5" class="v-bid v-far"/>
+      <rect x="318" y="64" width="62" height="22" rx="5" class="v-ask v-far"/>
+      <rect x="110" y="60" width="84" height="30" rx="7" class="v-bid v-ours v-hit-a"/>
+      <rect x="226" y="60" width="84" height="30" rx="7" class="v-ask v-ours v-hit-b"/>
+      <text x="152" y="79" class="v-on">OUR BID</text>
+      <text x="268" y="79" class="v-on">OUR ASK</text>
+
+      <line x1="210" y1="40" x2="210" y2="100" class="v-mid"/>
+      <path d="M195 104v6h30v-6" class="v-bracket"/>
+      <text x="210" y="126" class="v-label">SPREAD</text>
+      <text x="152" y="108" class="v-label">WE BUY</text>
+      <text x="268" y="108" class="v-label">WE SELL</text>
+    </svg>
   </article>
 
   <article class="track glow reveal">
-    <!-- an order crossing the spread into the resting quote -->
-    <svg class="track-viz" viewBox="0 0 240 64" aria-hidden="true">
-      <line x1="120" y1="6" x2="120" y2="58" class="v-mid"/>
-      <rect x="150" y="18" width="52" height="28" rx="4" class="v-ask v-dim"/>
-      <path d="M38 32H144" class="v-arrow"/>
-      <path d="M136 24l8 8-8 8" class="v-head"/>
-    </svg>
     <span class="track-tag">Taker</span>
     <h3><span class="t-fa">نگاه تیکر</span><span class="t-en">The taker view</span></h3>
-    <p><span class="t-fa">مصرف نقدینگی و ورود به معامله.</span><span class="t-en">Consuming liquidity and entering trades.</span></p>
+    <p><span class="t-fa">مصرف نقدینگی و ورود به معامله: سفارش ما از اسپرد رد می‌شود و سفارش‌های نشسته را برمی‌دارد.</span><span class="t-en">Consuming liquidity and entering trades: our order crosses the spread and takes the orders resting there.</span></p>
+
+    <!-- our order sweeps across the spread and eats the resting levels one after another -->
+    <svg class="track-viz" viewBox="0 0 420 150" aria-hidden="true">
+      <text x="84" y="26" class="v-label">OUR ORDER</text>
+      <text x="280" y="26" class="v-label">RESTING ASKS</text>
+      <line x1="150" y1="36" x2="150" y2="114" class="v-mid"/>
+
+      <rect x="170" y="56" width="68" height="38" rx="7" class="v-ask v-eat-1"/>
+      <rect x="246" y="56" width="68" height="38" rx="7" class="v-ask v-eat-2"/>
+      <rect x="322" y="56" width="68" height="38" rx="7" class="v-ask v-eat-3"/>
+      <text x="204" y="79" class="v-on v-eat-1">12</text>
+      <text x="280" y="79" class="v-on v-eat-2">8</text>
+      <text x="356" y="79" class="v-on v-eat-3">20</text>
+
+      <rect x="24" y="68" width="300" height="14" rx="7" class="v-sweep"/>
+      <path d="M-9 -10 4 0-9 10" class="v-tip"/>
+
+      <text x="210" y="134" class="v-label">CROSSES THE SPREAD · TAKES LIQUIDITY</text>
+    </svg>
   </article>
 </div>
     </div>
@@ -286,6 +311,6 @@
 
 <button class="to-top" id="toTop" type="button" aria-label="Back to top">↑</button>
 
-<script src="assets/js/main.js?v=12"></script>
+<script src="assets/js/main.js?v=13"></script>
 </body>
 </html>
