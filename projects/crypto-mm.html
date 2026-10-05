@@ -133,6 +133,7 @@
     <nav class="toc reveal" aria-label="On this page">
       <span class="toc-title"><span class="t-fa">در این صفحه</span><span class="t-en">On this page</span></span>
       <a href="#intro"><span class="t-fa">معرفی</span><span class="t-en">Introduction</span></a>
+      <a href="#platform"><span class="t-fa">پلتفرم</span><span class="t-en">Platform</span></a>
       <a href="#approach"><span class="t-fa">رویکرد</span><span class="t-en">Approach</span></a>
       <a href="#difference"><span class="t-fa">آنچه برجسته است</span><span class="t-en">What stands out</span></a>
       <a href="#roadmap"><span class="t-fa">مسیر پیش رو</span><span class="t-en">The road ahead</span></a>
@@ -159,6 +160,60 @@
         <span class="t-fa">پروژه‌ی مارکت‌میکر کریپتو بازار ۲۲ رمزارز پرمعامله را در ۱۶ صرافی جهانی، در سطح تک‌تک معامله‌ها و سفارش‌ها، گرد می‌آورد. دامنه‌ی کار یک سال کامل برای هر رمزارز است، یعنی ۶۰ ترابایت داده‌ی خام. مقصد ما یک میز بازارسازی خودکار است که سرمایه را با الگوریتمی اداره می‌کند که روی همین تاریخچه آموخته و آزموده شده است.</span>
         <span class="t-en">The Crypto Market Maker project gathers the market of 22 heavily traded cryptocurrencies on 16 global exchanges, at the level of every single trade and order. The scope of the work is one full year for each cryptocurrency, that is, 60 terabytes of raw data. The destination is an automated market-making desk that runs capital with an algorithm trained and tested on this same history.</span>
       </p>
+      </section>
+
+      <section class="cs-section" id="platform">
+        <h2><span><span class="t-fa">از داخل پلتفرم</span><span class="t-en">Inside the platform</span></span></h2>
+        <p>
+          <span class="t-fa">این‌ها تصویرهای واقعی از پلتفرم پروژه‌اند، نه طرح. هر سه نما یک بازار را نشان می‌دهند: قرارداد دائمی BTCUSDT در بایننس، ۲۹ روز از سپتامبر ۲۰۲۶، با کندل‌های ۱۵ دقیقه‌ای که از معاملات بایگانی‌شده ساخته شده‌اند. برای بزرگ‌تر دیدن، روی تصویر بزنید.</span>
+          <span class="t-en">These are real screens from the project's platform, not mock-ups. All three views show one market: the BTCUSDT perpetual contract on Binance, 29 days of September 2026, with 15-minute bars built from the archived trades. Click the image to enlarge it.</span>
+        </p>
+
+        <div class="shots reveal" data-shots>
+          <div class="shots-tabs" role="tablist" aria-label="Platform views">
+            <button type="button" role="tab" aria-selected="true" data-name="BTCUSDT · binance perpetual · M15 · Bar-Band">
+              <b><span class="t-fa">کندل و نوار</span><span class="t-en">Bars and band</span></b>
+              <span>Bars: Bar-Band</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="BTCUSDT · binance perpetual · M15 · Volume · Δ candles">
+              <b><span class="t-fa">حجم و دلتا</span><span class="t-en">Volume and delta</span></b>
+              <span>Sub: Volume · Δ candles</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="BTCUSDT · binance perpetual · M15 · Cum Δ bars">
+              <b><span class="t-fa">دلتای تجمعی</span><span class="t-en">Cumulative delta</span></b>
+              <span>Bars: Line · Sub: Cum Δ bars</span>
+            </button>
+          </div>
+
+          <figure class="shot-frame">
+            <div class="shot-bar">
+              <i></i><i></i><i></i>
+              <span class="shot-name">BTCUSDT · binance perpetual · M15 · Bar-Band</span>
+              <button type="button" class="shot-zoom" aria-label="Enlarge">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg>
+              </button>
+            </div>
+            <div class="shot-stage">
+              <img class="is-on" src="../assets/img/projects/crypto-mm/bar-band.webp" data-full="../assets/img/projects/crypto-mm/bar-band-full.webp" width="1400" height="742" alt="کندل‌های ۱۵ دقیقه‌ای BTCUSDT با نوار دور هر کندل">
+              <img src="../assets/img/projects/crypto-mm/volume-delta.webp" data-full="../assets/img/projects/crypto-mm/volume-delta-full.webp" width="1400" height="742" loading="lazy" alt="کندل‌های ۱۵ دقیقه‌ای BTCUSDT با پنل حجم و پنل کندل‌های دلتا">
+              <img src="../assets/img/projects/crypto-mm/cum-delta.webp" data-full="../assets/img/projects/crypto-mm/cum-delta-full.webp" width="1400" height="742" loading="lazy" alt="نمودار خطی قیمت BTCUSDT با پنل دلتای تجمعی">
+            </div>
+            <figcaption>
+              <p class="shot-cap is-on">
+                <span class="t-fa">کندل‌های ۱۵ دقیقه‌ای در نمای Bar-Band: هر کندل همراه با نوار سایه‌دار دور آن.</span>
+                <span class="t-en">Fifteen-minute bars in the Bar-Band view: each bar with the shaded band around it.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-fa">همان کندل‌ها، و زیر آن دو پنل: حجم هر کندل و کندل‌های دلتا (Δ candles).</span>
+                <span class="t-en">The same bars, and beneath them two panels: the volume of each bar and the delta candles (Δ candles).</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-fa">قیمت به شکل خط، و زیر آن دلتای تجمعی به شکل کندل (Cum Δ bars).</span>
+                <span class="t-en">Price as a line, and beneath it the cumulative delta drawn as bars (Cum Δ bars).</span>
+              </p>
+            </figcaption>
+          </figure>
+        </div>
       </section>
 
       <section class="cs-section" id="approach">
