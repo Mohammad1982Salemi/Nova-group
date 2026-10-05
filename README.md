@@ -6,7 +6,7 @@
 Website for Nova Group — algorithmic research into market order flow since 2020.
 Bilingual (Persian / English), multi-page, fully static.
 
-**Live:** https://mohammad1982salemi.github.io/Nova-group/
+**Live:** https://novacapital.fund/
 
 ---
 
