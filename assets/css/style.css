@@ -1048,4 +1048,6 @@ html.sb .hero h1 em, html.sb .band-slogan h2 em {
   background: none; -webkit-background-clip: border-box; background-clip: border-box;
   color: #6cc6ff; filter: none;
 }
-html.sb .btn-primary { border: 1px solid rgba(56,213,245,.85); }
+/* it leaves raster images alone, so the two blue surfaces are painted from PNGs there */
+html.sb .btn-primary { background: url(../img/sb-button.png) center / 100% 100% no-repeat; }
+html.sb .proj-report.is-on { background: url(../img/sb-report.png) center / 100% 100% no-repeat; }
