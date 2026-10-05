@@ -1041,3 +1041,11 @@ html[dir="rtl"] .footer-cta:hover .arr { transform: scaleX(-1) translateX(4px); 
 
 /* some phone browsers only leave a page alone if it answers the dark-mode query itself */
 @media (prefers-color-scheme: dark) { :root { color-scheme: dark; } html { background: #05080e; } }
+
+/* Samsung Internet's dark mode darkens bright backgrounds and gradient text: give it flat equivalents */
+html.sb a[data-href] { cursor: pointer; }
+html.sb .hero h1 em, html.sb .band-slogan h2 em {
+  background: none; -webkit-background-clip: border-box; background-clip: border-box;
+  color: #6cc6ff; filter: none;
+}
+html.sb .btn-primary { border: 1px solid rgba(56,213,245,.85); }

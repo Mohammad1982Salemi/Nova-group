@@ -20,6 +20,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap">
 <link rel="stylesheet" href="@@R@@assets/css/style.css?v=@@V@@">
 
+<!-- Samsung Internet (also used inside Telegram and WhatsApp) recolours pages in its dark mode; flag it early. -->
+<script>if (/SamsungBrowser/i.test(navigator.userAgent)) document.documentElement.classList.add('sb');</script>
+
 <!-- Runs before first paint so the page never flashes in the wrong language or direction. -->
 <script>
 (function () {

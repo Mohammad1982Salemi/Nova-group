@@ -609,6 +609,44 @@
     }
   }
 
+  /* ---------------------------------------------------------------
+     Samsung Internet's dark mode paints every link's text yellow, whatever
+     colour the page asks for, and offers no opt-out. An anchor with no href
+     is not a link to it, so there the address moves to data-href and the
+     navigation is done here. Other browsers keep ordinary links.
+     --------------------------------------------------------------- */
+  function initSamsung() {
+    if (!/SamsungBrowser/i.test(navigator.userAgent)) return;
+    Array.prototype.slice.call(document.querySelectorAll('a[href]')).forEach(function (a) {
+      var raw = a.getAttribute('href'), url = a.href;
+      var blank = a.target === '_blank', dl = a.hasAttribute('download');
+      a.setAttribute('data-href', raw);
+      a.removeAttribute('href');
+      a.setAttribute('role', 'link');
+      a.tabIndex = 0;
+
+      function go(e) {
+        e.preventDefault();
+        if (raw.charAt(0) === '#') {
+          var el = document.getElementById(raw.slice(1));
+          if (el) el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+          return;
+        }
+        if (blank || dl) {                       // let a real, unrendered link do it
+          var t = document.createElement('a');
+          t.href = url;
+          if (blank) { t.target = '_blank'; t.rel = 'noopener'; }
+          if (dl) t.setAttribute('download', '');
+          t.click();
+          return;
+        }
+        window.location.href = url;
+      }
+      a.addEventListener('click', go);
+      a.addEventListener('keydown', function (e) { if (e.key === 'Enter') go(e); });
+    });
+  }
+
   function boot() {
     initLang();
     initNav();
@@ -619,6 +657,7 @@
     initMaker();
     initTaker();
     initShots();
+    initSamsung();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);

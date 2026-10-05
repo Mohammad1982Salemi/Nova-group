@@ -29,7 +29,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="assets/css/style.css?v=35">
+<link rel="stylesheet" href="assets/css/style.css?v=36">
+
+<!-- Samsung Internet (also used inside Telegram and WhatsApp) recolours pages in its dark mode; flag it early. -->
+<script>if (/SamsungBrowser/i.test(navigator.userAgent)) document.documentElement.classList.add('sb');</script>
 
 <!-- Runs before first paint so the page never flashes in the wrong language or direction. -->
 <script>
@@ -49,7 +52,7 @@
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
     <a class="logo" href="index.html" aria-label="Nova Group">
-      <img class="logo-mark" src="assets/img/nova-mark.svg" alt="" width="240" height="240">
+      <img class="logo-mark" src="assets/img/nova-mark-512.png" alt="" width="512" height="512">
       <span class="logo-text t-fa"><b>نوا</b> گروپ</span><span class="logo-text t-en"><b>NOVA</b> GROUP</span>
     </a>
 
@@ -130,7 +133,7 @@
     <div class="footer-top footer-panel">
       <div class="footer-brand">
         <a class="logo" href="index.html" aria-label="Nova Group">
-          <img class="logo-mark" src="assets/img/nova-mark.svg" alt="" width="240" height="240" loading="lazy">
+          <img class="logo-mark" src="assets/img/nova-mark-512.png" alt="" width="512" height="512" loading="lazy">
           <span class="logo-text t-fa"><b>نوا</b> گروپ</span><span class="logo-text t-en"><b>NOVA</b> GROUP</span>
         </a>
         <p>
@@ -165,6 +168,6 @@
 
 <button class="to-top" id="toTop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
 
-<script src="assets/js/main.js?v=35"></script>
+<script src="assets/js/main.js?v=36"></script>
 </body>
 </html>
