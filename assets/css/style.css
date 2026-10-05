@@ -1051,3 +1051,7 @@ html.sb .hero h1 em, html.sb .band-slogan h2 em {
 /* it leaves raster images alone, so the two blue surfaces are painted from PNGs there */
 html.sb .btn-primary { background: url(../img/sb-button.png) center / 100% 100% no-repeat; }
 html.sb .proj-report.is-on { background: url(../img/sb-report.png) center / 100% 100% no-repeat; }
+
+/* a link inside a paragraph of a project page */
+.cs-section p a { color: var(--accent-hi); border-block-end: 1px solid rgba(140,188,255,.4); transition: color .2s, border-color .2s; }
+.cs-section p a:hover { color: #fff; border-color: #fff; }

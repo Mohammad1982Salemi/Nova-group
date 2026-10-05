@@ -20,6 +20,7 @@ Bilingual (Persian / English), multi-page, fully static.
 | مارکت‌میکر CME | `projects/cme-mm.html` | صفحه‌ی اختصاصی پروژه |
 | فست اسکلپ | `projects/fast-scalp.html` | صفحه‌ی اختصاصی پروژه |
 | بلاک‌ترید | `projects/blocktrade.html` | صفحه‌ی اختصاصی پروژه |
+| آربیتراژ صندوق‌های طلا | `projects/gold-etf.html` | صفحه‌ی اختصاصی پروژه |
 | دیفای ال‌پی | `projects/defi-lp.html` | صفحه‌ی اختصاصی پروژه |
 | مارکت‌میکر کریپتو | `projects/crypto-mm.html` | صفحه‌ی اختصاصی پروژه |
 | TSETMC | `projects/tsetmc.html` | صفحه‌ی اختصاصی پروژه، با فهرست کناری |

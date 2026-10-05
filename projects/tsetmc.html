@@ -29,7 +29,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="../assets/css/style.css?v=37">
+<link rel="stylesheet" href="../assets/css/style.css?v=38">
 
 <!-- Samsung Internet (also used inside Telegram and WhatsApp) recolours pages in its dark mode; flag it early. -->
 <script>if (/SamsungBrowser/i.test(navigator.userAgent)) document.documentElement.classList.add('sb');</script>
@@ -138,7 +138,6 @@
     <nav class="toc reveal" aria-label="On this page">
       <span class="toc-title"><span class="t-fa">در این صفحه</span><span class="t-en">On this page</span></span>
       <a href="#intro"><span class="t-fa">معرفی</span><span class="t-en">Introduction</span></a>
-      <a href="#reports"><span class="t-fa">گزارش</span><span class="t-en">Report</span></a>
       <a href="#platform"><span class="t-fa">پلتفرم</span><span class="t-en">Platform</span></a>
       <a href="#approach"><span class="t-fa">رویکرد</span><span class="t-en">Approach</span></a>
       <a href="#difference"><span class="t-fa">آنچه برجسته است</span><span class="t-en">What stands out</span></a>
@@ -162,42 +161,10 @@
         <span class="t-fa">ما تصمیم گرفتیم کل داستان را بخوانیم. پروژه‌ی TSETMC یازده سال از بازار سرمایه‌ی ایران را، معامله‌به‌معامله و سفارش‌به‌سفارش، برای ۱٬۱۴۸ نماد گرد آورده و از نو ساخته است. روی همین تاریخچه مدل می‌سازیم و می‌آزماییم. مقصد ما یک صندوق الگوریتمی مدیریت پول است: سرمایه‌ای که نه با حدس و شنیده، که با خواندن جریان زنده‌ی سفارش‌ها اداره می‌شود.</span>
         <span class="t-en">We decided to read the whole story. The TSETMC project gathers and rebuilds eleven years of the Iranian market — trade by trade, order by order — across 1,148 symbols. We build and test our models on that history. The destination is an algorithmic money-management fund: capital run not on hunches or hearsay, but by reading the live flow of orders.</span>
       </p>
-      </section>
-
-      <section class="cs-section" id="reports">
-        <h2><span><span class="t-fa">گزارش شبیه‌ساز</span><span class="t-en">Simulator report</span></span></h2>
-        <p>
-          <span class="t-fa">روی همین زیرساخت، یک راهبرد را در شبیه‌ساز آزموده‌ایم: جابه‌جایی میان صندوق‌های طلای بورس تهران، با این پرسش که آیا می‌توان از نگه‌داشتن خودِ طلا جلو افتاد. معیار سنجش، نگه‌داشتن پرمعامله‌ترین صندوق طلاست. گزارش زیر همین آزمون را در چهار سناریو نشان می‌دهد: چهار سطح تخفیف کارمزد کارگزاری، از صفر تا ۴۵٪. می‌توانید آن را دانلود کنید و مستقل از ما بخوانید و بسنجید.</span>
-          <span class="t-en">On this same infrastructure we have tested one strategy in the simulator: rotating between the gold funds of the Tehran Stock Exchange, asking whether that can get ahead of simply holding gold. The benchmark is holding the most traded gold fund. The report below shows that test in four scenarios: four levels of broker fee discount, from zero to 45%. You can download it and read and weigh it independently of us.</span>
-        </p>
-        <ul class="reports">
-          <li class="glow reveal">
-            <div class="report-head">
-              <b><span class="t-fa">طلا</span><span class="t-en">GOLD</span></b>
-              <span><span class="t-fa">چرخش میان ۲۱ صندوق طلا</span><span class="t-en">Rotation between 21 gold funds</span></span>
-            </div>
-            <ul class="report-facts">
-              <li><b><span class="t-fa">ژانویه ۲۰۲۵ تا سپتامبر ۲۰۲۶</span><span class="t-en">Jan 2025 to Sep 2026</span></b><span><span class="t-fa">بازه‌ی آزمون</span><span class="t-en">test period</span></span></li>
-              <li><b><span class="t-fa">۳۹۵</span><span class="t-en">395</span></b><span><span class="t-fa">روز معاملاتی</span><span class="t-en">trading days</span></span></li>
-              <li><b><span class="t-fa">۶۰٬۹۵۷</span><span class="t-en">60,957</span></b><span><span class="t-fa">معامله‌ی شبیه‌سازی‌شده در سناریوی پایه</span><span class="t-en">simulated trades in the base scenario</span></span></li>
-              <li><b><span class="t-fa">۴ سناریو</span><span class="t-en">4 scenarios</span></b><span><span class="t-fa">۴ سطح کارمزد</span><span class="t-en">4 fee levels</span></span></li>
-            </ul>
-            <div class="report-actions">
-              <a class="btn btn-primary" href="../assets/reports/tsetmc-gold-funds-summary.html" download>
-                <svg class="arr-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
-                <span class="t-fa">دانلود گزارش</span><span class="t-en">Download the report</span>
-              </a>
-              <a class="btn btn-ghost" href="../assets/reports/tsetmc-gold-funds-summary.html" target="_blank" rel="noopener">
-                <span class="t-fa">باز کردن در مرورگر</span><span class="t-en">Open in the browser</span>
-              </a>
-            </div>
-            <p class="report-size"><span class="t-fa">یک فایل HTML مستقل، ۴٫۹ مگابایت، به انگلیسی</span><span class="t-en">One self-contained HTML file, 4.9 MB, in English</span></p>
-          </li>
-        </ul>
-        <p class="report-note">
-          <span class="t-fa">این نتیجه‌ی شبیه‌سازی روی دفتر سفارش ضبط‌شده‌ی بازار است، نه معامله‌ی واقعی، و تضمینی برای آینده نیست. در این شبیه‌سازی معامله‌گران رقیب مدل نشده‌اند.</span>
-          <span class="t-en">This is a simulation result on the market's recorded order books, not real trading, and no guarantee of the future. No competing traders are modelled in this simulation.</span>
-        </p>
+      <p>
+        <span class="t-fa">یک راهبرد از دل همین زیرساخت بیرون آمد و پروژه‌ای مستقل شد: <a href="../projects/gold-etf.html">آربیتراژ صندوق‌های طلا</a>.</span>
+        <span class="t-en">One strategy grew out of this infrastructure into a project of its own: <a href="../projects/gold-etf.html">Gold ETF Arbitrage</a>.</span>
+      </p>
       </section>
 
       <section class="cs-section" id="platform">
@@ -411,6 +378,6 @@
 
 <button class="to-top" id="toTop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
 
-<script src="../assets/js/main.js?v=37"></script>
+<script src="../assets/js/main.js?v=38"></script>
 </body>
 </html>
