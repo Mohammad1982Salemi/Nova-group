@@ -884,3 +884,18 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
 html[lang="fa"] .band-slogan h2 { letter-spacing: 0; }
 @media (max-width: 760px) { .band-slogan { align-items: center; padding: 46px 22px 42px; } }
 .report-head { flex-wrap: wrap; }
+
+/* project cards: a simulator-report badge, lit when a report can be downloaded */
+.proj-facts .proj-report {
+  padding: 12px 14px; border-radius: 12px; border: 1px dashed var(--line-2);
+  background: rgba(148,170,205,.03); opacity: .42;
+}
+.proj-facts .proj-report b { display: flex; align-items: center; gap: 8px; font-size: 15px; color: var(--muted); }
+.proj-facts .proj-report svg { flex: none; width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.proj-facts .proj-report.is-on {
+  opacity: 1; border: 1px solid rgba(56,213,245,.5);
+  background: linear-gradient(140deg, rgba(56,213,245,.16), rgba(59,130,246,.08));
+  box-shadow: 0 0 26px rgba(56,213,245,.16), inset 0 1px 0 rgba(255,255,255,.06);
+}
+.proj-facts .proj-report.is-on b { color: var(--cyan); }
+.proj-facts .proj-report.is-on > span { color: var(--text); }
