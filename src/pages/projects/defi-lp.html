@@ -81,6 +81,7 @@
     <nav class="toc reveal" aria-label="On this page">
       <span class="toc-title"><span class="t-fa">در این صفحه</span><span class="t-en">On this page</span></span>
       <a href="#intro"><span class="t-fa">معرفی</span><span class="t-en">Introduction</span></a>
+      <a href="#platform"><span class="t-fa">پلتفرم</span><span class="t-en">Platform</span></a>
       <a href="#approach"><span class="t-fa">رویکرد</span><span class="t-en">Approach</span></a>
       <a href="#difference"><span class="t-fa">آنچه برجسته است</span><span class="t-en">What stands out</span></a>
       <a href="#roadmap"><span class="t-fa">مسیر پیش رو</span><span class="t-en">The road ahead</span></a>
@@ -107,6 +108,60 @@
         <span class="t-fa">پروژه‌ی دیفای ال‌پی تاریخچه‌ی کامل ۱۳۶ استخر را روی چهار شبکه‌ی بلاک‌چین، از نخستین روز هر استخر تا امروز و در سطح تک‌تک رویدادها، گرد آورده است. بر پایه‌ی این داده، نشستن سرمایه در استخر و جابه‌جایی آن میان استخرها را در بازسازی دقیقی از خودِ بازار شبیه‌سازی می‌کنیم و نتیجه را با پول واقعی مقابله کرده‌ایم. مقصد ما یک صندوق خودکار است که پول را مدیریت می‌کند و آن را میان استخرها، به سوی بهترین بازده خالص، جابه‌جا می‌کند.</span>
         <span class="t-en">The DeFi LP project has gathered the full history of 136 pools on four blockchain networks, from each pool's first day until today, at the level of every single event. From that data we simulate capital sitting in a pool, and moving between pools, inside a close reconstruction of the market itself, and we have checked the result against real money. The destination is an automated fund that manages money and moves it between pools, toward the best net return.</span>
       </p>
+      </section>
+
+      <section class="cs-section" id="platform">
+        <h2><span><span class="t-fa">از داخل پلتفرم</span><span class="t-en">Inside the platform</span></span></h2>
+        <p>
+          <span class="t-fa">این‌ها تصویرهای واقعی از پلتفرم پروژه‌اند، نه طرح. هر سه نما یک استخر را نشان می‌دهند: cbBTC/USDC با کارمزد ۰٫۰۵٪ در Uniswap V4 روی شبکه‌ی Base. برای بزرگ‌تر دیدن، روی تصویر بزنید.</span>
+          <span class="t-en">These are real screens from the project's platform, not mock-ups. All three views show one pool: cbBTC/USDC at a 0.05% fee on Uniswap V4, on the Base network. Click the image to enlarge it.</span>
+        </p>
+
+        <div class="shots reveal" data-shots>
+          <div class="shots-tabs" role="tablist" aria-label="Platform views">
+            <button type="button" role="tab" aria-selected="true" data-name="cbBTC/USDC · Uniswap V4 (Base) · Heat: Zone">
+              <b><span class="t-fa">نمای Zone</span><span class="t-en">Zone view</span></b>
+              <span>Heat: Zone · Source: DEX</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="cbBTC/USDC · Uniswap V4 (Base) · Cum Δ">
+              <b><span class="t-fa">حرکت‌ها و دلتای تجمعی</span><span class="t-en">Moves and cumulative delta</span></b>
+              <span>Move: 4% · Sub: Cum Δ</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="cbBTC/USDC · Uniswap V4 (Base) · Heat: Yield">
+              <b><span class="t-fa">نمای Yield</span><span class="t-en">Yield view</span></b>
+              <span>Heat: Yield · Band: 1D v2</span>
+            </button>
+          </div>
+
+          <figure class="shot-frame">
+            <div class="shot-bar">
+              <i></i><i></i><i></i>
+              <span class="shot-name">cbBTC/USDC · Uniswap V4 (Base) · Heat: Zone</span>
+              <button type="button" class="shot-zoom" aria-label="Enlarge">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg>
+              </button>
+            </div>
+            <div class="shot-stage">
+              <img class="is-on" src="@@R@@assets/img/projects/defi-lp/heat-zone.webp" data-full="@@R@@assets/img/projects/defi-lp/heat-zone-full.webp" width="1400" height="742" alt="کندل‌های قیمت استخر cbBTC/USDC با نمای حرارتی Zone دور قیمت">
+              <img src="@@R@@assets/img/projects/defi-lp/moves-delta.webp" data-full="@@R@@assets/img/projects/defi-lp/moves-delta-full.webp" width="1400" height="742" loading="lazy" alt="کندل‌های قیمت استخر با قاب حرکت‌های ۴ درصدی و پنل دلتای تجمعی">
+              <img src="@@R@@assets/img/projects/defi-lp/heat-yield.webp" data-full="@@R@@assets/img/projects/defi-lp/heat-yield-full.webp" width="1400" height="742" loading="lazy" alt="نمای حرارتی Yield با نوار روزانه دور قیمت">
+            </div>
+            <figcaption>
+              <p class="shot-cap is-on">
+                <span class="t-fa">کندل‌های قیمت استخر از ژوئن ۲۰۲۵ تا اوت ۲۰۲۶، و دور آن نمای حرارتی Zone: ناحیه‌های رنگی در سطح‌های قیمت.</span>
+                <span class="t-en">The pool's price bars from June 2025 to August 2026, and around them the Zone heat view: coloured zones across the price levels.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-fa">همان کندل‌ها با قاب حرکت‌های ۴ درصدی، و زیر آن پنل دلتای تجمعی به دلار.</span>
+                <span class="t-en">The same bars with the 4% move boxes, and beneath them the cumulative delta panel in dollars.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-fa">سه ماه آخر در نمای حرارتی Yield، همراه با نوار روزانه (Band: 1D) دور قیمت.</span>
+                <span class="t-en">The last three months in the Yield heat view, with the daily band (Band: 1D) around the price.</span>
+              </p>
+            </figcaption>
+          </figure>
+        </div>
       </section>
 
       <section class="cs-section" id="approach">
