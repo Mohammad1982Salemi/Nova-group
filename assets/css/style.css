@@ -305,28 +305,33 @@ html[dir="rtl"] .btn-primary svg { transform: scaleX(-1); }
 .section-sub { color: var(--muted); margin-block-start: 14px; font-size: 16.5px; }
 
 /* ---------- about ---------- */
-.about-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: start; }
+.about-text { max-width: 78ch; }
 .about-text p { color: var(--muted); font-size: 16.5px; }
 .about-text p + p { margin-block-start: 20px; }
 .about-text strong { color: var(--text); font-weight: 600; }
 
-/* ---------- the framework: three layers ---------- */
-.framework { display: grid; gap: 16px; }
+/* ---------- the method: three layers ---------- */
+.method { margin-block-start: 64px; }
+.method-head { max-width: 720px; margin-block-end: 34px; }
+.method-head h3 { font-size: clamp(1.25rem, 2.6vw, 1.65rem); margin-block-end: 11px; }
+.method-head p { color: var(--muted); font-size: 15.6px; }
+.method-head p + p { margin-block-start: 6px; }
+
+.framework { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .framework li {
-  display: flex; gap: 16px; padding: 20px;
-  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
+  display: block; padding: 26px 24px 28px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg);
   transition: border-color .25s, background .25s, transform .25s;
 }
-.framework li:hover { border-color: var(--line-2); background: var(--surface-2); transform: translateX(-4px); }
-html[dir="ltr"] .framework li:hover { transform: translateX(4px); }
+.framework li:hover { border-color: var(--line-2); background: var(--surface-2); transform: translateY(-5px); }
 .fw-num {
-  flex: none; width: 34px; height: 34px; display: grid; place-items: center;
-  border-radius: 10px; font-size: 15px; font-weight: 700; color: var(--cyan);
+  display: grid; place-items: center; width: 36px; height: 36px; margin-block-end: 16px;
+  border-radius: 11px; font-size: 16px; font-weight: 700; color: var(--cyan);
   font-family: var(--font-display-en);
   background: rgba(34,211,238,.1); border: 1px solid rgba(34,211,238,.24);
 }
-.framework strong { display: block; font-size: 15.5px; margin-block-end: 5px; }
-.framework p { color: var(--muted); font-size: 14.2px; line-height: 1.78; }
+.framework strong { display: block; font-size: 16px; margin-block-end: 7px; }
+.framework p { color: var(--muted); font-size: 14.4px; line-height: 1.8; }
 .framework p + p { margin-block-start: 8px; }
 
 /* ---------- status note ---------- */
@@ -542,7 +547,7 @@ html[dir="rtl"] .clink-body { align-items: flex-start; }
 @media (max-width: 1024px) {
   .hero-grid { grid-template-columns: 1fr; gap: 70px; }
   .hero-visual { max-width: 580px; }
-  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .framework { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 760px) {
