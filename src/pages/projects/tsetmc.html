@@ -80,6 +80,7 @@
     <nav class="toc reveal" aria-label="On this page">
       <span class="toc-title"><span class="t-fa">در این صفحه</span><span class="t-en">On this page</span></span>
       <a href="#intro"><span class="t-fa">معرفی</span><span class="t-en">Introduction</span></a>
+      <a href="#platform"><span class="t-fa">پلتفرم</span><span class="t-en">Platform</span></a>
       <a href="#approach"><span class="t-fa">رویکرد</span><span class="t-en">Approach</span></a>
       <a href="#difference"><span class="t-fa">آنچه فرق می‌کند</span><span class="t-en">What it changes</span></a>
       <a href="#roadmap"><span class="t-fa">مسیر پیش رو</span><span class="t-en">The road ahead</span></a>
@@ -102,6 +103,60 @@
         <span class="t-fa">ما تصمیم گرفتیم کل داستان را بخوانیم. پروژه‌ی TSETMC یازده سال از بازار سرمایه‌ی ایران را، معامله‌به‌معامله و سفارش‌به‌سفارش، برای ۱٬۱۴۸ نماد گرد آورده و از نو ساخته است. روی همین تاریخچه مدل می‌سازیم و می‌آزماییم. مقصد ما یک صندوق الگوریتمی مدیریت پول است: سرمایه‌ای که نه با حدس و شنیده، که با خواندن جریان زنده‌ی سفارش‌ها اداره می‌شود.</span>
         <span class="t-en">We decided to read the whole story. The TSETMC project gathers and rebuilds eleven years of the Iranian market — trade by trade, order by order — across 1,148 symbols. We build and test our models on that history. The destination is an algorithmic fund: capital run not on hunches or hearsay, but by reading the live flow of orders.</span>
       </p>
+      </section>
+
+      <section class="cs-section" id="platform">
+        <h2><span><span class="t-fa">از داخل پلتفرم</span><span class="t-en">Inside the platform</span></span></h2>
+        <p>
+          <span class="t-fa">این‌ها تصویرهای واقعی از پلتفرم تحلیلی پروژه‌اند، نه طرح. هر نما همان داده‌ی خام بازار را از زاویه‌ای دیگر نشان می‌دهد. برای بزرگ‌تر دیدن، روی تصویر بزنید.</span>
+          <span class="t-en">These are real screens from the project's analysis platform, not mock-ups. Each view shows the same raw market data from a different angle. Click the image to enlarge it.</span>
+        </p>
+
+        <div class="shots reveal" data-shots>
+          <div class="shots-tabs" role="tablist" aria-label="Platform views">
+            <button type="button" role="tab" aria-selected="true" data-name="TSETMC · Book Δ">
+              <b><span class="t-fa">اختلاف دفتر سفارش</span><span class="t-en">Order-book delta</span></b>
+              <span>Book Δ · bid − ask</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="TSETMC · Big trades">
+              <b><span class="t-fa">معاملات بزرگ</span><span class="t-en">Big trades</span></b>
+              <span>Big trade buy · sell · Cum Δ</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="TSETMC · Options">
+              <b><span class="t-fa">اختیار معامله</span><span class="t-en">Options</span></b>
+              <span>104 contracts · calls</span>
+            </button>
+          </div>
+
+          <figure class="shot-frame">
+            <div class="shot-bar">
+              <i></i><i></i><i></i>
+              <span class="shot-name">TSETMC · Book Δ</span>
+              <button type="button" class="shot-zoom" aria-label="Enlarge">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg>
+              </button>
+            </div>
+            <div class="shot-stage">
+              <img class="is-on" src="@@R@@assets/img/projects/tsetmc/book-delta.webp" data-full="@@R@@assets/img/projects/tsetmc/book-delta-full.webp" width="1400" height="742" alt="نمودار هفتگی قیمت با سه پنل اختلاف دفتر سفارش">
+              <img src="@@R@@assets/img/projects/tsetmc/big-trades.webp" data-full="@@R@@assets/img/projects/tsetmc/big-trades-full.webp" width="1400" height="742" loading="lazy" alt="نمودار هفتگی قیمت با پنل‌های خرید و فروش معاملات بزرگ">
+              <img src="@@R@@assets/img/projects/tsetmc/options.webp" data-full="@@R@@assets/img/projects/tsetmc/options-full.webp" width="1400" height="742" loading="lazy" alt="۱۰۴ قرارداد اختیار معامله روی یک نمودار">
+            </div>
+            <figcaption>
+              <p class="shot-cap is-on">
+                <span class="t-fa">نمودار هفتگی قیمت، و زیر آن اختلاف حجم سمت خرید و سمت فروشِ دفتر سفارش در سه شکل: خام، وزن‌دهی‌شده با زمان، و تجمعی.</span>
+                <span class="t-en">Weekly price, and beneath it the gap between bid-side and ask-side volume in the book in three forms: raw, time-weighted, and cumulative.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-fa">حجم خریدهای بزرگ و فروش‌های بزرگ در هر هفته، و اختلاف تجمعی این دو، زیر همان نمودار قیمت.</span>
+                <span class="t-en">The volume of large buys and large sells each week, and the cumulative gap between the two, under the same price chart.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-fa">۱۰۴ قرارداد اختیار معامله روی یک نمودار، همراه با حجم، تعداد معاملات و کندل‌های اختلافِ اختیارهای خرید.</span>
+                <span class="t-en">104 option contracts on one chart, with the volume, trade count and delta candles of the calls.</span>
+              </p>
+            </figcaption>
+          </figure>
+        </div>
       </section>
 
       <section class="cs-section" id="approach">

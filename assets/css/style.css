@@ -502,6 +502,11 @@ html[dir="rtl"] .pipe > span + span::before { content: '←'; }
   transition: border-color .25s, background .25s;
 }
 .proj:hover { border-color: rgba(59,130,246,.55); background: var(--panel-2); }
+/* a strip of the project's own screen across the top of its card, fading into it */
+.proj-shot { grid-column: 1 / -1; position: relative; height: 220px; margin: -34px -36px 0; overflow: hidden; background: #0d111a; }
+.proj-shot img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; opacity: .9; transition: transform 1.2s ease, opacity .4s; }
+.proj-shot::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(9,13,22,0) 35%, rgba(9,13,22,.97) 100%); }
+.proj:hover .proj-shot img { transform: scale(1.05); opacity: 1; }
 .proj-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-block-end: 20px; }
 .proj h3 { font-family: var(--font-disp); font-size: clamp(1.6rem, 3vw, 2.1rem); letter-spacing: -.01em; margin-block-end: 8px; }
 .proj-sub { color: var(--text); font-size: 16.2px; font-weight: 500; margin-block-end: 12px; }
@@ -619,6 +624,65 @@ html[data-lang="en"] .toc-title { letter-spacing: .12em; text-transform: upperca
 .phases li.is-now .phase-mark { color: #04121a; background: var(--cyan); border-color: transparent; }
 .phases li.is-now p { color: var(--text); }
 
+/* ---------- screenshots of the real platform, in a window frame ---------- */
+.shots { margin-block-start: 32px; }
+.shots-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-block-end: 20px; }
+.shots-tabs button {
+  position: relative; overflow: hidden; text-align: start; padding: 15px 18px 17px; border-radius: var(--r);
+  color: var(--muted); border: 1px solid var(--line);
+  background: linear-gradient(165deg, rgba(148,170,205,.09), rgba(148,170,205,.025));
+  transition: border-color .25s, background .25s, box-shadow .25s, transform .25s;
+}
+.shots-tabs button:hover { transform: translateY(-2px); border-color: var(--line-2); }
+.shots-tabs b { display: block; font-size: 15.6px; color: var(--text); margin-block-end: 3px; }
+.shots-tabs button > span { font-family: var(--font-mono); font-size: 11px; letter-spacing: .04em; color: var(--dim); direction: ltr; unicode-bidi: plaintext; display: block; }
+.shots-tabs button[aria-selected="true"] {
+  border-color: rgba(96,165,250,.75); background: rgba(59,130,246,.15); box-shadow: 0 0 34px rgba(37,99,235,.22);
+}
+/* while the views advance by themselves, the current tab fills along its bottom edge */
+.shots-tabs button::after { content: ''; position: absolute; inset-inline-start: 0; inset-block-end: 0; height: 2px; width: 0; background: var(--grad); }
+.shots.is-auto .shots-tabs button[aria-selected="true"]::after { animation: shot-fill 6s linear forwards; }
+@keyframes shot-fill { to { width: 100%; } }
+
+.shot-frame {
+  position: relative; overflow: hidden; border-radius: 18px; border: 1px solid var(--line-2); background: #0b0f18;
+  box-shadow: 0 44px 110px rgba(0,0,0,.62), 0 0 90px rgba(37,99,235,.2), inset 0 1px 0 rgba(255,255,255,.08);
+  transform: perspective(1600px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .3s ease-out;
+}
+.shot-bar { direction: ltr; display: flex; align-items: center; gap: 7px; padding: 11px 14px; border-bottom: 1px solid var(--line); background: rgba(148,170,205,.06); }
+.shot-bar i { width: 10px; height: 10px; border-radius: 50%; background: #2c3950; }
+.shot-name { margin-left: 10px; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .06em; color: var(--muted); }
+.shot-zoom { margin-left: auto; width: 30px; height: 28px; display: grid; place-items: center; border-radius: 8px; background: none; border: 1px solid var(--line); color: var(--muted); transition: color .2s, border-color .2s; }
+.shot-zoom:hover { color: var(--accent-hi); border-color: var(--accent-hi); }
+.shot-zoom svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.shot-stage { position: relative; aspect-ratio: 1400 / 742; background: #0d111a; cursor: zoom-in; }
+.shot-stage img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transform: scale(1.02); transition: opacity .55s ease, transform .8s ease;
+}
+.shot-stage img.is-on { opacity: 1; transform: none; }
+/* a soft light across the glass */
+.shot-stage::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(115deg, rgba(255,255,255,.07) 0%, transparent 28%, transparent 72%, rgba(96,165,250,.06) 100%);
+}
+.shot-frame figcaption { padding: 16px 20px 18px; border-top: 1px solid var(--line); background: rgba(148,170,205,.04); }
+.cs-section .shot-cap { display: none; margin: 0; font-size: 14.8px; color: var(--muted); }
+.cs-section .shot-cap.is-on { display: block; animation: cap-in .45s ease-out; }
+@keyframes cap-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+.lightbox {
+  position: fixed; inset: 0; z-index: 300; display: grid; place-items: center; padding: 24px; cursor: zoom-out;
+  background: rgba(3,5,10,.93); backdrop-filter: blur(8px); animation: lb-in .2s ease-out;
+}
+.lightbox img { max-width: 100%; max-height: 100%; width: auto; height: auto; border-radius: 10px; border: 1px solid var(--line-2); box-shadow: 0 40px 120px rgba(0,0,0,.8); }
+.lightbox-close {
+  position: absolute; inset-block-start: 18px; inset-inline-end: 22px; width: 44px; height: 44px; border-radius: 50%;
+  font-size: 24px; line-height: 1; color: var(--text); background: rgba(148,170,205,.12); border: 1px solid var(--line-2);
+}
+@keyframes lb-in { from { opacity: 0; } to { opacity: 1; } }
+
 .cs-end { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
 /* "back" points the other way from every other arrow */
 .link-back .arr { transform: scaleX(-1); }
@@ -729,6 +793,10 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
   .cs-section + .cs-section { margin-block-start: 64px; }
   .layers-full li { gap: 16px; }
   .proj { padding: 26px 22px; }
+  .proj-shot { height: 150px; margin: -26px -22px 0; }
+  .shots-tabs { grid-template-columns: 1fr; gap: 8px; }
+  .shots-tabs button { padding: 12px 16px 14px; }
+  .shot-frame figcaption { padding: 14px 16px 16px; }
   .proj-facts { grid-template-columns: 1fr; gap: 16px; }
   .band { flex-direction: column; align-items: flex-start; gap: 24px; padding: 30px 24px; }
   .cs-section .detail-lead { font-size: 17.4px; }

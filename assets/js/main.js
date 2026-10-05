@@ -501,6 +501,112 @@
     runBook(root, step, draw, function () { return phase === 'sweep' ? rnd(260, 380) : rnd(480, 760); });
   }
 
+  /* ---------------------------------------------------------------
+     Case-study screenshots: tabs switch the view, it advances by itself
+     until someone takes over, the frame leans toward the cursor, and a
+     click opens the full-size image.
+     --------------------------------------------------------------- */
+  function initShots() {
+    var box = document.querySelector('[data-shots]');
+    if (!box) return;
+
+    var each = Array.prototype.slice;
+    var tabs = each.call(box.querySelectorAll('[role="tab"]'));
+    var imgs = each.call(box.querySelectorAll('.shot-stage img'));
+    var caps = each.call(box.querySelectorAll('.shot-cap'));
+    var frame = box.querySelector('.shot-frame');
+    var stage = box.querySelector('.shot-stage');
+    var name = box.querySelector('.shot-name');
+    var current = 0, auto = !reduceMotion, onScreen = false, timer = null;
+
+    function show(i) {
+      current = i;
+      tabs.forEach(function (tab, k) {
+        tab.setAttribute('aria-selected', k === i ? 'true' : 'false');
+        tab.tabIndex = k === i ? 0 : -1;
+      });
+      imgs.forEach(function (img, k) { img.classList.toggle('is-on', k === i); });
+      caps.forEach(function (cap, k) { cap.classList.toggle('is-on', k === i); });
+      name.textContent = tabs[i].getAttribute('data-name');
+    }
+    function schedule() {
+      clearTimeout(timer);
+      var running = auto && onScreen && !document.hidden;
+      box.classList.toggle('is-auto', running);
+      if (running) timer = setTimeout(function () { show((current + 1) % tabs.length); schedule(); }, 6000);
+    }
+    function takeOver(i) { auto = false; show(i); schedule(); }
+
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener('click', function () { takeOver(i); });
+      tab.addEventListener('keydown', function (e) {
+        var step = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!step) return;
+        if (html.dir === 'rtl') step = -step;
+        var to = (i + step + tabs.length) % tabs.length;
+        takeOver(to);
+        tabs[to].focus();
+      });
+    });
+
+    function enlarge() {
+      auto = false; schedule();
+      var layer = document.createElement('div');
+      layer.className = 'lightbox';
+      layer.setAttribute('role', 'dialog');
+      layer.setAttribute('aria-modal', 'true');
+      var close = document.createElement('button');
+      close.type = 'button';
+      close.className = 'lightbox-close';
+      close.setAttribute('aria-label', 'Close');
+      close.textContent = '×';
+      var big = document.createElement('img');
+      big.src = imgs[current].getAttribute('data-full');
+      big.alt = imgs[current].alt;
+      layer.appendChild(close);
+      layer.appendChild(big);
+      document.body.appendChild(layer);
+      document.body.style.overflow = 'hidden';
+
+      function shut() {
+        layer.remove();
+        document.body.style.overflow = '';
+        document.removeEventListener('keydown', onKey);
+        stage.focus();
+      }
+      function onKey(e) { if (e.key === 'Escape') shut(); }
+      layer.addEventListener('click', shut);
+      document.addEventListener('keydown', onKey);
+      close.focus();
+    }
+    stage.tabIndex = 0;
+    stage.addEventListener('click', enlarge);
+    stage.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); enlarge(); }
+    });
+    box.querySelector('.shot-zoom').addEventListener('click', enlarge);
+
+    if (!reduceMotion && !window.matchMedia('(hover: none)').matches) {   // lean toward the cursor
+      frame.addEventListener('pointermove', function (e) {
+        var r = frame.getBoundingClientRect();
+        frame.style.setProperty('--ry', (((e.clientX - r.left) / r.width - 0.5) * 5).toFixed(2) + 'deg');
+        frame.style.setProperty('--rx', ((0.5 - (e.clientY - r.top) / r.height) * 4).toFixed(2) + 'deg');
+      });
+      frame.addEventListener('pointerleave', function () {
+        frame.style.setProperty('--rx', '0deg');
+        frame.style.setProperty('--ry', '0deg');
+      });
+    }
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        onScreen = entries[0].isIntersecting;
+        schedule();
+      }, { threshold: 0.35 }).observe(box);
+      document.addEventListener('visibilitychange', schedule);
+    }
+  }
+
   function boot() {
     initLang();
     initNav();
@@ -510,6 +616,7 @@
     initMbo();
     initMaker();
     initTaker();
+    initShots();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
