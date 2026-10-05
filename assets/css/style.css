@@ -347,7 +347,7 @@ html[dir="ltr"] .about-points li:hover { transform: translateX(4px); }
 .members-head h3 { font-size: clamp(1.25rem, 2.6vw, 1.6rem); margin-block-end: 8px; }
 .members-head p { color: var(--muted); font-size: 15.4px; }
 
-.team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
 .member {
   text-align: center; padding: 34px 20px 28px;
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg);
@@ -471,7 +471,6 @@ html[dir="rtl"] .clink-body { align-items: flex-start; }
   .hero-grid { grid-template-columns: 1fr; gap: 70px; }
   .hero-visual { max-width: 580px; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
-  .team-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 760px) {
