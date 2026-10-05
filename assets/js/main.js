@@ -28,6 +28,8 @@
       var y = window.scrollY || window.pageYOffset;
       nav.classList.toggle('is-scrolled', y > 12);
       toTop.classList.toggle('is-visible', y > 620);
+      var room = document.documentElement.scrollHeight - window.innerHeight;   // how far the page has been read
+      toTop.style.setProperty('--p', room > 0 ? Math.min(100, y / room * 100).toFixed(1) : 0);
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();

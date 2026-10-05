@@ -711,15 +711,28 @@ html[data-lang="en"] .footer-col h2 { letter-spacing: .12em; text-transform: upp
 .footer-legal { margin-block-start: 44px; padding-block-start: 24px; border-block-start: 1px solid var(--line); color: var(--dim); font-size: 13.2px; max-width: 92ch; }
 .footer-bottom { margin-block-start: 14px; color: var(--dim); font-size: 13.2px; }
 
+/* back to top: a glass disc whose rim fills as the page is read */
 .to-top {
   position: fixed; inset-block-end: 24px; inset-inline-end: 24px; z-index: 90;
-  width: 44px; height: 44px; border-radius: 50%;
-  background: rgba(9,14,23,.9); border: 1px solid var(--line-2); color: var(--accent-hi); font-size: 17px;
-  opacity: 0; visibility: hidden; transform: translateY(10px);
-  transition: opacity .3s, transform .3s, visibility .3s, border-color .2s;
+  display: grid; place-items: center; width: 54px; height: 54px; padding: 0; border: 0; border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--cyan) 0, var(--accent) calc(var(--p, 0) * 1%), rgba(148,170,205,.16) 0);
+  box-shadow: 0 12px 34px rgba(0,0,0,.5), 0 0 26px rgba(59,130,246,.2);
+  opacity: 0; visibility: hidden; transform: translateY(14px) scale(.9);
+  transition: opacity .35s, transform .35s cubic-bezier(.2,.8,.2,1), visibility .35s, box-shadow .3s;
+}
+.to-top::before {
+  content: ''; position: absolute; inset: 3px; border-radius: 50%;
+  background: radial-gradient(120% 120% at 30% 20%, #1b2c4d, #0a111e 70%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12);
+}
+.to-top svg {
+  position: relative; width: 21px; height: 21px; fill: none; stroke: var(--accent-hi);
+  stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform .3s, stroke .3s;
 }
 .to-top.is-visible { opacity: 1; visibility: visible; transform: none; }
-.to-top:hover { border-color: var(--accent-hi); }
+.to-top:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(0,0,0,.55), 0 0 36px rgba(56,213,245,.45); }
+.to-top:hover svg { stroke: #fff; transform: translateY(-2px); }
+.to-top:active { transform: translateY(-1px) scale(.96); }
 
 /* ==========================================================================
    running prose is justified, so line ends sit under each other. Headings,
