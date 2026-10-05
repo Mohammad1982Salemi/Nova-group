@@ -133,6 +133,7 @@
     <nav class="toc reveal" aria-label="On this page">
       <span class="toc-title"><span class="t-fa">در این صفحه</span><span class="t-en">On this page</span></span>
       <a href="#intro"><span class="t-fa">معرفی</span><span class="t-en">Introduction</span></a>
+      <a href="#platform"><span class="t-fa">پلتفرم</span><span class="t-en">Platform</span></a>
       <a href="#approach"><span class="t-fa">رویکرد</span><span class="t-en">Approach</span></a>
       <a href="#difference"><span class="t-fa">آنچه برجسته است</span><span class="t-en">What stands out</span></a>
       <a href="#roadmap"><span class="t-fa">مسیر پیش رو</span><span class="t-en">The road ahead</span></a>
@@ -159,6 +160,60 @@
         <span class="t-fa">پروژه‌ی مارکت‌میکر CME تاریخچه‌ی چندساله‌ی بورس شیکاگو، از بزرگ‌ترین بازارهای آتی جهان، را در سطح تک‌تک سفارش‌ها گرد آورده است. بر پایه‌ی این داده، با یادگیری عمیق و تحلیل آماری، به یک الگوریتم بازارسازی رسیده‌ایم که در بازسازی دقیقی از خودِ بورس آزموده می‌شود. مقصد ما یک میز بازارسازی خودکار است که سرمایه را با همین الگوریتم اداره می‌کند، نه با قضاوت لحظه‌ای افراد.</span>
         <span class="t-en">The CME Market Maker project has gathered several years of the Chicago exchange, one of the world's largest futures markets, at the level of every single order. From that data, with deep learning and statistical analysis, we have arrived at a market-making algorithm that is tested inside a close reconstruction of the exchange itself. The destination is an automated market-making desk that runs capital with this algorithm, not with people's judgement of the moment.</span>
       </p>
+      </section>
+
+      <section class="cs-section" id="platform">
+        <h2><span><span class="t-fa">از داخل پلتفرم</span><span class="t-en">Inside the platform</span></span></h2>
+        <p>
+          <span class="t-fa">این‌ها تصویرهای واقعی از ابزارهای پروژه‌اند، نه طرح. هر نما همان داده‌ی سفارش‌به‌سفارش بازار را از زاویه‌ای دیگر نشان می‌دهد. برای بزرگ‌تر دیدن، روی تصویر بزنید.</span>
+          <span class="t-en">These are real screens from the project's tools, not mock-ups. Each view shows the same order-by-order market data from a different angle. Click the image to enlarge it.</span>
+        </p>
+
+        <div class="shots reveal" data-shots>
+          <div class="shots-tabs" role="tablist" aria-label="Platform views">
+            <button type="button" role="tab" aria-selected="true" data-name="CME · Limit orders">
+              <b><span class="t-fa">سفارش‌های منتظر</span><span class="t-en">Waiting orders</span></b>
+              <span>Limit Orders Flow · NQ</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="Quantia Tape · GC">
+              <b><span class="t-fa">نوار رویدادها</span><span class="t-en">Event tape</span></b>
+              <span>raw → wire → engine</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="Quantia Rendering · 1Tick">
+              <b><span class="t-fa">نمودار تیک‌به‌تیک</span><span class="t-en">Tick chart</span></b>
+              <span>1Tick → M1 → H4</span>
+            </button>
+          </div>
+
+          <figure class="shot-frame">
+            <div class="shot-bar">
+              <i></i><i></i><i></i>
+              <span class="shot-name">CME · Limit orders</span>
+              <button type="button" class="shot-zoom" aria-label="Enlarge">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg>
+              </button>
+            </div>
+            <div class="shot-stage">
+              <img class="is-on" src="../assets/img/projects/cme-mm/limit-orders.webp" data-full="../assets/img/projects/cme-mm/limit-orders-full.webp" width="1400" height="742" alt="نقشه‌ی حرارتی سفارش‌های منتظر در هر قیمت، با مسیر قیمت و حباب‌های معاملات">
+              <img src="../assets/img/projects/cme-mm/tape.webp" data-full="../assets/img/projects/cme-mm/tape-full.webp" width="1400" height="742" loading="lazy" alt="نوار رویدادهای بازار در سه ردیف: رکورد خام، پس از مفسر، و موتور">
+              <img src="../assets/img/projects/cme-mm/rendering.webp" data-full="../assets/img/projects/cme-mm/rendering-full.webp" width="1400" height="742" loading="lazy" alt="نمودار یک‌تیکی قیمت با نشانگرهای رخدادها">
+            </div>
+            <figcaption>
+              <p class="shot-cap is-on">
+                <span class="t-fa">حجم سفارش‌های منتظر در هر قیمت و هر لحظه به شکل نقشه‌ی حرارتی، مسیر قیمت روی آن، و حباب‌هایی که معاملات را نشان می‌دهند.</span>
+                <span class="t-en">The volume of orders waiting at each price and each moment as a heat map, the price path over it, and bubbles marking the trades.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-fa">۱۸٬۴۴۲٬۹۴۲ رویداد، یکی‌یکی قابل پیمایش، در سه ردیف: رکوردهای خام MBO، همان‌ها پس از مفسر، و نودها و رخدادهای سفارش در موتور.</span>
+                <span class="t-en">18,442,942 events, steppable one at a time, in three lanes: the raw MBO records, the same records after the interpreter, and the nodes and order events inside the engine.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-fa">نمودار یک‌تیکی قیمت با نشانگر رخدادها روی هر تیک. با دورشدن، نما از تیک به یک دقیقه و تا چهار ساعت بالا می‌رود.</span>
+                <span class="t-en">A one-tick price chart with event markers on each tick. Zooming out climbs from ticks to one minute and up to four hours.</span>
+              </p>
+            </figcaption>
+          </figure>
+        </div>
       </section>
 
       <section class="cs-section" id="approach">
