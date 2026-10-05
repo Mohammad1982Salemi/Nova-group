@@ -308,6 +308,199 @@
     document.addEventListener('visibilitychange', function () { if (!document.hidden && onScreen) start(); });
   }
 
+  /* ---------------------------------------------------------------
+     The two track cards: small books in the same language as the hero
+     book, each telling one story with our own orders marked in amber.
+     Maker - our orders wait in the queue on both sides and are filled
+     as others trade through it. Taker - our order arrives and takes the
+     front of the queue, level after level.
+     --------------------------------------------------------------- */
+  function rnd(a, b) { return a + Math.floor(Math.random() * (b - a + 1)); }
+  function fmtPx(p) { return p.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  function clock() {
+    var d = new Date();
+    function p(n, w) { n = String(n); while (n.length < w) n = '0' + n; return n; }
+    return p(d.getHours(), 2) + ':' + p(d.getMinutes(), 2) + ':' + p(d.getSeconds(), 2) + '.' + p(d.getMilliseconds(), 3);
+  }
+
+  /* three levels a side at fixed prices; index 0 is the best level */
+  function MiniBook(root) {
+    var self = this, seq = 0, TICK = 0.25, BASE = 5124;
+    var asksEl = root.querySelector('.mbo-asks'), bidsEl = root.querySelector('.mbo-bids');
+    var tapeEl = root.querySelector('.mbo-tape'), noteEl = root.querySelector('.mbo-note');
+    this.asks = []; this.bids = []; this.tape = [];
+
+    this.order = function (own, q) { return { id: ++seq, q: q || rnd(1, 9), own: own, fresh: true }; };
+    this.topUp = function (lvl, n) { while (lvl.o.length < n) lvl.o.push(self.order(false)); };
+    this.mark = function (id, cls) {
+      var chip = root.querySelector('.chip[data-id="' + id + '"]');
+      if (chip) chip.classList.add(cls);
+    };
+    this.print = function (cls, label, q, px) {
+      self.tape.unshift({ cls: cls, label: label, q: q, px: px, time: clock(), fresh: true });
+      if (self.tape.length > 2) self.tape.length = 2;
+    };
+
+    function row(l, maxTotal) {
+      var tot = 0;
+      var chips = l.o.map(function (o) {
+        tot += o.q;
+        var html = '<span class="chip' + (o.own ? ' own' : '') + (o.fresh ? ' is-new' : '') + '" data-id="' + o.id +
+          '" style="--q:' + Math.min(o.q, 24) + '">' + o.q + '</span>';
+        o.fresh = false;
+        return html;
+      }).join('');
+      return '<div class="mbo-row" style="--depth:' + Math.round(100 * tot / maxTotal) + '%"><span class="px">' + fmtPx(l.px) +
+        '</span><span class="q">' + chips + '</span><span class="tot">' + (tot || '') + '</span></div>';
+    }
+    this.draw = function (note) {
+      var maxTotal = 1;
+      self.asks.concat(self.bids).forEach(function (l) {
+        maxTotal = Math.max(maxTotal, l.o.reduce(function (s, o) { return s + o.q; }, 0));
+      });
+      asksEl.innerHTML = self.asks.slice().reverse().map(function (l) { return row(l, maxTotal); }).join('');
+      bidsEl.innerHTML = self.bids.map(function (l) { return row(l, maxTotal); }).join('');
+      noteEl.innerHTML = note;
+      tapeEl.innerHTML = self.tape.map(function (t) {
+        var html = '<div class="tp ' + t.cls + (t.fresh ? ' is-new' : '') + '"><span>' + t.time + '</span><b>' + t.label +
+          '</b><span>' + t.q + '</span><span>@ ' + fmtPx(t.px) + '</span></div>';
+        t.fresh = false;
+        return html;
+      }).join('');
+    };
+
+    for (var i = 0; i < 3; i++) {
+      this.asks.push({ px: BASE + TICK * (i + 1), o: [] });
+      this.bids.push({ px: BASE - TICK * i, o: [] });
+      this.topUp(this.asks[i], 3 + i);
+      this.topUp(this.bids[i], 3 + i);
+    }
+    this.asks.concat(this.bids).forEach(function (l) { l.o.forEach(function (o) { o.fresh = false; }); });
+  }
+
+  /* run step() on a beat while the card is on screen; step may defer a change with later() */
+  function runBook(root, step, draw, pace) {
+    draw();
+    if (reduceMotion || !('IntersectionObserver' in window)) return;   // a still book is fine
+
+    var timer = null, onScreen = false, pending = false;
+    function later(fn) {
+      pending = true;
+      setTimeout(function () { pending = false; fn(); draw(); }, 150);
+    }
+    function tick() {
+      timer = null;
+      if (!onScreen || document.hidden) return;
+      step(later);
+      if (!pending) draw();
+      timer = setTimeout(tick, pace());
+    }
+    function start() { if (!timer) timer = setTimeout(tick, 500); }
+
+    new IntersectionObserver(function (entries) {
+      onScreen = entries[0].isIntersecting;
+      if (onScreen) start();
+    }).observe(root);
+    document.addEventListener('visibilitychange', function () { if (!document.hidden && onScreen) start(); });
+  }
+
+  function initMaker() {
+    var root = document.querySelector('[data-track="maker"]');
+    if (!root) return;
+    var book = new MiniBook(root), mine = { bid: null, ask: null };
+
+    function best(side) { return side === 'bid' ? book.bids[0] : book.asks[0]; }
+    function quote(side) {                       // our order always joins at the back, behind a real queue
+      book.topUp(best(side), 3);
+      mine[side] = book.order(true, rnd(2, 5));
+      best(side).o.push(mine[side]);
+    }
+    function ahead(side) { return best(side).o.indexOf(mine[side]); }
+    function draw() {
+      book.draw('<span>Ahead of our bid<b>' + ahead('bid') + '</b></span><span>Ahead of our ask<b>' + ahead('ask') + '</b></span>');
+    }
+
+    function step(later) {
+      var side = Math.random() < 0.5 ? 'bid' : 'ask', lvl = best(side), r = Math.random();
+
+      if (r < 0.36) {                            // an aggressor trades with whoever is first in line
+        var front = lvl.o[0];
+        book.mark(front.id, 'is-hit');
+        return later(function () {
+          lvl.o.shift();
+          if (front.own) { book.print('own', 'OURS', front.q, lvl.px); quote(side); }
+          else book.print(side === 'bid' ? 'sell' : 'buy', side === 'bid' ? 'SELL' : 'BUY', front.q, lvl.px);
+        });
+      }
+      if (r < 0.84) {                            // somebody joins behind us
+        var deep = Math.random() < 0.3 ? (side === 'bid' ? book.bids : book.asks)[rnd(1, 2)] : lvl;
+        if (deep.o.length < 7) deep.o.push(book.order(false));
+        return;
+      }
+      var n = ahead(side);                       // somebody ahead of us cancels: we move up
+      if (n > 0) {
+        var gone = lvl.o[rnd(0, n - 1)];
+        book.mark(gone.id, 'is-out');
+        later(function () { lvl.o.splice(lvl.o.indexOf(gone), 1); });
+      }
+    }
+
+    quote('bid'); quote('ask');
+    mine.bid.fresh = mine.ask.fresh = false;
+    runBook(root, step, draw, function () { return rnd(420, 820); });
+  }
+
+  function initTaker() {
+    var root = document.querySelector('[data-track="taker"]');
+    if (!root) return;
+    var book = new MiniBook(root);
+    var phase = 'wait', beats = 3, buy = true, size = 0, left = 0, cost = 0;
+
+    function draw() {
+      var note;
+      if (phase === 'sweep') {
+        note = '<span>Our order<b class="own">' + (buy ? 'BUY ' : 'SELL ') + size + '</b></span><span>Filled<b>' + (size - left) +
+          '</b></span><span>Left<b>' + left + '</b></span>';
+      } else if (phase === 'rest') {
+        note = '<span>Filled<b class="own">' + size + '</b></span><span>Avg price<b>' + fmtPx(cost / size) + '</b></span>';
+      } else {
+        note = '<span>Waiting for a signal</span>';
+      }
+      book.draw(note);
+    }
+
+    function step(later) {
+      var side = buy ? book.asks : book.bids, i;
+
+      if (phase === 'wait') {
+        if (--beats > 0) return;
+        size = left = rnd(14, 26); cost = 0; phase = 'sweep';
+        return;
+      }
+
+      if (phase === 'sweep') {                   // take the front order of the nearest level that still has any
+        var lvl = null;
+        for (i = 0; i < side.length && !lvl; i++) if (side[i].o.length) lvl = side[i];
+        if (!lvl) { size -= left; left = 0; }    // the book is empty: we got what there was
+        if (left <= 0) { phase = 'rest'; beats = 4; return; }
+        var front = lvl.o[0], take = Math.min(front.q, left);
+        book.mark(front.id, 'is-hit');
+        return later(function () {
+          front.q -= take; left -= take; cost += take * lvl.px;
+          if (!front.q) lvl.o.shift();
+          book.print('own', buy ? 'BUY' : 'SELL', take, lvl.px);
+          if (left <= 0) { phase = 'rest'; beats = 4; }
+        });
+      }
+
+      for (i = 0; i < side.length; i++) if (side[i].o.length < 3 + i) side[i].o.push(book.order(false));   // liquidity returns
+      if (--beats > 0) return;
+      buy = !buy; phase = 'wait'; beats = 3;
+    }
+
+    runBook(root, step, draw, function () { return phase === 'sweep' ? rnd(260, 380) : rnd(480, 760); });
+  }
+
   function boot() {
     initLang();
     initNav();
@@ -315,6 +508,8 @@
     initToc();
     initGlow();
     initMbo();
+    initMaker();
+    initTaker();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
