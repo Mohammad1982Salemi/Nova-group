@@ -1,10 +1,10 @@
 # Nova Group · گروه نوا
 
-صفحه‌ی معرفی گروه نوا — گروهی که روی طراحی و ساخت الگوریتم‌های معاملاتی کار می‌کند.
+صفحه‌ی معرفی گروه نوا — پژوهش الگوریتمی از ۱۳۹۹ روی جریان سفارشات بازار.
 دوزبانه (فارسی / انگلیسی)، تیره و مدرن، تک‌صفحه‌ای.
 
-Bilingual (Persian / English) presentation page for Nova Group — a team building
-trading algorithms. Dark, modern, single-page.
+Bilingual (Persian / English) presentation page for Nova Group — algorithmic
+research into market order flow since 2020. Dark, modern, single-page.
 
 **🌐 صفحه‌ی زنده / Live site:** https://mohammad1982salemi.github.io/Nova-group/
 

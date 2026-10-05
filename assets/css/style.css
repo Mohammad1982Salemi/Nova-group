@@ -308,6 +308,7 @@ html[dir="rtl"] .btn-primary svg { transform: scaleX(-1); }
 .about-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: start; }
 .about-text p { color: var(--muted); font-size: 16.5px; }
 .about-text p + p { margin-block-start: 20px; }
+.about-text strong { color: var(--text); font-weight: 600; }
 
 .about-points { display: grid; gap: 18px; }
 .about-points li {
