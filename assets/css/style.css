@@ -135,7 +135,8 @@ html[data-lang="en"] .t-fa { display: none !important; }
 .nav-inner { display: flex; align-items: center; gap: 28px; width: min(100% - 40px, var(--wrap)); margin-inline: auto; }
 
 .logo { display: flex; align-items: center; gap: 10px; }
-.logo-mark { width: 30px; height: 30px; filter: drop-shadow(0 0 13px rgba(59,130,246,.5)); }
+/* the artwork already carries its own glow — a drop-shadow on top doubles it */
+.logo-mark { width: 34px; height: 34px; }
 /* the wordmark sits on the dark navbar, so it runs bright-to-light-blue —
    the brand blue at full strength is too dark to read up there */
 .logo-text {
