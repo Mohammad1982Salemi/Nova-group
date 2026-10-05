@@ -133,6 +133,7 @@
     <nav class="toc reveal" aria-label="On this page">
       <span class="toc-title"><span class="t-fa">در این صفحه</span><span class="t-en">On this page</span></span>
       <a href="#intro"><span class="t-fa">معرفی</span><span class="t-en">Introduction</span></a>
+      <a href="#platform"><span class="t-fa">پلتفرم</span><span class="t-en">Platform</span></a>
       <a href="#approach"><span class="t-fa">رویکرد</span><span class="t-en">Approach</span></a>
       <a href="#difference"><span class="t-fa">آنچه برجسته است</span><span class="t-en">What stands out</span></a>
       <a href="#roadmap"><span class="t-fa">مسیر پیش رو</span><span class="t-en">The road ahead</span></a>
@@ -159,6 +160,60 @@
         <span class="t-fa">پروژه‌ی فست اسکلپ تاریخچه‌ی چندساله‌ی بورس شیکاگو، از بزرگ‌ترین بازارهای آتی جهان، را در سطح تک‌تک سفارش‌ها گرد آورده است. بر پایه‌ی این داده، با یادگیری ماشین (ML) و تحلیل آماری، به یک الگوریتم معاملات کوتاه‌مدت رسیده‌ایم که در بازسازی دقیقی از خودِ بورس آزموده می‌شود. مقصد ما یک میز معاملات خودکار است که سرمایه را با همین الگوریتم اداره می‌کند، نه با واکنش لحظه‌ای افراد.</span>
         <span class="t-en">The Fast Scalp project has gathered several years of the Chicago exchange, one of the world's largest futures markets, at the level of every single order. From that data, with machine learning (ML) and statistical analysis, we have arrived at a short-term trading algorithm that is tested inside a close reconstruction of the exchange itself. The destination is an automated trading desk that runs capital with this algorithm, not with people's reactions of the moment.</span>
       </p>
+      </section>
+
+      <section class="cs-section" id="platform">
+        <h2><span><span class="t-fa">از داخل پلتفرم</span><span class="t-en">Inside the platform</span></span></h2>
+        <p>
+          <span class="t-fa">این‌ها تصویرهای واقعی از پلتفرم پروژه‌اند، نه طرح. هر نما همان داده‌ی سفارش‌به‌سفارش بازار را از زاویه‌ای دیگر نشان می‌دهد. برای بزرگ‌تر دیدن، روی تصویر بزنید.</span>
+          <span class="t-en">These are real screens from the project's platform, not mock-ups. Each view shows the same order-by-order market data from a different angle. Click the image to enlarge it.</span>
+        </p>
+
+        <div class="shots reveal" data-shots>
+          <div class="shots-tabs" role="tablist" aria-label="Platform views">
+            <button type="button" role="tab" aria-selected="true" data-name="Quantia Rendering · S15 · Trade">
+              <b><span class="t-fa">رخدادهای سفارش</span><span class="t-en">Order events</span></b>
+              <span>S15 · B / S · stop · target</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="Quantia Rendering · S15 · Delta">
+              <b><span class="t-fa">پروفایل حجم و دلتا</span><span class="t-en">Volume profile and delta</span></b>
+              <span>VWAP · POC · PureReal Δ · Trade Δ</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="Quantia Rendering · S15 · Sweep">
+              <b><span class="t-fa">نمای Sweep</span><span class="t-en">Sweep view</span></b>
+              <span>Bar-Hollow-Sweep · TrdOrder</span>
+            </button>
+          </div>
+
+          <figure class="shot-frame">
+            <div class="shot-bar">
+              <i></i><i></i><i></i>
+              <span class="shot-name">Quantia Rendering · S15 · Trade</span>
+              <button type="button" class="shot-zoom" aria-label="Enlarge">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg>
+              </button>
+            </div>
+            <div class="shot-stage">
+              <img class="is-on" src="../assets/img/projects/fast-scalp/order-events.webp" data-full="../assets/img/projects/fast-scalp/order-events-full.webp" width="1400" height="742" alt="کندل‌های ۱۵ ثانیه‌ای با برچسب رخدادهای خرید و فروش">
+              <img src="../assets/img/projects/fast-scalp/profile-delta.webp" data-full="../assets/img/projects/fast-scalp/profile-delta-full.webp" width="1400" height="742" loading="lazy" alt="کندل‌های ۱۵ ثانیه‌ای با پروفایل حجم، VWAP و دو پنل دلتا">
+              <img src="../assets/img/projects/fast-scalp/sweeps.webp" data-full="../assets/img/projects/fast-scalp/sweeps-full.webp" width="1400" height="742" loading="lazy" alt="کندل‌های ۱۵ ثانیه‌ای در نمای Sweep با نشانگرهای مثلثی">
+            </div>
+            <figcaption>
+              <p class="shot-cap is-on">
+                <span class="t-fa">کندل‌های ۱۵ ثانیه‌ای، و روی هر کندل برچسب رخدادهای آن: سمت خرید یا فروش (B / S)، حجم، و نشانه‌هایی مانند stop و target.</span>
+                <span class="t-en">Fifteen-second bars, and on each bar the labels of its events: the buy or sell side (B / S), the size, and marks such as stop and target.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-fa">کندل‌های ۱۵ ثانیه‌ای با پروفایل حجم، خط VWAP و سطح‌های POC، VAH و VAL، و زیر آن دو پنل PureReal Delta و Trade Delta.</span>
+                <span class="t-en">Fifteen-second bars with a volume profile, the VWAP line and the POC, VAH and VAL levels, and beneath them the PureReal Delta and Trade Delta panels.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-fa">همان کندل‌ها در نمای Sweep: مثلث‌های آبی و نارنجی با عدد هر کدام، روی کندلی که رخ داده‌اند.</span>
+                <span class="t-en">The same bars in the Sweep view: blue and orange triangles, each with its number, on the bar where they occurred.</span>
+              </p>
+            </figcaption>
+          </figure>
+        </div>
       </section>
 
       <section class="cs-section" id="approach">
