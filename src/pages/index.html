@@ -1,3 +1,4 @@
+<!-- section: home -->
 <!DOCTYPE html>
 <html lang="fa" dir="rtl" data-lang="fa">
 <head>
@@ -9,63 +10,11 @@
 <meta property="og:title" content="گروه نوا | Nova Group">
 <meta property="og:description" content="قیمت، معلولِ جریان سفارش است. Price is a consequence of order flow.">
 <meta property="og:url" content="https://mohammad1982salemi.github.io/Nova-group/">
-<meta name="author" content="Nova Group">
-<meta name="theme-color" content="#05080e">
-<meta property="og:site_name" content="Nova Group">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://mohammad1982salemi.github.io/Nova-group/assets/img/favicon-192.png">
-<meta name="twitter:card" content="summary">
-
-<link rel="icon" type="image/png" sizes="64x64" href="assets/img/favicon-64.png">
-<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
-<link rel="apple-touch-icon" href="assets/img/favicon-192.png">
-
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vazirmatn@33.0.3/Vazirmatn-font-face.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="assets/css/style.css?v=7">
-
-<!-- Runs before first paint so the page never flashes in the wrong language or direction. -->
-<script>
-(function () {
-  var d = document.documentElement, l = null;
-  try { l = localStorage.getItem('nova-lang'); } catch (e) {}
-  if (l !== 'fa' && l !== 'en') l = (navigator.language || '').toLowerCase().indexOf('fa') === 0 ? 'fa' : 'en';
-  d.setAttribute('data-lang', l); d.lang = l; d.dir = l === 'fa' ? 'rtl' : 'ltr';
-  d.className += ' js';
-})();
-</script>
+@@HEAD@@
 </head>
 <body>
 
-<a href="#main" class="skip-link"><span class="t-fa">پرش به محتوا</span><span class="t-en">Skip to content</span></a>
-
-<header class="nav" id="nav">
-  <div class="wrap nav-inner">
-    <a class="logo" href="index.html" aria-label="Nova Group">
-      <img class="logo-mark" src="assets/img/nova-mark-180.png" alt="" width="180" height="180">
-      <span class="logo-text t-fa">نوا گروپ</span><span class="logo-text t-en">NOVA GROUP</span>
-    </a>
-
-    <nav class="nav-links" id="navLinks" aria-label="Main">
-      <a href="index.html" aria-current="page"><span class="t-fa">خانه</span><span class="t-en">Home</span></a>
-      <a href="about.html"><span class="t-fa">درباره ما</span><span class="t-en">About</span></a>
-      <a href="projects.html"><span class="t-fa">پروژه‌ها</span><span class="t-en">Projects</span></a>
-      <a href="contact.html"><span class="t-fa">تماس</span><span class="t-en">Contact</span></a>
-    </nav>
-
-    <div class="nav-actions">
-      <button class="lang-btn" id="langBtn" type="button" aria-label="Change language">
-        <span class="t-fa">EN</span><span class="t-en">فا</span>
-      </button>
-      <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
-        <span></span><span></span>
-      </button>
-    </div>
-  </div>
-</header>
+@@NAV@@
 
 <main id="main">
 
@@ -204,18 +153,7 @@
     </header>
 
     <div class="split-main">
-<div class="tracks">
-  <article class="track reveal">
-    <span class="track-tag">Maker</span>
-    <h3><span class="t-fa">نگاه مارکت میکر</span><span class="t-en">The market-maker view</span></h3>
-    <p><span class="t-fa">عرضه‌ی نقدینگی و ساخت بازار.</span><span class="t-en">Supplying liquidity and making markets.</span></p>
-  </article>
-  <article class="track reveal">
-    <span class="track-tag">Taker</span>
-    <h3><span class="t-fa">نگاه تیکر</span><span class="t-en">The taker view</span></h3>
-    <p><span class="t-fa">مصرف نقدینگی و ورود به معامله.</span><span class="t-en">Consuming liquidity and entering trades.</span></p>
-  </article>
-</div>
+@@TRACKS@@
     </div>
   </div>
 </section>
@@ -233,33 +171,7 @@
     </header>
 
     <div class="split-main">
-<a class="proj reveal" href="projects/tsetmc.html">
-  <div class="proj-main">
-    <div class="proj-top">
-      <span class="idx"><span class="t-fa">۰۱</span><span class="t-en">01</span></span>
-      <span class="status"><span class="t-fa">در حال ساخت</span><span class="t-en">In progress</span></span>
-    </div>
-    <h3>TSETMC</h3>
-    <p class="proj-sub">
-      <span class="t-fa">تحلیل جریان سفارش بورس تهران، در مسیر یک صندوق الگوریتمی مدیریت پول</span>
-      <span class="t-en">Order-flow analysis of the Tehran Stock Exchange, on the way to an algorithmic fund</span>
-    </p>
-    <p class="proj-desc">
-      <span class="t-fa">یازده سال از بازار سرمایه‌ی ایران، معامله‌به‌معامله و سفارش‌به‌سفارش، گردآوری و از نو ساخته شده است. روی همین تاریخچه مدل می‌سازیم و می‌آزماییم.</span>
-      <span class="t-en">Eleven years of the Iranian market, gathered and rebuilt trade by trade and order by order. We build and test our models on that history.</span>
-    </p>
-    <span class="link-arrow">
-      <span class="t-fa">مطالعه‌ی پروژه</span><span class="t-en">Read the project</span>
-      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-    </span>
-  </div>
-
-  <ul class="proj-facts">
-    <li><b><span class="t-fa">۱۱ سال</span><span class="t-en">11 years</span></b><span><span class="t-fa">تاریخچه‌ی بازار</span><span class="t-en">of market history</span></span></li>
-    <li><b><span class="t-fa">۱٬۱۴۸</span><span class="t-en">1,148</span></b><span><span class="t-fa">نماد</span><span class="t-en">symbols</span></span></li>
-    <li><b><bdi>Python · C#</bdi></b><span><span class="t-fa">فناوری</span><span class="t-en">technology</span></span></li>
-  </ul>
-</a>
+@@PROJ_TSETMC@@
 
       <a class="link-arrow reveal" href="projects.html">
         <span class="t-fa">همه‌ی پروژه‌ها</span><span class="t-en">All projects</span>
@@ -290,48 +202,6 @@
 
 </main>
 
-<footer class="footer">
-  <div class="wrap">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <a class="logo" href="index.html" aria-label="Nova Group">
-          <img class="logo-mark" src="assets/img/nova-mark-180.png" alt="" width="180" height="180" loading="lazy">
-          <span class="logo-text t-fa">نوا گروپ</span><span class="logo-text t-en">NOVA GROUP</span>
-        </a>
-        <p>
-          <span class="t-fa">پژوهش و ساخت الگوریتم‌های معاملاتی بر پایه‌ی جریان سفارش بازار — از ۱۳۹۹.</span>
-          <span class="t-en">Researching and building trading algorithms from market order flow — since 2020.</span>
-        </p>
-      </div>
-
-      <nav class="footer-col" aria-label="Footer">
-        <h2><span class="t-fa">سایت</span><span class="t-en">Site</span></h2>
-        <a href="index.html"><span class="t-fa">خانه</span><span class="t-en">Home</span></a>
-        <a href="about.html"><span class="t-fa">درباره ما</span><span class="t-en">About</span></a>
-        <a href="projects.html"><span class="t-fa">پروژه‌ها</span><span class="t-en">Projects</span></a>
-        <a href="contact.html"><span class="t-fa">تماس</span><span class="t-en">Contact</span></a>
-      </nav>
-
-      <div class="footer-col">
-        <h2><span class="t-fa">ارتباط</span><span class="t-en">Connect</span></h2>
-        <a href="https://github.com/Mohammad1982Salemi/Nova-group" target="_blank" rel="noopener">GitHub</a>
-      </div>
-    </div>
-
-    <p class="footer-legal">
-      <span class="t-fa">این وب‌سایت معرفی یک فعالیت پژوهشی است. پیشنهاد یا دعوت به سرمایه‌گذاری نیست و هیچ عدد عملکردی در آن منتشر نشده است.</span>
-      <span class="t-en">This website describes a research effort. It is not an offer or solicitation to invest, and it publishes no performance figures.</span>
-    </p>
-
-    <div class="footer-bottom">
-      <span class="t-fa">© ۱۴۰۵ گروه نوا — همه‌ی حقوق محفوظ است.</span>
-      <span class="t-en">© 2026 Nova Group — All rights reserved.</span>
-    </div>
-  </div>
-</footer>
-
-<button class="to-top" id="toTop" type="button" aria-label="Back to top">↑</button>
-
-<script src="assets/js/main.js?v=7"></script>
+@@FOOTER@@
 </body>
 </html>

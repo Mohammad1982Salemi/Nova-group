@@ -1,0 +1,211 @@
+<!-- section: projects -->
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TSETMC — جریان سفارش بورس تهران | گروه نوا</title>
+<meta name="description" content="پروژه‌ی TSETMC: یازده سال از بازار سرمایه‌ی ایران، معامله‌به‌معامله و سفارش‌به‌سفارش، برای ۱٬۱۴۸ نماد. TSETMC: eleven years of the Iranian market rebuilt order by order.">
+<link rel="canonical" href="https://mohammad1982salemi.github.io/Nova-group/projects/tsetmc.html">
+<meta property="og:title" content="TSETMC — جریان سفارش بورس تهران | گروه نوا">
+<meta property="og:description" content="تحلیل جریان سفارش بورس تهران، در مسیر یک صندوق الگوریتمی مدیریت پول.">
+<meta property="og:url" content="https://mohammad1982salemi.github.io/Nova-group/projects/tsetmc.html">
+@@HEAD@@
+</head>
+<body>
+
+@@NAV@@
+
+<main id="main">
+
+<section class="page-hero">
+  <div class="wrap">
+    <nav class="crumbs reveal" aria-label="Breadcrumb">
+      <a href="@@R@@projects.html"><span class="t-fa">پروژه‌ها</span><span class="t-en">Projects</span></a>
+      <span aria-hidden="true">/</span>
+      <span>TSETMC</span>
+    </nav>
+
+    <h1 class="reveal">TSETMC</h1>
+    <p class="page-lead reveal">
+      <span class="t-fa">تحلیل جریان سفارش بورس تهران، در مسیر یک صندوق الگوریتمی مدیریت پول.</span>
+      <span class="t-en">Order-flow analysis of the Tehran Stock Exchange, on the way to an algorithmic fund.</span>
+    </p>
+
+    <div class="cs-meta reveal">
+      <span class="status"><span class="t-fa">در حال ساخت</span><span class="t-en">In progress</span></span>
+      <ul class="tags">
+        <li>Python</li><li>C#</li><li>Order flow</li>
+        <li><span class="t-fa">شبیه‌ساز اجرا</span><span class="t-en">Execution simulator</span></li>
+        <li><span class="t-fa">اختیار معامله</span><span class="t-en">Options</span></li>
+      </ul>
+    </div>
+
+    <ul class="facts reveal">
+      <li>
+        <b><span class="t-fa">۱۱ سال</span><span class="t-en">11 years</span></b>
+        <span><span class="t-fa">تاریخچه‌ی بازار سرمایه‌ی ایران</span><span class="t-en">of Iranian market history</span></span>
+      </li>
+      <li>
+        <b><span class="t-fa">۱٬۱۴۸</span><span class="t-en">1,148</span></b>
+        <span><span class="t-fa">نماد، معامله‌به‌معامله و سفارش‌به‌سفارش</span><span class="t-en">symbols, trade by trade and order by order</span></span>
+      </li>
+      <li>
+        <b><span class="t-fa">کمتر از ۹۰ ثانیه</span><span class="t-en">Under 90 s</span></b>
+        <span><span class="t-fa">آماده‌سازی تاریخچه‌ی کامل یک نماد پرمعامله</span><span class="t-en">to prepare a heavily traded symbol's full history</span></span>
+      </li>
+      <li>
+        <b><bdi>Python · C#</bdi></b>
+        <span><span class="t-fa">هسته‌ی پردازش · موتور محاسبات و شبیه‌ساز اجرا</span><span class="t-en">processing core · computation engine and simulator</span></span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap cs-layout">
+
+    <aside class="cs-side">
+      <nav class="toc" aria-label="On this page">
+        <span class="toc-title"><span class="t-fa">در این صفحه</span><span class="t-en">On this page</span></span>
+        <a href="#intro"><span class="t-fa">معرفی</span><span class="t-en">Introduction</span></a>
+        <a href="#approach"><span class="t-fa">رویکرد</span><span class="t-en">Approach</span></a>
+        <a href="#difference"><span class="t-fa">آنچه فرق می‌کند</span><span class="t-en">What it changes</span></a>
+        <a href="#roadmap"><span class="t-fa">مسیر پیش رو</span><span class="t-en">The road ahead</span></a>
+        <a href="#technology"><span class="t-fa">فناوری</span><span class="t-en">Technology</span></a>
+      </nav>
+    </aside>
+
+    <article class="cs-body">
+      <section class="cs-section" id="intro">
+        <h2><span class="cs-num"><span class="t-fa">۰۱</span><span class="t-en">01</span></span><span><span class="t-fa">معرفی</span><span class="t-en">Introduction</span></span></h2>
+      <p class="detail-lead">
+        <span class="t-fa">قیمت آخرین خبری است که به بازار می‌رسد. پیش از آن، کسی تصمیم گرفته، سفارشی گذاشته، سفارشی برداشته و پولی جابه‌جا شده است. هر روز در بورس تهران میلیون‌ها بار این اتفاق می‌افتد و تقریباً همه فقط سطر آخرش را می‌خوانند.</span>
+        <span class="t-en">Price is the last piece of news to reach the market. Before it, someone decided, placed an order, pulled an order, moved money. In Tehran's exchange this happens millions of times a day, and almost everyone reads only the last line.</span>
+      </p>
+      <p>
+        <span class="t-fa">ما تصمیم گرفتیم کل داستان را بخوانیم. پروژه‌ی TSETMC یازده سال از بازار سرمایه‌ی ایران را، معامله‌به‌معامله و سفارش‌به‌سفارش، برای ۱٬۱۴۸ نماد گرد آورده و از نو ساخته است. روی همین تاریخچه مدل می‌سازیم و می‌آزماییم. مقصد ما یک صندوق الگوریتمی مدیریت پول است: سرمایه‌ای که نه با حدس و شنیده، که با خواندن جریان زنده‌ی سفارش‌ها اداره می‌شود.</span>
+        <span class="t-en">We decided to read the whole story. The TSETMC project gathers and rebuilds eleven years of the Iranian market — trade by trade, order by order — across 1,148 symbols. We build and test our models on that history. The destination is an algorithmic fund: capital run not on hunches or hearsay, but by reading the live flow of orders.</span>
+      </p>
+      </section>
+
+      <section class="cs-section" id="approach">
+        <h2><span class="cs-num"><span class="t-fa">۰۲</span><span class="t-en">02</span></span><span><span class="t-fa">رویکرد</span><span class="t-en">Approach</span></span></h2>
+      <p>
+        <span class="t-fa">ما از بالا به بازار نگاه نمی‌کنیم؛ از کف آن شروع می‌کنیم و بالا می‌آییم. تصمیم سرمایه‌گذاری در سه لایه ساخته می‌شود و هر لایه بر شانه‌ی لایه‌ی پیش از خود می‌ایستد.</span>
+        <span class="t-en">We don't look at the market from above; we start at its floor and build upward. An investment decision is made in three layers, each standing on the shoulders of the one before.</span>
+      </p>
+      <ol class="steps">
+        <li>
+          <strong class="t-fa">از جریان سفارش به سهم</strong><strong class="t-en">From order flow to the stock</strong>
+          <p class="t-fa">ریزترین داده‌ی بازار را می‌خوانیم تا بدانیم پشت حرکت قیمت هر سهم چه نیرویی ایستاده است: پولی که آمده بماند، یا موجی که می‌گذرد. خروجی این لایه یک ارزیابی عددی و روشن از وضعیت هر سهم است.</p>
+          <p class="t-en">We read the finest data the market produces to see what stands behind each stock's move: money that has come to stay, or a wave passing through. The output of this layer is a clear numerical assessment of each stock's state.</p>
+        </li>
+        <li>
+          <strong class="t-fa">از سهم به صنعت</strong><strong class="t-en">From the stock to the sector</strong>
+          <p class="t-fa">وقتی سهم‌های یک صنعت کنار هم می‌نشینند، تصویر بزرگ‌تری پیدا می‌شود: پول به کدام صنعت رو کرده و از کدام روی برگردانده است.</p>
+          <p class="t-en">When the stocks of a sector are read together, a larger picture appears: which sector money has turned toward, and which it has turned away from.</p>
+        </li>
+        <li>
+          <strong class="t-fa">از صنعت به پرتفوی</strong><strong class="t-en">From the sector to the portfolio</strong>
+          <p class="t-fa">وزن صنعت‌ها و سهم‌های برگزیده‌ی هر کدام، سبد را می‌سازد. سبدی که هر ریالش دلیل دارد و آن دلیل را می‌شود تا کف بازار دنبال کرد.</p>
+          <p class="t-en">Sector weights and the chosen stocks within each build the portfolio. Every unit of it has a reason, and that reason can be traced down to the floor of the market.</p>
+        </li>
+      </ol>
+      <p>
+        <span class="t-fa">در کنار این سه لایه، بازار اختیار معامله: این بازار در ایران نوپاست و بیشتر فعالان هنوز از کنارش می‌گذرند. ما از همین امروز آن را جدی گرفته‌ایم و امکان تحلیل آن را در کنار قیمت سهم پایه فراهم کرده‌ایم.</span>
+        <span class="t-en">Alongside those three layers sits the options market. It is young in Iran and most participants still walk past it. We have taken it seriously from the start, and can analyse it alongside the underlying stock's price.</span>
+      </p>
+      </section>
+
+      <section class="cs-section" id="difference">
+        <h2><span class="cs-num"><span class="t-fa">۰۳</span><span class="t-en">03</span></span><span><span class="t-fa">آنچه برای سرمایه‌گذار فرق می‌کند</span><span class="t-en">What it changes for an investor</span></span></h2>
+      <ul class="points">
+        <li>
+          <strong class="t-fa">تصمیمی که نه می‌ترسد و نه طمع می‌کند.</strong><strong class="t-en">A decision that neither fears nor covets.</strong>
+          <p class="t-fa">بازار ایران بازار هیجان است: صف خرید همه را حریص می‌کند و صف فروش همه را فراری. بیشترِ زیان‌ها در همین دو لحظه ساخته می‌شود. الگوریتم در هر دو روز همان‌قدر خونسرد است، و هر خرید و فروش از قاعده‌ای می‌آید که پیش‌تر نوشته و آزموده شده، نه از حال‌وهوای آن روزِ بازار.</p>
+          <p class="t-en">The Iranian market runs on emotion: a queue of buyers makes everyone greedy, a queue of sellers drives everyone away. Most losses are made in exactly those two moments. The algorithm is equally calm on both days, and every trade comes from a rule written and tested beforehand — not from the mood of the day.</p>
+        </li>
+        <li>
+          <strong class="t-fa">پیش از پول شما، یازده سال آزمون.</strong><strong class="t-en">Eleven years of testing, before your money.</strong>
+          <p class="t-fa">هیچ قاعده‌ای به سرمایه نمی‌رسد مگر آنکه در برابر یازده سال بازار واقعی ایستاده باشد: رونق بزرگ ۱۳۹۹، ریزش پس از آن، و سال‌های کش‌دار رکود. اشتباه‌ها را روی تاریخ می‌کنیم، نه روی سرمایه‌ی شما.</p>
+          <p class="t-en">No rule reaches capital unless it has stood against eleven years of real market: the great boom of 2020, the fall that followed, and the long grinding years of stagnation. We make our mistakes on history, not on your capital.</p>
+        </li>
+        <li>
+          <strong class="t-fa">سودی که می‌شود برداشت، نه سودی که فقط می‌شود نشان داد.</strong><strong class="t-en">A return you could withdraw, not one you can only display.</strong>
+          <p class="t-fa">بک‌تست معمولی فرض می‌کند هر سفارش همان لحظه و با همان قیمتِ روی تابلو انجام می‌شود. بازار واقعی این‌قدر مهربان نیست. شبیه‌ساز ما موتور اجرای سفارش‌های بورس را بازسازی می‌کند: سفارش در صف می‌نشیند، نوبت می‌گیرد، تکه‌تکه پر می‌شود یا پشت صف می‌ماند. عددی که گزارش می‌کنیم از همین شبیه‌ساز گذشته است.</p>
+          <p class="t-en">An ordinary backtest assumes every order fills instantly at the price on the tape. The real market is not that kind. Our simulator rebuilds the exchange's own order-execution engine: orders queue, wait their turn, fill in part or stay behind the queue. The figures we report have been through that simulator.</p>
+        </li>
+        <li>
+          <strong class="t-fa">صف را می‌شناسیم، هم برای ورود و هم برای خروج.</strong><strong class="t-en">We know the queue — on the way in and on the way out.</strong>
+          <p class="t-fa">کابوس سرمایه‌گذار در این بازار، ماندن پشت صف فروش است: دارایی‌ای که روی کاغذ هست و فروختنی نیست. صف، دامنه‌ی نوسان و عمق واقعی بازار از سطر اول در مدل ماست. ابزار وارداتی در برابر این‌ها کور است.</p>
+          <p class="t-en">The investor's nightmare in this market is being stuck behind a sell queue: an asset that exists on paper and cannot be sold. Queues, price limits and true market depth are in our model from the first line. Imported tools are blind to all three.</p>
+        </li>
+        <li>
+          <strong class="t-fa">سبدی که به یک سهم، یک صنعت یا یک نفر تکیه ندارد.</strong><strong class="t-en">A portfolio resting on no single stock, sector or person.</strong>
+          <p class="t-fa">کل بازار، از سهام و صندوق‌ها تا اختیار معامله، هر روز با یک چارچوب سنجیده می‌شود و سبد از دل همه‌ی صنعت‌ها بیرون می‌آید. دانش این کار در سامانه نشسته است، نه در ذهن یک تحلیلگر ستاره که فردا ممکن است نباشد.</p>
+          <p class="t-en">The whole market — stocks, funds and options alike — is measured each day against one framework, and the portfolio is drawn from across every sector. The knowledge lives in the system, not in the head of a star analyst who may not be here tomorrow.</p>
+        </li>
+        <li>
+          <strong class="t-fa">فقط داده‌ی رسمی بازار، و دلیلی برای هر تصمیم.</strong><strong class="t-en">Only official market data — and a reason for every decision.</strong>
+          <p class="t-fa">نه شایعه، نه خبر پشت پرده، نه کانال و سیگنال. خوراک الگوریتم همان چیزی است که خودِ بورس ثبت کرده است. و برای هر معامله می‌توانیم بگوییم چرا انجام شد و ردّ آن را تا داده‌ی خام نشان دهیم.</p>
+          <p class="t-en">No rumours, no back-channel news, no channels and signals. The algorithm's input is what the exchange itself recorded. And for any trade we can say why it happened and trace it back to the raw data.</p>
+        </li>
+      </ul>
+      </section>
+
+      <section class="cs-section" id="roadmap">
+        <h2><span class="cs-num"><span class="t-fa">۰۴</span><span class="t-en">04</span></span><span><span class="t-fa">مسیر پیش رو</span><span class="t-en">The road ahead</span></span></h2>
+      <ol class="phases">
+        <li class="is-done">
+          <span class="phase-mark"><span class="t-fa">انجام‌شده</span><span class="t-en">Done</span></span>
+          <p class="t-fa">زیرساخت داده، موتور تحلیل و شبیه‌ساز اجرای معاملات ساخته و آزموده شده‌اند. این زیرساخت خریدنی نیست؛ باید سال‌ها برایش وقت گذاشت و ما گذاشته‌ایم.</p>
+          <p class="t-en">The data infrastructure, the analytics engine and the execution simulator are built and tested. That infrastructure cannot be bought; it takes years, and we have put them in.</p>
+        </li>
+        <li class="is-now">
+          <span class="phase-mark"><span class="t-fa">امروز</span><span class="t-en">Now</span></span>
+          <p class="t-fa">در لایه‌ی نخست هستیم و شاخص‌های جریان سفارش را برای هر سهم می‌سازیم و می‌سنجیم.</p>
+          <p class="t-en">We are in the first layer, building and measuring the order-flow indicators for each stock.</p>
+        </li>
+        <li>
+          <span class="phase-mark"><span class="t-fa">پس از آن</span><span class="t-en">Next</span></span>
+          <p class="t-fa">لایه‌ی صنعت، ساخت پرتفوی و بک‌تست چندساله روی کل بازار.</p>
+          <p class="t-en">The sector layer, portfolio construction, and a multi-year backtest across the whole market.</p>
+        </li>
+        <li>
+          <span class="phase-mark"><span class="t-fa">گام پایانی</span><span class="t-en">Final step</span></span>
+          <p class="t-fa">اتصال به داده‌ی زنده و مدیریت الگوریتمی سرمایه در قالب صندوق.</p>
+          <p class="t-en">Connecting to live data and running capital algorithmically, in fund form.</p>
+        </li>
+      </ol>
+      </section>
+
+      <section class="cs-section" id="technology">
+        <h2><span class="cs-num"><span class="t-fa">۰۵</span><span class="t-en">05</span></span><span><span class="t-fa">فناوری</span><span class="t-en">Technology</span></span></h2>
+      <p>
+        <span class="t-fa">هسته‌ی پردازش با پایتون و موتور محاسبات و شبیه‌ساز اجرا با سی‌شارپ نوشته شده است. پردازش موازی است: تاریخچه‌ی کامل یک نماد پرمعامله در کمتر از یک و نیم دقیقه آماده می‌شود. هیچ تغییری بدون گذشتن از مجموعه‌ی آزمون‌های خودکار پذیرفته نمی‌شود.</span>
+        <span class="t-en">The processing core is written in Python, while the computation engine and the execution simulator are in C#. Processing is parallel: the complete history of a heavily traded symbol is ready in under ninety seconds. No change is accepted without passing the automated test suite.</span>
+      </p>
+      </section>
+    </article>
+
+  </div>
+</section>
+
+<section class="section ruled">
+  <div class="wrap cs-end">
+    <a class="link-arrow link-back" href="@@R@@projects.html">
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <span class="t-fa">همه‌ی پروژه‌ها</span><span class="t-en">All projects</span>
+    </a>
+    <a class="btn btn-ghost" href="@@R@@contact.html">
+      <span class="t-fa">تماس با ما</span><span class="t-en">Get in touch</span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+@@FOOTER@@
+</body>
+</html>

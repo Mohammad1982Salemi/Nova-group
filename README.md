@@ -1,190 +1,109 @@
 # Nova Group · گروه نوا
 
-صفحه‌ی معرفی گروه نوا — پژوهش الگوریتمی از ۱۳۹۹ روی جریان سفارشات بازار.
-دوزبانه (فارسی / انگلیسی)، تیره و مدرن، تک‌صفحه‌ای.
+وب‌سایت معرفی گروه نوا — پژوهش الگوریتمی از ۱۳۹۹ روی جریان سفارشات بازار.
+دوزبانه (فارسی / انگلیسی)، چندصفحه‌ای، بدون سرور.
 
-Bilingual (Persian / English) presentation page for Nova Group — algorithmic
-research into market order flow since 2020. Dark, modern, single-page.
+Website for Nova Group — algorithmic research into market order flow since 2020.
+Bilingual (Persian / English), multi-page, fully static.
 
-**🌐 صفحه‌ی زنده / Live site:** https://mohammad1982salemi.github.io/Nova-group/
+**Live:** https://mohammad1982salemi.github.io/Nova-group/
 
 ---
 
-## فارسی
+## صفحه‌ها · Pages
 
-### ساختار صفحه
+| صفحه | فایل | محتوا |
+| --- | --- | --- |
+| خانه | `index.html` | تز مرکزی، روش در یک نگاه، دو مسیر، پروژه‌ی شاخص |
+| درباره ما | `about.html` | ایده، روش سه‌لایه (کامل)، دو مسیر، وضعیت ما، تیم |
+| پروژه‌ها | `projects.html` | فهرست پروژه‌ها |
+| TSETMC | `projects/tsetmc.html` | صفحه‌ی اختصاصی پروژه، با فهرست کناری |
+| تماس | `contact.html` | راه ارتباط (فعلاً فقط گیت‌هاب) |
 
-| بخش | توضیح |
+## ساختار · How it is put together
+
+صفحه‌های بالا **خروجی** هستند. منبع آن‌ها زیر `src/` است و با `build.py` ساخته می‌شوند، تا نوار بالا و فوتر فقط یک‌جا نوشته شده باشند.
+
+The pages above are **generated**. Their source lives under `src/` and `build.py`
+assembles them, so the navbar and footer are written once.
+
+```
+src/partials/   head, nav, footer + blocks shared by several pages
+src/pages/      one file per page; folders become URL folders
+build.py        src -> the .html files at the repo root
+assets/         css, js, images (not generated — edit directly)
+```
+
+**هیچ‌وقت فایل‌های `.html` ریشه را مستقیم ویرایش نکنید** — با ساخت بعدی بازنویسی می‌شوند.
+**Never edit the root `.html` files by hand** — the next build overwrites them.
+
+```bash
+python build.py
+```
+
+### توکن‌ها · Tokens
+
+| Token | Meaning |
 | --- | --- |
-| هیرو | تز مرکزی گروه + کارت نمودار بک‌تست |
-| درباره ما | معرفی، **چارچوب سه‌لایه‌ی کار**، و کادر «وضعیت ما» |
-| اعضا | سه عضو با نام و سمت |
-| پروژه‌ها | هر پروژه یک موردِ **بازشو**: معرفی / رویکرد / آنچه فرق می‌کند / مسیر پیش رو / فناوری |
-| تماس با ما | فعلاً فقط گیت‌هاب |
+| `@@NAME@@` | contents of `src/partials/name.html` |
+| `@@R@@` | path back to the site root (`""` or `"../"`) |
+| `@@V@@` | `VERSION` in `build.py`, appended to the CSS / JS URLs |
+| `@@A:key@@` | marks the active nav link; the page's first line is `<!-- section: key -->` |
 
-### چارچوب سه‌لایه
+### کش مرورگر · Cache busting
 
-هر پروژه روی همین سه لایه سوار می‌شود، از پایین به بالا:
+هر بار `assets/css/style.css` یا `assets/js/main.js` عوض شد، `VERSION` را در `build.py` یک واحد بالا ببرید و دوباره بسازید. بدون این کار، مرورگرها تا چند دقیقه نسخه‌ی قدیمی را نشان می‌دهند.
 
-1. **پلتفرم مستقل، اختصاصی هر پروژه** — بدون وابستگی به ابزار آماده
-2. **شبیه‌ساز عمیق اجرای سفارش** — ستون کار؛ صف، نوبت و پر شدن تکه‌تکه
-3. **تحلیل، نمودار و مدل‌های پیش‌بینی** — آخرین لایه، نه اولین
+Bump `VERSION` in `build.py` whenever `style.css` or `main.js` changes, then rebuild.
 
-### پروژه‌ها چطور اضافه می‌شوند
+## افزودن پروژه · Adding a project
 
-هر پروژه یک `<article class="project">` است با دو بخش:
+1. `src/pages/projects/tsetmc.html` را کپی کنید (مثلاً `crypto.html`) و متن را عوض کنید. هر بخش یک `<section class="cs-section" id="…">` است و فهرست کناری (`.toc`) به همان `id`ها لینک می‌دهد.
+2. کارت پروژه را از روی `src/partials/proj_tsetmc.html` بسازید و در `src/pages/projects.html` اضافه کنید.
+3. `python build.py`
 
-- **سربرگ و کارت بسته** — `class="project-head"` (شماره، عنوان، یک خط خلاصه، وضعیت) به‌علاوه‌ی `class="tags"`
-- **بدنه‌ی بازشو** — `class="project-detail"` شامل بلوک‌هایی با `class="detail-block"`
+بلوک‌های آماده برای متن پروژه: `detail-lead` (پاراگراف آغازین درشت)، `steps` (مراحل)، `points` (فهرست تمایزها)، `phases` (مسیر زمانی؛ `is-done` / `is-now`).
 
-بلوک‌های آماده در CSS: `detail-lead` (پاراگراف درشت)، `steps` (فرآیند مرحله‌ای)، `points` (فهرست تمایزها)، `phases` (تایم‌لاین؛ به هر `li` کلاس `is-done` یا `is-now` بدهید).
-
-دکمه‌ی باز و بسته در `main.js` → `initProjects()` است. برای بسته‌بودن پیش‌فرض، کلاس `is-open` را از `article` بردارید و `aria-expanded` را `false` کنید.
-
-### ویژگی‌ها
-
-- دوزبانه با دکمه‌ی تغییر زبان در نوار بالا (فارسی راست‌چین / انگلیسی چپ‌چین)
-- شماره‌ها به‌طور خودکار به اعداد فارسی تبدیل می‌شوند
-- طراحی واکنش‌گرا (موبایل، تبلت، دسکتاپ)
-- انیمیشن‌های ورود با اسکرول و شمارنده‌های متحرک
-- پشتیبانی از `prefers-reduced-motion`
-- برچسب‌های Open Graph برای پیش‌نمایش زیبا هنگام اشتراک‌گذاری لینک
-- لوگو و فاویکون به‌صورت SVG وکتور (بدون فایل تصویری)
-
-### ساختار فایل‌ها
-
-```
-index.html               صفحه‌ی اصلی (هر دو زبان داخلش است)
-assets/css/style.css     استایل‌ها
-assets/js/main.js        تعاملات (تغییر زبان، انیمیشن، منو)
-.nojekyll                غیرفعال‌کردن پردازش Jekyll روی GitHub Pages
-```
-
-### ویرایش محتوا
-
-تمام متن‌ها مستقیم داخل `index.html` هستند. هر متن دوزبانه به این شکل نوشته شده:
+## متن دوزبانه · Bilingual text
 
 ```html
 <span class="t-fa">متن فارسی</span>
 <span class="t-en">English text</span>
 ```
 
-برای تغییر هر متن، فقط همان دو `span` را ویرایش کنید.
+مقدارهای صرفاً لاتین (مثل `C#`) داخل `<bdi>` بروند تا در متن راست‌چین ترتیبشان به هم نخورد.
+Wrap Latin-only values such as `C#` in `<bdi>` so right-to-left text does not reorder them.
 
-### چیزهایی که باید با اطلاعات واقعی جایگزین شوند
+## لحن — عمدی است · Tone is deliberate
 
-| مورد | محل در `index.html` |
-| --- | --- |
-| پروژه‌ها | بخش `id="projects"` |
+سایت **هیچ ادعایی که اثبات نشده مطرح نمی‌کند**:
 
-نام و سمت اعضای تیم واقعی است. در بخش تماس فعلاً **فقط لینک گیت‌هاب** هست — ایمیل، تلفن و تلگرام عمداً خالی مانده‌اند تا با مقدار ساختگی پر نشوند. هر وقت راه ارتباطی واقعی داشتید، در `class="contact-links"` اضافه کنید.
+- هیچ عدد عملکردی (بازده، شارپ، افت سرمایه) در آن نیست
+- پروژه‌ها «در حال ساخت» هستند، نه «فعال»
+- تصویر دفتر سفارش در صفحه‌ی خانه نمادین است و زیرش همین نوشته شده
+- بخش «وضعیت ما» و فوتر صریح می‌گویند که هیچ استراتژی‌ای به اجرای واقعی نرسیده و سایت دعوت به سرمایه‌گذاری نیست
 
-> ⚠️ همه‌ی این‌ها در حال حاضر **محتوای نمونه** هستند، نه اطلاعات واقعی. فقط لینک گیت‌هاب واقعی است.
+The site makes **no claim it cannot back up**: no performance figures, projects marked
+in progress, the home-page order book labelled as illustrative, and a footer note that
+this is not an offer to invest. Update those statements if and when that changes.
 
-### لحن صفحه — عمدی است
+## وضعیت محتوا · Content status
 
-صفحه طوری نوشته شده که **هیچ ادعایی که اثبات نشده مطرح نکند**:
+- نام و سمت اعضا واقعی است. فقط محمد سالمی عکس دارد؛ دو نفر دیگر با حرف اول نام نمایش داده می‌شوند.
+- تماس فقط گیت‌هاب است — ایمیل و تلفن عمداً خالی مانده‌اند.
+- از پروژه‌ها فقط TSETMC نوشته شده؛ بقیه تا وقتی متنشان آماده نشده، فهرست نمی‌شوند.
 
-- هیچ عدد عملکردی (بازده، شارپ، افت سرمایه) در صفحه نیست و بخش آمار عمداً حذف شده
-- وضعیت پروژه‌ها فقط «در حال ساخت»، «پژوهش» و «نمونه‌ی اولیه» است — هیچ‌جا «فعال» نیست
-- زیر نمودار هیرو صریحاً نوشته شده که نمونه است و بازدهی واقعی نیست
-- یک کادر «وضعیت ما» صریحاً می‌گوید هنوز هیچ استراتژی‌ای به اجرای واقعی نرسیده
-
-اگر بعداً به مرحله‌ی اجرا رسیدید و خواستید اعداد عملکرد اضافه کنید، آن کادر و این بند را هم به‌روز کنید.
-
-### اجرای محلی
-
-```bash
-python -m http.server 8000
-```
-
-سپس آدرس `http://localhost:8000` را باز کنید.
-
----
-
-## English
-
-### Sections
-
-| Section | Contents |
-| --- | --- |
-| Hero | Short intro plus a sample backtest chart card |
-| About & members | Who we are, four working principles, key numbers, team cards |
-| Projects | Six projects with status (live / in development / research) and tech tags |
-| Contact | Email, Telegram, phone and GitHub |
-
-### Features
-
-- Bilingual with a language toggle in the navbar (Persian RTL / English LTR)
-- Numbers automatically convert to Persian numerals in Persian mode
-- Fully responsive across mobile, tablet and desktop
-- Scroll-reveal animations and animated count-up statistics
-- Respects `prefers-reduced-motion`
-- Open Graph tags for rich link previews
-- Vector SVG logo and favicon (no raster image files)
-
-### Editing content
-
-All copy lives in `index.html`, written as paired bilingual spans:
-
-```html
-<span class="t-fa">متن فارسی</span>
-<span class="t-en">English text</span>
-```
-
-### Placeholder content
-
-Team names and roles are real. Only **Mohammad Salemi has a photo**
-(`assets/img/mohammad-salemi.jpg`, 400×400, ~24 KB); Rouhi and Shalchian fall back
-to initials until they send one.
-
-Contact lists **GitHub only** — email, phone and Telegram were deliberately left
-out rather than filled with invented details.
-
-**Projects:** TSETMC is the group's own written case study. The other four projects
-exist as repositories (`Quantia_ST_Crypto`, `Quantia_ST_LP`, `Quantia_ST_Scalp`,
-`Quantia_ST_BlockTrade`) but their write-ups have not been supplied yet, so they are
-**not listed** rather than filled with invented descriptions.
-
-### Tone is deliberate
-
-The page is written so that it makes **no claim it cannot back up**: there is no
-performance figure anywhere, every project is marked in-progress / research /
-prototype (never "live"), the hero chart is labelled as illustrative, and a
-"Where we are" callout states plainly that nothing has gone to live execution yet.
-Update that callout if and when that changes.
-
-### Run locally
+## اجرای محلی و انتشار · Local preview and deploy
 
 ```bash
 python -m http.server 8000
 ```
 
-Then open `http://localhost:8000`.
-
----
-
-### Cache busting
-
-`index.html` loads `style.css` and `main.js` with a `?v=` query. **Bump that number
-whenever either file changes** — GitHub Pages caches them, and a browser that has the
-old copy will keep rendering the old design for minutes after a push.
-
-```html
-<link rel="stylesheet" href="assets/css/style.css?v=3">
-<script src="assets/js/main.js?v=3"></script>
-```
-
----
-
-## Deployment
-
-The site is served from the `main` branch root via GitHub Pages.
-
 ```bash
+python build.py
 git add -A
 git commit -m "Update content"
 git push
 ```
 
-Changes appear at https://mohammad1982salemi.github.io/Nova-group/ within about a minute.
+GitHub Pages از شاخه‌ی `main` (ریشه) سرو می‌شود و تغییرات حدود یک دقیقه بعد زنده می‌شوند.

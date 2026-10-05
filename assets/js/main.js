@@ -1,40 +1,23 @@
-/* Nova Group — landing page interactions */
+/* Nova Group — shared page behaviour. The language itself is applied by the
+   inline script in <head>, before first paint; this file only switches it. */
 (function () {
   'use strict';
 
   var html = document.documentElement;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------------------------------------------------------------
-     language: fa (RTL) <-> en (LTR)
-     --------------------------------------------------------------- */
-  var STORAGE_KEY = 'nova-lang';
-
-  function detectLang() {
-    var saved = null;
-    try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) { /* storage blocked */ }
-    if (saved === 'fa' || saved === 'en') return saved;
-    return (navigator.language || '').toLowerCase().indexOf('fa') === 0 ? 'fa' : 'en';
-  }
-
-  function applyLang(lang) {
-    html.setAttribute('data-lang', lang);
-    html.setAttribute('lang', lang);
-    html.setAttribute('dir', lang === 'fa' ? 'rtl' : 'ltr');
-    try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) { /* storage blocked */ }
-  }
-
-  function initLangButton() {
+  function initLang() {
     var btn = document.getElementById('langBtn');
     if (!btn) return;
     btn.addEventListener('click', function () {
-      applyLang(html.getAttribute('data-lang') === 'fa' ? 'en' : 'fa');
+      var lang = html.getAttribute('data-lang') === 'fa' ? 'en' : 'fa';
+      html.setAttribute('data-lang', lang);
+      html.lang = lang;
+      html.dir = lang === 'fa' ? 'rtl' : 'ltr';
+      try { localStorage.setItem('nova-lang', lang); } catch (e) { /* storage blocked */ }
     });
   }
 
-  /* ---------------------------------------------------------------
-     nav: scroll state, mobile menu, back to top
-     --------------------------------------------------------------- */
   function initNav() {
     var nav = document.getElementById('nav');
     var burger = document.getElementById('burger');
@@ -53,87 +36,64 @@
       links.classList.remove('is-open');
       burger.setAttribute('aria-expanded', 'false');
     }
-
     burger.addEventListener('click', function () {
       var open = links.classList.toggle('is-open');
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
-
-    links.addEventListener('click', function (e) {
-      if (e.target.closest('a')) closeMenu();
-    });
-
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeMenu();
-    });
-
-    window.addEventListener('resize', function () {
-      if (window.innerWidth > 760) closeMenu();
-    });
+    links.addEventListener('click', function (e) { if (e.target.closest('a')) closeMenu(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
+    window.addEventListener('resize', function () { if (window.innerWidth > 760) closeMenu(); });
 
     toTop.addEventListener('click', function () {
       window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
     });
   }
 
-  /* ---------------------------------------------------------------
-     reveal on scroll
-     --------------------------------------------------------------- */
   function initReveal() {
     var items = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
-
     if (reduceMotion || !('IntersectionObserver' in window)) {
       items.forEach(function (el) { el.classList.add('is-in'); });
       return;
     }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-in');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    items.forEach(function (el) { observer.observe(el); });
+  }
+
+  /* case-study pages: mark the section being read in the contents list */
+  function initToc() {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+    if (!links.length || !('IntersectionObserver' in window)) return;
+
+    var byId = {};
+    links.forEach(function (a) {
+      var id = a.getAttribute('href').slice(1);
+      if (document.getElementById(id)) byId[id] = a;
+    });
 
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
-        var el = entry.target;
-        var siblings = Array.prototype.slice.call(el.parentElement.children).filter(function (n) {
-          return n.classList.contains('reveal');
-        });
-        el.style.transitionDelay = Math.min(siblings.indexOf(el), 5) * 80 + 'ms';
-        el.classList.add('is-in');
-        observer.unobserve(el);
+        links.forEach(function (a) { a.removeAttribute('aria-current'); });
+        byId[entry.target.id].setAttribute('aria-current', 'true');
       });
-    }, { threshold: 0.14, rootMargin: '0px 0px -60px 0px' });
+    }, { rootMargin: '-25% 0px -65% 0px' });
 
-    items.forEach(function (el) { observer.observe(el); });
+    Object.keys(byId).forEach(function (id) { observer.observe(document.getElementById(id)); });
   }
 
-  /* ---------------------------------------------------------------
-     projects: open and close a case study
-     --------------------------------------------------------------- */
-  function initProjects() {
-    document.querySelectorAll('.project-toggle').forEach(function (btn) {
-      var card = btn.closest('.project');
-      var detail = document.getElementById(btn.getAttribute('aria-controls'));
-      if (!card || !detail) return;
-
-      btn.addEventListener('click', function () {
-        var open = card.classList.toggle('is-open');
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-        if (!open) btn.setAttribute('aria-label', 'باز کردن جزئیات پروژه');
-      });
-    });
-  }
-
-  /* ---------------------------------------------------------------
-     boot
-     --------------------------------------------------------------- */
   function boot() {
-    applyLang(detectLang());
-    initLangButton();
+    initLang();
     initNav();
     initReveal();
-    initProjects();
+    initToc();
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', boot);
-  } else {
-    boot();
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
 })();
