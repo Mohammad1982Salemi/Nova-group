@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دیفای ال‌پی — مدیریت پول در استخرهای نقدینگی | نوا گروپ</title>
+<meta name="description" content="پروژه‌ی دیفای ال‌پی: الگوریتم مدیریت پول در استخرهای نقدینگی صرافی‌های غیرمتمرکز، بر پایه‌ی تاریخچه‌ی کامل ۱۳۶ استخر روی چهار شبکه. DeFi LP: a money-management algorithm for DEX liquidity pools, built on the full history of 136 pools on four networks.">
+<link rel="canonical" href="https://mohammad1982salemi.github.io/Nova-group/projects/defi-lp.html">
+<meta property="og:title" content="دیفای ال‌پی — مدیریت پول در استخرهای نقدینگی | نوا گروپ">
+<meta property="og:description" content="الگوریتم مدیریت پول در استخرهای نقدینگی صرافی‌های غیرمتمرکز، در مسیر یک صندوق خودکار.">
+<meta property="og:url" content="https://mohammad1982salemi.github.io/Nova-group/projects/defi-lp.html">
+<meta name="author" content="Nova Group">
+<meta name="theme-color" content="#05080e">
+<meta property="og:site_name" content="Nova Group">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://mohammad1982salemi.github.io/Nova-group/assets/img/favicon-192.png">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/img/favicon-64.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/img/favicon-192.png">
+<link rel="apple-touch-icon" href="../assets/img/favicon-192.png">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vazirmatn@33.0.3/Vazirmatn-font-face.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/css/style.css?v=22">
+
+<!-- Runs before first paint so the page never flashes in the wrong language or direction. -->
+<script>
+(function () {
+  var d = document.documentElement, l = null;
+  try { l = localStorage.getItem('nova-lang'); } catch (e) {}
+  if (l !== 'fa' && l !== 'en') l = (navigator.language || '').toLowerCase().indexOf('fa') === 0 ? 'fa' : 'en';
+  d.setAttribute('data-lang', l); d.lang = l; d.dir = l === 'fa' ? 'rtl' : 'ltr';
+  d.className += ' js';
+})();
+</script>
+</head>
+<body>
+
+<a href="#main" class="skip-link"><span class="t-fa">پرش به محتوا</span><span class="t-en">Skip to content</span></a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="../index.html" aria-label="Nova Group">
+      <img class="logo-mark" src="../assets/img/nova-mark-180.png" alt="" width="180" height="180">
+      <span class="logo-text t-fa"><b>نوا</b> گروپ</span><span class="logo-text t-en"><b>NOVA</b> GROUP</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Main">
+      <a href="../index.html"><span class="t-fa">خانه</span><span class="t-en">Home</span></a>
+      <a href="../about.html"><span class="t-fa">درباره ما</span><span class="t-en">About</span></a>
+      <a href="../projects.html" aria-current="page"><span class="t-fa">پروژه‌ها</span><span class="t-en">Projects</span></a>
+      <a href="../contact.html"><span class="t-fa">تماس</span><span class="t-en">Contact</span></a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="lang-btn" id="langBtn" type="button" aria-label="Change language">
+        <span class="t-fa">EN</span><span class="t-en">فا</span>
+      </button>
+      <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="page-hero">
+  <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="wrap">
+    <nav class="crumbs reveal" aria-label="Breadcrumb">
+      <a href="../projects.html"><span class="t-fa">پروژه‌ها</span><span class="t-en">Projects</span></a>
+      <span aria-hidden="true">/</span>
+      <span><span class="t-fa">دیفای ال‌پی</span><span class="t-en">DeFi LP</span></span>
+    </nav>
+
+    <h1 class="reveal"><span class="t-fa">دیفای ال‌پی</span><span class="t-en">DeFi LP</span></h1>
+    <p class="page-lead reveal">
+      <span class="t-fa">الگوریتم مدیریت پول در استخرهای نقدینگی صرافی‌های غیرمتمرکز، در مسیر یک صندوق خودکار.</span>
+      <span class="t-en">A money-management algorithm for the liquidity pools of decentralised exchanges, on the way to an automated fund.</span>
+    </p>
+
+    <div class="cs-meta reveal">
+      <span class="status"><span class="t-fa">در حال مطالعه</span><span class="t-en">Under study</span></span>
+      <ul class="tags">
+        <li>Python</li><li>C#</li><li>DeFi</li>
+        <li><span class="t-fa">استخر نقدینگی</span><span class="t-en">Liquidity pools</span></li>
+        <li><span class="t-fa">داده‌ی زنجیره</span><span class="t-en">On-chain data</span></li>
+        <li><span class="t-fa">شبیه‌ساز سرمایه</span><span class="t-en">Capital simulator</span></li>
+      </ul>
+    </div>
+
+    <ul class="facts facts-glass">
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-fa">داده</span><span class="t-en">Data</span></span>
+        <b><span class="t-fa">۱۳۶ استخر، ۴ شبکه</span><span class="t-en">136 pools, 4 networks</span></b>
+        <p>
+          <span class="t-fa">تاریخچه‌ی کامل هر استخر، از نخستین روز تا امروز و در سطح تک‌تک رویدادها.</span>
+          <span class="t-en">Each pool's full history, from its first day until today, event by event.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-fa">مقابله با واقعیت</span><span class="t-en">Checked against reality</span></span>
+        <b><span class="t-fa">حدود ۴۴ هزار موقعیت</span><span class="t-en">About 44,000 positions</span></b>
+        <p>
+          <span class="t-fa">کارمزد شبیه‌ساز با برداشت واقعی در شش استخر مقایسه شده؛ اختلاف کمتر از یک‌دهم درصد.</span>
+          <span class="t-en">The simulator's fees compared with real collections in six pools; a gap under a tenth of a percent.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-fa">آزمون</span><span class="t-en">Testing</span></span>
+        <b><span class="t-fa">بیش از ۴۵۰ آزمون</span><span class="t-en">Over 450 tests</span></b>
+        <p>
+          <span class="t-fa">هر تغییر تنها پس از گذشتن از آزمون‌های خودکار پذیرفته می‌شود.</span>
+          <span class="t-en">A change is accepted only after it has passed the automated tests.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-fa">فناوری</span><span class="t-en">Technology</span></span>
+        <b><span class="t-fa">دو زبان، دو نقش</span><span class="t-en">Two languages, two jobs</span></b>
+        <div class="fact-list">
+          <div><i>Python</i><span><span class="t-fa">آماده‌سازی داده</span><span class="t-en">Data preparation</span></span></div>
+          <div><i>C#</i><span><span class="t-fa">موتور تحلیل و شبیه‌ساز</span><span class="t-en">Analysis engine and simulator</span></span></div>
+        </div>
+      </li>
+    </ul>
+
+    <nav class="toc reveal" aria-label="On this page">
+      <span class="toc-title"><span class="t-fa">در این صفحه</span><span class="t-en">On this page</span></span>
+      <a href="#intro"><span class="t-fa">معرفی</span><span class="t-en">Introduction</span></a>
+      <a href="#approach"><span class="t-fa">رویکرد</span><span class="t-en">Approach</span></a>
+      <a href="#difference"><span class="t-fa">آنچه برجسته است</span><span class="t-en">What stands out</span></a>
+      <a href="#roadmap"><span class="t-fa">مسیر پیش رو</span><span class="t-en">The road ahead</span></a>
+      <a href="#technology"><span class="t-fa">فناوری</span><span class="t-en">Technology</span></a>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+
+    <article class="cs-body">
+      <section class="cs-section" id="intro">
+        <h2><span><span class="t-fa">معرفی</span><span class="t-en">Introduction</span></span></h2>
+      <p class="detail-lead">
+        <span class="t-fa">در صرافی غیرمتمرکز، خریدار و فروشنده با یکدیگر معامله نمی‌کنند. طرف هر معامله یک «استخر» است: سرمایه‌ای که عده‌ای کنار هم گذاشته‌اند تا دیگران با آن مبادله کنند و در ازایش کارمزد بپردازند. هر کس پولش را در استخر بگذارد سهمی از این کارمزد می‌گیرد. اما استخری که این ماه بهترین درآمد را دارد، ماه بعد لزوماً همان نیست: معامله‌گران جابه‌جا می‌شوند، سرمایه‌ی تازه می‌آید و سهم هر نفر کوچک می‌شود. بیشتر سرمایه‌ها همان‌جا که روز اول نشسته‌اند می‌مانند.</span>
+        <span class="t-en">On a decentralised exchange, buyer and seller do not trade with each other. The other side of every trade is a "pool": capital that a number of people have put together so that others can swap against it and pay a fee in return. Whoever puts money in the pool takes a share of that fee. But the pool with the best income this month is not necessarily the same one next month: traders move on, fresh capital arrives and each person's share shrinks. Most capital stays where it sat on the first day.</span>
+      </p>
+      <p>
+        <span class="t-fa">ما تصمیم گرفتیم سرمایه را همراه فرصت جابه‌جا کنیم، و هر جابه‌جایی را پیش از انجام با داده‌ی خودِ بازار بسنجیم.</span>
+        <span class="t-en">We decided to move capital along with the opportunity, and to weigh every move against the market's own data before making it.</span>
+      </p>
+      <p>
+        <span class="t-fa">پروژه‌ی دیفای ال‌پی تاریخچه‌ی کامل ۱۳۶ استخر را روی چهار شبکه‌ی بلاک‌چین، از نخستین روز هر استخر تا امروز و در سطح تک‌تک رویدادها، گرد آورده است. بر پایه‌ی این داده، نشستن سرمایه در استخر و جابه‌جایی آن میان استخرها را در بازسازی دقیقی از خودِ بازار شبیه‌سازی می‌کنیم و نتیجه را با پول واقعی مقابله کرده‌ایم. مقصد ما یک صندوق خودکار است که پول را مدیریت می‌کند و آن را میان استخرها، به سوی بهترین بازده خالص، جابه‌جا می‌کند.</span>
+        <span class="t-en">The DeFi LP project has gathered the full history of 136 pools on four blockchain networks, from each pool's first day until today, at the level of every single event. From that data we simulate capital sitting in a pool, and moving between pools, inside a close reconstruction of the market itself, and we have checked the result against real money. The destination is an automated fund that manages money and moves it between pools, toward the best net return.</span>
+      </p>
+      </section>
+
+      <section class="cs-section" id="approach">
+        <h2><span><span class="t-fa">رویکرد</span><span class="t-en">Approach</span></span></h2>
+      <p>
+        <span class="t-fa">پول جایی می‌نشیند که حسابِ خالصش بهتر است، و وقتی این حساب عوض شود جابه‌جا می‌شود. کار در سه مرحله پیش می‌رود:</span>
+        <span class="t-en">Money sits where its net account is better, and moves when that account changes. The work proceeds in three stages:</span>
+      </p>
+      <ol class="steps">
+        <li class="glow reveal">
+          <strong class="t-fa">از داده‌ی خام به تصویر کامل استخر</strong><strong class="t-en">From raw data to the full picture of the pool</strong>
+          <p class="t-fa">تابلوی استخر تنها قیمت و حجم معامله را نشان می‌دهد. ما همه‌ی رویدادهای ثبت‌شده در زنجیره را پردازش می‌کنیم و وضعیت استخر را برای هر لحظه از نو می‌سازیم. حاصل، تصویری است که نشان می‌دهد در هر سطح قیمت چه مقدار سرمایه نشسته بوده و چه زمانی آمده یا رفته است.</p>
+          <p class="t-en">A pool's dashboard shows only price and traded volume. We process every event recorded on the chain and rebuild the pool's state for each moment. The result is a picture of how much capital sat at each price level, and when it came or went.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fa">از تصویر استخر به سنجش هر استخر</strong><strong class="t-en">From the picture of the pool to measuring each pool</strong>
+          <p class="t-fa">شبیه‌ساز ما یک سرمایه‌ی فرضی را در همان استخرِ بازسازی‌شده می‌نشاند و حساب می‌کند چه کارمزدی می‌گرفت و حرکت قیمت چه مقدار از آن را پس می‌گرفت. خروجی، عددی خالص و مقایسه‌پذیر برای هر استخر است. همه‌ی استخرها با یک معیار سنجیده می‌شوند.</p>
+          <p class="t-en">Our simulator places a hypothetical sum in that same rebuilt pool and works out what fee it would have earned and how much of it the price move would have taken back. The output is a net, comparable figure for each pool. All pools are measured by one yardstick.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fa">از سنجش استخرها به مدیریت پول</strong><strong class="t-en">From measuring the pools to managing money</strong>
+          <p class="t-fa">با کنار هم گذاشتن این عددها، الگوریتم سه تصمیم می‌گیرد: پول در کدام استخرها بنشیند، در هر کدام در چه بازه‌ای از قیمت، و چه زمانی از یکی به دیگری برود. این مرحله امروز در مرحله‌ی مطالعه است.</p>
+          <p class="t-en">Putting those figures side by side, the algorithm makes three decisions: which pools the money sits in, over what price range in each, and when it moves from one to another. This stage is under study today.</p>
+        </li>
+      </ol>
+      </section>
+
+      <section class="cs-section" id="difference">
+        <h2><span><span class="t-fa">آنچه برجسته است</span><span class="t-en">What stands out</span></span></h2>
+      <ul class="points">
+        <li class="glow reveal">
+          <strong class="t-fa">سرمایه‌ای که یک‌جا نمی‌ماند.</strong><strong class="t-en">Capital that does not stay in one place.</strong>
+          <p class="t-fa">فرصت در این بازار جابه‌جا می‌شود و سرمایه‌ی ساکن آن را از دست می‌دهد. استخری می‌تواند امروز معامله داشته باشد در حالی که ماه‌هاست سرمایه از آن بیرون می‌رود؛ نمونه‌ی واقعی آن را در داده‌های خود دیده و ثبت کرده‌ایم. الگوریتم همه‌ی استخرهای زیر نظر را پیوسته با هم مقایسه می‌کند، نه یک بار در روز اول.</p>
+          <p class="t-en">Opportunity moves in this market, and capital that stands still misses it. A pool can have trades today while capital has been leaving it for months; we have seen and recorded a real case of this in our data. The algorithm compares all the pools it watches continuously, not once on the first day.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fa">جابه‌جایی‌ای که هزینه‌اش را درمی‌آورد.</strong><strong class="t-en">A move that earns back its cost.</strong>
+          <p class="t-fa">هر جابه‌جایی هزینه دارد: کارمزد تراکنش و اختلاف قیمت هنگام خروج و ورود. دنبال‌کردن هر نرخ بالاتر، سود را خرج همین هزینه‌ها می‌کند. در سنجش ما هزینه‌ی جابه‌جایی جزو حساب است و حرکتی که آن را جبران نکند انجام نمی‌شود.</p>
+          <p class="t-en">Every move has a cost: the transaction fee and the price difference on the way out and in. Chasing every higher rate spends the profit on those costs. In our measurement the cost of moving is part of the account, and a move that does not make it back is not made.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fa">سود خالص، نه نرخ اعلام‌شده.</strong><strong class="t-en">Net profit, not the advertised rate.</strong>
+          <p class="t-fa">نرخ روی تابلوی استخر تنها کارمزد را نشان می‌دهد. آنچه ما گزارش می‌کنیم کارمزد است پس از کسر زیان حرکت قیمت، هزینه‌ی تراکنش و اختلاف قیمت هنگام ورود. هر جزء جداگانه دیده می‌شود تا روشن باشد سود از کجا آمده و کجا رفته است.</p>
+          <p class="t-en">The rate on a pool's dashboard shows only the fee. What we report is the fee after the loss from the price move, the transaction cost and the price difference on entry. Each part is shown separately, so it is clear where the profit came from and where it went.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fa">شبیه‌سازی‌ای که با پول واقعی مقابله شده است.</strong><strong class="t-en">A simulation checked against real money.</strong>
+          <p class="t-fa">بسیاری از محاسبات این بازار روی کاغذ درست‌اند و در عمل نه. ما کارمزدی را که شبیه‌ساز حساب می‌کند با کارمزدی که حدود ۴۴ هزار موقعیت واقعی در شش استخر از زنجیره برداشت کرده‌اند مقایسه کرده‌ایم. اختلاف مجموع در بدترین استخر کمتر از یک‌دهم درصد است.</p>
+          <p class="t-en">Many calculations in this market are right on paper and not in practice. We have compared the fee the simulator works out with the fee that about 44,000 real positions in six pools collected from the chain. The total difference in the worst pool is under a tenth of a percent.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fa">داده‌ای که با خودِ زنجیره تطبیق داده شده است.</strong><strong class="t-en">Data reconciled with the chain itself.</strong>
+          <p class="t-fa">مقایسه‌ی استخرها روی داده‌ی ناقص به تصمیم غلط می‌رسد، و داده‌ی ناقص خود را نشان نمی‌دهد. برای هر ۱۳۶ استخر، رویدادهای بایگانی با زنجیره مقایسه شده و برای هر استخر گواهی سلامت صادر شده است. پنج نوع استخر روی چهار شبکه با یک موتور سنجیده می‌شوند.</p>
+          <p class="t-en">Comparing pools on incomplete data leads to a wrong decision, and incomplete data does not announce itself. For all 136 pools the archived events have been compared with the chain, and a health certificate has been issued for each pool. Five kinds of pool on four networks are measured by one engine.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fa">سرمایه بدون واسطه در استخر.</strong><strong class="t-en">Capital in the pool with no intermediary.</strong>
+          <p class="t-fa">بخشی از زیان‌های این بازار نه از خودِ بازار، که از قراردادهای واسطی آمده است که سرمایه‌ی دیگران را نگه می‌داشتند. در طراحی ما سرمایه مستقیم و به نام صاحبش در استخر خواهد نشست. الگوریتم فقط درباره‌ی جای آن تصمیم خواهد گرفت.</p>
+          <p class="t-en">Some of this market's losses came not from the market itself but from intermediary contracts that held other people's capital. In our design the capital will sit in the pool directly and in its owner's name. The algorithm will only decide where it goes.</p>
+        </li>
+      </ul>
+      </section>
+
+      <section class="cs-section" id="roadmap">
+        <h2><span><span class="t-fa">مسیر پیش رو</span><span class="t-en">The road ahead</span></span></h2>
+      <ol class="phases">
+        <li class="is-done glow reveal">
+          <span class="phase-mark"><span class="t-fa">انجام‌شده</span><span class="t-en">Done</span></span>
+          <p class="t-fa">زیرساخت داده، بازسازی استخر برای هر پنج نوع، شبیه‌ساز سرمایه و سامانه‌ی گزارش ساخته و آزموده شده‌اند.</p>
+          <p class="t-en">The data infrastructure, pool reconstruction for all five kinds, the capital simulator and the reporting system are built and tested.</p>
+        </li>
+        <li class="is-now glow reveal">
+          <span class="phase-mark"><span class="t-fa">امروز</span><span class="t-en">Now</span></span>
+          <p class="t-fa">امروز در مرحله‌ی مطالعه هستیم و قاعده‌های نشستن و جابه‌جایی سرمایه را روی استخرهایی با رفتار متفاوت می‌سنجیم؛ هنوز هیچ راهبردی را نهایی اعلام نکرده‌ایم.</p>
+          <p class="t-en">Today we are at the study stage, measuring the rules for placing and moving capital on pools that behave differently; we have not yet declared any strategy final.</p>
+        </li>
+        <li class="glow reveal">
+          <span class="phase-mark"><span class="t-fa">پس از آن</span><span class="t-en">Next</span></span>
+          <p class="t-fa">پس از آن، تکمیل غربال استخرها، آزمون راهبرد منتخب روی دوره‌های دیده‌نشده و بازنویسی سامانه برای کار عملیاتی خواهد آمد.</p>
+          <p class="t-en">After that come completing the pool screening, testing the chosen strategy on unseen periods, and rewriting the system for operational use.</p>
+        </li>
+        <li class="glow reveal">
+          <span class="phase-mark"><span class="t-fa">گام پایانی</span><span class="t-en">Final step</span></span>
+          <p class="t-fa">گام پایانی، اتصال به داده‌ی زنده و مدیریت پول واقعی در قالب یک صندوق خودکار است.</p>
+          <p class="t-en">The final step is connecting to live data and managing real money, as an automated fund.</p>
+        </li>
+      </ol>
+      </section>
+
+      <section class="cs-section" id="technology">
+        <h2><span><span class="t-fa">فناوری</span><span class="t-en">Technology</span></span></h2>
+      <p>
+        <span class="t-fa">آماده‌سازی داده با پایتون و موتور تحلیل و شبیه‌ساز با سی‌شارپ نوشته شده است. بایگانی ۱۳۶ استخر در بیش از شش هزار فایل نگهداری می‌شود و نسخه‌ی سرور با نسخه‌ی پشتیبان فایل به فایل یکسان است. هر تغییر تنها پس از گذشتن از بیش از ۴۵۰ آزمون خودکار پذیرفته می‌شود.</span>
+        <span class="t-en">Data preparation is written in Python, and the analysis engine and simulator in C#. The archive of 136 pools is kept in more than six thousand files, and the server copy is identical to the backup copy file by file. A change is accepted only after it has passed more than 450 automated tests.</span>
+      </p>
+      </section>
+    </article>
+
+  </div>
+</section>
+
+<section class="section ruled">
+  <div class="wrap cs-end">
+    <a class="link-arrow link-back" href="../projects.html">
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <span class="t-fa">همه‌ی پروژه‌ها</span><span class="t-en">All projects</span>
+    </a>
+    <a class="btn btn-ghost" href="../contact.html">
+      <span class="t-fa">تماس با ما</span><span class="t-en">Get in touch</span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="logo" href="../index.html" aria-label="Nova Group">
+          <img class="logo-mark" src="../assets/img/nova-mark-180.png" alt="" width="180" height="180" loading="lazy">
+          <span class="logo-text t-fa"><b>نوا</b> گروپ</span><span class="logo-text t-en"><b>NOVA</b> GROUP</span>
+        </a>
+        <p>
+          <span class="t-fa">پژوهش و ساخت الگوریتم‌های معاملاتی بر پایه‌ی جریان سفارش بازار — از ۱۳۹۹.</span>
+          <span class="t-en">Researching and building trading algorithms from market order flow — since 2020.</span>
+        </p>
+      </div>
+
+      <nav class="footer-col" aria-label="Footer">
+        <h2><span class="t-fa">سایت</span><span class="t-en">Site</span></h2>
+        <a href="../index.html"><span class="t-fa">خانه</span><span class="t-en">Home</span></a>
+        <a href="../about.html"><span class="t-fa">درباره ما</span><span class="t-en">About</span></a>
+        <a href="../projects.html"><span class="t-fa">پروژه‌ها</span><span class="t-en">Projects</span></a>
+        <a href="../contact.html"><span class="t-fa">تماس</span><span class="t-en">Contact</span></a>
+      </nav>
+
+      <div class="footer-col">
+        <h2><span class="t-fa">ارتباط</span><span class="t-en">Connect</span></h2>
+        <a href="https://github.com/Mohammad1982Salemi/Nova-group" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+
+    <p class="footer-legal">
+      <span class="t-fa">این وب‌سایت معرفی یک فعالیت پژوهشی است. پیشنهاد یا دعوت به سرمایه‌گذاری نیست. گزارش‌های منتشرشده نتیجه‌ی شبیه‌سازی‌اند، نه معامله‌ی واقعی، و تضمینی برای آینده نیستند.</span>
+      <span class="t-en">This website describes a research effort. It is not an offer or solicitation to invest. The published reports are simulation results, not real trading, and no guarantee of the future.</span>
+    </p>
+
+    <div class="footer-bottom">
+      <span class="t-fa">© ۱۴۰۵ نوا گروپ — همه‌ی حقوق محفوظ است.</span>
+      <span class="t-en">© 2026 Nova Group — All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Back to top">↑</button>
+
+<script src="../assets/js/main.js?v=22"></script>
+</body>
+</html>

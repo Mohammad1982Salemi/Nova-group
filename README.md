@@ -19,6 +19,7 @@ Bilingual (Persian / English), multi-page, fully static.
 | پروژه‌ها | `projects.html` | فهرست پروژه‌ها |
 | مارکت‌میکر CME | `projects/cme-mm.html` | صفحه‌ی اختصاصی پروژه |
 | فست اسکلپ | `projects/fast-scalp.html` | صفحه‌ی اختصاصی پروژه |
+| دیفای ال‌پی | `projects/defi-lp.html` | صفحه‌ی اختصاصی پروژه |
 | TSETMC | `projects/tsetmc.html` | صفحه‌ی اختصاصی پروژه، با فهرست کناری |
 | تماس | `contact.html` | راه ارتباط (فعلاً فقط گیت‌هاب) |
 
