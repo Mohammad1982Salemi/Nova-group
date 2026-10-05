@@ -114,9 +114,13 @@ All copy lives in `index.html`, written as paired bilingual spans:
 
 ### Placeholder content
 
-Team names and roles are real. Contact lists **GitHub only** — email, phone and
-Telegram were deliberately left out rather than filled with invented details.
-The **six project entries** are still placeholders.
+Team names and roles are real. Only **Mohammad Salemi has a photo**
+(`assets/img/mohammad-salemi.jpg`, 400×400, ~24 KB); Rouhi and Shalchian fall back
+to initials until they send one.
+
+Contact lists **GitHub only** — email, phone and Telegram were deliberately left
+out rather than filled with invented details. The **six project entries** are still
+placeholders.
 
 ### Tone is deliberate
 
