@@ -164,6 +164,19 @@ Then open `http://localhost:8000`.
 
 ---
 
+### Cache busting
+
+`index.html` loads `style.css` and `main.js` with a `?v=` query. **Bump that number
+whenever either file changes** — GitHub Pages caches them, and a browser that has the
+old copy will keep rendering the old design for minutes after a push.
+
+```html
+<link rel="stylesheet" href="assets/css/style.css?v=3">
+<script src="assets/js/main.js?v=3"></script>
+```
+
+---
+
 ## Deployment
 
 The site is served from the `main` branch root via GitHub Pages.
