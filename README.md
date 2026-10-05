@@ -15,7 +15,7 @@ Bilingual (Persian / English), multi-page, fully static.
 | صفحه | فایل | محتوا |
 | --- | --- | --- |
 | خانه | `index.html` | تز مرکزی، روش در یک نگاه، دو مسیر، پروژه‌ی شاخص |
-| درباره ما | `about.html` | ایده، روش سه‌لایه (کامل)، دو مسیر، وضعیت ما، تیم |
+| درباره ما | `about.html` | ایده، روش سه‌لایه (کامل)، دو مسیر، تیم |
 | پروژه‌ها | `projects.html` | فهرست پروژه‌ها |
 | TSETMC | `projects/tsetmc.html` | صفحه‌ی اختصاصی پروژه، با فهرست کناری |
 | تماس | `contact.html` | راه ارتباط (فعلاً فقط گیت‌هاب) |
@@ -81,7 +81,7 @@ Wrap Latin-only values such as `C#` in `<bdi>` so right-to-left text does not re
 - هیچ عدد عملکردی (بازده، شارپ، افت سرمایه) در آن نیست
 - پروژه‌ها «در حال ساخت» هستند، نه «فعال»
 - تصویر دفتر سفارش در صفحه‌ی خانه نمادین است و زیرش همین نوشته شده
-- بخش «وضعیت ما» و فوتر صریح می‌گویند که هیچ استراتژی‌ای به اجرای واقعی نرسیده و سایت دعوت به سرمایه‌گذاری نیست
+- کادر پایانی صفحه‌ی خانه و فوتر صریح می‌گویند که هیچ استراتژی‌ای به اجرای واقعی نرسیده و سایت دعوت به سرمایه‌گذاری نیست
 
 The site makes **no claim it cannot back up**: no performance figures, projects marked
 in progress, the home-page order book labelled as illustrative, and a footer note that
