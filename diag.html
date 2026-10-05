@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="dark light">
+<title>Nova colour test</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin: 0; padding: 16px; background: #05080e; color: #e8eefb; font: 15px/1.5 system-ui, sans-serif; }
+  h1 { font-size: 17px; margin: 0 0 10px; color: #fff; }
+  .row { display: flex; align-items: center; gap: 10px; margin: 8px 0; }
+  .n { flex: none; width: 22px; color: #93a4c4; font-size: 12px; }
+  .box { flex: 1; padding: 10px 12px; border-radius: 8px; border: 1px solid #2a3a5c; color: #fff; text-decoration: none; }
+  .blue { background: #3b82f6; }
+  .grad { background: linear-gradient(120deg, #1848e8, #38d5f5); }
+  .gradtext { background: linear-gradient(120deg, #3b82f6, #38d5f5); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 700; font-size: 20px; }
+  .bgimg { height: 44px; background: url(assets/img/nova-mark.svg) left center / 44px no-repeat; }
+  pre { white-space: pre-wrap; word-break: break-word; font-size: 11.5px; color: #b9c8de; background: #0b1220; padding: 10px; border-radius: 8px; }
+  img, svg.i { width: 44px; height: 44px; }
+</style>
+</head>
+<body>
+<h1>Nova colour test — please screenshot this whole page</h1>
+
+<div class="row"><span class="n">1</span><div class="box">White text, plain box</div></div>
+<div class="row"><span class="n">2</span><a class="box" href="#x">White text, inside a link</a></div>
+<div class="row"><span class="n">3</span><a class="box" href="diag.html?never-visited-9731">White text, link never visited</a></div>
+<div class="row"><span class="n">4</span><div class="box blue">White text on solid blue</div></div>
+<div class="row"><span class="n">5</span><div class="box grad">White text on blue gradient</div></div>
+<div class="row"><span class="n">6</span><a class="box grad" href="#y">Link on blue gradient</a></div>
+<div class="row"><span class="n">7</span><div class="box"><span class="gradtext">Gradient text</span></div></div>
+<div class="row"><span class="n">8</span><div class="box">img: <img src="assets/img/nova-mark.svg" alt=""> png: <img src="assets/img/favicon-192.png" alt=""></div></div>
+<div class="row"><span class="n">9</span><div class="box">inline svg:
+  <svg class="i" viewBox="36 36 168 168"><defs><linearGradient id="m" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1848e8"/><stop offset="1" stop-color="#38d5f5"/></linearGradient></defs>
+  <polygon points="50,58 92,58 92,158 50,190" fill="#3f6fe0"/><polygon points="148,82 190,50 190,182 148,182" fill="#7fb6ff"/><polygon points="50,58 92,58 190,182 148,182" fill="url(#m)"/></svg>
+  canvas: <canvas id="cv" width="88" height="88" style="width:44px;height:44px"></canvas></div></div>
+<div class="row"><span class="n">10</span><div class="box bgimg"></div></div>
+
+<pre id="out">reading…</pre>
+
+<script>
+(function () {
+  var cv = document.getElementById('cv').getContext('2d');
+  var g = cv.createLinearGradient(0, 0, 88, 88); g.addColorStop(0, '#1848e8'); g.addColorStop(1, '#38d5f5');
+  cv.fillStyle = g; cv.fillRect(0, 0, 88, 88);
+
+  function mq(q) { try { return window.matchMedia(q).matches; } catch (e) { return 'n/a'; } }
+  function col(sel, prop) { var e = document.querySelectorAll('.row .box')[sel]; return getComputedStyle(e)[prop]; }
+  var lines = [
+    'UA: ' + navigator.userAgent,
+    'prefers-color-scheme dark: ' + mq('(prefers-color-scheme: dark)'),
+    'forced-colors active: ' + mq('(forced-colors: active)'),
+    'inverted-colors: ' + mq('(inverted-colors: inverted)'),
+    'prefers-contrast more: ' + mq('(prefers-contrast: more)'),
+    'box1 color: ' + col(0, 'color'),
+    'link2 color: ' + col(1, 'color'),
+    'link3 color: ' + col(2, 'color'),
+    'blue4 background: ' + col(3, 'backgroundColor'),
+    'grad5 background-image: ' + col(4, 'backgroundImage').slice(0, 70),
+    'root color-scheme: ' + getComputedStyle(document.documentElement).colorScheme,
+    'screen: ' + screen.width + 'x' + screen.height + ' dpr ' + devicePixelRatio
+  ];
+  document.getElementById('out').textContent = lines.join('\n');
+})();
+</script>
+</body>
+</html>
