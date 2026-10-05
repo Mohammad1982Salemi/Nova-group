@@ -305,14 +305,16 @@ html[dir="rtl"] .btn-primary svg { transform: scaleX(-1); }
 .section-sub { color: var(--muted); margin-block-start: 14px; font-size: 16.5px; }
 
 /* ---------- about ---------- */
-.about-text { max-width: 78ch; }
+/* the intro runs the full width of the wrap, so its edges line up with the
+   three method cards below it rather than floating in a narrower column */
+.about-text { max-width: none; }
 .about-text p { color: var(--muted); font-size: 16.5px; }
 .about-text p + p { margin-block-start: 20px; }
 .about-text strong { color: var(--text); font-weight: 600; }
 
 /* ---------- the method: three layers ---------- */
 .method { margin-block-start: 64px; }
-.method-head { max-width: 720px; margin-block-end: 34px; }
+.method-head { max-width: none; margin-block-end: 34px; }
 .method-head h3 { font-size: clamp(1.25rem, 2.6vw, 1.65rem); margin-block-end: 11px; }
 .method-head p { color: var(--muted); font-size: 15.6px; }
 .method-head p + p { margin-block-start: 6px; }
@@ -534,6 +536,25 @@ html[dir="rtl"] .clink-body { align-items: flex-start; }
 }
 .to-top.is-visible { opacity: 1; visibility: visible; transform: translateY(0); }
 .to-top:hover { border-color: var(--accent); box-shadow: var(--glow); }
+
+/* ==========================================================================
+   running prose is justified, so the ends of the lines sit under each other
+   instead of stepping in and out. Headings, labels and one-line snippets are
+   left alone — justification only helps a block that actually wraps.
+   ========================================================================== */
+.about-text p,
+.method-head p,
+.framework p,
+.status-note p,
+.section-sub,
+.detail-block p,
+.steps p,
+.points p,
+.phases p,
+.contact-copy > p {
+  text-align: justify;
+  text-justify: inter-word;
+}
 
 /* ==========================================================================
    reveal on scroll
