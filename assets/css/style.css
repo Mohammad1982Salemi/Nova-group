@@ -360,6 +360,8 @@ html[dir="ltr"] .about-points li:hover { transform: translateX(4px); }
   font-family: var(--font-display-en); font-size: 26px; font-weight: 700; color: #03101f;
   background: var(--grad); box-shadow: 0 0 0 1px rgba(255,255,255,.1), var(--glow);
 }
+.avatar-photo { overflow: hidden; background: var(--surface); }
+.avatar-photo img { width: 100%; height: 100%; object-fit: cover; }
 .member h3 { font-size: 16.5px; margin-block-end: 6px; }
 .member .role { color: var(--muted); font-size: 13.8px; }
 
