@@ -17,3 +17,6 @@ cae42a26-9c43-4d4b-aa79-0bd13ee8635a.png
 # Images the app drops into the project root when one is pasted into chat
 /photo_*.jpg
 /*.png
+
+# Original files as the group supplied them (kept locally, not published)
+/_originals/

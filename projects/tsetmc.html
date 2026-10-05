@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="../assets/css/style.css?v=25">
+<link rel="stylesheet" href="../assets/css/style.css?v=26">
 
 <!-- Runs before first paint so the page never flashes in the wrong language or direction. -->
 <script>
@@ -131,6 +131,7 @@
     <nav class="toc reveal" aria-label="On this page">
       <span class="toc-title"><span class="t-fa">در این صفحه</span><span class="t-en">On this page</span></span>
       <a href="#intro"><span class="t-fa">معرفی</span><span class="t-en">Introduction</span></a>
+      <a href="#reports"><span class="t-fa">گزارش‌ها</span><span class="t-en">Reports</span></a>
       <a href="#platform"><span class="t-fa">پلتفرم</span><span class="t-en">Platform</span></a>
       <a href="#approach"><span class="t-fa">رویکرد</span><span class="t-en">Approach</span></a>
       <a href="#difference"><span class="t-fa">آنچه برجسته است</span><span class="t-en">What stands out</span></a>
@@ -154,6 +155,64 @@
         <span class="t-fa">ما تصمیم گرفتیم کل داستان را بخوانیم. پروژه‌ی TSETMC یازده سال از بازار سرمایه‌ی ایران را، معامله‌به‌معامله و سفارش‌به‌سفارش، برای ۱٬۱۴۸ نماد گرد آورده و از نو ساخته است. روی همین تاریخچه مدل می‌سازیم و می‌آزماییم. مقصد ما یک صندوق الگوریتمی مدیریت پول است: سرمایه‌ای که نه با حدس و شنیده، که با خواندن جریان زنده‌ی سفارش‌ها اداره می‌شود.</span>
         <span class="t-en">We decided to read the whole story. The TSETMC project gathers and rebuilds eleven years of the Iranian market — trade by trade, order by order — across 1,148 symbols. We build and test our models on that history. The destination is an algorithmic money-management fund: capital run not on hunches or hearsay, but by reading the live flow of orders.</span>
       </p>
+      </section>
+
+      <section class="cs-section" id="reports">
+        <h2><span><span class="t-fa">گزارش‌های شبیه‌ساز</span><span class="t-en">Simulator reports</span></span></h2>
+        <p>
+          <span class="t-fa">روی همین زیرساخت، یک راهبرد را در شبیه‌ساز آزموده‌ایم: جابه‌جایی میان صندوق‌های طلای بورس ایران، با این پرسش که آیا می‌توان از نگه‌داشتن خودِ طلا جلو افتاد. معیار سنجش، نگه‌داشتن پرمعامله‌ترین صندوق طلاست. دو گزارش زیر همین آزمون را نشان می‌دهند، یکی خلاصه و یکی با جزئیات. می‌توانید هر دو را دانلود کنید و مستقل از ما بخوانید و بسنجید.</span>
+          <span class="t-en">On this same infrastructure we have tested one strategy in the simulator: rotating between the gold funds of the Iranian market, asking whether that can get ahead of simply holding gold. The benchmark is holding the most traded gold fund. The two reports below show that test, one in summary and one in detail. You can download both and read and weigh them independently of us.</span>
+        </p>
+        <ul class="reports">
+          <li class="glow reveal">
+            <div class="report-head">
+              <b><span class="t-fa">خلاصه</span><span class="t-en">Summary</span></b>
+              <span><span class="t-fa">چرخش میان صندوق‌های طلا</span><span class="t-en">Rotation between gold funds</span></span>
+            </div>
+            <ul class="report-facts">
+              <li><b><span class="t-fa">ژانویه ۲۰۲۵ تا سپتامبر ۲۰۲۶</span><span class="t-en">Jan 2025 to Sep 2026</span></b><span><span class="t-fa">بازه‌ی آزمون</span><span class="t-en">test period</span></span></li>
+              <li><b><span class="t-fa">۳۹۵</span><span class="t-en">395</span></b><span><span class="t-fa">روز معاملاتی</span><span class="t-en">trading days</span></span></li>
+              <li><b><span class="t-fa">۲۱ صندوق طلا</span><span class="t-en">21 gold funds</span></b><span><span class="t-fa">در برابر معیار: نگه‌داشتن پرمعامله‌ترین صندوق</span><span class="t-en">against the benchmark: holding the most traded fund</span></span></li>
+              <li><b><span class="t-fa">۴ سناریو</span><span class="t-en">4 scenarios</span></b><span><span class="t-fa">تخفیف کارمزد کارگزاری، از صفر تا ۴۵٪</span><span class="t-en">broker fee discount, from zero to 45%</span></span></li>
+            </ul>
+            <div class="report-actions">
+              <a class="btn btn-primary" href="../assets/reports/tsetmc-gold-funds-summary.html" download>
+                <svg class="arr-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
+                <span class="t-fa">دانلود گزارش</span><span class="t-en">Download the report</span>
+              </a>
+              <a class="btn btn-ghost" href="../assets/reports/tsetmc-gold-funds-summary.html" target="_blank" rel="noopener">
+                <span class="t-fa">باز کردن در مرورگر</span><span class="t-en">Open in the browser</span>
+              </a>
+            </div>
+            <p class="report-size"><span class="t-fa">یک فایل HTML مستقل، ۴٫۹ مگابایت، به انگلیسی</span><span class="t-en">One self-contained HTML file, 4.9 MB, in English</span></p>
+          </li>
+          <li class="glow reveal">
+            <div class="report-head">
+              <b><span class="t-fa">با جزئیات</span><span class="t-en">Detailed</span></b>
+              <span><span class="t-fa">چرخش میان صندوق‌های طلا</span><span class="t-en">Rotation between gold funds</span></span>
+            </div>
+            <ul class="report-facts">
+              <li><b><span class="t-fa">ژانویه ۲۰۲۵ تا سپتامبر ۲۰۲۶</span><span class="t-en">Jan 2025 to Sep 2026</span></b><span><span class="t-fa">بازه‌ی آزمون</span><span class="t-en">test period</span></span></li>
+              <li><b><span class="t-fa">۳۹۵</span><span class="t-en">395</span></b><span><span class="t-fa">روز معاملاتی</span><span class="t-en">trading days</span></span></li>
+              <li><b><span class="t-fa">دقیقه به دقیقه</span><span class="t-en">Minute by minute</span></b><span><span class="t-fa">هر صندوق در برابر معیار، با تک‌تک نگه‌داری‌ها</span><span class="t-en">each fund against the benchmark, with every holding</span></span></li>
+              <li><b><span class="t-fa">۴ سناریو</span><span class="t-en">4 scenarios</span></b><span><span class="t-fa">تخفیف کارمزد کارگزاری، از صفر تا ۴۵٪</span><span class="t-en">broker fee discount, from zero to 45%</span></span></li>
+            </ul>
+            <div class="report-actions">
+              <a class="btn btn-primary" href="../assets/reports/tsetmc-gold-funds-detailed.html" download>
+                <svg class="arr-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
+                <span class="t-fa">دانلود گزارش</span><span class="t-en">Download the report</span>
+              </a>
+              <a class="btn btn-ghost" href="../assets/reports/tsetmc-gold-funds-detailed.html" target="_blank" rel="noopener">
+                <span class="t-fa">باز کردن در مرورگر</span><span class="t-en">Open in the browser</span>
+              </a>
+            </div>
+            <p class="report-size"><span class="t-fa">یک فایل HTML مستقل، ۱۳٫۷ مگابایت، به انگلیسی</span><span class="t-en">One self-contained HTML file, 13.7 MB, in English</span></p>
+          </li>
+        </ul>
+        <p class="report-note">
+          <span class="t-fa">این‌ها نتیجه‌ی شبیه‌سازی روی دفتر سفارش ضبط‌شده‌ی بازارند، نه معامله‌ی واقعی، و تضمینی برای آینده نیستند. در این شبیه‌سازی معامله‌گران رقیب مدل نشده‌اند.</span>
+          <span class="t-en">These are simulation results on the market's recorded order books, not real trading, and no guarantee of the future. No competing traders are modelled in this simulation.</span>
+        </p>
       </section>
 
       <section class="cs-section" id="platform">
@@ -369,6 +428,6 @@
 
 <button class="to-top" id="toTop" type="button" aria-label="Back to top">↑</button>
 
-<script src="../assets/js/main.js?v=25"></script>
+<script src="../assets/js/main.js?v=26"></script>
 </body>
 </html>

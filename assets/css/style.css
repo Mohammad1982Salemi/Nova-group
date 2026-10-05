@@ -883,3 +883,4 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
 }
 html[lang="fa"] .band-slogan h2 { letter-spacing: 0; }
 @media (max-width: 760px) { .band-slogan { align-items: center; padding: 46px 22px 42px; } }
+.report-head { flex-wrap: wrap; }
