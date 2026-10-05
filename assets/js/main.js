@@ -189,12 +189,12 @@
   }
 
   /* ---------------------------------------------------------------
-     cursor-tracked glow on service cards
+     cursor-tracked glow on project cards
      --------------------------------------------------------------- */
   function initCardGlow() {
     if (reduceMotion || window.matchMedia('(hover: none)').matches) return;
 
-    document.querySelectorAll('.card').forEach(function (card) {
+    document.querySelectorAll('.project').forEach(function (card) {
       card.addEventListener('pointermove', function (e) {
         var rect = card.getBoundingClientRect();
         card.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
