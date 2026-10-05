@@ -1038,3 +1038,6 @@ html[dir="rtl"] .footer-cta:hover .arr { transform: scaleX(-1) translateX(4px); 
   .to-top { width: 46px; height: 46px; inset-block-end: 14px; inset-inline-end: 14px; }
   .to-top svg { width: 18px; height: 18px; }
 }
+
+/* some phone browsers only leave a page alone if it answers the dark-mode query itself */
+@media (prefers-color-scheme: dark) { :root { color-scheme: dark; } html { background: #05080e; } }
