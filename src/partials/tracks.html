@@ -1,10 +1,26 @@
 <div class="tracks">
-  <article class="track reveal">
+  <article class="track glow reveal">
+    <!-- resting quotes on both sides of the mid -->
+    <svg class="track-viz" viewBox="0 0 240 64" aria-hidden="true">
+      <line x1="120" y1="6" x2="120" y2="58" class="v-mid"/>
+      <rect x="44" y="18" width="68" height="10" rx="3" class="v-bid v-pulse"/>
+      <rect x="66" y="36" width="46" height="10" rx="3" class="v-bid v-dim"/>
+      <rect x="128" y="18" width="68" height="10" rx="3" class="v-ask v-pulse"/>
+      <rect x="128" y="36" width="46" height="10" rx="3" class="v-ask v-dim"/>
+    </svg>
     <span class="track-tag">Maker</span>
     <h3><span class="t-fa">نگاه مارکت میکر</span><span class="t-en">The market-maker view</span></h3>
     <p><span class="t-fa">عرضه‌ی نقدینگی و ساخت بازار.</span><span class="t-en">Supplying liquidity and making markets.</span></p>
   </article>
-  <article class="track reveal">
+
+  <article class="track glow reveal">
+    <!-- an order crossing the spread into the resting quote -->
+    <svg class="track-viz" viewBox="0 0 240 64" aria-hidden="true">
+      <line x1="120" y1="6" x2="120" y2="58" class="v-mid"/>
+      <rect x="150" y="18" width="52" height="28" rx="4" class="v-ask v-dim"/>
+      <path d="M38 32H144" class="v-arrow"/>
+      <path d="M136 24l8 8-8 8" class="v-head"/>
+    </svg>
     <span class="track-tag">Taker</span>
     <h3><span class="t-fa">نگاه تیکر</span><span class="t-en">The taker view</span></h3>
     <p><span class="t-fa">مصرف نقدینگی و ورود به معامله.</span><span class="t-en">Consuming liquidity and entering trades.</span></p>

@@ -16,6 +16,7 @@
 <meta property="og:image" content="https://mohammad1982salemi.github.io/Nova-group/assets/img/favicon-192.png">
 <meta name="twitter:card" content="summary">
 
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
 <link rel="icon" type="image/png" sizes="64x64" href="assets/img/favicon-64.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
 <link rel="apple-touch-icon" href="assets/img/favicon-192.png">
@@ -25,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="assets/css/style.css?v=7">
+<link rel="stylesheet" href="assets/css/style.css?v=8">
 
 <!-- Runs before first paint so the page never flashes in the wrong language or direction. -->
 <script>
@@ -45,8 +46,8 @@
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
     <a class="logo" href="index.html" aria-label="Nova Group">
-      <img class="logo-mark" src="assets/img/nova-mark-180.png" alt="" width="180" height="180">
-      <span class="logo-text t-fa">نوا گروپ</span><span class="logo-text t-en">NOVA GROUP</span>
+      <img class="logo-mark" src="assets/img/nova-logo.svg" alt="" width="64" height="64">
+      <span class="logo-text t-fa"><b>نوا</b> گروپ</span><span class="logo-text t-en"><b>NOVA</b> GROUP</span>
     </a>
 
     <nav class="nav-links" id="navLinks" aria-label="Main">
@@ -79,7 +80,7 @@
         <span class="t-en">A three-person group that has been studying financial markets and building trading algorithms since 2020.</span>
       </p>
     </div>
-    <img class="page-mark reveal" src="assets/img/nova-mark.png" alt="" width="512" height="512">
+    <img class="page-mark reveal" src="assets/img/nova-logo.svg" alt="" width="64" height="64">
   </div>
 </section>
 
@@ -160,12 +161,28 @@
         </p>
       </div>
 <div class="tracks">
-  <article class="track reveal">
+  <article class="track glow reveal">
+    <!-- resting quotes on both sides of the mid -->
+    <svg class="track-viz" viewBox="0 0 240 64" aria-hidden="true">
+      <line x1="120" y1="6" x2="120" y2="58" class="v-mid"/>
+      <rect x="44" y="18" width="68" height="10" rx="3" class="v-bid v-pulse"/>
+      <rect x="66" y="36" width="46" height="10" rx="3" class="v-bid v-dim"/>
+      <rect x="128" y="18" width="68" height="10" rx="3" class="v-ask v-pulse"/>
+      <rect x="128" y="36" width="46" height="10" rx="3" class="v-ask v-dim"/>
+    </svg>
     <span class="track-tag">Maker</span>
     <h3><span class="t-fa">نگاه مارکت میکر</span><span class="t-en">The market-maker view</span></h3>
     <p><span class="t-fa">عرضه‌ی نقدینگی و ساخت بازار.</span><span class="t-en">Supplying liquidity and making markets.</span></p>
   </article>
-  <article class="track reveal">
+
+  <article class="track glow reveal">
+    <!-- an order crossing the spread into the resting quote -->
+    <svg class="track-viz" viewBox="0 0 240 64" aria-hidden="true">
+      <line x1="120" y1="6" x2="120" y2="58" class="v-mid"/>
+      <rect x="150" y="18" width="52" height="28" rx="4" class="v-ask v-dim"/>
+      <path d="M38 32H144" class="v-arrow"/>
+      <path d="M136 24l8 8-8 8" class="v-head"/>
+    </svg>
     <span class="track-tag">Taker</span>
     <h3><span class="t-fa">نگاه تیکر</span><span class="t-en">The taker view</span></h3>
     <p><span class="t-fa">مصرف نقدینگی و ورود به معامله.</span><span class="t-en">Consuming liquidity and entering trades.</span></p>
@@ -237,8 +254,8 @@
     <div class="footer-top">
       <div class="footer-brand">
         <a class="logo" href="index.html" aria-label="Nova Group">
-          <img class="logo-mark" src="assets/img/nova-mark-180.png" alt="" width="180" height="180" loading="lazy">
-          <span class="logo-text t-fa">نوا گروپ</span><span class="logo-text t-en">NOVA GROUP</span>
+          <img class="logo-mark" src="assets/img/nova-logo.svg" alt="" width="64" height="64" loading="lazy">
+          <span class="logo-text t-fa"><b>نوا</b> گروپ</span><span class="logo-text t-en"><b>NOVA</b> GROUP</span>
         </a>
         <p>
           <span class="t-fa">پژوهش و ساخت الگوریتم‌های معاملاتی بر پایه‌ی جریان سفارش بازار — از ۱۳۹۹.</span>
@@ -274,6 +291,6 @@
 
 <button class="to-top" id="toTop" type="button" aria-label="Back to top">↑</button>
 
-<script src="assets/js/main.js?v=7"></script>
+<script src="assets/js/main.js?v=8"></script>
 </body>
 </html>
