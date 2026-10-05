@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="../assets/css/style.css?v=21">
+<link rel="stylesheet" href="../assets/css/style.css?v=22">
 
 <!-- Runs before first paint so the page never flashes in the wrong language or direction. -->
 <script>
@@ -133,6 +133,7 @@
     <nav class="toc reveal" aria-label="On this page">
       <span class="toc-title"><span class="t-fa">در این صفحه</span><span class="t-en">On this page</span></span>
       <a href="#intro"><span class="t-fa">معرفی</span><span class="t-en">Introduction</span></a>
+      <a href="#reports"><span class="t-fa">گزارش‌ها</span><span class="t-en">Reports</span></a>
       <a href="#platform"><span class="t-fa">پلتفرم</span><span class="t-en">Platform</span></a>
       <a href="#approach"><span class="t-fa">رویکرد</span><span class="t-en">Approach</span></a>
       <a href="#difference"><span class="t-fa">آنچه برجسته است</span><span class="t-en">What stands out</span></a>
@@ -160,6 +161,50 @@
         <span class="t-fa">پروژه‌ی فست اسکلپ تاریخچه‌ی چندساله‌ی بورس شیکاگو، از بزرگ‌ترین بازارهای آتی جهان، را در سطح تک‌تک سفارش‌ها گرد آورده است. بر پایه‌ی این داده، با یادگیری ماشین (ML) و تحلیل آماری، به یک الگوریتم معاملات کوتاه‌مدت رسیده‌ایم که در بازسازی دقیقی از خودِ بورس آزموده می‌شود. مقصد ما یک میز معاملات خودکار است که سرمایه را با همین الگوریتم اداره می‌کند، نه با واکنش لحظه‌ای افراد.</span>
         <span class="t-en">The Fast Scalp project has gathered several years of the Chicago exchange, one of the world's largest futures markets, at the level of every single order. From that data, with machine learning (ML) and statistical analysis, we have arrived at a short-term trading algorithm that is tested inside a close reconstruction of the exchange itself. The destination is an automated trading desk that runs capital with this algorithm, not with people's reactions of the moment.</span>
       </p>
+      </section>
+
+      <section class="cs-section" id="reports">
+        <h2><span><span class="t-fa">گزارش‌های شبیه‌ساز</span><span class="t-en">Simulator reports</span></span></h2>
+        <p>
+          <span class="t-fa">این پروژه برای هر بازار یک گزارش کامل از شبیه‌ساز اجرا دارد. هر گزارش الگوریتم را هم‌زمان در پنج سطح تأخیر رسیدن سفارش به بورس نشان می‌دهد، از صفر تا ۱۰۰ میلی‌ثانیه. می‌توانید گزارش را دانلود کنید و مستقل از ما بخوانید و بسنجید.</span>
+          <span class="t-en">This project has one full report from the execution simulator per market. Each report shows the algorithm at five levels of order latency to the exchange at once, from zero to 100 milliseconds. You can download the report and read and weigh it independently of us.</span>
+        </p>
+        <ul class="reports">
+          <li class="glow reveal">
+            <div class="report-head">
+              <b>GC</b>
+              <span><span class="t-fa">آتی طلا</span><span class="t-en">Gold futures</span></span>
+            </div>
+            <ul class="report-facts">
+              <li><b><span class="t-fa">دسامبر ۲۰۱۹ تا ژوئیه ۲۰۲۶</span><span class="t-en">Dec 2019 to Jul 2026</span></b><span><span class="t-fa">بازه‌ی آزمون</span><span class="t-en">test period</span></span></li>
+              <li><b><span class="t-fa">۱٬۶۹۶</span><span class="t-en">1,696</span></b><span><span class="t-fa">روز معاملاتی</span><span class="t-en">trading days</span></span></li>
+              <li><b><span class="t-fa">۲۵٬۲۲۸</span><span class="t-en">25,228</span></b><span><span class="t-fa">معامله‌ی شبیه‌سازی‌شده در سناریوی پایه</span><span class="t-en">simulated trades in the base scenario</span></span></li>
+              <li><b><span class="t-fa">۵ سناریو</span><span class="t-en">5 scenarios</span></b><span><span class="t-fa">۵ سطح تأخیر، از صفر تا ۱۰۰ میلی‌ثانیه</span><span class="t-en">5 latency levels, from zero to 100 ms</span></span></li>
+            </ul>
+            <div class="report-actions">
+              <a class="btn btn-primary" href="../assets/reports/gc-fast-scalp.html" download>
+                <svg class="arr-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
+                <span class="t-fa">دانلود گزارش</span><span class="t-en">Download the report</span>
+              </a>
+              <a class="btn btn-ghost" href="../assets/reports/gc-fast-scalp.html" target="_blank" rel="noopener">
+                <span class="t-fa">باز کردن در مرورگر</span><span class="t-en">Open in the browser</span>
+              </a>
+            </div>
+            <p class="report-size"><span class="t-fa">یک فایل HTML مستقل، ۲٫۳ مگابایت، فارسی و انگلیسی</span><span class="t-en">One self-contained HTML file, 2.3 MB, Persian and English</span></p>
+          </li>
+          <li class="report-soon reveal">
+            <div class="report-head">
+              <b>NQ</b>
+              <span><span class="t-fa">آتی نزدک ۱۰۰</span><span class="t-en">Nasdaq-100 futures</span></span>
+            </div>
+            <p class="report-wait"><span class="t-fa">گزارش این بازار به‌زودی همین‌جا قرار می‌گیرد.</span><span class="t-en">The report for this market will be placed here soon.</span></p>
+            <span class="status"><span class="t-fa">به‌زودی</span><span class="t-en">Coming soon</span></span>
+          </li>
+        </ul>
+        <p class="report-note">
+          <span class="t-fa">این نتیجه‌ی شبیه‌سازی روی داده‌ی ضبط‌شده‌ی بازار (بک‌تست) است، نه معامله‌ی واقعی، و تضمینی برای آینده نیست.</span>
+          <span class="t-en">This is a simulation result on recorded market data (a backtest), not real trading, and no guarantee of the future.</span>
+        </p>
       </section>
 
       <section class="cs-section" id="platform">
@@ -371,6 +416,6 @@
 
 <button class="to-top" id="toTop" type="button" aria-label="Back to top">↑</button>
 
-<script src="../assets/js/main.js?v=21"></script>
+<script src="../assets/js/main.js?v=22"></script>
 </body>
 </html>
