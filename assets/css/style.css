@@ -985,3 +985,56 @@ html[dir="ltr"] .footer-cta:hover .arr { transform: translateX(4px); }
 html[dir="rtl"] .footer-cta:hover .arr { transform: scaleX(-1) translateX(4px); }
 .footer-bottom { margin-block-start: 26px; text-align: center; color: var(--dim); font-size: 13.4px; line-height: 1.9; }
 @media (max-width: 900px) { .footer-panel { gap: 36px; padding: 34px 28px; } .footer-panel::before { inset-inline: 28px; } }
+
+/* the page is dark by design: stop browsers' automatic dark modes from recolouring it */
+:root { color-scheme: dark; }
+
+/* ---------------------------------------------------------------
+   Phones and tablets only. Nothing below applies above 1020px.
+   --------------------------------------------------------------- */
+@media (max-width: 1020px) {
+  .footer-panel { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 760px) {
+  /* footer: one column, links in two, the address as a full-width button */
+  .footer { padding-block: 44px 92px; }
+  .footer-panel { grid-template-columns: 1fr; gap: 30px; padding: 30px 22px; }
+  .footer-panel::before { inset-inline: 22px; }
+  .footer-brand .logo-mark { width: 50px; height: 50px; }
+  html[data-lang="fa"] .footer-brand .logo-text { font-size: 22px; }
+  html[data-lang="en"] .footer-brand .logo-text { font-size: 16px; }
+  .footer-brand p { margin-block-start: 14px; max-width: none; }
+  .footer-col:not(.footer-contact) { grid-template-columns: 1fr 1fr; column-gap: 18px; }
+  .footer-col h2 { grid-column: 1 / -1; }
+  .footer-col > a { white-space: nowrap; }
+  .footer-col .footer-mail { justify-self: stretch; justify-content: center; padding: 14px 12px; font-size: 14.5px; }
+  .footer-bottom { font-size: 12.6px; padding-inline: 6px; }
+
+  /* project cards: tighter, the report box full width, facts as a compact table */
+  .proj { gap: 20px; padding: 24px 20px; }
+  .proj h3 { font-size: 1.55rem; }
+  .proj-sub { font-size: 15.2px; }
+  .proj-desc { margin-block-end: 20px; }
+  .proj-foot { flex-direction: column; align-items: stretch; gap: 16px; }
+  .proj-report { justify-content: center; padding: 13px 14px; }
+  .proj-foot .link-arrow { margin-inline-start: 0; align-self: flex-start; }
+  .proj-facts { gap: 0; padding-block-start: 4px; }
+  .proj-facts li {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+    padding-block: 12px; border-block-end: 1px solid var(--line);
+  }
+  .proj-facts li:last-child { border-block-end: 0; padding-block-end: 0; }
+  .proj-facts b { flex: none; font-size: 15.5px; }
+  .proj-facts li > span { text-align: end; font-size: 12.8px; }
+
+  /* report cards on the project pages */
+  .reports > li { padding: 24px 20px; }
+  .report-head b { font-size: 2rem; }
+  .report-facts { gap: 16px 14px; }
+  .report-actions .btn { flex: 1 1 100%; justify-content: center; }
+  .contact-mails .contact-main strong { font-size: 19px; }
+
+  /* back to top: smaller and tucked into the corner */
+  .to-top { width: 46px; height: 46px; inset-block-end: 14px; inset-inline-end: 14px; }
+  .to-top svg { width: 18px; height: 18px; }
+}
