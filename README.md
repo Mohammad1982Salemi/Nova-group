@@ -56,11 +56,21 @@ assets/js/main.js        تعاملات (تغییر زبان، انیمیشن، 
 | مورد | محل در `index.html` |
 | --- | --- |
 | نام اعضای تیم | بخش `id="about"` → `class="team-grid"` |
-| آمار (سال پژوهش، تعداد اعضا، …) | بخش `id="about"` → `class="stats"` |
 | پروژه‌ها | بخش `id="projects"` |
 | ایمیل، تلفن، تلگرام | بخش `id="contact"` |
 
 > ⚠️ همه‌ی این‌ها در حال حاضر **محتوای نمونه** هستند، نه اطلاعات واقعی. فقط لینک گیت‌هاب واقعی است.
+
+### لحن صفحه — عمدی است
+
+صفحه طوری نوشته شده که **هیچ ادعایی که اثبات نشده مطرح نکند**:
+
+- هیچ عدد عملکردی (بازده، شارپ، افت سرمایه) در صفحه نیست و بخش آمار عمداً حذف شده
+- وضعیت پروژه‌ها فقط «در حال ساخت»، «پژوهش» و «نمونه‌ی اولیه» است — هیچ‌جا «فعال» نیست
+- زیر نمودار هیرو صریحاً نوشته شده که نمونه است و بازدهی واقعی نیست
+- یک کادر «وضعیت ما» صریحاً می‌گوید هنوز هیچ استراتژی‌ای به اجرای واقعی نرسیده
+
+اگر بعداً به مرحله‌ی اجرا رسیدید و خواستید اعداد عملکرد اضافه کنید، آن کادر و این بند را هم به‌روز کنید.
 
 ### اجرای محلی
 
@@ -104,8 +114,16 @@ All copy lives in `index.html`, written as paired bilingual spans:
 
 ### Placeholder content
 
-Team names, the statistics, every project entry and all contact details except the
-GitHub link are **placeholders** and need replacing with real information.
+Team names, every project entry and all contact details except the GitHub link are
+**placeholders** and need replacing with real information.
+
+### Tone is deliberate
+
+The page is written so that it makes **no claim it cannot back up**: there is no
+performance figure anywhere, every project is marked in-progress / research /
+prototype (never "live"), the hero chart is labelled as illustrative, and a
+"Where we are" callout states plainly that nothing has gone to live execution yet.
+Update that callout if and when that changes.
 
 ### Run locally
 

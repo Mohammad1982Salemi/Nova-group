@@ -9,15 +9,6 @@
      language: fa (RTL) <-> en (LTR)
      --------------------------------------------------------------- */
   var STORAGE_KEY = 'nova-lang';
-  var DIGITS = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
-
-  function toPersianDigits(value) {
-    return String(value).replace(/\d/g, function (d) { return DIGITS[+d]; });
-  }
-
-  function localizeNumber(value, lang) {
-    return lang === 'fa' ? toPersianDigits(value) : String(value);
-  }
 
   function detectLang() {
     var saved = null;
@@ -30,73 +21,19 @@
     html.setAttribute('data-lang', lang);
     html.setAttribute('lang', lang);
     html.setAttribute('dir', lang === 'fa' ? 'rtl' : 'ltr');
-
-    // re-render every counted number in the right numeral system
-    counters.forEach(function (counter) { renderCount(counter, counter.dataset.value); });
-
     try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) { /* storage blocked */ }
   }
 
-  /* ---------------------------------------------------------------
-     counters (stats + floating cards)
-     --------------------------------------------------------------- */
-  var counters = [];
-
-  function writeCount(el, text) {
-    var target = el.querySelector('.fc-num') || el;
-    target.textContent = text;
-  }
-
-  function renderCount(counter, value) {
-    var lang = html.getAttribute('data-lang') || 'fa';
-    var text = localizeNumber(Math.round(value), lang) + (counter.dataset.suffix || '');
-    writeCount(counter, text);
-  }
-
-  function animateCount(counter) {
-    var end = parseFloat(counter.dataset.count) || 0;
-    var duration = 1500;
-    var start = performance.now();
-    counter.dataset.value = 0;
-
-    if (reduceMotion) {
-      counter.dataset.value = end;
-      renderCount(counter, end);
-      return;
-    }
-
-    (function step(now) {
-      var p = Math.min((now - start) / duration, 1);
-      var eased = 1 - Math.pow(1 - p, 3);
-      var current = end * eased;
-      counter.dataset.value = current;
-      renderCount(counter, current);
-      if (p < 1) requestAnimationFrame(step);
-    })(start);
-  }
-
-  function initCounters() {
-    counters = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
-    counters.forEach(function (counter) {
-      counter.dataset.value = 0;
-      renderCount(counter, 0);
-    });
-  }
-
-  /* ---------------------------------------------------------------
-     language button
-     --------------------------------------------------------------- */
   function initLangButton() {
     var btn = document.getElementById('langBtn');
     if (!btn) return;
     btn.addEventListener('click', function () {
-      var next = html.getAttribute('data-lang') === 'fa' ? 'en' : 'fa';
-      applyLang(next);
+      applyLang(html.getAttribute('data-lang') === 'fa' ? 'en' : 'fa');
     });
   }
 
   /* ---------------------------------------------------------------
-     nav: scroll state, mobile menu, active section
+     nav: scroll state, mobile menu, back to top
      --------------------------------------------------------------- */
   function initNav() {
     var nav = document.getElementById('nav');
@@ -157,35 +94,13 @@
         var siblings = Array.prototype.slice.call(el.parentElement.children).filter(function (n) {
           return n.classList.contains('reveal');
         });
-        var index = siblings.indexOf(el);
-        el.style.transitionDelay = Math.min(index, 5) * 80 + 'ms';
+        el.style.transitionDelay = Math.min(siblings.indexOf(el), 5) * 80 + 'ms';
         el.classList.add('is-in');
         observer.unobserve(el);
       });
     }, { threshold: 0.14, rootMargin: '0px 0px -60px 0px' });
 
     items.forEach(function (el) { observer.observe(el); });
-  }
-
-  /* ---------------------------------------------------------------
-     each counter animates the first time it enters the viewport
-     (hero cards fire on load, the stats strip on scroll)
-     --------------------------------------------------------------- */
-  function initCounterTriggers() {
-    if (!('IntersectionObserver' in window)) {
-      counters.forEach(animateCount);
-      return;
-    }
-
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        animateCount(entry.target);
-        observer.unobserve(entry.target);
-      });
-    }, { threshold: 0.4 });
-
-    counters.forEach(function (counter) { observer.observe(counter); });
   }
 
   /* ---------------------------------------------------------------
@@ -207,12 +122,10 @@
      boot
      --------------------------------------------------------------- */
   function boot() {
-    initCounters();
     applyLang(detectLang());
     initLangButton();
     initNav();
     initReveal();
-    initCounterTriggers();
     initCardGlow();
   }
 
