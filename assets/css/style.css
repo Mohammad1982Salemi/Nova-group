@@ -913,3 +913,4 @@ html[lang="fa"] .band-slogan h2 { letter-spacing: 0; }
   box-shadow: 0 0 0 1px rgba(56,213,245,.12), 0 10px 34px rgba(56,213,245,.22), inset 0 1px 0 rgba(255,255,255,.14);
 }
 .proj-report.is-on svg { color: var(--cyan); }
+.reports > li:only-child { grid-column: 1 / -1; }

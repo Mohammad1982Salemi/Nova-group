@@ -12,7 +12,7 @@ Tokens a page (or a partial) may use:
 import re
 from pathlib import Path
 
-VERSION = "29"  # bump whenever assets/css/style.css or assets/js/main.js changes
+VERSION = "30"  # bump whenever assets/css/style.css or assets/js/main.js changes
 
 ROOT = Path(__file__).parent
 PAGES = ROOT / "src" / "pages"
