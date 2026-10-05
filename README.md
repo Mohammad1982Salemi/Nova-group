@@ -55,11 +55,9 @@ assets/js/main.js        تعاملات (تغییر زبان، انیمیشن، 
 
 | مورد | محل در `index.html` |
 | --- | --- |
-| **سمت اعضای تیم** | بخش `id="about"` → `class="team-grid"` — فعلاً هر سه «عضو تیم» هستند |
 | پروژه‌ها | بخش `id="projects"` |
-| ایمیل، تلفن، تلگرام | بخش `id="contact"` |
 
-نام اعضای تیم واقعی است؛ فقط سمت‌شان هنوز مشخص نشده.
+نام و سمت اعضای تیم واقعی است. در بخش تماس فعلاً **فقط لینک گیت‌هاب** هست — ایمیل، تلفن و تلگرام عمداً خالی مانده‌اند تا با مقدار ساختگی پر نشوند. هر وقت راه ارتباطی واقعی داشتید، در `class="contact-links"` اضافه کنید.
 
 > ⚠️ همه‌ی این‌ها در حال حاضر **محتوای نمونه** هستند، نه اطلاعات واقعی. فقط لینک گیت‌هاب واقعی است.
 
@@ -116,9 +114,9 @@ All copy lives in `index.html`, written as paired bilingual spans:
 
 ### Placeholder content
 
-Team names are real; their **roles are not filled in yet** (all three read "Team
-member"). Every project entry and all contact details except the GitHub link are
-still **placeholders**.
+Team names and roles are real. Contact lists **GitHub only** — email, phone and
+Telegram were deliberately left out rather than filled with invented details.
+The **six project entries** are still placeholders.
 
 ### Tone is deliberate
 

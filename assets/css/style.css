@@ -424,7 +424,8 @@ html[dir="ltr"] .about-points li:hover { transform: translateX(4px); }
 .contact-copy h2 { font-size: clamp(1.6rem, 3.2vw, 2.3rem); margin-block-end: 16px; }
 .contact-copy > p { color: var(--muted); font-size: 16.5px; margin-block-end: 36px; }
 
-.contact-links { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.contact-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.contact-links > :only-child { max-width: 420px; }
 .clink {
   display: flex; align-items: center; gap: 15px; padding: 17px 20px;
   background: rgba(5,7,10,.5); border: 1px solid var(--line); border-radius: var(--r);
