@@ -104,16 +104,18 @@
   }
 
   /* ---------------------------------------------------------------
-     cursor-tracked glow on project cards
+     projects: open and close a case study
      --------------------------------------------------------------- */
-  function initCardGlow() {
-    if (reduceMotion || window.matchMedia('(hover: none)').matches) return;
+  function initProjects() {
+    document.querySelectorAll('.project-toggle').forEach(function (btn) {
+      var card = btn.closest('.project');
+      var detail = document.getElementById(btn.getAttribute('aria-controls'));
+      if (!card || !detail) return;
 
-    document.querySelectorAll('.project').forEach(function (card) {
-      card.addEventListener('pointermove', function (e) {
-        var rect = card.getBoundingClientRect();
-        card.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
-        card.style.setProperty('--my', (e.clientY - rect.top) + 'px');
+      btn.addEventListener('click', function () {
+        var open = card.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (!open) btn.setAttribute('aria-label', 'باز کردن جزئیات پروژه');
       });
     });
   }
@@ -126,7 +128,7 @@
     initLangButton();
     initNav();
     initReveal();
-    initCardGlow();
+    initProjects();
   }
 
   if (document.readyState === 'loading') {

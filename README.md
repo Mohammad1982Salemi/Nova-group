@@ -16,10 +16,30 @@ research into market order flow since 2020. Dark, modern, single-page.
 
 | بخش | توضیح |
 | --- | --- |
-| هیرو | معرفی کوتاه + کارت نمودار بک‌تست |
-| درباره ما و اعضا | معرفی گروه، چهار اصل کاری، آمار، و کارت اعضای تیم |
-| پروژه‌ها | شش پروژه با وضعیت (فعال / در حال توسعه / پژوهش) و تگ فناوری‌ها |
-| تماس با ما | ایمیل، تلگرام، تلفن و گیت‌هاب |
+| هیرو | تز مرکزی گروه + کارت نمودار بک‌تست |
+| درباره ما | معرفی، **چارچوب سه‌لایه‌ی کار**، و کادر «وضعیت ما» |
+| اعضا | سه عضو با نام و سمت |
+| پروژه‌ها | هر پروژه یک موردِ **بازشو**: معرفی / رویکرد / آنچه فرق می‌کند / مسیر پیش رو / فناوری |
+| تماس با ما | فعلاً فقط گیت‌هاب |
+
+### چارچوب سه‌لایه
+
+هر پروژه روی همین سه لایه سوار می‌شود، از پایین به بالا:
+
+1. **پلتفرم مستقل، اختصاصی هر پروژه** — بدون وابستگی به ابزار آماده
+2. **شبیه‌ساز عمیق اجرای سفارش** — ستون کار؛ صف، نوبت و پر شدن تکه‌تکه
+3. **تحلیل، نمودار و مدل‌های پیش‌بینی** — آخرین لایه، نه اولین
+
+### پروژه‌ها چطور اضافه می‌شوند
+
+هر پروژه یک `<article class="project">` است با دو بخش:
+
+- **سربرگ و کارت بسته** — `class="project-head"` (شماره، عنوان، یک خط خلاصه، وضعیت) به‌علاوه‌ی `class="tags"`
+- **بدنه‌ی بازشو** — `class="project-detail"` شامل بلوک‌هایی با `class="detail-block"`
+
+بلوک‌های آماده در CSS: `detail-lead` (پاراگراف درشت)، `steps` (فرآیند مرحله‌ای)، `points` (فهرست تمایزها)، `phases` (تایم‌لاین؛ به هر `li` کلاس `is-done` یا `is-now` بدهید).
+
+دکمه‌ی باز و بسته در `main.js` → `initProjects()` است. برای بسته‌بودن پیش‌فرض، کلاس `is-open` را از `article` بردارید و `aria-expanded` را `false` کنید.
 
 ### ویژگی‌ها
 
@@ -119,8 +139,12 @@ Team names and roles are real. Only **Mohammad Salemi has a photo**
 to initials until they send one.
 
 Contact lists **GitHub only** — email, phone and Telegram were deliberately left
-out rather than filled with invented details. The **six project entries** are still
-placeholders.
+out rather than filled with invented details.
+
+**Projects:** TSETMC is the group's own written case study. The other four projects
+exist as repositories (`Quantia_ST_Crypto`, `Quantia_ST_LP`, `Quantia_ST_Scalp`,
+`Quantia_ST_BlockTrade`) but their write-ups have not been supplied yet, so they are
+**not listed** rather than filled with invented descriptions.
 
 ### Tone is deliberate
 
