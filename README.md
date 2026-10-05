@@ -23,7 +23,7 @@ Bilingual (Persian / English), multi-page, fully static.
 | دیفای ال‌پی | `projects/defi-lp.html` | صفحه‌ی اختصاصی پروژه |
 | مارکت‌میکر کریپتو | `projects/crypto-mm.html` | صفحه‌ی اختصاصی پروژه |
 | TSETMC | `projects/tsetmc.html` | صفحه‌ی اختصاصی پروژه، با فهرست کناری |
-| تماس | `contact.html` | ایمیل گروه و اعضا، و گیت‌هاب |
+| تماس | `contact.html` | ایمیل گروه و اعضا |
 
 ## ساختار · How it is put together
 
@@ -95,7 +95,7 @@ this is not an offer to invest. Update those statements if and when that changes
 ## وضعیت محتوا · Content status
 
 - نام و سمت اعضا واقعی است. فقط محمد سالمی عکس دارد؛ دو نفر دیگر با حرف اول نام نمایش داده می‌شوند.
-- تماس: info@novacapital.fund، ایمیل هر عضو، و گیت‌هاب — تلفن عمداً خالی مانده است.
+- تماس: info@novacapital.fund و ایمیل هر عضو — تلفن عمداً خالی مانده است.
 - از پروژه‌ها فقط TSETMC نوشته شده؛ بقیه تا وقتی متنشان آماده نشده، فهرست نمی‌شوند.
 
 ## اجرای محلی و انتشار · Local preview and deploy

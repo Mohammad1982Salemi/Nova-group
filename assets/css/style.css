@@ -859,8 +859,8 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
   font-family: var(--font-disp); font-size: 13px; color: var(--accent-hi); overflow-wrap: anywhere;
 }
 .member-mail:hover { color: var(--text); }
-.contact-mails { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.contact-mails { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
 .contact-mails .contact-label { letter-spacing: 0; text-transform: none; font-family: inherit; font-size: 14px; }
-@media (max-width: 760px) { .contact-mails { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .contact-mails { grid-template-columns: 1fr; } }
 .contact-mails .contact-main { grid-column: 1 / -1; border-color: rgba(56,213,245,.3); }
 .contact-mails .contact-main strong { font-size: 24px; }
