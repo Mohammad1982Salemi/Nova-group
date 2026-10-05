@@ -136,11 +136,16 @@ html[data-lang="en"] .t-fa { display: none !important; }
 
 .logo { display: flex; align-items: center; gap: 10px; }
 .logo-mark { width: 30px; height: 30px; filter: drop-shadow(0 0 13px rgba(59,130,246,.5)); }
+/* the wordmark sits on the dark navbar, so it runs bright-to-light-blue —
+   the brand blue at full strength is too dark to read up there */
 .logo-text {
-  font-family: var(--font-display-en);
-  font-weight: 700; letter-spacing: .18em; font-size: 17px;
-  background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+  font-weight: 700;
+  background: linear-gradient(115deg, #dbeafe 0%, #93c5fd 55%, #7dd3fc 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
 }
+/* Persian must never be letter-spaced: it breaks the joins between the letters */
+html[data-lang="fa"] .logo-text { font-family: var(--font-fa); font-size: 16.5px; letter-spacing: normal; }
+html[data-lang="en"] .logo-text { font-family: var(--font-display-en); font-size: 14px; letter-spacing: .16em; }
 
 .nav-links { display: flex; gap: 4px; margin-inline-start: auto; }
 .nav-links a {

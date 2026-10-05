@@ -22,7 +22,7 @@
 <meta name="twitter:title" content="گروه نوا | الگوریتم‌های معاملاتی">
 <meta name="twitter:description" content="طراحی و آزمون الگوریتم‌های معاملاتی.">
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23081226'/><path d='M12 50V14h9v36z' fill='%232563eb'/><path d='M12 14h9l26 36h-9z' fill='%233b82f6'/><rect x='46' y='33' width='5' height='17' fill='%2322d3ee'/><rect x='54' y='14' width='5' height='36' fill='%2322d3ee'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23071426'/><g fill='none' stroke-linecap='round' stroke-linejoin='round'><path d='M12 52V20L38 52V20' stroke='%231e3a8a' stroke-width='12'/><path d='M12 52V20L38 52V20' stroke='%233b82f6' stroke-width='7.4'/></g><path d='M24 2c1.7 12.2 9.8 20.3 22 22-12.2 1.7-20.3 9.8-22 22-1.7-12.2-9.8-20.3-22-22C14.2 22.3 22.3 14.2 24 2Z' transform='translate(33 5) scale(0.52)' fill='%23bae6fd'/></svg>">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vazirmatn@33.0.3/Vazirmatn-font-face.css">
@@ -31,7 +31,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap">
 <!-- Bump ?v= on style.css and main.js whenever either file changes: GitHub Pages
      caches them, and browsers otherwise keep serving the old build for minutes. -->
-<link rel="stylesheet" href="assets/css/style.css?v=2">
+<link rel="stylesheet" href="assets/css/style.css?v=3">
 </head>
 
 <body>
@@ -54,28 +54,36 @@
     <a class="logo" href="#hero" aria-label="Nova Group">
       <svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true">
         <defs>
-          <linearGradient id="lgBar" x1="0" y1="1" x2="1" y2="0">
-            <stop offset="0%" stop-color="#2563eb"/>
+          <linearGradient id="lgN" x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0%" stop-color="#1d4ed8"/>
             <stop offset="55%" stop-color="#3b82f6"/>
-            <stop offset="100%" stop-color="#22d3ee"/>
+            <stop offset="100%" stop-color="#7dd3fc"/>
           </linearGradient>
-          <linearGradient id="lgStem" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#1e40af"/>
-            <stop offset="100%" stop-color="#1d4ed8"/>
+          <linearGradient id="lgSpark" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0%" stop-color="#3b82f6"/>
+            <stop offset="100%" stop-color="#e0f2fe"/>
           </linearGradient>
-          <linearGradient id="lgFace" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#60a5fa"/>
-            <stop offset="100%" stop-color="#2563eb"/>
-          </linearGradient>
+          <radialGradient id="lgHalo" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#60a5fa" stop-opacity=".5"/>
+            <stop offset="100%" stop-color="#60a5fa" stop-opacity="0"/>
+          </radialGradient>
         </defs>
-        <path d="M10 51V13h8v38z" fill="url(#lgStem)"/>
-        <path d="M10 51V13l8 9v29z" fill="url(#lgFace)"/>
-        <path d="M10 13h8l30 38h-8z" fill="url(#lgBar)"/>
-        <rect x="45" y="37" width="4.2" height="14" fill="url(#lgBar)"/>
-        <rect x="51" y="27" width="4.2" height="24" fill="url(#lgBar)"/>
-        <rect x="57" y="13" width="4.2" height="38" fill="url(#lgBar)"/>
+
+        <ellipse cx="27" cy="37" rx="24" ry="16.5" fill="none"
+                 stroke="#60a5fa" stroke-opacity=".5" stroke-width="1.4"
+                 transform="rotate(-32 27 37)"/>
+
+        <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 53V21L40 53V21" stroke="#1e3a8a" stroke-width="11"/>
+          <path d="M14 53V21L40 53V21" stroke="url(#lgN)" stroke-width="7.2"/>
+          <path d="M14 53V21L40 53V21" stroke="#bfdbfe" stroke-width="1.7" stroke-opacity=".55"/>
+        </g>
+
+        <circle cx="48" cy="15" r="14" fill="url(#lgHalo)"/>
+        <path d="M24 2c1.7 12.2 9.8 20.3 22 22-12.2 1.7-20.3 9.8-22 22-1.7-12.2-9.8-20.3-22-22C14.2 22.3 22.3 14.2 24 2Z"
+              transform="translate(37 4) scale(0.46)" fill="url(#lgSpark)"/>
       </svg>
-      <span class="logo-text">NOVA</span>
+      <span class="logo-text t-fa">نوا گروپ</span><span class="logo-text t-en">NOVA GROUP</span>
     </a>
 
     <nav class="nav-links" id="navLinks" aria-label="Main">
@@ -473,7 +481,7 @@
 
 <footer class="footer">
   <div class="wrap footer-inner">
-    <span class="logo-text">NOVA</span>
+    <span class="logo-text t-fa">نوا گروپ</span><span class="logo-text t-en">NOVA GROUP</span>
     <p class="t-fa">© ۱۴۰۵ گروه نوا — همه‌ی حقوق محفوظ است.</p>
     <p class="t-en">© 2026 Nova Group — All rights reserved.</p>
   </div>
@@ -481,6 +489,6 @@
 
 <button class="to-top" id="toTop" type="button" aria-label="Back to top">↑</button>
 
-<script src="assets/js/main.js?v=2"></script>
+<script src="assets/js/main.js?v=3"></script>
 </body>
 </html>
