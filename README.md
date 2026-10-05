@@ -18,6 +18,7 @@ Bilingual (Persian / English), multi-page, fully static.
 | درباره ما | `about.html` | ایده، روش سه‌لایه (کامل)، دو مسیر، تیم |
 | پروژه‌ها | `projects.html` | فهرست پروژه‌ها |
 | مارکت‌میکر CME | `projects/cme-mm.html` | صفحه‌ی اختصاصی پروژه |
+| فست اسکلپ | `projects/fast-scalp.html` | صفحه‌ی اختصاصی پروژه |
 | TSETMC | `projects/tsetmc.html` | صفحه‌ی اختصاصی پروژه، با فهرست کناری |
 | تماس | `contact.html` | راه ارتباط (فعلاً فقط گیت‌هاب) |
 
