@@ -132,6 +132,7 @@
     <nav class="toc reveal" aria-label="On this page">
       <span class="toc-title"><span class="t-fa">در این صفحه</span><span class="t-en">On this page</span></span>
       <a href="#intro"><span class="t-fa">معرفی</span><span class="t-en">Introduction</span></a>
+      <a href="#platform"><span class="t-fa">ابزار نمایش</span><span class="t-en">Display tool</span></a>
       <a href="#approach"><span class="t-fa">رویکرد</span><span class="t-en">Approach</span></a>
       <a href="#difference"><span class="t-fa">آنچه برجسته است</span><span class="t-en">What stands out</span></a>
       <a href="#roadmap"><span class="t-fa">مسیر پیش رو</span><span class="t-en">The road ahead</span></a>
@@ -158,6 +159,60 @@
         <span class="t-fa">پروژه‌ی بلاک‌ترید یک سرویس داده‌ی در حال کار دارد. سرور ما معاملات بلوکی همه‌ی محصولات بورس شیکاگو را بی‌وقفه دریافت و پردازش می‌کند و به چارت معامله‌گر تحویل می‌دهد. هر بلوک با میانه‌ی ۳۶ ثانیه پس از اعلام بورس می‌رسد و تاریخچه‌ی آن روزبه‌روز انباشته می‌شود. مقصد ما الگوریتم‌های معاملاتی و سرمایه‌گذاری است که بر تحلیل رفتاری همین بلوک‌ها بنا می‌شوند.</span>
         <span class="t-en">The BlockTrade project has a data service that is up and running. Our server receives and processes the block trades of every Chicago exchange product without pause and delivers them to the trader's chart. Each block arrives a median of 36 seconds after the exchange's notice, and its history builds up day by day. The destination is trading and investment algorithms built on the behavioural analysis of these same blocks.</span>
       </p>
+      </section>
+
+      <section class="cs-section" id="platform">
+        <h2><span><span class="t-fa">از داخل ابزار نمایش</span><span class="t-en">Inside the display tool</span></span></h2>
+        <p>
+          <span class="t-fa">این‌ها تصویرهای واقعی از ابزار نمایش پروژه‌اند، نه طرح. هر دایره یک معامله‌ی بلوکی است که روی چارت ۱۵ دقیقه‌ای همان دارایی نشسته، و رنگ آن شکل معامله را نشان می‌دهد. برای بزرگ‌تر دیدن، روی تصویر بزنید.</span>
+          <span class="t-en">These are real screens from the project's display tool, not mock-ups. Each circle is one block trade placed on the 15-minute chart of its own asset, and its colour shows the shape of the trade. Click the image to enlarge it.</span>
+        </p>
+
+        <div class="shots reveal" data-shots>
+          <div class="shots-tabs" role="tablist" aria-label="Chart views">
+            <button type="button" role="tab" aria-selected="true" data-name="GC 12-26 · Gold Futures · 15 Minute">
+              <b><span class="t-fa">آتی طلا</span><span class="t-en">Gold futures</span></b>
+              <span>GC 12-26 · 816 blocks</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="ZW 12-26 · 15 Minute">
+              <b><span class="t-fa">آتی گندم</span><span class="t-en">Wheat futures</span></b>
+              <span>ZW 12-26 · 57 blocks</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="6E 12-26 · Euro FX Futures · 15 Minute">
+              <b><span class="t-fa">آتی یورو</span><span class="t-en">Euro FX futures</span></b>
+              <span>6E 12-26 · 81 blocks</span>
+            </button>
+          </div>
+
+          <figure class="shot-frame">
+            <div class="shot-bar">
+              <i></i><i></i><i></i>
+              <span class="shot-name">GC 12-26 · Gold Futures · 15 Minute</span>
+              <button type="button" class="shot-zoom" aria-label="Enlarge">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg>
+              </button>
+            </div>
+            <div class="shot-stage">
+              <img class="is-on" src="../assets/img/projects/blocktrade/gold.webp" data-full="../assets/img/projects/blocktrade/gold-full.webp" width="1400" height="742" alt="چارت ۱۵ دقیقه‌ای آتی طلا با دایره‌های معاملات بلوکی و راهنمای شکل‌ها">
+              <img src="../assets/img/projects/blocktrade/wheat.webp" data-full="../assets/img/projects/blocktrade/wheat-full.webp" width="1400" height="742" loading="lazy" alt="چارت ۱۵ دقیقه‌ای آتی گندم با دایره‌های معاملات بلوکی">
+              <img src="../assets/img/projects/blocktrade/euro.webp" data-full="../assets/img/projects/blocktrade/euro-full.webp" width="1400" height="742" loading="lazy" alt="چارت ۱۵ دقیقه‌ای آتی یورو با دایره‌های معاملات بلوکی">
+            </div>
+            <figcaption>
+              <p class="shot-cap is-on">
+                <span class="t-fa">آتی طلا: ۸۱۶ بلوک ثبت‌شده که ۱۰۱ تای آن در این بازه رسم شده است. راهنمای کنار چارت شکل‌ها را در چند گروه نشان می‌دهد: فقط آتی، فقط اختیار معامله، و ترکیب‌های این دو.</span>
+                <span class="t-en">Gold futures: 816 recorded blocks, 101 of them drawn in this span. The legend beside the chart lists the shapes in groups: futures only, options only, and combinations of the two.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-fa">آتی گندم: ۵۷ بلوک ثبت‌شده که ۷ تای آن در این بازه رسم شده است.</span>
+                <span class="t-en">Wheat futures: 57 recorded blocks, 7 of them drawn in this span.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-fa">آتی یورو: ۸۱ بلوک ثبت‌شده که ۱۵ تای آن در این بازه رسم شده است.</span>
+                <span class="t-en">Euro FX futures: 81 recorded blocks, 15 of them drawn in this span.</span>
+              </p>
+            </figcaption>
+          </figure>
+        </div>
       </section>
 
       <section class="cs-section" id="approach">
