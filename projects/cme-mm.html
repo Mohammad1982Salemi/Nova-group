@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مارکت‌میکر CME — الگوریتم بازارسازی در بازار آتی شیکاگو | نوا گروپ</title>
+<meta name="description" content="پروژه‌ی مارکت‌میکر CME: الگوریتم بازارسازی مبتنی بر یادگیری عمیق، آموخته از تاریخچه‌ی سفارش‌به‌سفارش بورس شیکاگو. CME Market Maker: a deep-learning market-making algorithm learned from order-by-order CME history.">
+<link rel="canonical" href="https://mohammad1982salemi.github.io/Nova-group/projects/cme-mm.html">
+<meta property="og:title" content="مارکت‌میکر CME — الگوریتم بازارسازی در بازار آتی شیکاگو | نوا گروپ">
+<meta property="og:description" content="الگوریتم بازارسازی مبتنی بر یادگیری عمیق در بازار آتی شیکاگو، در مسیر یک میز بازارسازی خودکار.">
+<meta property="og:url" content="https://mohammad1982salemi.github.io/Nova-group/projects/cme-mm.html">
+<meta name="author" content="Nova Group">
+<meta name="theme-color" content="#05080e">
+<meta property="og:site_name" content="Nova Group">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://mohammad1982salemi.github.io/Nova-group/assets/img/favicon-192.png">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/img/favicon-64.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/img/favicon-192.png">
+<link rel="apple-touch-icon" href="../assets/img/favicon-192.png">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vazirmatn@33.0.3/Vazirmatn-font-face.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/css/style.css?v=20">
+
+<!-- Runs before first paint so the page never flashes in the wrong language or direction. -->
+<script>
+(function () {
+  var d = document.documentElement, l = null;
+  try { l = localStorage.getItem('nova-lang'); } catch (e) {}
+  if (l !== 'fa' && l !== 'en') l = (navigator.language || '').toLowerCase().indexOf('fa') === 0 ? 'fa' : 'en';
+  d.setAttribute('data-lang', l); d.lang = l; d.dir = l === 'fa' ? 'rtl' : 'ltr';
+  d.className += ' js';
+})();
+</script>
+</head>
+<body>
+
+<a href="#main" class="skip-link"><span class="t-fa">پرش به محتوا</span><span class="t-en">Skip to content</span></a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="../index.html" aria-label="Nova Group">
+      <img class="logo-mark" src="../assets/img/nova-mark-180.png" alt="" width="180" height="180">
+      <span class="logo-text t-fa"><b>نوا</b> گروپ</span><span class="logo-text t-en"><b>NOVA</b> GROUP</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Main">
+      <a href="../index.html"><span class="t-fa">خانه</span><span class="t-en">Home</span></a>
+      <a href="../about.html"><span class="t-fa">درباره ما</span><span class="t-en">About</span></a>
+      <a href="../projects.html" aria-current="page"><span class="t-fa">پروژه‌ها</span><span class="t-en">Projects</span></a>
+      <a href="../contact.html"><span class="t-fa">تماس</span><span class="t-en">Contact</span></a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="lang-btn" id="langBtn" type="button" aria-label="Change language">
+        <span class="t-fa">EN</span><span class="t-en">فا</span>
+      </button>
+      <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="page-hero">
+  <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="wrap">
+    <nav class="crumbs reveal" aria-label="Breadcrumb">
+      <a href="../projects.html"><span class="t-fa">پروژه‌ها</span><span class="t-en">Projects</span></a>
+      <span aria-hidden="true">/</span>
+      <span><span class="t-fa">مارکت‌میکر CME</span><span class="t-en">CME Market Maker</span></span>
+    </nav>
+
+    <h1 class="reveal"><span class="t-fa">مارکت‌میکر CME</span><span class="t-en">CME Market Maker</span></h1>
+    <p class="page-lead reveal">
+      <span class="t-fa">الگوریتم بازارسازی مبتنی بر یادگیری عمیق در بازار آتی شیکاگو، در مسیر یک میز بازارسازی خودکار.</span>
+      <span class="t-en">A deep-learning market-making algorithm for the Chicago futures market, on the way to an automated market-making desk.</span>
+    </p>
+
+    <div class="cs-meta reveal">
+      <span class="status"><span class="t-fa">در حال آزمون</span><span class="t-en">In testing</span></span>
+      <ul class="tags">
+        <li>Python</li><li>C#</li><li>Rust</li><li>MBO</li>
+        <li><span class="t-fa">یادگیری عمیق</span><span class="t-en">Deep learning</span></li>
+        <li><span class="t-fa">بازارسازی</span><span class="t-en">Market making</span></li>
+        <li><span class="t-fa">شبیه‌ساز اجرا</span><span class="t-en">Execution simulator</span></li>
+      </ul>
+    </div>
+
+    <ul class="facts facts-glass">
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-fa">داده</span><span class="t-en">Data</span></span>
+        <b><span class="t-fa">تک‌تک سفارش‌ها</span><span class="t-en">Every single order</span></b>
+        <p>
+          <span class="t-fa">تاریخچه‌ی چندساله‌ی بورس شیکاگو، از بزرگ‌ترین بازارهای آتی جهان.</span>
+          <span class="t-en">Several years of the Chicago exchange, one of the world's largest futures markets.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-fa">روش</span><span class="t-en">Method</span></span>
+        <b><span class="t-fa">یادگیری عمیق</span><span class="t-en">Deep learning</span></b>
+        <p>
+          <span class="t-fa">با پشتوانه‌ی تحلیل آماری؛ الگوها از نمونه‌های واقعی بازار آموخته می‌شوند.</span>
+          <span class="t-en">Backed by statistical analysis; the patterns are learned from real market examples.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-fa">معیار</span><span class="t-en">Yardstick</span></span>
+        <b><span class="t-fa">نتیجه‌ی مالی خالص</span><span class="t-en">Net financial result</span></b>
+        <p>
+          <span class="t-fa">پس از کسر همه‌ی هزینه‌ها، در طیفی از شرایط سرعت و کارمزد.</span>
+          <span class="t-en">After every cost, across a range of speed and fee conditions.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-fa">فناوری</span><span class="t-en">Technology</span></span>
+        <b><span class="t-fa">سه زبان، سه نقش</span><span class="t-en">Three languages, three jobs</span></b>
+        <div class="fact-list">
+          <div><i>Python</i><span><span class="t-fa">مدل‌های یادگیری</span><span class="t-en">Learning models</span></span></div>
+          <div><i>C#</i><span><span class="t-fa">بازسازی بازار و شبیه‌ساز</span><span class="t-en">Market rebuild and simulator</span></span></div>
+          <div><i>Rust</i><span><span class="t-fa">خواننده‌ی داده‌ی خام</span><span class="t-en">Raw-data reader</span></span></div>
+        </div>
+      </li>
+    </ul>
+
+    <nav class="toc reveal" aria-label="On this page">
+      <span class="toc-title"><span class="t-fa">در این صفحه</span><span class="t-en">On this page</span></span>
+      <a href="#intro"><span class="t-fa">معرفی</span><span class="t-en">Introduction</span></a>
+      <a href="#approach"><span class="t-fa">رویکرد</span><span class="t-en">Approach</span></a>
+      <a href="#difference"><span class="t-fa">آنچه برجسته است</span><span class="t-en">What stands out</span></a>
+      <a href="#roadmap"><span class="t-fa">مسیر پیش رو</span><span class="t-en">The road ahead</span></a>
+      <a href="#technology"><span class="t-fa">فناوری</span><span class="t-en">Technology</span></a>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+
+    <article class="cs-body">
+      <section class="cs-section" id="intro">
+        <h2><span><span class="t-fa">معرفی</span><span class="t-en">Introduction</span></span></h2>
+      <p class="detail-lead">
+        <span class="t-fa">هر بازار مالی بر یک پیش‌فرض خاموش استوار است: هر لحظه که کسی بخواهد بخرد یا بفروشد، طرف مقابلی آماده است. این طرف مقابل بازارساز است: فعالی که هم‌زمان برای خرید و فروش قیمت اعلام می‌کند، اندکی ارزان‌تر می‌خرد و اندکی گران‌تر می‌فروشد، و درآمدش از تکرار همین فاصله‌ی کوچک در شمار زیادی معامله است. او نیازی ندارد جهت قیمت را بداند. خطرش این است که درست پیش از یک حرکت بزرگ، در سمت نادرست معامله کرده باشد.</span>
+        <span class="t-en">Every financial market rests on a silent assumption: whenever someone wants to buy or sell, a counterparty is ready. That counterparty is the market maker: a participant who quotes a price to buy and a price to sell at the same time, buys a little cheaper and sells a little dearer, and earns from repeating that small gap over a great many trades. They do not need to know which way the price will go. Their risk is having traded on the wrong side just before a large move.</span>
+      </p>
+      <p>
+        <span class="t-fa">ما این کار را به الگوریتمی سپرده‌ایم که آن را از خودِ بازار آموخته است.</span>
+        <span class="t-en">We have handed that job to an algorithm that learned it from the market itself.</span>
+      </p>
+      <p>
+        <span class="t-fa">پروژه‌ی مارکت‌میکر CME تاریخچه‌ی چندساله‌ی بورس شیکاگو، از بزرگ‌ترین بازارهای آتی جهان، را در سطح تک‌تک سفارش‌ها گرد آورده است. بر پایه‌ی این داده، با یادگیری عمیق و تحلیل آماری، به یک الگوریتم بازارسازی رسیده‌ایم که در بازسازی دقیقی از خودِ بورس آزموده می‌شود. مقصد ما یک میز بازارسازی خودکار است که سرمایه را با همین الگوریتم اداره می‌کند، نه با قضاوت لحظه‌ای افراد.</span>
+        <span class="t-en">The CME Market Maker project has gathered several years of the Chicago exchange, one of the world's largest futures markets, at the level of every single order. From that data, with deep learning and statistical analysis, we have arrived at a market-making algorithm that is tested inside a close reconstruction of the exchange itself. The destination is an automated market-making desk that runs capital with this algorithm, not with people's judgement of the moment.</span>
+      </p>
+      </section>
+
+      <section class="cs-section" id="approach">
+        <h2><span><span class="t-fa">رویکرد</span><span class="t-en">Approach</span></span></h2>
+      <p>
+        <span class="t-fa">الگوریتم از داده‌ی بازار می‌آموزد و در بازسازی همان بازار سنجیده می‌شود. کار در سه مرحله انجام شده است:</span>
+        <span class="t-en">The algorithm learns from market data and is measured inside a reconstruction of that same market. The work was done in three stages:</span>
+      </p>
+      <ol class="steps">
+        <li class="glow reveal">
+          <strong class="t-fa">از داده‌ی خام به تصویر کامل بازار</strong><strong class="t-en">From raw data to the full picture of the market</strong>
+          <p class="t-fa">تابلوی معاملات تنها خلاصه‌ای از بازار را نشان می‌دهد. ما همه‌ی پیام‌های ثبت‌شده‌ی بورس را پردازش می‌کنیم و فهرست سفارش‌های منتظر را برای هر لحظه از نو می‌سازیم. حاصل، تصویری است که نشان می‌دهد در هر قیمت چه حجمی منتظر است و سفارش‌ها به چه ترتیبی در صف ایستاده‌اند.</p>
+          <p class="t-en">The trading screen shows only a summary of the market. We process every message the exchange recorded and rebuild the list of waiting orders for each moment. The result is a picture of how much volume waits at each price and in what order the orders stand in the queue.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fa">از تصویر بازار به الگوریتم</strong><strong class="t-en">From the picture of the market to the algorithm</strong>
+          <p class="t-fa">در یادگیری عمیق، رایانه به‌جای پیروی از قواعد دست‌نویس، الگوها را از نمونه‌های واقعی می‌آموزد. الگوریتم ما به این روش و با پشتوانه‌ی تحلیل آماری آموخته است که معامله‌ی بازارساز در چه وضعیتی به سود او تمام می‌شود و در چه وضعیتی به زیانش. خروجی آن سه تصمیم است: سفارش کجا گذاشته شود، از کدام معامله پرهیز شود و چه زمانی باید کنار کشید.</p>
+          <p class="t-en">In deep learning the computer learns patterns from real examples instead of following hand-written rules. That way, and backed by statistical analysis, our algorithm has learned in which situations a market maker's trade ends in their favour and in which it ends against them. Its output is three decisions: where to place an order, which trade to avoid, and when to step aside.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fa">از الگوریتم به اجرای آزموده</strong><strong class="t-en">From the algorithm to tested execution</strong>
+          <p class="t-fa">تصمیم درست باید در بازار واقعی هم قابل اجرا باشد. در شبیه‌ساز ما سفارش‌های الگوریتم با تأخیر به بورس می‌رسند، در صف نوبت می‌گیرند و بر بازار اثر می‌گذارند، درست مانند واقعیت. معیار داوری، نتیجه‌ی مالی خالص پس از کسر همه‌ی هزینه‌هاست.</p>
+          <p class="t-en">A right decision must also be executable in the real market. In our simulator the algorithm's orders reach the exchange with a delay, take their turn in the queue and affect the market, just as they would in reality. The yardstick is the net financial result after every cost.</p>
+        </li>
+      </ol>
+      </section>
+
+      <section class="cs-section" id="difference">
+        <h2><span><span class="t-fa">آنچه برجسته است</span><span class="t-en">What stands out</span></span></h2>
+      <ul class="points">
+        <li class="glow reveal">
+          <strong class="t-fa">دانشی که در سامانه نشسته است، نه در ذهن افراد.</strong><strong class="t-en">Knowledge that lives in the system, not in people's heads.</strong>
+          <p class="t-fa">بازارسازی سنتی به شهود معامله‌گران ماهر تکیه دارد و این دانش با رفتن آن افراد از دست می‌رود. الگوریتم ما آنچه را می‌داند از خودِ داده‌ی بازار آموخته است. این دانش ثبت‌شده، تکرارپذیر و قابل بازآموزی است.</p>
+          <p class="t-en">Traditional market making leans on the intuition of skilled traders, and that knowledge is lost when they leave. Our algorithm learned what it knows from the market data itself. That knowledge is recorded, repeatable and can be retrained.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fa">گزینش، نه حضور همیشگی در بازار.</strong><strong class="t-en">Selection, not constant presence in the market.</strong>
+          <p class="t-fa">سفارش‌گذاری دوطرفه بدون گزینش را با هزینه‌ی واقعی سنجیدیم و زیان‌ده بود، زیرا بازارساز بی‌گزینش بیشتر وقتی معامله می‌کند که قیمت در آستانه‌ی حرکت در خلاف جهت اوست. ارزش الگوریتم در همین نقطه است: تشخیص اینکه کدام معامله را باید خواست و از کدام باید کنار کشید.</p>
+          <p class="t-en">We measured unselective two-sided quoting at real cost and it lost money, because a market maker who does not select trades mostly when the price is about to move against them. That is exactly where the algorithm's value lies: telling which trade to want and which to step away from.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fa">نتیجه‌ای که در اجرا هم برقرار می‌ماند.</strong><strong class="t-en">A result that still holds in execution.</strong>
+          <p class="t-fa">بسیاری از راهبردها روی کاغذ سودآورند و در عمل نه، چون آزمونشان فرض می‌کند سفارش بی‌درنگ و با قیمت تابلو انجام می‌شود. در شبیه‌ساز ما سفارش همان مسیر بازار واقعی را طی می‌کند، و درستی این شبیه‌سازی با بازسازی مستقلی از داده‌ی خام بورس مقابله شده است.</p>
+          <p class="t-en">Many strategies are profitable on paper and not in practice, because their test assumes an order fills at once at the quoted price. In our simulator an order travels the same path as in the real market, and the simulation's correctness has been checked against an independent reconstruction from the exchange's raw data.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fa">تفکیک یافته‌ی واقعی از تصادف.</strong><strong class="t-en">Telling a real finding from chance.</strong>
+          <p class="t-fa">مدل‌های یادگیری می‌توانند گذشته را «از بر کنند» بی‌آنکه چیزی درباره‌ی آینده آموخته باشند. برای پرهیز از این خطر، الگوریتم همیشه روی دوره‌هایی سنجیده می‌شود که هنگام آموزش ندیده است، از جمله دوره‌های پرتلاطم. هر یافته نیز در کنار داده‌هایی قرار می‌گیرد که به‌عمد فاقد الگوی معنادارند، و اگر آن‌جا هم دیده شود کنار گذاشته می‌شود.</p>
+          <p class="t-en">Learning models can memorise the past without having learned anything about the future. To avoid that, the algorithm is always measured on periods it did not see in training, turbulent ones included. Each finding is also set beside data deliberately stripped of any meaningful pattern, and if it shows up there too it is discarded.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fa">شناخت نیاز زیرساختی، پیش از هزینه‌کردن برای آن.</strong><strong class="t-en">Knowing the infrastructure need before paying for it.</strong>
+          <p class="t-fa">در این حوزه سرعت رسیدن سفارش به بورس و کارمزد هر معامله مرز سود و زیان را تعیین می‌کنند، و بهبود هر دو پرهزینه است. ما الگوریتم را هم‌زمان در طیفی از این شرایط می‌آزماییم. به این ترتیب پیش از هر تعهد مالی روشن است که طرح در کدام شرایط توجیه دارد.</p>
+          <p class="t-en">In this field the speed at which an order reaches the exchange and the fee on each trade decide the line between profit and loss, and improving either is expensive. We test the algorithm across a range of those conditions at once. So before any financial commitment it is clear under which conditions the plan is justified.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fa">گزارش‌دهی استاندارد و قابل فهم.</strong><strong class="t-en">Standard, readable reporting.</strong>
+          <p class="t-fa">نتیجه‌ی هر آزمون در یک صفحه ارائه می‌شود، با سنجه‌ها و نام‌های رایج این صنعت و به دو زبان فارسی و انگلیسی. سرمایه‌گذار یا مشاور او می‌تواند نتیجه را مستقل از ما بخواند و بسنجد.</p>
+          <p class="t-en">The result of each test is presented on one page, with the industry's usual measures and names, in both Persian and English. An investor or their adviser can read and weigh the result independently of us.</p>
+        </li>
+      </ul>
+      </section>
+
+      <section class="cs-section" id="roadmap">
+        <h2><span><span class="t-fa">مسیر پیش رو</span><span class="t-en">The road ahead</span></span></h2>
+      <ol class="phases">
+        <li class="is-done glow reveal">
+          <span class="phase-mark"><span class="t-fa">انجام‌شده</span><span class="t-en">Done</span></span>
+          <p class="t-fa">زیرساخت داده، بازسازی بازار، الگوریتم بازارسازی، شبیه‌ساز اجرا و سامانه‌ی گزارش ساخته شده‌اند.</p>
+          <p class="t-en">The data infrastructure, the market reconstruction, the market-making algorithm, the execution simulator and the reporting system are built.</p>
+        </li>
+        <li class="is-now glow reveal">
+          <span class="phase-mark"><span class="t-fa">امروز</span><span class="t-en">Now</span></span>
+          <p class="t-fa">امروز الگوریتم را در آزمون چندساله، در شرایط گوناگون سرعت و کارمزد و روی بیش از یک بازار می‌سنجیم.</p>
+          <p class="t-en">Today we are measuring the algorithm in a multi-year test, under varied speed and fee conditions and on more than one market.</p>
+        </li>
+        <li class="glow reveal">
+          <span class="phase-mark"><span class="t-fa">پس از آن</span><span class="t-en">Next</span></span>
+          <p class="t-fa">پس از آن، اتصال به داده‌ی زنده، استقرار در مجاورت بورس و دوره‌ای آزمایشی با سرمایه‌ی محدود خواهد آمد.</p>
+          <p class="t-en">After that come the connection to live data, deployment close to the exchange, and a trial period with limited capital.</p>
+        </li>
+        <li class="glow reveal">
+          <span class="phase-mark"><span class="t-fa">گام پایانی</span><span class="t-en">Final step</span></span>
+          <p class="t-fa">گام پایانی، بازارسازی با سرمایه‌ی واقعی در قالب یک میز خودکار است.</p>
+          <p class="t-en">The final step is market making with real capital, as an automated desk.</p>
+        </li>
+      </ol>
+      </section>
+
+      <section class="cs-section" id="technology">
+        <h2><span><span class="t-fa">فناوری</span><span class="t-en">Technology</span></span></h2>
+      <p>
+        <span class="t-fa">مدل‌های یادگیری با پایتون ساخته و بر پردازنده‌ی گرافیکی آموزش داده می‌شوند. موتور بازسازی بازار و شبیه‌ساز اجرا با سی‌شارپ و خواننده‌ی داده‌ی خام با راست نوشته شده است. هر تغییر تنها پس از مقایسه با نسخه‌ی پیشین و گذشتن از آزمون‌های خودکار پذیرفته می‌شود.</span>
+        <span class="t-en">The learning models are built in Python and trained on a graphics processor. The market-reconstruction engine and the execution simulator are written in C#, and the raw-data reader in Rust. A change is accepted only after it has been compared with the previous version and has passed the automated tests.</span>
+      </p>
+      </section>
+    </article>
+
+  </div>
+</section>
+
+<section class="section ruled">
+  <div class="wrap cs-end">
+    <a class="link-arrow link-back" href="../projects.html">
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <span class="t-fa">همه‌ی پروژه‌ها</span><span class="t-en">All projects</span>
+    </a>
+    <a class="btn btn-ghost" href="../contact.html">
+      <span class="t-fa">تماس با ما</span><span class="t-en">Get in touch</span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="logo" href="../index.html" aria-label="Nova Group">
+          <img class="logo-mark" src="../assets/img/nova-mark-180.png" alt="" width="180" height="180" loading="lazy">
+          <span class="logo-text t-fa"><b>نوا</b> گروپ</span><span class="logo-text t-en"><b>NOVA</b> GROUP</span>
+        </a>
+        <p>
+          <span class="t-fa">پژوهش و ساخت الگوریتم‌های معاملاتی بر پایه‌ی جریان سفارش بازار — از ۱۳۹۹.</span>
+          <span class="t-en">Researching and building trading algorithms from market order flow — since 2020.</span>
+        </p>
+      </div>
+
+      <nav class="footer-col" aria-label="Footer">
+        <h2><span class="t-fa">سایت</span><span class="t-en">Site</span></h2>
+        <a href="../index.html"><span class="t-fa">خانه</span><span class="t-en">Home</span></a>
+        <a href="../about.html"><span class="t-fa">درباره ما</span><span class="t-en">About</span></a>
+        <a href="../projects.html"><span class="t-fa">پروژه‌ها</span><span class="t-en">Projects</span></a>
+        <a href="../contact.html"><span class="t-fa">تماس</span><span class="t-en">Contact</span></a>
+      </nav>
+
+      <div class="footer-col">
+        <h2><span class="t-fa">ارتباط</span><span class="t-en">Connect</span></h2>
+        <a href="https://github.com/Mohammad1982Salemi/Nova-group" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+
+    <p class="footer-legal">
+      <span class="t-fa">این وب‌سایت معرفی یک فعالیت پژوهشی است. پیشنهاد یا دعوت به سرمایه‌گذاری نیست و هیچ عدد عملکردی در آن منتشر نشده است.</span>
+      <span class="t-en">This website describes a research effort. It is not an offer or solicitation to invest, and it publishes no performance figures.</span>
+    </p>
+
+    <div class="footer-bottom">
+      <span class="t-fa">© ۱۴۰۵ نوا گروپ — همه‌ی حقوق محفوظ است.</span>
+      <span class="t-en">© 2026 Nova Group — All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Back to top">↑</button>
+
+<script src="../assets/js/main.js?v=20"></script>
+</body>
+</html>
