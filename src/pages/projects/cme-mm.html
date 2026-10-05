@@ -82,6 +82,7 @@
     <nav class="toc reveal" aria-label="On this page">
       <span class="toc-title"><span class="t-fa">در این صفحه</span><span class="t-en">On this page</span></span>
       <a href="#intro"><span class="t-fa">معرفی</span><span class="t-en">Introduction</span></a>
+      <a href="#reports"><span class="t-fa">گزارش‌ها</span><span class="t-en">Reports</span></a>
       <a href="#platform"><span class="t-fa">پلتفرم</span><span class="t-en">Platform</span></a>
       <a href="#approach"><span class="t-fa">رویکرد</span><span class="t-en">Approach</span></a>
       <a href="#difference"><span class="t-fa">آنچه برجسته است</span><span class="t-en">What stands out</span></a>
@@ -109,6 +110,64 @@
         <span class="t-fa">پروژه‌ی مارکت‌میکر CME تاریخچه‌ی چندساله‌ی بورس شیکاگو، از بزرگ‌ترین بازارهای آتی جهان، را در سطح تک‌تک سفارش‌ها گرد آورده است. بر پایه‌ی این داده، با یادگیری عمیق و تحلیل آماری، به یک الگوریتم بازارسازی رسیده‌ایم که در بازسازی دقیقی از خودِ بورس آزموده می‌شود. مقصد ما یک میز بازارسازی خودکار است که سرمایه را با همین الگوریتم اداره می‌کند، نه با قضاوت لحظه‌ای افراد.</span>
         <span class="t-en">The CME Market Maker project has gathered several years of the Chicago exchange, one of the world's largest futures markets, at the level of every single order. From that data, with deep learning and statistical analysis, we have arrived at a market-making algorithm that is tested inside a close reconstruction of the exchange itself. The destination is an automated market-making desk that runs capital with this algorithm, not with people's judgement of the moment.</span>
       </p>
+      </section>
+
+      <section class="cs-section" id="reports">
+        <h2><span><span class="t-fa">گزارش‌های شبیه‌ساز</span><span class="t-en">Simulator reports</span></span></h2>
+        <p>
+          <span class="t-fa">این پروژه دو گزارش کامل از شبیه‌ساز اجرا دارد، یکی برای هر بازار. هر گزارش الگوریتم را هم‌زمان در ۲۵ سناریو نشان می‌دهد: پنج سطح تأخیر رسیدن سفارش به بورس، از صفر تا یک میلی‌ثانیه، در پنج سطح کارمزد. می‌توانید هر دو را دانلود کنید و مستقل از ما بخوانید و بسنجید.</span>
+          <span class="t-en">This project has two full reports from the execution simulator, one per market. Each report shows the algorithm in 25 scenarios at once: five levels of order latency to the exchange, from zero to one millisecond, at five fee levels. You can download both and read and weigh them independently of us.</span>
+        </p>
+        <ul class="reports">
+          <li class="glow reveal">
+            <div class="report-head">
+              <b>GC</b>
+              <span><span class="t-fa">آتی طلا</span><span class="t-en">Gold futures</span></span>
+            </div>
+            <ul class="report-facts">
+              <li><b><span class="t-fa">دسامبر ۲۰۱۹ تا ژوئیه ۲۰۲۶</span><span class="t-en">Dec 2019 to Jul 2026</span></b><span><span class="t-fa">بازه‌ی آزمون</span><span class="t-en">test period</span></span></li>
+              <li><b><span class="t-fa">۱٬۶۰۸</span><span class="t-en">1,608</span></b><span><span class="t-fa">روز معاملاتی</span><span class="t-en">trading days</span></span></li>
+              <li><b><span class="t-fa">۱٬۹۰۵٬۹۲۱</span><span class="t-en">1,905,921</span></b><span><span class="t-fa">معامله‌ی شبیه‌سازی‌شده در سناریوی پایه</span><span class="t-en">simulated trades in the base scenario</span></span></li>
+              <li><b><span class="t-fa">۲۵ سناریو</span><span class="t-en">25 scenarios</span></b><span><span class="t-fa">۵ سطح تأخیر × ۵ سطح کارمزد</span><span class="t-en">5 latency levels × 5 fee levels</span></span></li>
+            </ul>
+            <div class="report-actions">
+              <a class="btn btn-primary" href="@@R@@assets/reports/gc-market-maker.html" download>
+                <svg class="arr-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
+                <span class="t-fa">دانلود گزارش</span><span class="t-en">Download the report</span>
+              </a>
+              <a class="btn btn-ghost" href="@@R@@assets/reports/gc-market-maker.html" target="_blank" rel="noopener">
+                <span class="t-fa">باز کردن در مرورگر</span><span class="t-en">Open in the browser</span>
+              </a>
+            </div>
+            <p class="report-size"><span class="t-fa">یک فایل HTML مستقل، ۷٫۴ مگابایت، فارسی و انگلیسی</span><span class="t-en">One self-contained HTML file, 7.4 MB, Persian and English</span></p>
+          </li>
+          <li class="glow reveal">
+            <div class="report-head">
+              <b>NQ</b>
+              <span><span class="t-fa">آتی نزدک ۱۰۰</span><span class="t-en">Nasdaq-100 futures</span></span>
+            </div>
+            <ul class="report-facts">
+              <li><b><span class="t-fa">مه ۲۰۱۷ تا ژوئن ۲۰۲۶</span><span class="t-en">May 2017 to Jun 2026</span></b><span><span class="t-fa">بازه‌ی آزمون</span><span class="t-en">test period</span></span></li>
+              <li><b><span class="t-fa">۲٬۳۱۰</span><span class="t-en">2,310</span></b><span><span class="t-fa">روز معاملاتی</span><span class="t-en">trading days</span></span></li>
+              <li><b><span class="t-fa">۲٬۷۹۲٬۷۸۰</span><span class="t-en">2,792,780</span></b><span><span class="t-fa">معامله‌ی شبیه‌سازی‌شده در سناریوی پایه</span><span class="t-en">simulated trades in the base scenario</span></span></li>
+              <li><b><span class="t-fa">۲۵ سناریو</span><span class="t-en">25 scenarios</span></b><span><span class="t-fa">۵ سطح تأخیر × ۵ سطح کارمزد</span><span class="t-en">5 latency levels × 5 fee levels</span></span></li>
+            </ul>
+            <div class="report-actions">
+              <a class="btn btn-primary" href="@@R@@assets/reports/nq-market-maker.html" download>
+                <svg class="arr-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
+                <span class="t-fa">دانلود گزارش</span><span class="t-en">Download the report</span>
+              </a>
+              <a class="btn btn-ghost" href="@@R@@assets/reports/nq-market-maker.html" target="_blank" rel="noopener">
+                <span class="t-fa">باز کردن در مرورگر</span><span class="t-en">Open in the browser</span>
+              </a>
+            </div>
+            <p class="report-size"><span class="t-fa">یک فایل HTML مستقل، ۸٫۰ مگابایت، فارسی و انگلیسی</span><span class="t-en">One self-contained HTML file, 8.0 MB, Persian and English</span></p>
+          </li>
+        </ul>
+        <p class="report-note">
+          <span class="t-fa">این‌ها نتیجه‌ی شبیه‌سازی روی داده‌ی ضبط‌شده‌ی بازار (بک‌تست) هستند، نه معامله‌ی واقعی، و تضمینی برای آینده نیستند. هر گزارش سناریوهای زیان‌ده را هم نشان می‌دهد.</span>
+          <span class="t-en">These are simulation results on recorded market data (a backtest), not real trading, and no guarantee of the future. Each report shows the loss-making scenarios too.</span>
+        </p>
       </section>
 
       <section class="cs-section" id="platform">
