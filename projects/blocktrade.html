@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بلاک‌ترید — تحلیل رفتاری معاملات بلوکی بازار آتی شیکاگو | نوا گروپ</title>
+<meta name="description" content="پروژه‌ی بلاک‌ترید: سرویس داده‌ی معاملات بلوکی بورس شیکاگو و تحلیل رفتاری آن‌ها، در مسیر الگوریتم‌های معاملاتی و سرمایه‌گذاری. BlockTrade: a CME block-trade data service and the behavioural analysis built on it.">
+<link rel="canonical" href="https://mohammad1982salemi.github.io/Nova-group/projects/blocktrade.html">
+<meta property="og:title" content="بلاک‌ترید — تحلیل رفتاری معاملات بلوکی بازار آتی شیکاگو | نوا گروپ">
+<meta property="og:description" content="تحلیل رفتاری معاملات بلوکی بازار آتی شیکاگو، در مسیر الگوریتم‌های معاملاتی و سرمایه‌گذاری بر پایه‌ی ردِّ پول بزرگ.">
+<meta property="og:url" content="https://mohammad1982salemi.github.io/Nova-group/projects/blocktrade.html">
+<meta name="author" content="Nova Group">
+<meta name="theme-color" content="#05080e">
+<meta property="og:site_name" content="Nova Group">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://mohammad1982salemi.github.io/Nova-group/assets/img/favicon-192.png">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/img/favicon-64.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/img/favicon-192.png">
+<link rel="apple-touch-icon" href="../assets/img/favicon-192.png">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vazirmatn@33.0.3/Vazirmatn-font-face.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/css/style.css?v=22">
+
+<!-- Runs before first paint so the page never flashes in the wrong language or direction. -->
+<script>
+(function () {
+  var d = document.documentElement, l = null;
+  try { l = localStorage.getItem('nova-lang'); } catch (e) {}
+  if (l !== 'fa' && l !== 'en') l = (navigator.language || '').toLowerCase().indexOf('fa') === 0 ? 'fa' : 'en';
+  d.setAttribute('data-lang', l); d.lang = l; d.dir = l === 'fa' ? 'rtl' : 'ltr';
+  d.className += ' js';
+})();
+</script>
+</head>
+<body>
+
+<a href="#main" class="skip-link"><span class="t-fa">پرش به محتوا</span><span class="t-en">Skip to content</span></a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="../index.html" aria-label="Nova Group">
+      <img class="logo-mark" src="../assets/img/nova-mark-180.png" alt="" width="180" height="180">
+      <span class="logo-text t-fa"><b>نوا</b> گروپ</span><span class="logo-text t-en"><b>NOVA</b> GROUP</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Main">
+      <a href="../index.html"><span class="t-fa">خانه</span><span class="t-en">Home</span></a>
+      <a href="../about.html"><span class="t-fa">درباره ما</span><span class="t-en">About</span></a>
+      <a href="../projects.html" aria-current="page"><span class="t-fa">پروژه‌ها</span><span class="t-en">Projects</span></a>
+      <a href="../contact.html"><span class="t-fa">تماس</span><span class="t-en">Contact</span></a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="lang-btn" id="langBtn" type="button" aria-label="Change language">
+        <span class="t-fa">EN</span><span class="t-en">فا</span>
+      </button>
+      <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="page-hero">
+  <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="wrap">
+    <nav class="crumbs reveal" aria-label="Breadcrumb">
+      <a href="../projects.html"><span class="t-fa">پروژه‌ها</span><span class="t-en">Projects</span></a>
+      <span aria-hidden="true">/</span>
+      <span><span class="t-fa">بلاک‌ترید</span><span class="t-en">BlockTrade</span></span>
+    </nav>
+
+    <h1 class="reveal"><span class="t-fa">بلاک‌ترید</span><span class="t-en">BlockTrade</span></h1>
+    <p class="page-lead reveal">
+      <span class="t-fa">تحلیل رفتاری معاملات بلوکی بازار آتی شیکاگو، در مسیر الگوریتم‌های معاملاتی و سرمایه‌گذاری بر پایه‌ی ردِّ پول بزرگ.</span>
+      <span class="t-en">Behavioural analysis of block trades in the Chicago futures market, on the way to trading and investment algorithms built on the trail of big money.</span>
+    </p>
+
+    <div class="cs-meta reveal">
+      <span class="status"><span class="t-fa">سرویس داده در حال کار</span><span class="t-en">Data service running</span></span>
+      <ul class="tags">
+        <li>Python</li><li>C#</li><li>Linux</li>
+        <li><span class="t-fa">معاملات بلوکی</span><span class="t-en">Block trades</span></li>
+        <li><span class="t-fa">سرویس داده</span><span class="t-en">Data service</span></li>
+        <li><span class="t-fa">تحلیل رفتاری</span><span class="t-en">Behavioural analysis</span></li>
+      </ul>
+    </div>
+
+    <ul class="facts facts-glass">
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-fa">سرعت</span><span class="t-en">Speed</span></span>
+        <b><span class="t-fa">میانه‌ی ۳۶ ثانیه</span><span class="t-en">A 36-second median</span></b>
+        <p>
+          <span class="t-fa">فاصله‌ی رسیدن هر بلوک به چارت، پس از اعلام بورس.</span>
+          <span class="t-en">The time for each block to reach the chart, after the exchange's notice.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-fa">گستره</span><span class="t-en">Coverage</span></span>
+        <b><span class="t-fa">همه‌ی محصولات</span><span class="t-en">Every product</span></b>
+        <p>
+          <span class="t-fa">معاملات بلوکی همه‌ی محصولات بورس شیکاگو، بی‌وقفه دریافت و پردازش می‌شود.</span>
+          <span class="t-en">The block trades of every Chicago exchange product, received and processed without pause.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-fa">دسته‌بندی</span><span class="t-en">Classification</span></span>
+        <b><span class="t-fa">۲۴ شکل</span><span class="t-en">24 shapes</span></b>
+        <p>
+          <span class="t-fa">از یک قرارداد ساده تا ترکیب‌های چندپایه‌ی اختیار معامله، با تعریف روشن.</span>
+          <span class="t-en">From a single contract to multi-leg option combinations, each clearly defined.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-fa">فناوری</span><span class="t-en">Technology</span></span>
+        <b><span class="t-fa">دو زبان، دو نقش</span><span class="t-en">Two languages, two jobs</span></b>
+        <div class="fact-list">
+          <div><i>Python</i><span><span class="t-fa">دریافت، پردازش و تحویل</span><span class="t-en">Receive, process, deliver</span></span></div>
+          <div><i>C#</i><span><span class="t-fa">ابزار نمایش</span><span class="t-en">Display tool</span></span></div>
+        </div>
+      </li>
+    </ul>
+
+    <nav class="toc reveal" aria-label="On this page">
+      <span class="toc-title"><span class="t-fa">در این صفحه</span><span class="t-en">On this page</span></span>
+      <a href="#intro"><span class="t-fa">معرفی</span><span class="t-en">Introduction</span></a>
+      <a href="#approach"><span class="t-fa">رویکرد</span><span class="t-en">Approach</span></a>
+      <a href="#difference"><span class="t-fa">آنچه برجسته است</span><span class="t-en">What stands out</span></a>
+      <a href="#roadmap"><span class="t-fa">مسیر پیش رو</span><span class="t-en">The road ahead</span></a>
+      <a href="#technology"><span class="t-fa">فناوری</span><span class="t-en">Technology</span></a>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+
+    <article class="cs-body">
+      <section class="cs-section" id="intro">
+        <h2><span><span class="t-fa">معرفی</span><span class="t-en">Introduction</span></span></h2>
+      <p class="detail-lead">
+        <span class="t-fa">بزرگ‌ترین معامله‌های بازار آتی روی تابلو انجام نمی‌شوند. دو نهاد بزرگ بیرون از دفتر سفارش بر سر قیمت و حجم توافق می‌کنند و بازار تنها چند دقیقه بعد، در اعلامی کوتاه، از آن باخبر می‌شود. این معامله‌ها «معامله‌ی بلوکی» نام دارند. در کندل و حجمی که معامله‌گر روی چارت می‌بیند اثری از آن‌ها نیست، و کمتر کسی می‌پرسد این پول بزرگ چه می‌کند و بازار پس از آن چه رفتاری دارد.</span>
+        <span class="t-en">The largest trades in the futures market do not happen on the screen. Two large institutions agree on price and size away from the order book, and the market learns of it only a few minutes later, in a short notice. These are called block trades. They leave no trace in the bars and volume a trader sees on the chart, and few people ask what this big money is doing and how the market behaves afterwards.</span>
+      </p>
+      <p>
+        <span class="t-fa">ما تصمیم گرفتیم رفتار این معامله‌ها را بشناسیم، و برای این کار نخست خودمان تأمین‌کننده‌ی داده‌اش شدیم.</span>
+        <span class="t-en">We decided to understand how these trades behave, and to do that we first became the supplier of their data ourselves.</span>
+      </p>
+      <p>
+        <span class="t-fa">پروژه‌ی بلاک‌ترید یک سرویس داده‌ی در حال کار دارد. سرور ما معاملات بلوکی همه‌ی محصولات بورس شیکاگو را بی‌وقفه دریافت و پردازش می‌کند و به چارت معامله‌گر تحویل می‌دهد. هر بلوک با میانه‌ی ۳۶ ثانیه پس از اعلام بورس می‌رسد و تاریخچه‌ی آن روزبه‌روز انباشته می‌شود. مقصد ما الگوریتم‌های معاملاتی و سرمایه‌گذاری است که بر تحلیل رفتاری همین بلوک‌ها بنا می‌شوند.</span>
+        <span class="t-en">The BlockTrade project has a data service that is up and running. Our server receives and processes the block trades of every Chicago exchange product without pause and delivers them to the trader's chart. Each block arrives a median of 36 seconds after the exchange's notice, and its history builds up day by day. The destination is trading and investment algorithms built on the behavioural analysis of these same blocks.</span>
+      </p>
+      </section>
+
+      <section class="cs-section" id="approach">
+        <h2><span><span class="t-fa">رویکرد</span><span class="t-en">Approach</span></span></h2>
+      <p>
+        <span class="t-fa">نخست داده را از آنِ خود می‌کنیم، سپس رفتار را می‌شناسیم و در پایان بر آن شناخت الگوریتم می‌سازیم.</span>
+        <span class="t-en">First we make the data our own, then we come to know the behaviour, and finally we build algorithms on that knowledge.</span>
+      </p>
+      <ol class="steps">
+        <li class="glow reveal">
+          <strong class="t-fa">از بازار به داده‌ی خودمان</strong><strong class="t-en">From the market to our own data</strong>
+          <p class="t-fa">سرور اختصاصی ما اعلام‌های بورس را در طول روز معاملاتی دریافت و عیناً ثبت می‌کند و از راه یک درگاه اختصاصی به مصرف‌کنندگان تحویل می‌دهد. ما در این مرحله تأمین‌کننده‌ی داده‌ایم، نه مشتری آن. این مرحله ساخته شده است و کار می‌کند.</p>
+          <p class="t-en">Our dedicated server receives the exchange's notices throughout the trading day, records them exactly as they are, and delivers them to consumers through a dedicated gateway. At this stage we are the supplier of the data, not its customer. This stage is built and working.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fa">از داده به تحلیل رفتاری</strong><strong class="t-en">From data to behavioural analysis</strong>
+          <p class="t-fa">هر بلوک هویت ثابت می‌گیرد، در یکی از ۲۴ شکل تعریف‌شده می‌نشیند و به دارایی خودش وصل می‌شود. اصلاح، پس‌گرفته‌شدن و بازگشت هر معامله نیز با زمان دقیق ثبت می‌شود. بر این پایه خواهیم سنجید که هر شکل از بلوک در چه وضعیتی پدید می‌آید و بازار پس از آن چه می‌کند.</p>
+          <p class="t-en">Each block gets a fixed identity, falls into one of 24 defined shapes and is tied to its own asset. Every correction, withdrawal and return of a trade is recorded too, with its exact time. On that basis we will measure in what situation each shape of block appears and what the market does afterwards.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fa">از تحلیل رفتاری به الگوریتم</strong><strong class="t-en">From behavioural analysis to the algorithm</strong>
+          <p class="t-fa">یافته‌هایی که در آزمون روی تاریخچه پایدار بمانند، به قاعده‌ی معاملاتی و سرمایه‌گذاری تبدیل خواهند شد. این الگوریتم‌ها از همان درگاهی تغذیه خواهند شد که چارت از آن تغذیه می‌شود.</p>
+          <p class="t-en">Findings that hold up when tested on the history will be turned into trading and investment rules. Those algorithms will be fed from the same gateway that feeds the chart.</p>
+        </li>
+      </ol>
+      </section>
+
+      <section class="cs-section" id="difference">
+        <h2><span><span class="t-fa">آنچه برجسته است</span><span class="t-en">What stands out</span></span></h2>
+      <ul class="points">
+        <li class="glow reveal">
+          <strong class="t-fa">هدف شناخت رفتار است، نه نمایش داده.</strong><strong class="t-en">The aim is to understand behaviour, not to display data.</strong>
+          <p class="t-fa">دیدن یک بلوک روی چارت به‌تنهایی تصمیم نمی‌سازد. آنچه ما دنبالش هستیم الگوی تکرارشونده است: کدام شکل از معامله‌ی بزرگ، در کدام وضعیت، با چه پیامدی همراه است. ابزار نمایش نخستین خروجی این مسیر است، نه پایان آن.</p>
+          <p class="t-en">Seeing a block on the chart does not make a decision by itself. What we are after is the repeating pattern: which shape of large trade, in which situation, comes with what consequence. The display tool is the first output of this path, not its end.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fa">تأمین‌کننده‌ی داده‌ایم، نه مشتری آن.</strong><strong class="t-en">We supply the data; we are not its customer.</strong>
+          <p class="t-fa">تحلیل رفتاری به داده‌ای نیاز دارد که کامل، به‌موقع و در اختیار خود ما باشد. ما زنجیره را از دریافت تا تحویل خودمان ساخته‌ایم و اداره می‌کنیم. کیفیت و زمان رسیدن آنچه به تحلیل و الگوریتم می‌رسد در دست ماست.</p>
+          <p class="t-en">Behavioural analysis needs data that is complete, on time and in our own hands. We built and run the chain ourselves, from receipt to delivery. The quality and timing of what reaches the analysis and the algorithm are under our control.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fa">رفتار بازار را داریم، نه فقط فهرست پایان روز.</strong><strong class="t-en">We have the market's behaviour, not just the end-of-day list.</strong>
+          <p class="t-fa">فهرست پایان روز نمی‌گوید در میانه‌ی روز چه چیزی اصلاح شد، پس گرفته شد یا رفت و برگشت. سرویس ما همه‌ی این‌ها را نگه می‌دارد، و ماده‌ی خام تحلیل رفتاری همین جزئیات است. این تاریخچه هر روز بزرگ‌تر می‌شود و بعداً نمی‌توان آن را از نو ضبط کرد.</p>
+          <p class="t-en">The end-of-day list does not say what was corrected, withdrawn, or went and came back in the middle of the day. Our service keeps all of that, and those details are the raw material of behavioural analysis. This history grows every day and cannot be recorded again later.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fa">زبان مشترکی برای معاملات بزرگ.</strong><strong class="t-en">A common language for large trades.</strong>
+          <p class="t-fa">معاملات بلوکی از یک قرارداد ساده تا ترکیب‌های چندپایه‌ی اختیار معامله را در بر می‌گیرند. ما آن‌ها را در ۲۴ شکل با تعریف روشن دسته‌بندی کرده‌ایم و این دسته‌بندی روی کل داده‌ی ثبت‌شده آزموده شده است. بدون این زبان، مقایسه‌ی رفتار بلوک‌ها ممکن نیست.</p>
+          <p class="t-en">Block trades range from a single contract to multi-leg option combinations. We have sorted them into 24 clearly defined shapes, and that classification has been tested on all the recorded data. Without this language, comparing how blocks behave is not possible.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fa">تحلیلی که بر حدس پنهان بنا نمی‌شود.</strong><strong class="t-en">Analysis that is not built on a hidden guess.</strong>
+          <p class="t-fa">معامله‌ی بلوکی خریدار و فروشنده را با هم دارد و جهتی برای آن اعلام نمی‌شود. سرویس ما نوع معامله را می‌گوید و جهت نمی‌سازد؛ هر جا هم نتواند بلوکی را بشناسد، همان را صریح اعلام می‌کند. هر تفسیر جهت‌دار در تحلیل ما جدا و با نام «قرینه» خواهد آمد.</p>
+          <p class="t-en">A block trade has its buyer and seller together, and no direction is announced for it. Our service states the type of trade and does not invent a direction; wherever it cannot recognise a block, it says exactly that. Any directional reading in our analysis will come separately, under the name "evidence".</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fa">زیرساختی که برای چند مصرف‌کننده آماده است.</strong><strong class="t-en">Infrastructure ready for several consumers.</strong>
+          <p class="t-fa">چند دستگاه مستقل از یک خوراک تغذیه می‌شوند، هر کدام با دسترسی جدا. داده هر شب به انباری بیرون از سرور می‌رود و دو نسخه با هم مقابله می‌شوند. افزودن یک الگوریتم به‌عنوان مصرف‌کننده‌ی تازه کار زیرساختی تازه‌ای نمی‌خواهد.</p>
+          <p class="t-en">Several independent machines are fed from one feed, each with its own access. Every night the data goes to a store outside the server and the two copies are checked against each other. Adding an algorithm as a new consumer needs no new infrastructure work.</p>
+        </li>
+      </ul>
+      </section>
+
+      <section class="cs-section" id="roadmap">
+        <h2><span><span class="t-fa">مسیر پیش رو</span><span class="t-en">The road ahead</span></span></h2>
+      <ol class="phases">
+        <li class="is-done glow reveal">
+          <span class="phase-mark"><span class="t-fa">انجام‌شده</span><span class="t-en">Done</span></span>
+          <p class="t-fa">سرور دریافت، لایه‌ی پردازش و دسته‌بندی، درگاه تحویل، نسخه‌ی پشتیبان و ابزار نمایش ساخته و آزموده شده‌اند.</p>
+          <p class="t-en">The receiving server, the processing and classification layer, the delivery gateway, the backup and the display tool are built and tested.</p>
+        </li>
+        <li class="is-now glow reveal">
+          <span class="phase-mark"><span class="t-fa">امروز</span><span class="t-en">Now</span></span>
+          <p class="t-fa">در مرحله‌ی کنونی تاریخچه را انباشته می‌کنیم و قاعده‌های شناخت رفتار را با مشاهده‌ی زنده‌ی بازار کامل می‌کنیم.</p>
+          <p class="t-en">At the current stage we are building up the history and completing the rules for recognising behaviour by watching the market live.</p>
+        </li>
+        <li class="glow reveal">
+          <span class="phase-mark"><span class="t-fa">پس از آن</span><span class="t-en">Next</span></span>
+          <p class="t-fa">پس از آن تحلیل رفتاری بلوک‌ها و آزمون فرضیه‌های معاملاتی روی همین تاریخچه خواهد آمد.</p>
+          <p class="t-en">After that come the behavioural analysis of the blocks and the testing of trading hypotheses on this same history.</p>
+        </li>
+        <li class="glow reveal">
+          <span class="phase-mark"><span class="t-fa">گام پایانی</span><span class="t-en">Final step</span></span>
+          <p class="t-fa">گام پایانی الگوریتم‌های معاملاتی و سرمایه‌گذاری است که ردِّ پول بزرگ را در تصمیم خود به کار می‌گیرند.</p>
+          <p class="t-en">The final step is trading and investment algorithms that use the trail of big money in their decisions.</p>
+        </li>
+      </ol>
+      </section>
+
+      <section class="cs-section" id="technology">
+        <h2><span><span class="t-fa">فناوری</span><span class="t-en">Technology</span></span></h2>
+      <p>
+        <span class="t-fa">لایه‌ی دریافت، پردازش و درگاه تحویل با پایتون روی سرور اختصاصی لینوکس و ابزار نمایش با سی‌شارپ نوشته شده است. سرویس بی‌وقفه کار می‌کند و سلامت خود را هر ده دقیقه ثبت می‌کند. هر تغییر از آزمون‌های خودکار می‌گذرد و هر شب نسخه‌ی پشتیبان با اصل مقابله می‌شود.</span>
+        <span class="t-en">The receiving layer, the processing and the delivery gateway are written in Python on a dedicated Linux server, and the display tool in C#. The service runs without pause and records its own health every ten minutes. Every change goes through the automated tests, and every night the backup is checked against the original.</span>
+      </p>
+      </section>
+    </article>
+
+  </div>
+</section>
+
+<section class="section ruled">
+  <div class="wrap cs-end">
+    <a class="link-arrow link-back" href="../projects.html">
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <span class="t-fa">همه‌ی پروژه‌ها</span><span class="t-en">All projects</span>
+    </a>
+    <a class="btn btn-ghost" href="../contact.html">
+      <span class="t-fa">تماس با ما</span><span class="t-en">Get in touch</span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="logo" href="../index.html" aria-label="Nova Group">
+          <img class="logo-mark" src="../assets/img/nova-mark-180.png" alt="" width="180" height="180" loading="lazy">
+          <span class="logo-text t-fa"><b>نوا</b> گروپ</span><span class="logo-text t-en"><b>NOVA</b> GROUP</span>
+        </a>
+        <p>
+          <span class="t-fa">پژوهش و ساخت الگوریتم‌های معاملاتی بر پایه‌ی جریان سفارش بازار — از ۱۳۹۹.</span>
+          <span class="t-en">Researching and building trading algorithms from market order flow — since 2020.</span>
+        </p>
+      </div>
+
+      <nav class="footer-col" aria-label="Footer">
+        <h2><span class="t-fa">سایت</span><span class="t-en">Site</span></h2>
+        <a href="../index.html"><span class="t-fa">خانه</span><span class="t-en">Home</span></a>
+        <a href="../about.html"><span class="t-fa">درباره ما</span><span class="t-en">About</span></a>
+        <a href="../projects.html"><span class="t-fa">پروژه‌ها</span><span class="t-en">Projects</span></a>
+        <a href="../contact.html"><span class="t-fa">تماس</span><span class="t-en">Contact</span></a>
+      </nav>
+
+      <div class="footer-col">
+        <h2><span class="t-fa">ارتباط</span><span class="t-en">Connect</span></h2>
+        <a href="https://github.com/Mohammad1982Salemi/Nova-group" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+
+    <p class="footer-legal">
+      <span class="t-fa">این وب‌سایت معرفی یک فعالیت پژوهشی است. پیشنهاد یا دعوت به سرمایه‌گذاری نیست. گزارش‌های منتشرشده نتیجه‌ی شبیه‌سازی‌اند، نه معامله‌ی واقعی، و تضمینی برای آینده نیستند.</span>
+      <span class="t-en">This website describes a research effort. It is not an offer or solicitation to invest. The published reports are simulation results, not real trading, and no guarantee of the future.</span>
+    </p>
+
+    <div class="footer-bottom">
+      <span class="t-fa">© ۱۴۰۵ نوا گروپ — همه‌ی حقوق محفوظ است.</span>
+      <span class="t-en">© 2026 Nova Group — All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Back to top">↑</button>
+
+<script src="../assets/js/main.js?v=22"></script>
+</body>
+</html>
