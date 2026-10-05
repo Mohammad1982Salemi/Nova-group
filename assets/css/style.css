@@ -29,7 +29,7 @@
   --r-lg: 24px;
 
   --wrap: 1160px;
-  --nav-h: 72px;
+  --nav-h: 86px;
 
   --font-fa: 'Vazirmatn', 'Segoe UI', Tahoma, sans-serif;
   --font-en: 'Inter', system-ui, -apple-system, sans-serif;
@@ -126,17 +126,26 @@ html[data-lang="en"] .t-fa { display: none !important; }
   border-block-end: 1px solid transparent;
   transition: background .3s, border-color .3s, backdrop-filter .3s;
 }
+/* a soft scrim under the bar while it is still transparent, so the logo and
+   links never sit on raw page content as it scrolls up behind them */
+.nav::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(to bottom,
+              rgba(5,7,10,.94) 0%, rgba(5,7,10,.6) 58%, rgba(5,7,10,0) 100%);
+  transition: opacity .35s;
+}
+.nav.is-scrolled::before { opacity: 0; }
 .nav.is-scrolled {
-  background: rgba(5,7,10,.74);
+  background: rgba(5,7,10,.78);
   backdrop-filter: blur(16px) saturate(160%);
   -webkit-backdrop-filter: blur(16px) saturate(160%);
   border-block-end-color: var(--line);
 }
-.nav-inner { display: flex; align-items: center; gap: 28px; width: min(100% - 40px, var(--wrap)); margin-inline: auto; }
+.nav-inner { display: flex; align-items: center; gap: 30px; width: min(100% - 40px, var(--wrap)); margin-inline: auto; }
 
-.logo { display: flex; align-items: center; gap: 10px; }
+.logo { display: flex; align-items: center; gap: 12px; }
 /* the artwork already carries its own glow — a drop-shadow on top doubles it */
-.logo-mark { width: 34px; height: 34px; }
+.logo-mark { width: 42px; height: 42px; }
 /* the wordmark sits on the dark navbar, so it runs bright-to-light-blue —
    the brand blue at full strength is too dark to read up there */
 .logo-text {
@@ -145,29 +154,29 @@ html[data-lang="en"] .t-fa { display: none !important; }
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 /* Persian must never be letter-spaced: it breaks the joins between the letters */
-html[data-lang="fa"] .logo-text { font-family: var(--font-fa); font-size: 16.5px; letter-spacing: normal; }
-html[data-lang="en"] .logo-text { font-family: var(--font-display-en); font-size: 14px; letter-spacing: .16em; }
+html[data-lang="fa"] .logo-text { font-family: var(--font-fa); font-size: 18px; letter-spacing: normal; }
+html[data-lang="en"] .logo-text { font-family: var(--font-display-en); font-size: 15px; letter-spacing: .17em; }
 
-.nav-links { display: flex; gap: 4px; margin-inline-start: auto; }
+.nav-links { display: flex; gap: 6px; margin-inline-start: auto; }
 .nav-links a {
-  padding: 8px 14px; border-radius: 8px; font-size: 15px; color: var(--muted);
+  padding: 9px 16px; border-radius: 9px; font-size: 15.5px; color: var(--muted);
   transition: color .2s, background .2s;
 }
 .nav-links a:hover { color: var(--text); background: var(--surface); }
 
-.nav-actions { display: flex; align-items: center; gap: 10px; }
+.nav-actions { display: flex; align-items: center; gap: 12px; }
 
 .lang-btn {
-  min-width: 46px; height: 36px; padding: 0 14px;
+  min-width: 50px; height: 40px; padding: 0 16px;
   background: var(--surface); border: 1px solid var(--line);
-  border-radius: 999px; font-size: 14px; font-weight: 600; letter-spacing: .04em;
+  border-radius: 999px; font-size: 14.5px; font-weight: 600; letter-spacing: .04em;
   transition: border-color .2s, box-shadow .2s, color .2s;
 }
 .lang-btn:hover { border-color: var(--accent); color: var(--accent); box-shadow: var(--glow); }
 
 .burger {
-  display: none; width: 40px; height: 36px; padding: 0;
-  background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  display: none; width: 44px; height: 40px; padding: 0;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 11px;
   flex-direction: column; align-items: center; justify-content: center; gap: 5px;
 }
 .burger span { display: block; width: 16px; height: 1.8px; background: var(--text); border-radius: 2px; transition: transform .25s, opacity .25s; }
@@ -302,6 +311,8 @@ html[dir="rtl"] .btn-primary svg { transform: scaleX(-1); }
    ========================================================================== */
 .section { padding-block: 104px; }
 .section-head { max-width: 720px; margin-block-end: 50px; }
+.about-head { display: flex; align-items: center; gap: 30px; max-width: none; }
+.about-mark { flex: none; width: 152px; height: 152px; }
 .eyebrow {
   display: inline-block; margin-block-end: 16px;
   font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
@@ -578,7 +589,7 @@ html[dir="rtl"] .clink-body { align-items: flex-start; }
 }
 
 @media (max-width: 760px) {
-  :root { --nav-h: 64px; }
+  :root { --nav-h: 70px; }
 
   .burger { display: flex; }
   .nav-links {
@@ -602,6 +613,9 @@ html[dir="rtl"] .clink-body { align-items: flex-start; }
 
   .contact-panel { padding: 34px 24px; border-radius: 22px; }
 
+  .about-head { gap: 20px; }
+  .about-mark { width: 88px; height: 88px; }
+
   .project-head { flex-wrap: wrap; gap: 14px; padding: 20px 20px 16px; }
   .project-title { order: 3; flex-basis: 100%; }
   .project-toggle { margin-inline-start: auto; }
@@ -621,6 +635,8 @@ html[dir="rtl"] .clink-body { align-items: flex-start; }
 @media (max-width: 420px) {
   .hero-cta { flex-direction: column; align-items: stretch; }
   .btn { justify-content: center; }
+  .about-mark { width: 66px; height: 66px; }
+  html[data-lang="en"] .logo-text { font-size: 13px; letter-spacing: .13em; }
 }
 
 /* ==========================================================================
