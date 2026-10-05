@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="36 36 168 168" width="240" height="240" role="img" aria-label="Nova Group">
+  <defs>
+    <linearGradient id="deep" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b2fb8"/><stop offset="1" stop-color="#7fb6ff"/></linearGradient>
+    <linearGradient id="lite" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9cc8ff"/><stop offset="1" stop-color="#1557f0"/></linearGradient>
+    <linearGradient id="main" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1848e8"/><stop offset=".55" stop-color="#3f9bff"/><stop offset="1" stop-color="#38d5f5"/></linearGradient>
+    <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#00124d" stop-opacity=".75"/><stop offset="1" stop-color="#00124d" stop-opacity="0"/></linearGradient>
+    <linearGradient id="shadeUp" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#00124d" stop-opacity=".75"/><stop offset="1" stop-color="#00124d" stop-opacity="0"/></linearGradient>
+  </defs>
+  <polygon points="50,58 92,58 92,158 50,190" fill="url(#deep)"/>
+  <polygon points="148,82 190,50 190,182 148,182" fill="url(#lite)"/>
+  <polygon points="50,75 92,125 92,108 50,58" fill="url(#shade)"/>
+  <polygon points="148,115 190,165 190,182 148,132" fill="url(#shadeUp)"/>
+  <polygon points="50,58 92,58 190,182 148,182" fill="url(#main)"/>
+</svg>

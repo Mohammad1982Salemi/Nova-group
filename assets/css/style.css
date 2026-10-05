@@ -23,7 +23,7 @@
   --r:    14px;
   --r-lg: 20px;
   --wrap: 1180px;
-  --nav-h: 80px;
+  --nav-h: 92px;
 
   --font-fa:   'Vazirmatn', 'Segoe UI', Tahoma, sans-serif;
   --font-en:   'Inter', system-ui, -apple-system, sans-serif;
@@ -161,14 +161,21 @@ html[data-lang="fa"] .tags li { font-family: var(--font-fa); }
 .nav-inner { display: flex; align-items: center; gap: 28px; }
 
 .logo { display: inline-flex; align-items: center; gap: 12px; }
-/* the artwork carries its own glow - no drop-shadow on top of it */
 .logo-mark { width: 48px; height: 48px; }
+/* the header carries the brand: a larger mark with a soft light behind it, and a larger name */
+.nav .logo { gap: 16px; }
+.nav .logo-mark { width: 64px; height: 64px; filter: drop-shadow(0 0 18px rgba(63,155,255,.55)); transition: transform .3s, filter .3s; }
+.nav .logo:hover .logo-mark { transform: translateY(-2px); filter: drop-shadow(0 0 26px rgba(56,213,245,.8)); }
 /* two weights: the name in white, "group" stepped back */
 .logo-text { font-weight: 400; color: #9fb1c9; }
 .logo-text b { font-weight: 700; color: #fff; }
 /* Persian must never be letter-spaced: it breaks the joins between the letters */
 html[data-lang="fa"] .logo-text { font-family: var(--font-fa); font-size: 18.5px; }
 html[data-lang="en"] .logo-text { font-family: var(--font-disp); font-size: 15px; letter-spacing: .2em; }
+html[data-lang="fa"] .nav .logo-text { font-size: 27px; }
+html[data-lang="en"] .nav .logo-text { font-size: 21px; letter-spacing: .18em; }
+.nav .logo-text { color: #b9c8de; }
+.nav .logo-text b { font-weight: 800; }
 
 .nav-links { display: flex; gap: 4px; margin-inline-start: auto; }
 .nav-links a {
@@ -558,7 +565,7 @@ html[dir="rtl"] .pipe > span + span::before { content: '←'; }
 .page-hero h1 { font-size: clamp(2.1rem, 4.8vw, 3.4rem); margin-block-end: 20px; }
 .page-lead { color: var(--muted); font-size: 18.2px; max-width: 66ch; }
 .page-hero-grid { display: flex; align-items: center; justify-content: space-between; gap: 48px; }
-.page-mark { flex: none; width: 300px; height: auto; }
+.page-mark { flex: none; width: 230px; height: auto; filter: drop-shadow(0 0 40px rgba(63,155,255,.45)); }
 .page-hero .facts { margin-block-start: 52px; border-block-end: 0; }
 .page-hero:has(.facts) { padding-block-end: 0; }
 
@@ -777,6 +784,9 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
   .nav-inner { gap: 14px; }
   .nav-actions { margin-inline-start: auto; }
   .logo-mark { width: 42px; height: 42px; }
+  .nav .logo-mark { width: 48px; height: 48px; }
+  html[data-lang="fa"] .nav .logo-text { font-size: 21px; }
+  html[data-lang="en"] .nav .logo-text { font-size: 15px; letter-spacing: .13em; }
   .nav-links {
     position: fixed; inset-block-start: var(--nav-h); inset-inline: 0;
     flex-direction: column; gap: 2px; margin: 0; padding: 12px 20px 20px;
@@ -913,3 +923,8 @@ html[lang="fa"] .band-slogan h2 { letter-spacing: 0; }
   box-shadow: 0 0 0 1px rgba(56,213,245,.12), 0 10px 34px rgba(56,213,245,.22), inset 0 1px 0 rgba(255,255,255,.14);
 }
 .proj-report.is-on svg { color: var(--cyan); }
+@media (max-width: 480px) {
+  .nav .logo-mark { width: 42px; height: 42px; }
+  html[data-lang="fa"] .nav .logo-text { font-size: 19px; }
+  html[data-lang="en"] .nav .logo-text { font-size: 13px; }
+}
