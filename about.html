@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="assets/css/style.css?v=32">
+<link rel="stylesheet" href="assets/css/style.css?v=33">
 
 <!-- Runs before first paint so the page never flashes in the wrong language or direction. -->
 <script>
@@ -251,7 +251,7 @@
 
 <footer class="footer">
   <div class="wrap">
-    <div class="footer-top">
+    <div class="footer-top footer-panel">
       <div class="footer-brand">
         <a class="logo" href="index.html" aria-label="Nova Group">
           <img class="logo-mark" src="assets/img/nova-mark.svg" alt="" width="240" height="240" loading="lazy">
@@ -271,26 +271,28 @@
         <a href="contact.html"><span class="t-fa">تماس</span><span class="t-en">Contact</span></a>
       </nav>
 
-      <div class="footer-col">
+      <div class="footer-col footer-contact">
         <h2><span class="t-fa">ارتباط</span><span class="t-en">Connect</span></h2>
-        <a href="mailto:info@novacapital.fund" dir="ltr">info@novacapital.fund</a>
+        <a class="footer-mail" href="mailto:info@novacapital.fund">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
+          <bdi>info@novacapital.fund</bdi>
+        </a>
+        <a class="footer-cta" href="contact.html">
+          <span class="t-fa">تماس با ما</span><span class="t-en">Get in touch</span>
+          <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
       </div>
     </div>
 
-    <p class="footer-legal">
-      <span class="t-fa">این وب‌سایت معرفی یک فعالیت پژوهشی است. پیشنهاد یا دعوت به سرمایه‌گذاری نیست. گزارش‌های منتشرشده نتیجه‌ی شبیه‌سازی‌اند، نه معامله‌ی واقعی، و تضمینی برای آینده نیستند.</span>
-      <span class="t-en">This website describes a research effort. It is not an offer or solicitation to invest. The published reports are simulation results, not real trading, and no guarantee of the future.</span>
+    <p class="footer-bottom">
+      <span class="t-fa">© ۱۴۰۵ نوا گروپ. همه‌ی حقوق مادی و معنوی این وب‌سایت و محتوای آن متعلق به نوا گروپ است. هرگونه سوءاستفاده پیگرد قانونی دارد.</span>
+      <span class="t-en">© 2026 Nova Group. All rights to this website and its content belong to Nova Group. Any misuse is subject to legal action.</span>
     </p>
-
-    <div class="footer-bottom">
-      <span class="t-fa">© ۱۴۰۵ نوا گروپ — همه‌ی حقوق محفوظ است.</span>
-      <span class="t-en">© 2026 Nova Group — All rights reserved.</span>
-    </div>
   </div>
 </footer>
 
 <button class="to-top" id="toTop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
 
-<script src="assets/js/main.js?v=32"></script>
+<script src="assets/js/main.js?v=33"></script>
 </body>
 </html>
