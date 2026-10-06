@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlockTrade — behavioural analysis of block trades in the Chicago futures market | Nova Group</title>
+<meta name="description" content="The BlockTrade project: a data service for the block trades of the Chicago exchange and their behavioural analysis, on the way to trading and investment algorithms.">
+<link rel="canonical" href="https://novacapital.fund/en/projects/blocktrade.html">
+<link rel="alternate" hreflang="fa" href="https://novacapital.fund/projects/blocktrade.html">
+<link rel="alternate" hreflang="en" href="https://novacapital.fund/en/projects/blocktrade.html">
+<link rel="alternate" hreflang="x-default" href="https://novacapital.fund/en/projects/blocktrade.html">
+<meta property="og:title" content="BlockTrade — behavioural analysis of block trades in the Chicago futures market | Nova Group">
+<meta property="og:description" content="Behavioural analysis of block trades in the Chicago futures market, on the way to trading and investment algorithms built on the trail of big money.">
+<meta property="og:url" content="https://novacapital.fund/en/projects/blocktrade.html">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="fa_IR">
+<meta property="og:image" content="https://novacapital.fund/assets/img/og/blocktrade-en.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://novacapital.fund/assets/img/og/blocktrade-en.jpg">
+<meta name="author" content="Nova Group">
+<meta name="theme-color" content="#05080e">
+<meta name="color-scheme" content="dark light">
+<meta name="supported-color-schemes" content="dark light">
+<meta name="darkreader-lock">
+<meta property="og:site_name" content="Nova Group">
+<meta property="og:type" content="website">
+
+<link rel="icon" type="image/svg+xml" href="../../assets/img/nova-mark.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="../../assets/img/favicon-64.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../../assets/img/favicon-192.png">
+<link rel="apple-touch-icon" href="../../assets/img/favicon-192.png">
+
+<!-- The fonts are served from this site; the one this language needs first is fetched early. -->
+<link rel="preload" href="../../assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/css/style.css?v=48">
+
+<!-- Samsung Internet (also used inside Telegram and WhatsApp) recolours pages in its dark mode; flag it early. -->
+<script>if (/SamsungBrowser/i.test(navigator.userAgent)) document.documentElement.classList.add('sb');</script>
+
+<!-- Runs before first paint. The reader's language is an earlier choice, a ?lang= in the address, or else
+     Persian for a Persian browser or a clock set to Tehran and English for everyone else. -->
+<script>
+(function () {
+  var d = document.documentElement, want = null, asked = /[?&]lang=(fa|en)\b/.exec(location.search), i;
+  try { if (asked) localStorage.setItem('nova-lang', asked[1]); want = localStorage.getItem('nova-lang'); } catch (e) {}
+  if (asked) want = asked[1];
+  if (want !== 'fa' && want !== 'en') {
+    var said = navigator.languages || [navigator.language || ''], fa = false;
+    for (i = 0; i < said.length; i++) if (/^fa\b/i.test(said[i])) fa = true;
+    try { if (Intl.DateTimeFormat().resolvedOptions().timeZone === 'Asia/Tehran') fa = true; } catch (e) {}
+    want = fa ? 'fa' : 'en';
+  }
+  if (d.hasAttribute('data-both')) {
+    // the one page that carries both languages: under /en/ it reads in English
+    var l = location.pathname.indexOf('/en/') === 0 ? 'en' : want;
+    d.setAttribute('data-lang', l); d.lang = l; d.dir = l === 'fa' ? 'rtl' : 'ltr';
+  } else if (want === 'en' && d.getAttribute('data-alt') &&
+      !/bot|crawl|spider|slurp|preview|google|bing|yandex|baidu|duckduck|facebook|whatsapp|telegram|lighthouse/i.test(navigator.userAgent)) {
+    // a Persian address is the default one: a reader of English is sent on to the same page under /en/
+    d.style.visibility = 'hidden';
+    setTimeout(function () { d.style.visibility = ''; }, 2500);
+    location.replace(d.getAttribute('data-alt') + location.hash);
+    return;
+  }
+  d.className += ' js';
+  // a short opening, once per visit and never for people who asked for less motion
+  try {
+    if (!sessionStorage.getItem('nova-seen') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      sessionStorage.setItem('nova-seen', '1'); d.className += ' intro';
+    }
+  } catch (e) {}
+})();
+</script>
+</head>
+<body>
+
+<a href="#main" class="skip-link"><span class="t-en">Skip to content</span></a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="../index.html" aria-label="Nova Group">
+      <img class="logo-mark" src="../../assets/img/nova-mark-512.png" alt="" width="512" height="512">
+      <span class="logo-text t-en"><b>NOVA</b> GROUP</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Main">
+      <a href="../index.html"><span class="t-en">Home</span></a>
+      <a href="../about.html"><span class="t-en">About</span></a>
+      <a href="../projects.html" aria-current="page"><span class="t-en">Projects</span></a>
+      <a href="../contact.html"><span class="t-en">Contact</span></a>
+    </nav>
+
+    <div class="nav-actions">
+      <a class="lang-btn" id="langBtn" href="../../projects/blocktrade.html" hreflang="fa" lang="fa" aria-label="فارسی">فا</a>
+      <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="page-hero">
+  <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="wrap">
+    <nav class="crumbs reveal" aria-label="Breadcrumb">
+      <a href="../projects.html"><span class="t-en">Projects</span></a>
+      <span aria-hidden="true">/</span>
+      <span><span class="t-en">BlockTrade</span></span>
+    </nav>
+
+    <h1 class="reveal"><span class="t-en">BlockTrade</span></h1>
+    <p class="page-lead reveal">
+      <span class="t-en">Behavioural analysis of block trades in the Chicago futures market, on the way to trading and investment algorithms built on the trail of big money.</span>
+    </p>
+
+    <div class="cs-meta reveal">
+      <span class="status"><span class="t-en">Data service running</span></span>
+      <ul class="tags">
+        <li>Python</li><li>C#</li><li>Linux</li>
+        <li><span class="t-en">Block trades</span></li>
+        <li><span class="t-en">Data service</span></li>
+        <li><span class="t-en">Behavioural analysis</span></li>
+        <li><span class="t-en">Simulator</span></li>
+      </ul>
+    </div>
+
+    <ul class="facts facts-glass">
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-en">Speed</span></span>
+        <b><span class="t-en">A 36-second median</span></b>
+        <p>
+          <span class="t-en">The time for each block to reach the chart, after the exchange's notice.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-en">Coverage</span></span>
+        <b><span class="t-en">Every product</span></b>
+        <p>
+          <span class="t-en">The block trades of every Chicago exchange product, received and processed without pause.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-en">Classification</span></span>
+        <b><span class="t-en">24 shapes</span></b>
+        <p>
+          <span class="t-en">From a single contract to multi-leg option combinations, each clearly defined.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-en">Technology</span></span>
+        <b><span class="t-en">Two languages, two jobs</span></b>
+        <div class="fact-list">
+          <div><i>Python</i><span><span class="t-en">Receive, process, deliver</span></span></div>
+          <div><i>C#</i><span><span class="t-en">Display tool</span></span></div>
+        </div>
+      </li>
+    </ul>
+
+    <nav class="toc reveal" aria-label="On this page">
+      <span class="toc-title"><span class="t-en">On this page</span></span>
+      <a href="#intro"><span class="t-en">Introduction</span></a>
+      <a href="#platform"><span class="t-en">Display tool</span></a>
+      <a href="#approach"><span class="t-en">Approach</span></a>
+      <a href="#difference"><span class="t-en">What stands out</span></a>
+      <a href="#roadmap"><span class="t-en">The road ahead</span></a>
+      <a href="#technology"><span class="t-en">Technology</span></a>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+
+    <article class="cs-body">
+      <section class="cs-section" id="intro">
+        <h2><span><span class="t-en">Introduction</span></span></h2>
+      <p class="detail-lead">
+        <span class="t-en">The largest trades in the futures market do not happen on the screen. Two large institutions agree on price and size away from the order book, and the market learns of it only a few minutes later, in a short notice. These are called block trades. They leave no trace in the bars and volume a trader sees on the chart, and few people ask what this big money is doing and how the market behaves afterwards.</span>
+      </p>
+      <p>
+        <span class="t-en">We decided to understand how these trades behave, and to do that we first became the supplier of their data ourselves.</span>
+      </p>
+      <p>
+        <span class="t-en">The BlockTrade project has a data service that is up and running. Our server receives and processes the block trades of every Chicago exchange product without pause and delivers them to the trader's chart. Each block arrives a median of 36 seconds after the exchange's notice, and its history builds up day by day. The destination is trading and investment algorithms built on the behavioural analysis of these same blocks.</span>
+      </p>
+      </section>
+
+      <section class="cs-section" id="platform">
+        <h2><span><span class="t-en">Inside the display tool</span></span></h2>
+        <p>
+          <span class="t-en">These are real screens from the project's display tool, not mock-ups. Each circle is one block trade placed on the 15-minute chart of its own asset, and its colour shows the shape of the trade. Click the image to enlarge it.</span>
+        </p>
+
+        <div class="shots reveal" data-shots>
+          <div class="shots-tabs" role="tablist" aria-label="Chart views">
+            <button type="button" role="tab" aria-selected="true" data-name="GC 12-26 · Gold Futures · 15 Minute">
+              <b><span class="t-en">Gold futures</span></b>
+              <span>GC 12-26 · 816 blocks</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="ZW 12-26 · 15 Minute">
+              <b><span class="t-en">Wheat futures</span></b>
+              <span>ZW 12-26 · 57 blocks</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="6E 12-26 · Euro FX Futures · 15 Minute">
+              <b><span class="t-en">Euro FX futures</span></b>
+              <span>6E 12-26 · 81 blocks</span>
+            </button>
+          </div>
+
+          <figure class="shot-frame">
+            <div class="shot-bar">
+              <i></i><i></i><i></i>
+              <span class="shot-name">GC 12-26 · Gold Futures · 15 Minute</span>
+              <button type="button" class="shot-zoom" aria-label="Enlarge">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg>
+              </button>
+            </div>
+            <div class="shot-stage">
+              <img class="is-on" src="../../assets/img/projects/blocktrade/gold.webp" data-full="../../assets/img/projects/blocktrade/gold-full.webp" width="1400" height="742" alt="15-minute gold futures chart with block-trade circles and the legend of shapes">
+              <img src="../../assets/img/projects/blocktrade/wheat.webp" data-full="../../assets/img/projects/blocktrade/wheat-full.webp" width="1400" height="742" loading="lazy" alt="15-minute wheat futures chart with block-trade circles">
+              <img src="../../assets/img/projects/blocktrade/euro.webp" data-full="../../assets/img/projects/blocktrade/euro-full.webp" width="1400" height="742" loading="lazy" alt="15-minute Euro FX futures chart with block-trade circles">
+            </div>
+            <figcaption>
+              <p class="shot-cap is-on">
+                <span class="t-en">Gold futures: 816 recorded blocks, 101 of them drawn in this span. The legend beside the chart lists the shapes in groups: futures only, options only, and combinations of the two.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-en">Wheat futures: 57 recorded blocks, 7 of them drawn in this span.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-en">Euro FX futures: 81 recorded blocks, 15 of them drawn in this span.</span>
+              </p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="cs-section" id="approach">
+        <h2><span><span class="t-en">Approach</span></span></h2>
+      <p>
+        <span class="t-en">First we make the data our own, then we come to know the behaviour, and finally we build algorithms on that knowledge.</span>
+      </p>
+      <ol class="steps">
+        <li class="glow reveal">
+          <strong class="t-en">From the market to our own data</strong>
+          <p class="t-en">Our dedicated server receives the exchange's notices throughout the trading day, records them exactly as they are, and delivers them to consumers through a dedicated gateway. At this stage we are the supplier of the data, not its customer. This stage is built and working.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-en">From data to behavioural analysis</strong>
+          <p class="t-en">Each block gets a fixed identity, falls into one of 24 defined shapes and is tied to its own asset. Every correction, withdrawal and return of a trade is recorded too, with its exact time. On that basis we measure in what situation each shape of block appears and what the market does afterwards.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-en">From behavioural analysis to the algorithm</strong>
+          <p class="t-en">Findings that hold up when tested on the history will be turned into trading and investment rules. As in all our projects, they are tested in a simulator and at real cost, not on paper. Those algorithms will be fed from the same gateway that feeds the chart.</p>
+        </li>
+      </ol>
+      </section>
+
+      <section class="cs-section" id="difference">
+        <h2><span><span class="t-en">What stands out</span></span></h2>
+      <ul class="points">
+        <li class="glow reveal">
+          <strong class="t-en">The aim is to understand behaviour, not to display data.</strong>
+          <p class="t-en">Seeing a block on the chart does not make a decision by itself. What we are after is the repeating pattern: which shape of large trade, in which situation, comes with what consequence. The display tool is the first output of this path, not its end.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-en">We supply the data; we are not its customer.</strong>
+          <p class="t-en">Behavioural analysis needs data that is complete, on time and in our own hands. We built and run the chain ourselves, from receipt to delivery. The quality and timing of what reaches the analysis and the algorithm are under our control.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-en">We have the market's behaviour, not just the end-of-day list.</strong>
+          <p class="t-en">The end-of-day list does not say what was corrected, withdrawn, or went and came back in the middle of the day. Our service keeps all of that, and those details are the raw material of behavioural analysis. This history grows every day and cannot be recorded again later.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-en">A common language for large trades.</strong>
+          <p class="t-en">Block trades range from a single contract to multi-leg option combinations. We have sorted them into 24 clearly defined shapes, and that classification has been tested on all the recorded data. Without this language, comparing how blocks behave is not possible.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-en">Analysis that is not built on a hidden guess.</strong>
+          <p class="t-en">A block trade has its buyer and seller together, and no direction is announced for it. Our service states the type of trade and does not invent a direction; wherever it cannot recognise a block, it says exactly that. Any directional reading in our analysis will come separately, under the name "evidence".</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-en">Infrastructure ready for several consumers.</strong>
+          <p class="t-en">Several independent machines are fed from one feed, each with its own access. Every night the data goes to a store outside the server and the two copies are checked against each other. Adding an algorithm as a new consumer needs no new infrastructure work.</p>
+        </li>
+      </ul>
+      </section>
+
+      <section class="cs-section" id="roadmap">
+        <h2><span><span class="t-en">The road ahead</span></span></h2>
+      <ol class="phases">
+        <li class="is-done glow reveal">
+          <span class="phase-mark"><span class="t-en">Done</span></span>
+          <p class="t-en">The receiving server, the processing and classification layer, the delivery gateway, the backup and the display tool are built and tested.</p>
+        </li>
+        <li class="is-done glow reveal">
+          <span class="phase-mark"><span class="t-en">Done</span></span>
+          <p class="t-en">The rules for recognising behaviour have been completed by watching the market live, and the history builds up day by day.</p>
+        </li>
+        <li class="is-now glow reveal">
+          <span class="phase-mark"><span class="t-en">Now</span></span>
+          <p class="t-en">The behavioural analysis of the blocks and the testing of trading hypotheses on this same history.</p>
+        </li>
+        <li class="glow reveal">
+          <span class="phase-mark"><span class="t-en">Final step</span></span>
+          <p class="t-en">The final step is trading and investment algorithms that use the trail of big money in their decisions.</p>
+        </li>
+      </ol>
+      </section>
+
+      <section class="cs-section" id="technology">
+        <h2><span><span class="t-en">Technology</span></span></h2>
+      <p>
+        <span class="t-en">The receiving layer, the processing and the delivery gateway are written in Python on a dedicated Linux server, and the display tool in C#. The service runs without pause and records its own health every ten minutes. Every change goes through the automated tests, and every night the backup is checked against the original.</span>
+      </p>
+      </section>
+    </article>
+
+  </div>
+</section>
+
+<section class="section ruled">
+  <div class="wrap">
+    <nav class="projnav reveal" aria-label="More projects">
+      <a class="projnav-card is-prev glow" href="../projects/fast-scalp.html">
+        <span class="projnav-dir"><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="t-en">Previous project</span></span>
+        <b><span class="t-en">Fast Scalp</span></b>
+      </a>
+      <a class="projnav-card is-next glow" href="../projects/tsetmc.html">
+        <span class="projnav-dir"><span class="t-en">Next project</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <b><span class="t-en">TSETMC</span></b>
+      </a>
+    </nav>
+  </div>
+  <div class="wrap cs-end">
+    <a class="link-arrow link-back" href="../projects.html">
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <span class="t-en">All projects</span>
+    </a>
+    <a class="btn btn-ghost" href="../contact.html">
+      <span class="t-en">Get in touch</span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top footer-panel">
+      <div class="footer-brand">
+        <a class="logo" href="../index.html" aria-label="Nova Group">
+          <img class="logo-mark" src="../../assets/img/nova-mark-512.png" alt="" width="512" height="512" loading="lazy">
+          <span class="logo-text t-en"><b>NOVA</b> GROUP</span>
+        </a>
+        <p>
+          <span class="t-en">Researching and building trading algorithms from market order flow — since 2020.</span>
+        </p>
+      </div>
+
+      <nav class="footer-col" aria-label="Footer">
+        <h2><span class="t-en">Site</span></h2>
+        <a href="../index.html"><span class="t-en">Home</span></a>
+        <a href="../about.html"><span class="t-en">About</span></a>
+        <a href="../projects.html"><span class="t-en">Projects</span></a>
+        <a href="../contact.html"><span class="t-en">Contact</span></a>
+      </nav>
+
+      <div class="footer-col footer-contact">
+        <h2><span class="t-en">Connect</span></h2>
+        <a class="footer-mail" href="mailto:info@novacapital.fund">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
+          <bdi>info@novacapital.fund</bdi>
+        </a>
+      </div>
+    </div>
+
+    <p class="footer-bottom">
+      <span class="t-en">© 2026 Nova Group. All rights to this website and its content belong to Nova Group. Any misuse is subject to legal action.</span>
+    </p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
+
+<script src="../../assets/js/main.js?v=48"></script>
+</body>
+</html>

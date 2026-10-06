@@ -4,6 +4,23 @@
    so one set of rules serves both directions.
    ========================================================================== */
 
+/* The three families are served from this site, one variable file each. The two Latin ones cover
+   the basic Latin range only; anything else in a line falls through to the next font in the stack. */
+@font-face {
+  font-family: 'Vazirmatn'; font-style: normal; font-weight: 100 900; font-display: swap;
+  src: url(../fonts/vazirmatn-var.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap;
+  src: url(../fonts/inter-latin-var.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Space Grotesk'; font-style: normal; font-weight: 300 700; font-display: swap;
+  src: url(../fonts/space-grotesk-latin-var.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   --bg:       #05080e;
   --panel:    rgba(148,170,205,.045);
@@ -13,7 +30,7 @@
 
   --text:     #e9eef6;
   --muted:    #98a6ba;
-  --dim:      #65738b;
+  --dim:      #7886a1;
 
   --accent:    #3b82f6;
   --accent-hi: #8cbcff;
@@ -72,6 +89,8 @@ html[data-lang="en"] .t-fa { display: none !important; }
   background: var(--accent); color: #fff; padding: 10px 18px; border-radius: 8px; font-weight: 600;
 }
 .skip-link:focus { inset-block-start: 16px; }
+/* read out by a screen reader, not shown */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
 /* ==========================================================================
    shared pieces
@@ -191,6 +210,7 @@ html[data-lang="en"] .nav .logo-text { font-size: 21px; letter-spacing: .18em; }
 
 .nav-actions { display: flex; align-items: center; gap: 12px; }
 .lang-btn {
+  display: inline-flex; align-items: center; justify-content: center;
   min-width: 50px; height: 40px; padding: 0 16px;
   background: var(--panel); border: 1px solid var(--line); border-radius: 999px;
   font-size: 14.5px; font-weight: 600; transition: border-color .2s, color .2s;
@@ -1299,4 +1319,24 @@ html[data-lang="en"] .facts-glass .fact-list span { font-size: 13px; letter-spac
   .mbo-mid b { margin-left: 4px; font-size: 11px; }
   .mbo-cols, .mbo-row { grid-template-columns: 62px minmax(0, 1fr) 24px; gap: 8px; padding-inline: 10px; }
   .tp { grid-template-columns: 80px 34px 22px 1fr; gap: 6px; }
+}
+
+/* ---------- arriving from the same page in the other language: the reader is put back where they were,
+   so nothing plays its entrance a second time ---------- */
+html.is-returning .reveal, html.is-returning .reveal > span { opacity: 1 !important; transform: none !important; clip-path: none !important; transition: none !important; }
+
+/* ---------- touch screens: small links and buttons answer to a fingertip, not just to their own outline.
+   The hit area grows; nothing on the page moves, and a desktop with a mouse is not affected. ---------- */
+@media (pointer: coarse) {
+  .crumbs a, .member-mail, a.link-arrow, .shot-zoom, .cs-section p a { position: relative; }
+  .crumbs a::after, .member-mail::after, a.link-arrow::after, .shot-zoom::after, .cs-section p a::after {
+    content: ''; position: absolute; inset: -10px -6px;
+  }
+}
+
+/* ---------- phones, English: justified lines in a narrow column may break a long word rather than open wide gaps ---------- */
+@media (max-width: 760px) {
+  html[lang="en"] :is(.prose p, .hero-sub, .page-lead, .split-side p, .layers p, .track p, .proj-desc, .sec-head p:not(.eyebrow), .cs-section p) {
+    -webkit-hyphens: auto; hyphens: auto; hyphenate-limit-chars: 7 3 3;
+  }
 }

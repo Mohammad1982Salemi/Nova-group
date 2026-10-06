@@ -1,49 +1,69 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl" data-lang="fa">
+<html lang="fa" dir="rtl" data-lang="fa" data-alt="en/projects.html">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>پروژه‌ها — نوا گروپ | Projects — Nova Group</title>
-<meta name="description" content="پروژه‌های نوا گروپ: هر کدام با پلتفرم داده‌ی مستقل و شبیه‌ساز خودش. Nova Group's projects, each on its own data platform and simulator.">
+<title>پروژه‌ها | نوا گروپ</title>
+<meta name="description" content="پروژه‌های نوا گروپ: هر کدام با پلتفرم داده‌ی مستقل و شبیه‌ساز خودش.">
 <link rel="canonical" href="https://novacapital.fund/projects.html">
-<meta property="og:title" content="پروژه‌ها — نوا گروپ | Projects — Nova Group">
-<meta property="og:description" content="روی چه چیزی کار می‌کنیم. What we are working on.">
+<link rel="alternate" hreflang="fa" href="https://novacapital.fund/projects.html">
+<link rel="alternate" hreflang="en" href="https://novacapital.fund/en/projects.html">
+<link rel="alternate" hreflang="x-default" href="https://novacapital.fund/en/projects.html">
+<meta property="og:title" content="پروژه‌ها | نوا گروپ">
+<meta property="og:description" content="روی چه چیزی کار می‌کنیم.">
 <meta property="og:url" content="https://novacapital.fund/projects.html">
+<meta property="og:locale" content="fa_IR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:image" content="https://novacapital.fund/assets/img/og/nova-fa.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://novacapital.fund/assets/img/og/nova-fa.jpg">
 <meta name="author" content="Nova Group">
 <meta name="theme-color" content="#05080e">
 <meta name="color-scheme" content="dark light">
 <meta name="supported-color-schemes" content="dark light">
 <meta name="darkreader-lock">
-<meta property="og:site_name" content="Nova Group">
+<meta property="og:site_name" content="نوا گروپ">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://novacapital.fund/assets/img/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://novacapital.fund/assets/img/og.png">
 
 <link rel="icon" type="image/svg+xml" href="assets/img/nova-mark.svg">
 <link rel="icon" type="image/png" sizes="64x64" href="assets/img/favicon-64.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
 <link rel="apple-touch-icon" href="assets/img/favicon-192.png">
 
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vazirmatn@33.0.3/Vazirmatn-font-face.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="assets/css/style.css?v=47">
+<!-- The fonts are served from this site; the one this language needs first is fetched early. -->
+<link rel="preload" href="assets/fonts/vazirmatn-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css?v=48">
 
 <!-- Samsung Internet (also used inside Telegram and WhatsApp) recolours pages in its dark mode; flag it early. -->
 <script>if (/SamsungBrowser/i.test(navigator.userAgent)) document.documentElement.classList.add('sb');</script>
 
-<!-- Runs before first paint so the page never flashes in the wrong language or direction. -->
+<!-- Runs before first paint. The reader's language is an earlier choice, a ?lang= in the address, or else
+     Persian for a Persian browser or a clock set to Tehran and English for everyone else. -->
 <script>
 (function () {
-  var d = document.documentElement, l = null;
-  try { l = localStorage.getItem('nova-lang'); } catch (e) {}
-  if (l !== 'fa' && l !== 'en') l = (navigator.language || '').toLowerCase().indexOf('fa') === 0 ? 'fa' : 'en';
-  d.setAttribute('data-lang', l); d.lang = l; d.dir = l === 'fa' ? 'rtl' : 'ltr';
+  var d = document.documentElement, want = null, asked = /[?&]lang=(fa|en)\b/.exec(location.search), i;
+  try { if (asked) localStorage.setItem('nova-lang', asked[1]); want = localStorage.getItem('nova-lang'); } catch (e) {}
+  if (asked) want = asked[1];
+  if (want !== 'fa' && want !== 'en') {
+    var said = navigator.languages || [navigator.language || ''], fa = false;
+    for (i = 0; i < said.length; i++) if (/^fa\b/i.test(said[i])) fa = true;
+    try { if (Intl.DateTimeFormat().resolvedOptions().timeZone === 'Asia/Tehran') fa = true; } catch (e) {}
+    want = fa ? 'fa' : 'en';
+  }
+  if (d.hasAttribute('data-both')) {
+    // the one page that carries both languages: under /en/ it reads in English
+    var l = location.pathname.indexOf('/en/') === 0 ? 'en' : want;
+    d.setAttribute('data-lang', l); d.lang = l; d.dir = l === 'fa' ? 'rtl' : 'ltr';
+  } else if (want === 'en' && d.getAttribute('data-alt') &&
+      !/bot|crawl|spider|slurp|preview|google|bing|yandex|baidu|duckduck|facebook|whatsapp|telegram|lighthouse/i.test(navigator.userAgent)) {
+    // a Persian address is the default one: a reader of English is sent on to the same page under /en/
+    d.style.visibility = 'hidden';
+    setTimeout(function () { d.style.visibility = ''; }, 2500);
+    location.replace(d.getAttribute('data-alt') + location.hash);
+    return;
+  }
   d.className += ' js';
   // a short opening, once per visit and never for people who asked for less motion
   try {
@@ -56,27 +76,25 @@
 </head>
 <body>
 
-<a href="#main" class="skip-link"><span class="t-fa">پرش به محتوا</span><span class="t-en">Skip to content</span></a>
+<a href="#main" class="skip-link"><span class="t-fa">پرش به محتوا</span></a>
 
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
-    <a class="logo" href="index.html" aria-label="Nova Group">
+    <a class="logo" href="index.html" aria-label="نوا گروپ">
       <img class="logo-mark" src="assets/img/nova-mark-512.png" alt="" width="512" height="512">
-      <span class="logo-text t-fa"><b>نوا</b> گروپ</span><span class="logo-text t-en"><b>NOVA</b> GROUP</span>
+      <span class="logo-text t-fa"><b>نوا</b> گروپ</span>
     </a>
 
-    <nav class="nav-links" id="navLinks" aria-label="Main">
-      <a href="index.html"><span class="t-fa">خانه</span><span class="t-en">Home</span></a>
-      <a href="about.html"><span class="t-fa">درباره ما</span><span class="t-en">About</span></a>
-      <a href="projects.html" aria-current="page"><span class="t-fa">پروژه‌ها</span><span class="t-en">Projects</span></a>
-      <a href="contact.html"><span class="t-fa">تماس</span><span class="t-en">Contact</span></a>
+    <nav class="nav-links" id="navLinks" aria-label="منوی اصلی">
+      <a href="index.html"><span class="t-fa">خانه</span></a>
+      <a href="about.html"><span class="t-fa">درباره ما</span></a>
+      <a href="projects.html" aria-current="page"><span class="t-fa">پروژه‌ها</span></a>
+      <a href="contact.html"><span class="t-fa">تماس</span></a>
     </nav>
 
     <div class="nav-actions">
-      <button class="lang-btn" id="langBtn" type="button" aria-label="Change language">
-        <span class="t-fa">EN</span><span class="t-en">فا</span>
-      </button>
-      <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+      <a class="lang-btn" id="langBtn" href="en/projects.html" hreflang="en" lang="en" aria-label="English">EN</a>
+      <button class="burger" id="burger" type="button" aria-label="منو" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span>
       </button>
     </div>
@@ -88,233 +106,218 @@
 <section class="page-hero">
   <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="wrap">
-    <p class="eyebrow reveal"><span class="t-fa">پروژه‌ها</span><span class="t-en">Projects</span></p>
-    <h1 class="reveal"><span class="t-fa">روی چه چیزی کار می‌کنیم</span><span class="t-en">What we are working on</span></h1>
+    <p class="eyebrow reveal"><span class="t-fa">پروژه‌ها</span></p>
+    <h1 class="reveal"><span class="t-fa">روی چه چیزی کار می‌کنیم</span></h1>
     <p class="page-lead reveal">
       <span class="t-fa">هفت پروژه، هر کدام با پلتفرم داده‌ی مستقل و شبیه‌ساز خودش. این قانون ماست: هیچ تصمیمی پیش از آزمون در شبیه‌ساز به سرمایه نمی‌رسد.</span>
-      <span class="t-en">Seven projects, each with its own independent data platform and its own simulator. This is our rule: no decision reaches capital before it has been tested in a simulator.</span>
     </p>
   </div>
 </section>
 
 <section class="section">
   <div class="wrap">
+    <h2 class="sr-only"><span class="t-fa">فهرست پروژه‌ها</span></h2>
     <div class="proj-list">
 <a class="proj glow reveal" href="projects/cme-mm.html">
   <div class="proj-main">
     <div class="proj-top">
-      <span class="status"><span class="t-fa">در حال آزمون</span><span class="t-en">In testing</span></span>
+      <span class="status"><span class="t-fa">در حال آزمون</span></span>
       <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v18M5 7h7M3 11h9M7 15h5M12 9h6M12 13h9M12 17h5"/></svg></span>
     </div>
-    <h3><span class="t-fa">مارکت‌میکر CME</span><span class="t-en">CME Market Maker</span></h3>
+    <h3><span class="t-fa">مارکت‌میکر CME</span></h3>
     <p class="proj-sub">
       <span class="t-fa">الگوریتم بازارسازی مبتنی بر یادگیری عمیق در بازار آتی شیکاگو، در مسیر یک میز بازارسازی خودکار</span>
-      <span class="t-en">A deep-learning market-making algorithm for the Chicago futures market, on the way to an automated market-making desk</span>
     </p>
     <p class="proj-desc">
       <span class="t-fa">تاریخچه‌ی چندساله‌ی بورس شیکاگو در سطح تک‌تک سفارش‌ها گرد آمده است. بر پایه‌ی این داده به یک الگوریتم بازارسازی رسیده‌ایم که در بازسازی دقیقی از خودِ بورس آزموده می‌شود.</span>
-      <span class="t-en">Several years of the Chicago exchange, gathered order by order. From that data we have arrived at a market-making algorithm that is tested inside a close reconstruction of the exchange itself.</span>
     </p>
     <div class="proj-foot">
-      <span class="proj-report is-on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg><span class="t-fa">گزارش شبیه‌ساز قابل دانلود</span><span class="t-en">Simulator report to download</span></span>
+      <span class="proj-report is-on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg><span class="t-fa">گزارش شبیه‌ساز قابل دانلود</span></span>
       <span class="link-arrow">
-      <span class="t-fa">مطالعه‌ی پروژه</span><span class="t-en">Read the project</span>
+      <span class="t-fa">مطالعه‌ی پروژه</span>
       <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </span>
     </div>
   </div>
 
   <ul class="proj-facts">
-    <li><b><span class="t-fa">چندساله</span><span class="t-en">Multi-year</span></b><span><span class="t-fa">تاریخچه‌ی سفارش‌به‌سفارش</span><span class="t-en">order-by-order history</span></span></li>
-    <li><b><span class="t-fa">یادگیری عمیق</span><span class="t-en">Deep learning</span></b><span><span class="t-fa">روش</span><span class="t-en">method</span></span></li>
-    <li><b><bdi>Python · C# · Rust</bdi></b><span><span class="t-fa">فناوری</span><span class="t-en">technology</span></span></li>
+    <li><b><span class="t-fa">چندساله</span></b><span><span class="t-fa">تاریخچه‌ی سفارش‌به‌سفارش</span></span></li>
+    <li><b><span class="t-fa">یادگیری عمیق</span></b><span><span class="t-fa">روش</span></span></li>
+    <li><b><bdi>Python · C# · Rust</bdi></b><span><span class="t-fa">فناوری</span></span></li>
   </ul>
 </a>
 <a class="proj glow reveal" href="projects/fast-scalp.html">
   <div class="proj-main">
     <div class="proj-top">
-      <span class="status"><span class="t-fa">در حال آزمون</span><span class="t-en">In testing</span></span>
+      <span class="status"><span class="t-fa">در حال آزمون</span></span>
       <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 3 5 13h6l-1 8 8-10h-6l1-8z"/></svg></span>
     </div>
-    <h3><span class="t-fa">فست اسکلپ</span><span class="t-en">Fast Scalp</span></h3>
+    <h3><span class="t-fa">فست اسکلپ</span></h3>
     <p class="proj-sub">
       <span class="t-fa">الگوریتم معاملات کوتاه‌مدت مبتنی بر ML در بازار آتی شیکاگو، در مسیر یک میز معاملات خودکار</span>
-      <span class="t-en">An ML-based short-term trading algorithm for the Chicago futures market, on the way to an automated trading desk</span>
     </p>
     <p class="proj-desc">
       <span class="t-fa">تاریخچه‌ی چندساله‌ی بورس شیکاگو در سطح تک‌تک سفارش‌ها گرد آمده است. بر پایه‌ی این داده به یک الگوریتم معاملات کوتاه‌مدت رسیده‌ایم که در بازسازی دقیقی از خودِ بورس آزموده می‌شود.</span>
-      <span class="t-en">Several years of the Chicago exchange, gathered order by order. From that data we have arrived at a short-term trading algorithm that is tested inside a close reconstruction of the exchange itself.</span>
     </p>
     <div class="proj-foot">
-      <span class="proj-report is-on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg><span class="t-fa">گزارش شبیه‌ساز قابل دانلود</span><span class="t-en">Simulator report to download</span></span>
+      <span class="proj-report is-on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg><span class="t-fa">گزارش شبیه‌ساز قابل دانلود</span></span>
       <span class="link-arrow">
-      <span class="t-fa">مطالعه‌ی پروژه</span><span class="t-en">Read the project</span>
+      <span class="t-fa">مطالعه‌ی پروژه</span>
       <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </span>
     </div>
   </div>
 
   <ul class="proj-facts">
-    <li><b><span class="t-fa">چندساله</span><span class="t-en">Multi-year</span></b><span><span class="t-fa">تاریخچه‌ی سفارش‌به‌سفارش</span><span class="t-en">order-by-order history</span></span></li>
-    <li><b><span class="t-fa">یادگیری ماشین</span><span class="t-en">Machine learning</span></b><span><span class="t-fa">روش</span><span class="t-en">method</span></span></li>
-    <li><b><bdi>Python · C# · Rust</bdi></b><span><span class="t-fa">فناوری</span><span class="t-en">technology</span></span></li>
+    <li><b><span class="t-fa">چندساله</span></b><span><span class="t-fa">تاریخچه‌ی سفارش‌به‌سفارش</span></span></li>
+    <li><b><span class="t-fa">یادگیری ماشین</span></b><span><span class="t-fa">روش</span></span></li>
+    <li><b><bdi>Python · C# · Rust</bdi></b><span><span class="t-fa">فناوری</span></span></li>
   </ul>
 </a>
 <a class="proj glow reveal" href="projects/blocktrade.html">
   <div class="proj-main">
     <div class="proj-top">
-      <span class="status"><span class="t-fa">سرویس داده در حال کار</span><span class="t-en">Data service running</span></span>
+      <span class="status"><span class="t-fa">سرویس داده در حال کار</span></span>
       <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 3h11v11H3zM16 16h5v5h-5zM16 9h5M9 16v5"/></svg></span>
     </div>
-    <h3><span class="t-fa">بلاک‌ترید</span><span class="t-en">BlockTrade</span></h3>
+    <h3><span class="t-fa">بلاک‌ترید</span></h3>
     <p class="proj-sub">
       <span class="t-fa">تحلیل رفتاری معاملات بلوکی بازار آتی شیکاگو، در مسیر الگوریتم‌های معاملاتی و سرمایه‌گذاری بر پایه‌ی ردِّ پول بزرگ</span>
-      <span class="t-en">Behavioural analysis of block trades in the Chicago futures market, on the way to trading and investment algorithms built on the trail of big money</span>
     </p>
     <p class="proj-desc">
       <span class="t-fa">سرور ما معاملات بلوکی همه‌ی محصولات بورس شیکاگو را بی‌وقفه دریافت و پردازش می‌کند و به چارت معامله‌گر تحویل می‌دهد. تاریخچه‌ی آن روزبه‌روز انباشته می‌شود.</span>
-      <span class="t-en">Our server receives and processes the block trades of every Chicago exchange product without pause and delivers them to the trader's chart. Their history builds up day by day.</span>
     </p>
     <div class="proj-foot">
-      <span class="proj-report"><span class="t-fa">گزارش شبیه‌ساز منتشر نشده</span><span class="t-en">No simulator report published</span></span>
+      <span class="proj-report"><span class="t-fa">گزارش شبیه‌ساز منتشر نشده</span></span>
       <span class="link-arrow">
-      <span class="t-fa">مطالعه‌ی پروژه</span><span class="t-en">Read the project</span>
+      <span class="t-fa">مطالعه‌ی پروژه</span>
       <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </span>
     </div>
   </div>
 
   <ul class="proj-facts">
-    <li><b><span class="t-fa">۳۶ ثانیه</span><span class="t-en">36 seconds</span></b><span><span class="t-fa">میانه‌ی رسیدن هر بلوک پس از اعلام بورس</span><span class="t-en">median arrival of each block after the exchange's notice</span></span></li>
-    <li><b><span class="t-fa">۲۴ شکل</span><span class="t-en">24 shapes</span></b><span><span class="t-fa">دسته‌بندی بلوک‌ها</span><span class="t-en">block classification</span></span></li>
-    <li><b><bdi>Python · C#</bdi></b><span><span class="t-fa">فناوری</span><span class="t-en">technology</span></span></li>
+    <li><b><span class="t-fa">۳۶ ثانیه</span></b><span><span class="t-fa">میانه‌ی رسیدن هر بلوک پس از اعلام بورس</span></span></li>
+    <li><b><span class="t-fa">۲۴ شکل</span></b><span><span class="t-fa">دسته‌بندی بلوک‌ها</span></span></li>
+    <li><b><bdi>Python · C#</bdi></b><span><span class="t-fa">فناوری</span></span></li>
   </ul>
 </a>
 <a class="proj glow reveal" href="projects/tsetmc.html">
   <div class="proj-main">
     <div class="proj-top">
-      <span class="status"><span class="t-fa">در حال توسعه</span><span class="t-en">In development</span></span>
+      <span class="status"><span class="t-fa">در حال توسعه</span></span>
       <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4v4M7 16v4M5 8h4v8H5zM17 3v3M17 14v7M15 6h4v8h-4z"/></svg></span>
     </div>
     <h3>TSETMC</h3>
     <p class="proj-sub">
       <span class="t-fa">تحلیل جریان سفارش بورس تهران، در مسیر یک صندوق الگوریتمی مدیریت پول</span>
-      <span class="t-en">Order-flow analysis of the Tehran Stock Exchange, on the way to an algorithmic money-management fund</span>
     </p>
     <p class="proj-desc">
       <span class="t-fa">یازده سال از بازار سرمایه‌ی ایران، معامله‌به‌معامله و سفارش‌به‌سفارش، گردآوری و از نو ساخته شده است. روی همین تاریخچه مدل می‌سازیم و می‌آزماییم.</span>
-      <span class="t-en">Eleven years of Iran's capital market, gathered and rebuilt trade by trade and order by order. We build and test our models on that history.</span>
     </p>
     <div class="proj-foot">
-      <span class="proj-report"><span class="t-fa">گزارش شبیه‌ساز منتشر نشده</span><span class="t-en">No simulator report published</span></span>
+      <span class="proj-report"><span class="t-fa">گزارش شبیه‌ساز منتشر نشده</span></span>
       <span class="link-arrow">
-      <span class="t-fa">مطالعه‌ی پروژه</span><span class="t-en">Read the project</span>
+      <span class="t-fa">مطالعه‌ی پروژه</span>
       <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </span>
     </div>
   </div>
 
   <ul class="proj-facts">
-    <li><b><span class="t-fa">۱۱ سال</span><span class="t-en">11 years</span></b><span><span class="t-fa">تاریخچه‌ی بازار</span><span class="t-en">of market history</span></span></li>
-    <li><b><span class="t-fa">۱٬۱۴۸</span><span class="t-en">1,148</span></b><span><span class="t-fa">نماد</span><span class="t-en">symbols</span></span></li>
-    <li><b><bdi>Python · C#</bdi></b><span><span class="t-fa">فناوری</span><span class="t-en">technology</span></span></li>
+    <li><b><span class="t-fa">۱۱ سال</span></b><span><span class="t-fa">تاریخچه‌ی بازار</span></span></li>
+    <li><b><span class="t-fa">۱٬۱۴۸</span></b><span><span class="t-fa">نماد</span></span></li>
+    <li><b><bdi>Python · C#</bdi></b><span><span class="t-fa">فناوری</span></span></li>
   </ul>
 </a>
 <a class="proj glow reveal" href="projects/gold-etf.html">
   <div class="proj-main">
     <div class="proj-top">
-      <span class="status"><span class="t-fa">در حال آزمون</span><span class="t-en">In testing</span></span>
+      <span class="status"><span class="t-fa">در حال آزمون</span></span>
       <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 12a4 4 0 1 0 8 0a4 4 0 1 0-8 0M4 12a8 8 0 0 1 13.7-5.7L20 8M20 12a8 8 0 0 1-13.7 5.7L4 16M20 4v4h-4M4 20v-4h4"/></svg></span>
     </div>
-    <h3><span class="t-fa">آربیتراژ صندوق‌های طلا</span><span class="t-en">Gold ETF Arbitrage</span></h3>
+    <h3><span class="t-fa">آربیتراژ صندوق‌های طلا</span></h3>
     <p class="proj-sub">
       <span class="t-fa">الگوریتمی که سرمایه را میان صندوق‌های طلای بورس تهران جابه‌جا می‌کند، در مسیر یک سبد طلای خودکار که می‌خواهد بیش از نگه‌داشتن طلا به دست آورد</span>
-      <span class="t-en">An algorithm that moves capital between the gold funds of the Tehran Stock Exchange, on the way to an automated gold portfolio that aims to earn more than holding gold</span>
     </p>
     <p class="proj-desc">
       <span class="t-fa">صندوق‌های طلای بورس تهران، سفارش‌به‌سفارش ثبت شده و با یک معیار سنجیده می‌شوند. جابه‌جایی میان آن‌ها را در بازسازی دقیقی از خودِ بورس می‌آزماییم، در برابر نگه‌داشتن ساده‌ی طلا.</span>
-      <span class="t-en">The gold funds of the Tehran Stock Exchange, recorded order by order and measured on one yardstick. We test moving between them inside a close reconstruction of the exchange, against simply holding gold.</span>
     </p>
     <div class="proj-foot">
-      <span class="proj-report is-on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg><span class="t-fa">گزارش شبیه‌ساز قابل دانلود</span><span class="t-en">Simulator report to download</span></span>
+      <span class="proj-report is-on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg><span class="t-fa">گزارش شبیه‌ساز قابل دانلود</span></span>
       <span class="link-arrow">
-        <span class="t-fa">مطالعه‌ی پروژه</span><span class="t-en">Read the project</span>
+        <span class="t-fa">مطالعه‌ی پروژه</span>
         <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </span>
     </div>
   </div>
 
   <ul class="proj-facts">
-    <li><b><span class="t-fa">۲۱ صندوق طلا</span><span class="t-en">21 gold funds</span></b><span><span class="t-fa">سنجیده با یک معیار</span><span class="t-en">measured on one yardstick</span></span></li>
-    <li><b><span class="t-fa">۳۹۵ روز معاملاتی</span><span class="t-en">395 trading days</span></b><span><span class="t-fa">بازپخش‌شده در شبیه‌ساز</span><span class="t-en">replayed in the simulator</span></span></li>
-    <li><b><bdi>Python</bdi></b><span><span class="t-fa">فناوری</span><span class="t-en">technology</span></span></li>
+    <li><b><span class="t-fa">۲۱ صندوق طلا</span></b><span><span class="t-fa">سنجیده با یک معیار</span></span></li>
+    <li><b><span class="t-fa">۳۹۵ روز معاملاتی</span></b><span><span class="t-fa">بازپخش‌شده در شبیه‌ساز</span></span></li>
+    <li><b><bdi>Python</bdi></b><span><span class="t-fa">فناوری</span></span></li>
   </ul>
 </a>
 <a class="proj glow reveal" href="projects/defi-lp.html">
   <div class="proj-main">
     <div class="proj-top">
-      <span class="status"><span class="t-fa">در حال مطالعه</span><span class="t-en">Under study</span></span>
+      <span class="status"><span class="t-fa">در حال مطالعه</span></span>
       <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 12a5.5 5.5 0 1 0 11 0a5.5 5.5 0 1 0-11 0M9.5 12a5.5 5.5 0 1 0 11 0a5.5 5.5 0 1 0-11 0"/></svg></span>
     </div>
-    <h3><span class="t-fa">دیفای ال‌پی</span><span class="t-en">DeFi LP</span></h3>
+    <h3><span class="t-fa">دیفای ال‌پی</span></h3>
     <p class="proj-sub">
       <span class="t-fa">الگوریتم مدیریت پول در استخرهای نقدینگی صرافی‌های غیرمتمرکز، در مسیر یک صندوق خودکار</span>
-      <span class="t-en">A money-management algorithm for the liquidity pools of decentralised exchanges, on the way to an automated fund</span>
     </p>
     <p class="proj-desc">
       <span class="t-fa">تاریخچه‌ی کامل ۱۳۶ استخر روی چهار شبکه‌ی بلاک‌چین، از نخستین روز هر استخر و در سطح تک‌تک رویدادها، گرد آمده است. نشستن سرمایه در استخر و جابه‌جایی آن را در بازسازی دقیقی از خودِ بازار شبیه‌سازی می‌کنیم.</span>
-      <span class="t-en">The full history of 136 pools on four blockchain networks, gathered from each pool's first day and event by event. We simulate capital sitting in a pool, and moving between pools, inside a close reconstruction of the market itself.</span>
     </p>
     <div class="proj-foot">
-      <span class="proj-report"><span class="t-fa">گزارش شبیه‌ساز منتشر نشده</span><span class="t-en">No simulator report published</span></span>
+      <span class="proj-report"><span class="t-fa">گزارش شبیه‌ساز منتشر نشده</span></span>
       <span class="link-arrow">
-      <span class="t-fa">مطالعه‌ی پروژه</span><span class="t-en">Read the project</span>
+      <span class="t-fa">مطالعه‌ی پروژه</span>
       <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </span>
     </div>
   </div>
 
   <ul class="proj-facts">
-    <li><b><span class="t-fa">۱۳۶ استخر</span><span class="t-en">136 pools</span></b><span><span class="t-fa">تاریخچه‌ی کامل، رویداد به رویداد</span><span class="t-en">full history, event by event</span></span></li>
-    <li><b><span class="t-fa">۴ شبکه</span><span class="t-en">4 networks</span></b><span><span class="t-fa">بلاک‌چین</span><span class="t-en">blockchain</span></span></li>
-    <li><b><bdi>Python · C#</bdi></b><span><span class="t-fa">فناوری</span><span class="t-en">technology</span></span></li>
+    <li><b><span class="t-fa">۱۳۶ استخر</span></b><span><span class="t-fa">تاریخچه‌ی کامل، رویداد به رویداد</span></span></li>
+    <li><b><span class="t-fa">۴ شبکه</span></b><span><span class="t-fa">بلاک‌چین</span></span></li>
+    <li><b><bdi>Python · C#</bdi></b><span><span class="t-fa">فناوری</span></span></li>
   </ul>
 </a>
 <a class="proj glow reveal" href="projects/crypto-mm.html">
   <div class="proj-main">
     <div class="proj-top">
-      <span class="status"><span class="t-fa">در حال توسعه</span><span class="t-en">In development</span></span>
+      <span class="status"><span class="t-fa">در حال توسعه</span></span>
       <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg></span>
     </div>
-    <h3><span class="t-fa">مارکت‌میکر کریپتو</span><span class="t-en">Crypto Market Maker</span></h3>
+    <h3><span class="t-fa">مارکت‌میکر کریپتو</span></h3>
     <p class="proj-sub">
       <span class="t-fa">زیرساخت داده و الگوریتم بازارسازی در بازار رمزارز، در مسیر یک میز بازارسازی خودکار</span>
-      <span class="t-en">Data infrastructure and a market-making algorithm for the crypto market, on the way to an automated market-making desk</span>
     </p>
     <p class="proj-desc">
       <span class="t-fa">بازار ۲۲ رمزارز پرمعامله در ۱۶ صرافی جهانی، در سطح تک‌تک معامله‌ها و سفارش‌ها، گرد می‌آید. پیش از نوشتن الگوریتم، کل این بازار را ثبت کرده‌ایم و ثبت می‌کنیم.</span>
-      <span class="t-en">The market of 22 heavily traded cryptocurrencies on 16 global exchanges, gathered trade by trade and order by order. Before writing the algorithm, we have recorded this whole market, and keep recording it.</span>
     </p>
     <div class="proj-foot">
-      <span class="proj-report"><span class="t-fa">گزارش شبیه‌ساز منتشر نشده</span><span class="t-en">No simulator report published</span></span>
+      <span class="proj-report"><span class="t-fa">گزارش شبیه‌ساز منتشر نشده</span></span>
       <span class="link-arrow">
-      <span class="t-fa">مطالعه‌ی پروژه</span><span class="t-en">Read the project</span>
+      <span class="t-fa">مطالعه‌ی پروژه</span>
       <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </span>
     </div>
   </div>
 
   <ul class="proj-facts">
-    <li><b><span class="t-fa">۲۲ رمزارز</span><span class="t-en">22 cryptocurrencies</span></b><span><span class="t-fa">در ۱۶ صرافی جهانی</span><span class="t-en">on 16 global exchanges</span></span></li>
-    <li><b><span class="t-fa">۶۰ ترابایت</span><span class="t-en">60 terabytes</span></b><span><span class="t-fa">دامنه‌ی داده‌ی خام</span><span class="t-en">scope of raw data</span></span></li>
-    <li><b><bdi>Rust · C#</bdi></b><span><span class="t-fa">فناوری</span><span class="t-en">technology</span></span></li>
+    <li><b><span class="t-fa">۲۲ رمزارز</span></b><span><span class="t-fa">در ۱۶ صرافی جهانی</span></span></li>
+    <li><b><span class="t-fa">۶۰ ترابایت</span></b><span><span class="t-fa">دامنه‌ی داده‌ی خام</span></span></li>
+    <li><b><bdi>Rust · C#</bdi></b><span><span class="t-fa">فناوری</span></span></li>
   </ul>
 </a>
     </div>
 
     <p class="list-note reveal">
       <span class="t-fa">شرح پروژه‌های دیگر به‌مرور به این صفحه اضافه می‌شود.</span>
-      <span class="t-en">Write-ups for our other projects will be added to this page over time.</span>
     </p>
   </div>
 </section>
@@ -325,26 +328,25 @@
   <div class="wrap">
     <div class="footer-top footer-panel">
       <div class="footer-brand">
-        <a class="logo" href="index.html" aria-label="Nova Group">
+        <a class="logo" href="index.html" aria-label="نوا گروپ">
           <img class="logo-mark" src="assets/img/nova-mark-512.png" alt="" width="512" height="512" loading="lazy">
-          <span class="logo-text t-fa"><b>نوا</b> گروپ</span><span class="logo-text t-en"><b>NOVA</b> GROUP</span>
+          <span class="logo-text t-fa"><b>نوا</b> گروپ</span>
         </a>
         <p>
           <span class="t-fa">پژوهش و ساخت الگوریتم‌های معاملاتی بر پایه‌ی جریان سفارش بازار — از ۱۳۹۹.</span>
-          <span class="t-en">Researching and building trading algorithms from market order flow — since 2020.</span>
         </p>
       </div>
 
-      <nav class="footer-col" aria-label="Footer">
-        <h2><span class="t-fa">سایت</span><span class="t-en">Site</span></h2>
-        <a href="index.html"><span class="t-fa">خانه</span><span class="t-en">Home</span></a>
-        <a href="about.html"><span class="t-fa">درباره ما</span><span class="t-en">About</span></a>
-        <a href="projects.html"><span class="t-fa">پروژه‌ها</span><span class="t-en">Projects</span></a>
-        <a href="contact.html"><span class="t-fa">تماس</span><span class="t-en">Contact</span></a>
+      <nav class="footer-col" aria-label="پیوندهای پانویس">
+        <h2><span class="t-fa">سایت</span></h2>
+        <a href="index.html"><span class="t-fa">خانه</span></a>
+        <a href="about.html"><span class="t-fa">درباره ما</span></a>
+        <a href="projects.html"><span class="t-fa">پروژه‌ها</span></a>
+        <a href="contact.html"><span class="t-fa">تماس</span></a>
       </nav>
 
       <div class="footer-col footer-contact">
-        <h2><span class="t-fa">ارتباط</span><span class="t-en">Connect</span></h2>
+        <h2><span class="t-fa">ارتباط</span></h2>
         <a class="footer-mail" href="mailto:info@novacapital.fund">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
           <bdi>info@novacapital.fund</bdi>
@@ -354,13 +356,12 @@
 
     <p class="footer-bottom">
       <span class="t-fa">© ۱۴۰۵ نوا گروپ. همه‌ی حقوق مادی و معنوی این وب‌سایت و محتوای آن متعلق به نوا گروپ است. هرگونه سوءاستفاده پیگرد قانونی دارد.</span>
-      <span class="t-en">© 2026 Nova Group. All rights to this website and its content belong to Nova Group. Any misuse is subject to legal action.</span>
     </p>
   </div>
 </footer>
 
-<button class="to-top" id="toTop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
+<button class="to-top" id="toTop" type="button" aria-label="بازگشت به بالا"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
 
-<script src="assets/js/main.js?v=47"></script>
+<script src="assets/js/main.js?v=48"></script>
 </body>
 </html>

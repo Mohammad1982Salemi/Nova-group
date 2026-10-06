@@ -1,49 +1,69 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl" data-lang="fa">
+<html lang="fa" dir="rtl" data-lang="fa" data-alt="en/contact.html">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>تماس — نوا گروپ | Contact — Nova Group</title>
-<meta name="description" content="ایمیل نوا گروپ و اعضای آن. Email addresses of Nova Group and its team.">
+<title>تماس | نوا گروپ</title>
+<meta name="description" content="ایمیل نوا گروپ و اعضای آن.">
 <link rel="canonical" href="https://novacapital.fund/contact.html">
-<meta property="og:title" content="تماس — نوا گروپ | Contact — Nova Group">
-<meta property="og:description" content="گفت‌وگو کنیم. Let's talk.">
+<link rel="alternate" hreflang="fa" href="https://novacapital.fund/contact.html">
+<link rel="alternate" hreflang="en" href="https://novacapital.fund/en/contact.html">
+<link rel="alternate" hreflang="x-default" href="https://novacapital.fund/en/contact.html">
+<meta property="og:title" content="تماس | نوا گروپ">
+<meta property="og:description" content="گفت‌وگو کنیم.">
 <meta property="og:url" content="https://novacapital.fund/contact.html">
+<meta property="og:locale" content="fa_IR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:image" content="https://novacapital.fund/assets/img/og/nova-fa.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://novacapital.fund/assets/img/og/nova-fa.jpg">
 <meta name="author" content="Nova Group">
 <meta name="theme-color" content="#05080e">
 <meta name="color-scheme" content="dark light">
 <meta name="supported-color-schemes" content="dark light">
 <meta name="darkreader-lock">
-<meta property="og:site_name" content="Nova Group">
+<meta property="og:site_name" content="نوا گروپ">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://novacapital.fund/assets/img/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://novacapital.fund/assets/img/og.png">
 
 <link rel="icon" type="image/svg+xml" href="assets/img/nova-mark.svg">
 <link rel="icon" type="image/png" sizes="64x64" href="assets/img/favicon-64.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
 <link rel="apple-touch-icon" href="assets/img/favicon-192.png">
 
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vazirmatn@33.0.3/Vazirmatn-font-face.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="assets/css/style.css?v=47">
+<!-- The fonts are served from this site; the one this language needs first is fetched early. -->
+<link rel="preload" href="assets/fonts/vazirmatn-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css?v=48">
 
 <!-- Samsung Internet (also used inside Telegram and WhatsApp) recolours pages in its dark mode; flag it early. -->
 <script>if (/SamsungBrowser/i.test(navigator.userAgent)) document.documentElement.classList.add('sb');</script>
 
-<!-- Runs before first paint so the page never flashes in the wrong language or direction. -->
+<!-- Runs before first paint. The reader's language is an earlier choice, a ?lang= in the address, or else
+     Persian for a Persian browser or a clock set to Tehran and English for everyone else. -->
 <script>
 (function () {
-  var d = document.documentElement, l = null;
-  try { l = localStorage.getItem('nova-lang'); } catch (e) {}
-  if (l !== 'fa' && l !== 'en') l = (navigator.language || '').toLowerCase().indexOf('fa') === 0 ? 'fa' : 'en';
-  d.setAttribute('data-lang', l); d.lang = l; d.dir = l === 'fa' ? 'rtl' : 'ltr';
+  var d = document.documentElement, want = null, asked = /[?&]lang=(fa|en)\b/.exec(location.search), i;
+  try { if (asked) localStorage.setItem('nova-lang', asked[1]); want = localStorage.getItem('nova-lang'); } catch (e) {}
+  if (asked) want = asked[1];
+  if (want !== 'fa' && want !== 'en') {
+    var said = navigator.languages || [navigator.language || ''], fa = false;
+    for (i = 0; i < said.length; i++) if (/^fa\b/i.test(said[i])) fa = true;
+    try { if (Intl.DateTimeFormat().resolvedOptions().timeZone === 'Asia/Tehran') fa = true; } catch (e) {}
+    want = fa ? 'fa' : 'en';
+  }
+  if (d.hasAttribute('data-both')) {
+    // the one page that carries both languages: under /en/ it reads in English
+    var l = location.pathname.indexOf('/en/') === 0 ? 'en' : want;
+    d.setAttribute('data-lang', l); d.lang = l; d.dir = l === 'fa' ? 'rtl' : 'ltr';
+  } else if (want === 'en' && d.getAttribute('data-alt') &&
+      !/bot|crawl|spider|slurp|preview|google|bing|yandex|baidu|duckduck|facebook|whatsapp|telegram|lighthouse/i.test(navigator.userAgent)) {
+    // a Persian address is the default one: a reader of English is sent on to the same page under /en/
+    d.style.visibility = 'hidden';
+    setTimeout(function () { d.style.visibility = ''; }, 2500);
+    location.replace(d.getAttribute('data-alt') + location.hash);
+    return;
+  }
   d.className += ' js';
   // a short opening, once per visit and never for people who asked for less motion
   try {
@@ -56,27 +76,25 @@
 </head>
 <body>
 
-<a href="#main" class="skip-link"><span class="t-fa">پرش به محتوا</span><span class="t-en">Skip to content</span></a>
+<a href="#main" class="skip-link"><span class="t-fa">پرش به محتوا</span></a>
 
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
-    <a class="logo" href="index.html" aria-label="Nova Group">
+    <a class="logo" href="index.html" aria-label="نوا گروپ">
       <img class="logo-mark" src="assets/img/nova-mark-512.png" alt="" width="512" height="512">
-      <span class="logo-text t-fa"><b>نوا</b> گروپ</span><span class="logo-text t-en"><b>NOVA</b> GROUP</span>
+      <span class="logo-text t-fa"><b>نوا</b> گروپ</span>
     </a>
 
-    <nav class="nav-links" id="navLinks" aria-label="Main">
-      <a href="index.html"><span class="t-fa">خانه</span><span class="t-en">Home</span></a>
-      <a href="about.html"><span class="t-fa">درباره ما</span><span class="t-en">About</span></a>
-      <a href="projects.html"><span class="t-fa">پروژه‌ها</span><span class="t-en">Projects</span></a>
-      <a href="contact.html" aria-current="page"><span class="t-fa">تماس</span><span class="t-en">Contact</span></a>
+    <nav class="nav-links" id="navLinks" aria-label="منوی اصلی">
+      <a href="index.html"><span class="t-fa">خانه</span></a>
+      <a href="about.html"><span class="t-fa">درباره ما</span></a>
+      <a href="projects.html"><span class="t-fa">پروژه‌ها</span></a>
+      <a href="contact.html" aria-current="page"><span class="t-fa">تماس</span></a>
     </nav>
 
     <div class="nav-actions">
-      <button class="lang-btn" id="langBtn" type="button" aria-label="Change language">
-        <span class="t-fa">EN</span><span class="t-en">فا</span>
-      </button>
-      <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+      <a class="lang-btn" id="langBtn" href="en/contact.html" hreflang="en" lang="en" aria-label="English">EN</a>
+      <button class="burger" id="burger" type="button" aria-label="منو" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span>
       </button>
     </div>
@@ -87,11 +105,10 @@
 
 <section class="page-hero">
   <div class="wrap">
-    <p class="eyebrow reveal"><span class="t-fa">تماس</span><span class="t-en">Contact</span></p>
-    <h1 class="reveal"><span class="t-fa">گفت‌وگو کنیم</span><span class="t-en">Let's talk</span></h1>
+    <p class="eyebrow reveal"><span class="t-fa">تماس</span></p>
+    <h1 class="reveal"><span class="t-fa">گفت‌وگو کنیم</span></h1>
     <p class="page-lead reveal">
       <span class="t-fa">اگر روی الگوریتم‌های معاملاتی کار می‌کنید، ایده‌ای برای همکاری دارید، یا سؤالی درباره‌ی روش کار ما دارید، به ما ایمیل بزنید.</span>
-      <span class="t-en">If you work on trading algorithms, have an idea to collaborate on, or a question about how we work, write to us.</span>
     </p>
   </div>
 </section>
@@ -100,34 +117,34 @@
   <div class="wrap">
     <div class="contact-mails">
       <a class="contact-card contact-main reveal" href="mailto:info@novacapital.fund">
-        <span class="contact-label"><span class="t-fa">ایمیل نوا گروپ</span><span class="t-en">Nova Group email</span></span>
+        <span class="contact-label"><span class="t-fa">ایمیل نوا گروپ</span></span>
         <strong>info@novacapital.fund</strong>
         <span class="link-arrow">
-          <span class="t-fa">نوشتن ایمیل</span><span class="t-en">Write an email</span>
+          <span class="t-fa">نوشتن ایمیل</span>
           <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </span>
       </a>
       <a class="contact-card reveal" href="mailto:rouhi@novacapital.fund">
-        <span class="contact-label"><span class="t-fa">مهندس علیرضا روحی</span><span class="t-en">Alireza Rouhi</span></span>
+        <span class="contact-label"><span class="t-fa">مهندس علیرضا روحی</span></span>
         <strong>rouhi@novacapital.fund</strong>
         <span class="link-arrow">
-          <span class="t-fa">نوشتن ایمیل</span><span class="t-en">Write an email</span>
+          <span class="t-fa">نوشتن ایمیل</span>
           <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </span>
       </a>
       <a class="contact-card reveal" href="mailto:shalchian@novacapital.fund">
-        <span class="contact-label"><span class="t-fa">مهندس محمد مسیح شالچیان</span><span class="t-en">Mohammad Masih Shalchian</span></span>
+        <span class="contact-label"><span class="t-fa">مهندس محمد مسیح شالچیان</span></span>
         <strong>shalchian@novacapital.fund</strong>
         <span class="link-arrow">
-          <span class="t-fa">نوشتن ایمیل</span><span class="t-en">Write an email</span>
+          <span class="t-fa">نوشتن ایمیل</span>
           <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </span>
       </a>
       <a class="contact-card reveal" href="mailto:salemi@novacapital.fund">
-        <span class="contact-label"><span class="t-fa">مهندس محمد سالمی</span><span class="t-en">Mohammad Salemi</span></span>
+        <span class="contact-label"><span class="t-fa">مهندس محمد سالمی</span></span>
         <strong>salemi@novacapital.fund</strong>
         <span class="link-arrow">
-          <span class="t-fa">نوشتن ایمیل</span><span class="t-en">Write an email</span>
+          <span class="t-fa">نوشتن ایمیل</span>
           <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </span>
       </a>
@@ -141,26 +158,25 @@
   <div class="wrap">
     <div class="footer-top footer-panel">
       <div class="footer-brand">
-        <a class="logo" href="index.html" aria-label="Nova Group">
+        <a class="logo" href="index.html" aria-label="نوا گروپ">
           <img class="logo-mark" src="assets/img/nova-mark-512.png" alt="" width="512" height="512" loading="lazy">
-          <span class="logo-text t-fa"><b>نوا</b> گروپ</span><span class="logo-text t-en"><b>NOVA</b> GROUP</span>
+          <span class="logo-text t-fa"><b>نوا</b> گروپ</span>
         </a>
         <p>
           <span class="t-fa">پژوهش و ساخت الگوریتم‌های معاملاتی بر پایه‌ی جریان سفارش بازار — از ۱۳۹۹.</span>
-          <span class="t-en">Researching and building trading algorithms from market order flow — since 2020.</span>
         </p>
       </div>
 
-      <nav class="footer-col" aria-label="Footer">
-        <h2><span class="t-fa">سایت</span><span class="t-en">Site</span></h2>
-        <a href="index.html"><span class="t-fa">خانه</span><span class="t-en">Home</span></a>
-        <a href="about.html"><span class="t-fa">درباره ما</span><span class="t-en">About</span></a>
-        <a href="projects.html"><span class="t-fa">پروژه‌ها</span><span class="t-en">Projects</span></a>
-        <a href="contact.html"><span class="t-fa">تماس</span><span class="t-en">Contact</span></a>
+      <nav class="footer-col" aria-label="پیوندهای پانویس">
+        <h2><span class="t-fa">سایت</span></h2>
+        <a href="index.html"><span class="t-fa">خانه</span></a>
+        <a href="about.html"><span class="t-fa">درباره ما</span></a>
+        <a href="projects.html"><span class="t-fa">پروژه‌ها</span></a>
+        <a href="contact.html"><span class="t-fa">تماس</span></a>
       </nav>
 
       <div class="footer-col footer-contact">
-        <h2><span class="t-fa">ارتباط</span><span class="t-en">Connect</span></h2>
+        <h2><span class="t-fa">ارتباط</span></h2>
         <a class="footer-mail" href="mailto:info@novacapital.fund">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
           <bdi>info@novacapital.fund</bdi>
@@ -170,13 +186,12 @@
 
     <p class="footer-bottom">
       <span class="t-fa">© ۱۴۰۵ نوا گروپ. همه‌ی حقوق مادی و معنوی این وب‌سایت و محتوای آن متعلق به نوا گروپ است. هرگونه سوءاستفاده پیگرد قانونی دارد.</span>
-      <span class="t-en">© 2026 Nova Group. All rights to this website and its content belong to Nova Group. Any misuse is subject to legal action.</span>
     </p>
   </div>
 </footer>
 
-<button class="to-top" id="toTop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
+<button class="to-top" id="toTop" type="button" aria-label="بازگشت به بالا"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
 
-<script src="assets/js/main.js?v=47"></script>
+<script src="assets/js/main.js?v=48"></script>
 </body>
 </html>

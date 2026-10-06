@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TSETMC — order flow of the Tehran Stock Exchange | Nova Group</title>
+<meta name="description" content="The TSETMC project: eleven years of Iran's capital market, trade by trade and order by order, for 1,148 symbols.">
+<link rel="canonical" href="https://novacapital.fund/en/projects/tsetmc.html">
+<link rel="alternate" hreflang="fa" href="https://novacapital.fund/projects/tsetmc.html">
+<link rel="alternate" hreflang="en" href="https://novacapital.fund/en/projects/tsetmc.html">
+<link rel="alternate" hreflang="x-default" href="https://novacapital.fund/en/projects/tsetmc.html">
+<meta property="og:title" content="TSETMC — order flow of the Tehran Stock Exchange | Nova Group">
+<meta property="og:description" content="Order-flow analysis of the Tehran Stock Exchange, on the way to an algorithmic money-management fund.">
+<meta property="og:url" content="https://novacapital.fund/en/projects/tsetmc.html">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="fa_IR">
+<meta property="og:image" content="https://novacapital.fund/assets/img/og/tsetmc-en.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://novacapital.fund/assets/img/og/tsetmc-en.jpg">
+<meta name="author" content="Nova Group">
+<meta name="theme-color" content="#05080e">
+<meta name="color-scheme" content="dark light">
+<meta name="supported-color-schemes" content="dark light">
+<meta name="darkreader-lock">
+<meta property="og:site_name" content="Nova Group">
+<meta property="og:type" content="website">
+
+<link rel="icon" type="image/svg+xml" href="../../assets/img/nova-mark.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="../../assets/img/favicon-64.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../../assets/img/favicon-192.png">
+<link rel="apple-touch-icon" href="../../assets/img/favicon-192.png">
+
+<!-- The fonts are served from this site; the one this language needs first is fetched early. -->
+<link rel="preload" href="../../assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/css/style.css?v=48">
+
+<!-- Samsung Internet (also used inside Telegram and WhatsApp) recolours pages in its dark mode; flag it early. -->
+<script>if (/SamsungBrowser/i.test(navigator.userAgent)) document.documentElement.classList.add('sb');</script>
+
+<!-- Runs before first paint. The reader's language is an earlier choice, a ?lang= in the address, or else
+     Persian for a Persian browser or a clock set to Tehran and English for everyone else. -->
+<script>
+(function () {
+  var d = document.documentElement, want = null, asked = /[?&]lang=(fa|en)\b/.exec(location.search), i;
+  try { if (asked) localStorage.setItem('nova-lang', asked[1]); want = localStorage.getItem('nova-lang'); } catch (e) {}
+  if (asked) want = asked[1];
+  if (want !== 'fa' && want !== 'en') {
+    var said = navigator.languages || [navigator.language || ''], fa = false;
+    for (i = 0; i < said.length; i++) if (/^fa\b/i.test(said[i])) fa = true;
+    try { if (Intl.DateTimeFormat().resolvedOptions().timeZone === 'Asia/Tehran') fa = true; } catch (e) {}
+    want = fa ? 'fa' : 'en';
+  }
+  if (d.hasAttribute('data-both')) {
+    // the one page that carries both languages: under /en/ it reads in English
+    var l = location.pathname.indexOf('/en/') === 0 ? 'en' : want;
+    d.setAttribute('data-lang', l); d.lang = l; d.dir = l === 'fa' ? 'rtl' : 'ltr';
+  } else if (want === 'en' && d.getAttribute('data-alt') &&
+      !/bot|crawl|spider|slurp|preview|google|bing|yandex|baidu|duckduck|facebook|whatsapp|telegram|lighthouse/i.test(navigator.userAgent)) {
+    // a Persian address is the default one: a reader of English is sent on to the same page under /en/
+    d.style.visibility = 'hidden';
+    setTimeout(function () { d.style.visibility = ''; }, 2500);
+    location.replace(d.getAttribute('data-alt') + location.hash);
+    return;
+  }
+  d.className += ' js';
+  // a short opening, once per visit and never for people who asked for less motion
+  try {
+    if (!sessionStorage.getItem('nova-seen') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      sessionStorage.setItem('nova-seen', '1'); d.className += ' intro';
+    }
+  } catch (e) {}
+})();
+</script>
+</head>
+<body>
+
+<a href="#main" class="skip-link"><span class="t-en">Skip to content</span></a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="../index.html" aria-label="Nova Group">
+      <img class="logo-mark" src="../../assets/img/nova-mark-512.png" alt="" width="512" height="512">
+      <span class="logo-text t-en"><b>NOVA</b> GROUP</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Main">
+      <a href="../index.html"><span class="t-en">Home</span></a>
+      <a href="../about.html"><span class="t-en">About</span></a>
+      <a href="../projects.html" aria-current="page"><span class="t-en">Projects</span></a>
+      <a href="../contact.html"><span class="t-en">Contact</span></a>
+    </nav>
+
+    <div class="nav-actions">
+      <a class="lang-btn" id="langBtn" href="../../projects/tsetmc.html" hreflang="fa" lang="fa" aria-label="فارسی">فا</a>
+      <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="page-hero">
+  <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="wrap">
+    <nav class="crumbs reveal" aria-label="Breadcrumb">
+      <a href="../projects.html"><span class="t-en">Projects</span></a>
+      <span aria-hidden="true">/</span>
+      <span>TSETMC</span>
+    </nav>
+
+    <h1 class="reveal"><span>TSETMC</span></h1>
+    <p class="page-lead reveal">
+      <span class="t-en">Order-flow analysis of the Tehran Stock Exchange, on the way to an algorithmic money-management fund.</span>
+    </p>
+
+    <div class="cs-meta reveal">
+      <span class="status"><span class="t-en">In development</span></span>
+      <ul class="tags">
+        <li>Python</li><li>C#</li>
+        <li><span class="t-en">Order flow</span></li>
+        <li><span class="t-en">Execution simulator</span></li>
+        <li><span class="t-en">Options</span></li>
+      </ul>
+    </div>
+
+    <ul class="facts facts-glass">
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-en">Data</span></span>
+        <b><span class="t-en">11 years of history</span></b>
+        <p>
+          <span class="t-en">Iran's capital market, gathered and rebuilt trade by trade and order by order.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-en">Coverage</span></span>
+        <b><span class="t-en">1,148 symbols</span></b>
+        <p>
+          <span class="t-en">The whole market, from stocks and funds to options, measured against one framework.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-en">Speed</span></span>
+        <b><span class="t-en">Under 90 seconds</span></b>
+        <p>
+          <span class="t-en">To prepare the full history of a heavily traded symbol, processed in parallel.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-en">Technology</span></span>
+        <b><span class="t-en">Two languages, two jobs</span></b>
+        <div class="fact-list">
+          <div><i>Python</i><span><span class="t-en">Processing core</span></span></div>
+          <div><i>C#</i><span><span class="t-en">Computation and simulator</span></span></div>
+        </div>
+      </li>
+    </ul>
+
+    <nav class="toc reveal" aria-label="On this page">
+      <span class="toc-title"><span class="t-en">On this page</span></span>
+      <a href="#intro"><span class="t-en">Introduction</span></a>
+      <a href="#platform"><span class="t-en">Platform</span></a>
+      <a href="#approach"><span class="t-en">Approach</span></a>
+      <a href="#difference"><span class="t-en">What stands out</span></a>
+      <a href="#roadmap"><span class="t-en">The road ahead</span></a>
+      <a href="#technology"><span class="t-en">Technology</span></a>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+
+    <article class="cs-body">
+      <section class="cs-section" id="intro">
+        <h2><span><span class="t-en">Introduction</span></span></h2>
+      <p class="detail-lead">
+        <span class="t-en">Price is the last piece of news to reach the market. Before it, someone decided, placed an order, pulled an order, moved money. On the Tehran Stock Exchange this happens millions of times a day, and almost everyone reads only the last line.</span>
+      </p>
+      <p>
+        <span class="t-en">We decided to read the whole story. The TSETMC project has gathered and rebuilt eleven years of Iran's capital market — trade by trade, order by order — for 1,148 symbols. We build and test our models on that history. The destination is an algorithmic money-management fund: capital run not on hunches or hearsay, but by reading the live flow of orders.</span>
+      </p>
+      <p>
+        <span class="t-en">One strategy grew out of this infrastructure into a project of its own: <a href="../projects/gold-etf.html">Gold ETF Arbitrage</a>.</span>
+      </p>
+      </section>
+
+      <section class="cs-section" id="platform">
+        <h2><span><span class="t-en">Inside the platform</span></span></h2>
+        <p>
+          <span class="t-en">These are real screens from the project's analysis platform, not mock-ups. Each view shows the same raw market data from a different angle. Click the image to enlarge it.</span>
+        </p>
+
+        <div class="shots reveal" data-shots>
+          <div class="shots-tabs" role="tablist" aria-label="Platform views">
+            <button type="button" role="tab" aria-selected="true" data-name="TSETMC · Book Δ">
+              <b><span class="t-en">Order-book delta</span></b>
+              <span>Book Δ · bid − ask</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="TSETMC · Big trades">
+              <b><span class="t-en">Big trades</span></b>
+              <span>Big trade buy · sell · Cum Δ</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="TSETMC · Options">
+              <b><span class="t-en">Options</span></b>
+              <span>104 contracts · calls</span>
+            </button>
+          </div>
+
+          <figure class="shot-frame">
+            <div class="shot-bar">
+              <i></i><i></i><i></i>
+              <span class="shot-name">TSETMC · Book Δ</span>
+              <button type="button" class="shot-zoom" aria-label="Enlarge">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg>
+              </button>
+            </div>
+            <div class="shot-stage">
+              <img class="is-on" src="../../assets/img/projects/tsetmc/book-delta.webp" data-full="../../assets/img/projects/tsetmc/book-delta-full.webp" width="1400" height="742" alt="Weekly price chart with three order-book delta panels">
+              <img src="../../assets/img/projects/tsetmc/big-trades.webp" data-full="../../assets/img/projects/tsetmc/big-trades-full.webp" width="1400" height="742" loading="lazy" alt="Weekly price chart with panels of large buys and large sells">
+              <img src="../../assets/img/projects/tsetmc/options.webp" data-full="../../assets/img/projects/tsetmc/options-full.webp" width="1400" height="742" loading="lazy" alt="104 option contracts on one chart">
+            </div>
+            <figcaption>
+              <p class="shot-cap is-on">
+                <span class="t-en">Weekly price, and beneath it the gap between bid-side and ask-side volume in the book in three forms: raw, time-weighted, and cumulative.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-en">The volume of large buys and large sells each week, and the cumulative gap between the two, under the same price chart.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-en">104 option contracts on one chart, with the volume, trade count and delta candles of the calls.</span>
+              </p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="cs-section" id="approach">
+        <h2><span><span class="t-en">Approach</span></span></h2>
+      <p>
+        <span class="t-en">We don't look at the market from above; we start at its floor and build upward. An investment decision is made in three stages, each standing on the shoulders of the one before.</span>
+      </p>
+      <ol class="steps">
+        <li class="glow reveal">
+          <strong class="t-en">From order flow to the stock</strong>
+          <p class="t-en">We read the finest data the market produces to see what stands behind each stock's move: money that has come to stay, or a wave passing through. The output of this stage is a clear numerical assessment of each stock's state.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-en">From the stock to the sector</strong>
+          <p class="t-en">When the stocks of a sector are read together, a larger picture appears: which sector money has turned toward, and which it has turned away from.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-en">From the sector to the portfolio</strong>
+          <p class="t-en">Sector weights and the chosen stocks within each build the portfolio. Every unit of it has a reason, and that reason can be traced down to the floor of the market.</p>
+        </li>
+      </ol>
+      <p>
+        <span class="t-en">Alongside those three stages sits the options market. It is young in Iran and most participants still walk past it. We have taken it seriously from today, and have made it possible to analyse it alongside the price of the underlying stock.</span>
+      </p>
+      </section>
+
+      <section class="cs-section" id="difference">
+        <h2><span><span class="t-en">What stands out</span></span></h2>
+      <ul class="points">
+        <li class="glow reveal">
+          <strong class="t-en">A decision that neither fears nor covets.</strong>
+          <p class="t-en">The Iranian market runs on emotion: a queue of buyers makes everyone greedy, a queue of sellers drives everyone away. Most losses are made in exactly those two moments. The algorithm is equally calm on both days, and every trade comes from a rule written and tested beforehand — not from the mood of the day.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-en">Eleven years of testing, before your money.</strong>
+          <p class="t-en">No rule reaches capital unless it has stood against eleven years of real market: the great boom of 2020, the fall that followed, and the long grinding years of stagnation. We make our mistakes on history, not on your capital.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-en">A return you could withdraw, not one you can only display.</strong>
+          <p class="t-en">An ordinary backtest assumes every order fills instantly at the quoted price. The real market is not that kind. Our simulator rebuilds the exchange's own order-execution engine: orders queue, wait their turn, fill in part or stay at the back of the queue. The figures we report have been through that simulator.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-en">We know the queue — on the way in and on the way out.</strong>
+          <p class="t-en">The investor's nightmare in this market is being stuck behind a sell queue: an asset that exists on paper and cannot be sold. Queues, price limits and true market depth are in our model from the first line. Imported tools are blind to all three.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-en">A portfolio resting on no single stock, sector or person.</strong>
+          <p class="t-en">The whole market — stocks, funds and options alike — is measured each day against one framework, and the portfolio is drawn from across every sector. The knowledge lives in the system, not in the head of a star analyst who may not be here tomorrow.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-en">Only official market data — and a reason for every decision.</strong>
+          <p class="t-en">No rumours, no back-channel news, no channels and signals. The algorithm's input is what the exchange itself recorded. And for any trade we can say why it happened and trace it back to the raw data.</p>
+        </li>
+      </ul>
+      </section>
+
+      <section class="cs-section" id="roadmap">
+        <h2><span><span class="t-en">The road ahead</span></span></h2>
+      <ol class="phases">
+        <li class="is-done glow reveal">
+          <span class="phase-mark"><span class="t-en">Done</span></span>
+          <p class="t-en">The data infrastructure, the analytics engine and the execution simulator are built and tested. That infrastructure cannot be bought; it takes years, and we have put them in.</p>
+        </li>
+        <li class="is-done glow reveal">
+          <span class="phase-mark"><span class="t-en">Done</span></span>
+          <p class="t-en">The first stage: the order-flow indicators for each stock are built and measured.</p>
+        </li>
+        <li class="is-now glow reveal">
+          <span class="phase-mark"><span class="t-en">Now</span></span>
+          <p class="t-en">The sector stage, portfolio construction, and a multi-year backtest across the whole market.</p>
+        </li>
+        <li class="glow reveal">
+          <span class="phase-mark"><span class="t-en">Final step</span></span>
+          <p class="t-en">Connecting to live data and running capital algorithmically, in fund form.</p>
+        </li>
+      </ol>
+      </section>
+
+      <section class="cs-section" id="technology">
+        <h2><span><span class="t-en">Technology</span></span></h2>
+      <p>
+        <span class="t-en">The processing core is written in Python, while the computation engine and the execution simulator are in C#. Processing is parallel: the complete history of a heavily traded symbol is ready in under ninety seconds. No change is accepted without passing the automated test suite.</span>
+      </p>
+      </section>
+    </article>
+
+  </div>
+</section>
+
+<section class="section ruled">
+  <div class="wrap">
+    <nav class="projnav reveal" aria-label="More projects">
+      <a class="projnav-card is-prev glow" href="../projects/blocktrade.html">
+        <span class="projnav-dir"><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="t-en">Previous project</span></span>
+        <b><span class="t-en">BlockTrade</span></b>
+      </a>
+      <a class="projnav-card is-next glow" href="../projects/gold-etf.html">
+        <span class="projnav-dir"><span class="t-en">Next project</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <b><span class="t-en">Gold ETF Arbitrage</span></b>
+      </a>
+    </nav>
+  </div>
+  <div class="wrap cs-end">
+    <a class="link-arrow link-back" href="../projects.html">
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <span class="t-en">All projects</span>
+    </a>
+    <a class="btn btn-ghost" href="../contact.html">
+      <span class="t-en">Get in touch</span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top footer-panel">
+      <div class="footer-brand">
+        <a class="logo" href="../index.html" aria-label="Nova Group">
+          <img class="logo-mark" src="../../assets/img/nova-mark-512.png" alt="" width="512" height="512" loading="lazy">
+          <span class="logo-text t-en"><b>NOVA</b> GROUP</span>
+        </a>
+        <p>
+          <span class="t-en">Researching and building trading algorithms from market order flow — since 2020.</span>
+        </p>
+      </div>
+
+      <nav class="footer-col" aria-label="Footer">
+        <h2><span class="t-en">Site</span></h2>
+        <a href="../index.html"><span class="t-en">Home</span></a>
+        <a href="../about.html"><span class="t-en">About</span></a>
+        <a href="../projects.html"><span class="t-en">Projects</span></a>
+        <a href="../contact.html"><span class="t-en">Contact</span></a>
+      </nav>
+
+      <div class="footer-col footer-contact">
+        <h2><span class="t-en">Connect</span></h2>
+        <a class="footer-mail" href="mailto:info@novacapital.fund">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
+          <bdi>info@novacapital.fund</bdi>
+        </a>
+      </div>
+    </div>
+
+    <p class="footer-bottom">
+      <span class="t-en">© 2026 Nova Group. All rights to this website and its content belong to Nova Group. Any misuse is subject to legal action.</span>
+    </p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
+
+<script src="../../assets/js/main.js?v=48"></script>
+</body>
+</html>

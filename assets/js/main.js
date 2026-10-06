@@ -1,26 +1,74 @@
-/* Nova Group — shared page behaviour. The language itself is applied by the
-   inline script in <head>, before first paint; this file only switches it. */
+/* Nova Group — shared page behaviour. Each language has its own page; which one a
+   reader lands on is settled by the inline script in <head>, before first paint. */
 (function () {
   'use strict';
 
   var html = document.documentElement;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fa = html.lang === 'fa';
+  var returning = false;      // arrived from the same page in the other language, at the same place
 
+  /* The language button is a plain link to the same page in the other language. Here the choice is
+     remembered, and the reader is put back at the paragraph they were reading. */
   function initLang() {
     var btn = document.getElementById('langBtn');
     if (!btn) return;
-    function apply() {
-      var lang = html.getAttribute('data-lang') === 'fa' ? 'en' : 'fa';
-      html.setAttribute('data-lang', lang);
-      html.lang = lang;
-      html.dir = lang === 'fa' ? 'rtl' : 'ltr';
-      try { localStorage.setItem('nova-lang', lang); } catch (e) { /* storage blocked */ }
+
+    if (btn.tagName !== 'A') {      // the not-found page carries both languages and switches in place
+      var apply = function () {
+        var lang = html.getAttribute('data-lang') === 'fa' ? 'en' : 'fa';
+        html.setAttribute('data-lang', lang);
+        html.lang = lang;
+        html.dir = lang === 'fa' ? 'rtl' : 'ltr';
+        try { localStorage.setItem('nova-lang', lang); } catch (e) { /* storage blocked */ }
+      };
+      btn.addEventListener('click', function () {
+        if (!reduceMotion && document.startViewTransition) document.startViewTransition(apply);
+        else apply();
+      });
+      return;
     }
-    btn.addEventListener('click', function () {
-      // cross-fade between the two languages where the browser can; otherwise switch at once
-      if (!reduceMotion && document.startViewTransition) document.startViewTransition(apply);
-      else apply();
+
+    var KEY = 'nova-place', to = btn.getAttribute('hreflang'), dest = btn.href;
+    // both languages have the same blocks in the same order, so a block's number finds it again
+    function blocks() { return Array.prototype.slice.call(document.querySelectorAll('main h1, main h2, main h3, main p, main li, main figure')); }
+    function line() { var nav = document.getElementById('nav'); return (nav ? nav.offsetHeight : 0) + 12; }
+
+    btn.addEventListener('click', function (e) {
+      var kept = true, list = blocks(), top = line(), i, r;
+      try { localStorage.setItem('nova-lang', to); } catch (err) { kept = false; }
+      for (i = 0; i < list.length; i++) {
+        r = list[i].getBoundingClientRect();
+        if (r.height && r.bottom > top) break;
+      }
+      if (window.scrollY > 60 && i < list.length) {
+        try { sessionStorage.setItem(KEY, JSON.stringify({ to: to, i: i, f: (top - r.top) / r.height })); } catch (err) { /* no place kept */ }
+      }
+      if (!kept) {                  // nothing can be remembered in this browser: carry the choice in the address
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        window.location.href = dest + '?lang=' + to;
+      }
     });
+
+    var saved = null;
+    try { saved = JSON.parse(sessionStorage.getItem(KEY)); sessionStorage.removeItem(KEY); } catch (err) { /* none */ }
+    if (!saved || saved.to !== html.lang) return;
+    var mark = blocks()[saved.i], last = -1;
+    if (!mark) return;
+    function settle() {
+      var r = mark.getBoundingClientRect();
+      last = Math.max(0, Math.round(window.scrollY + r.top + saved.f * r.height - line()));
+      window.scrollTo({ top: last, behavior: 'instant' });
+    }
+    returning = true;
+    html.classList.add('is-returning');
+    settle();
+    // the web font may land a moment later and move the lines: settle once more, unless the reader has moved on
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () { if (Math.abs(window.scrollY - last) < 4) settle(); });
+    }
+    setTimeout(function () { html.classList.remove('is-returning'); }, 400);
   }
 
   function initNav() {
@@ -58,7 +106,7 @@
 
   function initReveal() {
     var items = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
-    if (reduceMotion || !('IntersectionObserver' in window)) {
+    if (reduceMotion || returning || !('IntersectionObserver' in window)) {
       items.forEach(function (el) { el.classList.add('is-in'); });
       return;
     }
@@ -93,7 +141,7 @@
       inner.className = 'wrap';
       fill.className = 'tocbar-fill';
       copy.classList.remove('reveal', 'is-in');
-      copy.setAttribute('aria-label', 'On this page, pinned');
+      copy.setAttribute('aria-label', fa ? 'در این صفحه، سنجاق‌شده' : 'On this page, pinned');
       inner.appendChild(copy);
       bar.appendChild(inner);
       bar.appendChild(fill);
@@ -607,7 +655,7 @@
       var close = document.createElement('button');
       close.type = 'button';
       close.className = 'lightbox-close';
-      close.setAttribute('aria-label', 'Close');
+      close.setAttribute('aria-label', html.lang === 'fa' ? 'بستن' : 'Close');
       close.textContent = '×';
       var big = document.createElement('img');
       big.src = imgs[current].getAttribute('data-full');
@@ -700,7 +748,7 @@
      decimals; years and dates are left alone.
      --------------------------------------------------------------- */
   function initCount() {
-    if (reduceMotion || !('IntersectionObserver' in window)) return;
+    if (reduceMotion || returning || !('IntersectionObserver' in window)) return;
     var FA = '۰۱۲۳۴۵۶۷۸۹';
     var NUM = /[0-9۰-۹]+(?:[,٬][0-9۰-۹]{3})*(?:[.٫][0-9۰-۹]+)?/g;
     function value(s) {

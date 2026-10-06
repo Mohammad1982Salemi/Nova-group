@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeFi LP — money management in liquidity pools | Nova Group</title>
+<meta name="description" content="The DeFi LP project: a money-management algorithm for the liquidity pools of decentralised exchanges, built on the full history of 136 pools on four networks.">
+<link rel="canonical" href="https://novacapital.fund/en/projects/defi-lp.html">
+<link rel="alternate" hreflang="fa" href="https://novacapital.fund/projects/defi-lp.html">
+<link rel="alternate" hreflang="en" href="https://novacapital.fund/en/projects/defi-lp.html">
+<link rel="alternate" hreflang="x-default" href="https://novacapital.fund/en/projects/defi-lp.html">
+<meta property="og:title" content="DeFi LP — money management in liquidity pools | Nova Group">
+<meta property="og:description" content="A money-management algorithm for the liquidity pools of decentralised exchanges, on the way to an automated fund.">
+<meta property="og:url" content="https://novacapital.fund/en/projects/defi-lp.html">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="fa_IR">
+<meta property="og:image" content="https://novacapital.fund/assets/img/og/defi-lp-en.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://novacapital.fund/assets/img/og/defi-lp-en.jpg">
+<meta name="author" content="Nova Group">
+<meta name="theme-color" content="#05080e">
+<meta name="color-scheme" content="dark light">
+<meta name="supported-color-schemes" content="dark light">
+<meta name="darkreader-lock">
+<meta property="og:site_name" content="Nova Group">
+<meta property="og:type" content="website">
+
+<link rel="icon" type="image/svg+xml" href="../../assets/img/nova-mark.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="../../assets/img/favicon-64.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../../assets/img/favicon-192.png">
+<link rel="apple-touch-icon" href="../../assets/img/favicon-192.png">
+
+<!-- The fonts are served from this site; the one this language needs first is fetched early. -->
+<link rel="preload" href="../../assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/css/style.css?v=48">
+
+<!-- Samsung Internet (also used inside Telegram and WhatsApp) recolours pages in its dark mode; flag it early. -->
+<script>if (/SamsungBrowser/i.test(navigator.userAgent)) document.documentElement.classList.add('sb');</script>
+
+<!-- Runs before first paint. The reader's language is an earlier choice, a ?lang= in the address, or else
+     Persian for a Persian browser or a clock set to Tehran and English for everyone else. -->
+<script>
+(function () {
+  var d = document.documentElement, want = null, asked = /[?&]lang=(fa|en)\b/.exec(location.search), i;
+  try { if (asked) localStorage.setItem('nova-lang', asked[1]); want = localStorage.getItem('nova-lang'); } catch (e) {}
+  if (asked) want = asked[1];
+  if (want !== 'fa' && want !== 'en') {
+    var said = navigator.languages || [navigator.language || ''], fa = false;
+    for (i = 0; i < said.length; i++) if (/^fa\b/i.test(said[i])) fa = true;
+    try { if (Intl.DateTimeFormat().resolvedOptions().timeZone === 'Asia/Tehran') fa = true; } catch (e) {}
+    want = fa ? 'fa' : 'en';
+  }
+  if (d.hasAttribute('data-both')) {
+    // the one page that carries both languages: under /en/ it reads in English
+    var l = location.pathname.indexOf('/en/') === 0 ? 'en' : want;
+    d.setAttribute('data-lang', l); d.lang = l; d.dir = l === 'fa' ? 'rtl' : 'ltr';
+  } else if (want === 'en' && d.getAttribute('data-alt') &&
+      !/bot|crawl|spider|slurp|preview|google|bing|yandex|baidu|duckduck|facebook|whatsapp|telegram|lighthouse/i.test(navigator.userAgent)) {
+    // a Persian address is the default one: a reader of English is sent on to the same page under /en/
+    d.style.visibility = 'hidden';
+    setTimeout(function () { d.style.visibility = ''; }, 2500);
+    location.replace(d.getAttribute('data-alt') + location.hash);
+    return;
+  }
+  d.className += ' js';
+  // a short opening, once per visit and never for people who asked for less motion
+  try {
+    if (!sessionStorage.getItem('nova-seen') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      sessionStorage.setItem('nova-seen', '1'); d.className += ' intro';
+    }
+  } catch (e) {}
+})();
+</script>
+</head>
+<body>
+
+<a href="#main" class="skip-link"><span class="t-en">Skip to content</span></a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="../index.html" aria-label="Nova Group">
+      <img class="logo-mark" src="../../assets/img/nova-mark-512.png" alt="" width="512" height="512">
+      <span class="logo-text t-en"><b>NOVA</b> GROUP</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Main">
+      <a href="../index.html"><span class="t-en">Home</span></a>
+      <a href="../about.html"><span class="t-en">About</span></a>
+      <a href="../projects.html" aria-current="page"><span class="t-en">Projects</span></a>
+      <a href="../contact.html"><span class="t-en">Contact</span></a>
+    </nav>
+
+    <div class="nav-actions">
+      <a class="lang-btn" id="langBtn" href="../../projects/defi-lp.html" hreflang="fa" lang="fa" aria-label="فارسی">فا</a>
+      <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="page-hero">
+  <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="wrap">
+    <nav class="crumbs reveal" aria-label="Breadcrumb">
+      <a href="../projects.html"><span class="t-en">Projects</span></a>
+      <span aria-hidden="true">/</span>
+      <span><span class="t-en">DeFi LP</span></span>
+    </nav>
+
+    <h1 class="reveal"><span class="t-en">DeFi LP</span></h1>
+    <p class="page-lead reveal">
+      <span class="t-en">A money-management algorithm for the liquidity pools of decentralised exchanges, on the way to an automated fund.</span>
+    </p>
+
+    <div class="cs-meta reveal">
+      <span class="status"><span class="t-en">Under study</span></span>
+      <ul class="tags">
+        <li>Python</li><li>C#</li><li>DeFi</li>
+        <li><span class="t-en">Liquidity pools</span></li>
+        <li><span class="t-en">On-chain data</span></li>
+        <li><span class="t-en">Capital simulator</span></li>
+      </ul>
+    </div>
+
+    <ul class="facts facts-glass">
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-en">Data</span></span>
+        <b><span class="t-en">136 pools, 4 networks</span></b>
+        <p>
+          <span class="t-en">Each pool's full history, from its first day until today, event by event.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-en">Checked against reality</span></span>
+        <b><span class="t-en">About 44,000 positions</span></b>
+        <p>
+          <span class="t-en">The simulator's fees compared with real collections in six pools; a gap under a tenth of a percent.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-en">Testing</span></span>
+        <b><span class="t-en">Over 450 tests</span></b>
+        <p>
+          <span class="t-en">A change is accepted only after it has passed the automated tests.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-en">Technology</span></span>
+        <b><span class="t-en">Two languages, two jobs</span></b>
+        <div class="fact-list">
+          <div><i>Python</i><span><span class="t-en">Data preparation</span></span></div>
+          <div><i>C#</i><span><span class="t-en">Analysis engine and simulator</span></span></div>
+        </div>
+      </li>
+    </ul>
+
+    <nav class="toc reveal" aria-label="On this page">
+      <span class="toc-title"><span class="t-en">On this page</span></span>
+      <a href="#intro"><span class="t-en">Introduction</span></a>
+      <a href="#platform"><span class="t-en">Platform</span></a>
+      <a href="#approach"><span class="t-en">Approach</span></a>
+      <a href="#difference"><span class="t-en">What stands out</span></a>
+      <a href="#roadmap"><span class="t-en">The road ahead</span></a>
+      <a href="#technology"><span class="t-en">Technology</span></a>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+
+    <article class="cs-body">
+      <section class="cs-section" id="intro">
+        <h2><span><span class="t-en">Introduction</span></span></h2>
+      <p class="detail-lead">
+        <span class="t-en">On a decentralised exchange, buyer and seller do not trade with each other. The other side of every trade is a "pool": capital that a number of people have put together so that others can swap against it and pay a fee in return. Whoever puts money in the pool takes a share of that fee. But the pool with the best income this month is not necessarily the same one next month: traders move on, fresh capital arrives and each person's share shrinks. Most capital stays where it sat on the first day.</span>
+      </p>
+      <p>
+        <span class="t-en">We decided to move capital along with the opportunity, and to weigh every move against the market's own data before making it.</span>
+      </p>
+      <p>
+        <span class="t-en">The DeFi LP project has gathered the full history of 136 pools on four blockchain networks, from each pool's first day until today, at the level of every single event. From that data we simulate capital sitting in a pool, and moving between pools, inside a close reconstruction of the market itself, and we have checked the result against real money. The destination is an automated fund that manages money and moves it between pools, toward the best net return.</span>
+      </p>
+      </section>
+
+      <section class="cs-section" id="platform">
+        <h2><span><span class="t-en">Inside the platform</span></span></h2>
+        <p>
+          <span class="t-en">These are real screens from the project's platform, not mock-ups. All three views show one pool: cbBTC/USDC at a 0.05% fee on Uniswap V4, on the Base network. Click the image to enlarge it.</span>
+        </p>
+
+        <div class="shots reveal" data-shots>
+          <div class="shots-tabs" role="tablist" aria-label="Platform views">
+            <button type="button" role="tab" aria-selected="true" data-name="cbBTC/USDC · Uniswap V4 (Base) · Heat: Zone">
+              <b><span class="t-en">Zone view</span></b>
+              <span>Heat: Zone · Source: DEX</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="cbBTC/USDC · Uniswap V4 (Base) · Cum Δ">
+              <b><span class="t-en">Moves and cumulative delta</span></b>
+              <span>Move: 4% · Sub: Cum Δ</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="cbBTC/USDC · Uniswap V4 (Base) · Heat: Yield">
+              <b><span class="t-en">Yield view</span></b>
+              <span>Heat: Yield · Band: 1D v2</span>
+            </button>
+          </div>
+
+          <figure class="shot-frame">
+            <div class="shot-bar">
+              <i></i><i></i><i></i>
+              <span class="shot-name">cbBTC/USDC · Uniswap V4 (Base) · Heat: Zone</span>
+              <button type="button" class="shot-zoom" aria-label="Enlarge">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg>
+              </button>
+            </div>
+            <div class="shot-stage">
+              <img class="is-on" src="../../assets/img/projects/defi-lp/heat-zone.webp" data-full="../../assets/img/projects/defi-lp/heat-zone-full.webp" width="1400" height="742" alt="Price bars of the cbBTC/USDC pool with the Zone heat view around the price">
+              <img src="../../assets/img/projects/defi-lp/moves-delta.webp" data-full="../../assets/img/projects/defi-lp/moves-delta-full.webp" width="1400" height="742" loading="lazy" alt="Price bars of the pool with the 4% move boxes and the cumulative delta panel">
+              <img src="../../assets/img/projects/defi-lp/heat-yield.webp" data-full="../../assets/img/projects/defi-lp/heat-yield-full.webp" width="1400" height="742" loading="lazy" alt="The Yield heat view with the daily band around the price">
+            </div>
+            <figcaption>
+              <p class="shot-cap is-on">
+                <span class="t-en">The pool's price bars from June 2025 to August 2026, and around them the Zone heat view: coloured zones across the price levels.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-en">The same bars with the 4% move boxes, and beneath them the cumulative delta panel in dollars.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-en">The last three months in the Yield heat view, with the daily band (Band: 1D) around the price.</span>
+              </p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="cs-section" id="approach">
+        <h2><span><span class="t-en">Approach</span></span></h2>
+      <p>
+        <span class="t-en">Money sits where its net account is better, and moves when that account changes. The work proceeds in three stages:</span>
+      </p>
+      <ol class="steps">
+        <li class="glow reveal">
+          <strong class="t-en">From raw data to the full picture of the pool</strong>
+          <p class="t-en">A pool's dashboard shows only price and traded volume. We process every event recorded on the chain and rebuild the pool's state for each moment. The result is a picture of how much capital sat at each price level, and when it came or went.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-en">From the picture of the pool to measuring each pool</strong>
+          <p class="t-en">Our simulator places a hypothetical sum in that same rebuilt pool and works out what fee it would have earned and how much of it the price move would have taken back. The output is a net, comparable figure for each pool. All pools are measured by one yardstick.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-en">From measuring the pools to managing money</strong>
+          <p class="t-en">Putting those figures side by side, the algorithm makes three decisions: which pools the money sits in, over what price range in each, and when it moves from one to another. This stage is under study today.</p>
+        </li>
+      </ol>
+      </section>
+
+      <section class="cs-section" id="difference">
+        <h2><span><span class="t-en">What stands out</span></span></h2>
+      <ul class="points">
+        <li class="glow reveal">
+          <strong class="t-en">Capital that does not stay in one place.</strong>
+          <p class="t-en">Opportunity moves in this market, and capital that stands still misses it. A pool can have trades today while capital has been leaving it for months; we have seen and recorded a real case of this in our data. The algorithm compares all the pools it watches continuously, not once on the first day.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-en">A move that earns back its cost.</strong>
+          <p class="t-en">Every move has a cost: the transaction fee and the price difference on the way out and in. Chasing every higher rate spends the profit on those costs. In our measurement the cost of moving is part of the account, and a move that does not make it back is not made.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-en">Net profit, not the advertised rate.</strong>
+          <p class="t-en">The rate on a pool's dashboard shows only the fee. What we report is the fee after the loss from the price move, the transaction cost and the price difference on entry. Each part is shown separately, so it is clear where the profit came from and where it went.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-en">A simulation checked against real money.</strong>
+          <p class="t-en">Many calculations in this market are right on paper and not in practice. We have compared the fee the simulator works out with the fee that about 44,000 real positions in six pools collected from the chain. The total difference in the worst pool is under a tenth of a percent.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-en">Data reconciled with the chain itself.</strong>
+          <p class="t-en">Comparing pools on incomplete data leads to a wrong decision, and incomplete data does not announce itself. For all 136 pools the archived events have been compared with the chain, and a health certificate has been issued for each pool. Five kinds of pool on four networks are measured by one engine.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-en">Capital in the pool with no intermediary.</strong>
+          <p class="t-en">Some of this market's losses came not from the market itself but from intermediary contracts that held other people's capital. In our design the capital will sit in the pool directly and in its owner's name. The algorithm will only decide where it goes.</p>
+        </li>
+      </ul>
+      </section>
+
+      <section class="cs-section" id="roadmap">
+        <h2><span><span class="t-en">The road ahead</span></span></h2>
+      <ol class="phases">
+        <li class="is-done glow reveal">
+          <span class="phase-mark"><span class="t-en">Done</span></span>
+          <p class="t-en">The data infrastructure, pool reconstruction for all five kinds, the capital simulator and the reporting system are built and tested.</p>
+        </li>
+        <li class="is-done glow reveal">
+          <span class="phase-mark"><span class="t-en">Done</span></span>
+          <p class="t-en">The rules for placing and moving capital have been measured on pools that behave differently; we have not yet declared any strategy final.</p>
+        </li>
+        <li class="is-now glow reveal">
+          <span class="phase-mark"><span class="t-en">Now</span></span>
+          <p class="t-en">Completing the pool screening, testing the chosen strategy on unseen periods, and rewriting the system for operational use.</p>
+        </li>
+        <li class="glow reveal">
+          <span class="phase-mark"><span class="t-en">Final step</span></span>
+          <p class="t-en">The final step is connecting to live data and managing real money, as an automated fund.</p>
+        </li>
+      </ol>
+      </section>
+
+      <section class="cs-section" id="technology">
+        <h2><span><span class="t-en">Technology</span></span></h2>
+      <p>
+        <span class="t-en">Data preparation is written in Python, and the analysis engine and simulator in C#. The archive of 136 pools is kept in more than six thousand files, and the server copy is identical to the backup copy file by file. A change is accepted only after it has passed more than 450 automated tests.</span>
+      </p>
+      </section>
+    </article>
+
+  </div>
+</section>
+
+<section class="section ruled">
+  <div class="wrap">
+    <nav class="projnav reveal" aria-label="More projects">
+      <a class="projnav-card is-prev glow" href="../projects/gold-etf.html">
+        <span class="projnav-dir"><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="t-en">Previous project</span></span>
+        <b><span class="t-en">Gold ETF Arbitrage</span></b>
+      </a>
+      <a class="projnav-card is-next glow" href="../projects/crypto-mm.html">
+        <span class="projnav-dir"><span class="t-en">Next project</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <b><span class="t-en">Crypto Market Maker</span></b>
+      </a>
+    </nav>
+  </div>
+  <div class="wrap cs-end">
+    <a class="link-arrow link-back" href="../projects.html">
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <span class="t-en">All projects</span>
+    </a>
+    <a class="btn btn-ghost" href="../contact.html">
+      <span class="t-en">Get in touch</span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top footer-panel">
+      <div class="footer-brand">
+        <a class="logo" href="../index.html" aria-label="Nova Group">
+          <img class="logo-mark" src="../../assets/img/nova-mark-512.png" alt="" width="512" height="512" loading="lazy">
+          <span class="logo-text t-en"><b>NOVA</b> GROUP</span>
+        </a>
+        <p>
+          <span class="t-en">Researching and building trading algorithms from market order flow — since 2020.</span>
+        </p>
+      </div>
+
+      <nav class="footer-col" aria-label="Footer">
+        <h2><span class="t-en">Site</span></h2>
+        <a href="../index.html"><span class="t-en">Home</span></a>
+        <a href="../about.html"><span class="t-en">About</span></a>
+        <a href="../projects.html"><span class="t-en">Projects</span></a>
+        <a href="../contact.html"><span class="t-en">Contact</span></a>
+      </nav>
+
+      <div class="footer-col footer-contact">
+        <h2><span class="t-en">Connect</span></h2>
+        <a class="footer-mail" href="mailto:info@novacapital.fund">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
+          <bdi>info@novacapital.fund</bdi>
+        </a>
+      </div>
+    </div>
+
+    <p class="footer-bottom">
+      <span class="t-en">© 2026 Nova Group. All rights to this website and its content belong to Nova Group. Any misuse is subject to legal action.</span>
+    </p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
+
+<script src="../../assets/js/main.js?v=48"></script>
+</body>
+</html>
