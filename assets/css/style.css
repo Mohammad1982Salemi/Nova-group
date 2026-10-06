@@ -1281,3 +1281,9 @@ html[data-lang="en"] .facts-glass .fact-list span { font-size: 13px; letter-spac
 
 /* between phone and tablet widths two tiles side by side are too narrow for their captions */
 @media (max-width: 640px) { .facts.facts-glass { grid-template-columns: 1fr; } }
+
+/* section headings may use the full width; only the paragraph under them stays narrow.
+   When a heading must break, the lines are balanced instead of leaving one word alone. */
+.sec-head { max-width: none; }
+.sec-head p:not(.eyebrow) { max-width: 740px; }
+.sec-head h2, .hero h1, .page-hero h1, .cs-section h2, .band-slogan h2 { text-wrap: balance; }
