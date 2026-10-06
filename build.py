@@ -203,7 +203,7 @@ def main():
                 attrs = 'lang="fa" dir="rtl" data-lang="fa" data-both'
             else:
                 button = (f'<a class="lang-btn" id="langBtn" href="{alt}" hreflang="{other}" lang="{other}" '
-                          f'aria-label="@@L:English||فارسی@@">@@L:EN||فا@@</a>')
+                          f'aria-label="@@L:EN — English||فا — فارسی@@">@@L:EN||فا@@</a>')
                 attrs = f'lang="{lang}" dir="{"rtl" if lang == "fa" else "ltr"}" data-lang="{lang}"'
                 if lang == "fa":
                     attrs += f' data-alt="{alt}"'                   # where the same page lives in English
