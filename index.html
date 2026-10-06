@@ -35,7 +35,7 @@
 <!-- The fonts are served from this site; the one this language needs first is fetched early. -->
 <link rel="preload" href="assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/style.css?v=51">
+<link rel="stylesheet" href="assets/css/style.css?v=52">
 
 <!-- Samsung Internet (also used inside Telegram and WhatsApp) recolours pages in its dark mode; flag it early. -->
 <script>if (/SamsungBrowser/i.test(navigator.userAgent)) document.documentElement.classList.add('sb');</script>
@@ -157,14 +157,55 @@
         <div class="mbo-side mbo-bids"></div>
         <div class="mbo-tape"></div>
       </div>
-      <!-- the visitor's own market order: main.js lets it take the front of the queue like any other -->
+      <!-- the visitor's own orders: main.js works them in the book like any other order -->
       <div class="mbo-try">
+        <div class="tk-row">
+          <div class="tk-seg" data-k="type" role="group" aria-label="Order type">
+            <button type="button" data-v="market" aria-pressed="true"><span class="t-en">Market</span></button>
+            <button type="button" data-v="limit" aria-pressed="false"><span class="t-en">Limit</span></button>
+          </div>
+          <div class="tk-seg" data-k="delay" role="group" aria-label="Delay before the order reaches the market">
+            <span class="tk-cap"><span class="t-en">Delay</span></span>
+            <button type="button" data-v="0" aria-pressed="true"><span class="t-en">None</span></button>
+            <button type="button" data-v="500" aria-pressed="false"><span class="t-en">0.5 s</span></button>
+            <button type="button" data-v="2000" aria-pressed="false"><span class="t-en">2 s</span></button>
+          </div>
+        </div>
+        <div class="tk-row">
+          <div class="tk-step">
+            <span class="tk-cap"><span class="t-en">Size</span></span>
+            <span class="tk-ctl">
+              <button type="button" data-step="-1" data-of="size" aria-label="Smaller size">−</button>
+              <input class="tk-size" type="text" inputmode="numeric" maxlength="2" value="10" autocomplete="off" aria-label="Order size, in contracts">
+              <button type="button" data-step="1" data-of="size" aria-label="Larger size">+</button>
+            </span>
+          </div>
+          <div class="tk-step tk-price">
+            <span class="tk-cap"><span class="t-en">Price</span></span>
+            <span class="tk-ctl">
+              <button type="button" data-step="-1" aria-label="One tick lower">−</button>
+              <output class="tk-px"></output>
+              <button type="button" data-step="1" aria-label="One tick higher">+</button>
+            </span>
+          </div>
+        </div>
         <div class="mbo-btns">
-          <button type="button" class="mbo-btn is-buy" data-side="buy"><span class="t-en">Buy at market</span></button>
-          <button type="button" class="mbo-btn is-sell" data-side="sell"><span class="t-en">Sell at market</span></button>
+          <button type="button" class="mbo-btn is-buy" data-side="buy"><b><span class="t-en">Buy</span></b><small></small></button>
+          <button type="button" class="mbo-btn is-sell" data-side="sell"><b><span class="t-en">Sell</span></b><small></small></button>
         </div>
         <p class="mbo-say" aria-live="polite">
-          <span class="t-en">Try it yourself: send a market order and watch it eat through the queue.</span>
+          <span class="t-en">Try it yourself: choose a size and an order type, then send it.</span>
+        </p>
+        <div class="tk-stats" hidden>
+          <div><span><span class="t-en">Filled</span></span><b data-s="filled"></b></div>
+          <div><span><span class="t-en">Avg price</span></span><b data-s="avg"></b></div>
+          <div><span><span class="t-en">Price moved</span></span><b data-s="moved"></b></div>
+          <div><span><span class="t-en">Slippage</span></span><b data-s="slip"></b></div>
+        </div>
+        <ul class="tk-work" hidden aria-label="Your waiting orders"></ul>
+        <p class="tk-pos" hidden>
+          <span class="tk-pos-text"></span>
+          <button type="button" class="tk-reset"><span class="t-en">Reset</span></button>
         </p>
       </div>
       <figcaption>
@@ -579,6 +620,6 @@
 
 <button class="to-top" id="toTop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
 
-<script src="assets/js/main.js?v=51"></script>
+<script src="assets/js/main.js?v=52"></script>
 </body>
 </html>

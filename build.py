@@ -26,11 +26,12 @@ Tokens a page or a partial may use:
   @@LANGBTN@@       the link to the same page in the other language
 """
 import re
+import time
 from datetime import date
 from html.parser import HTMLParser
 from pathlib import Path
 
-VERSION = "51"  # bump whenever assets/css/style.css or assets/js/main.js changes
+VERSION = "52"  # bump whenever assets/css/style.css or assets/js/main.js changes
 SITE = "https://novacapital.fund/"
 LANGS = ("fa", "en")
 MAIN = "en"     # the language served at the site's root; the other one lives under /<its code>/
@@ -166,6 +167,19 @@ def preload(lang):
                      for f in fonts)
 
 
+def write(path, text):
+    """Write a generated file. If Windows reports it busy for a moment (a scanner, a local server), try again."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    for attempt in range(6):
+        try:
+            path.write_text(text, encoding="utf-8", newline="\n")
+            return
+        except OSError:
+            if attempt == 5:
+                raise
+            time.sleep(0.3)
+
+
 def read(page):
     """A page source: its metadata lines, then everything from <body> on."""
     meta, lines = {}, page.read_text(encoding="utf-8").split("\n")
@@ -220,30 +234,26 @@ def main():
                 raise SystemExit(f"{rel}: unresolved token near {text[text.index('@@'):][:40]!r}")
 
             out = ROOT / ("" if lang == MAIN else lang) / rel
-            out.parent.mkdir(parents=True, exist_ok=True)
-            out.write_text(text, encoding="utf-8", newline="\n")
+            write(out, text)
             print("built", out.relative_to(ROOT).as_posix())
             if not both and lang == MAIN:
                 # English lived under /en/ for a short while: those addresses pass the reader on
                 to = "../" * (depth + 1) + here or "./"
-                old = ROOT / "en" / rel
-                old.parent.mkdir(parents=True, exist_ok=True)
-                old.write_text(
-                    '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n'
-                    f'<title>{esc(meta["title.en"])}</title>\n<meta name="robots" content="noindex">\n'
-                    f'<link rel="canonical" href="{address(rel, "en")}">\n'
-                    f'<meta http-equiv="refresh" content="0; url={to}">\n'
-                    f'<script>location.replace("{to}" + location.search + location.hash);</script>\n'
-                    f'</head>\n<body><p><a href="{to}">{esc(meta["title.en"])}</a></p></body>\n</html>\n',
-                    encoding="utf-8", newline="\n")
+                write(ROOT / "en" / rel,
+                      '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n'
+                      f'<title>{esc(meta["title.en"])}</title>\n<meta name="robots" content="noindex">\n'
+                      f'<link rel="canonical" href="{address(rel, "en")}">\n'
+                      f'<meta http-equiv="refresh" content="0; url={to}">\n'
+                      f'<script>location.replace("{to}" + location.search + location.hash);</script>\n'
+                      f'</head>\n<body><p><a href="{to}">{esc(meta["title.en"])}</a></p></body>\n</html>\n')
             if not both:
                 links = "".join(f'<xhtml:link rel="alternate" hreflang="{l}" href="{address(rel, l)}"/>' for l in LANGS)
                 sitemap.append(f"  <url><loc>{address(rel, lang)}</loc><lastmod>{date.today()}</lastmod>{links}</url>")
 
-    (ROOT / "sitemap.xml").write_text(
-        '<?xml version="1.0" encoding="UTF-8"?>\n'
-        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
-        + "\n".join(sorted(sitemap, key=lambda s: (s.count("/"), s))) + "\n</urlset>\n", encoding="utf-8", newline="\n")
+    write(ROOT / "sitemap.xml",
+          '<?xml version="1.0" encoding="UTF-8"?>\n'
+          '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
+          + "\n".join(sorted(sitemap, key=lambda s: (s.count("/"), s))) + "\n</urlset>\n")
     print("built sitemap.xml")
 
 

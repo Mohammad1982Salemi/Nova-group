@@ -301,6 +301,13 @@
      aggressor trades against the front of the best level. Order flow leans
      one way for a while, so levels get used up, the book shifts a tick at a
      time and the price actually travels.
+
+     The visitor can trade in it through the ticket under the book: a market
+     or a limit order of a chosen size, sent at once or after a delay. A
+     market order takes the front of the queue. A limit order that cannot
+     trade at once waits in the queue, in amber, and is filled in its turn
+     like any other. The ticket reports the average price, how far the
+     price moved, the slippage, and the position that results.
      --------------------------------------------------------------- */
   function initMbo() {
     var root = document.getElementById('mbo');
@@ -320,7 +327,9 @@
     var asks = [], bids = [], tape = [], mids = [];   // index 0 is always the best level
     var last = null, lastDir = 0;
     var bias = 0, biasLeft = 0;     // order flow leans one way for a while, then changes its mind
-    var warming = true, pending = false;
+    var warming = true, pending = false, busy = false;
+    var mine = [];                  // the visitor's orders waiting in the book
+    var drawTicket = function () {};
 
     function rnd(a, b) { return a + Math.floor(Math.random() * (b - a + 1)); }
     function fmt(p) { return p.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
@@ -336,7 +345,7 @@
 
     function rowHtml(l, maxTotal) {
       var chips = l.o.map(function (o) {
-        var html = '<span class="chip' + (o.fresh ? ' is-new' : '') + '" data-id="' + o.id + '" style="--q:' + Math.min(o.q, 24) + '">' + o.q + '</span>';
+        var html = '<span class="chip' + (o.own ? ' own' : '') + (o.fresh ? ' is-new' : '') + '" data-id="' + o.id + '" style="--q:' + Math.min(o.q, 24) + '">' + o.q + '</span>';
         o.fresh = false;
         return html;
       }).join('');
@@ -379,6 +388,7 @@
         return html;
       }).join('');
       drawSpark();
+      drawTicket();
     }
 
     /* one frame: remember where the mid is, then redraw */
@@ -408,15 +418,37 @@
       if (tape.length > 3) tape.length = 3;
     }
 
+    /* A level that leaves the visible book takes a waiting order of the visitor's out of sight. The order
+       is kept, and joins the end of the queue again when the book comes back to its price. */
+    function drop(book) {
+      book.pop().o.forEach(function (o) { if (o.own) o.w.away = true; });
+    }
+    function bringBack(book) {
+      mine.forEach(function (w) {
+        if (!w.away || (w.buy ? bids : asks) !== book) return;
+        for (var i = 0; i < book.length; i++) {
+          if (book[i].px === w.px) { book[i].o.push(w.chip); w.away = false; return; }
+        }
+      });
+    }
     /* someone quotes inside the spread: a new best level on that side */
     function improve(book, dir) {
       book.unshift({ px: book[0].px + dir * TICK, o: [order()] });
-      book.pop();
+      drop(book);
     }
     /* the best level is gone: the next one becomes best, and a far level appears */
     function shift(book, dir) {
       book.shift();
       book.push(level(book[book.length - 1].px + dir * TICK, rnd(3, 7)));
+      bringBack(book);
+    }
+    /* a level somewhere in the book has been emptied by a cancel: close the row up */
+    function closeUp(book, i) {
+      var dir = book === asks ? 1 : -1;
+      if (i === 0) return shift(book, dir);
+      book.splice(i, 1);
+      book.push(level(book[book.length - 1].px + dir * TICK, rnd(3, 7)));
+      bringBack(book);
     }
 
     function step() {
@@ -446,8 +478,12 @@
         if (!open.length) return;
         var from = Math.random() < 0.5 ? open[0] : open[rnd(0, open.length - 1)];
         var gone = from.o[rnd(Math.floor(from.o.length / 2), from.o.length - 1)];
+        if (gone.own) return;                            // only the visitor cancels the visitor's order
         mark([gone.id], 'is-out');
-        return commit(function () { from.o.splice(from.o.indexOf(gone), 1); });
+        return commit(function () {
+          var at = from.o.indexOf(gone);
+          if (at > -1) from.o.splice(at, 1);
+        });
       }
 
       /* a trade. Most are small; some are large enough to sweep through levels */
@@ -465,12 +501,13 @@
             var front = lv.o[0], take = Math.min(front.q, rem);
             front.q -= take; rem -= take; done += take;
             if (!front.q) lv.o.shift();
+            if (front.own) front.w.hit(take, lv.px);     // the visitor's waiting order has its turn
           }
           if (lv.o.length) break;
           shift(hitBook, buy ? 1 : -1);
           swept++;
         }
-        print(buy, done, px);
+        if (done) print(buy, done, px);
       });
     }
 
@@ -482,74 +519,330 @@
     for (i = 0; i < 160; i++) { step(); frame(); }      // arrive with a market already in motion
     tape.length = 0;
     warming = false;
-    render();
 
-    /* The visitor's own market order. It is an aggressor like any other: it takes the orders at the front
-       of the best level one by one, and when a level is used up the next price becomes the best. */
-    var say = document.querySelector('.mbo-say'), buttons = Array.prototype.slice.call(document.querySelectorAll('.mbo-btn'));
-    var busy = false, firstOrder = true;
-    function figure(v, decimals) {          // a number in the page's own digits
-      var text = decimals ? v.toFixed(decimals) : String(v);
-      return fa ? text.replace('.', '٫').replace(/\d/g, function (d) { return '۰۱۲۳۴۵۶۷۸۹'.charAt(d); }) : text;
-    }
-    function tell(buy, got, cleared, moved) {
-      if (!say) return;
-      var q = '<bdi>' + figure(got) + '</bdi>', by = '<bdi>' + figure(moved, 2) + '</bdi>', text;
-      if (fa) {
-        text = 'سفارش ' + (buy ? 'خرید' : 'فروش') + ' شما ' + q + ' قرارداد را از سر صف برداشت؛ ' +
-          (cleared ? figure(cleared) + ' سطح قیمت خالی شد و قیمت ' + by + (buy ? ' بالا رفت.' : ' پایین آمد.')
-                   : 'صف کوتاه‌تر شد، ولی قیمت جابه‌جا نشد.');
-      } else {
-        text = 'Your ' + (buy ? 'buy' : 'sell') + ' order took ' + q + ' contracts from the front of the queue; ' +
-          (cleared ? cleared + ' price level' + (cleared > 1 ? 's' : '') + ' emptied and the price moved ' + (buy ? 'up ' : 'down ') + by + '.'
-                   : 'the queue is shorter, but the price did not move.');
+    /* ---------------------------------------------------------------
+       The ticket: the visitor's own orders.
+       --------------------------------------------------------------- */
+    var desk = document.querySelector('.mbo-try');
+    if (desk) (function () {
+      var say = desk.querySelector('.mbo-say'), statsEl = desk.querySelector('.tk-stats'), workEl = desk.querySelector('.tk-work');
+      var posEl = desk.querySelector('.tk-pos'), posText = desk.querySelector('.tk-pos-text');
+      var sizeEl = desk.querySelector('.tk-size'), pxEl = desk.querySelector('.tk-px');
+      var buttons = Array.prototype.slice.call(desk.querySelectorAll('.mbo-btn'));
+      var notes = { buy: desk.querySelector('.mbo-btn.is-buy small'), sell: desk.querySelector('.mbo-btn.is-sell small') };
+      var cells = {};
+      Array.prototype.forEach.call(desk.querySelectorAll('[data-s]'), function (n) { cells[n.getAttribute('data-s')] = n; });
+      var want = { limit: false, size: 10, px: bids[0].px, wait: 0 }, flying = false;
+      var pos = 0, cost = 0, banked = 0, traded = false;   // the position, what it cost, and results already closed
+      var LADDER = [1, 2, 3, 5, 10, 15, 20, 25, 30, 40, 50, 75, 99], DIGITS = '۰۱۲۳۴۵۶۷۸۹', shown = {};
+
+      /* figures in the page's own digits */
+      function local(text) {
+        return fa ? text.replace(/,/g, '٬').replace(/\./g, '٫').replace(/\d/g, function (d) { return DIGITS.charAt(d); }) : text;
       }
-      say.innerHTML = text;
-      say.classList.remove('is-told');
-      void say.offsetWidth;                 // restart the entrance of the sentence
-      say.classList.add('is-told');
-    }
-    function send(buy) {
-      if (busy) return;
-      busy = true;                          // the buttons answer at once, even if the book is mid-change
-      buttons.forEach(function (b) { b.disabled = true; });
-      if (pending) setTimeout(function () { sweep(buy); }, 130);     // let the change in hand finish first
-      else sweep(buy);
-    }
-    function sweep(buy) {
-      var book = buy ? asks : bids, dir = buy ? 1 : -1, from = book[0].px;
-      // the first order is always large enough to use up the best level, so the price is seen to move
-      var left = firstOrder ? total(book[0]) + rnd(3, 12) : rnd(5, 34), got = 0, cleared = 0, here = 0;
-      firstOrder = false;
-      function done() {
-        if (here) print(buy, here, book[0].px, true);
-        bias = buy ? 1.25 : -1.25;          // for a moment the flow leans the way the order pushed it,
-        biasLeft = 10;                      // so the gap it opened is closed from behind and the move holds
-        frame();
-        tell(buy, got, cleared, Math.abs(book[0].px - from));
-        busy = false;
-        buttons.forEach(function (b) { b.disabled = false; });
+      function num(v, decimals) { return local(decimals ? v.toFixed(decimals) : String(v)); }
+      function b(text) { return '<bdi>' + text + '</bdi>'; }
+      function cash(p) { return b(local(fmt(p))); }
+      function signed(v, decimals) {
+        return '<bdi dir="ltr">' + (v > 0.00001 ? '+' : v < -0.00001 ? '−' : '') + num(Math.abs(v), decimals) + '</bdi>';
       }
-      function take() {
-        if (left <= 0 || cleared >= 4) return done();
-        var lv = book[0];
-        if (!lv.o.length) { shift(book, dir); cleared++; return take(); }
-        var front = lv.o[0], q = Math.min(front.q, left);
-        var chip = root.querySelector('.chip[data-id="' + front.id + '"]');
-        if (chip) chip.classList.add('is-mine');
-        setTimeout(function () {
-          front.q -= q; left -= q; got += q; here += q;
-          if (!front.q) lv.o.shift();
-          if (!lv.o.length) { print(buy, here, lv.px, true); here = 0; shift(book, dir); cleared++; }
+      function put(el, key, text) { if (shown[key] !== text) { shown[key] = text; el.textContent = text; } }
+
+      var T = fa ? {
+        buy: 'خرید', sell: 'فروش', market: 'به قیمت بازار', now: 'فوراً پر می‌شود', queue: 'در صف می‌نشیند', best: 'بهترین قیمت',
+        flying: 'سفارش در راه است…', cancelled: 'سفارش لغو شد.', noRoom: 'حداکثر سه سفارش هم‌زمان در صف می‌ماند؛ اول یکی را لغو کنید.',
+        self: ' سفارش منتظرِ خودتان در طرف مقابل اول لغو شد تا با خودتان معامله نکنید.',
+        waits: { 500: 'نیم‌ثانیه', 2000: 'دو ثانیه' },
+        late: function (w) { return ' سفارش ' + T.waits[w] + ' پس از ارسال به بازار رسید.'; },
+        swept: function (o, moved) {
+          return o.levels ? ' ' + b(num(o.levels)) + ' سطح قیمت خالی شد و قیمت ' + b(num(moved, 2)) + (o.buy ? ' بالا رفت.' : ' پایین آمد.')
+                          : ' صف کوتاه‌تر شد، ولی قیمت جابه‌جا نشد.';
+        },
+        filled: function (o, side, avg, moved) {
+          return 'سفارش ' + (o.limit ? 'محدودِ ' : '') + side + ' شما ' + (o.limit ? 'فوراً ' : '') + 'پر شد: ' + b(num(o.got)) +
+            ' قرارداد با میانگین قیمت ' + avg + '.' + T.swept(o, moved);
+        },
+        part: function (o, side, avg) {
+          return 'از سفارش محدودِ ' + side + ' شما ' + b(num(o.got)) + ' قرارداد فوراً با میانگین قیمت ' + avg + ' پر شد و ' +
+            b(num(o.rested)) + ' قرارداد باقی‌مانده در قیمت ' + cash(o.px) + ' در صف نشست.';
+        },
+        rests: function (o, side, ahead) {
+          var head = 'سفارش محدودِ ' + side + ' شما برای ' + b(num(o.rested)) + ' قرارداد در قیمت ' + cash(o.px);
+          if (ahead === null) return head + ' ثبت شد؛ این قیمت بیرون از عمق نمایش است.';
+          return head + (ahead ? ' در صف نشست؛ ' + b(num(ahead)) + ' قرارداد جلوتر از آن است.' : ' در صف نشست و اولِ صف است.');
+        },
+        hitPart: function (w, q, px) {
+          return b(num(q)) + ' قرارداد از سفارش ' + (w.buy ? T.buy : T.sell) + ' در صفِ شما در قیمت ' + cash(px) + ' معامله شد؛ ' +
+            b(num(w.chip.q)) + ' قرارداد هنوز منتظر است.';
+        },
+        hitAll: function (w, px) {
+          return 'سفارش ' + (w.buy ? T.buy : T.sell) + ' در صفِ شما کامل پر شد: ' + b(num(w.size)) + ' قرارداد در قیمت ' + cash(px) + '.';
+        },
+        row: function (w) { return num(w.chip.q) + ' در ' + local(fmt(w.px)); },
+        ahead: function (n) { return n === null ? 'بیرون از عمق نمایش' : 'جلوتر: ' + num(n); },
+        done: function (w) { return 'پرشده: ' + num(w.filled) + ' از ' + num(w.size); },
+        cancel: 'لغو این سفارش',
+        position: function (p, avg, pnl) {
+          return 'موقعیت: ' + (p ? signed(p) + ' قرارداد با میانگین ' + avg : 'بدون موقعیت باز') + ' · سود و زیان به واحد قیمت: ' + pnl;
+        }
+      } : {
+        buy: 'buy', sell: 'sell', market: 'at market', now: 'fills at once', queue: 'joins the queue', best: 'best price',
+        lots: function (n) { return b(num(n)) + (n === 1 ? ' contract' : ' contracts'); },
+        flying: 'Order on its way…', cancelled: 'Order cancelled.', noRoom: 'Up to three orders can wait at a time; cancel one first.',
+        self: ' Your own waiting order on the other side was cancelled first, so that you would not trade with yourself.',
+        waits: { 500: '0.5 s', 2000: '2 s' },
+        late: function (w) { return ' It reached the market ' + T.waits[w] + ' after you sent it.'; },
+        swept: function (o, moved) {
+          return o.levels ? ' ' + b(num(o.levels)) + ' price level' + (o.levels > 1 ? 's' : '') + ' emptied and the price moved ' +
+                            (o.buy ? 'up ' : 'down ') + b(num(moved, 2)) + '.'
+                          : ' The queue got shorter, but the price did not move.';
+        },
+        filled: function (o, side, avg, moved) {
+          return 'Your ' + side + (o.limit ? ' limit' : ' order') + ' was filled' + (o.limit ? ' at once' : '') + ': ' + T.lots(o.got) +
+            ' at an average price of ' + avg + '.' + T.swept(o, moved);
+        },
+        part: function (o, side, avg) {
+          return T.lots(o.got) + ' of your ' + side + ' limit ' + (o.got === 1 ? 'was' : 'were') + ' filled at once at an average price of ' +
+            avg + '; the other ' + b(num(o.rested)) + ' joined the queue at ' + cash(o.px) + '.';
+        },
+        rests: function (o, side, ahead) {
+          var head = 'Your ' + side + ' limit for ' + T.lots(o.rested) + ' ';
+          if (ahead === null) return head + 'at ' + cash(o.px) + ' is placed; that price is outside the visible book.';
+          return head + 'joined the queue at ' + cash(o.px) +
+            (ahead ? '; ' + T.lots(ahead) + (ahead === 1 ? ' is' : ' are') + ' ahead of it.' : ' and is first in line.');
+        },
+        hitPart: function (w, q, px) {
+          return T.lots(q) + ' of your waiting ' + (w.buy ? T.buy : T.sell) + ' order traded at ' + cash(px) + '; ' +
+            b(num(w.chip.q)) + (w.chip.q === 1 ? ' is' : ' are') + ' still waiting.';
+        },
+        hitAll: function (w, px) {
+          return 'Your waiting ' + (w.buy ? T.buy : T.sell) + ' order is filled in full: ' + T.lots(w.size) + ' at ' + cash(px) + '.';
+        },
+        row: function (w) { return w.chip.q + ' at ' + fmt(w.px); },
+        ahead: function (n) { return n === null ? 'outside the visible book' : 'ahead: ' + n; },
+        done: function (w) { return 'filled: ' + w.filled + ' of ' + w.size; },
+        cancel: 'Cancel this order',
+        position: function (p, avg, pnl) {
+          return 'Position: ' + (p ? signed(p) + (Math.abs(p) === 1 ? ' contract' : ' contracts') + ' at an average of ' + avg : 'flat') +
+            ' · P&L in price points: ' + pnl;
+        }
+      };
+
+      function tell(html, onWay) {
+        say.innerHTML = html;
+        say.classList.toggle('is-flying', !!onWay);
+        say.classList.remove('is-told');
+        void say.offsetWidth;                 // restart the entrance of the sentence
+        say.classList.add('is-told');
+      }
+      function stat(got, size, avg, moved, slip) {
+        cells.filled.textContent = num(got) + ' / ' + num(size);
+        cells.avg.textContent = avg === null ? '—' : local(fmt(avg));
+        cells.moved.innerHTML = moved === null ? '—' : signed(moved, 2);
+        cells.slip.innerHTML = slip === null ? '—' : signed(slip, 2);
+        statsEl.hidden = false;
+      }
+
+      /* the position: what is held, at what average, and what has been closed */
+      function trade(buy, q, px) {
+        var s = buy ? q : -q;
+        traded = true;
+        if (pos === 0 || (pos > 0) === (s > 0)) { cost += s * px; pos += s; return; }
+        var avg = cost / pos, closing = Math.min(Math.abs(pos), q);
+        banked += closing * (px - avg) * (pos > 0 ? 1 : -1);
+        pos += s;
+        cost = pos === 0 ? 0 : ((pos > 0) === (s > 0) ? pos * px : pos * avg);   // gone through flat: the rest opens at this price
+      }
+
+      /* how many contracts must trade before a waiting order's turn comes */
+      function ahead(w) {
+        if (w.away) return null;
+        var book = w.buy ? bids : asks, n = 0, i, j;
+        for (i = 0; i < book.length; i++) {
+          for (j = 0; j < book[i].o.length; j++) {
+            if (book[i].o[j] === w.chip) return n;
+            n += book[i].o[j].q;
+          }
+        }
+        return null;
+      }
+      function forget(w) {
+        var at = mine.indexOf(w);
+        if (at > -1) mine.splice(at, 1);
+        if (w.row.parentNode) w.row.parentNode.removeChild(w.row);
+        workEl.hidden = !mine.length;
+      }
+      function cancel(w) {
+        var book = w.buy ? bids : asks, i, at;
+        for (i = 0; i < book.length; i++) {
+          at = book[i].o.indexOf(w.chip);
+          if (at > -1) { book[i].o.splice(at, 1); if (!book[i].o.length) closeUp(book, i); break; }
+        }
+        forget(w);
+      }
+      function wait(o) {                        // what could not trade at once joins the queue at its price
+        if (mine.length >= 3) { o.refused = true; return; }
+        var book = o.buy ? bids : asks, w = { buy: o.buy, px: o.px, size: o.left, filled: 0, away: false }, i;
+        w.chip = { id: ++seq, q: o.left, own: true, w: w, fresh: true };
+        w.hit = function (q, px) {              // an aggressor reaches it
+          w.filled += q;
+          trade(w.buy, q, px);
+          print(w.buy, q, px, true);
+          if (w.chip.q) tell(T.hitPart(w, q, px));
+          else { forget(w); tell(T.hitAll(w, px)); }
+          stat(w.filled, w.size, px, null, 0);
+        };
+        for (i = 0; i < book.length; i++) {
+          if (book[i].px === o.px) { book[i].o.push(w.chip); break; }
+          if (o.buy ? book[i].px < o.px : book[i].px > o.px) { book.splice(i, 0, { px: o.px, o: [w.chip] }); drop(book); break; }
+        }
+        if (i === book.length) w.away = true;   // beyond the last level on show: it waits out of sight
+        w.row = document.createElement('li');
+        w.row.innerHTML = '<b class="' + (w.buy ? 'is-buy' : 'is-sell') + '">' + (w.buy ? T.buy : T.sell) + '</b><span class="tk-what"></span>' +
+          '<span class="tk-ahead"></span><span class="tk-done"></span><button type="button" aria-label="' + T.cancel + '">×</button>';
+        w.row.querySelector('button').addEventListener('click', function () { cancel(w); tell(T.cancelled); frame(); });
+        w.cells = [w.row.querySelector('.tk-what'), w.row.querySelector('.tk-ahead'), w.row.querySelector('.tk-done')];
+        workEl.appendChild(w.row);
+        workEl.hidden = false;
+        mine.push(w);
+        o.rested = o.left;
+        o.w = w;
+      }
+
+      /* the part of an order that can trade at once: it takes the front of the other side, order by order,
+         for as long as its size and its limit (if it has one) allow */
+      function work(o, done) {
+        var book = o.buy ? asks : bids, dir = o.buy ? 1 : -1, here = 0, at = 0;
+        function allowed() { return o.px === null || (o.buy ? book[0].px <= o.px : book[0].px >= o.px); }
+        (function next() {
+          if (o.left <= 0 || o.levels >= 40 || !allowed()) {
+            if (here) print(o.buy, here, at, true);
+            return done();
+          }
+          var lv = book[0], front = lv.o[0];
+          if (front.own) { cancel(front.w); o.self = true; return next(); }     // never against the visitor's own waiting order
+          var q = Math.min(front.q, o.left), chip = root.querySelector('.chip[data-id="' + front.id + '"]');
+          if (chip) chip.classList.add('is-mine');
+          setTimeout(function () {
+            front.q -= q; o.left -= q; o.got += q; o.paid += q * lv.px; here += q; at = lv.px;
+            if (!front.q) lv.o.shift();
+            if (!lv.o.length) { print(o.buy, here, lv.px, true); here = 0; shift(book, dir); o.levels++; }
+            frame();
+            next();
+          }, reduceMotion ? 0 : 90);
+        })();
+      }
+
+      function lock(on) { buttons.forEach(function (btn) { btn.disabled = on; }); }
+      function readSize() {
+        var v = parseInt(sizeEl.value.replace(/[۰-۹]/g, function (d) { return DIGITS.indexOf(d); })
+          .replace(/[٠-٩]/g, function (d) { return '٠١٢٣٤٥٦٧٨٩'.indexOf(d); }).replace(/\D/g, ''), 10);
+        want.size = Math.max(1, Math.min(99, v || 1));
+        sizeEl.value = num(want.size);
+      }
+      function arrive(o) {
+        busy = true;                            // the visitor's order has the book to itself while it is worked
+        if (pending) { setTimeout(function () { arrive(o); }, 40); return; }    // let the change in hand finish first
+        o.from = (o.buy ? asks : bids)[0].px;
+        work(o, function () {
+          var side = o.buy ? T.buy : T.sell, avg = o.got ? o.paid / o.got : null;
+          var moved = o.levels ? (o.buy ? asks : bids)[0].px - o.from : 0, text;
+          if (o.got) trade(o.buy, o.got, avg);
+          if (o.limit && o.left > 0) wait(o);
+          if (o.refused) text = (o.got ? T.filled(o, side, cash(avg), Math.abs(moved)) + ' ' : '') + T.noRoom;
+          else if (o.rested) text = o.got ? T.part(o, side, cash(avg)) : T.rests(o, side, ahead(o.w));
+          else text = T.filled(o, side, cash(avg), Math.abs(moved));
+          if (o.self) text += T.self;
+          if (o.wait) text += T.late(o.wait);
+          bias = o.buy ? 0.4 : -0.4;            // for a moment the flow leans a little the way the order pushed it
+          biasLeft = 8;
           frame();
-          take();
-        }, reduceMotion ? 0 : 120);
+          tell(text);
+          stat(o.got, o.size, avg, o.got ? moved : null, o.got ? (avg - o.seen) * (o.buy ? 1 : -1) : null);
+          busy = false;
+          flying = false;
+          lock(false);
+        });
       }
-      take();
-    }
-    buttons.forEach(function (b) {
-      b.addEventListener('click', function () { send(b.getAttribute('data-side') === 'buy'); });
-    });
+      function send(buy) {
+        if (flying) return;
+        readSize();
+        var o = { buy: buy, limit: want.limit, px: want.limit ? want.px : null, size: want.size, left: want.size, wait: want.wait,
+                  got: 0, paid: 0, levels: 0, rested: 0, self: false, refused: false, seen: (buy ? asks : bids)[0].px, from: 0, w: null };
+        flying = true;
+        lock(true);
+        if (o.wait) {
+          say.style.setProperty('--wait', o.wait + 'ms');
+          tell(T.flying, true);
+          setTimeout(function () { arrive(o); }, o.wait);
+        } else arrive(o);
+      }
+
+      /* what the ticket shows moves with the book: what each button would do, each waiting order's place, the result so far */
+      drawTicket = function () {
+        put(notes.buy, 'nb', want.limit ? (want.px >= asks[0].px ? T.now : T.queue) : T.market);
+        put(notes.sell, 'ns', want.limit ? (want.px <= bids[0].px ? T.now : T.queue) : T.market);
+        put(pxEl, 'px', want.limit ? local(fmt(want.px)) : T.best);
+        mine.forEach(function (w, i) {
+          var id = 'w' + w.chip.id;
+          put(w.cells[0], id + 'a', T.row(w));
+          put(w.cells[1], id + 'b', T.ahead(ahead(w)));
+          put(w.cells[2], id + 'c', T.done(w));
+        });
+        if (traded) {
+          var html = T.position(pos, pos ? cash(cost / pos) : '', signed(banked + (pos ? (mid() - cost / pos) * pos : 0), 2));
+          if (shown.pos !== html) { shown.pos = html; posText.innerHTML = html; }
+          posEl.hidden = false;
+        }
+      };
+
+      /* the controls */
+      Array.prototype.forEach.call(desk.querySelectorAll('.tk-seg'), function (seg) {
+        var kind = seg.getAttribute('data-k'), options = Array.prototype.slice.call(seg.querySelectorAll('button'));
+        options.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            options.forEach(function (x) { x.setAttribute('aria-pressed', x === btn ? 'true' : 'false'); });
+            if (kind === 'type') {
+              want.limit = btn.getAttribute('data-v') === 'limit';
+              if (want.limit) want.px = bids[0].px;          // start at the best bid: a buy there joins the queue
+              desk.classList.toggle('is-limit', want.limit);
+            } else want.wait = parseInt(btn.getAttribute('data-v'), 10) || 0;
+            drawTicket();
+          });
+        });
+      });
+      Array.prototype.forEach.call(desk.querySelectorAll('[data-step]'), function (btn) {
+        btn.addEventListener('click', function () {
+          var by = btn.getAttribute('data-step') === '1' ? 1 : -1, at;
+          if (btn.getAttribute('data-of') === 'size') {
+            readSize();
+            for (at = 0; at < LADDER.length - 1 && LADDER[at] < want.size; at++) { /* the rung at or above the size */ }
+            if (by < 0 && LADDER[at] >= want.size) at--;
+            else if (by > 0 && LADDER[at] <= want.size) at++;
+            want.size = LADDER[Math.max(0, Math.min(LADDER.length - 1, at))];
+            sizeEl.value = num(want.size);
+          } else if (want.limit) {
+            want.px = Math.max(bids[0].px - 12 * TICK, Math.min(asks[0].px + 12 * TICK, want.px + by * TICK));
+            drawTicket();
+          }
+        });
+      });
+      sizeEl.addEventListener('change', readSize);
+      sizeEl.addEventListener('focus', function () { sizeEl.select(); });
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () { send(btn.getAttribute('data-side') === 'buy'); });
+      });
+      desk.querySelector('.tk-reset').addEventListener('click', function () {
+        mine.slice().forEach(cancel);
+        pos = cost = banked = 0;
+        traded = false;
+        posEl.hidden = statsEl.hidden = true;
+        frame();
+      });
+      sizeEl.value = num(want.size);
+    })();
+
+    render();
 
     if (reduceMotion || !('IntersectionObserver' in window)) return;   // a still book is fine
 

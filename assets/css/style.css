@@ -1383,27 +1383,125 @@ html:not(.js) .phases li.is-now::before, .phases li.is-now.is-in::before { backg
 }
 @keyframes phase-dot { 0% { box-shadow: 0 0 0 0 rgba(4,18,26,.55); } 100% { box-shadow: 0 0 0 9px rgba(4,18,26,0); } }
 
-/* ---------- home hero: send a market order of your own into the simulated book ---------- */
-.mbo-try { display: grid; gap: 12px; margin-block-start: 14px; }
+/* ---------- home hero: an order ticket under the simulated book ----------
+   Type, delay, size and price; two buttons; then what happened, in a sentence and in four figures,
+   the visitor's waiting orders, and the position that results. */
+.mbo-try {
+  display: grid; gap: 10px; margin-block-start: 12px; padding: 14px; border-radius: var(--r-lg); border: 1px solid var(--line-2);
+  background: linear-gradient(180deg, rgba(14,21,36,.9), rgba(7,11,19,.9));
+  box-shadow: 0 24px 60px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.06);
+}
+.tk-row { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: 10px; }
+.tk-row + .tk-row { grid-template-columns: 1fr 1fr; }
+.tk-seg, .tk-step {
+  display: flex; align-items: center; min-width: 0; height: 42px; padding: 3px; border-radius: 11px;
+  border: 1px solid var(--line); background: rgba(148,170,205,.06);
+}
+.tk-cap { flex: none; padding-inline: 10px 4px; font-size: 12.4px; color: var(--dim); white-space: nowrap; }
+html[data-lang="en"] .tk-cap { font-family: var(--font-disp); font-size: 11.2px; letter-spacing: .1em; text-transform: uppercase; }
+.tk-seg button {
+  flex: 1; min-width: 0; height: 100%; padding: 0 6px; border: 0; border-radius: 8px; background: none;
+  color: var(--muted); font-size: 13.2px; font-weight: 600; white-space: nowrap; transition: background .2s, color .2s, box-shadow .2s;
+}
+.tk-seg button:hover { color: var(--text); }
+.tk-seg button[aria-pressed="true"] { color: #fff; background: rgba(59,130,246,.3); box-shadow: inset 0 0 0 1px rgba(96,165,250,.6); }
+/* figures read left to right in both languages; the label stays on the side the line starts on */
+.tk-ctl { flex: 1; min-width: 0; height: 100%; display: grid; grid-template-columns: 30px minmax(0, 1fr) 30px; align-items: center; direction: ltr; }
+.tk-ctl button { height: 100%; padding: 0; border: 0; border-radius: 8px; background: none; color: var(--accent-hi); font-size: 19px; line-height: 1; transition: background .2s; }
+.tk-ctl button:hover { background: rgba(59,130,246,.2); }
+.tk-ctl input, .tk-ctl output {
+  width: 100%; min-width: 0; padding: 0; border: 0; background: none; text-align: center;
+  font-family: var(--font-mono); font-size: 14.6px; font-variant-numeric: tabular-nums; color: var(--text);
+}
+html[data-lang="fa"] .tk-ctl input, html[data-lang="fa"] .tk-ctl output { font-family: var(--font-fa); font-size: 15.4px; }
+.tk-ctl input:focus { outline: none; }
+.tk-step:focus-within { border-color: var(--accent-hi); }
+/* a market order has no price of its own */
+.mbo-try:not(.is-limit) .tk-price { opacity: .55; }
+.mbo-try:not(.is-limit) .tk-price button { visibility: hidden; }
+.mbo-try:not(.is-limit) .tk-price output { font-family: inherit; font-size: 13px; color: var(--muted); }
+
 .mbo-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .mbo-btn {
-  min-height: 46px; padding: 10px 12px; border-radius: 12px; font-size: 14.4px; font-weight: 600; line-height: 1.5;
+  display: grid; align-content: center; justify-items: center; gap: 1px; min-height: 54px; padding: 7px 12px; border-radius: 12px;
   backdrop-filter: blur(8px); transition: background .2s, border-color .2s, box-shadow .25s, transform .2s, opacity .2s;
 }
+.mbo-btn b { font-size: 15.4px; font-weight: 700; line-height: 1.4; }
+.mbo-btn small { font-size: 11.8px; line-height: 1.5; opacity: .82; }
 .mbo-btn.is-buy  { color: #a9ccff; border: 1px solid rgba(91,155,255,.55); background: rgba(91,155,255,.1); }
 .mbo-btn.is-sell { color: #ffb3bf; border: 1px solid rgba(255,115,137,.5); background: rgba(255,115,137,.08); }
 .mbo-btn.is-buy:hover  { border-color: #7db4ff; background: rgba(91,155,255,.18); box-shadow: 0 0 26px rgba(91,155,255,.28); transform: translateY(-2px); }
 .mbo-btn.is-sell:hover { border-color: #ff8fa1; background: rgba(255,115,137,.15); box-shadow: 0 0 26px rgba(255,115,137,.24); transform: translateY(-2px); }
 .mbo-btn:active { transform: translateY(0) scale(.98); }
 .mbo-btn[disabled] { opacity: .5; cursor: default; transform: none; box-shadow: none; }
-/* two lines are held for the sentence, so the page does not shift when the result is written in */
-.mbo-say { min-height: 3.5em; text-align: center; font-size: 13.8px; line-height: 1.75; color: var(--muted); }
+
+/* two lines are held for the sentence, so the ticket does not jump when a result is written in */
+.mbo-say { min-height: 3.5em; margin-block-start: 2px; text-align: center; font-size: 13.6px; line-height: 1.75; color: var(--muted); }
 .mbo-say.is-told { color: var(--text); animation: cap-in .45s ease-out; }
 .mbo-say bdi { color: #ffd166; font-weight: 600; }
-@media (max-width: 760px) { .mbo-say { min-height: 5.25em; } }
-/* the visitor's prints on the tape are amber, like our own orders in the two track books */
+/* an order on its way: a line that runs for as long as the delay */
+.mbo-say.is-flying::after {
+  content: ''; display: block; width: 150px; height: 2px; margin: 9px auto 0; border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--cyan)); transform-origin: var(--o-start); animation: tk-fly var(--wait, 1s) linear forwards;
+}
+@keyframes tk-fly { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+.tk-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.tk-stats[hidden], .tk-work[hidden], .tk-pos[hidden] { display: none; }
+.tk-stats > div { padding: 8px 4px 9px; border-radius: 10px; border: 1px solid var(--line); background: rgba(148,170,205,.05); text-align: center; }
+.tk-stats span { display: block; font-size: 11.2px; line-height: 1.6; color: var(--dim); }
+.tk-stats b { display: block; margin-block-start: 2px; font-family: var(--font-mono); font-size: 13.4px; font-weight: 600; color: var(--text); direction: ltr; }
+html[data-lang="fa"] .tk-stats b { font-family: var(--font-fa); font-size: 14.4px; }
+
+.tk-work { display: grid; gap: 6px; }
+.tk-work li {
+  display: flex; align-items: center; gap: 10px; min-height: 38px; padding: 4px 6px 4px 12px; border-radius: 10px;
+  border: 1px solid rgba(255,209,102,.4); background: rgba(255,209,102,.06); font-size: 12.8px; color: var(--muted);
+}
+html[dir="rtl"] .tk-work li { padding: 4px 12px 4px 6px; }
+.tk-work b { flex: none; font-size: 12.4px; }
+.tk-work b.is-buy { color: #a9ccff; }
+.tk-work b.is-sell { color: #ffb3bf; }
+html[data-lang="en"] .tk-work b { text-transform: uppercase; letter-spacing: .06em; }
+.tk-what { color: var(--text); font-weight: 600; white-space: nowrap; }
+.tk-ahead { color: #ffd166; white-space: nowrap; }
+.tk-done { margin-inline-start: auto; white-space: nowrap; }
+.tk-work button {
+  flex: none; width: 30px; height: 30px; padding: 0; border-radius: 8px; border: 1px solid var(--line-2); background: none;
+  color: var(--muted); font-size: 17px; line-height: 1; transition: color .2s, border-color .2s;
+}
+.tk-work button:hover { color: #ffb3bf; border-color: #ff8fa1; }
+
+.tk-pos { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block-start: 10px; border-block-start: 1px solid var(--line); font-size: 12.8px; line-height: 1.7; color: var(--muted); }
+.tk-pos bdi { color: var(--text); font-weight: 600; }
+.tk-reset { flex: none; padding: 4px 12px; border-radius: 8px; border: 1px solid var(--line-2); background: none; color: var(--muted); font-size: 12.4px; transition: color .2s, border-color .2s; }
+.tk-reset:hover { color: var(--text); border-color: var(--accent-hi); }
+
+/* the visitor's prints on the tape and waiting orders in the book are amber, like our own orders in the two track books */
 .mbo .chip.is-mine { background: #ffd166; color: #1c1300; transform: scale(1.14); box-shadow: 0 0 16px rgba(255,209,102,.85); }
-.hero-visual figcaption { margin-block-start: 10px; }
+.hero-visual figcaption { margin-block-start: 12px; }
+
+/* the book and its ticket are taller than the words beside them: both start at the top, and the words stay in view */
+@media (min-width: 1021px) {
+  .hero-grid { align-items: start; }
+  .hero-copy { position: sticky; inset-block-start: calc(var(--nav-h) + 26px); padding-block-start: 30px; }
+}
+@media (max-width: 760px) {
+  .mbo-say { min-height: 5.25em; }
+  .tk-stats { grid-template-columns: 1fr 1fr; }
+  .tk-work li { flex-wrap: wrap; gap: 4px 10px; padding-block: 8px; }
+  .tk-pos { flex-wrap: wrap; }
+}
+/* beside the words on a mid-sized screen the ticket is narrow: the price gets the wider share and both get slimmer buttons */
+@media (min-width: 1021px) and (max-width: 1240px) {
+  .tk-row + .tk-row { grid-template-columns: minmax(0, .74fr) minmax(0, 1.26fr); gap: 8px; }
+  .tk-step .tk-cap { padding-inline: 8px 2px; }
+  .tk-ctl { grid-template-columns: 26px minmax(0, 1fr) 26px; }
+}
+/* on a phone every control has a row of its own */
+@media (max-width: 460px) {
+  .tk-row, .tk-row + .tk-row { grid-template-columns: 1fr; }
+}
 
 /* ---------- home, the closing line: marks drift in scattered and leave in steady streams ---------- */
 .band-slogan .flow { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }

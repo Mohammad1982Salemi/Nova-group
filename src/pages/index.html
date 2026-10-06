@@ -63,15 +63,56 @@
         <div class="mbo-side mbo-bids"></div>
         <div class="mbo-tape"></div>
       </div>
-      <!-- the visitor's own market order: main.js lets it take the front of the queue like any other -->
+      <!-- the visitor's own orders: main.js works them in the book like any other order -->
       <div class="mbo-try">
+        <div class="tk-row">
+          <div class="tk-seg" data-k="type" role="group" aria-label="@@L:نوع سفارش||Order type@@">
+            <button type="button" data-v="market" aria-pressed="true"><span class="t-fa">بازار</span><span class="t-en">Market</span></button>
+            <button type="button" data-v="limit" aria-pressed="false"><span class="t-fa">محدود</span><span class="t-en">Limit</span></button>
+          </div>
+          <div class="tk-seg" data-k="delay" role="group" aria-label="@@L:تأخیر رسیدن سفارش به بازار||Delay before the order reaches the market@@">
+            <span class="tk-cap"><span class="t-fa">تأخیر</span><span class="t-en">Delay</span></span>
+            <button type="button" data-v="0" aria-pressed="true"><span class="t-fa">بدون</span><span class="t-en">None</span></button>
+            <button type="button" data-v="500" aria-pressed="false"><span class="t-fa">نیم‌ثانیه</span><span class="t-en">0.5 s</span></button>
+            <button type="button" data-v="2000" aria-pressed="false"><span class="t-fa">دو ثانیه</span><span class="t-en">2 s</span></button>
+          </div>
+        </div>
+        <div class="tk-row">
+          <div class="tk-step">
+            <span class="tk-cap"><span class="t-fa">حجم</span><span class="t-en">Size</span></span>
+            <span class="tk-ctl">
+              <button type="button" data-step="-1" data-of="size" aria-label="@@L:حجم کمتر||Smaller size@@">−</button>
+              <input class="tk-size" type="text" inputmode="numeric" maxlength="2" value="10" autocomplete="off" aria-label="@@L:حجم سفارش، به قرارداد||Order size, in contracts@@">
+              <button type="button" data-step="1" data-of="size" aria-label="@@L:حجم بیشتر||Larger size@@">+</button>
+            </span>
+          </div>
+          <div class="tk-step tk-price">
+            <span class="tk-cap"><span class="t-fa">قیمت</span><span class="t-en">Price</span></span>
+            <span class="tk-ctl">
+              <button type="button" data-step="-1" aria-label="@@L:یک پله پایین‌تر||One tick lower@@">−</button>
+              <output class="tk-px"></output>
+              <button type="button" data-step="1" aria-label="@@L:یک پله بالاتر||One tick higher@@">+</button>
+            </span>
+          </div>
+        </div>
         <div class="mbo-btns">
-          <button type="button" class="mbo-btn is-buy" data-side="buy"><span class="t-fa">خرید به قیمت بازار</span><span class="t-en">Buy at market</span></button>
-          <button type="button" class="mbo-btn is-sell" data-side="sell"><span class="t-fa">فروش به قیمت بازار</span><span class="t-en">Sell at market</span></button>
+          <button type="button" class="mbo-btn is-buy" data-side="buy"><b><span class="t-fa">خرید</span><span class="t-en">Buy</span></b><small></small></button>
+          <button type="button" class="mbo-btn is-sell" data-side="sell"><b><span class="t-fa">فروش</span><span class="t-en">Sell</span></b><small></small></button>
         </div>
         <p class="mbo-say" aria-live="polite">
-          <span class="t-fa">خودتان امتحان کنید: یک سفارش بازار بفرستید و ببینید صف چطور خورده می‌شود.</span>
-          <span class="t-en">Try it yourself: send a market order and watch it eat through the queue.</span>
+          <span class="t-fa">خودتان امتحان کنید: حجم و نوع سفارش را انتخاب کنید و بفرستید.</span>
+          <span class="t-en">Try it yourself: choose a size and an order type, then send it.</span>
+        </p>
+        <div class="tk-stats" hidden>
+          <div><span><span class="t-fa">پرشده</span><span class="t-en">Filled</span></span><b data-s="filled"></b></div>
+          <div><span><span class="t-fa">میانگین قیمت</span><span class="t-en">Avg price</span></span><b data-s="avg"></b></div>
+          <div><span><span class="t-fa">جابه‌جایی قیمت</span><span class="t-en">Price moved</span></span><b data-s="moved"></b></div>
+          <div><span><span class="t-fa">لغزش قیمت</span><span class="t-en">Slippage</span></span><b data-s="slip"></b></div>
+        </div>
+        <ul class="tk-work" hidden aria-label="@@L:سفارش‌های منتظر شما||Your waiting orders@@"></ul>
+        <p class="tk-pos" hidden>
+          <span class="tk-pos-text"></span>
+          <button type="button" class="tk-reset"><span class="t-fa">از نو</span><span class="t-en">Reset</span></button>
         </p>
       </div>
       <figcaption>

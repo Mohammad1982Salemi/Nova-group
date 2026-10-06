@@ -34,7 +34,7 @@
 
 <!-- The fonts are served from this site; the one this language needs first is fetched early. -->
 <link rel="preload" href="../assets/fonts/vazirmatn-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/css/style.css?v=51">
+<link rel="stylesheet" href="../assets/css/style.css?v=52">
 
 <!-- Samsung Internet (also used inside Telegram and WhatsApp) recolours pages in its dark mode; flag it early. -->
 <script>if (/SamsungBrowser/i.test(navigator.userAgent)) document.documentElement.classList.add('sb');</script>
@@ -156,14 +156,55 @@
         <div class="mbo-side mbo-bids"></div>
         <div class="mbo-tape"></div>
       </div>
-      <!-- the visitor's own market order: main.js lets it take the front of the queue like any other -->
+      <!-- the visitor's own orders: main.js works them in the book like any other order -->
       <div class="mbo-try">
+        <div class="tk-row">
+          <div class="tk-seg" data-k="type" role="group" aria-label="نوع سفارش">
+            <button type="button" data-v="market" aria-pressed="true"><span class="t-fa">بازار</span></button>
+            <button type="button" data-v="limit" aria-pressed="false"><span class="t-fa">محدود</span></button>
+          </div>
+          <div class="tk-seg" data-k="delay" role="group" aria-label="تأخیر رسیدن سفارش به بازار">
+            <span class="tk-cap"><span class="t-fa">تأخیر</span></span>
+            <button type="button" data-v="0" aria-pressed="true"><span class="t-fa">بدون</span></button>
+            <button type="button" data-v="500" aria-pressed="false"><span class="t-fa">نیم‌ثانیه</span></button>
+            <button type="button" data-v="2000" aria-pressed="false"><span class="t-fa">دو ثانیه</span></button>
+          </div>
+        </div>
+        <div class="tk-row">
+          <div class="tk-step">
+            <span class="tk-cap"><span class="t-fa">حجم</span></span>
+            <span class="tk-ctl">
+              <button type="button" data-step="-1" data-of="size" aria-label="حجم کمتر">−</button>
+              <input class="tk-size" type="text" inputmode="numeric" maxlength="2" value="10" autocomplete="off" aria-label="حجم سفارش، به قرارداد">
+              <button type="button" data-step="1" data-of="size" aria-label="حجم بیشتر">+</button>
+            </span>
+          </div>
+          <div class="tk-step tk-price">
+            <span class="tk-cap"><span class="t-fa">قیمت</span></span>
+            <span class="tk-ctl">
+              <button type="button" data-step="-1" aria-label="یک پله پایین‌تر">−</button>
+              <output class="tk-px"></output>
+              <button type="button" data-step="1" aria-label="یک پله بالاتر">+</button>
+            </span>
+          </div>
+        </div>
         <div class="mbo-btns">
-          <button type="button" class="mbo-btn is-buy" data-side="buy"><span class="t-fa">خرید به قیمت بازار</span></button>
-          <button type="button" class="mbo-btn is-sell" data-side="sell"><span class="t-fa">فروش به قیمت بازار</span></button>
+          <button type="button" class="mbo-btn is-buy" data-side="buy"><b><span class="t-fa">خرید</span></b><small></small></button>
+          <button type="button" class="mbo-btn is-sell" data-side="sell"><b><span class="t-fa">فروش</span></b><small></small></button>
         </div>
         <p class="mbo-say" aria-live="polite">
-          <span class="t-fa">خودتان امتحان کنید: یک سفارش بازار بفرستید و ببینید صف چطور خورده می‌شود.</span>
+          <span class="t-fa">خودتان امتحان کنید: حجم و نوع سفارش را انتخاب کنید و بفرستید.</span>
+        </p>
+        <div class="tk-stats" hidden>
+          <div><span><span class="t-fa">پرشده</span></span><b data-s="filled"></b></div>
+          <div><span><span class="t-fa">میانگین قیمت</span></span><b data-s="avg"></b></div>
+          <div><span><span class="t-fa">جابه‌جایی قیمت</span></span><b data-s="moved"></b></div>
+          <div><span><span class="t-fa">لغزش قیمت</span></span><b data-s="slip"></b></div>
+        </div>
+        <ul class="tk-work" hidden aria-label="سفارش‌های منتظر شما"></ul>
+        <p class="tk-pos" hidden>
+          <span class="tk-pos-text"></span>
+          <button type="button" class="tk-reset"><span class="t-fa">از نو</span></button>
         </p>
       </div>
       <figcaption>
@@ -578,6 +619,6 @@
 
 <button class="to-top" id="toTop" type="button" aria-label="بازگشت به بالا"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
 
-<script src="../assets/js/main.js?v=51"></script>
+<script src="../assets/js/main.js?v=52"></script>
 </body>
 </html>
