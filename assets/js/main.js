@@ -511,9 +511,12 @@
     }
     function send(buy) {
       if (busy) return;
-      if (pending) { setTimeout(function () { send(buy); }, 60); return; }    // let the change in hand finish first
-      busy = true;
+      busy = true;                          // the buttons answer at once, even if the book is mid-change
       buttons.forEach(function (b) { b.disabled = true; });
+      if (pending) setTimeout(function () { sweep(buy); }, 130);     // let the change in hand finish first
+      else sweep(buy);
+    }
+    function sweep(buy) {
       var book = buy ? asks : bids, dir = buy ? 1 : -1, from = book[0].px;
       // the first order is always large enough to use up the best level, so the price is seen to move
       var left = firstOrder ? total(book[0]) + rnd(3, 12) : rnd(5, 34), got = 0, cleared = 0, here = 0;
