@@ -5,8 +5,11 @@
 <meta name="darkreader-lock">
 <meta property="og:site_name" content="Nova Group">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://novacapital.fund/assets/img/favicon-192.png">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://novacapital.fund/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://novacapital.fund/assets/img/og.png">
 
 <link rel="icon" type="image/svg+xml" href="@@R@@assets/img/nova-mark.svg">
 <link rel="icon" type="image/png" sizes="64x64" href="@@R@@assets/img/favicon-64.png">
@@ -31,5 +34,11 @@
   if (l !== 'fa' && l !== 'en') l = (navigator.language || '').toLowerCase().indexOf('fa') === 0 ? 'fa' : 'en';
   d.setAttribute('data-lang', l); d.lang = l; d.dir = l === 'fa' ? 'rtl' : 'ltr';
   d.className += ' js';
+  // a short opening, once per visit and never for people who asked for less motion
+  try {
+    if (!sessionStorage.getItem('nova-seen') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      sessionStorage.setItem('nova-seen', '1'); d.className += ' intro';
+    }
+  } catch (e) {}
 })();
 </script>

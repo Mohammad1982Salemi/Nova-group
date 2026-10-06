@@ -16,8 +16,11 @@
 <meta name="darkreader-lock">
 <meta property="og:site_name" content="Nova Group">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://novacapital.fund/assets/img/favicon-192.png">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://novacapital.fund/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://novacapital.fund/assets/img/og.png">
 
 <link rel="icon" type="image/svg+xml" href="../assets/img/nova-mark.svg">
 <link rel="icon" type="image/png" sizes="64x64" href="../assets/img/favicon-64.png">
@@ -29,7 +32,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="../assets/css/style.css?v=39">
+<link rel="stylesheet" href="../assets/css/style.css?v=40">
 
 <!-- Samsung Internet (also used inside Telegram and WhatsApp) recolours pages in its dark mode; flag it early. -->
 <script>if (/SamsungBrowser/i.test(navigator.userAgent)) document.documentElement.classList.add('sb');</script>
@@ -42,6 +45,12 @@
   if (l !== 'fa' && l !== 'en') l = (navigator.language || '').toLowerCase().indexOf('fa') === 0 ? 'fa' : 'en';
   d.setAttribute('data-lang', l); d.lang = l; d.dir = l === 'fa' ? 'rtl' : 'ltr';
   d.className += ' js';
+  // a short opening, once per visit and never for people who asked for less motion
+  try {
+    if (!sessionStorage.getItem('nova-seen') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      sessionStorage.setItem('nova-seen', '1'); d.className += ' intro';
+    }
+  } catch (e) {}
 })();
 </script>
 </head>
@@ -85,7 +94,7 @@
       <span>TSETMC</span>
     </nav>
 
-    <h1 class="reveal">TSETMC</h1>
+    <h1 class="reveal"><span>TSETMC</span></h1>
     <p class="page-lead reveal">
       <span class="t-fa">تحلیل جریان سفارش بورس تهران، در مسیر یک صندوق الگوریتمی مدیریت پول.</span>
       <span class="t-en">Order-flow analysis of the Tehran Stock Exchange, on the way to an algorithmic money-management fund.</span>
@@ -325,6 +334,18 @@
 </section>
 
 <section class="section ruled">
+  <div class="wrap">
+    <nav class="projnav reveal" aria-label="More projects">
+      <a class="projnav-card is-prev glow" href="../projects/blocktrade.html">
+        <span class="projnav-dir"><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="t-fa">پروژه‌ی قبلی</span><span class="t-en">Previous project</span></span>
+        <b><span class="t-fa">بلاک‌ترید</span><span class="t-en">BlockTrade</span></b>
+      </a>
+      <a class="projnav-card is-next glow" href="../projects/gold-etf.html">
+        <span class="projnav-dir"><span class="t-fa">پروژه‌ی بعدی</span><span class="t-en">Next project</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <b><span class="t-fa">آربیتراژ صندوق‌های طلا</span><span class="t-en">Gold ETF Arbitrage</span></b>
+      </a>
+    </nav>
+  </div>
   <div class="wrap cs-end">
     <a class="link-arrow link-back" href="../projects.html">
       <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -378,6 +399,6 @@
 
 <button class="to-top" id="toTop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
 
-<script src="../assets/js/main.js?v=39"></script>
+<script src="../assets/js/main.js?v=40"></script>
 </body>
 </html>

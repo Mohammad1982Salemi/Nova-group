@@ -9,12 +9,17 @@
   function initLang() {
     var btn = document.getElementById('langBtn');
     if (!btn) return;
-    btn.addEventListener('click', function () {
+    function apply() {
       var lang = html.getAttribute('data-lang') === 'fa' ? 'en' : 'fa';
       html.setAttribute('data-lang', lang);
       html.lang = lang;
       html.dir = lang === 'fa' ? 'rtl' : 'ltr';
       try { localStorage.setItem('nova-lang', lang); } catch (e) { /* storage blocked */ }
+    }
+    btn.addEventListener('click', function () {
+      // cross-fade between the two languages where the browser can; otherwise switch at once
+      if (!reduceMotion && document.startViewTransition) document.startViewTransition(apply);
+      else apply();
     });
   }
 
@@ -58,31 +63,67 @@
       return;
     }
     var observer = new IntersectionObserver(function (entries) {
+      // things that arrive together come in one after another, not all at once
+      var step = 0;
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-in');
-        observer.unobserve(entry.target);
+        var el = entry.target, delay = Math.min(step++, 6) * 80;
+        el.style.transitionDelay = delay + 'ms';
+        el.classList.add('is-in');
+        observer.unobserve(el);
+        setTimeout(function () { el.style.transitionDelay = ''; }, delay + 1000);
       });
     }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-    items.forEach(function (el) { observer.observe(el); });
+    function start() { items.forEach(function (el) { observer.observe(el); }); }
+    // on the first visit the opening plays first
+    if (html.classList.contains('intro')) {
+      setTimeout(start, 650);
+      setTimeout(function () { html.classList.remove('intro'); }, 1300);
+    } else start();
   }
 
   /* case-study pages: mark the section being read in the contents list */
   function initToc() {
+    // on a project page the section links follow the reader in a bar under the header
+    var toc = document.querySelector('.page-hero .toc'), article = document.querySelector('.cs-body');
+    if (toc && article) {
+      var bar = document.createElement('div'), inner = document.createElement('div'), fill = document.createElement('i');
+      var copy = toc.cloneNode(true);
+      bar.className = 'tocbar';
+      inner.className = 'wrap';
+      fill.className = 'tocbar-fill';
+      copy.classList.remove('reveal', 'is-in');
+      copy.setAttribute('aria-label', 'On this page, pinned');
+      inner.appendChild(copy);
+      bar.appendChild(inner);
+      bar.appendChild(fill);
+      document.body.appendChild(bar);
+      var nav = document.getElementById('nav');
+      var place = function () {
+        var top = toc.getBoundingClientRect(), box = article.getBoundingClientRect(), vh = window.innerHeight;
+        bar.classList.toggle('is-on', top.bottom < nav.offsetHeight && box.bottom > vh * 0.4);
+        var read = (vh * 0.4 - box.top) / Math.max(1, box.height);
+        fill.style.transform = 'scaleX(' + Math.min(1, Math.max(0, read)).toFixed(3) + ')';
+      };
+      window.addEventListener('scroll', place, { passive: true });
+      window.addEventListener('resize', place);
+      place();
+    }
+
     var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
     if (!links.length || !('IntersectionObserver' in window)) return;
 
     var byId = {};
     links.forEach(function (a) {
       var id = a.getAttribute('href').slice(1);
-      if (document.getElementById(id)) byId[id] = a;
+      if (document.getElementById(id)) (byId[id] = byId[id] || []).push(a);
     });
 
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
         links.forEach(function (a) { a.removeAttribute('aria-current'); });
-        byId[entry.target.id].setAttribute('aria-current', 'true');
+        byId[entry.target.id].forEach(function (a) { a.setAttribute('aria-current', 'true'); });
       });
     }, { rootMargin: '-25% 0px -65% 0px' });
 
@@ -647,11 +688,66 @@
     });
   }
 
+  /* ---------------------------------------------------------------
+     Headline figures count up from zero the first time they are seen.
+     The figure keeps its own digits (Persian or Latin), separators and
+     decimals; years and dates are left alone.
+     --------------------------------------------------------------- */
+  function initCount() {
+    if (reduceMotion || !('IntersectionObserver' in window)) return;
+    var FA = '۰۱۲۳۴۵۶۷۸۹';
+    var NUM = /[0-9۰-۹]+(?:[,٬][0-9۰-۹]{3})*(?:[.٫][0-9۰-۹]+)?/g;
+    function value(s) {
+      return parseFloat(s.replace(/[٬,]/g, '').replace('٫', '.').replace(/[۰-۹]/g, function (c) { return FA.indexOf(c); }));
+    }
+    function write(v, like) {
+      var decimals = (like.split(/[.٫]/)[1] || '').length, parts = v.toFixed(decimals).split('.');
+      if (/[,٬]/.test(like)) parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      var s = parts.join('.');
+      if (/[۰-۹]/.test(like)) s = s.replace(/,/g, '٬').replace('.', '٫').replace(/\d/g, function (d) { return FA.charAt(d); });
+      return s;
+    }
+    var jobs = [];
+    Array.prototype.forEach.call(document.querySelectorAll('.facts-glass b, .proj-facts b, .report-facts b'), function (el) {
+      var walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null), node, mine = [];
+      while ((node = walk.nextNode())) {
+        var found = node.nodeValue.match(NUM);
+        if (!found) continue;
+        var dated = found.some(function (m) { var v = value(m); return !/[,٬.٫]/.test(m) && v >= 1300 && v <= 2100; });
+        if (!dated) mine.push({ node: node, text: node.nodeValue });
+      }
+      if (mine.length) jobs.push({ el: el, parts: mine });
+    });
+    if (!jobs.length) return;
+
+    function run(job) {
+      var t0 = null, span = 1100;
+      function frame(now) {
+        if (t0 === null) t0 = now;
+        var p = Math.min(1, (now - t0) / span), k = 1 - Math.pow(1 - p, 3);
+        job.parts.forEach(function (part) {
+          part.node.nodeValue = p === 1 ? part.text : part.text.replace(NUM, function (m) { return write(value(m) * k, m); });
+        });
+        if (p < 1) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
+    var seen = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        seen.unobserve(entry.target);
+        jobs.forEach(function (job) { if (job.el === entry.target) run(job); });
+      });
+    }, { threshold: 0.6 });
+    jobs.forEach(function (job) { seen.observe(job.el); });
+  }
+
   function boot() {
     initLang();
     initNav();
     initReveal();
     initToc();
+    initCount();
     initGlow();
     initMbo();
     initMaker();

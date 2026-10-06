@@ -16,8 +16,11 @@
 <meta name="darkreader-lock">
 <meta property="og:site_name" content="Nova Group">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://novacapital.fund/assets/img/favicon-192.png">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://novacapital.fund/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://novacapital.fund/assets/img/og.png">
 
 <link rel="icon" type="image/svg+xml" href="assets/img/nova-mark.svg">
 <link rel="icon" type="image/png" sizes="64x64" href="assets/img/favicon-64.png">
@@ -29,7 +32,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="assets/css/style.css?v=39">
+<link rel="stylesheet" href="assets/css/style.css?v=40">
 
 <!-- Samsung Internet (also used inside Telegram and WhatsApp) recolours pages in its dark mode; flag it early. -->
 <script>if (/SamsungBrowser/i.test(navigator.userAgent)) document.documentElement.classList.add('sb');</script>
@@ -42,6 +45,12 @@
   if (l !== 'fa' && l !== 'en') l = (navigator.language || '').toLowerCase().indexOf('fa') === 0 ? 'fa' : 'en';
   d.setAttribute('data-lang', l); d.lang = l; d.dir = l === 'fa' ? 'rtl' : 'ltr';
   d.className += ' js';
+  // a short opening, once per visit and never for people who asked for less motion
+  try {
+    if (!sessionStorage.getItem('nova-seen') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      sessionStorage.setItem('nova-seen', '1'); d.className += ' intro';
+    }
+  } catch (e) {}
 })();
 </script>
 </head>
@@ -95,6 +104,7 @@
   <div class="proj-main">
     <div class="proj-top">
       <span class="status"><span class="t-fa">در حال آزمون</span><span class="t-en">In testing</span></span>
+      <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v18M5 7h7M3 11h9M7 15h5M12 9h6M12 13h9M12 17h5"/></svg></span>
     </div>
     <h3><span class="t-fa">مارکت‌میکر CME</span><span class="t-en">CME Market Maker</span></h3>
     <p class="proj-sub">
@@ -124,6 +134,7 @@
   <div class="proj-main">
     <div class="proj-top">
       <span class="status"><span class="t-fa">در حال آزمون</span><span class="t-en">In testing</span></span>
+      <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 3 5 13h6l-1 8 8-10h-6l1-8z"/></svg></span>
     </div>
     <h3><span class="t-fa">فست اسکلپ</span><span class="t-en">Fast Scalp</span></h3>
     <p class="proj-sub">
@@ -153,6 +164,7 @@
   <div class="proj-main">
     <div class="proj-top">
       <span class="status"><span class="t-fa">سرویس داده در حال کار</span><span class="t-en">Data service running</span></span>
+      <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 3h11v11H3zM16 16h5v5h-5zM16 9h5M9 16v5"/></svg></span>
     </div>
     <h3><span class="t-fa">بلاک‌ترید</span><span class="t-en">BlockTrade</span></h3>
     <p class="proj-sub">
@@ -182,6 +194,7 @@
   <div class="proj-main">
     <div class="proj-top">
       <span class="status"><span class="t-fa">در حال توسعه</span><span class="t-en">In development</span></span>
+      <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4v4M7 16v4M5 8h4v8H5zM17 3v3M17 14v7M15 6h4v8h-4z"/></svg></span>
     </div>
     <h3>TSETMC</h3>
     <p class="proj-sub">
@@ -211,6 +224,7 @@
   <div class="proj-main">
     <div class="proj-top">
       <span class="status"><span class="t-fa">در حال آزمون</span><span class="t-en">In testing</span></span>
+      <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 12a4 4 0 1 0 8 0a4 4 0 1 0-8 0M4 12a8 8 0 0 1 13.7-5.7L20 8M20 12a8 8 0 0 1-13.7 5.7L4 16M20 4v4h-4M4 20v-4h4"/></svg></span>
     </div>
     <h3><span class="t-fa">آربیتراژ صندوق‌های طلا</span><span class="t-en">Gold ETF Arbitrage</span></h3>
     <p class="proj-sub">
@@ -240,6 +254,7 @@
   <div class="proj-main">
     <div class="proj-top">
       <span class="status"><span class="t-fa">در حال مطالعه</span><span class="t-en">Under study</span></span>
+      <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 12a5.5 5.5 0 1 0 11 0a5.5 5.5 0 1 0-11 0M9.5 12a5.5 5.5 0 1 0 11 0a5.5 5.5 0 1 0-11 0"/></svg></span>
     </div>
     <h3><span class="t-fa">دیفای ال‌پی</span><span class="t-en">DeFi LP</span></h3>
     <p class="proj-sub">
@@ -269,6 +284,7 @@
   <div class="proj-main">
     <div class="proj-top">
       <span class="status"><span class="t-fa">در حال توسعه</span><span class="t-en">In development</span></span>
+      <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg></span>
     </div>
     <h3><span class="t-fa">مارکت‌میکر کریپتو</span><span class="t-en">Crypto Market Maker</span></h3>
     <p class="proj-sub">
@@ -345,6 +361,6 @@
 
 <button class="to-top" id="toTop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
 
-<script src="assets/js/main.js?v=39"></script>
+<script src="assets/js/main.js?v=40"></script>
 </body>
 </html>

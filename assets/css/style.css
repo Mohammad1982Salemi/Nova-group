@@ -1098,3 +1098,183 @@ html.sb .proj-report.is-on { background: url(../img/sb-report.png) center / 100%
 /* a link inside a paragraph of a project page */
 .cs-section p a { color: var(--accent-hi); border-block-end: 1px solid rgba(140,188,255,.4); transition: color .2s, border-color .2s; }
 .cs-section p a:hover { color: #fff; border-color: #fff; }
+
+/* ==========================================================================
+   Upgrade layer: type scale, motion between and within pages, navigation aids.
+   Nothing here changes a word of content.
+   ========================================================================== */
+:root { --o-start: left; }
+html[dir="rtl"] { --o-start: right; }
+
+/* ---------- a larger, tighter type scale and more air ---------- */
+.hero h1 { font-size: clamp(2.6rem, 6vw, 4.7rem); }
+.page-hero h1 { font-size: clamp(2.4rem, 5.6vw, 4.1rem); }
+.sec-head { margin-block-end: 58px; }
+.sec-head h2 { font-size: clamp(2rem, 4vw, 3.05rem); }
+.cs-section h2 { font-size: clamp(1.9rem, 3.7vw, 2.8rem); }
+html[data-lang="en"] .hero h1, html[data-lang="en"] .page-hero h1 { letter-spacing: -.035em; }
+html[data-lang="en"] .sec-head h2, html[data-lang="en"] .cs-section h2 { letter-spacing: -.03em; }
+.section { padding-block: 116px; }
+.sec-head .eyebrow { display: inline-flex; align-items: center; gap: 12px; }
+.sec-head .eyebrow::before { content: ''; width: 30px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, var(--accent), var(--cyan)); }
+.facts-glass b, .proj-facts b, .report-facts b { font-variant-numeric: tabular-nums; }
+@media (max-width: 760px) { .section { padding-block: 76px; } .sec-head { margin-block-end: 40px; } }
+
+/* ---------- a fine grain over the page, so flat colour has some depth ---------- */
+body::after {
+  content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- the opening: the mark, a line, then the page (first visit only) ---------- */
+html.intro::after {
+  content: ''; position: fixed; inset: 0; z-index: 2000; pointer-events: none;
+  background: #05080e url(../img/nova-mark-512.png) center / 92px no-repeat;
+  animation: intro-veil 1.05s cubic-bezier(.6,0,.3,1) forwards;
+}
+html.intro::before {
+  content: ''; position: fixed; z-index: 2001; pointer-events: none;
+  inset-inline: 0; inset-block-start: calc(50% + 70px); width: 130px; height: 2px; margin-inline: auto;
+  background: linear-gradient(90deg, transparent, #38d5f5, transparent);
+  animation: intro-line 1.05s cubic-bezier(.6,0,.3,1) forwards;
+}
+@keyframes intro-veil {
+  0% { opacity: 1; background-size: 78px; }
+  60% { opacity: 1; background-size: 92px; }
+  100% { opacity: 0; background-size: 108px; visibility: hidden; }
+}
+@keyframes intro-line {
+  0% { opacity: 0; transform: scaleX(0); }
+  25% { opacity: 1; }
+  60% { opacity: 1; transform: scaleX(1); }
+  100% { opacity: 0; transform: scaleX(1.5); }
+}
+
+/* ---------- moving between pages: the old one fades, the new one rises in ---------- */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: vt-out .2s ease both; }
+::view-transition-new(root) { animation: vt-in .45s cubic-bezier(.2,.8,.2,1) both; }
+.nav { view-transition-name: site-nav; }
+::view-transition-old(site-nav), ::view-transition-new(site-nav) { animation: none; }
+@keyframes vt-out { to { opacity: 0; } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(12px); } }
+@supports not (view-transition-name: none) {
+  html.js main { animation: vt-in .5s cubic-bezier(.2,.8,.2,1) both; }
+}
+
+/* ---------- the big headings rise from behind an edge ---------- */
+/* the clip sits on the text inside, not on the heading: a heading clipped to nothing is never seen as "in view" */
+html.js .hero h1.reveal, html.js .page-hero h1.reveal { opacity: 1; transform: none; }
+html.js .hero h1.reveal > span, html.js .page-hero h1.reveal > span {
+  display: block; transform: translateY(.4em); clip-path: inset(0 -5% 100% -5%);
+  transition: clip-path 1s cubic-bezier(.2,.8,.2,1), transform 1s cubic-bezier(.2,.8,.2,1); transition-delay: inherit;
+}
+html.js .hero h1.reveal.is-in > span, html.js .page-hero h1.reveal.is-in > span { transform: none; clip-path: inset(-15% -5% -20% -5%); }
+
+/* ---------- links: an underline that draws itself ---------- */
+.nav-links a::after {
+  content: ''; position: absolute; inset-inline: 16px; inset-block-end: 3px; height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--cyan));
+  transform: scaleX(0); transform-origin: var(--o-start); transition: transform .32s cubic-bezier(.2,.8,.2,1);
+}
+.nav-links a:hover::after, .nav-links a[aria-current="page"]::after { transform: scaleX(1); }
+.link-arrow > span {
+  padding-block-end: 2px; background: linear-gradient(currentColor, currentColor) no-repeat;
+  background-position: var(--o-start) 100%; background-size: 0 1px; transition: background-size .32s cubic-bezier(.2,.8,.2,1);
+}
+a.link-arrow:hover > span, a:hover .link-arrow > span { background-size: 100% 1px; }
+
+/* ---------- home: the three layers as one connected path, not three boxes ---------- */
+@media (min-width: 861px) {
+  .layers-home { gap: 0; }
+  .layers-home li, .layers-home li.glow:hover {
+    padding: 0 34px; background: none; border: 0; border-radius: 0; box-shadow: none; transform: none; overflow: visible;
+  }
+  .layers-home li:first-child { padding-inline-start: 0; }
+  .layers-home li:last-child { padding-inline-end: 0; }
+  .layers-home li.glow::after { display: none; }
+  .layers-home .layer-ico { width: 58px; height: 58px; margin-block-end: 26px; border-radius: 17px; transition: transform .3s, box-shadow .3s, border-color .3s; }
+  .layers-home li:hover .layer-ico { transform: translateY(-4px); border-color: var(--cyan); box-shadow: 0 12px 34px rgba(56,213,245,.35); }
+  .layers-home .layer-ico svg { width: 27px; height: 27px; }
+  .layers-home h3 { font-size: 20px; }
+  /* the dashes run from one layer's mark to the next */
+  .layers-home li::before { display: none; }
+  .layers-home li + li::before {
+    display: block; content: ''; position: absolute; inset-block-start: 28px; height: 2px; z-index: 0; border-radius: 2px;
+    background: repeating-linear-gradient(90deg, var(--cyan) 0 6px, transparent 6px 12px);
+    animation: pipe-flow 1s linear infinite;
+  }
+  html[dir="rtl"] .layers-home li + li::before { animation-name: pipe-flow-rtl; }
+  .layers-home li:nth-child(2)::before { inset-inline-start: calc(-100% + 72px); width: calc(100% - 62px); }
+  .layers-home li:nth-child(3)::before { inset-inline-start: calc(-100% + 106px); width: calc(100% - 96px); }
+  .layers-home li + li .layer-ico::before {
+    content: ''; position: absolute; inset-block-start: 24px; inset-inline-start: 18px; width: 8px; height: 8px;
+    border-block-start: 2px solid var(--cyan); border-inline-end: 2px solid var(--cyan); transform: rotate(45deg);
+  }
+  html[dir="rtl"] .layers-home li + li .layer-ico::before { transform: rotate(-45deg); }
+  .layers-home li:nth-child(3) .layer-ico::before { inset-inline-start: 18px; }
+}
+@media (prefers-reduced-motion: reduce) { .layers-home li + li::before { animation: none; } }
+
+/* ---------- project cards: a mark of their own ---------- */
+.proj-glyph {
+  flex: none; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 13px;
+  border: 1px solid var(--line-2); background: rgba(148,170,205,.05);
+  transition: border-color .3s, box-shadow .3s, background .3s;
+}
+.proj-glyph svg { width: 23px; height: 23px; fill: none; stroke: var(--accent-hi); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; transition: stroke .3s; }
+.proj:hover .proj-glyph { border-color: rgba(56,213,245,.6); background: rgba(56,213,245,.08); box-shadow: 0 0 24px rgba(56,213,245,.22); }
+.proj:hover .proj-glyph svg { stroke: var(--cyan); }
+
+/* ---------- project pages: the section links follow the reader ---------- */
+.tocbar {
+  position: fixed; inset-inline: 0; inset-block-start: var(--nav-h); z-index: 90;
+  background: rgba(5,8,14,.88); backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border-block-end: 1px solid var(--line);
+  opacity: 0; visibility: hidden; transform: translateY(-14px);
+  transition: opacity .28s, transform .35s cubic-bezier(.2,.8,.2,1), visibility .28s;
+}
+.tocbar.is-on { opacity: 1; visibility: visible; transform: none; }
+.tocbar .toc { margin: 0; padding-block: 10px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+.tocbar .toc::-webkit-scrollbar { display: none; }
+.tocbar .toc a { flex: none; }
+.tocbar-fill {
+  position: absolute; inset-inline: 0; inset-block-end: -1px; height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--cyan)); transform: scaleX(0); transform-origin: var(--o-start);
+}
+html:has(.tocbar) { scroll-padding-top: calc(var(--nav-h) + 78px); }
+
+/* ---------- project pages: the project before and the one after ---------- */
+.projnav { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-block-end: 40px; }
+.projnav-card {
+  display: flex; flex-direction: column; gap: 12px; padding: 28px 30px; border-radius: var(--r-lg);
+  border: 1px solid var(--line); background: var(--panel);
+}
+.projnav-card.is-next { align-items: flex-end; text-align: end; }
+.projnav-dir { display: inline-flex; align-items: center; gap: 9px; color: var(--muted); font-size: 13.6px; }
+.projnav-card.is-prev .arr { transform: scaleX(-1); }
+html[dir="rtl"] .projnav-card.is-prev .arr { transform: none; }
+.projnav-card b { font-family: var(--font-h); font-size: clamp(1.2rem, 2.3vw, 1.6rem); font-weight: 700; color: var(--text); transition: color .25s; }
+.projnav-card:hover b { color: var(--cyan); }
+@media (max-width: 760px) { .projnav { grid-template-columns: 1fr; } .projnav-card.is-next { align-items: flex-start; text-align: start; } }
+
+/* ---------- not found ---------- */
+.lost { min-height: 78vh; display: grid; align-items: center; border-block-end: 0; }
+.lost-code {
+  font-family: var(--font-disp); font-size: clamp(5rem, 18vw, 11rem); font-weight: 700; line-height: 1; letter-spacing: -.04em;
+  background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; margin-block-end: 18px;
+}
+html.sb .lost-code { background: none; color: #6cc6ff; }
+.lost .hero-cta { margin-block-start: 34px; }
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+  html.js .hero h1.reveal > span, html.js .page-hero h1.reveal > span { clip-path: none; transform: none; }
+}
+@media print { .tocbar, .projnav, body::after { display: none; } }
+
+/* English captions in the fact tiles run longer than the Persian ones: set them a touch smaller so none is cut */
+html[data-lang="en"] .facts-glass .fact-list span { font-size: 13px; letter-spacing: -.012em; }
+
+/* between phone and tablet widths two tiles side by side are too narrow for their captions */
+@media (max-width: 640px) { .facts.facts-glass { grid-template-columns: 1fr; } }
