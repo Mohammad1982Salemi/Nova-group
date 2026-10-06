@@ -1211,37 +1211,41 @@ html.js .hero h1.reveal.is-in > span, html.js .page-hero h1.reveal.is-in > span 
 }
 a.link-arrow:hover > span, a:hover .link-arrow > span { background-size: 100% 1px; }
 
-/* ---------- home: the three layers as one connected path, not three boxes ---------- */
+/* ---------- home: the three layers as a stack, the foundation at the bottom ----------
+   Each layer is a slab; a higher one is a little narrower and sits on the one beneath. They are written
+   in reading order (foundation first) and laid out bottom-up. When the stack comes into view the
+   foundation rises into place and the other two land on it in turn (main.js adds .is-stacked). */
 @media (min-width: 861px) {
-  .layers-home { gap: 0; }
-  .layers-home li { padding: 0 34px; background: none; border: 0; border-radius: 0; overflow: visible; }
-  /* hovering must not bring the card look, or its padding, back */
-  .layers-home li.glow:hover { background: none; border: 0; box-shadow: none; transform: none; }
-  .layers-home li:first-child { padding-inline-start: 0; }
-  .layers-home li:last-child { padding-inline-end: 0; }
-  .layers-home li.glow::after { display: none; }
-  .layers-home .layer-ico { width: 58px; height: 58px; margin-block-end: 26px; border-radius: 17px; transition: transform .3s, box-shadow .3s, border-color .3s; }
-  .layers-home li:hover .layer-ico { transform: translateY(-4px); border-color: var(--cyan); box-shadow: 0 12px 34px rgba(56,213,245,.35); }
+  .layers-home { display: flex; flex-direction: column-reverse; align-items: center; gap: 12px; }
+  .layers-home li {
+    display: grid; grid-template-columns: 58px minmax(210px, 290px) minmax(0, 1fr); column-gap: 26px;
+    grid-template-areas: "ico tag text" "ico title text"; align-items: center;
+    width: 100%; padding: 22px 32px 24px; border-radius: 18px; border: 1px solid var(--line-2);
+    background: linear-gradient(180deg, rgba(148,170,205,.115), rgba(148,170,205,.03));
+    box-shadow: 0 20px 44px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.08), inset 0 -4px 0 rgba(3,6,12,.5);
+  }
+  .layers-home li:nth-child(2) { width: 91%; border-color: rgba(96,165,250,.38); }
+  .layers-home li:nth-child(3) {
+    width: 82%; border-color: rgba(56,213,245,.5);
+    box-shadow: 0 20px 44px rgba(0,0,0,.42), 0 0 44px rgba(56,213,245,.1), inset 0 1px 0 rgba(255,255,255,.1), inset 0 -4px 0 rgba(3,6,12,.5);
+  }
+  .layers-home .layer-ico { grid-area: ico; width: 58px; height: 58px; margin: 0; border-radius: 17px; transition: transform .3s, box-shadow .3s, border-color .3s; }
   .layers-home .layer-ico svg { width: 27px; height: 27px; }
-  .layers-home h3 { font-size: 20px; }
-  /* the dashes run from one layer's mark to the next */
-  .layers-home li::before { display: none; }
-  .layers-home li + li::before {
-    display: block; content: ''; position: absolute; inset-block-start: 28px; height: 2px; z-index: 0; border-radius: 2px;
-    background: repeating-linear-gradient(90deg, var(--cyan) 0 6px, transparent 6px 12px);
-    animation: pipe-flow 1s linear infinite;
-  }
-  html[dir="rtl"] .layers-home li + li::before { animation-name: pipe-flow-rtl; }
-  .layers-home li:nth-child(2)::before { inset-inline-start: calc(-100% + 72px); width: calc(100% - 62px); }
-  .layers-home li:nth-child(3)::before { inset-inline-start: calc(-100% + 106px); width: calc(100% - 96px); }
-  .layers-home li + li .layer-ico::before {
-    content: ''; position: absolute; inset-block-start: 24px; inset-inline-start: 18px; width: 8px; height: 8px;
-    border-block-start: 2px solid var(--cyan); border-inline-end: 2px solid var(--cyan); transform: rotate(45deg);
-  }
-  html[dir="rtl"] .layers-home li + li .layer-ico::before { transform: rotate(-45deg); }
-  .layers-home li:nth-child(3) .layer-ico::before { inset-inline-start: 18px; }
+  .layers-home .layer-tag { grid-area: tag; align-self: end; margin: 0; }
+  .layers-home h3 { grid-area: title; align-self: start; margin: 4px 0 0; font-size: 19px; }
+  .layers-home p { grid-area: text; }
+  .layers-home li.glow:hover { transform: translateY(-4px); }
+  .layers-home li:hover .layer-ico { border-color: var(--cyan); box-shadow: 0 12px 34px rgba(56,213,245,.35); }
+
+  html.js .layers-home:not(.is-stacked) > li { opacity: 0; }
+  html.js .layers-home:not(.is-stacked) > li:nth-child(1) { transform: translateY(44px); }
+  html.js .layers-home:not(.is-stacked) > li:nth-child(n+2) { transform: translateY(-58px) scale(.97); }
+  html.js .layers-home.is-stacked > li { opacity: 1; transform: none; transition: opacity .4s ease, transform .8s cubic-bezier(.3,1.4,.5,1), border-color .3s, box-shadow .3s; }
+  html.js .layers-home.is-stacked:not(.is-settled) > li:nth-child(2) { transition-delay: .34s; }
+  html.js .layers-home.is-stacked:not(.is-settled) > li:nth-child(3) { transition-delay: .68s; }
+  html.js .layers-home.is-settled > li { transition: transform .3s, border-color .3s, box-shadow .3s; }
+  html.js .layers-home.is-settled > li.glow:hover { transform: translateY(-4px); }
 }
-@media (prefers-reduced-motion: reduce) { .layers-home li + li::before { animation: none; } }
 
 /* ---------- project cards: a mark of their own ---------- */
 .proj-glyph {
@@ -1324,6 +1328,7 @@ html[data-lang="en"] .facts-glass .fact-list span { font-size: 13px; letter-spac
 /* ---------- arriving from the same page in the other language: the reader is put back where they were,
    so nothing plays its entrance a second time ---------- */
 html.is-returning .reveal, html.is-returning .reveal > span { opacity: 1 !important; transform: none !important; clip-path: none !important; transition: none !important; }
+html.is-returning .phases li::before { transition: none; }
 
 /* ---------- touch screens: small links and buttons answer to a fingertip, not just to their own outline.
    The hit area grows; nothing on the page moves, and a desktop with a mouse is not affected. ---------- */
@@ -1339,4 +1344,109 @@ html.is-returning .reveal, html.is-returning .reveal > span { opacity: 1 !import
   html[lang="en"] :is(.prose p, .hero-sub, .page-lead, .split-side p, .layers p, .track p, .proj-desc, .sec-head p:not(.eyebrow), .cs-section p) {
     -webkit-hyphens: auto; hyphens: auto; hyphenate-limit-chars: 7 3 3;
   }
+}
+
+/* ==========================================================================
+   Effects layer 2
+   ========================================================================== */
+:root { --o-end: right; }
+html[dir="rtl"] { --o-end: left; }
+/* Persian inside a display heading (a project's name on its card) stays in the site's Persian face */
+html[data-lang="fa"] { --font-disp: 'Space Grotesk', 'Inter', 'Vazirmatn', 'Segoe UI', Tahoma, sans-serif; }
+
+/* ---------- a project's name travels from its card to the heading of its page, and back ---------- */
+.proj h3 > span { display: inline-block; }
+.page-hero:has(.crumbs) h1 > span { width: fit-content; max-width: 100%; view-transition-name: proj-title; }
+html.from-card .page-hero h1.reveal > span { transform: none; clip-path: none; transition: none; }
+::view-transition-group(proj-title) { animation-duration: .55s; animation-timing-function: cubic-bezier(.2,.8,.2,1); }
+
+/* ---------- the road ahead: a bar along the top of each stage fills, in order, up to today ---------- */
+.phases li::before {
+  content: ''; position: absolute; inset-block-start: 0; inset-inline: 0; height: 3px; z-index: 1;
+  background:
+    linear-gradient(to var(--o-end), var(--accent), var(--cyan)) var(--o-start) 0 / 0% 100% no-repeat,
+    rgba(148,170,205,.13);
+  transition: background-size .75s cubic-bezier(.3,.7,.2,1);
+}
+.phases li:nth-child(2)::before { transition-delay: .5s; }
+.phases li:nth-child(3)::before { transition-delay: 1s; }
+.phases li:nth-child(4)::before { transition-delay: 1.5s; }
+html:not(.js) .phases li.is-done::before, .phases li.is-done.is-in::before { background-size: 100% 100%, auto; }
+html:not(.js) .phases li.is-now::before, .phases li.is-now.is-in::before { background-size: 58% 100%, auto; }
+/* today's stage breathes, and its label carries a live dot */
+.phases li.is-now.is-in { animation: phase-now 3s ease-in-out 1.6s infinite; }
+@keyframes phase-now { 50% { box-shadow: 0 0 54px rgba(56,213,245,.3); border-color: rgba(56,213,245,.85); } }
+.phases li.is-now .phase-mark { display: inline-flex; align-items: center; gap: 8px; }
+.phases li.is-now .phase-mark::before {
+  content: ''; flex: none; width: 7px; height: 7px; border-radius: 50%; background: #04121a;
+  animation: phase-dot 1.8s ease-out infinite;
+}
+@keyframes phase-dot { 0% { box-shadow: 0 0 0 0 rgba(4,18,26,.55); } 100% { box-shadow: 0 0 0 9px rgba(4,18,26,0); } }
+
+/* ---------- home hero: send a market order of your own into the simulated book ---------- */
+.mbo-try { display: grid; gap: 12px; margin-block-start: 14px; }
+.mbo-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.mbo-btn {
+  min-height: 46px; padding: 10px 12px; border-radius: 12px; font-size: 14.4px; font-weight: 600; line-height: 1.5;
+  backdrop-filter: blur(8px); transition: background .2s, border-color .2s, box-shadow .25s, transform .2s, opacity .2s;
+}
+.mbo-btn.is-buy  { color: #a9ccff; border: 1px solid rgba(91,155,255,.55); background: rgba(91,155,255,.1); }
+.mbo-btn.is-sell { color: #ffb3bf; border: 1px solid rgba(255,115,137,.5); background: rgba(255,115,137,.08); }
+.mbo-btn.is-buy:hover  { border-color: #7db4ff; background: rgba(91,155,255,.18); box-shadow: 0 0 26px rgba(91,155,255,.28); transform: translateY(-2px); }
+.mbo-btn.is-sell:hover { border-color: #ff8fa1; background: rgba(255,115,137,.15); box-shadow: 0 0 26px rgba(255,115,137,.24); transform: translateY(-2px); }
+.mbo-btn:active { transform: translateY(0) scale(.98); }
+.mbo-btn[disabled] { opacity: .5; cursor: default; transform: none; box-shadow: none; }
+/* two lines are held for the sentence, so the page does not shift when the result is written in */
+.mbo-say { min-height: 3.5em; text-align: center; font-size: 13.8px; line-height: 1.75; color: var(--muted); }
+.mbo-say.is-told { color: var(--text); animation: cap-in .45s ease-out; }
+.mbo-say bdi { color: #ffd166; font-weight: 600; }
+@media (max-width: 760px) { .mbo-say { min-height: 5.25em; } }
+/* the visitor's prints on the tape are amber, like our own orders in the two track books */
+.mbo .chip.is-mine { background: #ffd166; color: #1c1300; transform: scale(1.14); box-shadow: 0 0 16px rgba(255,209,102,.85); }
+.hero-visual figcaption { margin-block-start: 10px; }
+
+/* ---------- home, the closing line: marks drift in scattered and leave in steady streams ---------- */
+.band-slogan .flow { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
+.band-slogan > :not(.flow) { position: relative; z-index: 1; }
+
+/* ---------- a project screenshot at full size: zoom with the wheel, two fingers or a double tap; drag to move ---------- */
+.lightbox { display: block; padding: 0; cursor: default; overscroll-behavior: contain; }
+.lightbox.is-closing { opacity: 0; transition: opacity .2s; }
+.lightbox-view { position: absolute; inset: 56px 16px 84px; display: grid; place-items: center; touch-action: none; cursor: zoom-out; }
+.lightbox-view img {
+  display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; aspect-ratio: var(--ar, auto);
+  border-radius: 10px; border: 1px solid var(--line-2); box-shadow: 0 40px 120px rgba(0,0,0,.8);
+  cursor: zoom-in; user-select: none; -webkit-user-drag: none; will-change: transform; transform-origin: 50% 50%;
+}
+.lightbox-view img.is-zoomed { cursor: grab; }
+.lightbox-view img.is-held { cursor: grabbing; }
+.lightbox-view img.is-eased { transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+.lightbox-nav {
+  position: absolute; inset-block-start: 50%; z-index: 2; width: 46px; height: 46px; margin-block-start: -37px; padding: 0; border-radius: 50%;
+  display: grid; place-items: center; color: var(--text); background: rgba(148,170,205,.12); border: 1px solid var(--line-2);
+  transition: background .2s, border-color .2s;
+}
+.lightbox-nav:hover { background: rgba(59,130,246,.3); border-color: var(--accent-hi); }
+.lightbox-nav svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.lightbox-nav.is-prev { inset-inline-start: 18px; }
+.lightbox-nav.is-next { inset-inline-end: 18px; }
+html[dir="ltr"] .lightbox-nav.is-prev svg, html[dir="rtl"] .lightbox-nav.is-next svg { transform: scaleX(-1); }
+.lightbox-close { z-index: 3; inset-block-start: 8px; inset-inline-end: 14px; width: 42px; height: 42px; }
+.lightbox-bar {
+  position: absolute; inset-inline: 0; inset-block-end: 0; z-index: 2; display: flex; align-items: center; gap: 16px;
+  min-height: 72px; padding: 12px 22px 14px; background: linear-gradient(to top, rgba(3,5,10,.92), rgba(3,5,10,0));
+}
+.lightbox-count { flex: none; font-family: var(--font-disp); font-size: 13px; letter-spacing: .08em; color: var(--accent-hi); direction: ltr; }
+.lightbox-cap { flex: 1; min-width: 0; font-size: 14.2px; line-height: 1.7; color: var(--muted); }
+.lightbox-hint { flex: none; font-size: 12.4px; color: var(--dim); transition: opacity .6s; }
+.lightbox-hint.is-gone { opacity: 0; }
+@media (max-width: 760px) {
+  .lightbox-view { inset: 54px 0 118px; }
+  .lightbox-view img { border-radius: 0; border-inline: 0; }
+  .lightbox-nav { inset-block-start: auto; inset-block-end: 12px; margin: 0; width: 42px; height: 42px; z-index: 3; }
+  .lightbox-nav.is-prev { inset-inline-start: 12px; }
+  .lightbox-nav.is-next { inset-inline-end: 12px; }
+  .lightbox-bar { flex-direction: column; align-items: stretch; gap: 4px; min-height: 110px; padding: 10px 64px 12px; text-align: center; }
+  .lightbox-cap { font-size: 12.8px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .lightbox-hint { order: -1; color: var(--accent-hi); }
 }

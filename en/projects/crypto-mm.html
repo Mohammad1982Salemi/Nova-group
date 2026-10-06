@@ -35,7 +35,7 @@
 <!-- The fonts are served from this site; the one this language needs first is fetched early. -->
 <link rel="preload" href="../../assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../../assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../../assets/css/style.css?v=48">
+<link rel="stylesheet" href="../../assets/css/style.css?v=49">
 
 <!-- Samsung Internet (also used inside Telegram and WhatsApp) recolours pages in its dark mode; flag it early. -->
 <script>if (/SamsungBrowser/i.test(navigator.userAgent)) document.documentElement.classList.add('sb');</script>
@@ -66,6 +66,16 @@
     return;
   }
   d.className += ' js';
+  try {
+    // the same page in the other language: the reader is put back in place, so nothing plays its entrance again
+    if (sessionStorage.getItem('nova-place')) d.className += ' is-returning';
+    // arriving from a project's card: its name travels into this page's heading, which must be there from the first frame
+    var card = sessionStorage.getItem('nova-card');
+    if (card) {
+      sessionStorage.removeItem('nova-card');
+      if (location.pathname.indexOf('/projects/' + card + '.html') > -1) d.className += ' from-card';
+    }
+  } catch (e) {}
   // a short opening, once per visit and never for people who asked for less motion
   try {
     if (!sessionStorage.getItem('nova-seen') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -391,6 +401,6 @@
 
 <button class="to-top" id="toTop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
 
-<script src="../../assets/js/main.js?v=48"></script>
+<script src="../../assets/js/main.js?v=49"></script>
 </body>
 </html>

@@ -63,6 +63,17 @@
         <div class="mbo-side mbo-bids"></div>
         <div class="mbo-tape"></div>
       </div>
+      <!-- the visitor's own market order: main.js lets it take the front of the queue like any other -->
+      <div class="mbo-try">
+        <div class="mbo-btns">
+          <button type="button" class="mbo-btn is-buy" data-side="buy"><span class="t-fa">خرید به قیمت بازار</span><span class="t-en">Buy at market</span></button>
+          <button type="button" class="mbo-btn is-sell" data-side="sell"><span class="t-fa">فروش به قیمت بازار</span><span class="t-en">Sell at market</span></button>
+        </div>
+        <p class="mbo-say" aria-live="polite">
+          <span class="t-fa">خودتان امتحان کنید: یک سفارش بازار بفرستید و ببینید صف چطور خورده می‌شود.</span>
+          <span class="t-en">Try it yourself: send a market order and watch it eat through the queue.</span>
+        </p>
+      </div>
       <figcaption>
         <span class="t-fa">دفتر سفارش در سطح تک‌سفارش (MBO) — شبیه‌سازی است، نه داده‌ی بازار.</span>
         <span class="t-en">An order-level (MBO) book — a simulation, not market data.</span>
@@ -200,6 +211,7 @@
 <section class="section">
   <div class="wrap">
     <div class="band band-slogan reveal">
+      <canvas class="flow" aria-hidden="true"></canvas>
       <h2>
         <span class="t-fa">از جریان سفارش، <em>تا جریان سرمایه.</em></span>
         <span class="t-en">From order flow <em>to capital flow.</em></span>

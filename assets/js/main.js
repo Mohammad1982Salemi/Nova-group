@@ -41,9 +41,8 @@
         r = list[i].getBoundingClientRect();
         if (r.height && r.bottom > top) break;
       }
-      if (window.scrollY > 60 && i < list.length) {
-        try { sessionStorage.setItem(KEY, JSON.stringify({ to: to, i: i, f: (top - r.top) / r.height })); } catch (err) { /* no place kept */ }
-      }
+      if (window.scrollY <= 60 || i === list.length) i = -1;      // at the top: there is no place to find again
+      try { sessionStorage.setItem(KEY, JSON.stringify({ to: to, i: i, f: i < 0 ? 0 : (top - r.top) / r.height })); } catch (err) { /* no place kept */ }
       if (!kept) {                  // nothing can be remembered in this browser: carry the choice in the address
         e.preventDefault();
         e.stopImmediatePropagation();
@@ -53,7 +52,10 @@
 
     var saved = null;
     try { saved = JSON.parse(sessionStorage.getItem(KEY)); sessionStorage.removeItem(KEY); } catch (err) { /* none */ }
-    if (!saved || saved.to !== html.lang) return;
+    if (!saved || saved.to !== html.lang) { html.classList.remove('is-returning'); return; }
+    returning = true;
+    html.classList.add('is-returning');
+    setTimeout(function () { html.classList.remove('is-returning'); }, 400);
     var mark = blocks()[saved.i], last = -1;
     if (!mark) return;
     function settle() {
@@ -61,14 +63,28 @@
       last = Math.max(0, Math.round(window.scrollY + r.top + saved.f * r.height - line()));
       window.scrollTo({ top: last, behavior: 'instant' });
     }
-    returning = true;
-    html.classList.add('is-returning');
     settle();
     // the web font may land a moment later and move the lines: settle once more, unless the reader has moved on
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(function () { if (Math.abs(window.scrollY - last) < 4) settle(); });
     }
-    setTimeout(function () { html.classList.remove('is-returning'); }, 400);
+  }
+
+  /* A project's name travels from its card to the heading of its page. The card's title takes the shared
+     name only when that card is clicked, so the other cards simply fade with the page. Going back with
+     the browser's button, the heading returns to the same card. */
+  function initCards() {
+    var cards = Array.prototype.slice.call(document.querySelectorAll('a.proj, a.projnav-card'));
+    cards.forEach(function (card) {
+      var m = /projects\/([\w-]+)\.html/.exec(card.getAttribute('href') || '');
+      if (!m) return;
+      card.addEventListener('click', function () {
+        cards.forEach(function (c) { var t = c.querySelector('h3 > span'); if (t) t.style.viewTransitionName = ''; });
+        var title = card.querySelector('h3 > span');
+        if (title) title.style.viewTransitionName = 'proj-title';
+        try { sessionStorage.setItem('nova-card', m[1]); } catch (e) { /* the heading just rises as usual */ }
+      });
+    });
   }
 
   function initNav() {
@@ -184,6 +200,88 @@
     }, { passive: true });
   }
 
+  /* Home: the three layers of the method land on one another, from the bottom up, when the stack is in view */
+  function initStack() {
+    var stack = document.querySelector('.layers-home');
+    if (!stack) return;
+    if (reduceMotion || returning || !('IntersectionObserver' in window)) { stack.classList.add('is-stacked', 'is-settled'); return; }
+    var seen = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      seen.disconnect();
+      stack.classList.add('is-stacked');
+      setTimeout(function () { stack.classList.add('is-settled'); }, 1800);   // from here on a hover answers at once
+    }, { threshold: 0.6 });
+    seen.observe(stack);
+  }
+
+  /* Home, behind the closing line. Marks drift in scattered from the side the sentence starts on and
+     gather into a few steady streams by the time they leave: order flow on one side, capital flow on the other. */
+  function initFlow() {
+    var canvas = document.querySelector('.band-slogan .flow');
+    if (!canvas || !canvas.getContext) return;
+    var ctx = canvas.getContext('2d'), rtl = html.dir === 'rtl';
+    var LANES = [0.07, 0.13, 0.19, 0.87, 0.93];      // above and below the words, never across them
+    var W = 0, H = 0, dpr = 1, marks = [], raf = 0, onScreen = false, then = 0;
+
+    function mark(x) {
+      return {
+        x: x, y: 0.05 + Math.random() * 0.9, lane: LANES[Math.floor(Math.random() * LANES.length)],
+        v: 0.04 + Math.random() * 0.055, len: 5 + Math.random() * 16, w: Math.random() < 0.22 ? 2.2 : 1.3,
+        beat: 0.7 + Math.random() * 1.7, at: Math.random() * 6.283
+      };
+    }
+    function size() {
+      var r = canvas.getBoundingClientRect();
+      if (!r.width || !r.height) return;
+      if (Math.abs(r.width - W) < 1 && Math.abs(r.height - H) < 1) return;   // a phone's address bar sliding away is not a new size
+      dpr = Math.min(2, window.devicePixelRatio || 1);
+      W = r.width; H = r.height;
+      canvas.width = Math.round(W * dpr);
+      canvas.height = Math.round(H * dpr);
+      marks = [];
+      for (var n = Math.round(Math.min(96, Math.max(36, W / 12))), i = 0; i < n; i++) marks.push(mark(Math.random()));
+    }
+    function draw(now) {
+      var dt = Math.min(0.05, (now - then) / 1000) || 0, i, m, k, y, x, len, edge;
+      then = now;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+      ctx.lineCap = 'round';
+      for (i = 0; i < marks.length; i++) {
+        m = marks[i];
+        m.x += m.v * dt;
+        if (m.x > 1.06) m = marks[i] = mark(-0.06);
+        k = Math.min(1, Math.max(0, (m.x - 0.1) / 0.6));
+        k = k * k * (3 - 2 * k);                      // 0 while scattered, 1 once in a stream
+        y = (m.y + (m.lane - m.y) * k) * H + (1 - k) * Math.sin(now / 1000 * m.beat + m.at) * 8;
+        x = (rtl ? 1 - m.x : m.x) * W;
+        len = m.len * (0.5 + 1.5 * k) * (rtl ? -1 : 1);
+        edge = Math.max(0, Math.min(1, (m.x + 0.06) / 0.14, (1.06 - m.x) / 0.16));
+        ctx.strokeStyle = 'rgba(' + Math.round(91 - 35 * k) + ',' + Math.round(155 + 58 * k) + ',' + Math.round(255 - 10 * k) + ',' +
+          (edge * (0.32 + 0.4 * k)).toFixed(3) + ')';   // blue while scattered, cyan once gathered
+        ctx.lineWidth = m.w;
+        ctx.beginPath();
+        ctx.moveTo(x - len, y);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+      }
+    }
+    function loop(now) {
+      raf = 0;
+      if (!onScreen || document.hidden) return;
+      draw(now);
+      raf = requestAnimationFrame(loop);
+    }
+    function start() { if (!raf && onScreen && !document.hidden) { then = performance.now(); raf = requestAnimationFrame(loop); } }
+
+    size();
+    draw(performance.now());
+    window.addEventListener('resize', function () { size(); draw(performance.now()); });
+    if (reduceMotion || !('IntersectionObserver' in window)) return;      // one still frame is enough
+    new IntersectionObserver(function (entries) { onScreen = entries[0].isIntersecting; start(); }).observe(canvas);
+    document.addEventListener('visibilitychange', start);
+  }
+
   /* cards with .glow get a spotlight that follows the cursor */
   function initGlow() {
     if (reduceMotion || window.matchMedia('(hover: none)').matches) return;
@@ -275,8 +373,8 @@
       out.last.textContent = last === null ? '—' : fmt(last);
       out.last.className = lastDir > 0 ? 'up' : lastDir < 0 ? 'down' : '';
       tapeEl.innerHTML = tape.map(function (t) {
-        var html = '<div class="tp ' + (t.buy ? 'buy' : 'sell') + (t.fresh ? ' is-new' : '') + '"><span>' + t.time + '</span>' +
-          '<b>' + (t.buy ? 'BUY' : 'SELL') + '</b><span>' + t.q + '</span><span>@ ' + fmt(t.px) + '</span></div>';
+        var html = '<div class="tp ' + (t.own ? 'own' : t.buy ? 'buy' : 'sell') + (t.fresh ? ' is-new' : '') + '"><span>' + t.time + '</span>' +
+          '<b>' + (t.own ? 'YOU' : t.buy ? 'BUY' : 'SELL') + '</b><span>' + t.q + '</span><span>@ ' + fmt(t.px) + '</span></div>';
         t.fresh = false;
         return html;
       }).join('');
@@ -303,10 +401,10 @@
       pending = true;
       setTimeout(function () { pending = false; fn(); frame(); }, 110);
     }
-    function print(buy, q, px) {
+    function print(buy, q, px, own) {
       if (last !== null && px !== last) lastDir = px > last ? 1 : -1;
       last = px;
-      tape.unshift({ time: stamp(), buy: buy, q: q, px: px, fresh: !warming });
+      tape.unshift({ time: stamp(), buy: buy, q: q, px: px, own: !!own, fresh: !warming });
       if (tape.length > 3) tape.length = 3;
     }
 
@@ -386,12 +484,77 @@
     warming = false;
     render();
 
+    /* The visitor's own market order. It is an aggressor like any other: it takes the orders at the front
+       of the best level one by one, and when a level is used up the next price becomes the best. */
+    var say = document.querySelector('.mbo-say'), buttons = Array.prototype.slice.call(document.querySelectorAll('.mbo-btn'));
+    var busy = false, firstOrder = true;
+    function figure(v, decimals) {          // a number in the page's own digits
+      var text = decimals ? v.toFixed(decimals) : String(v);
+      return fa ? text.replace('.', '٫').replace(/\d/g, function (d) { return '۰۱۲۳۴۵۶۷۸۹'.charAt(d); }) : text;
+    }
+    function tell(buy, got, cleared, moved) {
+      if (!say) return;
+      var q = '<bdi>' + figure(got) + '</bdi>', by = '<bdi>' + figure(moved, 2) + '</bdi>', text;
+      if (fa) {
+        text = 'سفارش ' + (buy ? 'خرید' : 'فروش') + ' شما ' + q + ' قرارداد را از سر صف برداشت؛ ' +
+          (cleared ? figure(cleared) + ' سطح قیمت خالی شد و قیمت ' + by + (buy ? ' بالا رفت.' : ' پایین آمد.')
+                   : 'صف کوتاه‌تر شد، ولی قیمت جابه‌جا نشد.');
+      } else {
+        text = 'Your ' + (buy ? 'buy' : 'sell') + ' order took ' + q + ' contracts from the front of the queue; ' +
+          (cleared ? cleared + ' price level' + (cleared > 1 ? 's' : '') + ' emptied and the price moved ' + (buy ? 'up ' : 'down ') + by + '.'
+                   : 'the queue is shorter, but the price did not move.');
+      }
+      say.innerHTML = text;
+      say.classList.remove('is-told');
+      void say.offsetWidth;                 // restart the entrance of the sentence
+      say.classList.add('is-told');
+    }
+    function send(buy) {
+      if (busy) return;
+      if (pending) { setTimeout(function () { send(buy); }, 60); return; }    // let the change in hand finish first
+      busy = true;
+      buttons.forEach(function (b) { b.disabled = true; });
+      var book = buy ? asks : bids, dir = buy ? 1 : -1, from = book[0].px;
+      // the first order is always large enough to use up the best level, so the price is seen to move
+      var left = firstOrder ? total(book[0]) + rnd(3, 12) : rnd(5, 34), got = 0, cleared = 0, here = 0;
+      firstOrder = false;
+      function done() {
+        if (here) print(buy, here, book[0].px, true);
+        bias = buy ? 1.25 : -1.25;          // for a moment the flow leans the way the order pushed it,
+        biasLeft = 10;                      // so the gap it opened is closed from behind and the move holds
+        frame();
+        tell(buy, got, cleared, Math.abs(book[0].px - from));
+        busy = false;
+        buttons.forEach(function (b) { b.disabled = false; });
+      }
+      function take() {
+        if (left <= 0 || cleared >= 4) return done();
+        var lv = book[0];
+        if (!lv.o.length) { shift(book, dir); cleared++; return take(); }
+        var front = lv.o[0], q = Math.min(front.q, left);
+        var chip = root.querySelector('.chip[data-id="' + front.id + '"]');
+        if (chip) chip.classList.add('is-mine');
+        setTimeout(function () {
+          front.q -= q; left -= q; got += q; here += q;
+          if (!front.q) lv.o.shift();
+          if (!lv.o.length) { print(buy, here, lv.px, true); here = 0; shift(book, dir); cleared++; }
+          frame();
+          take();
+        }, reduceMotion ? 0 : 120);
+      }
+      take();
+    }
+    buttons.forEach(function (b) {
+      b.addEventListener('click', function () { send(b.getAttribute('data-side') === 'buy'); });
+    });
+
     if (reduceMotion || !('IntersectionObserver' in window)) return;   // a still book is fine
 
     var timer = null, onScreen = false;
     function tick() {
       timer = null;
       if (!onScreen || document.hidden) return;
+      if (busy) { timer = setTimeout(tick, 160); return; }       // the visitor's order has the book to itself
       step();
       if (!pending) frame();
       timer = setTimeout(tick, rnd(150, 360));
@@ -646,34 +809,182 @@
       });
     });
 
+    /* The view at full size. The wheel, two fingers or a double tap zoom in on the point under them, a drag
+       moves the picture, and the arrows or a sideways swipe go to the next view. */
     function enlarge() {
       auto = false; schedule();
-      var layer = document.createElement('div');
-      layer.className = 'lightbox';
+      function make(tag, cls, label) {
+        var n = document.createElement(tag);
+        if (cls) n.className = cls;
+        if (label) n.setAttribute('aria-label', label);
+        if (tag === 'button') n.type = 'button';
+        return n;
+      }
+      var layer = make('div', 'lightbox'), view = make('div', 'lightbox-view'), big = make('img');
+      var close = make('button', 'lightbox-close', fa ? 'بستن' : 'Close');
+      var prev = make('button', 'lightbox-nav is-prev', fa ? 'نمای قبلی' : 'Previous view');
+      var next = make('button', 'lightbox-nav is-next', fa ? 'نمای بعدی' : 'Next view');
+      var bar = make('div', 'lightbox-bar'), count = make('span', 'lightbox-count'), cap = make('span', 'lightbox-cap'), hint = make('span', 'lightbox-hint');
+      var at = current, k = 1, x = 0, y = 0, ratio = 1, held = {}, fingers = 0, grab = null, moved = 0, lastTap = 0;
+      var rest = each.call(document.body.children).filter(function (n) { return n.tagName !== 'SCRIPT'; });
+
       layer.setAttribute('role', 'dialog');
       layer.setAttribute('aria-modal', 'true');
-      var close = document.createElement('button');
-      close.type = 'button';
-      close.className = 'lightbox-close';
-      close.setAttribute('aria-label', html.lang === 'fa' ? 'بستن' : 'Close');
       close.textContent = '×';
-      var big = document.createElement('img');
-      big.src = imgs[current].getAttribute('data-full');
-      big.alt = imgs[current].alt;
-      layer.appendChild(close);
-      layer.appendChild(big);
-      document.body.appendChild(layer);
-      document.body.style.overflow = 'hidden';
+      prev.innerHTML = next.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>';
+      hint.textContent = window.matchMedia('(pointer: coarse)').matches
+        ? (fa ? 'بزرگ‌نمایی: دو انگشت یا دو ضربه' : 'Zoom: pinch or double tap')
+        : (fa ? 'بزرگ‌نمایی: کلیک یا چرخ موس' : 'Zoom: click or wheel');
+      if (tabs.length < 2) prev.hidden = next.hidden = true;
+      bar.appendChild(count); bar.appendChild(cap); bar.appendChild(hint);
+      view.appendChild(big);
+      [close, prev, view, next, bar].forEach(function (n) { layer.appendChild(n); });
 
+      function draw(eased) {
+        big.classList.toggle('is-eased', !!eased);
+        big.classList.toggle('is-zoomed', k > 1.01);
+        big.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0) scale(' + k.toFixed(3) + ')';
+      }
+      function fit() {                       // the picture as large as the space allows, at its own proportions
+        var w = Math.min(view.clientWidth, view.clientHeight * ratio);
+        big.style.width = Math.floor(w) + 'px';
+        big.style.height = Math.floor(w / ratio) + 'px';
+      }
+      function keepIn() {                    // never drag the picture off the screen
+        var mx = Math.max(0, (big.offsetWidth * k - view.clientWidth) / 2 + (k > 1.01 ? 24 : 0));
+        var my = Math.max(0, (big.offsetHeight * k - view.clientHeight) / 2 + (k > 1.01 ? 24 : 0));
+        x = Math.max(-mx, Math.min(mx, x));
+        y = Math.max(-my, Math.min(my, y));
+      }
+      function centre() { var r = view.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; }
+      function zoom(to, px, py, eased) {     // the point under the pointer stays under it
+        to = Math.max(1, Math.min(5, to));
+        var c = centre();
+        x = (px - c.x) - (to / k) * (px - c.x - x);
+        y = (py - c.y) - (to / k) * (py - c.y - y);
+        k = to;
+        if (k <= 1.01) { k = 1; x = 0; y = 0; }
+        keepIn();
+        draw(eased);
+      }
+      function load(i, fade) {
+        var small = imgs[i], full = new Image(), want = small.getAttribute('data-full');
+        at = i; k = 1; x = 0; y = 0;
+        ratio = small.getAttribute('width') / small.getAttribute('height');
+        fit();
+        draw(false);
+        big.alt = small.alt;
+        big.src = small.currentSrc || small.src;                    // what is already on the page, at once ...
+        full.onload = function () { if (at === i && layer.parentNode) big.src = want; };   // ... then the full-size file
+        full.src = want;
+        count.textContent = (i + 1) + ' / ' + tabs.length;
+        cap.textContent = caps[i] ? caps[i].textContent.replace(/\s+/g, ' ').trim() : '';
+        show(i);
+        if (fade && !reduceMotion && big.animate) big.animate([{ opacity: 0.25 }, { opacity: 1 }], { duration: 260, easing: 'ease-out' });
+      }
+      function go(step) { load((at + step + tabs.length) % tabs.length, true); }
       function shut() {
-        layer.remove();
-        document.body.style.overflow = '';
+        window.removeEventListener('resize', onResize);
         document.removeEventListener('keydown', onKey);
+        rest.forEach(function (n) { n.inert = false; });
+        document.body.style.overflow = '';
+        layer.classList.add('is-closing');
+        setTimeout(function () { layer.remove(); }, reduceMotion ? 0 : 200);
         stage.focus();
       }
-      function onKey(e) { if (e.key === 'Escape') shut(); }
-      layer.addEventListener('click', shut);
+      function onResize() { fit(); keepIn(); draw(false); }
+      function onKey(e) {
+        var forward = html.dir === 'rtl' ? 'ArrowLeft' : 'ArrowRight', back = html.dir === 'rtl' ? 'ArrowRight' : 'ArrowLeft';
+        var c = centre();
+        if (e.key === 'Escape') shut();
+        else if (e.key === forward && tabs.length > 1) go(1);
+        else if (e.key === back && tabs.length > 1) go(-1);
+        else if (e.key === '+' || e.key === '=') zoom(k * 1.4, c.x, c.y, true);
+        else if (e.key === '-') zoom(k / 1.4, c.x, c.y, true);
+        else if (e.key === '0') zoom(1, c.x, c.y, true);
+      }
+      function two() {
+        var ids = Object.keys(held), a = held[ids[0]], b = held[ids[1]];
+        return { d: Math.max(1, Math.hypot(a.x - b.x, a.y - b.y)), x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
+      }
+
+      big.addEventListener('pointerdown', function (e) {
+        e.preventDefault();
+        if (big.setPointerCapture) big.setPointerCapture(e.pointerId);
+        held[e.pointerId] = { x: e.clientX, y: e.clientY };
+        fingers = Object.keys(held).length;
+        if (fingers === 1) { grab = { px: e.clientX, py: e.clientY, x: x, y: y }; moved = 0; }
+        else if (fingers === 2) { var p = two(); grab = { d: p.d, px: p.x, py: p.y, x: x, y: y, k: k }; moved = 99; }
+        big.classList.add('is-held');
+        big.classList.remove('is-eased');
+      });
+      big.addEventListener('pointermove', function (e) {
+        if (!held[e.pointerId] || !grab) return;
+        held[e.pointerId] = { x: e.clientX, y: e.clientY };
+        if (fingers === 2) {
+          var p = two(), to = Math.max(1, Math.min(5, grab.k * p.d / grab.d)), c = centre();
+          x = (p.x - c.x) - (to / grab.k) * (grab.px - c.x - grab.x);
+          y = (p.y - c.y) - (to / grab.k) * (grab.py - c.y - grab.y);
+          k = to;
+          keepIn();
+          draw(false);
+        } else if (fingers === 1) {
+          var dx = e.clientX - grab.px, dy = e.clientY - grab.py;
+          moved = Math.max(moved, Math.abs(dx) + Math.abs(dy));
+          if (k > 1.01) { x = grab.x + dx; y = grab.y + dy; keepIn(); }
+          else if (e.pointerType !== 'mouse' && tabs.length > 1) x = dx * 0.6;       // a swipe starts to carry the picture
+          draw(false);
+        }
+      });
+      function release(e) {
+        if (!held[e.pointerId]) return;
+        var before = fingers, dx = grab ? e.clientX - grab.px : 0, dy = grab ? e.clientY - grab.py : 0, now = Date.now();
+        delete held[e.pointerId];
+        fingers = Object.keys(held).length;
+        if (!fingers) big.classList.remove('is-held');
+        if (before === 2) {                  // one finger stays down: it carries on as a drag
+          if (fingers === 1) { var id = Object.keys(held)[0]; grab = { px: held[id].x, py: held[id].y, x: x, y: y }; }
+          if (k <= 1.01) { var c = centre(); zoom(1, c.x, c.y, true); }
+          return;
+        }
+        if (k <= 1.01) {
+          var away = html.dir === 'rtl' ? dx : -dx;                 // towards the next view
+          if (e.pointerType !== 'mouse' && tabs.length > 1 && Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.4) { go(away > 0 ? 1 : -1); return; }
+          x = 0; y = 0;
+          draw(true);
+        }
+        if (moved > 8 || e.type === 'pointercancel') return;        // that was a drag, not a tap
+        if (e.pointerType === 'mouse') zoom(k > 1.01 ? 1 : 2.4, e.clientX, e.clientY, true);
+        else if (now - lastTap < 330) { zoom(k > 1.01 ? 1 : 2.4, e.clientX, e.clientY, true); lastTap = 0; }
+        else lastTap = now;
+      }
+      big.addEventListener('pointerup', release);
+      big.addEventListener('pointercancel', release);
+      big.addEventListener('dragstart', function (e) { e.preventDefault(); });
+      view.addEventListener('wheel', function (e) {
+        e.preventDefault();
+        zoom(k * (e.deltaY < 0 ? 1.2 : 1 / 1.2), e.clientX, e.clientY, false);
+      }, { passive: false });
+      layer.addEventListener('click', function (e) { if (e.target === layer || e.target === view || e.target === close) shut(); });
+      prev.addEventListener('click', function () { go(-1); });
+      next.addEventListener('click', function () { go(1); });
+      window.addEventListener('resize', onResize);
       document.addEventListener('keydown', onKey);
+
+      var from = stage.getBoundingClientRect();
+      document.body.appendChild(layer);
+      document.body.style.overflow = 'hidden';
+      rest.forEach(function (n) { if (n !== layer) n.inert = true; });
+      load(at, false);
+      var to = big.getBoundingClientRect();
+      if (!reduceMotion && big.animate && to.width) {               // it grows out of the frame it was in
+        big.animate([
+          { transform: 'translate(' + (from.left + from.width / 2 - to.left - to.width / 2).toFixed(1) + 'px,' +
+              (from.top + from.height / 2 - to.top - to.height / 2).toFixed(1) + 'px) scale(' + (from.width / to.width).toFixed(4) + ')' },
+          { transform: 'none' }
+        ], { duration: 380, easing: 'cubic-bezier(.2,.8,.2,1)' });
+      }
+      setTimeout(function () { hint.classList.add('is-gone'); }, 4500);
       close.focus();
     }
     stage.tabIndex = 0;
@@ -798,15 +1109,18 @@
 
   function boot() {
     initLang();
+    initCards();
     initNav();
     initReveal();
     initToc();
     initCount();
+    initStack();
     initGlow();
     initMbo();
     initMaker();
     initTaker();
     initShots();
+    initFlow();
     initSamsung();
   }
 
