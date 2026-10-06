@@ -128,6 +128,12 @@
     }, { rootMargin: '-25% 0px -65% 0px' });
 
     Object.keys(byId).forEach(function (id) { observer.observe(document.getElementById(id)); });
+
+    // above the first section nothing is current; a jump straight to the top crosses no section on the way
+    var first = document.getElementById(Object.keys(byId)[0]);
+    window.addEventListener('scroll', function () {
+      if (first.getBoundingClientRect().top > window.innerHeight * 0.35) links.forEach(function (a) { a.removeAttribute('aria-current'); });
+    }, { passive: true });
   }
 
   /* cards with .glow get a spotlight that follows the cursor */
