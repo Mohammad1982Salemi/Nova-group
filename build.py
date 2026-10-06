@@ -13,7 +13,7 @@ Tokens a page (or a partial) may use:
 import re
 from pathlib import Path
 
-VERSION = "45"  # bump whenever assets/css/style.css or assets/js/main.js changes
+VERSION = "46"  # bump whenever assets/css/style.css or assets/js/main.js changes
 
 # the order of the project cards; a project page links to its neighbours in this list
 PROJECTS = [
