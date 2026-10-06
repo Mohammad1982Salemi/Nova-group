@@ -77,8 +77,8 @@
     function start() { items.forEach(function (el) { observer.observe(el); }); }
     // on the first visit the opening plays first
     if (html.classList.contains('intro')) {
-      setTimeout(start, 650);
-      setTimeout(function () { html.classList.remove('intro'); }, 1300);
+      setTimeout(start, 1450);
+      setTimeout(function () { html.classList.remove('intro'); }, 2200);
     } else start();
   }
 

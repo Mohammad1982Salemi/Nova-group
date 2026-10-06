@@ -1129,25 +1129,28 @@ body::after {
 /* ---------- the opening: the mark, a line, then the page (first visit only) ---------- */
 html.intro::after {
   content: ''; position: fixed; inset: 0; z-index: 2000; pointer-events: none;
-  background: #05080e url(../img/nova-mark-512.png) center / 92px no-repeat;
-  animation: intro-veil 1.05s cubic-bezier(.6,0,.3,1) forwards;
+  background: #05080e url(../img/nova-mark-512.png) center calc(50% - 34px) / 60px no-repeat;
+  animation: intro-veil 2s cubic-bezier(.45,0,.2,1) forwards;
 }
+/* the name under the mark, with a thin line beneath it */
 html.intro::before {
-  content: ''; position: fixed; z-index: 2001; pointer-events: none;
-  inset-inline: 0; inset-block-start: calc(50% + 70px); width: 130px; height: 2px; margin-inline: auto;
-  background: linear-gradient(90deg, transparent, #38d5f5, transparent);
-  animation: intro-line 1.05s cubic-bezier(.6,0,.3,1) forwards;
+  content: 'NOVA GROUP'; position: fixed; z-index: 2001; pointer-events: none;
+  inset-inline: 0; inset-block-start: calc(50% + 62px); padding-block-end: 18px; text-align: center;
+  font-family: var(--font-disp); font-size: 25px; font-weight: 700; letter-spacing: .26em; text-indent: .26em; color: #fff;
+  background: linear-gradient(90deg, transparent, #38d5f5, transparent) center 100% / 150px 2px no-repeat;
+  animation: intro-name 2s cubic-bezier(.45,0,.2,1) forwards;
 }
+html[data-lang="fa"].intro::before { content: 'نوا گروپ'; font-family: var(--font-fa); font-size: 28px; letter-spacing: 0; text-indent: 0; }
 @keyframes intro-veil {
-  0% { opacity: 1; background-size: 78px; }
-  60% { opacity: 1; background-size: 92px; }
-  100% { opacity: 0; background-size: 108px; visibility: hidden; }
+  0% { opacity: 1; background-size: 60px; }
+  72% { opacity: 1; background-size: 148px; }
+  100% { opacity: 0; background-size: 172px; visibility: hidden; }
 }
-@keyframes intro-line {
-  0% { opacity: 0; transform: scaleX(0); }
-  25% { opacity: 1; }
-  60% { opacity: 1; transform: scaleX(1); }
-  100% { opacity: 0; transform: scaleX(1.5); }
+@keyframes intro-name {
+  0% { opacity: 0; transform: translateY(-14px) scale(.55); }
+  22% { opacity: 1; }
+  72% { opacity: 1; transform: translateY(26px) scale(1); }
+  100% { opacity: 0; transform: translateY(36px) scale(1.1); visibility: hidden; }
 }
 
 /* ---------- moving between pages: the old one fades, the new one rises in ---------- */
