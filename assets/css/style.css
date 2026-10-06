@@ -1548,3 +1548,43 @@ html[dir="ltr"] .lightbox-nav.is-prev svg, html[dir="rtl"] .lightbox-nav.is-next
   .lightbox-cap { font-size: 12.8px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
   .lightbox-hint { order: -1; color: var(--accent-hi); }
 }
+
+/* ==========================================================================
+   Effects layer 3
+   ========================================================================== */
+/* ---------- project pages: the figure in a hero tile, drawn in a strip along the tile's foot ---------- */
+.page-hero .facts-glass li { display: flex; flex-direction: column; }
+.page-hero .facts-glass p:has(+ .viz) { margin-block-end: 18px; }
+.viz { display: block; width: 100%; height: 44px; margin-block-start: auto; }
+
+/* ---------- the two track books share a trade: the taker's order crosses to the maker's quote ---------- */
+.cross-chip {
+  position: fixed; inset: 0 auto auto 0; z-index: 80; pointer-events: none;
+  min-width: 26px; height: 20px; padding: 0 6px; display: grid; place-items: center; border-radius: 6px;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: #1c1300; background: #ffd166;
+  box-shadow: 0 0 0 1px #ffe9ad, 0 0 18px rgba(255,209,102,.9), 0 0 44px rgba(255,209,102,.45);
+  offset-rotate: 0deg; offset-anchor: 50% 50%;
+}
+.cross-hit {
+  position: fixed; z-index: 80; pointer-events: none; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%;
+  border: 2px solid #ffd166; animation: cross-hit .5s ease-out forwards;
+}
+@keyframes cross-hit { to { transform: scale(4.2); opacity: 0; } }
+
+/* ---------- moving along the menu: the new page comes in from the side it lies on, and the line under
+   the menu slides from the old item to the new one ---------- */
+:root { --vt-x: 30px; }
+html[dir="rtl"] { --vt-x: -30px; }
+html.vt-fwd::view-transition-old(root)  { animation: vt-out-fwd .24s ease both; }
+html.vt-fwd::view-transition-new(root)  { animation: vt-in-fwd .5s cubic-bezier(.2,.8,.2,1) both; }
+html.vt-back::view-transition-old(root) { animation: vt-out-back .24s ease both; }
+html.vt-back::view-transition-new(root) { animation: vt-in-back .5s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes vt-in-fwd   { from { opacity: 0; transform: translateX(var(--vt-x)); } }
+@keyframes vt-out-fwd  { to   { opacity: 0; transform: translateX(calc(var(--vt-x) * -.5)); } }
+@keyframes vt-in-back  { from { opacity: 0; transform: translateX(calc(var(--vt-x) * -1)); } }
+@keyframes vt-out-back { to   { opacity: 0; transform: translateX(calc(var(--vt-x) * .5)); } }
+/* on a phone the menu is folded away, so only a wide screen has a line to slide */
+@media (min-width: 761px) {
+  .nav-links a[aria-current="page"]::after { view-transition-name: nav-line; }
+}
+::view-transition-group(nav-line) { animation-duration: .5s; animation-timing-function: cubic-bezier(.3,.9,.3,1); }

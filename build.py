@@ -31,10 +31,11 @@ from datetime import date
 from html.parser import HTMLParser
 from pathlib import Path
 
-VERSION = "52"  # bump whenever assets/css/style.css or assets/js/main.js changes
+VERSION = "53"  # bump whenever assets/css/style.css or assets/js/main.js changes
 SITE = "https://novacapital.fund/"
 LANGS = ("fa", "en")
 MAIN = "en"     # the language served at the site's root; the other one lives under /<its code>/
+MENU = {"home": 0, "about": 1, "projects": 2, "contact": 3}   # the order of the menu: pages come in from the side they lie on
 
 # the order of the project cards; a project page links to its neighbours in this list
 PROJECTS = [
@@ -213,6 +214,8 @@ def main():
             here = here[:-len("index.html")] if here.endswith("index.html") else here
             alt = (top + other + "/" + here) if lang == MAIN else (top + here or "./")
             attrs = f'lang="{lang}" dir="{"rtl" if lang == "fa" else "ltr"}" data-lang="{lang}"'
+            if meta["section"] in MENU:
+                attrs += f' data-sec="{MENU[meta["section"]]}"'
 
             if both:
                 button = ('<button class="lang-btn" id="langBtn" type="button" aria-label="Change language">'

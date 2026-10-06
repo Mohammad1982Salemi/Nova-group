@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl" data-lang="fa">
+<html lang="fa" dir="rtl" data-lang="fa" data-sec="2">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,7 +34,7 @@
 
 <!-- The fonts are served from this site; the one this language needs first is fetched early. -->
 <link rel="preload" href="../../assets/fonts/vazirmatn-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../../assets/css/style.css?v=52">
+<link rel="stylesheet" href="../../assets/css/style.css?v=53">
 
 <!-- Samsung Internet (also used inside Telegram and WhatsApp) recolours pages in its dark mode; flag it early. -->
 <script>if (/SamsungBrowser/i.test(navigator.userAgent)) document.documentElement.classList.add('sb');</script>
@@ -69,6 +69,14 @@
       if (location.pathname.indexOf('/projects/' + card + '.html') > -1) d.className += ' from-card';
     }
   } catch (e) {}
+  // which way along the menu this page lies from the one just left: it comes in from that side
+  function way() {
+    var here = d.getAttribute('data-sec'), from = null;
+    d.classList.remove('vt-fwd', 'vt-back');
+    try { from = sessionStorage.getItem('nova-sec'); if (here !== null) sessionStorage.setItem('nova-sec', here); } catch (e) {}
+    if (here !== null && from !== null && from !== here) d.classList.add(+here > +from ? 'vt-fwd' : 'vt-back');
+  }
+  if ('onpagereveal' in window) window.addEventListener('pagereveal', way); else way();
   // a short opening, once per visit and never for people who asked for less motion
   try {
     if (!sessionStorage.getItem('nova-seen') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -138,6 +146,7 @@
         <p>
           <span class="t-fa">تاریخچه‌ی چندساله‌ی بورس شیکاگو، از بزرگ‌ترین بازارهای آتی جهان.</span>
         </p>
+        <canvas class="viz" data-viz="stream" aria-hidden="true"></canvas>
       </li>
       <li class="glow reveal">
         <span class="fact-label"><span class="t-fa">روش</span></span>
@@ -145,6 +154,7 @@
         <p>
           <span class="t-fa">با پشتوانه‌ی تحلیل آماری؛ الگوها از نمونه‌های واقعی بازار آموخته می‌شوند.</span>
         </p>
+        <canvas class="viz" data-viz="settle" aria-hidden="true"></canvas>
       </li>
       <li class="glow reveal">
         <span class="fact-label"><span class="t-fa">ریسک</span></span>
@@ -152,6 +162,7 @@
         <p>
           <span class="t-fa">از لحظه‌ی ورود مشخص است؛ آنچه گزارش می‌شود زیان واقعی است، نه اسمی.</span>
         </p>
+        <canvas class="viz" data-viz="stop" aria-hidden="true"></canvas>
       </li>
       <li class="glow reveal">
         <span class="fact-label"><span class="t-fa">فناوری</span></span>
@@ -448,6 +459,6 @@
 
 <button class="to-top" id="toTop" type="button" aria-label="بازگشت به بالا"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
 
-<script src="../../assets/js/main.js?v=52"></script>
+<script src="../../assets/js/main.js?v=53"></script>
 </body>
 </html>

@@ -51,6 +51,14 @@
       if (location.pathname.indexOf('/projects/' + card + '.html') > -1) d.className += ' from-card';
     }
   } catch (e) {}
+  // which way along the menu this page lies from the one just left: it comes in from that side
+  function way() {
+    var here = d.getAttribute('data-sec'), from = null;
+    d.classList.remove('vt-fwd', 'vt-back');
+    try { from = sessionStorage.getItem('nova-sec'); if (here !== null) sessionStorage.setItem('nova-sec', here); } catch (e) {}
+    if (here !== null && from !== null && from !== here) d.classList.add(+here > +from ? 'vt-fwd' : 'vt-back');
+  }
+  if ('onpagereveal' in window) window.addEventListener('pagereveal', way); else way();
   // a short opening, once per visit and never for people who asked for less motion
   try {
     if (!sessionStorage.getItem('nova-seen') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {

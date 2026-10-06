@@ -873,6 +873,38 @@
      --------------------------------------------------------------- */
   function rnd(a, b) { return a + Math.floor(Math.random() * (b - a + 1)); }
   function fmtPx(p) { return p.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+
+  /* The two books share one moment. When the taker's order sets off, it leaves its card, crosses to the
+     other one and reaches the maker's waiting quote there: the same trade, seen from its two sides. */
+  var maker = null;
+  function cross(from, buy, size) {
+    var side = buy ? 'ask' : 'bid', target = maker && maker.chip(side), start = from.querySelector('.mbo-note');
+    if (!target || !start || reduceMotion || !document.body.animate || !window.CSS || !CSS.supports('offset-path', "path('M0 0L1 1')")) return;
+    var a = start.getBoundingClientRect(), b = target.getBoundingClientRect(), vh = window.innerHeight;
+    if (a.bottom < 60 || a.top > vh - 20 || b.bottom < 60 || b.top > vh - 20) return;     // both ends must be on screen
+    var x0 = a.left + a.width / 2, y0 = a.top + a.height / 2, x1 = b.left + b.width / 2, y1 = b.top + b.height / 2;
+    var lift = Math.min(90, 30 + Math.abs(x1 - x0) * 0.14 + Math.abs(y1 - y0) * 0.1);
+    var dot = document.createElement('span');
+    dot.className = 'cross-chip';
+    dot.textContent = size;
+    dot.style.offsetPath = "path('M" + x0.toFixed(1) + ' ' + y0.toFixed(1) + ' Q' + ((x0 + x1) / 2).toFixed(1) + ' ' +
+      (Math.min(y0, y1) - lift).toFixed(1) + ' ' + x1.toFixed(1) + ' ' + y1.toFixed(1) + "')";
+    document.body.appendChild(dot);
+    dot.animate([
+      { offsetDistance: '0%', opacity: 0, scale: 0.5 },
+      { opacity: 1, scale: 1.1, offset: 0.2 },
+      { offsetDistance: '100%', opacity: 1, scale: 0.8 }
+    ], { duration: 820, easing: 'cubic-bezier(.45,.05,.35,1)', fill: 'forwards' }).onfinish = function () {
+      var ring = document.createElement('span');
+      ring.className = 'cross-hit';
+      ring.style.left = x1 + 'px';
+      ring.style.top = y1 + 'px';
+      document.body.appendChild(ring);
+      setTimeout(function () { ring.remove(); }, 520);
+      dot.remove();
+      maker.strike(side);
+    };
+  }
   function clock() {
     var d = new Date();
     function p(n, w) { n = String(n); while (n.length < w) n = '0' + n; return n; }
@@ -952,18 +984,26 @@
       timer = setTimeout(tick, pace());
     }
     function start() { if (!timer) timer = setTimeout(tick, 500); }
+    /* something has just happened to this book: let it answer now rather than at its next beat */
+    function hurry() {
+      if (!onScreen || document.hidden) return;
+      clearTimeout(timer);
+      timer = setTimeout(tick, 60);
+    }
 
     new IntersectionObserver(function (entries) {
       onScreen = entries[0].isIntersecting;
       if (onScreen) start();
     }).observe(root);
     document.addEventListener('visibilitychange', function () { if (!document.hidden && onScreen) start(); });
+    return hurry;
   }
 
   function initMaker() {
     var root = document.querySelector('[data-track="maker"]');
     if (!root) return;
     var book = new MiniBook(root), mine = { bid: null, ask: null };
+    var struck = null, hurry = null;             // the side the taker's order has just reached
 
     function best(side) { return side === 'bid' ? book.bids[0] : book.asks[0]; }
     function quote(side) {                       // our order always joins at the back, behind a real queue
@@ -977,14 +1017,15 @@
     }
 
     function step(later) {
-      var side = Math.random() < 0.5 ? 'bid' : 'ask', lvl = best(side), r = Math.random();
+      // once struck, the orders ahead of ours are taken one after another until ours has traded
+      var side = struck || (Math.random() < 0.5 ? 'bid' : 'ask'), lvl = best(side), r = struck ? 0 : Math.random();
 
       if (r < 0.36) {                            // an aggressor trades with whoever is first in line
         var front = lvl.o[0];
         book.mark(front.id, 'is-hit');
         return later(function () {
           lvl.o.shift();
-          if (front.own) { book.print('own', 'OURS', front.q, lvl.px); quote(side); }
+          if (front.own) { book.print('own', 'OURS', front.q, lvl.px); quote(side); struck = null; }
           else book.print(side === 'bid' ? 'sell' : 'buy', side === 'bid' ? 'SELL' : 'BUY', front.q, lvl.px);
         });
       }
@@ -1003,7 +1044,11 @@
 
     quote('bid'); quote('ask');
     mine.bid.fresh = mine.ask.fresh = false;
-    runBook(root, step, draw, function () { return rnd(420, 820); });
+    hurry = runBook(root, step, draw, function () { return struck ? rnd(150, 230) : rnd(420, 820); });
+    maker = {
+      chip: function (side) { return mine[side] ? root.querySelector('.chip[data-id="' + mine[side].id + '"]') : null; },
+      strike: function (side) { struck = side; if (hurry) hurry(); }
+    };
   }
 
   function initTaker() {
@@ -1031,6 +1076,7 @@
       if (phase === 'wait') {
         if (--beats > 0) return;
         size = left = rnd(14, 26); cost = 0; phase = 'sweep';
+        cross(root, buy, size);
         return;
       }
 
@@ -1312,6 +1358,225 @@
   }
 
   /* ---------------------------------------------------------------
+     Project pages: the figure in a hero tile, drawn. A strip under the
+     tile's sentence shows the number itself: 136 marks for 136 pools,
+     22 across by 16 down for 22 coins on 16 exchanges, 36 marks lit out
+     of 60 for a 36-second median. Nothing is drawn that the page does
+     not state. A tile that states no number gets a small moving picture
+     of what it says instead, with no count in it.
+     --------------------------------------------------------------- */
+  function initViz() {
+    var found = Array.prototype.slice.call(document.querySelectorAll('canvas.viz'));
+    if (!found.length || !found[0].getContext) return;
+    var rtl = html.dir === 'rtl', items = [], raf = 0;
+    var DIM = 'rgba(148,170,205,.2)', TAU = Math.PI * 2;
+
+    function tone(k, a) {       // blue where the row starts, cyan where it ends
+      return 'rgba(' + Math.round(91 - 35 * k) + ',' + Math.round(155 + 58 * k) + ',' + Math.round(255 - 10 * k) + ',' + a + ')';
+    }
+    function box(ctx, x, y, w, h, r) {
+      if (r > 0.6 && ctx.roundRect) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); ctx.fill(); }
+      else ctx.fillRect(x, y, w, h);
+    }
+    function ease(k) { return 1 - Math.pow(1 - Math.min(1, Math.max(0, k)), 3); }
+
+    /* ---- a count: n marks in rows, lit one after another ---- */
+    function cells(it, now) {
+      var o = it.o, ctx = it.ctx, n = o.n, cols = o.cols, rows = Math.ceil(n / cols), lead = o.lead || 0;
+      var top = lead ? 14 : 0, pw = it.W / cols, ph = (it.H - top) / rows;
+      var w = Math.max(1, pw * (cols > 60 ? 0.62 : 0.76)), h = Math.max(1, Math.min(rows === 1 ? 14 : 10, ph * 0.74));
+      var lit = o.lit === undefined ? n : o.lit, span = it.span;
+      var t = now - it.t0, p = it.still ? 1 : ease(t / span), head = p * lit;
+      var wave = it.still || t < span ? -1 : ((t - span) % 6200) / 1100;      // a soft light passes now and then
+      var i, k, x, y, a, gap, s;
+
+      for (i = 0; i < lead; i++) {            // the few larger marks: the networks, the funds, the pools
+        gap = Math.min(13, it.W / lead);
+        ctx.beginPath();
+        ctx.arc(4.5 + i * gap, 5, 3.6, 0, TAU);
+        if (p * lead > i) { ctx.fillStyle = 'rgba(255,209,102,.95)'; ctx.fill(); }
+        else { ctx.strokeStyle = 'rgba(255,209,102,.4)'; ctx.lineWidth = 1; ctx.stroke(); }
+      }
+      for (i = 0; i < n; i++) {
+        x = (i % cols) * pw + (pw - w) / 2;
+        y = top + Math.floor(i / cols) * ph + (ph - h) / 2;
+        k = n > 1 ? i / (n - 1) : 0;
+        if (i < head) {
+          a = 0.92;
+          if (!it.still && i > head - Math.max(1, lit * 0.03) && p < 1) ctx.fillStyle = '#ffffff';          // the mark just lit
+          else {
+            if (wave >= 0 && wave <= 1.2 && Math.abs(k - wave) < 0.07) a = 1;
+            else if (wave >= 0 && wave <= 1.2) a = 0.78;
+            ctx.fillStyle = tone(k, a);
+          }
+        } else ctx.fillStyle = DIM;
+        if (o.shapes) {                        // every mark a different kind of shape
+          s = Math.min(pw, ph) * 0.52;
+          ctx.beginPath();
+          if (i % 4 === 0) ctx.arc(x + w / 2, y + h / 2, s * 0.5, 0, TAU);
+          else if (i % 4 === 1) ctx.rect(x + w / 2 - s * 0.45, y + h / 2 - s * 0.45, s * 0.9, s * 0.9);
+          else if (i % 4 === 2) { ctx.moveTo(x + w / 2, y + h / 2 - s * 0.55); ctx.lineTo(x + w / 2 + s * 0.55, y + h / 2 + s * 0.45); ctx.lineTo(x + w / 2 - s * 0.55, y + h / 2 + s * 0.45); }
+          else { ctx.moveTo(x + w / 2, y + h / 2 - s * 0.6); ctx.lineTo(x + w / 2 + s * 0.5, y + h / 2); ctx.lineTo(x + w / 2, y + h / 2 + s * 0.6); ctx.lineTo(x + w / 2 - s * 0.5, y + h / 2); }
+          ctx.closePath();
+          ctx.fill();
+        } else if (o.edge && i === lit) {      // the limit itself: an outline, never reached
+          ctx.strokeStyle = 'rgba(56,213,245,.9)'; ctx.lineWidth = 1;
+          ctx.strokeRect(x + 0.5, y + 0.5, Math.max(1, w - 1), h - 1);
+        } else box(ctx, x, y, w, h, Math.min(2, w / 3));
+      }
+    }
+
+    /* ---- no number: orders joining a queue and being taken from its front ---- */
+    function stream(it, now) {
+      var ctx = it.ctx, s = it.s, dt = Math.min(0.05, (now - (s.then || now)) / 1000), i, c, end;
+      s.then = now;
+      if (!s.q) { s.q = []; s.next = 0; for (i = 0; i < 9; i++) s.q.push({ x: 6 + i * 27, w: 12 + (i * 7 % 13), hit: 0 }); }
+      for (i = 0; i < s.q.length; i++) {
+        c = s.q[i];
+        if (!it.still) c.x -= 15 * dt;
+        if (c.x < 5 && !c.hit) c.hit = now;                     // first in line: it trades
+        var gone = c.hit ? (now - c.hit) / 380 : 0;
+        ctx.fillStyle = c.hit ? 'rgba(255,255,255,' + Math.max(0, 1 - gone).toFixed(2) + ')' : 'rgba(91,155,255,.3)';
+        box(ctx, Math.max(4, c.x), 15, c.w, 14, 3);
+        if (!c.hit) { ctx.strokeStyle = 'rgba(91,155,255,.6)'; ctx.lineWidth = 1; ctx.strokeRect(Math.max(4, c.x) + 0.5, 15.5, c.w - 1, 13); }
+      }
+      s.q = s.q.filter(function (q) { return !q.hit || now - q.hit < 380; });
+      end = s.q.length ? s.q[s.q.length - 1].x + s.q[s.q.length - 1].w : 0;
+      if (!it.still && end < it.W - 30) s.q.push({ x: Math.max(it.W - 6, end + 9), w: 10 + Math.floor(Math.random() * 14), hit: 0 });   // another joins at the back
+    }
+
+    /* ---- no number: scattered examples settling into the pattern behind them ---- */
+    function settle(it, now) {
+      var ctx = it.ctx, s = it.s, n = 30, t = it.still ? 0.75 : ((now - it.t0) % 7600) / 7600, i, x, y, k, on;
+      if (!s.off) { s.off = []; for (i = 0; i < n; i++) s.off.push((Math.sin(i * 12.9898) * 43758.5453 % 1) * 17); }
+      k = t < 0.3 ? 0 : t < 0.55 ? ease((t - 0.3) / 0.25) : t < 0.9 ? 1 : 1 - ease((t - 0.9) / 0.1);     // 0 scattered, 1 on the curve
+      if (k > 0.05) {
+        ctx.strokeStyle = 'rgba(56,213,245,' + (0.5 * k).toFixed(2) + ')'; ctx.lineWidth = 1.2; ctx.beginPath();
+        for (i = 0; i <= 40; i++) { x = 6 + (it.W - 12) * i / 40; y = it.H / 2 - Math.sin(i / 40 * 4.4 + 0.5) * 11; if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y); }
+        ctx.stroke();
+      }
+      for (i = 0; i < n; i++) {
+        x = 6 + (it.W - 12) * i / (n - 1);
+        on = it.H / 2 - Math.sin(i / (n - 1) * 4.4 + 0.5) * 11;
+        y = on + s.off[i] * (1 - k) + (it.still ? 0 : Math.sin(now / 600 + i) * 1.4 * (1 - k));
+        ctx.fillStyle = tone(i / (n - 1), 0.45 + 0.5 * k);
+        ctx.beginPath(); ctx.arc(x, y, 2.1, 0, TAU); ctx.fill();
+      }
+    }
+
+    /* ---- no number: a trade with its stop set from the moment of entry ---- */
+    function stopLine(it, now) {
+      var ctx = it.ctx, s = it.s, span = 5200, t = it.still ? 0.8 : ((now - it.t0) % span) / span, turn = Math.floor((now - it.t0) / span);
+      var n = 46, i, x, y, v, seed, entry = 0.16, upto, hit = -1, yStop;
+      if (s.turn !== turn || !s.path) {        // a new trade each turn; every third one is stopped out
+        s.turn = turn; s.path = []; v = 0; seed = turn * 7.13 + 1.7;
+        for (i = 0; i < n; i++) {
+          v += Math.sin(seed + i * 1.93) * 2.3 + Math.sin(seed * 2.1 + i * 0.47) * 1.1 + (turn % 3 === 1 ? 0.75 : -0.42);
+          s.path.push(v);
+        }
+      }
+      yStop = it.H / 2 + 13;
+      ctx.setLineDash([4, 4]); ctx.strokeStyle = 'rgba(255,115,137,.75)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(it.W * entry, yStop + 0.5); ctx.lineTo(it.W - 4, yStop + 0.5); ctx.stroke();
+      ctx.setLineDash([]);
+      upto = Math.floor(Math.min(1, t / 0.8) * (n - 1));
+      ctx.strokeStyle = 'rgba(125,180,255,.95)'; ctx.lineWidth = 1.5; ctx.lineJoin = 'round'; ctx.beginPath();
+      for (i = 0; i <= upto; i++) {
+        x = it.W * entry + (it.W * (1 - entry) - 8) * i / (n - 1);
+        y = Math.min(yStop, it.H / 2 + s.path[i] - s.path[0]);
+        if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y);
+        if (y >= yStop) { hit = i; break; }   // stopped: the trade ends here
+      }
+      ctx.stroke();
+      ctx.fillStyle = '#ffd166'; ctx.beginPath(); ctx.arc(it.W * entry, it.H / 2, 3.2, 0, TAU); ctx.fill();       // the entry
+      if (hit > -1) { ctx.fillStyle = '#ff7389'; ctx.beginPath(); ctx.arc(x, yStop, 3.4, 0, TAU); ctx.fill(); }
+      else { ctx.fillStyle = '#ffffff'; ctx.beginPath(); ctx.arc(x, y, 2.4, 0, TAU); ctx.fill(); }
+    }
+
+    /* ---- no number: blocks received, processed and delivered without a pause ---- */
+    function belt(it, now) {
+      var ctx = it.ctx, y = it.H / 2, at = [0.14, 0.5, 0.86], gap = 46, off = it.still ? 12 : (now / 1000 * 34) % gap, i, x, j, near;
+      ctx.strokeStyle = 'rgba(148,170,205,.28)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(4, y + 0.5); ctx.lineTo(it.W - 4, y + 0.5); ctx.stroke();
+      for (x = 4 + off; x < it.W - 4; x += gap) {
+        ctx.fillStyle = tone(x / it.W, 0.95);
+        box(ctx, x - 4, y - 4, 8, 8, 2);
+      }
+      for (j = 0; j < 3; j++) {
+        near = 1;
+        for (x = 4 + off; x < it.W - 4; x += gap) near = Math.min(near, Math.abs(x - it.W * at[j]) / 16);
+        ctx.strokeStyle = 'rgba(56,213,245,' + (0.4 + 0.6 * (1 - near)).toFixed(2) + ')'; ctx.lineWidth = 1.4;
+        ctx.beginPath(); ctx.arc(it.W * at[j], y, 10 + 2 * (1 - near), 0, TAU); ctx.stroke();
+      }
+    }
+
+    var KINDS = { cells: cells, stream: stream, settle: settle, stop: stopLine, belt: belt };
+
+    function size(it) {
+      var w = it.el.clientWidth, h = it.el.clientHeight, dpr = Math.min(2, window.devicePixelRatio || 1);
+      if (!w || !h) return false;
+      if (w !== it.W || h !== it.H) {
+        it.W = w; it.H = h; it.dpr = dpr;
+        it.el.width = Math.round(w * dpr);
+        it.el.height = Math.round(h * dpr);
+      }
+      return true;
+    }
+    function paint(it, now) {
+      if (!size(it)) return;
+      var ctx = it.ctx;
+      ctx.setTransform(it.dpr, 0, 0, it.dpr, 0, 0);
+      ctx.clearRect(0, 0, it.W, it.H);
+      if (rtl) { ctx.translate(it.W, 0); ctx.scale(-1, 1); }       // the row starts on the side the line of text starts on
+      it.draw(it, now);
+    }
+    function loop(now) {
+      raf = 0;
+      var more = false;
+      items.forEach(function (it) {
+        if (!it.on || document.hidden) return;
+        more = true;                           // something is on screen: keep the beat (an idle beat costs a comparison)
+        if (it.t0 === null) {                  // wait until the tile itself has come into view
+          if (it.tile && !it.tile.classList.contains('is-in')) return;
+          it.t0 = now + 160;
+        }
+        var t = now - it.t0, moving = !it.still;
+        // a count moves while it fills, and again for the light that passes over it now and then
+        if (moving && it.o.kind === 'cells') moving = t < it.span + 80 || (t - it.span) % 6200 < 1400;
+        if (moving || it.dirty) { it.dirty = false; paint(it, Math.max(now, it.t0)); }
+      });
+      if (more) raf = requestAnimationFrame(loop);
+    }
+    function wake() { if (!raf && !document.hidden) raf = requestAnimationFrame(loop); }
+
+    found.forEach(function (el) {
+      var kind = el.getAttribute('data-viz'), draw = KINDS[kind];
+      if (!draw) return;
+      var it = {
+        el: el, ctx: el.getContext('2d'), draw: draw, W: 0, H: 0, dpr: 1, s: {}, on: false, dirty: true,
+        t0: null, still: reduceMotion || returning, tile: el.closest('.reveal'),
+        span: 900 + Math.min(900, (+el.getAttribute('data-n') || 0) * 3),
+        o: { kind: kind, n: +el.getAttribute('data-n') || 0, cols: +el.getAttribute('data-cols') || 1, lead: +el.getAttribute('data-lead') || 0,
+             lit: el.hasAttribute('data-lit') ? +el.getAttribute('data-lit') : undefined, edge: el.hasAttribute('data-edge'), shapes: el.hasAttribute('data-shapes') }
+      };
+      items.push(it);
+    });
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      items.forEach(function (it) { it.still = true; it.t0 = 0; paint(it, 1e7); });
+      window.addEventListener('resize', function () { items.forEach(function (it) { paint(it, 1e7); }); });
+      return;
+    }
+    var seen = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        items.forEach(function (it) { if (it.el === entry.target) { it.on = entry.isIntersecting; it.dirty = true; } });
+      });
+      wake();
+    }, { threshold: 0.2 });
+    items.forEach(function (it) { seen.observe(it.el); });
+    window.addEventListener('resize', function () { items.forEach(function (it) { it.dirty = true; }); wake(); });
+    document.addEventListener('visibilitychange', wake);
+  }
+
+  /* ---------------------------------------------------------------
      Samsung Internet's dark mode paints every link's text yellow, whatever
      colour the page asks for, and offers no opt-out. An anchor with no href
      is not a link to it, so there the address moves to data-href and the
@@ -1416,6 +1681,7 @@
     initMaker();
     initTaker();
     initShots();
+    initViz();
     initFlow();
     initSamsung();
   }
