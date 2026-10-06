@@ -1127,10 +1127,16 @@ body::after {
 }
 
 /* ---------- the opening: the mark, a line, then the page (first visit only) ---------- */
+/* The mark is drawn once at its final size and grown with a transform, which the graphics card
+   does smoothly; resizing the picture itself moved in whole pixels and trembled. The dark veil is
+   the mark's own very wide shadow, so it grows and fades with it. */
 html.intro::after {
-  content: ''; position: fixed; inset: 0; z-index: 2000; pointer-events: none;
-  background: #05080e url(../img/nova-mark-512.png) center calc(50% - 34px) / 60px no-repeat;
-  animation: intro-veil 3.3s cubic-bezier(.3,.1,.25,1) forwards;
+  content: ''; position: fixed; z-index: 2000; pointer-events: none;
+  top: 50%; left: 50%; width: 192px; height: 192px; margin: -130px 0 0 -96px;
+  background: #05080e url(../img/nova-mark-512.png) center / contain no-repeat;
+  box-shadow: 0 0 0 400vmax #05080e;
+  will-change: transform, opacity; backface-visibility: hidden;
+  animation: intro-veil 3.3s forwards;
 }
 /* the name under the mark, with a thin line beneath it */
 html.intro::before {
@@ -1138,13 +1144,13 @@ html.intro::before {
   inset-inline: 0; inset-block-start: calc(50% + 74px); padding-block-end: 18px; text-align: center;
   font-family: var(--font-disp); font-size: 25px; font-weight: 700; letter-spacing: .26em; text-indent: .26em; color: #fff;
   background: linear-gradient(90deg, transparent, #38d5f5, transparent) center 100% / 150px 2px no-repeat;
-  animation: intro-name 3.3s cubic-bezier(.3,.1,.25,1) forwards;
+  will-change: transform, opacity; animation: intro-name 3.3s cubic-bezier(.25,.6,.3,1) forwards;
 }
 html[data-lang="fa"].intro::before { content: 'نوا گروپ'; font-family: var(--font-fa); font-size: 28px; letter-spacing: 0; text-indent: 0; }
 @keyframes intro-veil {
-  0% { opacity: 1; background-size: 56px; }
-  76% { opacity: 1; background-size: 192px; }
-  100% { opacity: 0; background-size: 214px; visibility: hidden; }
+  0% { opacity: 1; transform: scale(.29); animation-timing-function: cubic-bezier(.25,.6,.3,1); }
+  76% { opacity: 1; transform: scale(1); animation-timing-function: ease-in; }
+  100% { opacity: 0; transform: scale(1.1); visibility: hidden; }
 }
 @keyframes intro-name {
   0% { opacity: 0; transform: translateY(-22px) scale(.5); }
