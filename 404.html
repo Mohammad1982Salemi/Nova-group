@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl" data-lang="fa" data-both>
+<html lang="en" dir="ltr" data-lang="en" data-both>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <base href="/">
-<title>صفحه پیدا نشد — نوا گروپ | Page not found — Nova Group</title>
+<title>Page not found — Nova Group | صفحه پیدا نشد — نوا گروپ</title>
 <meta name="robots" content="noindex">
 <meta name="author" content="Nova Group">
 <meta name="theme-color" content="#05080e">
 <meta name="color-scheme" content="dark light">
 <meta name="supported-color-schemes" content="dark light">
 <meta name="darkreader-lock">
-<meta property="og:site_name" content="نوا گروپ">
+<meta property="og:site_name" content="Nova Group">
 <meta property="og:type" content="website">
 
 <link rel="icon" type="image/svg+xml" href="assets/img/nova-mark.svg">
@@ -20,32 +20,27 @@
 <link rel="apple-touch-icon" href="assets/img/favicon-192.png">
 
 <!-- The fonts are served from this site; the one this language needs first is fetched early. -->
-<link rel="preload" href="assets/fonts/vazirmatn-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/style.css?v=50">
+<link rel="preload" href="assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css?v=51">
 
 <!-- Samsung Internet (also used inside Telegram and WhatsApp) recolours pages in its dark mode; flag it early. -->
 <script>if (/SamsungBrowser/i.test(navigator.userAgent)) document.documentElement.classList.add('sb');</script>
 
-<!-- Runs before first paint. The reader's language is an earlier choice, a ?lang= in the address, or else
-     Persian for a Persian browser or a clock set to Tehran and English for everyone else. -->
+<!-- Runs before first paint. Everyone meets the site in English. A reader who has chosen Persian (with the
+     language button, or a ?lang=fa in the address) is taken to the Persian page from then on. -->
 <script>
 (function () {
-  var d = document.documentElement, want = null, asked = /[?&]lang=(fa|en)\b/.exec(location.search), i;
+  var d = document.documentElement, want = null, asked = /[?&]lang=(fa|en)\b/.exec(location.search);
   try { if (asked) localStorage.setItem('nova-lang', asked[1]); want = localStorage.getItem('nova-lang'); } catch (e) {}
   if (asked) want = asked[1];
-  if (want !== 'fa' && want !== 'en') {
-    var said = navigator.languages || [navigator.language || ''], fa = false;
-    for (i = 0; i < said.length; i++) if (/^fa\b/i.test(said[i])) fa = true;
-    try { if (Intl.DateTimeFormat().resolvedOptions().timeZone === 'Asia/Tehran') fa = true; } catch (e) {}
-    want = fa ? 'fa' : 'en';
-  }
+  if (want !== 'fa') want = 'en';
   if (d.hasAttribute('data-both')) {
-    // the one page that carries both languages: under /en/ it reads in English
-    var l = location.pathname.indexOf('/en/') === 0 ? 'en' : want;
+    // the one page that carries both languages: under /fa/ it reads in Persian
+    var l = location.pathname.indexOf('/fa/') === 0 ? 'fa' : want;
     d.setAttribute('data-lang', l); d.lang = l; d.dir = l === 'fa' ? 'rtl' : 'ltr';
-  } else if (want === 'en' && d.getAttribute('data-alt') &&
-      !/bot|crawl|spider|slurp|preview|google|bing|yandex|baidu|duckduck|facebook|whatsapp|telegram|lighthouse/i.test(navigator.userAgent)) {
-    // a Persian address is the default one: a reader of English is sent on to the same page under /en/
+  } else if (want === 'fa' && d.getAttribute('data-alt')) {
+    // an English address is the default one: a reader who chose Persian is sent on to the same page under /fa/
     d.style.visibility = 'hidden';
     setTimeout(function () { d.style.visibility = ''; }, 2500);
     location.replace(d.getAttribute('data-alt') + location.hash);
@@ -77,12 +72,12 @@
 
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
-    <a class="logo" href="index.html" aria-label="نوا گروپ">
+    <a class="logo" href="index.html" aria-label="Nova Group">
       <img class="logo-mark" src="assets/img/nova-mark-512.png" alt="" width="512" height="512">
       <span class="logo-text t-fa"><b>نوا</b> گروپ</span><span class="logo-text t-en"><b>NOVA</b> GROUP</span>
     </a>
 
-    <nav class="nav-links" id="navLinks" aria-label="منوی اصلی">
+    <nav class="nav-links" id="navLinks" aria-label="Main">
       <a href="index.html"><span class="t-fa">خانه</span><span class="t-en">Home</span></a>
       <a href="about.html"><span class="t-fa">درباره ما</span><span class="t-en">About</span></a>
       <a href="projects.html"><span class="t-fa">پروژه‌ها</span><span class="t-en">Projects</span></a>
@@ -91,7 +86,7 @@
 
     <div class="nav-actions">
       <button class="lang-btn" id="langBtn" type="button" aria-label="Change language"><span class="t-fa">EN</span><span class="t-en">فا</span></button>
-      <button class="burger" id="burger" type="button" aria-label="منو" aria-expanded="false" aria-controls="navLinks">
+      <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span>
       </button>
     </div>
@@ -123,7 +118,7 @@
   <div class="wrap">
     <div class="footer-top footer-panel">
       <div class="footer-brand">
-        <a class="logo" href="index.html" aria-label="نوا گروپ">
+        <a class="logo" href="index.html" aria-label="Nova Group">
           <img class="logo-mark" src="assets/img/nova-mark-512.png" alt="" width="512" height="512" loading="lazy">
           <span class="logo-text t-fa"><b>نوا</b> گروپ</span><span class="logo-text t-en"><b>NOVA</b> GROUP</span>
         </a>
@@ -133,7 +128,7 @@
         </p>
       </div>
 
-      <nav class="footer-col" aria-label="پیوندهای پانویس">
+      <nav class="footer-col" aria-label="Footer">
         <h2><span class="t-fa">سایت</span><span class="t-en">Site</span></h2>
         <a href="index.html"><span class="t-fa">خانه</span><span class="t-en">Home</span></a>
         <a href="about.html"><span class="t-fa">درباره ما</span><span class="t-en">About</span></a>
@@ -157,8 +152,8 @@
   </div>
 </footer>
 
-<button class="to-top" id="toTop" type="button" aria-label="بازگشت به بالا"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
+<button class="to-top" id="toTop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
 
-<script src="assets/js/main.js?v=50"></script>
+<script src="assets/js/main.js?v=51"></script>
 </body>
 </html>

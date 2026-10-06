@@ -1,30 +1,30 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl" data-lang="fa" data-alt="../en/projects/gold-etf.html">
+<html lang="en" dir="ltr" data-lang="en" data-alt="../fa/projects/gold-etf.html">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>آربیتراژ صندوق‌های طلا — جابه‌جایی میان صندوق‌های طلای بورس تهران | نوا گروپ</title>
-<meta name="description" content="پروژه‌ی آربیتراژ صندوق‌های طلا: الگوریتمی که سرمایه را میان صندوق‌های طلای بورس تهران جابه‌جا می‌کند و در شبیه‌ساز در برابر نگه‌داشتن طلا سنجیده شده است.">
+<title>Gold ETF Arbitrage — moving between the gold funds of the Tehran Stock Exchange | Nova Group</title>
+<meta name="description" content="The Gold ETF Arbitrage project: an algorithm that moves capital between the gold funds of the Tehran Stock Exchange, tested in simulation against holding gold.">
 <link rel="canonical" href="https://novacapital.fund/projects/gold-etf.html">
-<link rel="alternate" hreflang="fa" href="https://novacapital.fund/projects/gold-etf.html">
-<link rel="alternate" hreflang="en" href="https://novacapital.fund/en/projects/gold-etf.html">
-<link rel="alternate" hreflang="x-default" href="https://novacapital.fund/en/projects/gold-etf.html">
-<meta property="og:title" content="آربیتراژ صندوق‌های طلا — جابه‌جایی میان صندوق‌های طلای بورس تهران | نوا گروپ">
-<meta property="og:description" content="الگوریتمی که سرمایه را میان صندوق‌های طلای بورس تهران جابه‌جا می‌کند، در مسیر یک سبد طلای خودکار.">
+<link rel="alternate" hreflang="fa" href="https://novacapital.fund/fa/projects/gold-etf.html">
+<link rel="alternate" hreflang="en" href="https://novacapital.fund/projects/gold-etf.html">
+<link rel="alternate" hreflang="x-default" href="https://novacapital.fund/projects/gold-etf.html">
+<meta property="og:title" content="Gold ETF Arbitrage — moving between the gold funds of the Tehran Stock Exchange | Nova Group">
+<meta property="og:description" content="An algorithm that moves capital between the gold funds of the Tehran Stock Exchange, on the way to an automated gold portfolio.">
 <meta property="og:url" content="https://novacapital.fund/projects/gold-etf.html">
-<meta property="og:locale" content="fa_IR">
-<meta property="og:locale:alternate" content="en_US">
-<meta property="og:image" content="https://novacapital.fund/assets/img/og/gold-etf-fa.jpg">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="fa_IR">
+<meta property="og:image" content="https://novacapital.fund/assets/img/og/gold-etf-en.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://novacapital.fund/assets/img/og/gold-etf-fa.jpg">
+<meta name="twitter:image" content="https://novacapital.fund/assets/img/og/gold-etf-en.jpg">
 <meta name="author" content="Nova Group">
 <meta name="theme-color" content="#05080e">
 <meta name="color-scheme" content="dark light">
 <meta name="supported-color-schemes" content="dark light">
 <meta name="darkreader-lock">
-<meta property="og:site_name" content="نوا گروپ">
+<meta property="og:site_name" content="Nova Group">
 <meta property="og:type" content="website">
 
 <link rel="icon" type="image/svg+xml" href="../assets/img/nova-mark.svg">
@@ -33,32 +33,27 @@
 <link rel="apple-touch-icon" href="../assets/img/favicon-192.png">
 
 <!-- The fonts are served from this site; the one this language needs first is fetched early. -->
-<link rel="preload" href="../assets/fonts/vazirmatn-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/css/style.css?v=50">
+<link rel="preload" href="../assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/style.css?v=51">
 
 <!-- Samsung Internet (also used inside Telegram and WhatsApp) recolours pages in its dark mode; flag it early. -->
 <script>if (/SamsungBrowser/i.test(navigator.userAgent)) document.documentElement.classList.add('sb');</script>
 
-<!-- Runs before first paint. The reader's language is an earlier choice, a ?lang= in the address, or else
-     Persian for a Persian browser or a clock set to Tehran and English for everyone else. -->
+<!-- Runs before first paint. Everyone meets the site in English. A reader who has chosen Persian (with the
+     language button, or a ?lang=fa in the address) is taken to the Persian page from then on. -->
 <script>
 (function () {
-  var d = document.documentElement, want = null, asked = /[?&]lang=(fa|en)\b/.exec(location.search), i;
+  var d = document.documentElement, want = null, asked = /[?&]lang=(fa|en)\b/.exec(location.search);
   try { if (asked) localStorage.setItem('nova-lang', asked[1]); want = localStorage.getItem('nova-lang'); } catch (e) {}
   if (asked) want = asked[1];
-  if (want !== 'fa' && want !== 'en') {
-    var said = navigator.languages || [navigator.language || ''], fa = false;
-    for (i = 0; i < said.length; i++) if (/^fa\b/i.test(said[i])) fa = true;
-    try { if (Intl.DateTimeFormat().resolvedOptions().timeZone === 'Asia/Tehran') fa = true; } catch (e) {}
-    want = fa ? 'fa' : 'en';
-  }
+  if (want !== 'fa') want = 'en';
   if (d.hasAttribute('data-both')) {
-    // the one page that carries both languages: under /en/ it reads in English
-    var l = location.pathname.indexOf('/en/') === 0 ? 'en' : want;
+    // the one page that carries both languages: under /fa/ it reads in Persian
+    var l = location.pathname.indexOf('/fa/') === 0 ? 'fa' : want;
     d.setAttribute('data-lang', l); d.lang = l; d.dir = l === 'fa' ? 'rtl' : 'ltr';
-  } else if (want === 'en' && d.getAttribute('data-alt') &&
-      !/bot|crawl|spider|slurp|preview|google|bing|yandex|baidu|duckduck|facebook|whatsapp|telegram|lighthouse/i.test(navigator.userAgent)) {
-    // a Persian address is the default one: a reader of English is sent on to the same page under /en/
+  } else if (want === 'fa' && d.getAttribute('data-alt')) {
+    // an English address is the default one: a reader who chose Persian is sent on to the same page under /fa/
     d.style.visibility = 'hidden';
     setTimeout(function () { d.style.visibility = ''; }, 2500);
     location.replace(d.getAttribute('data-alt') + location.hash);
@@ -86,25 +81,25 @@
 </head>
 <body>
 
-<a href="#main" class="skip-link"><span class="t-fa">پرش به محتوا</span></a>
+<a href="#main" class="skip-link"><span class="t-en">Skip to content</span></a>
 
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
-    <a class="logo" href="../index.html" aria-label="نوا گروپ">
+    <a class="logo" href="../index.html" aria-label="Nova Group">
       <img class="logo-mark" src="../assets/img/nova-mark-512.png" alt="" width="512" height="512">
-      <span class="logo-text t-fa"><b>نوا</b> گروپ</span>
+      <span class="logo-text t-en"><b>NOVA</b> GROUP</span>
     </a>
 
-    <nav class="nav-links" id="navLinks" aria-label="منوی اصلی">
-      <a href="../index.html"><span class="t-fa">خانه</span></a>
-      <a href="../about.html"><span class="t-fa">درباره ما</span></a>
-      <a href="../projects.html" aria-current="page"><span class="t-fa">پروژه‌ها</span></a>
-      <a href="../contact.html"><span class="t-fa">تماس</span></a>
+    <nav class="nav-links" id="navLinks" aria-label="Main">
+      <a href="../index.html"><span class="t-en">Home</span></a>
+      <a href="../about.html"><span class="t-en">About</span></a>
+      <a href="../projects.html" aria-current="page"><span class="t-en">Projects</span></a>
+      <a href="../contact.html"><span class="t-en">Contact</span></a>
     </nav>
 
     <div class="nav-actions">
-      <a class="lang-btn" id="langBtn" href="../en/projects/gold-etf.html" hreflang="en" lang="en" aria-label="EN — English">EN</a>
-      <button class="burger" id="burger" type="button" aria-label="منو" aria-expanded="false" aria-controls="navLinks">
+      <a class="lang-btn" id="langBtn" href="../fa/projects/gold-etf.html" hreflang="fa" lang="fa" aria-label="فا — فارسی">فا</a>
+      <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span>
       </button>
     </div>
@@ -116,68 +111,68 @@
 <section class="page-hero">
   <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="wrap">
-    <nav class="crumbs reveal" aria-label="مسیر صفحه">
-      <a href="../projects.html"><span class="t-fa">پروژه‌ها</span></a>
+    <nav class="crumbs reveal" aria-label="Breadcrumb">
+      <a href="../projects.html"><span class="t-en">Projects</span></a>
       <span aria-hidden="true">/</span>
-      <span><span class="t-fa">آربیتراژ صندوق‌های طلا</span></span>
+      <span><span class="t-en">Gold ETF Arbitrage</span></span>
     </nav>
 
-    <h1 class="reveal"><span class="t-fa">آربیتراژ صندوق‌های طلا</span></h1>
+    <h1 class="reveal"><span class="t-en">Gold ETF Arbitrage</span></h1>
     <p class="page-lead reveal">
-      <span class="t-fa">الگوریتمی که سرمایه را میان صندوق‌های طلای بورس تهران جابه‌جا می‌کند، در مسیر یک سبد طلای خودکار که می‌خواهد بیش از نگه‌داشتن طلا به دست آورد.</span>
+      <span class="t-en">An algorithm that moves capital between the gold funds of the Tehran Stock Exchange, on the way to an automated gold portfolio that aims to earn more than holding gold.</span>
     </p>
 
     <div class="cs-meta reveal">
-      <span class="status"><span class="t-fa">در حال آزمون</span></span>
+      <span class="status"><span class="t-en">In testing</span></span>
       <ul class="tags">
         <li>Python</li>
-        <li><span class="t-fa">صندوق‌های طلا</span></li>
-        <li><span class="t-fa">بورس تهران</span></li>
-        <li><span class="t-fa">ارزش نسبی</span></li>
-        <li><span class="t-fa">دفتر سفارش</span></li>
-        <li><span class="t-fa">شبیه‌ساز اجرا</span></li>
+        <li><span class="t-en">Gold funds</span></li>
+        <li><span class="t-en">Tehran Stock Exchange</span></li>
+        <li><span class="t-en">Relative value</span></li>
+        <li><span class="t-en">Order book</span></li>
+        <li><span class="t-en">Execution simulator</span></li>
       </ul>
     </div>
 
     <ul class="facts facts-glass">
       <li class="glow reveal">
-        <span class="fact-label"><span class="t-fa">داده</span></span>
-        <b><span class="t-fa">۳۶ صندوق طلا</span></b>
+        <span class="fact-label"><span class="t-en">Data</span></span>
+        <b><span class="t-en">36 gold funds</span></b>
         <p>
-          <span class="t-fa">دفتر سفارش و معاملات آن‌ها در ۹۹۵ روز معاملاتی، از ژوئیه ۲۰۲۲ تا سپتامبر ۲۰۲۶.</span>
+          <span class="t-en">Their order books and trades over 995 trading days, from July 2022 to September 2026.</span>
         </p>
       </li>
       <li class="glow reveal">
-        <span class="fact-label"><span class="t-fa">شبیه‌سازی</span></span>
-        <b><span class="t-fa">۶۰٬۹۵۷ معامله</span></b>
+        <span class="fact-label"><span class="t-en">Simulation</span></span>
+        <b><span class="t-en">60,957 trades</span></b>
         <p>
-          <span class="t-fa">معامله‌ی شبیه‌سازی‌شده در سناریوی پایه، در ۳۹۵ روز معاملاتی و ۲۱ صندوق.</span>
+          <span class="t-en">Simulated trades in the base scenario, over 395 trading days and 21 funds.</span>
         </p>
       </li>
       <li class="glow reveal">
-        <span class="fact-label"><span class="t-fa">آزمون</span></span>
-        <b><span class="t-fa">۸۲ شبیه‌سازی کامل</span></b>
+        <span class="fact-label"><span class="t-en">Testing</span></span>
+        <b><span class="t-en">82 full simulations</span></b>
         <p>
-          <span class="t-fa">برای سنجیدن قاعده روی دوره‌ها، سطح‌های کارمزد و فرض‌های گوناگون، پیش از گزارش آن.</span>
+          <span class="t-en">Run to check the rule on different periods, fee levels and assumptions before reporting it.</span>
         </p>
       </li>
       <li class="glow reveal">
-        <span class="fact-label"><span class="t-fa">فناوری</span></span>
-        <b><span class="t-fa">یک زبان</span></b>
+        <span class="fact-label"><span class="t-en">Technology</span></span>
+        <b><span class="t-en">One language</span></b>
         <div class="fact-list">
-          <div><i>Python</i><span><span class="t-fa">داده، شبیه‌ساز و الگوریتم</span></span></div>
+          <div><i>Python</i><span><span class="t-en">Data, simulator and algorithm</span></span></div>
         </div>
       </li>
     </ul>
 
-    <nav class="toc reveal" aria-label="در این صفحه">
-      <span class="toc-title"><span class="t-fa">در این صفحه</span></span>
-      <a href="#intro"><span class="t-fa">معرفی</span></a>
-      <a href="#reports"><span class="t-fa">گزارش</span></a>
-      <a href="#approach"><span class="t-fa">رویکرد</span></a>
-      <a href="#difference"><span class="t-fa">آنچه برجسته است</span></a>
-      <a href="#roadmap"><span class="t-fa">مسیر پیش رو</span></a>
-      <a href="#technology"><span class="t-fa">فناوری</span></a>
+    <nav class="toc reveal" aria-label="On this page">
+      <span class="toc-title"><span class="t-en">On this page</span></span>
+      <a href="#intro"><span class="t-en">Introduction</span></a>
+      <a href="#reports"><span class="t-en">Report</span></a>
+      <a href="#approach"><span class="t-en">Approach</span></a>
+      <a href="#difference"><span class="t-en">What stands out</span></a>
+      <a href="#roadmap"><span class="t-en">The road ahead</span></a>
+      <a href="#technology"><span class="t-en">Technology</span></a>
     </nav>
   </div>
 </section>
@@ -187,135 +182,135 @@
 
     <article class="cs-body">
       <section class="cs-section" id="intro">
-        <h2><span><span class="t-fa">معرفی</span></span></h2>
+        <h2><span><span class="t-en">Introduction</span></span></h2>
       <p class="detail-lead">
-        <span class="t-fa">بیش از سی صندوق در بورس تهران یک کار می‌کنند: طلا نگه می‌دارند. همه همان طلا را دارند، ولی هر کدام نسبت به دارایی‌اش با قیمت خودش معامله می‌شود. در هر لحظه یک صندوق کمی گران است و دیگری کمی ارزان، و اینکه کدام گران و کدام ارزان است ساعت به ساعت عوض می‌شود. بیشتر سرمایه‌گذاران یک صندوق را انتخاب می‌کنند و در آن می‌مانند. این تفاوت‌ها کوچک‌اند، پس کارمزد و دفتر سفارش کم‌عمق آن‌ها را می‌بلعد، مگر آنکه هر دو دقیق اندازه‌گیری شوند.</span>
+        <span class="t-en">More than thirty funds on the Tehran Stock Exchange do one thing: they hold gold. They hold the same gold, yet each one trades at its own price against what it owns. At any moment one fund is a little dear and another a little cheap, and which is which changes from hour to hour. Most investors choose one fund and stay in it. The differences are small, so fees and thin order books swallow them unless both are measured exactly.</span>
       </p>
       <p>
-        <span class="t-fa">ما تصمیم گرفتیم همه‌ی صندوق‌های طلا را یک دارایی ببینیم و آن دارایی را از راه صندوقی نگه داریم که در آن لحظه ارزان‌ترین راهِ داشتن طلاست، و فقط وقتی جابه‌جا شویم که جابه‌جایی هزینه‌ی خودش را درآورد.</span>
+        <span class="t-en">We decided to treat all the gold funds as one asset, and to hold that asset through whichever fund is cheapest to own at the time, moving only when the move pays for its own cost.</span>
       </p>
       <p>
-        <span class="t-fa">این پروژه دفتر سفارش و معاملات ۳۶ صندوق طلا را از ژوئیه ۲۰۲۲ تا سپتامبر ۲۰۲۶، یعنی ۹۹۵ روز معاملاتی، همراه با ارزش خالص دارایی اعلام‌شده‌ی هر صندوق در اختیار دارد. روی این داده شبیه‌سازی ساختیم که بورس را ثانیه به ثانیه بازپخش می‌کند، و یک قاعده‌ی جابه‌جایی را روی ۲۱ صندوق، از ژانویه ۲۰۲۵ تا سپتامبر ۲۰۲۶ و در چهار سطح کارمزد کارگزاری آزمودیم. در آن شبیه‌سازی، سبد در ۱۹ ماه از ۲۱ ماه جلوتر از نگه‌داشتن ساده‌ی پرمعامله‌ترین صندوق طلا تمام شد. مقصد ما یک سبد طلای خودکار است که در هر لحظه کاملاً در طلاست و می‌خواهد در پایان طلای بیشتری از آغاز داشته باشد.</span>
+        <span class="t-en">The project holds the order books and trades of 36 gold funds from July 2022 to September 2026, 995 trading days, together with each fund's published net asset value. On that record we built a simulator that replays the exchange second by second, and tested one switching rule across 21 funds from January 2025 to September 2026, at four levels of broker fee. In that simulation the portfolio finished ahead of simply holding the most traded gold fund in 19 of 21 months. The destination is an automated gold portfolio that is fully in gold at every moment and aims to end with more gold than it started with.</span>
       </p>
       </section>
 
       <section class="cs-section" id="reports">
-        <h2><span><span class="t-fa">گزارش شبیه‌ساز</span></span></h2>
+        <h2><span><span class="t-en">Simulator report</span></span></h2>
         <p>
-          <span class="t-fa">گزارش زیر همان آزمون را در چهار سناریو نشان می‌دهد. تنها چیزی که میان آن‌ها فرق می‌کند کارمزد کارگزاری است: بدون تخفیف، و با ۲۵، ۳۵ و ۴۵ درصد تخفیف. قاعده در هر چهار سناریو یکی است. می‌توانید گزارش را دانلود کنید و مستقل از ما بخوانید و بسنجید.</span>
+          <span class="t-en">The report below shows that test in four scenarios. Only the broker fee varies between them: no discount, and 25%, 35% and 45% discount. The rule is the same in all four. You can download the report and read and weigh it independently of us.</span>
         </p>
         <ul class="reports">
           <li class="glow reveal">
             <div class="report-head">
-              <b><span class="t-fa">طلا</span></b>
-              <span><span class="t-fa">۲۱ صندوق طلای بورس تهران</span></span>
+              <b><span class="t-en">GOLD</span></b>
+              <span><span class="t-en">21 gold funds of the Tehran Stock Exchange</span></span>
             </div>
             <ul class="report-facts">
-              <li><b><span class="t-fa">ژانویه ۲۰۲۵ تا سپتامبر ۲۰۲۶</span></b><span><span class="t-fa">بازه‌ی آزمون</span></span></li>
-              <li><b><span class="t-fa">۳۹۵</span></b><span><span class="t-fa">روز معاملاتی</span></span></li>
-              <li><b><span class="t-fa">۶۰٬۹۵۷</span></b><span><span class="t-fa">معامله‌ی شبیه‌سازی‌شده در سناریوی پایه</span></span></li>
-              <li><b><span class="t-fa">۴ سناریو</span></b><span><span class="t-fa">۴ سطح کارمزد</span></span></li>
+              <li><b><span class="t-en">Jan 2025 to Sep 2026</span></b><span><span class="t-en">test period</span></span></li>
+              <li><b><span class="t-en">395</span></b><span><span class="t-en">trading days</span></span></li>
+              <li><b><span class="t-en">60,957</span></b><span><span class="t-en">simulated trades in the base scenario</span></span></li>
+              <li><b><span class="t-en">4 scenarios</span></b><span><span class="t-en">4 fee levels</span></span></li>
             </ul>
             <div class="report-actions">
               <a class="btn btn-primary" href="../assets/reports/gold-etf-report.html" download>
                 <svg class="arr-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
-                <span class="t-fa">دانلود گزارش</span>
+                <span class="t-en">Download the report</span>
               </a>
               <a class="btn btn-ghost" href="../assets/reports/gold-etf-report.html" target="_blank" rel="noopener">
-                <span class="t-fa">باز کردن در مرورگر</span>
+                <span class="t-en">Open in the browser</span>
               </a>
             </div>
-            <p class="report-size"><span class="t-fa">یک فایل HTML مستقل، ۴٫۹ مگابایت، به انگلیسی</span></p>
+            <p class="report-size"><span class="t-en">One self-contained HTML file, 4.9 MB, in English</span></p>
           </li>
         </ul>
         <p class="report-note">
-          <span class="t-fa">این نتیجه‌ی شبیه‌سازی روی دفتر سفارش ضبط‌شده‌ی بازار است، نه معامله‌ی واقعی، و تضمینی برای آینده نیست. در این شبیه‌سازی معامله‌گران رقیب مدل نشده‌اند.</span>
+          <span class="t-en">This is a simulation result on the market's recorded order books, not real trading, and no guarantee of the future. No competing traders are modelled in this simulation.</span>
         </p>
       </section>
 
       <section class="cs-section" id="approach">
-        <h2><span><span class="t-fa">رویکرد</span></span></h2>
+        <h2><span><span class="t-en">Approach</span></span></h2>
       <p>
-        <span class="t-fa">ما هرگز نمی‌پرسیم طلا بالا می‌رود یا پایین؛ فقط می‌پرسیم همین حالا کدام صندوق ارزان‌ترین راهِ نگه‌داشتن آن است. کار در سه مرحله پیش می‌رود:</span>
+        <span class="t-en">We never ask whether gold will rise or fall; we only ask which fund is the cheapest way to hold it right now. The work proceeds in three stages:</span>
       </p>
       <ol class="steps">
         <li class="glow reveal">
-          <strong class="t-fa">از قیمت و ارزش خالص دارایی به یک معیار برای همه‌ی صندوق‌ها</strong>
-          <p class="t-fa">قیمت یک صندوق به‌تنهایی چیزی نمی‌گوید، چون هر صندوق اندازه‌ی واحد و ترکیب شمش و سکه‌ی خودش را دارد. ما قیمت بازار هر صندوق را با ارزش دارایی‌اش و با همین عدد برای پرمعامله‌ترین صندوق طلا، که معیار ماست، می‌سنجیم. حاصل، برای هر صندوق یک عدد است که می‌گوید نسبت به حالت عادی خودش چقدر گران یا ارزان است. همه‌ی صندوق‌ها روی همین یک مقیاس خوانده می‌شوند.</p>
+          <strong class="t-en">From prices and net asset values to one yardstick for every fund</strong>
+          <p class="t-en">A fund's price alone says nothing, because every fund has a different unit size and a different mix of gold bar and coin. We set each fund's market price against the value of what it holds and against the same figure for the most traded gold fund, which is our benchmark. The result is one number per fund that says how dear or cheap it is compared with its own normal. All funds are read on that one scale.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fa">از معیار به جابه‌جایی‌ای که هزینه‌اش را درمی‌آورد</strong>
-          <p class="t-fa">ارزان‌بودن یک صندوق هنوز دلیل جابه‌جایی نیست. هر جابه‌جایی یک کارمزد فروش، یک کارمزد خرید و فاصله‌ی خریدار و فروشنده در دو دفتر سفارش هزینه دارد. قاعده فقط وقتی سرمایه را جابه‌جا می‌کند که تفاوت به‌روشنی از این هزینه بزرگ‌تر باشد، و وقتی تفاوت بسته شد آن را برمی‌گرداند. جابه‌جایی‌ای که هزینه‌اش را درنیاورد انجام نمی‌شود.</p>
+          <strong class="t-en">From the yardstick to a switch that pays for itself</strong>
+          <p class="t-en">A cheap fund is not yet a reason to move. Every switch costs a sale fee, a purchase fee and the gap between buyers and sellers in two order books. The rule moves capital only when the difference is clearly larger than that cost, and brings it back when the difference has closed. A switch that would not earn back its cost is not made.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fa">از تصمیم به سفارش پرشده</strong>
-          <p class="t-fa">صندوق‌های طلا، جز بزرگ‌ترینشان، کم‌عمق معامله می‌شوند؛ پس ارزش یک تصمیم همان‌قدر است که دفتر سفارش واقعاً می‌تواند پر کند. الگوریتم اندازه‌ی هر سفارش را با عمق روی تابلو تنظیم می‌کند، دو سوی یک جابه‌جایی را با هم پیش می‌برد و حساب را در تمام مدت در طلا نگه می‌دارد. فروش استقراضی نمی‌کند و برای بزرگ‌کردن موقعیت وام نمی‌گیرد.</p>
+          <strong class="t-en">From the decision to a filled order</strong>
+          <p class="t-en">Gold funds other than the largest one trade thinly, so a decision is worth only what the order book can actually fill. The algorithm sizes each order to the depth on the screen, works the two sides of a switch together, and keeps the account in gold throughout. It does not sell short and does not borrow to enlarge the position.</p>
         </li>
       </ol>
       <p>
-        <span class="t-fa">شبیه‌ساز زیر هر سه مرحله نشسته است. دفتر سفارش ضبط‌شده‌ی همه‌ی صندوق‌ها را کنار هم و ثانیه به ثانیه بازپخش می‌کند. سفارش‌های ما پشت سفارش‌هایی که از پیش آن‌جا بودند در صف می‌نشینند، تکه‌تکه پر می‌شوند یا اصلاً پر نمی‌شوند، و نقدینگی‌ای را که مصرف می‌کنند با خود می‌برند. داده‌ی بازار چند ثانیه دیرتر به الگوریتم می‌رسد و رسیدن سفارش‌ها هم زمان می‌برد، همان‌طور که در عمل خواهد بود. شبیه‌ساز خودِ حساب را هم نگه می‌دارد و هر سفارشی را که از سقف اعتبار روزانه‌ی کارگزار فراتر برود، چیزی را بفروشد که در حساب نیست، یا بیرون از دامنه‌ی نوسان روز باشد رد می‌کند.</span>
+        <span class="t-en">The simulator sits under all three stages. It replays the recorded order books of all the funds side by side, one second at a time. Our orders join the queue behind the orders that were already there, fill in part or not at all, and take away the liquidity they consume. Market data reaches the algorithm a few seconds late and orders take time to arrive, as they would in practice. The simulator also keeps the account itself, and refuses any order that would borrow beyond the broker's intraday limit, sell what is not held, or trade outside the day's price limits.</span>
       </p>
       <p>
-        <span class="t-fa">این پروژه درون <a href="../projects/tsetmc.html">TSETMC</a> آغاز شد و از همان ضبط‌های بازار استفاده می‌کند. پروژه‌ای جداست چون پرسش، شبیه‌ساز و مقصدش از آنِ خودش است.</span>
+        <span class="t-en">The project began inside <a href="../projects/tsetmc.html">TSETMC</a> and uses the same market recordings. It is a separate project because its question, its simulator and its destination are its own.</span>
       </p>
       </section>
 
       <section class="cs-section" id="difference">
-        <h2><span><span class="t-fa">آنچه برجسته است</span></span></h2>
+        <h2><span><span class="t-en">What stands out</span></span></h2>
       <ul class="points">
         <li class="glow reveal">
-          <strong class="t-fa">با طلا سنجیده می‌شود، نه با تومان.</strong>
-          <p class="t-fa">خودِ طلا می‌تواند بالا یا پایین برود و صندوق طلا هم دنبالش می‌رود. پس معیار ما پول نقد نیست، بلکه نگه‌داشتن ساده‌ی پرمعامله‌ترین صندوق طلاست. هر عددی که گزارش می‌کنیم، سبد است تقسیم بر ارزشی که همان پول داشت اگر در آن صندوق مانده بود. نتیجه‌ی صفر یعنی «بهتر از نگه‌داشتن طلا نبود»، نه «زیانی نداشت».</p>
+          <strong class="t-en">It is measured in gold, not in toman.</strong>
+          <p class="t-en">Gold itself can rise or fall, and a gold fund will follow it. Our benchmark is therefore not cash but simply holding the most traded gold fund. Every figure we report is the portfolio divided by what the same money would be worth if it had stayed in that fund. A result of zero means "no better than holding gold", not "no loss".</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fa">همیشه کاملاً در طلا.</strong>
-          <p class="t-fa">سبد هرگز به انتظار روز بهتر در پول نقد نمی‌نشیند و هرگز علیه طلا شرط نمی‌بندد. در پایان هر روز صندوق طلا در دست دارد. در هیچ‌یک از شبیه‌سازی‌های قاعده‌ی نهایی، پول قرضی به شب نرسید؛ شبیه‌ساز این را در پایان هر روز بررسی می‌کند و اگر رخ دهد ثبتش می‌کند.</p>
+          <strong class="t-en">Always fully in gold.</strong>
+          <p class="t-en">The portfolio never sits in cash waiting for a better day and never bets against gold. It holds gold funds at every close. In every simulation of the final rule, no borrowed money was carried overnight; the simulator checks this at every close and records it if it ever happens.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fa">شبیه‌سازی که حساب را درست نگه می‌دارد.</strong>
-          <p class="t-fa">بک‌تست معمولی فرض می‌کند هر سفارش با قیمت تابلو پر می‌شود. شبیه‌ساز ما دفتر سفارش ضبط‌شده را ثانیه به ثانیه بازپخش می‌کند، سفارش‌های ما را در صف می‌نشاند و آن‌ها را فقط با حجمی پر می‌کند که واقعاً آن‌جا بود. سناریوی پایه ۶۰٬۹۵۷ معامله‌ی شبیه‌سازی‌شده در ۳۹۵ روز معاملاتی دارد. الگوریتم بازار را با تأخیر می‌بیند و سفارش‌هایش با تأخیر می‌رسند.</p>
+          <strong class="t-en">A simulator that keeps the account honest.</strong>
+          <p class="t-en">An ordinary backtest assumes every order fills at the quoted price. Ours replays the recorded order books second by second, puts our orders in the queue, and fills them only against volume that was really there. The base scenario contains 60,957 simulated trades over 395 trading days. The algorithm sees the market with a delay and its orders arrive with a delay.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fa">کارمزد از سطر اول در حساب است.</strong>
-          <p class="t-fa">برتری یک صندوق بر دیگری کوچک است، پس کارمزد کارگزار تعیین می‌کند جابه‌جایی ارزش انجام‌دادن دارد یا نه. کل شبیه‌سازی را در چهار سطح کارمزد، از بدون تخفیف تا ۴۵ درصد تخفیف، با همان قاعده دوباره اجرا کردیم. گزارش هر چهار را نشان می‌دهد تا خواننده ببیند چه مقدار از نتیجه به کارمزد بستگی دارد.</p>
+          <strong class="t-en">Fees are in the account from the first line.</strong>
+          <p class="t-en">The advantage of one fund over another is small, so the broker's fee decides whether a switch is worth making. We ran the whole simulation again at four fee levels, from no discount to a 45% discount, with the rule unchanged. The report shows all four, so the reader can see how much of the result depends on the fee.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fa">آزموده در جایی که می‌توانست شکست بخورد.</strong>
-          <p class="t-fa">قاعده‌ای که روی یک دوره کار می‌کند شاید فقط خوش‌شانس بوده باشد. منطق قاعده را روی قیمت‌های ۲۰۲۲ تا ۲۰۲۴ بررسی کردیم، دوره‌ای که هیچ شبیه‌سازی‌ای از آن استفاده نکرده بود، و دو نیمه‌ی دوره‌ی آزمون را جدا خواندیم، چون بورس میان آن دو یک محدودیت معاملاتی را عوض کرد. روی نسخه‌ی پیشین قاعده، صندوق انتخاب‌شده را در همان لحظه‌ها با صندوقی تصادفی هم جایگزین کردیم و آن نسخه زیان داد. در مجموع ۸۲ شبیه‌سازیِ کل‌دوره پشت نتیجه‌ی گزارش‌شده است.</p>
+          <strong class="t-en">Tested where it could fail.</strong>
+          <p class="t-en">A rule that works on one period may only have been lucky. We checked the rule's logic on the prices of 2022 to 2024, a period no simulation had used, and we read the two halves of the test period separately, because the exchange changed a trading limit between them. On an earlier version of the rule we also replaced the chosen fund with a randomly chosen one at the same moments, and that version lost money. In all, 82 full-period simulations stand behind the reported result.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fa">نتیجه‌ای که بدون ما هم می‌شود خواند.</strong>
-          <p class="t-fa">گزارش شبیه‌ساز یک فایل است که در مرورگر باز می‌شود. سبد را در برابر نگه‌داشتن طلا ماه به ماه نشان می‌دهد، بدترین دوره‌ی عقب‌ماندن از طلا را در کنار بهترین ماه، و آنچه کارمزدها بردند. محدودیت‌های خودش را هم می‌گوید: شبیه‌سازی است، و معامله‌گران دیگری را که برای همان سفارش‌ها رقابت می‌کنند مدل نمی‌کند.</p>
+          <strong class="t-en">A result you can read without us.</strong>
+          <p class="t-en">The simulator report is one file that opens in a browser. It shows the portfolio against holding gold month by month, the worst stretch behind gold as well as the best month, and what the fees took. It also states its own limits: it is a simulation, and it does not model other traders competing for the same orders.</p>
         </li>
       </ul>
       </section>
 
       <section class="cs-section" id="roadmap">
-        <h2><span><span class="t-fa">مسیر پیش رو</span></span></h2>
+        <h2><span><span class="t-en">The road ahead</span></span></h2>
       <ol class="phases">
         <li class="is-done glow reveal">
-          <span class="phase-mark"><span class="t-fa">انجام‌شده</span></span>
-          <p class="t-fa">ضبط‌های بازار، شبیه‌ساز اجرا و قاعده‌ی جابه‌جایی ساخته شده‌اند، و قاعده در شبیه‌سازی روی ۲۱ صندوق و چهار سطح کارمزد آزموده شده است.</p>
+          <span class="phase-mark"><span class="t-en">Done</span></span>
+          <p class="t-en">The market recordings, the execution simulator and the switching rule are built, and the rule has been tested in simulation across 21 funds and four fee levels.</p>
         </li>
         <li class="is-now glow reveal">
-          <span class="phase-mark"><span class="t-fa">امروز</span></span>
-          <p class="t-fa">روشن‌کردن آنچه شبیه‌سازی نمی‌تواند بداند، مانند تأخیر واقعی داده‌ی زنده و سفارش‌های ما، و آماده‌شدن برای اجرای الگوریتم روی بازار زنده بدون فرستادن سفارش.</p>
+          <span class="phase-mark"><span class="t-en">Now</span></span>
+          <p class="t-en">Establishing what the simulation cannot know, such as the real delay of live data and of our orders, and preparing to run the algorithm on the live market without sending orders.</p>
         </li>
         <li class="glow reveal">
-          <span class="phase-mark"><span class="t-fa">پس از آن</span></span>
-          <p class="t-fa">اجرای آن روی بازار زنده به‌صورت کاغذی، مقایسه‌ی هر روز با بازپخش همان روز در شبیه‌ساز، و سپس یک دوره‌ی آزمایشی کوچک برای سنجیدن پرشدن واقعی سفارش‌ها در برابر شبیه‌سازی.</p>
+          <span class="phase-mark"><span class="t-en">Next</span></span>
+          <p class="t-en">Running it on the live market on paper, comparing each day with the simulator's replay of that same day, and then a small pilot to measure real fills against simulated ones.</p>
         </li>
         <li class="glow reveal">
-          <span class="phase-mark"><span class="t-fa">گام پایانی</span></span>
-          <p class="t-fa">مدیریت خودکار سرمایه در قالب یک سبد طلا، به‌عنوان محصولی در کنار صندوق مدیریت پول.</p>
+          <span class="phase-mark"><span class="t-en">Final step</span></span>
+          <p class="t-en">Managing capital automatically as a gold portfolio, as a product beside the money-management fund.</p>
         </li>
       </ol>
       </section>
 
       <section class="cs-section" id="technology">
-        <h2><span><span class="t-fa">فناوری</span></span></h2>
+        <h2><span><span class="t-en">Technology</span></span></h2>
       <p>
-        <span class="t-fa">کل پروژه با پایتون نوشته شده است: آماده‌سازی ضبط‌های بازار، شبیه‌ساز اجرا، الگوریتم و تحلیل. یک شبیه‌سازی کامل از ۲۱ صندوق در ۲۱ ماه، ثانیه به ثانیه، روی یک دستگاه حدود پانزده دقیقه طول می‌کشد و چند شبیه‌سازی کنار هم اجرا می‌شوند. هیچ تغییری بدون گذشتن از ۵۵ آزمون خودکار پذیرفته نمی‌شود؛ برخی از این آزمون‌ها برای بازسازی یک خطای گذشته نوشته شده‌اند تا آن خطا برنگردد.</span>
+        <span class="t-en">The whole project is written in Python: preparing the market recordings, the execution simulator, the algorithm and the analysis. A full simulation of 21 funds over 21 months, second by second, takes about fifteen minutes on one machine, and several run side by side. No change is accepted without passing 55 automated tests, some of which were written to reproduce a past mistake so that it cannot return.</span>
       </p>
       </section>
     </article>
@@ -325,24 +320,24 @@
 
 <section class="section ruled">
   <div class="wrap">
-    <nav class="projnav reveal" aria-label="پروژه‌های دیگر">
+    <nav class="projnav reveal" aria-label="More projects">
       <a class="projnav-card is-prev glow" href="../projects/tsetmc.html">
-        <span class="projnav-dir"><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="t-fa">پروژه‌ی قبلی</span></span>
-        <b><span class="t-fa">TSETMC</span></b>
+        <span class="projnav-dir"><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="t-en">Previous project</span></span>
+        <b><span class="t-en">TSETMC</span></b>
       </a>
       <a class="projnav-card is-next glow" href="../projects/defi-lp.html">
-        <span class="projnav-dir"><span class="t-fa">پروژه‌ی بعدی</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        <b><span class="t-fa">دیفای ال‌پی</span></b>
+        <span class="projnav-dir"><span class="t-en">Next project</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <b><span class="t-en">DeFi LP</span></b>
       </a>
     </nav>
   </div>
   <div class="wrap cs-end">
     <a class="link-arrow link-back" href="../projects.html">
       <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      <span class="t-fa">همه‌ی پروژه‌ها</span>
+      <span class="t-en">All projects</span>
     </a>
     <a class="btn btn-ghost" href="../contact.html">
-      <span class="t-fa">تماس با ما</span>
+      <span class="t-en">Get in touch</span>
     </a>
   </div>
 </section>
@@ -353,25 +348,25 @@
   <div class="wrap">
     <div class="footer-top footer-panel">
       <div class="footer-brand">
-        <a class="logo" href="../index.html" aria-label="نوا گروپ">
+        <a class="logo" href="../index.html" aria-label="Nova Group">
           <img class="logo-mark" src="../assets/img/nova-mark-512.png" alt="" width="512" height="512" loading="lazy">
-          <span class="logo-text t-fa"><b>نوا</b> گروپ</span>
+          <span class="logo-text t-en"><b>NOVA</b> GROUP</span>
         </a>
         <p>
-          <span class="t-fa">پژوهش و ساخت الگوریتم‌های معاملاتی بر پایه‌ی جریان سفارش بازار — از ۱۳۹۹.</span>
+          <span class="t-en">Researching and building trading algorithms from market order flow — since 2020.</span>
         </p>
       </div>
 
-      <nav class="footer-col" aria-label="پیوندهای پانویس">
-        <h2><span class="t-fa">سایت</span></h2>
-        <a href="../index.html"><span class="t-fa">خانه</span></a>
-        <a href="../about.html"><span class="t-fa">درباره ما</span></a>
-        <a href="../projects.html"><span class="t-fa">پروژه‌ها</span></a>
-        <a href="../contact.html"><span class="t-fa">تماس</span></a>
+      <nav class="footer-col" aria-label="Footer">
+        <h2><span class="t-en">Site</span></h2>
+        <a href="../index.html"><span class="t-en">Home</span></a>
+        <a href="../about.html"><span class="t-en">About</span></a>
+        <a href="../projects.html"><span class="t-en">Projects</span></a>
+        <a href="../contact.html"><span class="t-en">Contact</span></a>
       </nav>
 
       <div class="footer-col footer-contact">
-        <h2><span class="t-fa">ارتباط</span></h2>
+        <h2><span class="t-en">Connect</span></h2>
         <a class="footer-mail" href="mailto:info@novacapital.fund">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
           <bdi>info@novacapital.fund</bdi>
@@ -380,13 +375,13 @@
     </div>
 
     <p class="footer-bottom">
-      <span class="t-fa">© ۱۴۰۵ نوا گروپ. همه‌ی حقوق مادی و معنوی این وب‌سایت و محتوای آن متعلق به نوا گروپ است. هرگونه سوءاستفاده پیگرد قانونی دارد.</span>
+      <span class="t-en">© 2026 Nova Group. All rights to this website and its content belong to Nova Group. Any misuse is subject to legal action.</span>
     </p>
   </div>
 </footer>
 
-<button class="to-top" id="toTop" type="button" aria-label="بازگشت به بالا"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
+<button class="to-top" id="toTop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
 
-<script src="../assets/js/main.js?v=50"></script>
+<script src="../assets/js/main.js?v=51"></script>
 </body>
 </html>

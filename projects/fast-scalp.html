@@ -1,30 +1,30 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl" data-lang="fa" data-alt="../en/projects/fast-scalp.html">
+<html lang="en" dir="ltr" data-lang="en" data-alt="../fa/projects/fast-scalp.html">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>فست اسکلپ — الگوریتم معاملات کوتاه‌مدت در بازار آتی شیکاگو | نوا گروپ</title>
-<meta name="description" content="پروژه‌ی فست اسکلپ: الگوریتم معاملات کوتاه‌مدت مبتنی بر یادگیری ماشین، آموخته از تاریخچه‌ی سفارش‌به‌سفارش بورس شیکاگو.">
+<title>Fast Scalp — a short-term trading algorithm for the Chicago futures market | Nova Group</title>
+<meta name="description" content="The Fast Scalp project: a short-term trading algorithm based on machine learning, learned from the order-by-order history of the Chicago exchange.">
 <link rel="canonical" href="https://novacapital.fund/projects/fast-scalp.html">
-<link rel="alternate" hreflang="fa" href="https://novacapital.fund/projects/fast-scalp.html">
-<link rel="alternate" hreflang="en" href="https://novacapital.fund/en/projects/fast-scalp.html">
-<link rel="alternate" hreflang="x-default" href="https://novacapital.fund/en/projects/fast-scalp.html">
-<meta property="og:title" content="فست اسکلپ — الگوریتم معاملات کوتاه‌مدت در بازار آتی شیکاگو | نوا گروپ">
-<meta property="og:description" content="الگوریتم معاملات کوتاه‌مدت مبتنی بر ML در بازار آتی شیکاگو، در مسیر یک میز معاملات خودکار.">
+<link rel="alternate" hreflang="fa" href="https://novacapital.fund/fa/projects/fast-scalp.html">
+<link rel="alternate" hreflang="en" href="https://novacapital.fund/projects/fast-scalp.html">
+<link rel="alternate" hreflang="x-default" href="https://novacapital.fund/projects/fast-scalp.html">
+<meta property="og:title" content="Fast Scalp — a short-term trading algorithm for the Chicago futures market | Nova Group">
+<meta property="og:description" content="An ML-based short-term trading algorithm for the Chicago futures market, on the way to an automated trading desk.">
 <meta property="og:url" content="https://novacapital.fund/projects/fast-scalp.html">
-<meta property="og:locale" content="fa_IR">
-<meta property="og:locale:alternate" content="en_US">
-<meta property="og:image" content="https://novacapital.fund/assets/img/og/fast-scalp-fa.jpg">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="fa_IR">
+<meta property="og:image" content="https://novacapital.fund/assets/img/og/fast-scalp-en.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://novacapital.fund/assets/img/og/fast-scalp-fa.jpg">
+<meta name="twitter:image" content="https://novacapital.fund/assets/img/og/fast-scalp-en.jpg">
 <meta name="author" content="Nova Group">
 <meta name="theme-color" content="#05080e">
 <meta name="color-scheme" content="dark light">
 <meta name="supported-color-schemes" content="dark light">
 <meta name="darkreader-lock">
-<meta property="og:site_name" content="نوا گروپ">
+<meta property="og:site_name" content="Nova Group">
 <meta property="og:type" content="website">
 
 <link rel="icon" type="image/svg+xml" href="../assets/img/nova-mark.svg">
@@ -33,32 +33,27 @@
 <link rel="apple-touch-icon" href="../assets/img/favicon-192.png">
 
 <!-- The fonts are served from this site; the one this language needs first is fetched early. -->
-<link rel="preload" href="../assets/fonts/vazirmatn-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/css/style.css?v=50">
+<link rel="preload" href="../assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/style.css?v=51">
 
 <!-- Samsung Internet (also used inside Telegram and WhatsApp) recolours pages in its dark mode; flag it early. -->
 <script>if (/SamsungBrowser/i.test(navigator.userAgent)) document.documentElement.classList.add('sb');</script>
 
-<!-- Runs before first paint. The reader's language is an earlier choice, a ?lang= in the address, or else
-     Persian for a Persian browser or a clock set to Tehran and English for everyone else. -->
+<!-- Runs before first paint. Everyone meets the site in English. A reader who has chosen Persian (with the
+     language button, or a ?lang=fa in the address) is taken to the Persian page from then on. -->
 <script>
 (function () {
-  var d = document.documentElement, want = null, asked = /[?&]lang=(fa|en)\b/.exec(location.search), i;
+  var d = document.documentElement, want = null, asked = /[?&]lang=(fa|en)\b/.exec(location.search);
   try { if (asked) localStorage.setItem('nova-lang', asked[1]); want = localStorage.getItem('nova-lang'); } catch (e) {}
   if (asked) want = asked[1];
-  if (want !== 'fa' && want !== 'en') {
-    var said = navigator.languages || [navigator.language || ''], fa = false;
-    for (i = 0; i < said.length; i++) if (/^fa\b/i.test(said[i])) fa = true;
-    try { if (Intl.DateTimeFormat().resolvedOptions().timeZone === 'Asia/Tehran') fa = true; } catch (e) {}
-    want = fa ? 'fa' : 'en';
-  }
+  if (want !== 'fa') want = 'en';
   if (d.hasAttribute('data-both')) {
-    // the one page that carries both languages: under /en/ it reads in English
-    var l = location.pathname.indexOf('/en/') === 0 ? 'en' : want;
+    // the one page that carries both languages: under /fa/ it reads in Persian
+    var l = location.pathname.indexOf('/fa/') === 0 ? 'fa' : want;
     d.setAttribute('data-lang', l); d.lang = l; d.dir = l === 'fa' ? 'rtl' : 'ltr';
-  } else if (want === 'en' && d.getAttribute('data-alt') &&
-      !/bot|crawl|spider|slurp|preview|google|bing|yandex|baidu|duckduck|facebook|whatsapp|telegram|lighthouse/i.test(navigator.userAgent)) {
-    // a Persian address is the default one: a reader of English is sent on to the same page under /en/
+  } else if (want === 'fa' && d.getAttribute('data-alt')) {
+    // an English address is the default one: a reader who chose Persian is sent on to the same page under /fa/
     d.style.visibility = 'hidden';
     setTimeout(function () { d.style.visibility = ''; }, 2500);
     location.replace(d.getAttribute('data-alt') + location.hash);
@@ -86,25 +81,25 @@
 </head>
 <body>
 
-<a href="#main" class="skip-link"><span class="t-fa">پرش به محتوا</span></a>
+<a href="#main" class="skip-link"><span class="t-en">Skip to content</span></a>
 
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
-    <a class="logo" href="../index.html" aria-label="نوا گروپ">
+    <a class="logo" href="../index.html" aria-label="Nova Group">
       <img class="logo-mark" src="../assets/img/nova-mark-512.png" alt="" width="512" height="512">
-      <span class="logo-text t-fa"><b>نوا</b> گروپ</span>
+      <span class="logo-text t-en"><b>NOVA</b> GROUP</span>
     </a>
 
-    <nav class="nav-links" id="navLinks" aria-label="منوی اصلی">
-      <a href="../index.html"><span class="t-fa">خانه</span></a>
-      <a href="../about.html"><span class="t-fa">درباره ما</span></a>
-      <a href="../projects.html" aria-current="page"><span class="t-fa">پروژه‌ها</span></a>
-      <a href="../contact.html"><span class="t-fa">تماس</span></a>
+    <nav class="nav-links" id="navLinks" aria-label="Main">
+      <a href="../index.html"><span class="t-en">Home</span></a>
+      <a href="../about.html"><span class="t-en">About</span></a>
+      <a href="../projects.html" aria-current="page"><span class="t-en">Projects</span></a>
+      <a href="../contact.html"><span class="t-en">Contact</span></a>
     </nav>
 
     <div class="nav-actions">
-      <a class="lang-btn" id="langBtn" href="../en/projects/fast-scalp.html" hreflang="en" lang="en" aria-label="EN — English">EN</a>
-      <button class="burger" id="burger" type="button" aria-label="منو" aria-expanded="false" aria-controls="navLinks">
+      <a class="lang-btn" id="langBtn" href="../fa/projects/fast-scalp.html" hreflang="fa" lang="fa" aria-label="فا — فارسی">فا</a>
+      <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span>
       </button>
     </div>
@@ -116,69 +111,69 @@
 <section class="page-hero">
   <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="wrap">
-    <nav class="crumbs reveal" aria-label="مسیر صفحه">
-      <a href="../projects.html"><span class="t-fa">پروژه‌ها</span></a>
+    <nav class="crumbs reveal" aria-label="Breadcrumb">
+      <a href="../projects.html"><span class="t-en">Projects</span></a>
       <span aria-hidden="true">/</span>
-      <span><span class="t-fa">فست اسکلپ</span></span>
+      <span><span class="t-en">Fast Scalp</span></span>
     </nav>
 
-    <h1 class="reveal"><span class="t-fa">فست اسکلپ</span></h1>
+    <h1 class="reveal"><span class="t-en">Fast Scalp</span></h1>
     <p class="page-lead reveal">
-      <span class="t-fa">الگوریتم معاملات کوتاه‌مدت مبتنی بر ML در بازار آتی شیکاگو، در مسیر یک میز معاملات خودکار.</span>
+      <span class="t-en">An ML-based short-term trading algorithm for the Chicago futures market, on the way to an automated trading desk.</span>
     </p>
 
     <div class="cs-meta reveal">
-      <span class="status"><span class="t-fa">در حال آزمون</span></span>
+      <span class="status"><span class="t-en">In testing</span></span>
       <ul class="tags">
         <li>Python</li><li>C#</li><li>Rust</li><li>MBO</li>
-        <li><span class="t-fa">یادگیری ماشین</span></li>
-        <li><span class="t-fa">اسکلپ</span></li>
-        <li><span class="t-fa">شبیه‌ساز اجرا</span></li>
+        <li><span class="t-en">Machine learning</span></li>
+        <li><span class="t-en">Scalping</span></li>
+        <li><span class="t-en">Execution simulator</span></li>
       </ul>
     </div>
 
     <ul class="facts facts-glass">
       <li class="glow reveal">
-        <span class="fact-label"><span class="t-fa">داده</span></span>
-        <b><span class="t-fa">تک‌تک سفارش‌ها</span></b>
+        <span class="fact-label"><span class="t-en">Data</span></span>
+        <b><span class="t-en">Every single order</span></b>
         <p>
-          <span class="t-fa">تاریخچه‌ی چندساله‌ی بورس شیکاگو، از بزرگ‌ترین بازارهای آتی جهان.</span>
+          <span class="t-en">Several years of the Chicago exchange, one of the world's largest futures markets.</span>
         </p>
       </li>
       <li class="glow reveal">
-        <span class="fact-label"><span class="t-fa">روش</span></span>
-        <b><span class="t-fa">یادگیری ماشین</span></b>
+        <span class="fact-label"><span class="t-en">Method</span></span>
+        <b><span class="t-en">Machine learning</span></b>
         <p>
-          <span class="t-fa">با پشتوانه‌ی تحلیل آماری؛ الگوها از نمونه‌های واقعی بازار آموخته می‌شوند.</span>
+          <span class="t-en">Backed by statistical analysis; the patterns are learned from real market examples.</span>
         </p>
       </li>
       <li class="glow reveal">
-        <span class="fact-label"><span class="t-fa">ریسک</span></span>
-        <b><span class="t-fa">حد زیان در هر معامله</span></b>
+        <span class="fact-label"><span class="t-en">Risk</span></span>
+        <b><span class="t-en">A stop on every trade</span></b>
         <p>
-          <span class="t-fa">از لحظه‌ی ورود مشخص است؛ آنچه گزارش می‌شود زیان واقعی است، نه اسمی.</span>
+          <span class="t-en">Set from the moment of entry; what is reported is the real loss, not the nominal one.</span>
         </p>
       </li>
       <li class="glow reveal">
-        <span class="fact-label"><span class="t-fa">فناوری</span></span>
-        <b><span class="t-fa">سه زبان، سه نقش</span></b>
+        <span class="fact-label"><span class="t-en">Technology</span></span>
+        <b><span class="t-en">Three languages, three jobs</span></b>
         <div class="fact-list">
-          <div><i>Python</i><span><span class="t-fa">مدل‌های یادگیری</span></span></div>
-          <div><i>C#</i><span><span class="t-fa">بازسازی بازار و شبیه‌ساز</span></span></div>
-          <div><i>Rust</i><span><span class="t-fa">خواننده‌ی داده‌ی خام</span></span></div>
+          <div><i>Python</i><span><span class="t-en">Learning models</span></span></div>
+          <div><i>C#</i><span><span class="t-en">Rebuild and simulator</span></span></div>
+          <div><i>Rust</i><span><span class="t-en">Raw-data reader</span></span></div>
         </div>
       </li>
     </ul>
 
-    <nav class="toc reveal" aria-label="در این صفحه">
-      <span class="toc-title"><span class="t-fa">در این صفحه</span></span>
-      <a href="#intro"><span class="t-fa">معرفی</span></a>
-      <a href="#reports"><span class="t-fa">گزارش‌ها</span></a>
-      <a href="#platform"><span class="t-fa">پلتفرم</span></a>
-      <a href="#approach"><span class="t-fa">رویکرد</span></a>
-      <a href="#difference"><span class="t-fa">آنچه برجسته است</span></a>
-      <a href="#roadmap"><span class="t-fa">مسیر پیش رو</span></a>
-      <a href="#technology"><span class="t-fa">فناوری</span></a>
+    <nav class="toc reveal" aria-label="On this page">
+      <span class="toc-title"><span class="t-en">On this page</span></span>
+      <a href="#intro"><span class="t-en">Introduction</span></a>
+      <a href="#reports"><span class="t-en">Reports</span></a>
+      <a href="#platform"><span class="t-en">Platform</span></a>
+      <a href="#approach"><span class="t-en">Approach</span></a>
+      <a href="#difference"><span class="t-en">What stands out</span></a>
+      <a href="#roadmap"><span class="t-en">The road ahead</span></a>
+      <a href="#technology"><span class="t-en">Technology</span></a>
     </nav>
   </div>
 </section>
@@ -188,92 +183,92 @@
 
     <article class="cs-body">
       <section class="cs-section" id="intro">
-        <h2><span><span class="t-fa">معرفی</span></span></h2>
+        <h2><span><span class="t-en">Introduction</span></span></h2>
       <p class="detail-lead">
-        <span class="t-fa">قیمت در بازار خودبه‌خود حرکت نمی‌کند. حرکت معمولاً از آن‌جا آغاز می‌شود که معامله‌گری حاضر نیست منتظر بماند و با «سفارش بازار» بهترین قیمتِ موجود را می‌پذیرد. بسیاری از این حرکت‌ها در چند لحظه فرو می‌نشینند و تنها برخی ادامه می‌یابند. معامله‌ی کوتاه‌مدت، که اسکلپ نامیده می‌شود، همراه‌شدن با همین حرکت‌هاست: ورود سریع، هدف کوچک و خروج زودهنگام. دشواری آن در تشخیص این است که پشت کدام حرکت نیروی واقعی ایستاده است و کدام‌یک پیش از رسیدن به هدف برمی‌گردد.</span>
+        <span class="t-en">Price does not move by itself. A move usually begins where a trader is not willing to wait and accepts the best available price with a market order. Many of these moves die down within moments and only some carry on. Short-term trading, known as scalping, means going along with exactly those moves: a fast entry, a small target and an early exit. The difficulty lies in telling which move has real force behind it and which will turn back before it reaches the target.</span>
       </p>
       <p>
-        <span class="t-fa">ما این تشخیص را به الگوریتمی سپرده‌ایم که آن را از جریان سفارش‌های خودِ بازار آموخته است.</span>
+        <span class="t-en">We have handed that judgement to an algorithm that learned it from the market's own flow of orders.</span>
       </p>
       <p>
-        <span class="t-fa">پروژه‌ی فست اسکلپ تاریخچه‌ی چندساله‌ی بورس شیکاگو، از بزرگ‌ترین بازارهای آتی جهان، را در سطح تک‌تک سفارش‌ها گرد آورده است. بر پایه‌ی این داده، با یادگیری ماشین (ML) و تحلیل آماری، به یک الگوریتم معاملات کوتاه‌مدت رسیده‌ایم که در بازسازی دقیقی از خودِ بورس آزموده می‌شود. مقصد ما یک میز معاملات خودکار است که سرمایه را با همین الگوریتم اداره می‌کند، نه با واکنش لحظه‌ای افراد.</span>
+        <span class="t-en">The Fast Scalp project has gathered several years of the Chicago exchange, one of the world's largest futures markets, at the level of every single order. From that data, with machine learning (ML) and statistical analysis, we have arrived at a short-term trading algorithm that is tested inside a close reconstruction of the exchange itself. The destination is an automated trading desk that runs capital with this algorithm, not with people's reactions of the moment.</span>
       </p>
       </section>
 
       <section class="cs-section" id="reports">
-        <h2><span><span class="t-fa">گزارش‌های شبیه‌ساز</span></span></h2>
+        <h2><span><span class="t-en">Simulator reports</span></span></h2>
         <p>
-          <span class="t-fa">این پروژه برای هر بازار یک گزارش کامل از شبیه‌ساز اجرا دارد. هر گزارش الگوریتم را هم‌زمان در پنج سطح تأخیر رسیدن سفارش به بورس نشان می‌دهد، از صفر تا ۱۰۰ میلی‌ثانیه. می‌توانید هر دو را دانلود کنید و مستقل از ما بخوانید و بسنجید.</span>
+          <span class="t-en">This project has one full report from the execution simulator per market. Each report shows the algorithm at five levels of order latency to the exchange at once, from zero to 100 milliseconds. You can download both and read and weigh them independently of us.</span>
         </p>
         <ul class="reports">
           <li class="glow reveal">
             <div class="report-head">
               <b>GC</b>
-              <span><span class="t-fa">آتی طلا</span></span>
+              <span><span class="t-en">Gold futures</span></span>
             </div>
             <ul class="report-facts">
-              <li><b><span class="t-fa">دسامبر ۲۰۱۹ تا ژوئیه ۲۰۲۶</span></b><span><span class="t-fa">بازه‌ی آزمون</span></span></li>
-              <li><b><span class="t-fa">۱٬۶۹۶</span></b><span><span class="t-fa">روز معاملاتی</span></span></li>
-              <li><b><span class="t-fa">۲۵٬۲۲۸</span></b><span><span class="t-fa">معامله‌ی شبیه‌سازی‌شده در سناریوی پایه</span></span></li>
-              <li><b><span class="t-fa">۵ سناریو</span></b><span><span class="t-fa">۵ سطح تأخیر، از صفر تا ۱۰۰ میلی‌ثانیه</span></span></li>
+              <li><b><span class="t-en">Dec 2019 to Jul 2026</span></b><span><span class="t-en">test period</span></span></li>
+              <li><b><span class="t-en">1,696</span></b><span><span class="t-en">trading days</span></span></li>
+              <li><b><span class="t-en">25,228</span></b><span><span class="t-en">simulated trades in the base scenario</span></span></li>
+              <li><b><span class="t-en">5 scenarios</span></b><span><span class="t-en">5 latency levels, from zero to 100 ms</span></span></li>
             </ul>
             <div class="report-actions">
               <a class="btn btn-primary" href="../assets/reports/gc-fast-scalp.html" download>
                 <svg class="arr-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
-                <span class="t-fa">دانلود گزارش</span>
+                <span class="t-en">Download the report</span>
               </a>
               <a class="btn btn-ghost" href="../assets/reports/gc-fast-scalp.html" target="_blank" rel="noopener">
-                <span class="t-fa">باز کردن در مرورگر</span>
+                <span class="t-en">Open in the browser</span>
               </a>
             </div>
-            <p class="report-size"><span class="t-fa">یک فایل HTML مستقل، ۲٫۳ مگابایت، فارسی و انگلیسی</span></p>
+            <p class="report-size"><span class="t-en">One self-contained HTML file, 2.3 MB, Persian and English</span></p>
           </li>
           <li class="glow reveal">
             <div class="report-head">
               <b>NQ</b>
-              <span><span class="t-fa">آتی نزدک ۱۰۰</span></span>
+              <span><span class="t-en">Nasdaq-100 futures</span></span>
             </div>
             <ul class="report-facts">
-              <li><b><span class="t-fa">مه ۲۰۱۷ تا ژوئن ۲۰۲۶</span></b><span><span class="t-fa">بازه‌ی آزمون</span></span></li>
-              <li><b><span class="t-fa">۲٬۳۴۲</span></b><span><span class="t-fa">روز معاملاتی</span></span></li>
-              <li><b><span class="t-fa">۱۹۴٬۳۰۲</span></b><span><span class="t-fa">معامله‌ی شبیه‌سازی‌شده در سناریوی پایه</span></span></li>
-              <li><b><span class="t-fa">۵ سناریو</span></b><span><span class="t-fa">۵ سطح تأخیر، از صفر تا ۱۰۰ میلی‌ثانیه</span></span></li>
+              <li><b><span class="t-en">May 2017 to Jun 2026</span></b><span><span class="t-en">test period</span></span></li>
+              <li><b><span class="t-en">2,342</span></b><span><span class="t-en">trading days</span></span></li>
+              <li><b><span class="t-en">194,302</span></b><span><span class="t-en">simulated trades in the base scenario</span></span></li>
+              <li><b><span class="t-en">5 scenarios</span></b><span><span class="t-en">5 latency levels, from zero to 100 ms</span></span></li>
             </ul>
             <div class="report-actions">
               <a class="btn btn-primary" href="../assets/reports/nq-fast-scalp.html" download>
                 <svg class="arr-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
-                <span class="t-fa">دانلود گزارش</span>
+                <span class="t-en">Download the report</span>
               </a>
               <a class="btn btn-ghost" href="../assets/reports/nq-fast-scalp.html" target="_blank" rel="noopener">
-                <span class="t-fa">باز کردن در مرورگر</span>
+                <span class="t-en">Open in the browser</span>
               </a>
             </div>
-            <p class="report-size"><span class="t-fa">یک فایل HTML مستقل، ۲٫۴ مگابایت، فارسی و انگلیسی</span></p>
+            <p class="report-size"><span class="t-en">One self-contained HTML file, 2.4 MB, Persian and English</span></p>
           </li>
         </ul>
         <p class="report-note">
-          <span class="t-fa">این‌ها نتیجه‌ی شبیه‌سازی روی داده‌ی ضبط‌شده‌ی بازار (بک‌تست) هستند، نه معامله‌ی واقعی، و تضمینی برای آینده نیستند.</span>
+          <span class="t-en">These are simulation results on recorded market data (a backtest), not real trading, and no guarantee of the future.</span>
         </p>
       </section>
 
       <section class="cs-section" id="platform">
-        <h2><span><span class="t-fa">از داخل پلتفرم</span></span></h2>
+        <h2><span><span class="t-en">Inside the platform</span></span></h2>
         <p>
-          <span class="t-fa">این‌ها تصویرهای واقعی از پلتفرم پروژه‌اند، نه طرح. هر نما همان داده‌ی سفارش‌به‌سفارش بازار را از زاویه‌ای دیگر نشان می‌دهد. برای بزرگ‌تر دیدن، روی تصویر بزنید.</span>
+          <span class="t-en">These are real screens from the project's platform, not mock-ups. Each view shows the same order-by-order market data from a different angle. Click the image to enlarge it.</span>
         </p>
 
         <div class="shots reveal" data-shots>
-          <div class="shots-tabs" role="tablist" aria-label="نماهای پلتفرم">
+          <div class="shots-tabs" role="tablist" aria-label="Platform views">
             <button type="button" role="tab" aria-selected="true" data-name="Quantia Rendering · S15 · Trade">
-              <b><span class="t-fa">رخدادهای سفارش</span></b>
+              <b><span class="t-en">Order events</span></b>
               <span>S15 · B / S · stop · target</span>
             </button>
             <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="Quantia Rendering · S15 · Delta">
-              <b><span class="t-fa">پروفایل حجم و دلتا</span></b>
+              <b><span class="t-en">Volume profile and delta</span></b>
               <span>VWAP · POC · PureReal Δ · Trade Δ</span>
             </button>
             <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="Quantia Rendering · S15 · Sweep">
-              <b><span class="t-fa">نمای Sweep</span></b>
+              <b><span class="t-en">Sweep view</span></b>
               <span>Bar-Hollow-Sweep · TrdOrder</span>
             </button>
           </div>
@@ -282,24 +277,24 @@
             <div class="shot-bar">
               <i></i><i></i><i></i>
               <span class="shot-name">Quantia Rendering · S15 · Trade</span>
-              <button type="button" class="shot-zoom" aria-label="بزرگ‌نمایی">
+              <button type="button" class="shot-zoom" aria-label="Enlarge">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg>
               </button>
             </div>
             <div class="shot-stage">
-              <img class="is-on" src="../assets/img/projects/fast-scalp/order-events.webp" data-full="../assets/img/projects/fast-scalp/order-events-full.webp" width="1400" height="742" alt="کندل‌های ۱۵ ثانیه‌ای با برچسب رخدادهای خرید و فروش">
-              <img src="../assets/img/projects/fast-scalp/profile-delta.webp" data-full="../assets/img/projects/fast-scalp/profile-delta-full.webp" width="1400" height="742" loading="lazy" alt="کندل‌های ۱۵ ثانیه‌ای با پروفایل حجم، VWAP و دو پنل دلتا">
-              <img src="../assets/img/projects/fast-scalp/sweeps.webp" data-full="../assets/img/projects/fast-scalp/sweeps-full.webp" width="1400" height="742" loading="lazy" alt="کندل‌های ۱۵ ثانیه‌ای در نمای Sweep با نشانگرهای مثلثی">
+              <img class="is-on" src="../assets/img/projects/fast-scalp/order-events.webp" data-full="../assets/img/projects/fast-scalp/order-events-full.webp" width="1400" height="742" alt="Fifteen-second bars with labels of the buy and sell events">
+              <img src="../assets/img/projects/fast-scalp/profile-delta.webp" data-full="../assets/img/projects/fast-scalp/profile-delta-full.webp" width="1400" height="742" loading="lazy" alt="Fifteen-second bars with a volume profile, VWAP and two delta panels">
+              <img src="../assets/img/projects/fast-scalp/sweeps.webp" data-full="../assets/img/projects/fast-scalp/sweeps-full.webp" width="1400" height="742" loading="lazy" alt="Fifteen-second bars in the Sweep view with triangle markers">
             </div>
             <figcaption>
               <p class="shot-cap is-on">
-                <span class="t-fa">کندل‌های ۱۵ ثانیه‌ای، و روی هر کندل برچسب رخدادهای آن: سمت خرید یا فروش (B / S)، حجم، و نشانه‌هایی مانند stop و target.</span>
+                <span class="t-en">Fifteen-second bars, and on each bar the labels of its events: the buy or sell side (B / S), the size, and marks such as stop and target.</span>
               </p>
               <p class="shot-cap">
-                <span class="t-fa">کندل‌های ۱۵ ثانیه‌ای با پروفایل حجم، خط VWAP و سطح‌های POC، VAH و VAL، و زیر آن دو پنل PureReal Delta و Trade Delta.</span>
+                <span class="t-en">Fifteen-second bars with a volume profile, the VWAP line and the POC, VAH and VAL levels, and beneath them the PureReal Delta and Trade Delta panels.</span>
               </p>
               <p class="shot-cap">
-                <span class="t-fa">همان کندل‌ها در نمای Sweep: مثلث‌های آبی و نارنجی با عدد هر کدام، روی کندلی که رخ داده‌اند.</span>
+                <span class="t-en">The same bars in the Sweep view: blue and orange triangles, each with its number, on the bar where they occurred.</span>
               </p>
             </figcaption>
           </figure>
@@ -307,82 +302,82 @@
       </section>
 
       <section class="cs-section" id="approach">
-        <h2><span><span class="t-fa">رویکرد</span></span></h2>
+        <h2><span><span class="t-en">Approach</span></span></h2>
       <p>
-        <span class="t-fa">الگوریتم از داده‌ی بازار می‌آموزد و در بازسازی همان بازار سنجیده می‌شود. کار در سه مرحله انجام شده است:</span>
+        <span class="t-en">The algorithm learns from market data and is measured inside a reconstruction of that same market. The work was done in three stages:</span>
       </p>
       <ol class="steps">
         <li class="glow reveal">
-          <strong class="t-fa">از داده‌ی خام به تصویر کامل بازار</strong>
-          <p class="t-fa">تابلوی معاملات تنها خلاصه‌ای از بازار را نشان می‌دهد. ما همه‌ی پیام‌های ثبت‌شده‌ی بورس را پردازش می‌کنیم و فهرست سفارش‌های منتظر را برای هر لحظه از نو می‌سازیم. حاصل، تصویری است که نشان می‌دهد پیش از هر حرکت قیمت، در دو سوی بازار چه گذشته است.</p>
+          <strong class="t-en">From raw data to the full picture of the market</strong>
+          <p class="t-en">The trading screen shows only a summary of the market. We process every message the exchange recorded and rebuild the list of waiting orders for each moment. The result is a picture of what happened on both sides of the market before each price move.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fa">از تصویر بازار به الگوریتم</strong>
-          <p class="t-fa">در یادگیری ماشین، رایانه به‌جای پیروی از قواعد دست‌نویس، الگوها را از نمونه‌های واقعی می‌آموزد. الگوریتم ما به این روش و با پشتوانه‌ی تحلیل آماری آموخته است که یک حرکت کوتاه در چه وضعیتی ادامه می‌یابد و در چه وضعیتی برمی‌گردد. خروجی آن سه تصمیم است: چه زمانی وارد شود، حد زیان معامله کجا باشد و چه زمانی خارج شود.</p>
+          <strong class="t-en">From the picture of the market to the algorithm</strong>
+          <p class="t-en">In machine learning the computer learns patterns from real examples instead of following hand-written rules. That way, and backed by statistical analysis, our algorithm has learned in which situations a short move carries on and in which it turns back. Its output is three decisions: when to enter, where to put the trade's stop, and when to exit.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fa">از الگوریتم به اجرای آزموده</strong>
-          <p class="t-fa">سفارش بازار در صف نمی‌ماند و به‌محض رسیدن به بورس انجام می‌شود، ولی رسیدنش زمان می‌برد. در این فاصله بهترین قیمت ممکن است از دست رفته باشد و معامله با قیمتی بدتر از آنچه هنگام تصمیم دیده شده انجام شود. شبیه‌ساز ما همین را بازسازی می‌کند، و معیار داوری نتیجه‌ی مالی خالص پس از کسر همه‌ی هزینه‌هاست.</p>
+          <strong class="t-en">From the algorithm to tested execution</strong>
+          <p class="t-en">A market order does not wait in a queue and fills as soon as it reaches the exchange, but getting there takes time. In that interval the best price may be gone, and the trade may fill at a worse price than the one seen when the decision was made. Our simulator rebuilds exactly that, and the yardstick is the net financial result after every cost.</p>
         </li>
       </ol>
       </section>
 
       <section class="cs-section" id="difference">
-        <h2><span><span class="t-fa">آنچه برجسته است</span></span></h2>
+        <h2><span><span class="t-en">What stands out</span></span></h2>
       <ul class="points">
         <li class="glow reveal">
-          <strong class="t-fa">دانشی که در سامانه نشسته است، نه در ذهن افراد.</strong>
-          <p class="t-fa">معامله‌ی کوتاه‌مدت به‌طور سنتی به چشم و واکنش معامله‌گر تکیه دارد، و خستگی و هیجان مستقیماً بر نتیجه اثر می‌گذارد. الگوریتم ما آنچه را می‌داند از داده‌ی بازار آموخته است و آن را در هر معامله یکسان به کار می‌بندد. این دانش ثبت‌شده، تکرارپذیر و قابل بازآموزی است.</p>
+          <strong class="t-en">Knowledge that lives in the system, not in people's heads.</strong>
+          <p class="t-en">Short-term trading traditionally leans on the trader's eye and reactions, and fatigue and emotion act directly on the result. Our algorithm learned what it knows from market data and applies it the same way on every trade. That knowledge is recorded, repeatable and can be retrained.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fa">گزینش، نه معامله‌ی پیاپی.</strong>
-          <p class="t-fa">در معامله‌ی کوتاه‌مدت سود هر معامله کوچک است و هزینه‌ی آن، یعنی کارمزد و فاصله‌ی قیمت خرید و فروش، در هر معامله پرداخت می‌شود. از این رو معامله‌کردن روی هر حرکت به زیان می‌انجامد؛ ورود بدون گزینش را با هزینه‌ی واقعی سنجیدیم و زیان‌ده بود. ارزش الگوریتم در همین نقطه است: تشخیص اینکه کدام حرکت ارزش ورود دارد و از کدام باید گذشت.</p>
+          <strong class="t-en">Selection, not trade after trade.</strong>
+          <p class="t-en">In short-term trading the profit on each trade is small, and its cost, the fee and the gap between the buying and selling price, is paid on every trade. So trading every move ends in a loss; we measured unselective entry at real cost and it lost money. That is exactly where the algorithm's value lies: telling which move is worth entering and which to let pass.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fa">نتیجه‌ای که در اجرا هم برقرار می‌ماند.</strong>
-          <p class="t-fa">بسیاری از راهبردهای کوتاه‌مدت روی کاغذ سودآورند و در عمل نه، چون آزمونشان فرض می‌کند سفارش با قیمت تابلو انجام می‌شود. در شبیه‌ساز ما سفارش با تأخیر می‌رسد و از حجم موجودِ همان لحظه پر می‌شود. درستی این شبیه‌سازی با بازسازی مستقلی از داده‌ی خام بورس مقابله شده است.</p>
+          <strong class="t-en">A result that still holds in execution.</strong>
+          <p class="t-en">Many short-term strategies are profitable on paper and not in practice, because their test assumes an order fills at the quoted price. In our simulator an order arrives late and fills from the volume available at that very moment. The simulation's correctness has been checked against an independent reconstruction from the exchange's raw data.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fa">ریسک تعریف‌شده، با برآورد واقع‌گرایانه.</strong>
-          <p class="t-fa">هر معامله از لحظه‌ی ورود حد زیان مشخصی دارد و عمر آن کوتاه است. این حد سقف قطعی نیست: در حرکت‌های تند، خروج ممکن است با قیمتی بدتر از آن انجام شود. شبیه‌ساز این حالت را نیز می‌بیند، و آنچه گزارش می‌شود زیان واقعی است، نه زیان اسمی.</p>
+          <strong class="t-en">Defined risk, realistically estimated.</strong>
+          <p class="t-en">Every trade has a set stop from the moment of entry, and its life is short. That stop is not a hard ceiling: in sharp moves the exit may happen at a worse price. The simulator sees that case too, and what is reported is the real loss, not the nominal one.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fa">تفکیک یافته‌ی واقعی از تصادف.</strong>
-          <p class="t-fa">مدل‌های یادگیری می‌توانند گذشته را «از بر کنند» بی‌آنکه چیزی درباره‌ی آینده آموخته باشند. برای پرهیز از این خطر، الگوریتم روی دوره‌هایی سنجیده می‌شود که هنگام آموزش ندیده است، از جمله دوره‌های پرتلاطم. هر یافته نیز در کنار داده‌هایی قرار می‌گیرد که به‌عمد فاقد الگوی معنادارند، و اگر آن‌جا هم دیده شود کنار گذاشته می‌شود.</p>
+          <strong class="t-en">Telling a real finding from chance.</strong>
+          <p class="t-en">Learning models can memorise the past without having learned anything about the future. To avoid that, the algorithm is measured on periods it did not see in training, turbulent ones included. Each finding is also set beside data deliberately stripped of any meaningful pattern, and if it shows up there too it is discarded.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fa">شناخت نیاز زیرساختی، پیش از هزینه‌کردن برای آن.</strong>
-          <p class="t-fa">در معامله‌ی کوتاه‌مدت سرعت رسیدن سفارش به بورس و کارمزد هر معامله مرز سود و زیان را تعیین می‌کنند، و بهبود هر دو پرهزینه است. ما الگوریتم را هم‌زمان در طیفی از این شرایط می‌آزماییم. به این ترتیب پیش از هر تعهد مالی روشن است که طرح در کدام شرایط توجیه دارد.</p>
+          <strong class="t-en">Knowing the infrastructure need before paying for it.</strong>
+          <p class="t-en">In short-term trading the speed at which an order reaches the exchange and the fee on each trade decide the line between profit and loss, and improving either is expensive. We test the algorithm across a range of those conditions at once. So before any financial commitment it is clear under which conditions the plan is justified.</p>
         </li>
       </ul>
       </section>
 
       <section class="cs-section" id="roadmap">
-        <h2><span><span class="t-fa">مسیر پیش رو</span></span></h2>
+        <h2><span><span class="t-en">The road ahead</span></span></h2>
       <ol class="phases">
         <li class="is-done glow reveal">
-          <span class="phase-mark"><span class="t-fa">انجام‌شده</span></span>
-          <p class="t-fa">زیرساخت داده، بازسازی بازار، الگوریتم معاملات، شبیه‌ساز اجرا و سامانه‌ی گزارش ساخته شده‌اند.</p>
+          <span class="phase-mark"><span class="t-en">Done</span></span>
+          <p class="t-en">The data infrastructure, the market reconstruction, the trading algorithm, the execution simulator and the reporting system are built.</p>
         </li>
         <li class="is-now glow reveal">
-          <span class="phase-mark"><span class="t-fa">امروز</span></span>
-          <p class="t-fa">امروز الگوریتم را در آزمون چندساله، در شرایط گوناگون سرعت و کارمزد و روی بیش از یک بازار می‌سنجیم.</p>
+          <span class="phase-mark"><span class="t-en">Now</span></span>
+          <p class="t-en">Today we are measuring the algorithm in a multi-year test, under varied speed and fee conditions and on more than one market.</p>
         </li>
         <li class="glow reveal">
-          <span class="phase-mark"><span class="t-fa">پس از آن</span></span>
-          <p class="t-fa">پس از آن، اتصال به داده‌ی زنده، استقرار در مجاورت بورس و دوره‌ای آزمایشی با سرمایه‌ی محدود خواهد آمد.</p>
+          <span class="phase-mark"><span class="t-en">Next</span></span>
+          <p class="t-en">After that come the connection to live data, deployment close to the exchange, and a trial period with limited capital.</p>
         </li>
         <li class="glow reveal">
-          <span class="phase-mark"><span class="t-fa">گام پایانی</span></span>
-          <p class="t-fa">گام پایانی، معامله با سرمایه‌ی واقعی در قالب یک میز خودکار است.</p>
+          <span class="phase-mark"><span class="t-en">Final step</span></span>
+          <p class="t-en">The final step is trading with real capital, as an automated desk.</p>
         </li>
       </ol>
       </section>
 
       <section class="cs-section" id="technology">
-        <h2><span><span class="t-fa">فناوری</span></span></h2>
+        <h2><span><span class="t-en">Technology</span></span></h2>
       <p>
-        <span class="t-fa">مدل‌های یادگیری با پایتون ساخته و بر پردازنده‌ی گرافیکی آموزش داده می‌شوند. موتور بازسازی بازار و شبیه‌ساز اجرا با سی‌شارپ و خواننده‌ی داده‌ی خام با راست نوشته شده است. نتیجه‌ی هر آزمون در گزارشی استاندارد و دوزبانه ارائه می‌شود، و هر تغییر تنها پس از مقایسه با نسخه‌ی پیشین و گذشتن از آزمون‌های خودکار پذیرفته می‌شود.</span>
+        <span class="t-en">The learning models are built in Python and trained on a graphics processor. The market-reconstruction engine and the execution simulator are written in C#, and the raw-data reader in Rust. The result of each test is presented in a standard, bilingual report, and a change is accepted only after it has been compared with the previous version and has passed the automated tests.</span>
       </p>
       </section>
     </article>
@@ -392,24 +387,24 @@
 
 <section class="section ruled">
   <div class="wrap">
-    <nav class="projnav reveal" aria-label="پروژه‌های دیگر">
+    <nav class="projnav reveal" aria-label="More projects">
       <a class="projnav-card is-prev glow" href="../projects/cme-mm.html">
-        <span class="projnav-dir"><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="t-fa">پروژه‌ی قبلی</span></span>
-        <b><span class="t-fa">مارکت‌میکر CME</span></b>
+        <span class="projnav-dir"><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="t-en">Previous project</span></span>
+        <b><span class="t-en">CME Market Maker</span></b>
       </a>
       <a class="projnav-card is-next glow" href="../projects/blocktrade.html">
-        <span class="projnav-dir"><span class="t-fa">پروژه‌ی بعدی</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        <b><span class="t-fa">بلاک‌ترید</span></b>
+        <span class="projnav-dir"><span class="t-en">Next project</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <b><span class="t-en">BlockTrade</span></b>
       </a>
     </nav>
   </div>
   <div class="wrap cs-end">
     <a class="link-arrow link-back" href="../projects.html">
       <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      <span class="t-fa">همه‌ی پروژه‌ها</span>
+      <span class="t-en">All projects</span>
     </a>
     <a class="btn btn-ghost" href="../contact.html">
-      <span class="t-fa">تماس با ما</span>
+      <span class="t-en">Get in touch</span>
     </a>
   </div>
 </section>
@@ -420,25 +415,25 @@
   <div class="wrap">
     <div class="footer-top footer-panel">
       <div class="footer-brand">
-        <a class="logo" href="../index.html" aria-label="نوا گروپ">
+        <a class="logo" href="../index.html" aria-label="Nova Group">
           <img class="logo-mark" src="../assets/img/nova-mark-512.png" alt="" width="512" height="512" loading="lazy">
-          <span class="logo-text t-fa"><b>نوا</b> گروپ</span>
+          <span class="logo-text t-en"><b>NOVA</b> GROUP</span>
         </a>
         <p>
-          <span class="t-fa">پژوهش و ساخت الگوریتم‌های معاملاتی بر پایه‌ی جریان سفارش بازار — از ۱۳۹۹.</span>
+          <span class="t-en">Researching and building trading algorithms from market order flow — since 2020.</span>
         </p>
       </div>
 
-      <nav class="footer-col" aria-label="پیوندهای پانویس">
-        <h2><span class="t-fa">سایت</span></h2>
-        <a href="../index.html"><span class="t-fa">خانه</span></a>
-        <a href="../about.html"><span class="t-fa">درباره ما</span></a>
-        <a href="../projects.html"><span class="t-fa">پروژه‌ها</span></a>
-        <a href="../contact.html"><span class="t-fa">تماس</span></a>
+      <nav class="footer-col" aria-label="Footer">
+        <h2><span class="t-en">Site</span></h2>
+        <a href="../index.html"><span class="t-en">Home</span></a>
+        <a href="../about.html"><span class="t-en">About</span></a>
+        <a href="../projects.html"><span class="t-en">Projects</span></a>
+        <a href="../contact.html"><span class="t-en">Contact</span></a>
       </nav>
 
       <div class="footer-col footer-contact">
-        <h2><span class="t-fa">ارتباط</span></h2>
+        <h2><span class="t-en">Connect</span></h2>
         <a class="footer-mail" href="mailto:info@novacapital.fund">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
           <bdi>info@novacapital.fund</bdi>
@@ -447,13 +442,13 @@
     </div>
 
     <p class="footer-bottom">
-      <span class="t-fa">© ۱۴۰۵ نوا گروپ. همه‌ی حقوق مادی و معنوی این وب‌سایت و محتوای آن متعلق به نوا گروپ است. هرگونه سوءاستفاده پیگرد قانونی دارد.</span>
+      <span class="t-en">© 2026 Nova Group. All rights to this website and its content belong to Nova Group. Any misuse is subject to legal action.</span>
     </p>
   </div>
 </footer>
 
-<button class="to-top" id="toTop" type="button" aria-label="بازگشت به بالا"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
+<button class="to-top" id="toTop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
 
-<script src="../assets/js/main.js?v=50"></script>
+<script src="../assets/js/main.js?v=51"></script>
 </body>
 </html>

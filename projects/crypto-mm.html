@@ -1,30 +1,30 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl" data-lang="fa" data-alt="../en/projects/crypto-mm.html">
+<html lang="en" dir="ltr" data-lang="en" data-alt="../fa/projects/crypto-mm.html">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>مارکت‌میکر کریپتو — زیرساخت داده و بازارسازی در بازار رمزارز | نوا گروپ</title>
-<meta name="description" content="پروژه‌ی مارکت‌میکر کریپتو: بازار ۲۲ رمزارز در ۱۶ صرافی جهانی، در سطح تک‌تک معامله‌ها و سفارش‌ها، و الگوریتم بازارسازی روی آن.">
+<title>Crypto Market Maker — data infrastructure and market making in the crypto market | Nova Group</title>
+<meta name="description" content="The Crypto Market Maker project: the market of 22 cryptocurrencies on 16 global exchanges, at the level of every single trade and order, and a market-making algorithm built on it.">
 <link rel="canonical" href="https://novacapital.fund/projects/crypto-mm.html">
-<link rel="alternate" hreflang="fa" href="https://novacapital.fund/projects/crypto-mm.html">
-<link rel="alternate" hreflang="en" href="https://novacapital.fund/en/projects/crypto-mm.html">
-<link rel="alternate" hreflang="x-default" href="https://novacapital.fund/en/projects/crypto-mm.html">
-<meta property="og:title" content="مارکت‌میکر کریپتو — زیرساخت داده و بازارسازی در بازار رمزارز | نوا گروپ">
-<meta property="og:description" content="زیرساخت داده و الگوریتم بازارسازی در بازار رمزارز، در مسیر یک میز بازارسازی خودکار.">
+<link rel="alternate" hreflang="fa" href="https://novacapital.fund/fa/projects/crypto-mm.html">
+<link rel="alternate" hreflang="en" href="https://novacapital.fund/projects/crypto-mm.html">
+<link rel="alternate" hreflang="x-default" href="https://novacapital.fund/projects/crypto-mm.html">
+<meta property="og:title" content="Crypto Market Maker — data infrastructure and market making in the crypto market | Nova Group">
+<meta property="og:description" content="Data infrastructure and a market-making algorithm for the crypto market, on the way to an automated market-making desk.">
 <meta property="og:url" content="https://novacapital.fund/projects/crypto-mm.html">
-<meta property="og:locale" content="fa_IR">
-<meta property="og:locale:alternate" content="en_US">
-<meta property="og:image" content="https://novacapital.fund/assets/img/og/crypto-mm-fa.jpg">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="fa_IR">
+<meta property="og:image" content="https://novacapital.fund/assets/img/og/crypto-mm-en.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://novacapital.fund/assets/img/og/crypto-mm-fa.jpg">
+<meta name="twitter:image" content="https://novacapital.fund/assets/img/og/crypto-mm-en.jpg">
 <meta name="author" content="Nova Group">
 <meta name="theme-color" content="#05080e">
 <meta name="color-scheme" content="dark light">
 <meta name="supported-color-schemes" content="dark light">
 <meta name="darkreader-lock">
-<meta property="og:site_name" content="نوا گروپ">
+<meta property="og:site_name" content="Nova Group">
 <meta property="og:type" content="website">
 
 <link rel="icon" type="image/svg+xml" href="../assets/img/nova-mark.svg">
@@ -33,32 +33,27 @@
 <link rel="apple-touch-icon" href="../assets/img/favicon-192.png">
 
 <!-- The fonts are served from this site; the one this language needs first is fetched early. -->
-<link rel="preload" href="../assets/fonts/vazirmatn-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/css/style.css?v=50">
+<link rel="preload" href="../assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/style.css?v=51">
 
 <!-- Samsung Internet (also used inside Telegram and WhatsApp) recolours pages in its dark mode; flag it early. -->
 <script>if (/SamsungBrowser/i.test(navigator.userAgent)) document.documentElement.classList.add('sb');</script>
 
-<!-- Runs before first paint. The reader's language is an earlier choice, a ?lang= in the address, or else
-     Persian for a Persian browser or a clock set to Tehran and English for everyone else. -->
+<!-- Runs before first paint. Everyone meets the site in English. A reader who has chosen Persian (with the
+     language button, or a ?lang=fa in the address) is taken to the Persian page from then on. -->
 <script>
 (function () {
-  var d = document.documentElement, want = null, asked = /[?&]lang=(fa|en)\b/.exec(location.search), i;
+  var d = document.documentElement, want = null, asked = /[?&]lang=(fa|en)\b/.exec(location.search);
   try { if (asked) localStorage.setItem('nova-lang', asked[1]); want = localStorage.getItem('nova-lang'); } catch (e) {}
   if (asked) want = asked[1];
-  if (want !== 'fa' && want !== 'en') {
-    var said = navigator.languages || [navigator.language || ''], fa = false;
-    for (i = 0; i < said.length; i++) if (/^fa\b/i.test(said[i])) fa = true;
-    try { if (Intl.DateTimeFormat().resolvedOptions().timeZone === 'Asia/Tehran') fa = true; } catch (e) {}
-    want = fa ? 'fa' : 'en';
-  }
+  if (want !== 'fa') want = 'en';
   if (d.hasAttribute('data-both')) {
-    // the one page that carries both languages: under /en/ it reads in English
-    var l = location.pathname.indexOf('/en/') === 0 ? 'en' : want;
+    // the one page that carries both languages: under /fa/ it reads in Persian
+    var l = location.pathname.indexOf('/fa/') === 0 ? 'fa' : want;
     d.setAttribute('data-lang', l); d.lang = l; d.dir = l === 'fa' ? 'rtl' : 'ltr';
-  } else if (want === 'en' && d.getAttribute('data-alt') &&
-      !/bot|crawl|spider|slurp|preview|google|bing|yandex|baidu|duckduck|facebook|whatsapp|telegram|lighthouse/i.test(navigator.userAgent)) {
-    // a Persian address is the default one: a reader of English is sent on to the same page under /en/
+  } else if (want === 'fa' && d.getAttribute('data-alt')) {
+    // an English address is the default one: a reader who chose Persian is sent on to the same page under /fa/
     d.style.visibility = 'hidden';
     setTimeout(function () { d.style.visibility = ''; }, 2500);
     location.replace(d.getAttribute('data-alt') + location.hash);
@@ -86,25 +81,25 @@
 </head>
 <body>
 
-<a href="#main" class="skip-link"><span class="t-fa">پرش به محتوا</span></a>
+<a href="#main" class="skip-link"><span class="t-en">Skip to content</span></a>
 
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
-    <a class="logo" href="../index.html" aria-label="نوا گروپ">
+    <a class="logo" href="../index.html" aria-label="Nova Group">
       <img class="logo-mark" src="../assets/img/nova-mark-512.png" alt="" width="512" height="512">
-      <span class="logo-text t-fa"><b>نوا</b> گروپ</span>
+      <span class="logo-text t-en"><b>NOVA</b> GROUP</span>
     </a>
 
-    <nav class="nav-links" id="navLinks" aria-label="منوی اصلی">
-      <a href="../index.html"><span class="t-fa">خانه</span></a>
-      <a href="../about.html"><span class="t-fa">درباره ما</span></a>
-      <a href="../projects.html" aria-current="page"><span class="t-fa">پروژه‌ها</span></a>
-      <a href="../contact.html"><span class="t-fa">تماس</span></a>
+    <nav class="nav-links" id="navLinks" aria-label="Main">
+      <a href="../index.html"><span class="t-en">Home</span></a>
+      <a href="../about.html"><span class="t-en">About</span></a>
+      <a href="../projects.html" aria-current="page"><span class="t-en">Projects</span></a>
+      <a href="../contact.html"><span class="t-en">Contact</span></a>
     </nav>
 
     <div class="nav-actions">
-      <a class="lang-btn" id="langBtn" href="../en/projects/crypto-mm.html" hreflang="en" lang="en" aria-label="EN — English">EN</a>
-      <button class="burger" id="burger" type="button" aria-label="منو" aria-expanded="false" aria-controls="navLinks">
+      <a class="lang-btn" id="langBtn" href="../fa/projects/crypto-mm.html" hreflang="fa" lang="fa" aria-label="فا — فارسی">فا</a>
+      <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span>
       </button>
     </div>
@@ -116,68 +111,68 @@
 <section class="page-hero">
   <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="wrap">
-    <nav class="crumbs reveal" aria-label="مسیر صفحه">
-      <a href="../projects.html"><span class="t-fa">پروژه‌ها</span></a>
+    <nav class="crumbs reveal" aria-label="Breadcrumb">
+      <a href="../projects.html"><span class="t-en">Projects</span></a>
       <span aria-hidden="true">/</span>
-      <span><span class="t-fa">مارکت‌میکر کریپتو</span></span>
+      <span><span class="t-en">Crypto Market Maker</span></span>
     </nav>
 
-    <h1 class="reveal"><span class="t-fa">مارکت‌میکر کریپتو</span></h1>
+    <h1 class="reveal"><span class="t-en">Crypto Market Maker</span></h1>
     <p class="page-lead reveal">
-      <span class="t-fa">زیرساخت داده و الگوریتم بازارسازی در بازار رمزارز، در مسیر یک میز بازارسازی خودکار.</span>
+      <span class="t-en">Data infrastructure and a market-making algorithm for the crypto market, on the way to an automated market-making desk.</span>
     </p>
 
     <div class="cs-meta reveal">
-      <span class="status"><span class="t-fa">در حال توسعه</span></span>
+      <span class="status"><span class="t-en">In development</span></span>
       <ul class="tags">
         <li>Rust</li><li>C#</li>
-        <li><span class="t-fa">رمزارز</span></li>
-        <li><span class="t-fa">بازارسازی</span></li>
-        <li><span class="t-fa">زیرساخت داده</span></li>
-        <li><span class="t-fa">یادگیری ماشین</span></li>
+        <li><span class="t-en">Crypto</span></li>
+        <li><span class="t-en">Market making</span></li>
+        <li><span class="t-en">Data infrastructure</span></li>
+        <li><span class="t-en">Machine learning</span></li>
       </ul>
     </div>
 
     <ul class="facts facts-glass">
       <li class="glow reveal">
-        <span class="fact-label"><span class="t-fa">گستره</span></span>
-        <b><span class="t-fa">۲۲ رمزارز، ۱۶ صرافی</span></b>
+        <span class="fact-label"><span class="t-en">Coverage</span></span>
+        <b><span class="t-en">22 coins, 16 exchanges</span></b>
         <p>
-          <span class="t-fa">بازارهای نقدی و آتی، در سطح تک‌تک معامله‌ها و سفارش‌ها.</span>
+          <span class="t-en">Spot and futures markets, at the level of every single trade and order.</span>
         </p>
       </li>
       <li class="glow reveal">
-        <span class="fact-label"><span class="t-fa">دامنه‌ی کار</span></span>
-        <b><span class="t-fa">۶۰ ترابایت</span></b>
+        <span class="fact-label"><span class="t-en">Scope</span></span>
+        <b><span class="t-en">60 terabytes</span></b>
         <p>
-          <span class="t-fa">داده‌ی خام یک سال کامل برای هر رمزارز.</span>
+          <span class="t-en">Raw data for one full year of each cryptocurrency.</span>
         </p>
       </li>
       <li class="glow reveal">
-        <span class="fact-label"><span class="t-fa">درستی داده</span></span>
-        <b><span class="t-fa">۳۷۶ میلیون معامله</span></b>
+        <span class="fact-label"><span class="t-en">Data integrity</span></span>
+        <b><span class="t-en">376 million trades</span></b>
         <p>
-          <span class="t-fa">در یک نمونه‌ی یک‌ماهه از ۱۲۶ بازار از نو ساخته شد، بدون هیچ اختلافی با منبع.</span>
+          <span class="t-en">Rebuilt in a one-month sample from 126 markets, with no difference from the source.</span>
         </p>
       </li>
       <li class="glow reveal">
-        <span class="fact-label"><span class="t-fa">فناوری</span></span>
-        <b><span class="t-fa">دو زبان، دو نقش</span></b>
+        <span class="fact-label"><span class="t-en">Technology</span></span>
+        <b><span class="t-en">Two languages, two jobs</span></b>
         <div class="fact-list">
-          <div><i>Rust</i><span><span class="t-fa">گردآوری، ذخیره‌سازی و هسته</span></span></div>
-          <div><i>C#</i><span><span class="t-fa">نمودار</span></span></div>
+          <div><i>Rust</i><span><span class="t-en">Collection, storage and core</span></span></div>
+          <div><i>C#</i><span><span class="t-en">Charting</span></span></div>
         </div>
       </li>
     </ul>
 
-    <nav class="toc reveal" aria-label="در این صفحه">
-      <span class="toc-title"><span class="t-fa">در این صفحه</span></span>
-      <a href="#intro"><span class="t-fa">معرفی</span></a>
-      <a href="#platform"><span class="t-fa">پلتفرم</span></a>
-      <a href="#approach"><span class="t-fa">رویکرد</span></a>
-      <a href="#difference"><span class="t-fa">آنچه برجسته است</span></a>
-      <a href="#roadmap"><span class="t-fa">مسیر پیش رو</span></a>
-      <a href="#technology"><span class="t-fa">فناوری</span></a>
+    <nav class="toc reveal" aria-label="On this page">
+      <span class="toc-title"><span class="t-en">On this page</span></span>
+      <a href="#intro"><span class="t-en">Introduction</span></a>
+      <a href="#platform"><span class="t-en">Platform</span></a>
+      <a href="#approach"><span class="t-en">Approach</span></a>
+      <a href="#difference"><span class="t-en">What stands out</span></a>
+      <a href="#roadmap"><span class="t-en">The road ahead</span></a>
+      <a href="#technology"><span class="t-en">Technology</span></a>
     </nav>
   </div>
 </section>
@@ -187,36 +182,36 @@
 
     <article class="cs-body">
       <section class="cs-section" id="intro">
-        <h2><span><span class="t-fa">معرفی</span></span></h2>
+        <h2><span><span class="t-en">Introduction</span></span></h2>
       <p class="detail-lead">
-        <span class="t-fa">بازار رمزارز هرگز تعطیل نمی‌شود و در یک جا هم نیست. هر رمزارز هم‌زمان در ده‌ها صرافی معامله می‌شود و در هر کدام، کسی باید همیشه آماده‌ی خرید و فروش باشد. این طرفِ همیشه‌حاضر بازارساز است: اندکی ارزان‌تر می‌خرد، اندکی گران‌تر می‌فروشد و نیازی ندارد جهت قیمت را بداند. خطرش این است که درست پیش از یک حرکت بزرگ، در سمت نادرست معامله کرده باشد؛ و در بازاری که میان چند صرافی پخش است، آن حرکت اغلب از جای دیگری آغاز می‌شود.</span>
+        <span class="t-en">The crypto market never closes, and it is not in one place either. Each cryptocurrency trades on dozens of exchanges at once, and on each of them someone must always be ready to buy and sell. That ever-present counterparty is the market maker: they buy a little cheaper, sell a little dearer, and do not need to know which way the price will go. Their risk is having traded on the wrong side just before a large move; and in a market spread across several exchanges, that move often starts somewhere else.</span>
       </p>
       <p>
-        <span class="t-fa">ما پیش از نوشتن الگوریتم، کل این بازار را ثبت کرده‌ایم و ثبت می‌کنیم.</span>
+        <span class="t-en">Before writing the algorithm, we have recorded this whole market, and keep recording it.</span>
       </p>
       <p>
-        <span class="t-fa">پروژه‌ی مارکت‌میکر کریپتو بازار ۲۲ رمزارز پرمعامله را در ۱۶ صرافی جهانی، در سطح تک‌تک معامله‌ها و سفارش‌ها، گرد می‌آورد. دامنه‌ی کار یک سال کامل برای هر رمزارز است، یعنی ۶۰ ترابایت داده‌ی خام. مقصد ما یک میز بازارسازی خودکار است که سرمایه را با الگوریتمی اداره می‌کند که روی همین تاریخچه آموخته و آزموده شده است.</span>
+        <span class="t-en">The Crypto Market Maker project gathers the market of 22 heavily traded cryptocurrencies on 16 global exchanges, at the level of every single trade and order. The scope of the work is one full year for each cryptocurrency, that is, 60 terabytes of raw data. The destination is an automated market-making desk that runs capital with an algorithm trained and tested on this same history.</span>
       </p>
       </section>
 
       <section class="cs-section" id="platform">
-        <h2><span><span class="t-fa">از داخل پلتفرم</span></span></h2>
+        <h2><span><span class="t-en">Inside the platform</span></span></h2>
         <p>
-          <span class="t-fa">این‌ها تصویرهای واقعی از پلتفرم پروژه‌اند، نه طرح. هر سه نما یک بازار را نشان می‌دهند: قرارداد دائمی BTCUSDT در بایننس، ۲۹ روز از سپتامبر ۲۰۲۶، با کندل‌های ۱۵ دقیقه‌ای که از معاملات بایگانی‌شده ساخته شده‌اند. برای بزرگ‌تر دیدن، روی تصویر بزنید.</span>
+          <span class="t-en">These are real screens from the project's platform, not mock-ups. All three views show one market: the BTCUSDT perpetual contract on Binance, 29 days of September 2026, with 15-minute bars built from the archived trades. Click the image to enlarge it.</span>
         </p>
 
         <div class="shots reveal" data-shots>
-          <div class="shots-tabs" role="tablist" aria-label="نماهای پلتفرم">
+          <div class="shots-tabs" role="tablist" aria-label="Platform views">
             <button type="button" role="tab" aria-selected="true" data-name="BTCUSDT · binance perpetual · M15 · Bar-Band">
-              <b><span class="t-fa">کندل و نوار</span></b>
+              <b><span class="t-en">Bars and band</span></b>
               <span>Bars: Bar-Band</span>
             </button>
             <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="BTCUSDT · binance perpetual · M15 · Volume · Δ candles">
-              <b><span class="t-fa">حجم و دلتا</span></b>
+              <b><span class="t-en">Volume and delta</span></b>
               <span>Sub: Volume · Δ candles</span>
             </button>
             <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="BTCUSDT · binance perpetual · M15 · Cum Δ bars">
-              <b><span class="t-fa">دلتای تجمعی</span></b>
+              <b><span class="t-en">Cumulative delta</span></b>
               <span>Bars: Line · Sub: Cum Δ bars</span>
             </button>
           </div>
@@ -225,24 +220,24 @@
             <div class="shot-bar">
               <i></i><i></i><i></i>
               <span class="shot-name">BTCUSDT · binance perpetual · M15 · Bar-Band</span>
-              <button type="button" class="shot-zoom" aria-label="بزرگ‌نمایی">
+              <button type="button" class="shot-zoom" aria-label="Enlarge">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg>
               </button>
             </div>
             <div class="shot-stage">
-              <img class="is-on" src="../assets/img/projects/crypto-mm/bar-band.webp" data-full="../assets/img/projects/crypto-mm/bar-band-full.webp" width="1400" height="742" alt="کندل‌های ۱۵ دقیقه‌ای BTCUSDT با نوار دور هر کندل">
-              <img src="../assets/img/projects/crypto-mm/volume-delta.webp" data-full="../assets/img/projects/crypto-mm/volume-delta-full.webp" width="1400" height="742" loading="lazy" alt="کندل‌های ۱۵ دقیقه‌ای BTCUSDT با پنل حجم و پنل کندل‌های دلتا">
-              <img src="../assets/img/projects/crypto-mm/cum-delta.webp" data-full="../assets/img/projects/crypto-mm/cum-delta-full.webp" width="1400" height="742" loading="lazy" alt="نمودار خطی قیمت BTCUSDT با پنل دلتای تجمعی">
+              <img class="is-on" src="../assets/img/projects/crypto-mm/bar-band.webp" data-full="../assets/img/projects/crypto-mm/bar-band-full.webp" width="1400" height="742" alt="15-minute BTCUSDT bars with the band around each bar">
+              <img src="../assets/img/projects/crypto-mm/volume-delta.webp" data-full="../assets/img/projects/crypto-mm/volume-delta-full.webp" width="1400" height="742" loading="lazy" alt="15-minute BTCUSDT bars with the volume panel and the delta-candle panel">
+              <img src="../assets/img/projects/crypto-mm/cum-delta.webp" data-full="../assets/img/projects/crypto-mm/cum-delta-full.webp" width="1400" height="742" loading="lazy" alt="BTCUSDT price as a line chart with the cumulative delta panel">
             </div>
             <figcaption>
               <p class="shot-cap is-on">
-                <span class="t-fa">کندل‌های ۱۵ دقیقه‌ای در نمای Bar-Band: هر کندل همراه با نوار سایه‌دار دور آن.</span>
+                <span class="t-en">Fifteen-minute bars in the Bar-Band view: each bar with the shaded band around it.</span>
               </p>
               <p class="shot-cap">
-                <span class="t-fa">همان کندل‌ها، و زیر آن دو پنل: حجم هر کندل و کندل‌های دلتا (Δ candles).</span>
+                <span class="t-en">The same bars, and beneath them two panels: the volume of each bar and the delta candles (Δ candles).</span>
               </p>
               <p class="shot-cap">
-                <span class="t-fa">قیمت به شکل خط، و زیر آن دلتای تجمعی به شکل کندل (Cum Δ bars).</span>
+                <span class="t-en">Price as a line, and beneath it the cumulative delta drawn as bars (Cum Δ bars).</span>
               </p>
             </figcaption>
           </figure>
@@ -250,85 +245,85 @@
       </section>
 
       <section class="cs-section" id="approach">
-        <h2><span><span class="t-fa">رویکرد</span></span></h2>
+        <h2><span><span class="t-en">Approach</span></span></h2>
       <p>
-        <span class="t-fa">نخست بازار را کامل و درست ثبت می‌کنیم، سپس آن را از نو می‌سازیم، و الگوریتم را در بازسازی همان بازار می‌آموزیم و می‌سنجیم. کار در سه مرحله پیش می‌رود:</span>
+        <span class="t-en">First we record the market completely and correctly, then we rebuild it, and we train and measure the algorithm inside a reconstruction of that same market. The work proceeds in three stages:</span>
       </p>
       <ol class="steps">
         <li class="glow reveal">
-          <strong class="t-fa">از بازار به بایگانی</strong>
-          <p class="t-fa">یک خط خودکار، داده‌ی بازارهای نقدی و آتی هر ۱۶ صرافی را روز به روز دریافت، فشرده، راستی‌آزمایی و ذخیره می‌کند. حاصل، بایگانی یکدستی است که هر فایل آن با منبع سنجیده شده است. این مرحله ساخته شده و شبانه‌روز در حال کار است.</p>
+          <strong class="t-en">From the market to the archive</strong>
+          <p class="t-en">An automated line receives, compresses, verifies and stores the spot and futures data of all 16 exchanges, day by day. The result is a uniform archive in which every file has been measured against the source. This stage is built and runs around the clock.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fa">از بایگانی به تصویر کامل بازار</strong>
-          <p class="t-fa">پلتفرم ما هر روزِ بازار را همان‌گونه که رخ داده از نو می‌سازد و روی نمودار نشان می‌دهد. بخش معاملات آن ساخته و آزموده شده است. بازسازی دفتر سفارش، یعنی فهرست سفارش‌های منتظر در هر لحظه، گام بعدی خواهد بود.</p>
+          <strong class="t-en">From the archive to the full picture of the market</strong>
+          <p class="t-en">Our platform rebuilds each day of the market exactly as it happened and shows it on a chart. Its trades part is built and tested. Rebuilding the order book, the list of waiting orders at each moment, will be the next step.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fa">از تصویر بازار به الگوریتم و اجرای آزموده</strong>
-          <p class="t-fa">الگوریتم بازارسازی با یادگیری ماشین و تحلیل آماری از همین داده خواهد آموخت که سفارش کجا گذاشته شود، از کدام معامله پرهیز شود و چه زمانی باید کنار کشید. آزمون آن در یک شبیه‌ساز اجرا انجام خواهد شد که رفتار خودِ صرافی را بازسازی می‌کند. معیار داوری، نتیجه‌ی مالی خالص پس از کسر همه‌ی هزینه‌ها خواهد بود.</p>
+          <strong class="t-en">From the picture of the market to the algorithm and tested execution</strong>
+          <p class="t-en">With machine learning and statistical analysis, the market-making algorithm will learn from this same data where to place an order, which trade to avoid and when to step aside. It will be tested in an execution simulator that rebuilds the behaviour of the exchange itself. The yardstick will be the net financial result after every cost.</p>
         </li>
       </ol>
       <p>
-        <span class="t-fa">در کنار بازارسازی، معامله‌ی کوتاه‌مدت: الگوریتم دومی که با حرکت‌های کوتاهِ قیمت همراه می‌شود روی همین زیرساخت و همین شبیه‌ساز ساخته خواهد شد. هر دو به یک دانش تکیه دارند: تشخیص اینکه کدام حرکت ادامه می‌یابد. بازارساز با این دانش کنار می‌کشد و معامله‌گر کوتاه‌مدت با آن وارد می‌شود.</span>
+        <span class="t-en">Alongside market making, short-term trading: a second algorithm that goes along with short price moves will be built on this same infrastructure and this same simulator. Both lean on one piece of knowledge: telling which move will carry on. The market maker uses it to step aside, and the short-term trader uses it to enter.</span>
       </p>
       </section>
 
       <section class="cs-section" id="difference">
-        <h2><span><span class="t-fa">آنچه برجسته است</span></span></h2>
+        <h2><span><span class="t-en">What stands out</span></span></h2>
       <ul class="points">
         <li class="glow reveal">
-          <strong class="t-fa">خطی که بدون ناظر کار می‌کند.</strong>
-          <p class="t-fa">گردآوری ده‌ها ترابایت داده از ۱۶ منبع، اگر به مراقبت انسان وابسته باشد، با اولین قطعی شبانه متوقف می‌شود. خط ما از قطعی شبکه، خطای منبع و پرشدن دیسک خودش برمی‌گردد و فقط چیزی را کنار می‌گذارد که خودبه‌خود درست نمی‌شود. این رفتار در برابر بیش از ۵۰ سناریوی خرابی آزموده شده است.</p>
+          <strong class="t-en">A line that works without a supervisor.</strong>
+          <p class="t-en">Gathering tens of terabytes from 16 sources, if it depends on human care, stops at the first outage in the night. Our line recovers by itself from network outages, source errors and a full disk, and sets aside only what will not fix itself. That behaviour has been tested against more than 50 failure scenarios.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fa">داده‌ای که درستی‌اش اثبات شده است.</strong>
-          <p class="t-fa">الگوریتمی که روی داده‌ی ناقص آموخته باشد، خطای داده را به‌جای الگوی بازار یاد می‌گیرد. هر فایل ما پیش از ذخیره با سه سنجش مستقل با منبع مقایسه می‌شود؛ در یک نمونه‌ی یک‌ماهه، ۳۷۶ میلیون معامله از ۱۲۶ بازار از نو ساخته شد و هیچ اختلافی با منبع نداشت. هر جا خودِ منبع کسری دارد، با نام ثبت و پیگیری می‌شود و پنهان نمی‌ماند.</p>
+          <strong class="t-en">Data whose correctness has been proven.</strong>
+          <p class="t-en">An algorithm trained on incomplete data learns the data's errors instead of the market's patterns. Each of our files is compared with the source by three independent measures before it is stored; in a one-month sample, 376 million trades from 126 markets were rebuilt and showed no difference from the source. Wherever the source itself has a gap, it is recorded by name and followed up, and does not stay hidden.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fa">کمتر از نصف حجم، بدون ازدست‌رفتن یک رقم.</strong>
-          <p class="t-fa">نگهداری و جابه‌جایی ده‌ها ترابایت داده هزینه‌ی پیوسته دارد. قالب ذخیره‌سازی ما همان داده را در کمتر از نصف حجمِ فشرده‌ی منبع نگه می‌دارد و فایل اصلی بایت به بایت از آن بازمی‌گردد. هزینه‌ی ذخیره و زمان انتقال به همین نسبت کم می‌شود.</p>
+          <strong class="t-en">Less than half the size, without losing a digit.</strong>
+          <p class="t-en">Keeping and moving tens of terabytes has a continuous cost. Our storage format holds the same data in less than half the source's compressed size, and the original file comes back from it byte for byte. The cost of storage and the time of transfer fall in the same proportion.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fa">تصویر کل بازار، نه یک صرافی و نه یک رمزارز.</strong>
-          <p class="t-fa">قیمت در یک صرافی ساخته نمی‌شود و بازارسازی که فقط صرافی خودش را می‌بیند، حرکت را زمانی می‌فهمد که به او رسیده است. ما هر ۱۶ صرافی را با یک قالب و یک ساعت کنار هم داریم. الگوریتم می‌تواند از رابطه‌ی میان بازارها بیاموزد، نه فقط از یکی.</p>
+          <strong class="t-en">The picture of the whole market, not one exchange and not one coin.</strong>
+          <p class="t-en">Price is not made on one exchange, and a market maker who sees only their own exchange understands a move when it has already reached them. We hold all 16 exchanges side by side in one format and on one clock. The algorithm can learn from the relationship between markets, not from just one.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fa">بازسازی‌ای که آینده را نمی‌داند.</strong>
-          <p class="t-fa">بسیاری از آزمون‌ها ناخواسته از خبری استفاده می‌کنند که در آن لحظه هنوز نرسیده بود. برای هر معامله دو زمان ثبت شده است: لحظه‌ی وقوع در صرافی و لحظه‌ی رسیدن خبر. پلتفرم در هر لحظه فقط همان را نشان می‌دهد که آن روز دیدنی بود، و خروجی آن با هر تعداد پردازنده یکسان است.</p>
+          <strong class="t-en">A reconstruction that does not know the future.</strong>
+          <p class="t-en">Many tests unintentionally use information that had not yet arrived at that moment. Two times are recorded for each trade: the moment it happened on the exchange and the moment the news of it arrived. At each moment the platform shows only what could be seen that day, and its output is the same with any number of processors.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fa">شبیه‌سازی که نتیجه‌اش در اجرا هم برقرار بماند.</strong>
-          <p class="t-fa">بسیاری از راهبردها روی کاغذ سودآورند و در عمل نه، چون آزمونشان فرض می‌کند سفارش بی‌درنگ و با قیمت تابلو انجام می‌شود. در شبیه‌ساز ما سفارش با تأخیر به صرافی خواهد رسید، در صف نوبت خواهد گرفت و تکه‌تکه پر خواهد شد یا پشت صف خواهد ماند. الگوریتم در طیفی از سرعت و کارمزد آزموده خواهد شد تا پیش از هر تعهد مالی روشن باشد طرح در کدام شرایط توجیه دارد.</p>
+          <strong class="t-en">A simulation whose result still holds in execution.</strong>
+          <p class="t-en">Many strategies are profitable on paper and not in practice, because their test assumes an order fills at once at the quoted price. In our simulator an order will reach the exchange with a delay, take its turn in the queue, and fill in part or stay at the back of the queue. The algorithm will be tested across a range of speeds and fees, so that before any financial commitment it is clear under which conditions the plan is justified.</p>
         </li>
       </ul>
       </section>
 
       <section class="cs-section" id="roadmap">
-        <h2><span><span class="t-fa">مسیر پیش رو</span></span></h2>
+        <h2><span><span class="t-en">The road ahead</span></span></h2>
       <ol class="phases">
         <li class="is-done glow reveal">
-          <span class="phase-mark"><span class="t-fa">انجام‌شده</span></span>
-          <p class="t-fa">خط خودکار گردآوری، قالب ذخیره‌سازی، پنل دریافت داده و بخش معاملات پلتفرم ساخته و روی داده‌ی واقعی آزموده شده‌اند.</p>
+          <span class="phase-mark"><span class="t-en">Done</span></span>
+          <p class="t-en">The automated collection line, the storage format, the data-download panel and the trades part of the platform are built and tested on real data.</p>
         </li>
         <li class="is-now glow reveal">
-          <span class="phase-mark"><span class="t-fa">امروز</span></span>
-          <p class="t-fa">امروز خط گردآوری رمزارزها را یکی پس از دیگری می‌گیرد و ما بخش‌های بعدی پلتفرم را می‌سازیم.</p>
+          <span class="phase-mark"><span class="t-en">Now</span></span>
+          <p class="t-en">Today the collection line is taking the cryptocurrencies one after another, and we are building the next parts of the platform.</p>
         </li>
         <li class="glow reveal">
-          <span class="phase-mark"><span class="t-fa">پس از آن</span></span>
-          <p class="t-fa">پس از آن بازسازی دفتر سفارش، شبیه‌ساز اجرا، و ساخت و آزمون الگوریتم بازارسازی و سپس الگوریتم معامله‌ی کوتاه‌مدت خواهد آمد.</p>
+          <span class="phase-mark"><span class="t-en">Next</span></span>
+          <p class="t-en">After that come rebuilding the order book, the execution simulator, and building and testing the market-making algorithm and then the short-term trading algorithm.</p>
         </li>
         <li class="glow reveal">
-          <span class="phase-mark"><span class="t-fa">گام پایانی</span></span>
-          <p class="t-fa">گام پایانی، اتصال به داده‌ی زنده، دوره‌ای آزمایشی با سرمایه‌ی محدود و بازارسازی با سرمایه‌ی واقعی روی سروری در مجاورت موتور صرافی است.</p>
+          <span class="phase-mark"><span class="t-en">Final step</span></span>
+          <p class="t-en">The final step is connecting to live data, a trial period with limited capital, and market making with real capital on a server next to the exchange's engine.</p>
         </li>
       </ol>
       </section>
 
       <section class="cs-section" id="technology">
-        <h2><span><span class="t-fa">فناوری</span></span></h2>
+        <h2><span><span class="t-en">Technology</span></span></h2>
       <p>
-        <span class="t-fa">خط گردآوری، قالب ذخیره‌سازی و هسته‌ی پلتفرم با راست و نمودار با سی‌شارپ نوشته شده است. پردازش موازی است: ۳۷۶ میلیون معامله‌ی یک ماه در کمتر از سه دقیقه ساخته و خودآزمایی می‌شود. هیچ نسخه‌ای منتشر نمی‌شود مگر پس از یک اجرای کامل و بی‌خطا از ابتدا تا انتها.</span>
+        <span class="t-en">The collection line, the storage format and the platform's core are written in Rust, and the chart in C#. Processing is parallel: one month's 376 million trades are built and self-checked in under three minutes. No version is released except after one complete, error-free run from start to finish.</span>
       </p>
       </section>
     </article>
@@ -338,24 +333,24 @@
 
 <section class="section ruled">
   <div class="wrap">
-    <nav class="projnav reveal" aria-label="پروژه‌های دیگر">
+    <nav class="projnav reveal" aria-label="More projects">
       <a class="projnav-card is-prev glow" href="../projects/defi-lp.html">
-        <span class="projnav-dir"><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="t-fa">پروژه‌ی قبلی</span></span>
-        <b><span class="t-fa">دیفای ال‌پی</span></b>
+        <span class="projnav-dir"><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="t-en">Previous project</span></span>
+        <b><span class="t-en">DeFi LP</span></b>
       </a>
       <a class="projnav-card is-next glow" href="../projects/cme-mm.html">
-        <span class="projnav-dir"><span class="t-fa">پروژه‌ی بعدی</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        <b><span class="t-fa">مارکت‌میکر CME</span></b>
+        <span class="projnav-dir"><span class="t-en">Next project</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <b><span class="t-en">CME Market Maker</span></b>
       </a>
     </nav>
   </div>
   <div class="wrap cs-end">
     <a class="link-arrow link-back" href="../projects.html">
       <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      <span class="t-fa">همه‌ی پروژه‌ها</span>
+      <span class="t-en">All projects</span>
     </a>
     <a class="btn btn-ghost" href="../contact.html">
-      <span class="t-fa">تماس با ما</span>
+      <span class="t-en">Get in touch</span>
     </a>
   </div>
 </section>
@@ -366,25 +361,25 @@
   <div class="wrap">
     <div class="footer-top footer-panel">
       <div class="footer-brand">
-        <a class="logo" href="../index.html" aria-label="نوا گروپ">
+        <a class="logo" href="../index.html" aria-label="Nova Group">
           <img class="logo-mark" src="../assets/img/nova-mark-512.png" alt="" width="512" height="512" loading="lazy">
-          <span class="logo-text t-fa"><b>نوا</b> گروپ</span>
+          <span class="logo-text t-en"><b>NOVA</b> GROUP</span>
         </a>
         <p>
-          <span class="t-fa">پژوهش و ساخت الگوریتم‌های معاملاتی بر پایه‌ی جریان سفارش بازار — از ۱۳۹۹.</span>
+          <span class="t-en">Researching and building trading algorithms from market order flow — since 2020.</span>
         </p>
       </div>
 
-      <nav class="footer-col" aria-label="پیوندهای پانویس">
-        <h2><span class="t-fa">سایت</span></h2>
-        <a href="../index.html"><span class="t-fa">خانه</span></a>
-        <a href="../about.html"><span class="t-fa">درباره ما</span></a>
-        <a href="../projects.html"><span class="t-fa">پروژه‌ها</span></a>
-        <a href="../contact.html"><span class="t-fa">تماس</span></a>
+      <nav class="footer-col" aria-label="Footer">
+        <h2><span class="t-en">Site</span></h2>
+        <a href="../index.html"><span class="t-en">Home</span></a>
+        <a href="../about.html"><span class="t-en">About</span></a>
+        <a href="../projects.html"><span class="t-en">Projects</span></a>
+        <a href="../contact.html"><span class="t-en">Contact</span></a>
       </nav>
 
       <div class="footer-col footer-contact">
-        <h2><span class="t-fa">ارتباط</span></h2>
+        <h2><span class="t-en">Connect</span></h2>
         <a class="footer-mail" href="mailto:info@novacapital.fund">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
           <bdi>info@novacapital.fund</bdi>
@@ -393,13 +388,13 @@
     </div>
 
     <p class="footer-bottom">
-      <span class="t-fa">© ۱۴۰۵ نوا گروپ. همه‌ی حقوق مادی و معنوی این وب‌سایت و محتوای آن متعلق به نوا گروپ است. هرگونه سوءاستفاده پیگرد قانونی دارد.</span>
+      <span class="t-en">© 2026 Nova Group. All rights to this website and its content belong to Nova Group. Any misuse is subject to legal action.</span>
     </p>
   </div>
 </footer>
 
-<button class="to-top" id="toTop" type="button" aria-label="بازگشت به بالا"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
+<button class="to-top" id="toTop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
 
-<script src="../assets/js/main.js?v=50"></script>
+<script src="../assets/js/main.js?v=51"></script>
 </body>
 </html>

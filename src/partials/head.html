@@ -21,26 +21,20 @@
 <!-- Samsung Internet (also used inside Telegram and WhatsApp) recolours pages in its dark mode; flag it early. -->
 <script>if (/SamsungBrowser/i.test(navigator.userAgent)) document.documentElement.classList.add('sb');</script>
 
-<!-- Runs before first paint. The reader's language is an earlier choice, a ?lang= in the address, or else
-     Persian for a Persian browser or a clock set to Tehran and English for everyone else. -->
+<!-- Runs before first paint. Everyone meets the site in English. A reader who has chosen Persian (with the
+     language button, or a ?lang=fa in the address) is taken to the Persian page from then on. -->
 <script>
 (function () {
-  var d = document.documentElement, want = null, asked = /[?&]lang=(fa|en)\b/.exec(location.search), i;
+  var d = document.documentElement, want = null, asked = /[?&]lang=(fa|en)\b/.exec(location.search);
   try { if (asked) localStorage.setItem('nova-lang', asked[1]); want = localStorage.getItem('nova-lang'); } catch (e) {}
   if (asked) want = asked[1];
-  if (want !== 'fa' && want !== 'en') {
-    var said = navigator.languages || [navigator.language || ''], fa = false;
-    for (i = 0; i < said.length; i++) if (/^fa\b/i.test(said[i])) fa = true;
-    try { if (Intl.DateTimeFormat().resolvedOptions().timeZone === 'Asia/Tehran') fa = true; } catch (e) {}
-    want = fa ? 'fa' : 'en';
-  }
+  if (want !== 'fa') want = 'en';
   if (d.hasAttribute('data-both')) {
-    // the one page that carries both languages: under /en/ it reads in English
-    var l = location.pathname.indexOf('/en/') === 0 ? 'en' : want;
+    // the one page that carries both languages: under /fa/ it reads in Persian
+    var l = location.pathname.indexOf('/fa/') === 0 ? 'fa' : want;
     d.setAttribute('data-lang', l); d.lang = l; d.dir = l === 'fa' ? 'rtl' : 'ltr';
-  } else if (want === 'en' && d.getAttribute('data-alt') &&
-      !/bot|crawl|spider|slurp|preview|google|bing|yandex|baidu|duckduck|facebook|whatsapp|telegram|lighthouse/i.test(navigator.userAgent)) {
-    // a Persian address is the default one: a reader of English is sent on to the same page under /en/
+  } else if (want === 'fa' && d.getAttribute('data-alt')) {
+    // an English address is the default one: a reader who chose Persian is sent on to the same page under /fa/
     d.style.visibility = 'hidden';
     setTimeout(function () { d.style.visibility = ''; }, 2500);
     location.replace(d.getAttribute('data-alt') + location.hash);

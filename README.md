@@ -6,14 +6,14 @@
 Website for Nova Group — algorithmic research into market order flow since 2020.
 Bilingual (Persian / English), multi-page, fully static.
 
-**Live:** https://novacapital.fund/ (فارسی) · https://novacapital.fund/en/ (English)
+**Live:** https://novacapital.fund/ (English) · https://novacapital.fund/fa/ (فارسی)
 
 ---
 
 ## صفحه‌ها · Pages
 
-هر صفحه دو نشانی دارد: فارسی در ریشه و انگلیسی زیر `/en/`.
-Every page has two addresses: Persian at the root and English under `/en/`.
+هر صفحه دو نشانی دارد: انگلیسی در ریشه و فارسی زیر `/fa/`.
+Every page has two addresses: English at the root and Persian under `/fa/`.
 
 | صفحه | فایل | محتوا |
 | --- | --- | --- |
@@ -32,20 +32,21 @@ Every page has two addresses: Persian at the root and English under `/en/`.
 
 ## ساختار · How it is put together
 
-صفحه‌های بالا و پوشه‌ی `en/` **خروجی** هستند. منبع آن‌ها زیر `src/` است و `build.py` از هر منبع دو صفحه می‌سازد: یکی فارسی و یکی انگلیسی.
+صفحه‌های بالا و پوشه‌های `fa/` و `en/` **خروجی** هستند. منبع آن‌ها زیر `src/` است و `build.py` از هر منبع دو صفحه می‌سازد: انگلیسی در ریشه و فارسی زیر `fa/`. پوشه‌ی `en/` فقط نشانی‌های قدیمی را به ریشه می‌فرستد.
 
-The pages above and the `en/` folder are **generated**. Their source lives under `src/`,
-and `build.py` writes each source twice: once in Persian, once in English.
+The pages above and the `fa/` and `en/` folders are **generated**. Their source lives under `src/`,
+and `build.py` writes each source twice: English at the root, Persian under `fa/`. The `en/`
+folder only passes old addresses on to the root. `MAIN` in `build.py` names the root language.
 
 ```
 src/partials/   head, nav, footer + blocks shared by several pages
 src/pages/      one file per page; folders become URL folders
-build.py        src -> the .html files at the repo root and under en/, plus sitemap.xml
+build.py        src -> the .html files at the repo root and under fa/, plus sitemap.xml
 assets/         css, js, fonts, images, reports (not generated — edit directly)
 tools/          make_og.py draws the link-preview images
 ```
 
-**هیچ‌وقت فایل‌های `.html` ریشه یا `en/` را مستقیم ویرایش نکنید** — با ساخت بعدی بازنویسی می‌شوند.
+**هیچ‌وقت فایل‌های `.html` ریشه، `fa/` یا `en/` را مستقیم ویرایش نکنید** — با ساخت بعدی بازنویسی می‌شوند.
 **Never edit the generated `.html` files by hand** — the next build overwrites them.
 
 ```bash
@@ -93,14 +94,14 @@ Wrap Latin-only values such as `C#` in `<bdi>` so right-to-left text does not re
 
 ### زبان بازدیدکننده · Which language a visitor sees
 
-- نشانی `/en/…` همیشه انگلیسی است.
-- نشانی فارسی، خواننده‌ی انگلیسی را به همان صفحه زیر `/en/` می‌فرستد: کسی که قبلاً انگلیسی را انتخاب کرده، یا در بازدید اول مرورگرش فارسی نیست و ساعت دستگاهش روی تهران نیست.
-- `?lang=fa` یا `?lang=en` در نشانی، انتخاب را صریح می‌کند.
-- خزنده‌ها جابه‌جا نمی‌شوند، تا هر دو نسخه نمایه شوند.
+- همه در بازدید اول سایت را **انگلیسی** می‌بینند.
+- کسی که با دکمه‌ی زبان فارسی را انتخاب کند، از آن به بعد از هر نشانی انگلیسی به همان صفحه زیر `/fa/` برده می‌شود.
+- نشانی `/fa/…` همیشه فارسی است.
+- `?lang=fa` یا `?lang=en` در نشانی، انتخاب را صریح می‌کند و به خاطر می‌سپارد.
 
-An `/en/…` address is always English. A Persian address sends a reader of English on to
-the same page under `/en/` (an earlier choice, or a first visit from a non-Persian browser
-whose clock is not set to Tehran). `?lang=fa|en` makes the choice explicit. Crawlers are left alone.
+Everyone meets the site in English. A reader who picks Persian with the language button is
+taken from any English address to the same page under `/fa/` from then on. A `/fa/…` address
+is always Persian, and `?lang=fa|en` makes the choice explicit and remembers it.
 
 ### کش مرورگر · Cache busting
 

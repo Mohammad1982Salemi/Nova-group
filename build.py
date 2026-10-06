@@ -3,9 +3,10 @@
 Run `python build.py` after editing anything under src/. The generated pages are
 committed, because GitHub Pages serves the repository as-is.
 
-Every page is written twice from one source: in Persian at its own address and in
-English under /en/. A source keeps both languages side by side, in elements classed
-t-fa and t-en; the build keeps the one that belongs and drops the other.
+Every page is written twice from one source: in English at its own address (English is
+the language a visitor meets first) and in Persian under /fa/. A source keeps both
+languages side by side, in elements classed t-fa and t-en; the build keeps the one that
+belongs and drops the other.
 
 A page source starts with comment lines, then <body>:
   <!-- section: name -->     which nav link is the current one (required, first line)
@@ -29,9 +30,10 @@ from datetime import date
 from html.parser import HTMLParser
 from pathlib import Path
 
-VERSION = "50"  # bump whenever assets/css/style.css or assets/js/main.js changes
+VERSION = "51"  # bump whenever assets/css/style.css or assets/js/main.js changes
 SITE = "https://novacapital.fund/"
 LANGS = ("fa", "en")
+MAIN = "en"     # the language served at the site's root; the other one lives under /<its code>/
 
 # the order of the project cards; a project page links to its neighbours in this list
 PROJECTS = [
@@ -128,12 +130,12 @@ def address(rel, lang):
     """A page's public address in one language."""
     path = rel.as_posix()
     path = path[:-len("index.html")] if path.endswith("index.html") else path
-    return SITE + ("en/" if lang == "en" else "") + path
+    return SITE + ("" if lang == MAIN else lang + "/") + path
 
 
 def head_meta(rel, meta, lang, both):
     if both:
-        return "\n".join(['<base href="/">', f'<title>{esc(meta["title.fa"])}</title>',
+        return "\n".join(['<base href="/">', f'<title>{esc(meta["title." + MAIN])}</title>',
                           '<meta name="robots" content="noindex">'])
     other = "en" if lang == "fa" else "fa"
     image = SITE + f"assets/img/og/{rel.stem if rel.parts[0] == 'projects' else 'nova'}-{lang}.jpg"
@@ -144,7 +146,7 @@ def head_meta(rel, meta, lang, both):
         f'<link rel="canonical" href="{address(rel, lang)}">',
         f'<link rel="alternate" hreflang="fa" href="{address(rel, "fa")}">',
         f'<link rel="alternate" hreflang="en" href="{address(rel, "en")}">',
-        f'<link rel="alternate" hreflang="x-default" href="{address(rel, "en")}">',
+        f'<link rel="alternate" hreflang="x-default" href="{address(rel, MAIN)}">',
         f'<meta property="og:title" content="{esc(meta["title." + lang])}">',
         f'<meta property="og:description" content="{esc(meta["og." + lang])}">',
         f'<meta property="og:url" content="{address(rel, lang)}">',
@@ -189,24 +191,24 @@ def main():
                 source = source.replace(f"@@{name}@@", body)
         source = re.sub(r"@@A:(\w+)@@", lambda m: ' aria-current="page"' if m.group(1) == meta["section"] else "", source)
 
-        for lang in (("fa",) if both else LANGS):
+        for lang in ((MAIN,) if both else LANGS):
             other = "en" if lang == "fa" else "fa"
             up = "" if both else "../" * depth                      # back to this language's root
-            top = up + ("../" if lang == "en" else "")              # back to the site's root
+            top = up + ("" if lang == MAIN else "../")              # back to the site's root
             here = rel.as_posix()
             here = here[:-len("index.html")] if here.endswith("index.html") else here
-            alt = (top + "en/" + here) if lang == "fa" else (top + here or "./")
+            alt = (top + other + "/" + here) if lang == MAIN else (top + here or "./")
+            attrs = f'lang="{lang}" dir="{"rtl" if lang == "fa" else "ltr"}" data-lang="{lang}"'
 
             if both:
                 button = ('<button class="lang-btn" id="langBtn" type="button" aria-label="Change language">'
                           '<span class="t-fa">EN</span><span class="t-en">فا</span></button>')
-                attrs = 'lang="fa" dir="rtl" data-lang="fa" data-both'
+                attrs += ' data-both'
             else:
                 button = (f'<a class="lang-btn" id="langBtn" href="{alt}" hreflang="{other}" lang="{other}" '
                           f'aria-label="@@L:EN — English||فا — فارسی@@">@@L:EN||فا@@</a>')
-                attrs = f'lang="{lang}" dir="{"rtl" if lang == "fa" else "ltr"}" data-lang="{lang}"'
-                if lang == "fa":
-                    attrs += f' data-alt="{alt}"'                   # where the same page lives in English
+                if lang == MAIN:
+                    attrs += f' data-alt="{alt}"'                   # where the same page lives in the other language
 
             head = PARTIALS["HEAD"].replace("@@META@@", head_meta(rel, meta, lang, both)).replace("@@PRELOAD@@", preload(lang))
             text = f'<!DOCTYPE html>\n<html {attrs}>\n<head>\n{head}\n</head>\n' + source.replace("@@LANGBTN@@", button)
@@ -217,10 +219,23 @@ def main():
             if "@@" in text:
                 raise SystemExit(f"{rel}: unresolved token near {text[text.index('@@'):][:40]!r}")
 
-            out = ROOT / ("en" if lang == "en" else "") / rel
+            out = ROOT / ("" if lang == MAIN else lang) / rel
             out.parent.mkdir(parents=True, exist_ok=True)
             out.write_text(text, encoding="utf-8", newline="\n")
             print("built", out.relative_to(ROOT).as_posix())
+            if not both and lang == MAIN:
+                # English lived under /en/ for a short while: those addresses pass the reader on
+                to = "../" * (depth + 1) + here or "./"
+                old = ROOT / "en" / rel
+                old.parent.mkdir(parents=True, exist_ok=True)
+                old.write_text(
+                    '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n'
+                    f'<title>{esc(meta["title.en"])}</title>\n<meta name="robots" content="noindex">\n'
+                    f'<link rel="canonical" href="{address(rel, "en")}">\n'
+                    f'<meta http-equiv="refresh" content="0; url={to}">\n'
+                    f'<script>location.replace("{to}" + location.search + location.hash);</script>\n'
+                    f'</head>\n<body><p><a href="{to}">{esc(meta["title.en"])}</a></p></body>\n</html>\n',
+                    encoding="utf-8", newline="\n")
             if not both:
                 links = "".join(f'<xhtml:link rel="alternate" hreflang="{l}" href="{address(rel, l)}"/>' for l in LANGS)
                 sitemap.append(f"  <url><loc>{address(rel, lang)}</loc><lastmod>{date.today()}</lastmod>{links}</url>")
