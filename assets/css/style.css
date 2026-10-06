@@ -1190,9 +1190,9 @@ a.link-arrow:hover > span, a:hover .link-arrow > span { background-size: 100% 1p
 /* ---------- home: the three layers as one connected path, not three boxes ---------- */
 @media (min-width: 861px) {
   .layers-home { gap: 0; }
-  .layers-home li, .layers-home li.glow:hover {
-    padding: 0 34px; background: none; border: 0; border-radius: 0; box-shadow: none; transform: none; overflow: visible;
-  }
+  .layers-home li { padding: 0 34px; background: none; border: 0; border-radius: 0; overflow: visible; }
+  /* hovering must not bring the card look, or its padding, back */
+  .layers-home li.glow:hover { background: none; border: 0; box-shadow: none; transform: none; }
   .layers-home li:first-child { padding-inline-start: 0; }
   .layers-home li:last-child { padding-inline-end: 0; }
   .layers-home li.glow::after { display: none; }
