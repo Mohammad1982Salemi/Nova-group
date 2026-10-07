@@ -31,7 +31,7 @@ from datetime import date
 from html.parser import HTMLParser
 from pathlib import Path
 
-VERSION = "54"  # bump whenever assets/css/style.css or assets/js/main.js changes
+VERSION = "55"  # bump whenever assets/css/style.css or assets/js/main.js changes
 SITE = "https://novacapital.fund/"
 LANGS = ("fa", "en")
 MAIN = "en"     # the language served at the site's root; the other one lives under /<its code>/

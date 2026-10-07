@@ -1555,7 +1555,7 @@ html[dir="ltr"] .lightbox-nav.is-prev svg, html[dir="rtl"] .lightbox-nav.is-next
 /* ---------- project pages: the hero tile's figure is the tile's headline; a bright line fills in under it ---------- */
 .page-hero .facts-glass b {
   position: relative; display: block; align-self: flex-start;
-  font-family: var(--font-disp); font-size: 25px; font-weight: 700; line-height: 1.3; letter-spacing: -.01em;
+  font-family: var(--font-disp); font-size: 21px; font-weight: 700; line-height: 1.3; letter-spacing: -.02em;
   padding-block-end: 12px; margin-block-end: 16px;
   background: linear-gradient(100deg, #8fc2ff 0%, #5b9bff 40%, #38d6f5 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
