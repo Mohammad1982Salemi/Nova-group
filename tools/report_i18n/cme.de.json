@@ -63,7 +63,7 @@
   "CME trading day": "CME-Handelstag",
   "(17:00 to 16:00 Chicago time).": "(17:00 bis 16:00 Ortszeit Chicago).",
   "= the initial risk of a trade: the distance from its entry to its stop as placed.": "= das Anfangsrisiko eines Trades: der Abstand von seinem Einstieg zu seinem Stop, wie er platziert wurde.",
-  "The run uses risk-based sizing: each trade is sized so that its initial risk is a fixed percent of the account.": "Der Lauf verwendet die risikobasierte Positionsgröße: Jeder Trade wird so bemessen, dass sein Anfangsrisiko ein fester Prozentsatz des Kontos ist.",
+  "The run uses risk-based sizing: each trade is sized so that its initial risk is a fixed percent of the account.": "Der Lauf verwendet die risikobasierte Positionsbemessung: Jeder Trade wird so bemessen, dass sein Anfangsrisiko ein fester Prozentsatz des Kontos ist.",
   "The same signals were simulated in": "Simuliert wurden dieselben Signale in",
   "Total Net Profit": "Gesamtnettogewinn",
   "no closed trade yet.": "noch kein geschlossener Trade.",
@@ -82,7 +82,7 @@
   "A simulation on the real order book": "Eine Simulation auf dem echten Orderbuch",
   "A simulation on the real order book (still in progress)": "Eine Simulation auf dem echten Orderbuch (läuft noch)",
   "what an ordinary backtest does not do": "was ein gewöhnlicher Backtest nicht leistet",
-  "Every order, not bars.": "Jede Order, keine Bars.",
+  "Every order, not bars.": "Jede Order, keine Balken.",
   "The market is rebuilt from the exchange's full order-by-order feed (MBO): every add, cancel and trade, in the exchange's own sequence.": "Der Markt wird aus dem vollständigen Order-für-Order-Datenfeed der Börse (MBO) rekonstruiert: jede neue Order, jede Stornierung und jeder Trade, in der Reihenfolge der Börse selbst.",
   "Real queue position.": "Echte Warteschlangenposition.",
   "A resting order waits behind the orders that were really there, and fills only when they trade or cancel.": "Eine wartende Order steht hinter den Orders, die wirklich dort lagen, und wird erst ausgeführt, wenn diese gehandelt oder storniert werden.",
@@ -99,7 +99,7 @@
   "This file was exported while the run was still in progress; the figures cover the trades closed up to that moment.": "Diese Datei wurde exportiert, während der Lauf noch andauerte; die Zahlen umfassen die bis zu diesem Zeitpunkt geschlossenen Trades.",
   "The account balance reached zero": "Der Kontostand erreichte null",
   "Every figure after that point assumes the account was refunded: the run keeps trading the same size.": "Jede Zahl nach diesem Punkt nimmt an, dass das Konto wieder aufgefüllt wurde: Der Lauf handelt mit derselben Größe weiter.",
-  "Risk-based sizing sizes a trade by its initial risk, and these had none (the stop was not beyond the entry).": "Die risikobasierte Positionsgröße bemisst einen Trade nach seinem Anfangsrisiko, und diese hatten keines (der Stop lag nicht jenseits des Einstiegs).",
+  "Risk-based sizing sizes a trade by its initial risk, and these had none (the stop was not beyond the entry).": "Die risikobasierte Positionsbemessung bemisst einen Trade nach seinem Anfangsrisiko, und diese hatten keines (der Stop lag nicht jenseits des Einstiegs).",
   "(the stop was not beyond the entry price when it was placed).": "(der Stop lag bei seiner Platzierung nicht jenseits des Einstiegspreises).",
   "They are in every money figure and are left out of the R figures (expectancy, R distribution, MAE / MFE).": "Sie sind in jeder Geldkennzahl enthalten und werden aus den R-Kennzahlen (Erwartungswert, R-Verteilung, MAE / MFE) herausgelassen.",
   "Money and R disagree in sign:": "Geld und R haben unterschiedliche Vorzeichen:",
@@ -123,7 +123,7 @@
   "Winning trades as a share of all closed trades.": "Gewinntrades als Anteil an allen geschlossenen Trades.",
   "Compare it with the break-even rate: the size of the average loss / (average win + the size of the average loss).": "Vergleichen Sie sie mit der Break-even-Quote: Betrag des durchschnittlichen Verlusts / (durchschnittlicher Gewinn + Betrag des durchschnittlichen Verlusts).",
   "Gross profit divided by gross loss, in money, after commission.": "Bruttogewinn geteilt durch Bruttoverlust, in Geld, nach Kommission.",
-  "1.00 = break-even.": "1.00 = Break-even.",
+  "1.00 = break-even.": "1,00 = Break-even.",
   "Total net profit divided by the number of closed trades.": "Gesamtnettogewinn geteilt durch die Anzahl der geschlossenen Trades.",
   "The average result of a trade in units of its own initial risk (1R = the distance from the entry to the stop as placed).": "Das durchschnittliche Ergebnis eines Trades in Einheiten seines eigenen Anfangsrisikos (1R = der Abstand vom Einstieg zum Stop, wie er platziert wurde).",
   "The deepest fall of the closed-trade balance below its own earlier high (trade close to trade close; open positions are not marked to market).": "Der tiefste Rückgang des Kontostands aus geschlossenen Trades unter sein eigenes früheres Hoch (von Trade-Schluss zu Trade-Schluss; offene Positionen werden nicht zum Marktpreis bewertet).",
@@ -207,7 +207,7 @@
   "Drawdown": "Drawdown",
   "USD below the previous high": "USD unter dem vorherigen Hoch",
   "Percent profitable": "Trefferquote",
-  "Percent profitable, %": "Trefferquote, %",
+  "Percent profitable, %": "Trefferquote, %",
   "Closed trade number": "Geschlossener Trade Nr.",
   "Average trade": "Durchschnittstrade",
   "Average trade, USD": "Durchschnittstrade, USD",
@@ -317,7 +317,7 @@
   "Drawdown Episodes": "Drawdown-Phasen",
   "Max. Contracts Held": "Max. gehaltene Kontrakte",
   "Max. Consecutive Losing Trades / Losing Days": "Max. Verlusttrades / Verlusttage in Folge",
-  "Monte Carlo Projection (block bootstrap)": "Monte Carlo-Projektion (Block-Bootstrap)",
+  "Monte Carlo Projection (block bootstrap)": "Monte-Carlo-Projektion (Block-Bootstrap)",
   "10th pct.": "10. Perz.",
   "50th pct.": "50. Perz.",
   "90th pct.": "90. Perz.",
@@ -325,16 +325,16 @@
   "Projected net profit": "Projizierter Nettogewinn",
   "A projected drawdown equal to the realized one means the same past episode was drawn whole (a block is long enough to hold it).": "Ein projizierter Drawdown, der dem realisierten gleicht, bedeutet, dass dieselbe vergangene Phase als Ganzes gezogen wurde (ein Block ist lang genug, um sie aufzunehmen).",
   "Probability of a net loss over that horizon:": "Wahrscheinlichkeit eines Nettoverlusts über diesen Horizont:",
-  "the projection starts from a balance that is not positive": "die Projektion startet von einem Kontostand, der nicht positiv ist",
+  "the projection starts from a balance that is not positive": "die Projektion beginnt bei einem Kontostand, der nicht positiv ist",
   "What the same number of future trades could look like if the future resembles this sample.": "Wie dieselbe Anzahl künftiger Trades aussehen könnte, wenn die Zukunft dieser Stichprobe ähnelt.",
   "Each simulation draws past blocks at random, so some past days appear twice and others not at all.": "Jede Simulation zieht vergangene Blöcke zufällig, sodass manche vergangenen Tage zweimal vorkommen und andere gar nicht.",
   "The spread between the percentiles is what chance in which blocks are drawn, and in what order, can do.": "Die Spanne zwischen den Perzentilen ist das, was der Zufall bei der Auswahl und der Reihenfolge der gezogenen Blöcke bewirken kann.",
   "It cannot foresee a change in the market or in execution.": "Eine Veränderung des Marktes oder der Ausführung kann sie nicht vorhersehen.",
-  "Monte Carlo Projection: three simulated paths": "Monte Carlo-Projektion: drei simulierte Pfade",
+  "Monte Carlo Projection: three simulated paths": "Monte-Carlo-Projektion: drei simulierte Pfade",
   "Zero is today's balance.": "Null ist der heutige Kontostand.",
   "Three of the simulated futures, drawn in full: a poor one, the middle one and a good one.": "Drei der simulierten Zukunftsverläufe, vollständig gezeichnet: ein schlechter, der mittlere und ein guter.",
   "They are single paths, not envelopes: the lines may cross.": "Es sind einzelne Pfade, keine Hüllkurven: Die Linien können sich kreuzen.",
-  "Read the final values and how rough the way there is.": "Lesen Sie die Endwerte ab und wie holprig der Weg dorthin ist.",
+  "Read the final values and how rough the way there is.": "Lesen Sie die Endwerte ab und achten Sie darauf, wie holprig der Weg dorthin ist.",
   "Distribution of Drawdown Depth": "Verteilung der Drawdown-Tiefe",
   "Each fall from a high until the next new high is one episode, counted once at its deepest point.": "Jeder Rückgang von einem Hoch bis zum nächsten neuen Hoch ist eine Phase, die einmal an ihrem tiefsten Punkt gezählt wird.",
   "How deep the falls from a high were.": "Wie tief die Rückgänge von einem Hoch waren.",
@@ -354,7 +354,7 @@
   "Future trade number": "Künftiger Trade Nr.",
   "Simulations ranked by final value": "Simulationen, nach Endwert geordnet",
   "No closed trade to project from.": "Kein geschlossener Trade als Grundlage für die Projektion.",
-  "The Monte Carlo projection is computed when the run ends.": "Die Monte Carlo-Projektion wird berechnet, wenn der Lauf endet.",
+  "The Monte Carlo projection is computed when the run ends.": "Die Monte-Carlo-Projektion wird berechnet, wenn der Lauf endet.",
   "Not computed for this scenario (a very large run computes it for the first scenario only).": "Für dieses Szenario nicht berechnet (ein sehr großer Lauf berechnet sie nur für das erste Szenario).",
   "Number of episodes (log scale)": "Anzahl Phasen (Log-Skala)",
   "Number of days (log scale)": "Anzahl Tage (Log-Skala)",
@@ -410,7 +410,7 @@
   "Money rows are after commission; rows marked (R) divide each trade by its own initial risk; the long and short columns are filled where a figure can be split by direction.": "Geldzeilen sind nach Kommission angegeben; mit (R) markierte Zeilen teilen jeden Trade durch sein eigenes Anfangsrisiko; die Long- und Short-Spalten sind dort gefüllt, wo sich eine Kennzahl nach Richtung aufteilen lässt.",
   "Trade List": "Trade-Liste",
   "The id is the ledger's id.": "Die ID ist die ID des Trade-Journals.",
-  "Prices are in price points, the R columns in units of the initial risk (empty = no defined risk; MAE is printed as a size), money after commission.": "Preise in Preispunkten, die R-Spalten in Einheiten des Anfangsrisikos (leer = kein definiertes Risiko; MAE wird als Betrag ausgegeben), Geldbeträge nach Kommission.",
+  "Prices are in price points, the R columns in units of the initial risk (empty = no defined risk; MAE is printed as a size), money after commission.": "Preise in Preispunkten, die R-Spalten in Einheiten des Anfangsrisikos (leer = kein definiertes Risiko; MAE wird als Größe ausgegeben), Geldbeträge nach Kommission.",
   "No ledger file was written with this export; a headless run writes the complete list beside its report.": "Mit diesem Export wurde keine Trade-Journal-Datei geschrieben; ein Headless-Lauf schreibt die vollständige Liste neben seinen Bericht.",
   "One row per trade, in the order the entries were filled.": "Eine Zeile pro Trade, in der Reihenfolge, in der die Einstiege ausgeführt wurden.",
   "Use it to check a single trade against a chart: the id is the same as in the ledger file.": "Nutzen Sie sie, um einen einzelnen Trade mit einem Chart abzugleichen: Die ID ist dieselbe wie in der Trade-Journal-Datei.",
@@ -461,7 +461,7 @@
   "Each line is one latency.": "Jede Linie ist eine Latenz.",
   "Commission changes no fill, so every line is straight.": "Die Kommission ändert keine Ausführung, daher ist jede Linie gerade.",
   "What each extra cent of commission costs.": "Was jeder zusätzliche Cent Kommission kostet.",
-  "The slope of a line is two fees per contract times the contracts traded.": "Die Steigung einer Linie ist zwei Gebühren pro Kontrakt mal die gehandelten Kontrakte.",
+  "The slope of a line is two fees per contract times the contracts traded.": "Die Steigung einer Linie ergibt sich aus zwei Gebühren pro Kontrakt mal den gehandelten Kontrakten.",
   "Where a line crosses zero is that latency's break-even commission.": "Wo eine Linie null kreuzt, liegt die Break-even-Kommission dieser Latenz.",
   "Commission per side for the cards below": "Kommission pro Seite für die Karten unten",
   "Equity Curves by Latency": "Kapitalkurven nach Latenz",
@@ -517,7 +517,7 @@
   "Even Trades": "Neutrale Trades",
   "Avg. Winning Trade": "Ø Gewinntrade",
   "Avg. Losing Trade": "Ø Verlusttrade",
-  "Ratio Avg. Win : Avg. Loss": "Verhältnis Ø Gewinn : Ø Verlust",
+  "Ratio Avg. Win : Avg. Loss": "Verhältnis Ø Gewinn : Ø Verlust",
   "Largest Winning Trade": "Größter Gewinntrade",
   "Largest Losing Trade": "Größter Verlusttrade",
   "Max. Consecutive Winning Trades": "Max. Gewinntrades in Folge",
@@ -538,7 +538,7 @@
   "SQN (sqrt(N) x Mean R / Std. Dev. R)": "SQN (sqrt(N) x Mittelwert R / Std.-Abw. R)",
   "Avg. MFE / MAE of Winning Trades (R)": "Ø MFE / MAE der Gewinntrades (R)",
   "Avg. MFE / MAE of Losing Trades (R)": "Ø MFE / MAE der Verlusttrades (R)",
-  "Avg. End Trade Drawdown (R; MFE minus the trade's result)": "Ø End Trade Drawdown (R; MFE minus Ergebnis des Trades)",
+  "Avg. End Trade Drawdown (R; MFE minus the trade's result)": "Ø Drawdown am Trade-Ende (R; MFE minus Ergebnis des Trades)",
   "Risk per Trade (risk-based sizing)": "Risiko pro Trade (risikobasierte Positionsgröße)",
   "Balance Reached Zero": "Kontostand erreichte null",
   "Trading Period (first signal to last exit)": "Handelszeitraum (erstes Signal bis letzter Ausstieg)",
@@ -564,7 +564,7 @@
   "Filled Entry Orders (fill rate)": "Ausgeführte Einstiegsorders (Ausführungsquote)",
   "Cancelled Entry Orders": "Stornierte Einstiegsorders",
   "Entry Orders Not Filled at the Slippage Limit": "Am Slippage-Limit nicht ausgeführte Einstiegsorders",
-  "Cancel-to-Fill Ratio": "Verhältnis storniert : ausgeführt",
+  "Cancel-to-Fill Ratio": "Verhältnis storniert : ausgeführt",
   "Avg. Entry Slippage (ticks; + = worse than the signal price)": "Ø Einstiegs-Slippage (Ticks; + = schlechter als der Signalpreis)",
   "Avg. Stop Slippage (ticks beyond the stop price; + = worse)": "Ø Stop-Slippage (Ticks jenseits des Stop-Preises; + = schlechter)",
   "Validity Score": "Validitäts-Score",
@@ -769,11 +769,11 @@
   ],
   [
    "Latenz (Orderverzögerung)",
-   "Die Zeit zwischen dem Sehen der Marktdaten und dem Eintreffen unserer Order an der Börse. 1 ms = 1,000 µs = 1,000,000 ns."
+   "Die Zeit zwischen dem Sehen der Marktdaten und dem Eintreffen unserer Order an der Börse. 1 ms = 1.000 µs = 1.000.000 ns."
   ],
   [
    "Kommission pro Seite",
-   "Die Gebühr, die pro Kontrakt bei jedem Kauf oder Verkauf gezahlt wird; ein vollständiger Trade (ein Round Turn) zahlt sie zweimal."
+   "Die Kommission, die pro Kontrakt bei jedem Kauf oder Verkauf gezahlt wird; ein vollständiger Trade (ein Round Turn) zahlt sie zweimal."
   ],
   [
    "Break-even-Kommission",
@@ -817,7 +817,7 @@
   ],
   [
    "Profitfaktor (Profit Factor)",
-   "Bruttogewinn geteilt durch Bruttoverlust, in Geld. Über 1 ist profitabel; 1.00 ist Break-even. „Profitfaktor (R)“ ist dasselbe Verhältnis, berechnet auf R-Multiples."
+   "Bruttogewinn geteilt durch Bruttoverlust, in Geld. Über 1 ist profitabel; 1,00 ist Break-even. „Profitfaktor (R)“ ist dasselbe Verhältnis, berechnet auf R-Multiples."
   ],
   [
    "Trefferquote (Percent Profitable)",
@@ -828,7 +828,7 @@
    "Gesamtnettogewinn geteilt durch die Anzahl der geschlossenen Trades."
   ],
   [
-   "Verhältnis Ø Gewinn : Ø Verlust",
+   "Verhältnis Ø Gewinn : Ø Verlust",
    "Der durchschnittliche Gewinntrade geteilt durch den durchschnittlichen Verlusttrade (Payoff Ratio)."
   ],
   [
@@ -936,7 +936,7 @@
    "Die weiteste Bewegung des Preises gegen den Trade, solange er offen war, als Betrag ausgegeben. Gemessen an gehandelten Preisen, vor Kommission."
   ],
   [
-   "End Trade Drawdown (ETD)",
+   "Drawdown am Trade-Ende (ETD)",
    "Wie viel von seinem besten Moment ein Trade wieder abgab: MFE minus Ergebnis des Trades."
   ],
   [
@@ -988,8 +988,8 @@
    "Eine Tabelle, deren Zellen nach ihrem Wert eingefärbt sind: Grün für Gewinn, Rot für Verlust, dunkler für größere Beträge."
   ],
   [
-   "Trade-Journal (tm_trades.csv)",
-   "Die Datei, die jeden Trade des Laufs auflistet; ein Headless-Lauf schreibt sie neben seinen Bericht."
+   "Trade-Journal",
+   "Die Datei, die jeden Trade des Laufs auflistet; ein Lauf ohne Oberfläche schreibt sie neben seinen Bericht."
   ]
  ]
 }
