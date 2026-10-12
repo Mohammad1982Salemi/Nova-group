@@ -652,9 +652,13 @@
       var pos = 0, cost = 0, banked = 0, traded = false;   // the position, what it cost, and results already closed
       var LADDER = [1, 2, 3, 5, 10, 15, 20, 25, 30, 40, 50, 75, 99], DIGITS = '۰۱۲۳۴۵۶۷۸۹', shown = {};
 
-      /* figures in the page's own digits */
+      /* figures in the page's own digits and separators */
+      var FIGURES = { fr: [' ', ','], de: ['.', ','], tr: ['.', ','] }[lang];
       function local(text) {
-        return fa ? text.replace(/,/g, '٬').replace(/\./g, '٫').replace(/\d/g, function (d) { return DIGITS.charAt(d); }) : text;
+        if (!/[0-9۰-۹]/.test(text)) return text;
+        if (fa) return text.replace(/,/g, '٬').replace(/\./g, '٫').replace(/\d/g, function (d) { return DIGITS.charAt(d); });
+        if (!FIGURES) return text;
+        return text.replace(/,/g, '\u0000').replace(/\./g, FIGURES[1]).replace(/\u0000/g, FIGURES[0]);
       }
       function num(v, decimals) { return local(decimals ? v.toFixed(decimals) : String(v)); }
       function b(text) { return '<bdi>' + text + '</bdi>'; }
@@ -735,13 +739,13 @@
         hitAll: function (w, px) {
           return 'Votre ' + T.ord(w.buy) + ' en attente est exécuté en totalité : ' + T.lots(w.size) + ' à ' + cash(px) + '.';
         },
-        row: function (w) { return w.chip.q + ' à ' + fmt(w.px); },
+        row: function (w) { return w.chip.q + ' à ' + local(fmt(w.px)); },
         ahead: function (n) { return n === null ? 'hors du carnet visible' : 'devant : ' + n; },
         done: function (w) { return 'exécuté : ' + w.filled + ' sur ' + w.size; },
         cancel: 'Annuler cet ordre',
         position: function (p, avg, pnl) {
           return 'Position : ' + (p ? signed(p) + (Math.abs(p) === 1 ? ' contrat' : ' contrats') + ' au prix moyen de ' + avg : 'aucune') +
-            ' · Résultat en points de prix : ' + pnl;
+            ' · Gain/perte en points de prix : ' + pnl;
         }
       } : lang === 'de' ? {
         buy: 'Kauf', sell: 'Verkauf', market: 'zum Marktpreis', now: 'sofort ausgeführt', queue: 'reiht sich ein', best: 'bester Preis',

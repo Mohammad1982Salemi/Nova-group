@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fast Scalp — un algorithme de trading à court terme pour le marché à terme de Chicago | Nova Group</title>
-<meta name="description" content="Le projet Fast Scalp : un algorithme de trading à court terme fondé sur l’apprentissage automatique, appris à partir de l’historique ordre par ordre de la Bourse de Chicago.">
+<meta name="description" content="Le projet Fast Scalp : un algorithme de trading à court terme fondé sur l’apprentissage automatique, entraîné sur l’historique des ordres du CME.">
 <link rel="canonical" href="https://novacapital.fund/fr/projects/fast-scalp.html">
 <link rel="alternate" hreflang="en" href="https://novacapital.fund/projects/fast-scalp.html">
 <link rel="alternate" hreflang="fr" href="https://novacapital.fund/fr/projects/fast-scalp.html">
@@ -13,7 +13,7 @@
 <link rel="alternate" hreflang="fa" href="https://novacapital.fund/fa/projects/fast-scalp.html">
 <link rel="alternate" hreflang="x-default" href="https://novacapital.fund/projects/fast-scalp.html">
 <meta property="og:title" content="Fast Scalp — un algorithme de trading à court terme pour le marché à terme de Chicago | Nova Group">
-<meta property="og:description" content="Un algorithme de trading à court terme fondé sur le ML pour le marché à terme de Chicago, en route vers un desk de trading automatisé.">
+<meta property="og:description" content="Un algorithme de trading à court terme fondé sur l’apprentissage automatique pour le marché à terme de Chicago, avec pour objectif une unité de trading automatisée.">
 <meta property="og:url" content="https://novacapital.fund/fr/projects/fast-scalp.html">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:locale:alternate" content="en_GB">
@@ -41,10 +41,10 @@
 <!-- The fonts are served from this site; the one this language needs first is fetched early. -->
 <link rel="preload" href="../../assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../../assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../../assets/css/style.css?v=60">
+<link rel="stylesheet" href="../../assets/css/style.css?v=61">
 
 <!-- Runs before first paint: Samsung Internet flag, the reader's language, the page-transition direction. -->
-<script src="../../assets/js/early.js?v=60"></script>
+<script src="../../assets/js/early.js?v=61"></script>
 </head>
 <body>
 
@@ -89,14 +89,14 @@
 
     <h1 class="reveal"><span class="t-fr">Fast Scalp</span></h1>
     <p class="page-lead reveal">
-      <span class="t-fr">Un algorithme de trading à court terme fondé sur le ML pour le marché à terme de Chicago, en route vers un desk de trading automatisé.</span>
+      <span class="t-fr">Un algorithme de trading à court terme fondé sur l’apprentissage automatique pour le marché à terme de Chicago, avec pour objectif une unité de trading automatisée.</span>
     </p>
 
     <div class="cs-meta reveal">
       <span class="status"><span class="t-fr">En test</span></span>
       <ul class="tags">
         <li>Python</li><li>C#</li><li>Rust</li><li>MBO</li>
-        <li><span class="t-fr">Machine learning</span></li>
+        <li><span class="t-fr">Apprentissage automatique</span></li>
         <li><span class="t-fr">Scalping</span></li>
         <li><span class="t-fr">Simulateur d’exécution</span></li>
       </ul>
@@ -107,21 +107,21 @@
         <span class="fact-label"><span class="t-fr">Données</span></span>
         <b><span class="t-fr">Chaque ordre</span></b>
         <p>
-          <span class="t-fr">Plusieurs années de la Bourse de Chicago, l’un des plus grands marchés à terme du monde.</span>
+          <span class="t-fr">Plusieurs années de données du CME, l’un des plus grands marchés à terme du monde.</span>
         </p>
       </li>
       <li class="glow reveal">
         <span class="fact-label"><span class="t-fr">Méthode</span></span>
-        <b><span class="t-fr">Machine learning</span></b>
+        <b><span class="t-fr">Apprentissage automatique</span></b>
         <p>
           <span class="t-fr">Avec l’appui de l’analyse statistique ; les schémas sont appris à partir d’exemples réels du marché.</span>
         </p>
       </li>
       <li class="glow reveal">
         <span class="fact-label"><span class="t-fr">Risque</span></span>
-        <b><span class="t-fr">Stop systématique</span></b>
+        <b><span class="t-fr">Un stop-loss pour chaque position</span></b>
         <p>
-          <span class="t-fr">Fixé dès le moment de l’entrée ; ce qui est communiqué est la perte réelle, et non la perte nominale.</span>
+          <span class="t-fr">Défini dès l’entrée en position ; la perte présentée tient compte de l’exécution simulée, et pas seulement du niveau théorique du stop.</span>
         </p>
       </li>
       <li class="glow reveal">
@@ -141,7 +141,7 @@
       <a href="#reports"><span class="t-fr">Rapports</span></a>
       <a href="#platform"><span class="t-fr">Plateforme</span></a>
       <a href="#approach"><span class="t-fr">Approche</span></a>
-      <a href="#difference"><span class="t-fr">Points saillants</span></a>
+      <a href="#difference"><span class="t-fr">Points clés</span></a>
       <a href="#roadmap"><span class="t-fr">Feuille de route</span></a>
       <a href="#technology"><span class="t-fr">Technologie</span></a>
     </nav>
@@ -161,14 +161,14 @@
         <span class="t-fr">Nous avons confié ce jugement à un algorithme qui l’a appris du flux d’ordres du marché lui-même.</span>
       </p>
       <p>
-        <span class="t-fr">Le projet Fast Scalp a rassemblé plusieurs années de la Bourse de Chicago, l’un des plus grands marchés à terme du monde, au niveau de chaque ordre individuel. À partir de ces données, avec l’apprentissage automatique (ML) et l’analyse statistique, nous sommes parvenus à un algorithme de trading à court terme qui est testé au sein d’une reconstitution fidèle de la bourse elle-même. La destination est un desk de trading automatisé qui gère le capital avec cet algorithme, et non selon les réactions humaines du moment.</span>
+        <span class="t-fr">Le projet Fast Scalp a rassemblé plusieurs années de données du CME, l’un des plus grands marchés à terme du monde, au niveau de chaque ordre individuel. À partir de ces données, avec l’apprentissage automatique (ML) et l’analyse statistique, nous sommes parvenus à un algorithme de trading à court terme qui est testé au sein d’une reconstitution fidèle de la bourse elle-même. L’objectif est une unité de trading automatisée qui gère le capital avec cet algorithme, et non selon les réactions humaines du moment.</span>
       </p>
       </section>
 
       <section class="cs-section" id="reports">
         <h2><span><span class="t-fr">Rapports du simulateur</span></span></h2>
         <p>
-          <span class="t-fr">Ce projet dispose d’un rapport complet du simulateur d’exécution par marché. Chaque rapport montre l’algorithme à cinq niveaux de latence de l’ordre vers la bourse à la fois, de zéro à 100 millisecondes. Vous pouvez télécharger les deux, puis les lire et les évaluer indépendamment de nous.</span>
+          <span class="t-fr">Ce projet comprend un rapport complet du simulateur d’exécution pour chaque marché. Chaque rapport compare cinq niveaux de latence de transmission des ordres, de zéro à 100 millisecondes. Les deux rapports sont téléchargeables et peuvent être examinés indépendamment de notre analyse.</span>
         </p>
         <ul class="reports">
           <li class="glow reveal">
@@ -196,7 +196,7 @@
           <li class="glow reveal">
             <div class="report-head">
               <b>NQ</b>
-              <span><span class="t-fr">Contrats à terme Nasdaq-100</span></span>
+              <span><span class="t-fr">Contrats à terme sur le Nasdaq-100</span></span>
             </div>
             <ul class="report-facts">
               <li><b><span class="t-fr">Mai 2017 à juin 2026</span></b><span><span class="t-fr">période de test</span></span></li>
@@ -293,30 +293,30 @@
       </section>
 
       <section class="cs-section" id="difference">
-        <h2><span><span class="t-fr">Points saillants</span></span></h2>
+        <h2><span><span class="t-fr">Points clés</span></span></h2>
       <ul class="points">
         <li class="glow reveal">
           <strong class="t-fr">Un savoir qui réside dans le système, et non dans la tête des personnes.</strong>
-          <p class="t-fr">Le trading à court terme s’appuie traditionnellement sur l’œil et les réactions du trader, et la fatigue et l’émotion agissent directement sur le résultat. Notre algorithme a appris ce qu’il sait des données de marché et l’applique de la même façon à chaque transaction. Ce savoir est enregistré, reproductible et peut être réentraîné.</p>
+          <p class="t-fr">Le trading à court terme repose traditionnellement sur l’observation et les réactions du trader ; la fatigue et les émotions influent directement sur les résultats. Notre algorithme apprend à partir des données de marché et applique la même logique à chaque transaction. Les connaissances acquises sont conservées dans le système, les résultats sont reproductibles et le modèle peut être réentraîné.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fr">La sélection, et non une transaction après l’autre.</strong>
+          <strong class="t-fr">Des prises de position sélectives.</strong>
           <p class="t-fr">En trading à court terme, le profit de chaque transaction est faible, et son coût, c’est-à-dire les frais et l’écart entre le prix d’achat et le prix de vente, est payé à chaque transaction. Traiter chaque mouvement aboutit donc à une perte ; nous avons mesuré l’entrée sans sélection au coût réel, et elle a perdu de l’argent. C’est exactement là que réside la valeur de l’algorithme : distinguer le mouvement qui mérite une entrée de celui qu’il faut laisser passer.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fr">Un résultat qui tient encore à l’exécution.</strong>
+          <strong class="t-fr">Une performance évaluée dans des conditions d’exécution réalistes.</strong>
           <p class="t-fr">De nombreuses stratégies à court terme sont rentables sur le papier mais pas en pratique, parce que leur test suppose qu’un ordre est exécuté au prix affiché. Dans notre simulateur, un ordre arrive en retard et est exécuté sur le volume disponible à cet instant précis. L’exactitude de la simulation a été vérifiée par rapport à une reconstitution indépendante réalisée à partir des données brutes de la bourse.</p>
         </li>
         <li class="glow reveal">
           <strong class="t-fr">Un risque défini, estimé de façon réaliste.</strong>
-          <p class="t-fr">Chaque transaction a un stop fixé dès le moment de l’entrée, et sa durée de vie est courte. Ce stop n’est pas un plafond absolu : lors de mouvements brusques, la sortie peut se faire à un prix moins bon. Le simulateur voit aussi ce cas, et ce qui est communiqué est la perte réelle, et non la perte nominale.</p>
+          <p class="t-fr">Chaque position est de courte durée et possède un stop-loss défini dès l’entrée. Ce seuil ne constitue pas une limite absolue de perte : lors d’un mouvement brusque, la sortie peut s’effectuer à un prix moins favorable. Le simulateur prend en compte ce risque et présente la perte résultant de l’exécution simulée, plutôt que la seule perte théorique au niveau du stop.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fr">Distinguer un vrai constat du hasard.</strong>
+          <strong class="t-fr">Distinguer les résultats robustes des effets du hasard.</strong>
           <p class="t-fr">Les modèles d’apprentissage peuvent mémoriser le passé sans avoir rien appris sur l’avenir. Pour l’éviter, l’algorithme est mesuré sur des périodes qu’il n’a pas vues pendant l’entraînement, périodes agitées comprises. Chaque constat est aussi confronté à des données délibérément privées de tout schéma significatif, et s’il y apparaît aussi, il est écarté.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fr">Connaître le besoin d’infrastructure avant de le payer.</strong>
+          <strong class="t-fr">Évaluer les besoins d’infrastructure avant d’investir.</strong>
           <p class="t-fr">En trading à court terme, la vitesse à laquelle un ordre atteint la bourse et les frais de chaque transaction déterminent la frontière entre profit et perte, et améliorer l’un ou l’autre coûte cher. Nous testons l’algorithme sur toute une gamme de ces conditions à la fois. Ainsi, avant tout engagement financier, on sait clairement dans quelles conditions le plan est justifié.</p>
         </li>
       </ul>
@@ -326,7 +326,7 @@
         <h2><span><span class="t-fr">Feuille de route</span></span></h2>
       <ol class="phases">
         <li class="is-done glow reveal">
-          <span class="phase-mark"><span class="t-fr">Fait</span></span>
+          <span class="phase-mark"><span class="t-fr">Réalisé</span></span>
           <p class="t-fr">L’infrastructure de données, la reconstitution du marché, l’algorithme de trading, le simulateur d’exécution et le système de rapports sont construits.</p>
         </li>
         <li class="is-now glow reveal">
@@ -347,7 +347,7 @@
       <section class="cs-section" id="technology">
         <h2><span><span class="t-fr">Technologie</span></span></h2>
       <p>
-        <span class="t-fr">Les modèles d’apprentissage sont construits en Python et entraînés sur un processeur graphique. Le moteur de reconstitution du marché et le simulateur d’exécution sont écrits en C#, et le lecteur de données brutes en Rust. Le résultat de chaque test est présenté dans un rapport standard en cinq langues, et une modification n’est acceptée qu’après avoir été comparée à la version précédente et avoir passé les tests automatisés.</span>
+        <span class="t-fr">Les modèles d’apprentissage sont construits en Python et entraînés sur un processeur graphique. Le moteur de reconstitution du marché et le simulateur d’exécution sont écrits en C#, et le lecteur de données brutes en Rust. Le résultat de chaque test est présenté dans un rapport standard en cinq langues, et une modification n’est acceptée qu’après avoir été comparée à la version précédente et avoir réussi les tests automatisés.</span>
       </p>
       </section>
     </article>
@@ -390,7 +390,7 @@
           <span class="logo-text t-fr"><b>NOVA</b> GROUP</span>
         </a>
         <p>
-          <span class="t-fr">Recherche et construction d’algorithmes de trading à partir du flux d’ordres du marché — depuis 2020.</span>
+          <span class="t-fr">Recherche et développement d’algorithmes de trading fondés sur le flux d’ordres du marché — depuis 2020.</span>
         </p>
       </div>
 
@@ -419,6 +419,6 @@
 
 <button class="to-top" id="toTop" type="button" aria-label="Haut de page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
 
-<script src="../../assets/js/main.js?v=60"></script>
+<script src="../../assets/js/main.js?v=61"></script>
 </body>
 </html>

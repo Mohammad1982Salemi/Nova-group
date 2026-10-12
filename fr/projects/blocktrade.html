@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BlockTrade — analyse comportementale des transactions de bloc sur le marché à terme de Chicago | Nova Group</title>
-<meta name="description" content="Le projet BlockTrade : un service de données pour les transactions de bloc de la Bourse de Chicago et leur analyse comportementale, en route vers des algorithmes de trading et d’investissement.">
+<meta name="description" content="Le projet BlockTrade : un service de données pour les transactions de bloc de la Bourse de Chicago et leur analyse comportementale, avec pour objectif des algorithmes de trading et d’investissement.">
 <link rel="canonical" href="https://novacapital.fund/fr/projects/blocktrade.html">
 <link rel="alternate" hreflang="en" href="https://novacapital.fund/projects/blocktrade.html">
 <link rel="alternate" hreflang="fr" href="https://novacapital.fund/fr/projects/blocktrade.html">
@@ -13,7 +13,7 @@
 <link rel="alternate" hreflang="fa" href="https://novacapital.fund/fa/projects/blocktrade.html">
 <link rel="alternate" hreflang="x-default" href="https://novacapital.fund/projects/blocktrade.html">
 <meta property="og:title" content="BlockTrade — analyse comportementale des transactions de bloc sur le marché à terme de Chicago | Nova Group">
-<meta property="og:description" content="Analyse comportementale des transactions de bloc sur le marché à terme de Chicago, en route vers des algorithmes de trading et d’investissement fondés sur la trace des gros capitaux.">
+<meta property="og:description" content="Analyse comportementale des transactions de bloc sur le marché à terme de Chicago, avec pour objectif des algorithmes de trading et d’investissement fondés sur les traces des gros capitaux.">
 <meta property="og:url" content="https://novacapital.fund/fr/projects/blocktrade.html">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:locale:alternate" content="en_GB">
@@ -41,10 +41,10 @@
 <!-- The fonts are served from this site; the one this language needs first is fetched early. -->
 <link rel="preload" href="../../assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../../assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../../assets/css/style.css?v=60">
+<link rel="stylesheet" href="../../assets/css/style.css?v=61">
 
 <!-- Runs before first paint: Samsung Internet flag, the reader's language, the page-transition direction. -->
-<script src="../../assets/js/early.js?v=60"></script>
+<script src="../../assets/js/early.js?v=61"></script>
 </head>
 <body>
 
@@ -89,7 +89,7 @@
 
     <h1 class="reveal"><span class="t-fr">BlockTrade</span></h1>
     <p class="page-lead reveal">
-      <span class="t-fr">Analyse comportementale des transactions de bloc sur le marché à terme de Chicago, en route vers des algorithmes de trading et d’investissement fondés sur la trace des gros capitaux.</span>
+      <span class="t-fr">Analyse comportementale des transactions de bloc sur le marché à terme de Chicago, avec pour objectif des algorithmes de trading et d’investissement fondés sur les traces des gros capitaux.</span>
     </p>
 
     <div class="cs-meta reveal">
@@ -122,7 +122,7 @@
         <span class="fact-label"><span class="t-fr">Classification</span></span>
         <b><span class="t-fr">24 formes</span></b>
         <p>
-          <span class="t-fr">Du contrat unique aux combinaisons d’options à plusieurs jambes, chacune clairement définie.</span>
+          <span class="t-fr">D’un contrat simple aux combinaisons d’options à plusieurs jambes, chacune clairement définie.</span>
         </p>
       </li>
       <li class="glow reveal">
@@ -140,7 +140,7 @@
       <a href="#intro"><span class="t-fr">Introduction</span></a>
       <a href="#platform"><span class="t-fr">Outil d’affichage</span></a>
       <a href="#approach"><span class="t-fr">Approche</span></a>
-      <a href="#difference"><span class="t-fr">Points saillants</span></a>
+      <a href="#difference"><span class="t-fr">Points clés</span></a>
       <a href="#roadmap"><span class="t-fr">Feuille de route</span></a>
       <a href="#technology"><span class="t-fr">Technologie</span></a>
     </nav>
@@ -160,7 +160,7 @@
         <span class="t-fr">Nous avons décidé de comprendre comment ces transactions se comportent et, pour cela, nous sommes d’abord devenus nous-mêmes le fournisseur de leurs données.</span>
       </p>
       <p>
-        <span class="t-fr">Le projet BlockTrade dispose d’un service de données en fonctionnement. Notre serveur reçoit et traite sans interruption les transactions de bloc de tous les produits de la Bourse de Chicago et les livre sur le graphique du trader. Chaque bloc arrive, en médiane, 36 secondes après l’avis de la bourse, et l’historique s’accumule jour après jour. La destination, ce sont des algorithmes de trading et d’investissement construits sur l’analyse comportementale de ces mêmes blocs.</span>
+        <span class="t-fr">Le projet BlockTrade dispose d’un service de données en fonctionnement. Notre serveur reçoit et traite sans interruption les transactions de bloc de tous les produits de la Bourse de Chicago et les livre sur le graphique du trader. Chaque bloc arrive, en médiane, 36 secondes après l’avis de la bourse, et l’historique s’accumule jour après jour. L’objectif est de développer des algorithmes de trading et d’investissement construits sur l’analyse comportementale de ces mêmes blocs.</span>
       </p>
       </section>
 
@@ -217,16 +217,16 @@
       <section class="cs-section" id="approach">
         <h2><span><span class="t-fr">Approche</span></span></h2>
       <p>
-        <span class="t-fr">Nous faisons d’abord nôtres les données, puis nous apprenons à connaître le comportement, et enfin nous construisons des algorithmes sur cette connaissance.</span>
+        <span class="t-fr">Nous constituons d’abord notre propre base de données, puis nous analysons le comportement des transactions de bloc avant de développer des algorithmes fondés sur ces résultats.</span>
       </p>
       <ol class="steps">
         <li class="glow reveal">
           <strong class="t-fr">Du marché à nos propres données</strong>
-          <p class="t-fr">Notre serveur dédié reçoit les avis de la bourse tout au long de la séance, les enregistre exactement tels quels et les livre aux consommateurs par une passerelle dédiée. À cette étape, nous sommes le fournisseur des données, et non leur client. Cette étape est construite et fonctionne.</p>
+          <p class="t-fr">Notre serveur dédié reçoit les avis de la bourse tout au long de la séance, les enregistre exactement tels quels et les livre à ses utilisateurs via une passerelle dédiée. À cette étape, nous sommes le fournisseur des données, et non leur client. Cette étape est construite et fonctionne.</p>
         </li>
         <li class="glow reveal">
           <strong class="t-fr">Des données à l’analyse comportementale</strong>
-          <p class="t-fr">Chaque bloc reçoit une identité fixe, entre dans l’une des 24 formes définies et est rattaché à son propre actif. Chaque correction, chaque retrait et chaque retour d’une transaction est également enregistré, avec son heure exacte. Sur cette base, nous mesurons dans quelle situation apparaît chaque forme de bloc et ce que fait le marché ensuite.</p>
+          <p class="t-fr">Chaque bloc reçoit un identifiant stable, entre dans l’une des 24 formes définies et est rattaché à son propre actif. Chaque correction, chaque retrait et chaque retour d’une transaction est également enregistré, avec son heure exacte. Sur cette base, nous mesurons dans quelle situation apparaît chaque forme de bloc et ce que fait le marché ensuite.</p>
         </li>
         <li class="glow reveal">
           <strong class="t-fr">De l’analyse comportementale à l’algorithme</strong>
@@ -236,31 +236,31 @@
       </section>
 
       <section class="cs-section" id="difference">
-        <h2><span><span class="t-fr">Points saillants</span></span></h2>
+        <h2><span><span class="t-fr">Points clés</span></span></h2>
       <ul class="points">
         <li class="glow reveal">
           <strong class="t-fr">Le but est de comprendre le comportement, et non d’afficher des données.</strong>
-          <p class="t-fr">Voir un bloc sur le graphique ne fait pas, à lui seul, une décision. Ce que nous recherchons, c’est le schéma qui se répète : quelle forme de grosse transaction, dans quelle situation, s’accompagne de quelle conséquence. L’outil d’affichage est le premier résultat de ce parcours, et non sa fin.</p>
+          <p class="t-fr">Voir un bloc sur le graphique ne suffit pas à fonder une décision. Ce que nous cherchons, c’est la régularité : quelle forme de grosse transaction, dans quelle situation, s’accompagne de quelle conséquence. L’outil d’affichage est le premier résultat de cette voie, et non son aboutissement.</p>
         </li>
         <li class="glow reveal">
           <strong class="t-fr">Nous fournissons les données ; nous n’en sommes pas le client.</strong>
-          <p class="t-fr">L’analyse comportementale a besoin de données complètes, à l’heure et entre nos propres mains. Nous avons construit et nous exploitons nous-mêmes la chaîne, de la réception à la livraison. La qualité et le délai de ce qui parvient à l’analyse et à l’algorithme sont sous notre contrôle.</p>
+          <p class="t-fr">L’analyse comportementale exige des données complètes, à l’heure et entre nos mains. Nous construisons et exploitons nous-mêmes la chaîne, de la réception à la livraison. La qualité et la ponctualité de ce qui parvient à l’analyse et à l’algorithme sont sous notre contrôle.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fr">Nous avons le comportement du marché, et pas seulement la liste de fin de journée.</strong>
-          <p class="t-fr">La liste de fin de journée ne dit pas ce qui a été corrigé, retiré, ou ce qui est parti puis revenu en cours de journée. Notre service conserve tout cela, et ces détails sont la matière première de l’analyse comportementale. Cet historique grandit chaque jour et ne peut pas être enregistré de nouveau plus tard.</p>
+          <strong class="t-fr">Nous avons le comportement du marché, et pas seulement le relevé de fin de journée.</strong>
+          <p class="t-fr">Un relevé de fin de journée ne dit pas ce qui a été corrigé, retiré ou revenu en cours de séance. Notre service garde tout cela, et ces détails sont la matière première de l’analyse comportementale. Cet historique grandit chaque jour et ne pourra pas être enregistré de nouveau plus tard.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fr">Un langage commun pour les grosses transactions.</strong>
-          <p class="t-fr">Les transactions de bloc vont du contrat unique aux combinaisons d’options à plusieurs jambes. Nous les avons classées en 24 formes clairement définies, et cette classification a été testée sur l’ensemble des données enregistrées. Sans ce langage, il n’est pas possible de comparer le comportement des blocs.</p>
+          <strong class="t-fr">Un langage commun pour les transactions de bloc.</strong>
+          <p class="t-fr">Les transactions de bloc vont d’un contrat simple aux combinaisons d’options à plusieurs jambes. Nous les classons en 24 formes clairement définies, et ce classement a été éprouvé sur l’ensemble des données enregistrées. Sans ce langage commun, comparer le comportement des blocs est impossible.</p>
         </li>
         <li class="glow reveal">
           <strong class="t-fr">Une analyse qui ne repose pas sur une supposition cachée.</strong>
           <p class="t-fr">Une transaction de bloc réunit son acheteur et son vendeur, et aucune direction n’est annoncée pour elle. Notre service indique le type de transaction et n’invente pas de direction ; chaque fois qu’il ne peut pas reconnaître un bloc, il le dit précisément. Toute lecture directionnelle dans notre analyse viendra séparément, sous l’appellation « indice ».</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fr">Une infrastructure prête pour plusieurs consommateurs.</strong>
-          <p class="t-fr">Plusieurs machines indépendantes sont alimentées par un même flux, chacune avec son propre accès. Chaque nuit, les données partent vers un stockage extérieur au serveur et les deux copies sont comparées l’une à l’autre. Ajouter un algorithme comme nouveau consommateur ne demande aucun nouveau travail d’infrastructure.</p>
+          <strong class="t-fr">Une infrastructure prête pour plusieurs utilisateurs.</strong>
+          <p class="t-fr">Plusieurs machines indépendantes sont alimentées par un même flux, chacune avec son propre accès. Chaque nuit, les données partent vers un stockage extérieur au serveur et les deux copies sont comparées l’une à l’autre. Ajouter un algorithme comme nouvel utilisateur ne demande aucun nouveau travail d’infrastructure.</p>
         </li>
       </ul>
       </section>
@@ -269,11 +269,11 @@
         <h2><span><span class="t-fr">Feuille de route</span></span></h2>
       <ol class="phases">
         <li class="is-done glow reveal">
-          <span class="phase-mark"><span class="t-fr">Fait</span></span>
+          <span class="phase-mark"><span class="t-fr">Réalisé</span></span>
           <p class="t-fr">Le serveur de réception, la couche de traitement et de classification, la passerelle de livraison, la sauvegarde et l’outil d’affichage sont construits et testés.</p>
         </li>
         <li class="is-done glow reveal">
-          <span class="phase-mark"><span class="t-fr">Fait</span></span>
+          <span class="phase-mark"><span class="t-fr">Réalisé</span></span>
           <p class="t-fr">Les règles de reconnaissance du comportement ont été complétées par l’observation du marché en direct, et l’historique s’accumule jour après jour.</p>
         </li>
         <li class="is-now glow reveal">
@@ -282,7 +282,7 @@
         </li>
         <li class="glow reveal">
           <span class="phase-mark"><span class="t-fr">Dernière étape</span></span>
-          <p class="t-fr">La dernière étape, ce sont des algorithmes de trading et d’investissement qui utilisent la trace des gros capitaux dans leurs décisions.</p>
+          <p class="t-fr">La dernière étape, ce sont des algorithmes de trading et d’investissement qui utilisent les traces des gros capitaux dans leurs décisions.</p>
         </li>
       </ol>
       </section>
@@ -333,7 +333,7 @@
           <span class="logo-text t-fr"><b>NOVA</b> GROUP</span>
         </a>
         <p>
-          <span class="t-fr">Recherche et construction d’algorithmes de trading à partir du flux d’ordres du marché — depuis 2020.</span>
+          <span class="t-fr">Recherche et développement d’algorithmes de trading fondés sur le flux d’ordres du marché — depuis 2020.</span>
         </p>
       </div>
 
@@ -362,6 +362,6 @@
 
 <button class="to-top" id="toTop" type="button" aria-label="Haut de page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
 
-<script src="../../assets/js/main.js?v=60"></script>
+<script src="../../assets/js/main.js?v=61"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CME Market Maker — un algorithme de tenue de marché pour le marché à terme de Chicago | Nova Group</title>
-<meta name="description" content="Le projet CME Market Maker : un algorithme de tenue de marché par apprentissage profond, appris à partir de l’historique ordre par ordre de la Bourse de Chicago.">
+<meta name="description" content="Le projet CME Market Maker : un algorithme de tenue de marché fondé sur l’apprentissage profond, entraîné sur l’historique des ordres du CME.">
 <link rel="canonical" href="https://novacapital.fund/fr/projects/cme-mm.html">
 <link rel="alternate" hreflang="en" href="https://novacapital.fund/projects/cme-mm.html">
 <link rel="alternate" hreflang="fr" href="https://novacapital.fund/fr/projects/cme-mm.html">
@@ -13,7 +13,7 @@
 <link rel="alternate" hreflang="fa" href="https://novacapital.fund/fa/projects/cme-mm.html">
 <link rel="alternate" hreflang="x-default" href="https://novacapital.fund/projects/cme-mm.html">
 <meta property="og:title" content="CME Market Maker — un algorithme de tenue de marché pour le marché à terme de Chicago | Nova Group">
-<meta property="og:description" content="Un algorithme de tenue de marché par apprentissage profond pour le marché à terme de Chicago, en route vers un desk de tenue de marché automatisé.">
+<meta property="og:description" content="Un algorithme de tenue de marché par apprentissage profond pour le marché à terme de Chicago, avec pour objectif un desk de tenue de marché automatisé.">
 <meta property="og:url" content="https://novacapital.fund/fr/projects/cme-mm.html">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:locale:alternate" content="en_GB">
@@ -41,10 +41,10 @@
 <!-- The fonts are served from this site; the one this language needs first is fetched early. -->
 <link rel="preload" href="../../assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../../assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../../assets/css/style.css?v=60">
+<link rel="stylesheet" href="../../assets/css/style.css?v=61">
 
 <!-- Runs before first paint: Samsung Internet flag, the reader's language, the page-transition direction. -->
-<script src="../../assets/js/early.js?v=60"></script>
+<script src="../../assets/js/early.js?v=61"></script>
 </head>
 <body>
 
@@ -89,14 +89,14 @@
 
     <h1 class="reveal"><span class="t-fr">CME Market Maker</span></h1>
     <p class="page-lead reveal">
-      <span class="t-fr">Un algorithme de tenue de marché par apprentissage profond pour le marché à terme de Chicago, en route vers un desk de tenue de marché automatisé.</span>
+      <span class="t-fr">Un algorithme de tenue de marché par apprentissage profond pour le marché à terme de Chicago, avec pour objectif un desk de tenue de marché automatisé.</span>
     </p>
 
     <div class="cs-meta reveal">
       <span class="status"><span class="t-fr">En test</span></span>
       <ul class="tags">
         <li>Python</li><li>C#</li><li>Rust</li><li>MBO</li>
-        <li><span class="t-fr">Deep learning</span></li>
+        <li><span class="t-fr">Apprentissage profond</span></li>
         <li><span class="t-fr">Tenue de marché</span></li>
         <li><span class="t-fr">Simulateur d’exécution</span></li>
       </ul>
@@ -107,18 +107,18 @@
         <span class="fact-label"><span class="t-fr">Données</span></span>
         <b><span class="t-fr">Chaque ordre</span></b>
         <p>
-          <span class="t-fr">Plusieurs années de la Bourse de Chicago, l’un des plus grands marchés à terme du monde.</span>
+          <span class="t-fr">Plusieurs années de données du CME, l’un des plus grands marchés à terme du monde.</span>
         </p>
       </li>
       <li class="glow reveal">
         <span class="fact-label"><span class="t-fr">Méthode</span></span>
-        <b><span class="t-fr">Deep learning</span></b>
+        <b><span class="t-fr">Apprentissage profond</span></b>
         <p>
           <span class="t-fr">Avec l’appui de l’analyse statistique ; les schémas sont appris à partir d’exemples réels du marché.</span>
         </p>
       </li>
       <li class="glow reveal">
-        <span class="fact-label"><span class="t-fr">Étalon</span></span>
+        <span class="fact-label"><span class="t-fr">Critère d’évaluation</span></span>
         <b><span class="t-fr">Résultat financier net</span></b>
         <p>
           <span class="t-fr">Après tous les coûts, sur une gamme de conditions de vitesse et de frais.</span>
@@ -141,7 +141,7 @@
       <a href="#reports"><span class="t-fr">Rapports</span></a>
       <a href="#platform"><span class="t-fr">Plateforme</span></a>
       <a href="#approach"><span class="t-fr">Approche</span></a>
-      <a href="#difference"><span class="t-fr">Points saillants</span></a>
+      <a href="#difference"><span class="t-fr">Points clés</span></a>
       <a href="#roadmap"><span class="t-fr">Feuille de route</span></a>
       <a href="#technology"><span class="t-fr">Technologie</span></a>
     </nav>
@@ -161,14 +161,14 @@
         <span class="t-fr">Nous avons confié ce travail à un algorithme qui l’a appris du marché lui-même.</span>
       </p>
       <p>
-        <span class="t-fr">Le projet CME Market Maker a rassemblé plusieurs années de la Bourse de Chicago, l’un des plus grands marchés à terme du monde, au niveau de chaque ordre individuel. À partir de ces données, avec l’apprentissage profond et l’analyse statistique, nous sommes parvenus à un algorithme de tenue de marché qui est testé au sein d’une reconstitution fidèle de la bourse elle-même. La destination est un desk de tenue de marché automatisé qui gère le capital avec cet algorithme, et non selon le jugement humain du moment.</span>
+        <span class="t-fr">Le projet CME Market Maker a rassemblé plusieurs années de données du CME, l’un des plus grands marchés à terme du monde, au niveau de chaque ordre individuel. À partir de ces données, avec l’apprentissage profond et l’analyse statistique, nous sommes parvenus à un algorithme de tenue de marché qui est testé au sein d’une reconstitution fidèle de la bourse elle-même. L’objectif est un desk de tenue de marché automatisé qui gère le capital avec cet algorithme, et non selon le jugement humain du moment.</span>
       </p>
       </section>
 
       <section class="cs-section" id="reports">
         <h2><span><span class="t-fr">Rapports du simulateur</span></span></h2>
         <p>
-          <span class="t-fr">Ce projet dispose de deux rapports complets du simulateur d’exécution, un par marché. Chaque rapport montre l’algorithme dans 25 scénarios à la fois : cinq niveaux de latence de l’ordre vers la bourse, de zéro à une milliseconde, pour cinq niveaux de frais. Vous pouvez télécharger les deux, puis les lire et les évaluer indépendamment de nous.</span>
+          <span class="t-fr">Ce projet comprend deux rapports complets du simulateur d’exécution, un par marché. Chaque rapport présente 25 scénarios croisant cinq niveaux de latence de transmission des ordres, de zéro à une milliseconde, avec cinq niveaux de frais. Les deux rapports sont téléchargeables et peuvent être examinés indépendamment de notre analyse.</span>
         </p>
         <ul class="reports">
           <li class="glow reveal">
@@ -196,7 +196,7 @@
           <li class="glow reveal">
             <div class="report-head">
               <b>NQ</b>
-              <span><span class="t-fr">Contrats à terme Nasdaq-100</span></span>
+              <span><span class="t-fr">Contrats à terme sur le Nasdaq-100</span></span>
             </div>
             <ul class="report-facts">
               <li><b><span class="t-fr">Mai 2017 à juin 2026</span></b><span><span class="t-fr">période de test</span></span></li>
@@ -279,11 +279,11 @@
       <ol class="steps">
         <li class="glow reveal">
           <strong class="t-fr">Des données brutes à l’image complète du marché</strong>
-          <p class="t-fr">L’écran de trading ne montre qu’un résumé du marché. Nous traitons chaque message enregistré par la bourse et reconstituons la liste des ordres en attente à chaque instant. Le résultat est une image du volume en attente à chaque prix et de l’ordre dans lequel les ordres se tiennent dans la file d’attente.</p>
+          <p class="t-fr">L’écran de trading ne présente qu’une synthèse du marché. Nous traitons chaque message enregistré par la bourse pour reconstituer, à chaque instant, le carnet des ordres au repos. Nous obtenons ainsi le volume disponible à chaque niveau de prix et la priorité de chaque ordre dans la file d’attente.</p>
         </li>
         <li class="glow reveal">
           <strong class="t-fr">De l’image du marché à l’algorithme</strong>
-          <p class="t-fr">En apprentissage profond, l’ordinateur apprend des schémas à partir d’exemples réels au lieu de suivre des règles écrites à la main. De cette façon, et avec l’appui de l’analyse statistique, notre algorithme a appris dans quelles situations la transaction d’un teneur de marché se termine en sa faveur et dans lesquelles elle se termine contre lui. Sa sortie tient en trois décisions : où placer un ordre, quelle transaction éviter et quand se mettre à l’écart.</p>
+          <p class="t-fr">En apprentissage profond, le modèle identifie des régularités à partir de données réelles plutôt que d’appliquer uniquement des règles prédéfinies. Avec l’appui de l’analyse statistique, notre algorithme apprend à distinguer les situations favorables et défavorables à une opération de tenue de marché. Il détermine où placer un ordre, quelles transactions éviter et quand suspendre la cotation.</p>
         </li>
         <li class="glow reveal">
           <strong class="t-fr">De l’algorithme à l’exécution testée</strong>
@@ -293,26 +293,26 @@
       </section>
 
       <section class="cs-section" id="difference">
-        <h2><span><span class="t-fr">Points saillants</span></span></h2>
+        <h2><span><span class="t-fr">Points clés</span></span></h2>
       <ul class="points">
         <li class="glow reveal">
           <strong class="t-fr">Un savoir qui réside dans le système, et non dans la tête des personnes.</strong>
-          <p class="t-fr">La tenue de marché traditionnelle s’appuie sur l’intuition de traders expérimentés, et ce savoir se perd quand ils partent. Notre algorithme a appris ce qu’il sait des données de marché elles-mêmes. Ce savoir est enregistré, reproductible et peut être réentraîné.</p>
+          <p class="t-fr">La tenue de marché traditionnelle repose sur l’expérience et l’intuition des traders, un savoir qui peut disparaître avec leur départ. Notre algorithme apprend à partir des données de marché. Les connaissances acquises sont conservées dans le système, les résultats sont reproductibles et le modèle peut être réentraîné.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fr">La sélection, et non la présence constante sur le marché.</strong>
-          <p class="t-fr">Nous avons mesuré au coût réel une cotation des deux côtés sans sélection, et elle a perdu de l’argent, car un teneur de marché qui ne sélectionne pas traite surtout au moment où le prix s’apprête à évoluer contre lui. C’est exactement là que réside la valeur de l’algorithme : distinguer la transaction à rechercher de celle dont il faut s’écarter.</p>
+          <strong class="t-fr">Une cotation sélective plutôt qu’une présence permanente.</strong>
+          <p class="t-fr">Nous avons évalué une cotation bilatérale systématique en intégrant les coûts réels : elle s’est révélée déficitaire. Sans sélection, le teneur de marché s’expose à la sélection adverse, en étant exécuté juste avant une évolution défavorable du prix. L’algorithme vise précisément à distinguer les transactions à rechercher de celles à éviter.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fr">Un résultat qui tient encore à l’exécution.</strong>
+          <strong class="t-fr">Une performance évaluée dans des conditions d’exécution réalistes.</strong>
           <p class="t-fr">De nombreuses stratégies sont rentables sur le papier mais pas en pratique, parce que leur test suppose qu’un ordre est exécuté immédiatement au prix affiché. Dans notre simulateur, un ordre suit le même chemin que sur le marché réel, et l’exactitude de la simulation a été vérifiée par rapport à une reconstitution indépendante réalisée à partir des données brutes de la bourse.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fr">Distinguer un vrai constat du hasard.</strong>
+          <strong class="t-fr">Distinguer les résultats robustes des effets du hasard.</strong>
           <p class="t-fr">Les modèles d’apprentissage peuvent mémoriser le passé sans avoir rien appris sur l’avenir. Pour l’éviter, l’algorithme est toujours mesuré sur des périodes qu’il n’a pas vues pendant l’entraînement, périodes agitées comprises. Chaque constat est aussi confronté à des données délibérément privées de tout schéma significatif, et s’il y apparaît aussi, il est écarté.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fr">Connaître le besoin d’infrastructure avant de le payer.</strong>
+          <strong class="t-fr">Évaluer les besoins d’infrastructure avant d’investir.</strong>
           <p class="t-fr">Dans ce domaine, la vitesse à laquelle un ordre atteint la bourse et les frais de chaque transaction déterminent la frontière entre profit et perte, et améliorer l’un ou l’autre coûte cher. Nous testons l’algorithme sur toute une gamme de ces conditions à la fois. Ainsi, avant tout engagement financier, on sait clairement dans quelles conditions le plan est justifié.</p>
         </li>
         <li class="glow reveal">
@@ -326,7 +326,7 @@
         <h2><span><span class="t-fr">Feuille de route</span></span></h2>
       <ol class="phases">
         <li class="is-done glow reveal">
-          <span class="phase-mark"><span class="t-fr">Fait</span></span>
+          <span class="phase-mark"><span class="t-fr">Réalisé</span></span>
           <p class="t-fr">L’infrastructure de données, la reconstitution du marché, l’algorithme de tenue de marché, le simulateur d’exécution et le système de rapports sont construits.</p>
         </li>
         <li class="is-now glow reveal">
@@ -347,7 +347,7 @@
       <section class="cs-section" id="technology">
         <h2><span><span class="t-fr">Technologie</span></span></h2>
       <p>
-        <span class="t-fr">Les modèles d’apprentissage sont construits en Python et entraînés sur un processeur graphique. Le moteur de reconstitution du marché et le simulateur d’exécution sont écrits en C#, et le lecteur de données brutes en Rust. Une modification n’est acceptée qu’après avoir été comparée à la version précédente et avoir passé les tests automatisés.</span>
+        <span class="t-fr">Les modèles d’apprentissage sont construits en Python et entraînés sur un processeur graphique. Le moteur de reconstitution du marché et le simulateur d’exécution sont écrits en C#, et le lecteur de données brutes en Rust. Une modification n’est acceptée qu’après avoir été comparée à la version précédente et avoir réussi les tests automatisés.</span>
       </p>
       </section>
     </article>
@@ -390,7 +390,7 @@
           <span class="logo-text t-fr"><b>NOVA</b> GROUP</span>
         </a>
         <p>
-          <span class="t-fr">Recherche et construction d’algorithmes de trading à partir du flux d’ordres du marché — depuis 2020.</span>
+          <span class="t-fr">Recherche et développement d’algorithmes de trading fondés sur le flux d’ordres du marché — depuis 2020.</span>
         </p>
       </div>
 
@@ -419,6 +419,6 @@
 
 <button class="to-top" id="toTop" type="button" aria-label="Haut de page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
 
-<script src="../../assets/js/main.js?v=60"></script>
+<script src="../../assets/js/main.js?v=61"></script>
 </body>
 </html>

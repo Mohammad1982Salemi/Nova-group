@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DeFi LP — gestion de capitaux dans les pools de liquidité | Nova Group</title>
-<meta name="description" content="Le projet DeFi LP : un algorithme de gestion de capitaux pour les pools de liquidité des plateformes d’échange décentralisées, construit sur l’historique complet de 136 pools sur quatre réseaux.">
+<title>DeFi LP — gestion du capital dans les pools de liquidité | Nova Group</title>
+<meta name="description" content="Le projet DeFi LP : un algorithme de gestion du capital pour les pools de liquidité des plateformes d’échange décentralisées, construit sur l’historique complet de 136 pools sur quatre réseaux.">
 <link rel="canonical" href="https://novacapital.fund/fr/projects/defi-lp.html">
 <link rel="alternate" hreflang="en" href="https://novacapital.fund/projects/defi-lp.html">
 <link rel="alternate" hreflang="fr" href="https://novacapital.fund/fr/projects/defi-lp.html">
@@ -12,8 +12,8 @@
 <link rel="alternate" hreflang="tr" href="https://novacapital.fund/tr/projects/defi-lp.html">
 <link rel="alternate" hreflang="fa" href="https://novacapital.fund/fa/projects/defi-lp.html">
 <link rel="alternate" hreflang="x-default" href="https://novacapital.fund/projects/defi-lp.html">
-<meta property="og:title" content="DeFi LP — gestion de capitaux dans les pools de liquidité | Nova Group">
-<meta property="og:description" content="Un algorithme de gestion de capitaux pour les pools de liquidité des plateformes d’échange décentralisées, en route vers un fonds automatisé.">
+<meta property="og:title" content="DeFi LP — gestion du capital dans les pools de liquidité | Nova Group">
+<meta property="og:description" content="Un algorithme de gestion du capital pour les pools de liquidité des plateformes d’échange décentralisées, avec pour objectif un fonds automatisé.">
 <meta property="og:url" content="https://novacapital.fund/fr/projects/defi-lp.html">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:locale:alternate" content="en_GB">
@@ -41,10 +41,10 @@
 <!-- The fonts are served from this site; the one this language needs first is fetched early. -->
 <link rel="preload" href="../../assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../../assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../../assets/css/style.css?v=60">
+<link rel="stylesheet" href="../../assets/css/style.css?v=61">
 
 <!-- Runs before first paint: Samsung Internet flag, the reader's language, the page-transition direction. -->
-<script src="../../assets/js/early.js?v=60"></script>
+<script src="../../assets/js/early.js?v=61"></script>
 </head>
 <body>
 
@@ -89,7 +89,7 @@
 
     <h1 class="reveal"><span class="t-fr">DeFi LP</span></h1>
     <p class="page-lead reveal">
-      <span class="t-fr">Un algorithme de gestion de capitaux pour les pools de liquidité des plateformes d’échange décentralisées, en route vers un fonds automatisé.</span>
+      <span class="t-fr">Un algorithme de gestion du capital pour les pools de liquidité des plateformes d’échange décentralisées, avec pour objectif un fonds automatisé.</span>
     </p>
 
     <div class="cs-meta reveal">
@@ -114,14 +114,14 @@
         <span class="fact-label"><span class="t-fr">Confronté à la réalité</span></span>
         <b><span class="t-fr">Env. 44 000 positions</span></b>
         <p>
-          <span class="t-fr">Les frais du simulateur comparés aux frais réellement perçus dans six pools ; un écart inférieur à un dixième de pour cent.</span>
+          <span class="t-fr">Frais calculés par le simulateur comparés aux frais effectivement perçus dans six pools ; écart inférieur à un dixième de pour cent.</span>
         </p>
       </li>
       <li class="glow reveal">
         <span class="fact-label"><span class="t-fr">Tests</span></span>
         <b><span class="t-fr">Plus de 450 tests</span></b>
         <p>
-          <span class="t-fr">Une modification n’est acceptée qu’après avoir passé les tests automatisés.</span>
+          <span class="t-fr">Une modification n’est acceptée qu’après avoir réussi les tests automatisés.</span>
         </p>
       </li>
       <li class="glow reveal">
@@ -139,7 +139,7 @@
       <a href="#intro"><span class="t-fr">Introduction</span></a>
       <a href="#platform"><span class="t-fr">Plateforme</span></a>
       <a href="#approach"><span class="t-fr">Approche</span></a>
-      <a href="#difference"><span class="t-fr">Points saillants</span></a>
+      <a href="#difference"><span class="t-fr">Points clés</span></a>
       <a href="#roadmap"><span class="t-fr">Feuille de route</span></a>
       <a href="#technology"><span class="t-fr">Technologie</span></a>
     </nav>
@@ -159,7 +159,7 @@
         <span class="t-fr">Nous avons décidé de déplacer le capital en suivant l’opportunité, et de peser chaque déplacement à l’aune des données du marché lui-même avant de l’effectuer.</span>
       </p>
       <p>
-        <span class="t-fr">Le projet DeFi LP a rassemblé l’historique complet de 136 pools sur quatre réseaux blockchain, du premier jour de chaque pool à aujourd’hui, au niveau de chaque événement. À partir de ces données, nous simulons le capital placé dans un pool, et son déplacement entre pools, au sein d’une reconstitution fidèle du marché lui-même, et nous avons vérifié le résultat par rapport à de l’argent réel. La destination est un fonds automatisé qui gère de l’argent et le déplace entre les pools, vers le meilleur rendement net.</span>
+        <span class="t-fr">Le projet DeFi LP a rassemblé l’historique complet de 136 pools sur quatre réseaux blockchain, du premier jour de chaque pool à aujourd’hui, au niveau de chaque événement. À partir de ces données, nous simulons le capital placé dans un pool, et son déplacement entre pools, au sein d’une reconstitution fidèle du marché lui-même, et nous avons vérifié le résultat par rapport à de l’argent réel. L’objectif est un fonds automatisé qui gère de l’argent et le déplace entre les pools, vers le meilleur rendement net.</span>
       </p>
       </section>
 
@@ -216,7 +216,7 @@
       <section class="cs-section" id="approach">
         <h2><span><span class="t-fr">Approche</span></span></h2>
       <p>
-        <span class="t-fr">L’argent se place là où son bilan net est meilleur, et se déplace quand ce bilan change. Le travail se déroule en trois étapes :</span>
+        <span class="t-fr">L’argent se place là où son compte net est meilleur, et se déplace quand ce compte change. Le travail se déroule en trois étapes :</span>
       </p>
       <ol class="steps">
         <li class="glow reveal">
@@ -225,37 +225,37 @@
         </li>
         <li class="glow reveal">
           <strong class="t-fr">De l’image du pool à la mesure de chaque pool</strong>
-          <p class="t-fr">Notre simulateur place une somme hypothétique dans ce même pool reconstitué et calcule les frais qu’elle aurait gagnés et la part que le mouvement du prix en aurait reprise. La sortie est un chiffre net et comparable pour chaque pool. Tous les pools sont mesurés avec un même étalon.</p>
+          <p class="t-fr">Notre simulateur place un capital hypothétique dans le pool reconstitué et calcule les frais qu’il aurait perçus ainsi que ce que le mouvement de prix en aurait repris. Il produit un résultat net comparable pour chaque pool. Tous les pools sont mesurés par un même critère.</p>
         </li>
         <li class="glow reveal">
           <strong class="t-fr">De la mesure des pools à la gestion de capitaux</strong>
-          <p class="t-fr">En mettant ces chiffres côte à côte, l’algorithme prend trois décisions : dans quels pools l’argent se place, sur quelle fourchette de prix dans chacun, et quand il passe de l’un à l’autre. Cette étape est aujourd’hui à l’étude.</p>
+          <p class="t-fr">À partir de ces résultats, l’algorithme détermine les pools auxquels allouer le capital, la plage de prix de chaque position et le moment des réallocations. Cette étape fait actuellement l’objet de recherches.</p>
         </li>
       </ol>
       </section>
 
       <section class="cs-section" id="difference">
-        <h2><span><span class="t-fr">Points saillants</span></span></h2>
+        <h2><span><span class="t-fr">Points clés</span></span></h2>
       <ul class="points">
         <li class="glow reveal">
           <strong class="t-fr">Un capital qui ne reste pas au même endroit.</strong>
           <p class="t-fr">Sur ce marché, l’opportunité se déplace, et le capital immobile la manque. Un pool peut connaître des transactions aujourd’hui alors que le capital le quitte depuis des mois ; nous en avons vu et enregistré un cas réel dans nos données. L’algorithme compare en continu tous les pools qu’il surveille, et non une seule fois le premier jour.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fr">Un déplacement qui récupère son coût.</strong>
-          <p class="t-fr">Chaque déplacement a un coût : les frais de transaction et la différence de prix à la sortie et à l’entrée. Courir après chaque taux plus élevé dépense le profit dans ces coûts. Dans notre mesure, le coût du déplacement fait partie du bilan, et un déplacement qui ne le récupère pas n’est pas effectué.</p>
+          <strong class="t-fr">Une réallocation qui couvre ses coûts.</strong>
+          <p class="t-fr">Chaque déplacement a un coût : les frais de transaction et l’écart de prix à la sortie comme à l’entrée. Courir après chaque taux plus élevé dépense le profit en frais. Dans notre mesure, le coût du déplacement fait partie du compte, et un déplacement qui ne le rattrape pas n’est pas effectué.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fr">Le profit net, et non le taux affiché.</strong>
-          <p class="t-fr">Le taux affiché sur le tableau de bord d’un pool ne montre que les frais. Ce que nous communiquons, ce sont les frais après la perte due au mouvement du prix, le coût de transaction et la différence de prix à l’entrée. Chaque élément est présenté séparément, de sorte que l’on voit clairement d’où vient le profit et où il est parti.</p>
+          <strong class="t-fr">Le bénéfice net, et non le taux affiché.</strong>
+          <p class="t-fr">Le taux affiché sur le tableau de bord d’un pool ne montre que les frais. Ce que nous rapportons, c’est le revenu net de la perte due au mouvement de prix, du coût de transaction et de l’écart de prix à l’entrée. Chaque composante est présentée séparément, pour que l’on voie d’où le gain vient et où il est parti.</p>
         </li>
         <li class="glow reveal">
           <strong class="t-fr">Une simulation confrontée à de l’argent réel.</strong>
-          <p class="t-fr">De nombreux calculs sur ce marché sont justes sur le papier mais pas en pratique. Nous avons comparé les frais que calcule le simulateur avec ceux qu’environ 44 000 positions réelles dans six pools ont perçus sur la chaîne. La différence totale dans le pire pool est inférieure à un dixième de pour cent.</p>
+          <p class="t-fr">Dans ce marché, de nombreux calculs sont justes sur le papier et ne le sont pas en pratique. Nous avons comparé les frais calculés par le simulateur à ceux qu’environ 44 000 positions réelles ont effectivement perçus sur la chaîne, dans six pools. Même dans le pool le plus défavorable, l’écart total reste inférieur à un dixième de pour cent.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fr">Des données rapprochées de la chaîne elle-même.</strong>
-          <p class="t-fr">Comparer des pools sur des données incomplètes conduit à une mauvaise décision, et des données incomplètes ne se signalent pas d’elles-mêmes. Pour l’ensemble des 136 pools, les événements archivés ont été comparés à la chaîne, et un certificat de santé a été émis pour chaque pool. Cinq types de pool sur quatre réseaux sont mesurés par un même moteur.</p>
+          <strong class="t-fr">Des données vérifiées par rapprochement avec la blockchain.</strong>
+          <p class="t-fr">Comparer des pools sur des données incomplètes conduit à une mauvaise décision, et des données incomplètes ne se signalent pas d’elles-mêmes. Pour l’ensemble des 136 pools, les événements archivés ont été comparés à la chaîne, et un rapport de contrôle d’intégrité a été émis pour chaque pool. Cinq types de pool sur quatre réseaux sont mesurés par un même moteur.</p>
         </li>
         <li class="glow reveal">
           <strong class="t-fr">Le capital dans le pool, sans intermédiaire.</strong>
@@ -268,16 +268,16 @@
         <h2><span><span class="t-fr">Feuille de route</span></span></h2>
       <ol class="phases">
         <li class="is-done glow reveal">
-          <span class="phase-mark"><span class="t-fr">Fait</span></span>
+          <span class="phase-mark"><span class="t-fr">Réalisé</span></span>
           <p class="t-fr">L’infrastructure de données, la reconstitution des pools pour les cinq types, le simulateur de capital et le système de rapports sont construits et testés.</p>
         </li>
         <li class="is-done glow reveal">
-          <span class="phase-mark"><span class="t-fr">Fait</span></span>
+          <span class="phase-mark"><span class="t-fr">Réalisé</span></span>
           <p class="t-fr">Les règles de placement et de déplacement du capital ont été mesurées sur des pools aux comportements différents ; nous n’avons encore déclaré aucune stratégie définitive.</p>
         </li>
         <li class="is-now glow reveal">
           <span class="phase-mark"><span class="t-fr">En cours</span></span>
-          <p class="t-fr">Achever le filtrage des pools, tester la stratégie retenue sur des périodes non vues et réécrire le système pour un usage opérationnel.</p>
+          <p class="t-fr">Finaliser la sélection des pools, valider la stratégie retenue hors échantillon et réécrire le système en vue de son exploitation opérationnelle.</p>
         </li>
         <li class="glow reveal">
           <span class="phase-mark"><span class="t-fr">Dernière étape</span></span>
@@ -289,7 +289,7 @@
       <section class="cs-section" id="technology">
         <h2><span><span class="t-fr">Technologie</span></span></h2>
       <p>
-        <span class="t-fr">La préparation des données est écrite en Python, et le moteur d’analyse et le simulateur en C#. L’archive de 136 pools est conservée dans plus de six mille fichiers, et la copie du serveur est identique à la copie de sauvegarde, fichier par fichier. Une modification n’est acceptée qu’après avoir passé plus de 450 tests automatisés.</span>
+        <span class="t-fr">La préparation des données est écrite en Python, et le moteur d’analyse et le simulateur en C#. L’archive de 136 pools est conservée dans plus de six mille fichiers, et la copie du serveur est identique à la copie de sauvegarde, fichier par fichier. Une modification n’est acceptée qu’après avoir réussi plus de 450 tests automatisés.</span>
       </p>
       </section>
     </article>
@@ -332,7 +332,7 @@
           <span class="logo-text t-fr"><b>NOVA</b> GROUP</span>
         </a>
         <p>
-          <span class="t-fr">Recherche et construction d’algorithmes de trading à partir du flux d’ordres du marché — depuis 2020.</span>
+          <span class="t-fr">Recherche et développement d’algorithmes de trading fondés sur le flux d’ordres du marché — depuis 2020.</span>
         </p>
       </div>
 
@@ -361,6 +361,6 @@
 
 <button class="to-top" id="toTop" type="button" aria-label="Haut de page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
 
-<script src="../../assets/js/main.js?v=60"></script>
+<script src="../../assets/js/main.js?v=61"></script>
 </body>
 </html>

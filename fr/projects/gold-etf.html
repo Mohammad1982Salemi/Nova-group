@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gold ETF Arbitrage — passage d’un fonds or à l’autre à la Bourse de Téhéran | Nova Group</title>
-<meta name="description" content="Le projet Gold ETF Arbitrage : un algorithme qui déplace le capital entre les fonds or de la Bourse de Téhéran, testé en simulation face à la détention d’or.">
+<title>Gold ETF Arbitrage — déplacement entre les fonds adossés à l’or à la Bourse de Téhéran | Nova Group</title>
+<meta name="description" content="Le projet Gold ETF Arbitrage : un algorithme qui déplace le capital entre les fonds adossés à l’or de la Bourse de Téhéran, testé en simulation face à la détention d’or.">
 <link rel="canonical" href="https://novacapital.fund/fr/projects/gold-etf.html">
 <link rel="alternate" hreflang="en" href="https://novacapital.fund/projects/gold-etf.html">
 <link rel="alternate" hreflang="fr" href="https://novacapital.fund/fr/projects/gold-etf.html">
@@ -12,8 +12,8 @@
 <link rel="alternate" hreflang="tr" href="https://novacapital.fund/tr/projects/gold-etf.html">
 <link rel="alternate" hreflang="fa" href="https://novacapital.fund/fa/projects/gold-etf.html">
 <link rel="alternate" hreflang="x-default" href="https://novacapital.fund/projects/gold-etf.html">
-<meta property="og:title" content="Gold ETF Arbitrage — passage d’un fonds or à l’autre à la Bourse de Téhéran | Nova Group">
-<meta property="og:description" content="Un algorithme qui déplace le capital entre les fonds or de la Bourse de Téhéran, en route vers un portefeuille or automatisé.">
+<meta property="og:title" content="Gold ETF Arbitrage — déplacement entre les fonds adossés à l’or à la Bourse de Téhéran | Nova Group">
+<meta property="og:description" content="Un algorithme qui déplace le capital entre les fonds adossés à l’or de la Bourse de Téhéran, avec pour objectif un portefeuille automatisé investi en or.">
 <meta property="og:url" content="https://novacapital.fund/fr/projects/gold-etf.html">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:locale:alternate" content="en_GB">
@@ -41,10 +41,10 @@
 <!-- The fonts are served from this site; the one this language needs first is fetched early. -->
 <link rel="preload" href="../../assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../../assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../../assets/css/style.css?v=60">
+<link rel="stylesheet" href="../../assets/css/style.css?v=61">
 
 <!-- Runs before first paint: Samsung Internet flag, the reader's language, the page-transition direction. -->
-<script src="../../assets/js/early.js?v=60"></script>
+<script src="../../assets/js/early.js?v=61"></script>
 </head>
 <body>
 
@@ -89,14 +89,14 @@
 
     <h1 class="reveal"><span class="t-fr">Gold ETF Arbitrage</span></h1>
     <p class="page-lead reveal">
-      <span class="t-fr">Un algorithme qui déplace le capital entre les fonds or de la Bourse de Téhéran, en route vers un portefeuille or automatisé qui vise à rapporter plus que la détention d’or.</span>
+      <span class="t-fr">Un algorithme qui déplace le capital entre les fonds adossés à l’or de la Bourse de Téhéran, avec pour objectif un portefeuille automatisé investi en or qui vise à rapporter plus que la détention d’or.</span>
     </p>
 
     <div class="cs-meta reveal">
       <span class="status"><span class="t-fr">En test</span></span>
       <ul class="tags">
         <li>Python</li>
-        <li><span class="t-fr">Fonds or</span></li>
+        <li><span class="t-fr">Fonds adossés à l’or</span></li>
         <li><span class="t-fr">Bourse de Téhéran</span></li>
         <li><span class="t-fr">Valeur relative</span></li>
         <li><span class="t-fr">Carnet d’ordres</span></li>
@@ -107,7 +107,7 @@
     <ul class="facts facts-glass">
       <li class="glow reveal">
         <span class="fact-label"><span class="t-fr">Données</span></span>
-        <b><span class="t-fr">36 fonds or</span></b>
+        <b><span class="t-fr">36 fonds adossés à l’or</span></b>
         <p>
           <span class="t-fr">Leurs carnets d’ordres et leurs transactions sur 995 jours de bourse, de juillet 2022 à septembre 2026.</span>
         </p>
@@ -140,7 +140,7 @@
       <a href="#intro"><span class="t-fr">Introduction</span></a>
       <a href="#reports"><span class="t-fr">Rapport</span></a>
       <a href="#approach"><span class="t-fr">Approche</span></a>
-      <a href="#difference"><span class="t-fr">Points saillants</span></a>
+      <a href="#difference"><span class="t-fr">Points clés</span></a>
       <a href="#roadmap"><span class="t-fr">Feuille de route</span></a>
       <a href="#technology"><span class="t-fr">Technologie</span></a>
     </nav>
@@ -157,10 +157,10 @@
         <span class="t-fr">Plus de trente fonds de la Bourse de Téhéran font une seule chose : ils détiennent de l’or. Ils détiennent le même or, et pourtant chacun se négocie à son propre prix par rapport à ce qu’il possède. À tout moment, un fonds est un peu cher et un autre un peu bon marché, et lequel est lequel change d’heure en heure. La plupart des investisseurs choisissent un fonds et y restent. Les différences sont faibles, si bien que les frais et les carnets d’ordres peu profonds les engloutissent, à moins que les deux ne soient mesurés exactement.</span>
       </p>
       <p>
-        <span class="t-fr">Nous avons décidé de traiter tous les fonds or comme un seul actif, et de détenir cet actif à travers le fonds le moins cher à détenir sur le moment, en ne nous déplaçant que lorsque le déplacement couvre son propre coût.</span>
+        <span class="t-fr">Nous avons décidé de traiter tous les fonds adossés à l’or comme un seul actif, et de détenir cet actif par le fonds le moins cher à détenir sur le moment, en ne nous déplaçant que lorsque le déplacement paie son propre coût.</span>
       </p>
       <p>
-        <span class="t-fr">Le projet détient les carnets d’ordres et les transactions de 36 fonds or de juillet 2022 à septembre 2026, soit 995 jours de bourse, ainsi que la valeur liquidative publiée de chaque fonds. Sur ces enregistrements, nous avons construit un simulateur qui rejoue la bourse seconde par seconde, et nous avons testé une règle de bascule sur 21 fonds, de janvier 2025 à septembre 2026, à quatre niveaux de frais de courtage. Dans cette simulation, le portefeuille a terminé devant la simple détention du fonds or le plus négocié 19 mois sur 21. La destination est un portefeuille or automatisé qui est entièrement en or à chaque instant et vise à finir avec plus d’or qu’au départ.</span>
+        <span class="t-fr">Le projet détient les carnets d’ordres et les transactions de 36 fonds adossés à l’or de juillet 2022 à septembre 2026, soit 995 jours de bourse, ainsi que la valeur liquidative publiée de chaque fonds. Sur ces enregistrements, nous avons construit un simulateur qui rejoue la bourse seconde par seconde, et nous avons testé une règle de réallocation sur 21 fonds, de janvier 2025 à septembre 2026, à quatre niveaux de frais de courtage. Dans cette simulation, le portefeuille a terminé devant la simple détention du fonds adossé à l’or le plus négocié 19 mois sur 21. L’objectif est un portefeuille automatisé investi en or qui est entièrement en or à chaque instant et vise à finir avec plus d’or qu’au départ.</span>
       </p>
       </section>
 
@@ -173,7 +173,7 @@
           <li class="glow reveal">
             <div class="report-head">
               <b><span class="t-fr">GOLD</span></b>
-              <span><span class="t-fr">21 fonds or de la Bourse de Téhéran</span></span>
+              <span><span class="t-fr">21 fonds adossés à l’or de la Bourse de Téhéran</span></span>
             </div>
             <ul class="report-facts">
               <li><b><span class="t-fr">Janv. 2025 à sept. 2026</span></b><span><span class="t-fr">période de test</span></span></li>
@@ -205,16 +205,16 @@
       </p>
       <ol class="steps">
         <li class="glow reveal">
-          <strong class="t-fr">Des prix et des valeurs liquidatives à un étalon unique pour tous les fonds</strong>
-          <p class="t-fr">Le prix d’un fonds ne dit rien à lui seul, car chaque fonds a une taille de part différente et une composition différente en lingots et en pièces d’or. Nous rapportons le prix de marché de chaque fonds à la valeur de ce qu’il détient, puis au même chiffre pour le fonds or le plus négocié, qui est notre référence. Le résultat est un nombre par fonds, qui dit à quel point il est cher ou bon marché par rapport à sa propre normale. Tous les fonds sont lus sur cette même échelle.</p>
+          <strong class="t-fr">Des prix et des valeurs liquidatives à un même critère pour tous les fonds</strong>
+          <p class="t-fr">Le prix d’un fonds ne dit rien à lui seul, car chaque fonds a une taille de part différente et une composition différente en lingots et en pièces d’or. Nous rapportons le prix de marché de chaque fonds à la valeur de ce qu’il détient, puis au même chiffre pour le fonds adossé à l’or le plus négocié, qui est notre référence. Le résultat est un nombre par fonds, qui dit à quel point il est cher ou bon marché par rapport à son niveau habituel. Tous les fonds sont lus sur cette même échelle.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fr">De l’étalon à une bascule qui couvre son coût</strong>
-          <p class="t-fr">Un fonds bon marché n’est pas encore une raison de bouger. Chaque bascule coûte des frais de vente, des frais d’achat et l’écart entre acheteurs et vendeurs dans deux carnets d’ordres. La règle ne déplace le capital que lorsque la différence est nettement supérieure à ce coût, et le ramène quand la différence s’est refermée. Une bascule qui ne récupérerait pas son coût n’est pas effectuée.</p>
+          <strong class="t-fr">De la mesure à un déplacement qui couvre son coût</strong>
+          <p class="t-fr">Un fonds bon marché n’est pas encore une raison de se déplacer. Chaque déplacement coûte des frais de vente, des frais d’achat et la fourchette acheteur-vendeur dans les deux carnets d’ordres. La règle ne déplace le capital que si la différence dépasse nettement ce coût, et le ramène quand la différence s’est refermée. Un déplacement qui ne récupérerait pas son coût n’est pas effectué.</p>
         </li>
         <li class="glow reveal">
           <strong class="t-fr">De la décision à un ordre exécuté</strong>
-          <p class="t-fr">Les fonds or autres que le plus grand se négocient peu, de sorte qu’une décision ne vaut que ce que le carnet d’ordres peut réellement exécuter. L’algorithme dimensionne chaque ordre selon la profondeur affichée à l’écran, traite ensemble les deux côtés d’une bascule et maintient le compte en or tout du long. Il ne vend pas à découvert et n’emprunte pas pour augmenter la position.</p>
+          <p class="t-fr">Les fonds adossés à l’or autres que le plus grand se négocient peu, de sorte qu’une décision ne vaut que ce que le carnet d’ordres peut réellement exécuter. L’algorithme dimensionne chaque ordre selon la profondeur affichée à l’écran, traite ensemble les deux côtés d’une réallocation et maintient le compte en or tout du long. Il ne vend pas à découvert et n’emprunte pas pour augmenter la position.</p>
         </li>
       </ol>
       <p>
@@ -226,23 +226,23 @@
       </section>
 
       <section class="cs-section" id="difference">
-        <h2><span><span class="t-fr">Points saillants</span></span></h2>
+        <h2><span><span class="t-fr">Points clés</span></span></h2>
       <ul class="points">
         <li class="glow reveal">
           <strong class="t-fr">Il est mesuré en or, et non en toman.</strong>
-          <p class="t-fr">L’or lui-même peut monter ou baisser, et un fonds or le suivra. Notre référence n’est donc pas le numéraire, mais la simple détention du fonds or le plus négocié. Chaque chiffre que nous communiquons est le portefeuille divisé par ce que vaudrait le même argent s’il était resté dans ce fonds. Un résultat de zéro signifie « pas mieux que détenir de l’or », et non « aucune perte ».</p>
+          <p class="t-fr">L’or lui-même peut monter ou baisser, et un fonds adossé à l’or le suivra. Notre référence n’est donc pas le numéraire, mais la simple détention du fonds adossé à l’or le plus négocié. Chaque chiffre que nous communiquons est la valeur du portefeuille divisée par ce que vaudrait le même argent s’il était resté dans ce fonds. Un résultat de zéro signifie « pas mieux que détenir de l’or », et non « aucune perte ».</p>
         </li>
         <li class="glow reveal">
           <strong class="t-fr">Toujours entièrement en or.</strong>
-          <p class="t-fr">Le portefeuille ne reste jamais en numéraire dans l’attente d’un jour meilleur et ne parie jamais contre l’or. Il détient des fonds or à chaque clôture. Dans toutes les simulations de la règle finale, aucun argent emprunté n’a été reporté au lendemain ; le simulateur le vérifie à chaque clôture et l’enregistre si cela vient à se produire.</p>
+          <p class="t-fr">Le portefeuille ne reste jamais en numéraire dans l’attente d’un jour meilleur et ne parie jamais contre l’or. Il détient des fonds adossés à l’or à chaque clôture. Dans toutes les simulations de la règle finale, aucun argent emprunté n’a été reporté au lendemain ; le simulateur le vérifie à chaque clôture et l’enregistre si cela vient à se produire.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fr">Un simulateur qui tient un compte honnête.</strong>
+          <strong class="t-fr">Un simulateur qui ne triche pas avec le compte.</strong>
           <p class="t-fr">Un backtest ordinaire suppose que chaque ordre est exécuté au prix affiché. Le nôtre rejoue les carnets d’ordres enregistrés seconde par seconde, place nos ordres dans la file d’attente et ne les exécute que face à un volume qui était réellement présent. Le scénario de base contient 60 957 transactions simulées sur 395 jours de bourse. L’algorithme voit le marché avec un délai et ses ordres arrivent avec un délai.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fr">Les frais sont dans le compte dès la première ligne.</strong>
-          <p class="t-fr">L’avantage d’un fonds sur un autre est faible, de sorte que les frais de courtage décident si une bascule vaut la peine d’être effectuée. Nous avons relancé toute la simulation à quatre niveaux de frais, de l’absence de remise à une remise de 45 %, sans changer la règle. Le rapport montre les quatre, afin que le lecteur puisse voir quelle part du résultat dépend des frais.</p>
+          <strong class="t-fr">Des frais présents dans le compte dès la première ligne.</strong>
+          <p class="t-fr">L’avantage d’un fonds sur un autre est faible, de sorte que les frais de courtage décident si une réallocation vaut la peine d’être effectuée. Nous avons relancé toute la simulation à quatre niveaux de frais, de l’absence de remise à une remise de 45 %, sans changer la règle. Le rapport montre les quatre, afin que le lecteur puisse voir quelle part du résultat dépend des frais.</p>
         </li>
         <li class="glow reveal">
           <strong class="t-fr">Testé là où il pouvait échouer.</strong>
@@ -250,7 +250,7 @@
         </li>
         <li class="glow reveal">
           <strong class="t-fr">Un résultat que vous pouvez lire sans nous.</strong>
-          <p class="t-fr">Le rapport du simulateur est un fichier unique qui s’ouvre dans un navigateur. Il montre le portefeuille face à la détention d’or mois par mois, la pire période de retard sur l’or comme le meilleur mois, et ce que les frais ont prélevé. Il énonce aussi ses propres limites : c’est une simulation, et elle ne modélise pas les autres traders en concurrence pour les mêmes ordres.</p>
+          <p class="t-fr">Le rapport du simulateur est un fichier unique qui s’ouvre dans un navigateur. Il montre le portefeuille face à la détention d’or mois par mois, la plus forte sous-performance par rapport à l’or comme le meilleur mois, et ce que les frais ont prélevé. Il énonce aussi ses propres limites : c’est une simulation, et elle ne modélise pas les autres traders en concurrence pour les mêmes ordres.</p>
         </li>
       </ul>
       </section>
@@ -259,8 +259,8 @@
         <h2><span><span class="t-fr">Feuille de route</span></span></h2>
       <ol class="phases">
         <li class="is-done glow reveal">
-          <span class="phase-mark"><span class="t-fr">Fait</span></span>
-          <p class="t-fr">Les enregistrements de marché, le simulateur d’exécution et la règle de bascule sont construits, et la règle a été testée en simulation sur 21 fonds et quatre niveaux de frais.</p>
+          <span class="phase-mark"><span class="t-fr">Réalisé</span></span>
+          <p class="t-fr">Les enregistrements de marché, le simulateur d’exécution et la règle de réallocation sont construits, et la règle a été testée en simulation sur 21 fonds et quatre niveaux de frais.</p>
         </li>
         <li class="is-now glow reveal">
           <span class="phase-mark"><span class="t-fr">En cours</span></span>
@@ -268,11 +268,11 @@
         </li>
         <li class="glow reveal">
           <span class="phase-mark"><span class="t-fr">Ensuite</span></span>
-          <p class="t-fr">Le faire tourner sur le marché en direct, sur le papier, comparer chaque journée avec la même journée rejouée par le simulateur, puis mener un petit pilote pour mesurer les exécutions réelles face aux exécutions simulées.</p>
+          <p class="t-fr">Exécuter l’algorithme sur les données en direct en mode de trading simulé, comparer chaque séance à sa relecture dans le simulateur, puis mener un essai à petite échelle pour confronter les exécutions réelles aux exécutions simulées.</p>
         </li>
         <li class="glow reveal">
           <span class="phase-mark"><span class="t-fr">Dernière étape</span></span>
-          <p class="t-fr">Gérer le capital automatiquement sous la forme d’un portefeuille or, comme produit aux côtés du fonds de gestion.</p>
+          <p class="t-fr">Gérer le capital automatiquement sous la forme d’un portefeuille investi en or, comme produit aux côtés du fonds de gestion du capital.</p>
         </li>
       </ol>
       </section>
@@ -280,7 +280,7 @@
       <section class="cs-section" id="technology">
         <h2><span><span class="t-fr">Technologie</span></span></h2>
       <p>
-        <span class="t-fr">L’ensemble du projet est écrit en Python : préparation des enregistrements de marché, simulateur d’exécution, algorithme et analyse. Une simulation complète de 21 fonds sur 21 mois, seconde par seconde, prend environ quinze minutes sur une machine, et plusieurs tournent côte à côte. Aucune modification n’est acceptée sans avoir passé 55 tests automatisés, dont certains ont été écrits pour reproduire une erreur passée afin qu’elle ne puisse pas revenir.</span>
+        <span class="t-fr">L’ensemble du projet est écrit en Python : préparation des enregistrements de marché, simulateur d’exécution, algorithme et analyse. Une simulation complète de 21 fonds sur 21 mois, seconde par seconde, prend environ quinze minutes sur une machine, et plusieurs tournent côte à côte. Aucune modification n’est acceptée sans avoir réussi 55 tests automatisés, dont certains ont été écrits pour reproduire une erreur passée afin qu’elle ne puisse pas revenir.</span>
       </p>
       </section>
     </article>
@@ -323,7 +323,7 @@
           <span class="logo-text t-fr"><b>NOVA</b> GROUP</span>
         </a>
         <p>
-          <span class="t-fr">Recherche et construction d’algorithmes de trading à partir du flux d’ordres du marché — depuis 2020.</span>
+          <span class="t-fr">Recherche et développement d’algorithmes de trading fondés sur le flux d’ordres du marché — depuis 2020.</span>
         </p>
       </div>
 
@@ -352,6 +352,6 @@
 
 <button class="to-top" id="toTop" type="button" aria-label="Haut de page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
 
-<script src="../../assets/js/main.js?v=60"></script>
+<script src="../../assets/js/main.js?v=61"></script>
 </body>
 </html>

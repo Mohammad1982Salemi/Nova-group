@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nova Group — algorithmes de trading fondés sur le flux d’ordres</title>
-<meta name="description" content="Nova Group travaille depuis 2020 sur le flux d’ordres du marché et sur la construction d’algorithmes de trading : données de transactions et d’ordres dans la profondeur du marché, simulateur d’exécution des ordres et modèles prédictifs.">
+<meta name="description" content="Depuis 2020, Nova Group étudie le flux d’ordres et développe des algorithmes de trading à partir de données de transactions et de carnet d’ordres, d’un simulateur d’exécution et de modèles prédictifs.">
 <link rel="canonical" href="https://novacapital.fund/fr/">
 <link rel="alternate" hreflang="en" href="https://novacapital.fund/">
 <link rel="alternate" hreflang="fr" href="https://novacapital.fund/fr/">
@@ -41,10 +41,10 @@
 <!-- The fonts are served from this site; the one this language needs first is fetched early. -->
 <link rel="preload" href="../assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/css/style.css?v=60">
+<link rel="stylesheet" href="../assets/css/style.css?v=61">
 
 <!-- Runs before first paint: Samsung Internet flag, the reader's language, the page-transition direction. -->
-<script src="../assets/js/early.js?v=60"></script>
+<script src="../assets/js/early.js?v=61"></script>
 </head>
 <body>
 
@@ -95,7 +95,7 @@
       </h1>
 
       <p class="hero-sub reveal">
-        <span class="t-fr">Nous collectons les transactions et ordres dans la profondeur du marché aux niveaux 1 à 3, simulons avec précision le moteur d’exécution de la place de marché, puis construisons et testons des algorithmes de trading sur cette base.</span>
+        <span class="t-fr">Nous collectons les données de transactions et de carnet d’ordres de niveaux 1 à 3, reconstituons précisément le moteur d’exécution du marché, puis développons et testons nos algorithmes de trading sur cette base.</span>
       </p>
 
       <div class="hero-cta reveal">
@@ -131,8 +131,8 @@
       <div class="mbo-try">
         <div class="tk-row">
           <div class="tk-seg" data-k="type" role="group" aria-label="Type d’ordre">
-            <button type="button" data-v="market" aria-pressed="true"><span class="t-fr">Marché</span></button>
-            <button type="button" data-v="limit" aria-pressed="false"><span class="t-fr">Limite</span></button>
+            <button type="button" data-v="market" aria-pressed="true"><span class="t-fr">Au marché</span></button>
+            <button type="button" data-v="limit" aria-pressed="false"><span class="t-fr">À cours limité</span></button>
           </div>
           <div class="tk-seg" data-k="delay" role="group" aria-label="Délai avant que l’ordre n’atteigne le marché">
             <span class="tk-cap"><span class="t-fr">Délai</span></span>
@@ -145,9 +145,9 @@
           <div class="tk-step">
             <span class="tk-cap"><span class="t-fr">Taille</span></span>
             <span class="tk-ctl">
-              <button type="button" data-step="-1" data-of="size" aria-label="Taille plus petite">−</button>
+              <button type="button" data-step="-1" data-of="size" aria-label="Taille inférieure">−</button>
               <input class="tk-size" type="text" inputmode="numeric" maxlength="2" value="10" autocomplete="off" aria-label="Taille de l’ordre, en contrats">
-              <button type="button" data-step="1" data-of="size" aria-label="Taille plus grande">+</button>
+              <button type="button" data-step="1" data-of="size" aria-label="Taille supérieure">+</button>
             </span>
           </div>
           <div class="tk-step tk-price">
@@ -169,8 +169,8 @@
         <div class="tk-stats" hidden>
           <div><span><span class="t-fr">Exécuté</span></span><b data-s="filled"></b></div>
           <div><span><span class="t-fr">Prix moyen</span></span><b data-s="avg"></b></div>
-          <div><span><span class="t-fr">Déplacement du prix</span></span><b data-s="moved"></b></div>
-          <div><span><span class="t-fr">Glissement</span></span><b data-s="slip"></b></div>
+          <div><span><span class="t-fr">Variation du prix</span></span><b data-s="moved"></b></div>
+          <div><span><span class="t-fr">Glissement de prix</span></span><b data-s="slip"></b></div>
         </div>
         <ul class="tk-work" hidden aria-label="Vos ordres en attente"></ul>
         <p class="tk-pos" hidden>
@@ -191,7 +191,7 @@
         <span class="fact-label"><span class="t-fr">Parcours</span></span>
         <b><span class="t-fr">Depuis 2020</span></b>
         <p>
-          <span class="t-fr">Étude des marchés financiers et construction d’algorithmes de trading, depuis lors et jusqu’à aujourd’hui.</span>
+          <span class="t-fr">Recherche sur les marchés financiers et développement d’algorithmes de trading depuis nos débuts.</span>
         </p>
       </li>
 
@@ -220,7 +220,7 @@
         <b><span class="t-fr">Science des données &amp; modèles</span></b>
         <div class="fact-list">
           <div><i>DS</i><span><span class="t-fr">Science des données &amp; statistiques</span></span></div>
-          <div><i>ML·DL</i><span><span class="t-fr">ML et apprentissage profond</span></span></div>
+          <div><i>ML·DL</i><span><span class="t-fr">Apprentissage automatique et profond</span></span></div>
           <div><i>RL</i><span><span class="t-fr">Apprentissage par renforcement</span></span></div>
         </div>
       </li>
@@ -243,13 +243,13 @@
       <li class="glow reveal">
         <span class="layer-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3Z"/><path d="M4 7v5c0 1.7 3.6 3 8 3s8-1.3 8-3V7"/><path d="M4 12v5c0 1.7 3.6 3 8 3s8-1.3 8-3v-5"/></svg></span>
         <span class="layer-tag"><span class="t-fr">Socle</span></span>
-        <h3><span class="t-fr">Une plateforme indépendante, construite pour chaque projet</span></h3>
-        <p><span class="t-fr">Chaque projet reçoit sa propre plateforme de données et d’exécution, construite en partant de zéro et indépendante de tout outil prêt à l’emploi.</span></p>
+        <h3><span class="t-fr">Une plateforme indépendante, développée pour chaque projet</span></h3>
+        <p><span class="t-fr">Chaque projet dispose d’une plateforme de données et d’exécution dédiée, développée intégralement et indépendante des outils prêts à l’emploi.</span></p>
       </li>
       <li class="glow reveal">
         <span class="layer-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="5" height="5" rx="1"/><rect x="9.5" y="5" width="5" height="5" rx="1"/><rect x="16" y="5" width="5" height="5" rx="1"/><rect x="3" y="14" width="5" height="5" rx="1"/><rect x="9.5" y="14" width="5" height="5" rx="1"/><path d="M17 16.5h4M19.5 14.5l2 2-2 2"/></svg></span>
         <span class="layer-tag"><span class="t-fr">Moteur</span></span>
-        <h3><span class="t-fr">Un simulateur d’exécution des ordres approfondi</span></h3>
+        <h3><span class="t-fr">Un simulateur détaillé d’exécution des ordres</span></h3>
         <p><span class="t-fr">Nous reconstituons le moteur d’exécution de la place de marché : les ordres prennent place dans la file d’attente, attendent leur tour et sont exécutés partiellement.</span></p>
       </li>
       <li class="glow reveal">
@@ -271,18 +271,18 @@
 <section class="section section-tint">
   <div class="wrap">
     <header class="sec-head reveal">
-      <p class="eyebrow"><span class="t-fr">Deux voies</span></p>
-      <h2><span class="t-fr">Nous apportons de la liquidité, et nous en prenons</span></h2>
+      <p class="eyebrow"><span class="t-fr">Deux axes</span></p>
+      <h2><span class="t-fr">Apport et prise de liquidité</span></h2>
       <p>
-        <span class="t-fr">Les deux voies s’appuient sur la même compréhension du flux d’ordres, et chacune a ses propres projets.</span>
+        <span class="t-fr">Ces deux axes reposent sur la même analyse du flux d’ordres et donnent chacun lieu à des projets distincts.</span>
       </p>
     </header>
 
 <div class="tracks">
   <article class="track glow reveal">
     <span class="track-tag">Maker</span>
-    <h3><span class="t-fr">Le regard du teneur de marché</span></h3>
-    <p><span class="t-fr">Fournir de la liquidité et tenir le marché : nos ordres attendent dans la file d’attente des deux côtés du prix, et d’autres intervenants traitent contre eux.</span></p>
+    <h3><span class="t-fr">L’approche du teneur de marché</span></h3>
+    <p><span class="t-fr">Fournir de la liquidité par la tenue de marché : nos ordres se placent dans les files d’attente à l’achat et à la vente, où ils sont exécutés par les ordres des autres intervenants.</span></p>
 
     <!-- a small simulated book, filled in by main.js: our quotes wait their turn on both sides -->
     <div class="mbo mbo-mini" data-track="maker" lang="en" aria-hidden="true">
@@ -300,8 +300,8 @@
 
   <article class="track glow reveal">
     <span class="track-tag">Taker</span>
-    <h3><span class="t-fr">Le regard du preneur de liquidité</span></h3>
-    <p><span class="t-fr">Consommer de la liquidité et entrer en position : notre ordre franchit l’écart (spread) et prend les ordres en attente en tête de la file d’attente.</span></p>
+    <h3><span class="t-fr">L’approche du preneur de liquidité</span></h3>
+    <p><span class="t-fr">Consommer de la liquidité pour entrer en position : notre ordre franchit la fourchette acheteur-vendeur et s’exécute contre les ordres en attente en tête de file.</span></p>
 
     <!-- a small simulated book, filled in by main.js: our order arrives and sweeps the levels -->
     <div class="mbo mbo-mini" data-track="taker" lang="en" aria-hidden="true">
@@ -337,15 +337,15 @@
     </div>
     <h3><span class="t-fr">CME Market Maker</span></h3>
     <p class="proj-sub">
-      <span class="t-fr">Un algorithme de tenue de marché par apprentissage profond pour le marché à terme de Chicago, en route vers un desk de tenue de marché automatisé</span>
+      <span class="t-fr">Un algorithme de tenue de marché par apprentissage profond pour le marché à terme de Chicago, avec pour objectif un desk de tenue de marché automatisé.</span>
     </p>
     <p class="proj-desc">
-      <span class="t-fr">Plusieurs années de la Bourse de Chicago, rassemblées ordre par ordre. À partir de ces données, nous sommes parvenus à un algorithme de tenue de marché qui est testé au sein d’une reconstitution fidèle de la bourse elle-même.</span>
+      <span class="t-fr">Plusieurs années de données du CME, rassemblées ordre par ordre. À partir de ces données, nous sommes parvenus à un algorithme de tenue de marché qui est testé au sein d’une reconstitution fidèle de la bourse elle-même.</span>
     </p>
     <div class="proj-foot">
       <span class="proj-report is-on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg><span class="t-fr">Rapport du simulateur à télécharger</span></span>
       <span class="link-arrow">
-      <span class="t-fr">Lire le projet</span>
+      <span class="t-fr">Découvrir le projet</span>
       <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </span>
     </div>
@@ -353,7 +353,7 @@
 
   <ul class="proj-facts">
     <li><b><span class="t-fr">Pluriannuel</span></b><span><span class="t-fr">historique ordre par ordre</span></span></li>
-    <li><b><span class="t-fr">Deep learning</span></b><span><span class="t-fr">méthode</span></span></li>
+    <li><b><span class="t-fr">Apprentissage profond</span></b><span><span class="t-fr">méthode</span></span></li>
     <li><b><bdi>Python · C# · Rust</bdi></b><span><span class="t-fr">technologie</span></span></li>
   </ul>
 </a>
@@ -365,15 +365,15 @@
     </div>
     <h3><span class="t-fr">Fast Scalp</span></h3>
     <p class="proj-sub">
-      <span class="t-fr">Un algorithme de trading à court terme fondé sur le ML pour le marché à terme de Chicago, en route vers un desk de trading automatisé</span>
+      <span class="t-fr">Un algorithme de trading à court terme fondé sur l’apprentissage automatique pour le marché à terme de Chicago, avec pour objectif un desk de trading automatisé.</span>
     </p>
     <p class="proj-desc">
-      <span class="t-fr">Plusieurs années de la Bourse de Chicago, rassemblées ordre par ordre. À partir de ces données, nous sommes parvenus à un algorithme de trading à court terme qui est testé au sein d’une reconstitution fidèle de la bourse elle-même.</span>
+      <span class="t-fr">Plusieurs années de données du CME, rassemblées ordre par ordre. À partir de ces données, nous sommes parvenus à un algorithme de trading à court terme qui est testé au sein d’une reconstitution fidèle de la bourse elle-même.</span>
     </p>
     <div class="proj-foot">
       <span class="proj-report is-on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg><span class="t-fr">Rapport du simulateur à télécharger</span></span>
       <span class="link-arrow">
-      <span class="t-fr">Lire le projet</span>
+      <span class="t-fr">Découvrir le projet</span>
       <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </span>
     </div>
@@ -381,7 +381,7 @@
 
   <ul class="proj-facts">
     <li><b><span class="t-fr">Pluriannuel</span></b><span><span class="t-fr">historique ordre par ordre</span></span></li>
-    <li><b><span class="t-fr">Machine learning</span></b><span><span class="t-fr">méthode</span></span></li>
+    <li><b><span class="t-fr">Apprentissage automatique</span></b><span><span class="t-fr">méthode</span></span></li>
     <li><b><bdi>Python · C# · Rust</bdi></b><span><span class="t-fr">technologie</span></span></li>
   </ul>
 </a>
@@ -393,7 +393,7 @@
     </div>
     <h3><span class="t-fr">BlockTrade</span></h3>
     <p class="proj-sub">
-      <span class="t-fr">Analyse comportementale des transactions de bloc sur le marché à terme de Chicago, en route vers des algorithmes de trading et d’investissement fondés sur la trace des gros capitaux</span>
+      <span class="t-fr">Analyse comportementale des transactions de bloc sur le marché à terme de Chicago, avec pour objectif des algorithmes de trading et d’investissement fondés sur les traces des gros capitaux.</span>
     </p>
     <p class="proj-desc">
       <span class="t-fr">Notre serveur reçoit et traite sans interruption les transactions de bloc de tous les produits de la Bourse de Chicago et les livre sur le graphique du trader. Leur historique s’accumule jour après jour.</span>
@@ -401,14 +401,14 @@
     <div class="proj-foot">
       <span class="proj-report"><span class="t-fr">Aucun rapport du simulateur publié</span></span>
       <span class="link-arrow">
-      <span class="t-fr">Lire le projet</span>
+      <span class="t-fr">Découvrir le projet</span>
       <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </span>
     </div>
   </div>
 
   <ul class="proj-facts">
-    <li><b><span class="t-fr">36 secondes</span></b><span><span class="t-fr">arrivée médiane de chaque bloc après l’avis de la bourse</span></span></li>
+    <li><b><span class="t-fr">36 secondes</span></b><span><span class="t-fr">délai médian de réception d’un bloc après sa publication par la bourse</span></span></li>
     <li><b><span class="t-fr">24 formes</span></b><span><span class="t-fr">classification des blocs</span></span></li>
     <li><b><bdi>Python · C#</bdi></b><span><span class="t-fr">technologie</span></span></li>
   </ul>
@@ -421,7 +421,7 @@
     </div>
     <h3>TSETMC</h3>
     <p class="proj-sub">
-      <span class="t-fr">Analyse du flux d’ordres de la Bourse de Téhéran, en route vers un fonds de gestion algorithmique</span>
+      <span class="t-fr">Analyse du flux d’ordres de la Bourse de Téhéran, avec pour objectif un fonds algorithmique de gestion du capital.</span>
     </p>
     <p class="proj-desc">
       <span class="t-fr">Onze années du marché des capitaux iranien, rassemblées et reconstituées transaction par transaction et ordre par ordre. Nous construisons et testons nos modèles sur cet historique.</span>
@@ -429,7 +429,7 @@
     <div class="proj-foot">
       <span class="proj-report"><span class="t-fr">Aucun rapport du simulateur publié</span></span>
       <span class="link-arrow">
-      <span class="t-fr">Lire le projet</span>
+      <span class="t-fr">Découvrir le projet</span>
       <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </span>
     </div>
@@ -449,22 +449,22 @@
     </div>
     <h3><span class="t-fr">Gold ETF Arbitrage</span></h3>
     <p class="proj-sub">
-      <span class="t-fr">Un algorithme qui déplace le capital entre les fonds or de la Bourse de Téhéran, en route vers un portefeuille or automatisé qui vise à rapporter plus que la détention d’or</span>
+      <span class="t-fr">Un algorithme qui déplace le capital entre les fonds adossés à l’or de la Bourse de Téhéran, avec pour objectif un portefeuille automatisé investi en or qui vise à rapporter plus que la détention d’or</span>
     </p>
     <p class="proj-desc">
-      <span class="t-fr">Les fonds or de la Bourse de Téhéran, enregistrés ordre par ordre et mesurés avec un même étalon. Nous testons le passage de l’un à l’autre au sein d’une reconstitution fidèle de la bourse, face à la simple détention d’or.</span>
+      <span class="t-fr">Les fonds adossés à l’or de la Bourse de Téhéran, enregistrés ordre par ordre et mesurés avec un même critère. Nous testons le passage de l’un à l’autre au sein d’une reconstitution fidèle de la bourse, face à la simple détention d’or.</span>
     </p>
     <div class="proj-foot">
       <span class="proj-report is-on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg><span class="t-fr">Rapport du simulateur à télécharger</span></span>
       <span class="link-arrow">
-        <span class="t-fr">Lire le projet</span>
+        <span class="t-fr">Découvrir le projet</span>
         <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </span>
     </div>
   </div>
 
   <ul class="proj-facts">
-    <li><b><span class="t-fr">21 fonds or</span></b><span><span class="t-fr">mesurés avec un même étalon</span></span></li>
+    <li><b><span class="t-fr">21 fonds adossés à l’or</span></b><span><span class="t-fr">évalués selon un même critère</span></span></li>
     <li><b><span class="t-fr">395 jours de bourse</span></b><span><span class="t-fr">rejoués dans le simulateur</span></span></li>
     <li><b><bdi>Python</bdi></b><span><span class="t-fr">technologie</span></span></li>
   </ul>
@@ -477,7 +477,7 @@
     </div>
     <h3><span class="t-fr">DeFi LP</span></h3>
     <p class="proj-sub">
-      <span class="t-fr">Un algorithme de gestion de capitaux pour les pools de liquidité des plateformes d’échange décentralisées, en route vers un fonds automatisé</span>
+      <span class="t-fr">Un algorithme de gestion du capital pour les pools de liquidité des plateformes d’échange décentralisées, avec pour objectif un fonds automatisé</span>
     </p>
     <p class="proj-desc">
       <span class="t-fr">L’historique complet de 136 pools sur quatre réseaux blockchain, rassemblé depuis le premier jour de chaque pool et événement par événement. Nous simulons le capital placé dans un pool, et son déplacement entre pools, au sein d’une reconstitution fidèle du marché lui-même.</span>
@@ -485,7 +485,7 @@
     <div class="proj-foot">
       <span class="proj-report"><span class="t-fr">Aucun rapport du simulateur publié</span></span>
       <span class="link-arrow">
-      <span class="t-fr">Lire le projet</span>
+      <span class="t-fr">Découvrir le projet</span>
       <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </span>
     </div>
@@ -505,7 +505,7 @@
     </div>
     <h3><span class="t-fr">Crypto Market Maker</span></h3>
     <p class="proj-sub">
-      <span class="t-fr">Une infrastructure de données et un algorithme de tenue de marché pour le marché des cryptomonnaies, en route vers un desk de tenue de marché automatisé</span>
+      <span class="t-fr">Une infrastructure de données et un algorithme de tenue de marché pour le marché des cryptomonnaies, avec pour objectif un desk de tenue de marché automatisé.</span>
     </p>
     <p class="proj-desc">
       <span class="t-fr">Le marché de 22 cryptomonnaies très négociées sur 16 plateformes d’échange mondiales, rassemblé transaction par transaction et ordre par ordre. Avant d’écrire l’algorithme, nous avons enregistré l’ensemble de ce marché, et nous continuons de l’enregistrer.</span>
@@ -513,7 +513,7 @@
     <div class="proj-foot">
       <span class="proj-report"><span class="t-fr">Aucun rapport du simulateur publié</span></span>
       <span class="link-arrow">
-      <span class="t-fr">Lire le projet</span>
+      <span class="t-fr">Découvrir le projet</span>
       <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </span>
     </div>
@@ -561,7 +561,7 @@
           <span class="logo-text t-fr"><b>NOVA</b> GROUP</span>
         </a>
         <p>
-          <span class="t-fr">Recherche et construction d’algorithmes de trading à partir du flux d’ordres du marché — depuis 2020.</span>
+          <span class="t-fr">Recherche et développement d’algorithmes de trading fondés sur le flux d’ordres du marché — depuis 2020.</span>
         </p>
       </div>
 
@@ -590,6 +590,6 @@
 
 <button class="to-top" id="toTop" type="button" aria-label="Haut de page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
 
-<script src="../assets/js/main.js?v=60"></script>
+<script src="../assets/js/main.js?v=61"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>À propos | Nova Group</title>
-<meta name="description" content="Nova Group : l’idée, la méthode en trois couches, les deux voies du teneur de marché et du preneur de liquidité, et l’équipe.">
+<meta name="description" content="Nova Group : l’idée, la méthode en trois couches, les deux axes — tenue de marché et prise de liquidité — et l’équipe.">
 <link rel="canonical" href="https://novacapital.fund/fr/about.html">
 <link rel="alternate" hreflang="en" href="https://novacapital.fund/about.html">
 <link rel="alternate" hreflang="fr" href="https://novacapital.fund/fr/about.html">
@@ -41,10 +41,10 @@
 <!-- The fonts are served from this site; the one this language needs first is fetched early. -->
 <link rel="preload" href="../assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/css/style.css?v=60">
+<link rel="stylesheet" href="../assets/css/style.css?v=61">
 
 <!-- Runs before first paint: Samsung Internet flag, the reader's language, the page-transition direction. -->
-<script src="../assets/js/early.js?v=60"></script>
+<script src="../assets/js/early.js?v=61"></script>
 </head>
 <body>
 
@@ -84,7 +84,7 @@
       <p class="eyebrow reveal"><span class="t-fr">À propos</span></p>
       <h1 class="reveal"><span class="t-fr">Qui nous sommes</span></h1>
       <p class="page-lead reveal">
-        <span class="t-fr">Un groupe de trois personnes qui étudie les marchés financiers et construit des algorithmes de trading depuis 2020.</span>
+        <span class="t-fr">Une équipe de trois personnes qui étudie les marchés financiers et développe des algorithmes de trading depuis 2020.</span>
       </p>
     </div>
     <img class="page-mark reveal" src="../assets/img/nova-mark-512.png" alt="" width="512" height="512">
@@ -100,10 +100,10 @@
 
     <div class="split-main prose reveal">
       <p>
-        <span class="t-fr">Nova Group étudie les marchés financiers depuis 2020. Notre idée centrale tient en une phrase : <strong>le prix est une conséquence du flux des transactions et des ordres du marché — et non sa cause.</strong> Admettez cela, et le travail devient clair : on ne peut comprendre le prix tant qu’on n’a pas compris les ordres qui se trouvent derrière lui.</span>
+        <span class="t-fr">Nova Group étudie les marchés financiers depuis 2020. Notre idée centrale tient en une phrase : <strong>le prix résulte du flux des transactions et des ordres du marché — il n’en est pas la cause.</strong> Si on l’accepte, le travail devient clair : on ne peut pas comprendre le prix avant d’avoir compris les ordres qui le précèdent.</span>
       </p>
       <p>
-        <span class="t-fr">Une grande partie de ces années a été consacrée précisément à cela — collecter et nettoyer les transactions et ordres dans la profondeur du marché aux niveaux 1, 2 et 3, sur des places de marché allant du CME aux plateformes d’échange de cryptomonnaies, centralisées et décentralisées, et à la Bourse de Téhéran. Sur ces données, nous construisons des modèles d’apprentissage automatique, d’apprentissage profond et d’apprentissage par renforcement afin de parvenir à une compréhension causale du flux d’ordres et de prévoir le prix à partir de celui-ci.</span>
+        <span class="t-fr">Une grande partie de notre travail a consisté à collecter et à nettoyer les données de transactions et de carnet d’ordres de niveaux 1, 2 et 3, sur les marchés du CME, les plateformes centralisées et décentralisées de cryptomonnaies et la Bourse de Téhéran. À partir de ces données, nous développons des modèles d’apprentissage automatique, d’apprentissage profond et d’apprentissage par renforcement pour comprendre les mécanismes causaux du flux d’ordres et prévoir l’évolution des prix.</span>
       </p>
     </div>
   </div>
@@ -115,7 +115,7 @@
     <header class="split-side reveal">
       <h2><span class="t-fr">Notre méthode</span></h2>
       <p>
-        <span class="t-fr">Chaque projet que nous construisons repose sur ces trois mêmes couches, de bas en haut. La couche inférieure ne mène nulle part sans celle du dessus — et la couche supérieure n’existe pas sans celle du dessous.</span>
+        <span class="t-fr">Chaque projet que nous construisons repose sur ces trois mêmes couches, de bas en haut. La couche du bas ne mène nulle part sans celle du dessus — et la couche du haut n’existe pas sans celle du dessous.</span>
       </p>
     </header>
 
@@ -124,14 +124,14 @@
         <li class="reveal">
           <span class="layer-num"><span class="t-fr">1</span></span>
           <div>
-            <h3><span class="t-fr">Une plateforme indépendante, construite pour chaque projet</span></h3>
-            <p><span class="t-fr">Pour chaque projet, nous construisons en partant de zéro sa propre plateforme de données et d’exécution, indépendante de tout outil prêt à l’emploi.</span></p>
+            <h3><span class="t-fr">Une plateforme indépendante, développée pour chaque projet</span></h3>
+            <p><span class="t-fr">Pour chaque projet, nous construisons de bout en bout sa propre plateforme de données et d’exécution, indépendante de tout outil prêt à l’emploi.</span></p>
           </div>
         </li>
         <li class="reveal">
           <span class="layer-num"><span class="t-fr">2</span></span>
           <div>
-            <h3><span class="t-fr">Un simulateur d’exécution des ordres approfondi</span></h3>
+            <h3><span class="t-fr">Un simulateur détaillé d’exécution des ordres</span></h3>
             <p><span class="t-fr">Le pilier de notre travail. Un backtest ordinaire suppose que chaque ordre est exécuté instantanément au prix affiché — une hypothèse qui flatte les chiffres. Nous reconstituons le moteur d’exécution de la place de marché : les ordres prennent place dans la file d’attente, attendent leur tour, sont exécutés partiellement ou restent en fin de file. C’est la règle dans chacun de nos projets, et sa forme change selon le marché : sur un marché dirigé par les ordres, reconstituer la file d’attente et l’exécution des ordres ; dans un pool de liquidité, placer du capital dans le pool reconstitué et calculer ses frais et ses pertes.</span></p>
           </div>
         </li>
@@ -139,7 +139,7 @@
           <span class="layer-num"><span class="t-fr">3</span></span>
           <div>
             <h3><span class="t-fr">Analyses, graphiques et modèles prédictifs</span></h3>
-            <p><span class="t-fr">Nous partons des données brutes : le flux des transactions, des ordres et des variations de prix. Le travail statistique et analytique décompose ce flux et le transforme en caractéristiques (features) capables d’expliquer le prochain mouvement du marché. Sur ces caractéristiques, nous entraînons des modèles d’apprentissage automatique, d’apprentissage profond et d’apprentissage par renforcement, et ce qui ressort de ce parcours est un algorithme de prédiction.</span></p>
+            <p><span class="t-fr">Nous partons des données brutes : flux de transactions, ordres et variations de prix. Le travail statistique et analytique décompose ce flux et en tire des caractéristiques qui peuvent expliquer le mouvement suivant du marché. Sur ces caractéristiques, nous entraînons des modèles d’apprentissage automatique, d’apprentissage profond et d’apprentissage par renforcement ; ce qui sort de ce chemin est un algorithme de prévision.</span></p>
 
             <div class="pipe reveal">
               <span>
@@ -157,11 +157,11 @@
               </span>
               <span class="is-goal">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17l5-5 4 3 7-8M15 7h5v5"/></svg>
-                <b><span class="t-fr">Algorithme de prédiction</span></b>
+                <b><span class="t-fr">Algorithme de prévision</span></b>
               </span>
             </div>
 
-            <p><span class="t-fr">Les graphiques et les outils d’analyse sont eux aussi construits dans cette couche, afin que chaque pas de ce parcours puisse être vu et vérifié. C’est la dernière couche, et non la première — sans les deux qui se trouvent en dessous, aucun chiffre n’a de sens.</span></p>
+            <p><span class="t-fr">Les graphiques et les outils d’analyse se construisent aussi dans cette couche, pour que chaque étape du chemin puisse être vue et vérifiée. C’est la dernière couche, et non la première — sans les deux du dessous, aucun chiffre ne veut dire quoi que ce soit.</span></p>
           </div>
         </li>
       </ol>
@@ -173,20 +173,20 @@
 <section class="section ruled">
   <div class="wrap split">
     <header class="split-side reveal">
-      <h2><span class="t-fr">Deux voies</span></h2>
+      <h2><span class="t-fr">Deux axes</span></h2>
     </header>
 
     <div class="split-main">
       <div class="prose reveal">
         <p>
-          <span class="t-fr">Notre travail avance sur deux voies parallèles. Toutes deux s’appuient sur la même compréhension du flux d’ordres, et chacune a ses propres projets.</span>
+          <span class="t-fr">Nos recherches suivent deux axes parallèles. Tous deux reposent sur la même analyse du flux d’ordres, mais chacun donne lieu à des projets distincts.</span>
         </p>
       </div>
 <div class="tracks">
   <article class="track glow reveal">
     <span class="track-tag">Maker</span>
-    <h3><span class="t-fr">Le regard du teneur de marché</span></h3>
-    <p><span class="t-fr">Fournir de la liquidité et tenir le marché : nos ordres attendent dans la file d’attente des deux côtés du prix, et d’autres intervenants traitent contre eux.</span></p>
+    <h3><span class="t-fr">L’approche du teneur de marché</span></h3>
+    <p><span class="t-fr">Fournir de la liquidité par la tenue de marché : nos ordres se placent dans les files d’attente à l’achat et à la vente, où ils sont exécutés par les ordres des autres intervenants.</span></p>
 
     <!-- a small simulated book, filled in by main.js: our quotes wait their turn on both sides -->
     <div class="mbo mbo-mini" data-track="maker" lang="en" aria-hidden="true">
@@ -204,8 +204,8 @@
 
   <article class="track glow reveal">
     <span class="track-tag">Taker</span>
-    <h3><span class="t-fr">Le regard du preneur de liquidité</span></h3>
-    <p><span class="t-fr">Consommer de la liquidité et entrer en position : notre ordre franchit l’écart (spread) et prend les ordres en attente en tête de la file d’attente.</span></p>
+    <h3><span class="t-fr">L’approche du preneur de liquidité</span></h3>
+    <p><span class="t-fr">Consommer de la liquidité pour entrer en position : notre ordre franchit la fourchette acheteur-vendeur et s’exécute contre les ordres en attente en tête de file.</span></p>
 
     <!-- a small simulated book, filled in by main.js: our order arrives and sweeps the levels -->
     <div class="mbo mbo-mini" data-track="taker" lang="en" aria-hidden="true">
@@ -273,7 +273,7 @@
           <span class="logo-text t-fr"><b>NOVA</b> GROUP</span>
         </a>
         <p>
-          <span class="t-fr">Recherche et construction d’algorithmes de trading à partir du flux d’ordres du marché — depuis 2020.</span>
+          <span class="t-fr">Recherche et développement d’algorithmes de trading fondés sur le flux d’ordres du marché — depuis 2020.</span>
         </p>
       </div>
 
@@ -302,6 +302,6 @@
 
 <button class="to-top" id="toTop" type="button" aria-label="Haut de page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
 
-<script src="../assets/js/main.js?v=60"></script>
+<script src="../assets/js/main.js?v=61"></script>
 </body>
 </html>
