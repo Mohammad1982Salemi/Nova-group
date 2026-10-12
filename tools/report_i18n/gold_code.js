@@ -122,7 +122,7 @@ const MSG = {
     t7: "Altının gerisinde maks. fark", n7: (n) => `geride kalınan en uzun dönem: ${n} seans`,
     t8: "Kapanan pozisyonlar", n8: (win, avg) => `%${win} kârda · komisyonlardan sonra ortalama kazanç %${avg}`,
     tip8: (hub, other) => `Bir pozisyon, ilk alımından ${hub} fonuna geri dönülen son satışına kadar elde tutulan bir fondur. Doğrudan başka bir fona aktarılan ya da hâlâ açık olan ${other} pozisyon burada sayılmaz.`,
-    t9: "Devir ve komisyonlar", n9: (fees) => `hesabın katı kadar işlem · ${fees} puan komisyon ödendi`,
+    t9: "Devir ve komisyonlar", n9: (fees) => `hesabın işlem hacmi · ${fees} puan komisyon ödendi`,
     t10: "Yoğunlaşma", n10: (n) => `tek bir fonda görülen en yüksek pay · ${n} fon kullanıldı`,
     year: "Yıl", yearTotal: "Yıl toplamı", cell: (mon, y, v, hub) => `${mon} ${y}: ${hub} tutmaya göre %${v}`,
     heatnote: (hub) => `${hub} tutmaya göre portföy, ay içinde %`, heatcap: (v) => `renk ölçeği: en koyu hücre %${v}`,
