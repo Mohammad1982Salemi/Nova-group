@@ -781,7 +781,7 @@
         hitAll: function (w, px) {
           return 'Ihre wartende ' + T.ord(w.buy) + ' ist vollständig ausgeführt: ' + T.lots(w.size) + ' bei ' + cash(px) + '.';
         },
-        row: function (w) { return w.chip.q + ' bei ' + fmt(w.px); },
+        row: function (w) { return w.chip.q + ' bei ' + local(fmt(w.px)); },
         ahead: function (n) { return n === null ? 'außerhalb des sichtbaren Orderbuchs' : 'davor: ' + n; },
         done: function (w) { return 'ausgeführt: ' + w.filled + ' von ' + w.size; },
         cancel: 'Diese Order stornieren',
@@ -820,7 +820,7 @@
         hitAll: function (w, px) {
           return 'Bekleyen ' + (w.buy ? T.buy : T.sell) + ' emriniz tamamen gerçekleşti: ' + cash(px) + ' fiyatından ' + T.lots(w.size) + '.';
         },
-        row: function (w) { return w.chip.q + ' @ ' + fmt(w.px); },
+        row: function (w) { return w.chip.q + ' @ ' + local(fmt(w.px)); },
         ahead: function (n) { return n === null ? 'görünen defterin dışında' : 'önünde: ' + n; },
         done: function (w) { return 'gerçekleşen: ' + w.filled + ' / ' + w.size; },
         cancel: 'Bu emri iptal et',

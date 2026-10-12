@@ -134,6 +134,58 @@
 
 ---
 
+## بخش ۵ — آلمانی
+
+منابع تأیید: سند Deutsche Börse (Cash Market)، مشاورهٔ MiFID/MiFIR روی Xetra، و نوشتار مالی بانک‌ها و صندوق‌های آلمانی.
+
+### ۵.۱ — واژه‌هایی که آلمانی خودش دارد و باید به کار برود
+
+| انگلیسی | آلمانی | توضیح |
+|---|---|---|
+| bid-ask spread | **Geld-Brief-Spanne** | معادل آلمانی؛ «Spread» هم رایج است و در متن به کار می‌رود، ولی نباید «Spanne» و «Spread» قاطی شوند |
+| fill | **Ausführung** | نه «Fill» |
+| partial fill | **Teilausführung** | |
+| fill rate | **Ausführungsquote (Fill Rate)** | |
+| venue | **Handelsplatz** | |
+| trading day | **Handelstag** | |
+| session | **Session** | و «Handelstag» برای trading day؛ این دو نباید یکی شوند |
+| quote / bid / ask | **Geldseite / Briefseite** | |
+| hedge | **Absicherung** | |
+| volatility | **Volatilität** | |
+| percentile / median / distribution | **Perzentil / Median / Verteilung** | |
+| feature (ورودی مدل) | **Merkmal (Feature)** | |
+| prediction | **Prognose** | نه «Prediction» |
+| machine learning | **maschinelles Lernen (ML)** | |
+| take-profit | **Kursziel (Take-Profit, TP)** | |
+| trailing stop | **Trailing-Stop** | |
+| expectancy | **Erwartungswert (R)** | |
+| percent profitable | **Trefferquote** | |
+| equity curve | **Kapitalkurve** | |
+| recovery factor | **Recovery-Faktor** | |
+| initial risk | **Anfangsrisiko** | |
+| position size | **Positionsgröße** | |
+| floor price / price limit | **Preislimit** | |
+| order-by-order data | **Daten auf Order-Ebene** | |
+
+### ۵.۲ — وام‌واژه‌ای که در آلمانی مالی پذیرفته است
+
+Market Maker · Market Making · Taker · Spread · Slippage · Drawdown · Tick · Backtest · Simulation · Orderflow · Orderbuch · Limit-Order · Market-Order · Stop-Loss · Trailing-Stop · Blocktrade · Futures · Option · Exposure · Portfolio · Kapital · Latenz · Session · Heatmap · Volumenprofil · Delta · Arbitrage · Monte Carlo · Block-Bootstrap · Deep Learning · Reinforcement Learning · Sharpe/Sortino/Calmar/Information Ratio · MAE · MFE · R-Multiple · Break-even
+
+### ۵.۳ — تفکیک‌هایی که باید رعایت شوند
+
+| انگلیسی | آلمانی تعیین‌شده | چرا |
+|---|---|---|
+| commission (کارمزد معاملاتی) | **Kommission** | گزارش‌ها همین را دارند |
+| fee (هزینهٔ عمومی) | **Gebühr** | سایت و گزارش طلا همین را دارند؛ الان هر دو در یک فایل قاطی شده‌اند |
+| broker fee | **Brokergebühr** | |
+| stop-loss | **Stop-Loss** | و «Stop» فقط برای برچسب کوتاه، جایی که انگلیسی هم «stop» می‌گوید |
+| spread | **Spread** | یکدست در همه‌جا؛ «Spanne» تنها بخشی از ترکیب «Geld-Brief-Spanne» است |
+| round turn | **Round Turn** | وام‌واژهٔ پذیرفته |
+
+### ۵.۴ — نگارش
+
+عدد را آلمانی می‌نویسیم: جداکنندهٔ هزارگان نقطه و اعشار ویرگول — «1.000 µs»، «1,00». علامت نقل‌قول و خط تیرهٔ آلمانی رعایت شود. در ترکیب‌ها خط تیرهٔ نرم (U+00AD) که در فایل هست، بخشی از قالب است و دست نمی‌خورد.
+
 ## بخش ۴ — موارد باز
 
 - **`Latency` در برابر `Delay`**: هر دو مفهوم در انگلیسی جدا هستند، ولی باید با متن پارسی (مرجع) سنجیده شود که آیا دو مفهوم است یا یک مفهوم با دو نام. تصمیم در مرحلهٔ کنترل سایت گرفته می‌شود.
