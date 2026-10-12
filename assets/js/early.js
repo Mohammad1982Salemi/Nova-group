@@ -23,9 +23,10 @@ if (/SamsungBrowser/i.test(navigator.userAgent)) document.documentElement.classL
     return;
   }
   d.className += ' js';
+  var sameAgain = false;
   try {
     // the same page in another language: the reader is put back in place, so nothing plays its entrance again
-    if (sessionStorage.getItem('nova-place')) d.className += ' is-returning';
+    if (sessionStorage.getItem('nova-place')) { d.className += ' is-returning'; sameAgain = true; }
     // arriving from a project's card: its name travels into this page's heading, which must be there from the first frame
     var card = sessionStorage.getItem('nova-card');
     if (card) {
@@ -34,7 +35,14 @@ if (/SamsungBrowser/i.test(navigator.userAgent)) document.documentElement.classL
     }
   } catch (e) {}
   // which way along the menu this page lies from the one just left: it comes in from that side
-  function way() {
+  function way(e) {
+    // a change of language is the same page again. It takes the old one's place at once: fading one language
+    // into another would show two texts of different lengths lying over each other for a moment.
+    if (sameAgain && e && e.viewTransition) {
+      var vt = e.viewTransition;
+      if (vt.ready && vt.ready.catch) vt.ready.catch(function () { /* skipped on purpose */ });
+      vt.skipTransition();
+    }
     var here = d.getAttribute('data-sec'), from = null;
     d.classList.remove('vt-fwd', 'vt-back');
     try { from = sessionStorage.getItem('nova-sec'); if (here !== null) sessionStorage.setItem('nova-sec', here); } catch (e) {}

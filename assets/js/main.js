@@ -23,6 +23,25 @@
   };
   function word(key) { return (WORDS[lang] || WORDS.en)[key]; }
 
+  /* Fetch something the reader is about to need, once, without showing it: a page they are reaching for,
+     or a font that page will ask for. The click then finds it in the browser's cache. */
+  var fetched = {};
+  function fetchEarly(href, font) {
+    if (fetched[href]) return;
+    fetched[href] = true;
+    if (navigator.connection && navigator.connection.saveData) return;      // the reader asked to spare their data
+    var l = document.createElement('link');
+    if (!(l.relList && l.relList.supports && l.relList.supports('prefetch'))) {
+      // a browser without prefetch still keeps a page it has fetched in its cache
+      if (!font && window.fetch) fetch(href, { credentials: 'same-origin' }).catch(function () { /* the click will fetch it */ });
+      return;
+    }
+    l.rel = 'prefetch';
+    l.href = href;
+    if (font) { l.as = 'font'; l.type = 'font/woff2'; l.crossOrigin = 'anonymous'; }
+    document.head.appendChild(l);
+  }
+
   /* The language menu lists the same page in every language, as plain links. Here the choice is
      remembered, and the reader is put back at the paragraph they were reading. */
   function initLang() {
@@ -77,20 +96,6 @@
     function warm() {
       if (warmed) return;
       warmed = true;
-      if (navigator.connection && navigator.connection.saveData) return;      // the reader asked to spare their data
-      var probe = document.createElement('link');
-      var can = !!(probe.relList && probe.relList.supports && probe.relList.supports('prefetch'));
-      function fetchEarly(href, font) {
-        if (!can) {                                // a browser without prefetch still keeps the page in its cache
-          if (!font && window.fetch) fetch(href, { credentials: 'same-origin' }).catch(function () { /* the click will fetch it */ });
-          return;
-        }
-        var l = document.createElement('link');
-        l.rel = 'prefetch';
-        l.href = href;
-        if (font) { l.as = 'font'; l.type = 'font/woff2'; l.crossOrigin = 'anonymous'; }
-        document.head.appendChild(l);
-      }
       Object.keys(dests).forEach(function (to) { fetchEarly(dests[to]); });
       // Turkish alone needs the extended part of the two Latin fonts
       var sheet = document.querySelector('link[rel="stylesheet"][href*="css/style.css"]');
@@ -142,6 +147,40 @@
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(function () { if (Math.abs(window.scrollY - last) < 4) settle(); });
     }
+  }
+
+  /* A link to another page of the site: the page is fetched while the pointer rests on the link, or the
+     finger has just come down on it, so the click that follows opens it without waiting for the network.
+     Downloads, the simulator reports (several megabytes each) and the language menu are left alone. */
+  function initAhead() {
+    var timer = 0, room = 10;        // at most this many pages per visit to a page
+    function bare(path) { return path.replace(/index\.html$/, ''); }      // a folder and its index.html are one page
+    function page(a) {
+      if (!a || a.hasAttribute('download') || a.target === '_blank' || a.closest('#lang')) return null;
+      var raw = a.getAttribute('href') || a.getAttribute('data-href'), u;
+      if (!raw || raw.charAt(0) === '#') return null;
+      try { u = new URL(raw, location.href); } catch (e) { return null; }
+      if (u.origin !== location.origin || bare(u.pathname) === bare(location.pathname) || u.pathname.indexOf('/assets/') > -1) return null;
+      u.hash = '';
+      return u.href;
+    }
+    function ahead(a) {
+      var href = page(a);
+      if (!href || fetched[href] || room < 1) return;
+      room--;
+      fetchEarly(href);
+    }
+    function link(e) { return e.target && e.target.closest ? e.target.closest('a') : null; }
+    function soon(e, wait) {
+      var a = link(e);
+      clearTimeout(timer);
+      if (a) timer = setTimeout(function () { ahead(a); }, wait);
+    }
+    // a pointer that only passes over a link, or a finger that starts a scroll on one, fetches nothing
+    document.addEventListener('mouseover', function (e) { soon(e, 70); }, { passive: true });
+    document.addEventListener('touchstart', function (e) { soon(e, 60); }, { passive: true });
+    document.addEventListener('touchmove', function () { clearTimeout(timer); }, { passive: true });
+    document.addEventListener('focusin', function (e) { var a = link(e); if (a) ahead(a); });
   }
 
   /* A project's name travels from its card to the heading of its page. The card's title takes the shared
@@ -1652,6 +1691,7 @@
 
   function boot() {
     initLang();
+    initAhead();
     initCards();
     initNav();
     initReveal();

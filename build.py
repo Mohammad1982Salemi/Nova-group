@@ -39,7 +39,7 @@ from datetime import date
 from html.parser import HTMLParser
 from pathlib import Path
 
-VERSION = "58"  # bump whenever assets/css/style.css or assets/js/main.js changes
+VERSION = "59"  # bump whenever assets/css/style.css or assets/js/main.js changes
 SITE = "https://novacapital.fund/"
 LANGS = ("en", "fr", "de", "tr", "fa")    # in the order of the language menu: Persian closes the list
 MAIN = "en"     # the language served at the site's root; every other one lives under /<its code>/
