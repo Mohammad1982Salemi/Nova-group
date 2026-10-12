@@ -1246,7 +1246,12 @@ html[data-lang="fa"].intro::before { content: 'نوا گروپ'; font-family: va
 @keyframes vt-in { from { opacity: 0; transform: translateY(12px); } }
 @supports not (view-transition-name: none) {
   html.js main { animation: vt-in .5s cubic-bezier(.2,.8,.2,1) both; }
+  html.js.is-returning main { animation: none; }
 }
+/* a change of language is the same page again, not a new one: a quick cross-fade in place, nothing rising in */
+@keyframes vt-fade { from { opacity: 0; } }
+html.is-returning::view-transition-old(root) { animation: vt-out .12s ease both; }
+html.is-returning::view-transition-new(root) { animation: vt-fade .16s ease both; }
 
 /* ---------- the big headings rise from behind an edge ---------- */
 /* the clip sits on the text inside, not on the heading: a heading clipped to nothing is never seen as "in view" */

@@ -70,6 +70,38 @@
 
     var KEY = 'nova-place', dests = {};
     Array.prototype.forEach.call(box.querySelectorAll('a[hreflang]'), function (a) { dests[a.getAttribute('hreflang')] = a.href; });
+
+    /* The same page in the other languages is fetched as soon as the reader reaches for the menu, so the one
+       they choose is already here when they click: a change of language should not feel like loading a page. */
+    var warmed = false;
+    function warm() {
+      if (warmed) return;
+      warmed = true;
+      if (navigator.connection && navigator.connection.saveData) return;      // the reader asked to spare their data
+      var probe = document.createElement('link');
+      var can = !!(probe.relList && probe.relList.supports && probe.relList.supports('prefetch'));
+      function fetchEarly(href, font) {
+        if (!can) {                                // a browser without prefetch still keeps the page in its cache
+          if (!font && window.fetch) fetch(href, { credentials: 'same-origin' }).catch(function () { /* the click will fetch it */ });
+          return;
+        }
+        var l = document.createElement('link');
+        l.rel = 'prefetch';
+        l.href = href;
+        if (font) { l.as = 'font'; l.type = 'font/woff2'; l.crossOrigin = 'anonymous'; }
+        document.head.appendChild(l);
+      }
+      Object.keys(dests).forEach(function (to) { fetchEarly(dests[to]); });
+      // Turkish alone needs the extended part of the two Latin fonts
+      var sheet = document.querySelector('link[rel="stylesheet"][href*="css/style.css"]');
+      if (dests.tr && sheet) {
+        var fonts = sheet.href.replace(/css\/style\.css.*$/, 'fonts/');
+        fetchEarly(fonts + 'inter-latin-ext-var.woff2', true);
+        fetchEarly(fonts + 'space-grotesk-latin-ext-var.woff2', true);
+      }
+    }
+    ['pointerenter', 'touchstart', 'focusin'].forEach(function (ev) { box.addEventListener(ev, warm, { passive: true }); });
+    box.addEventListener('toggle', warm);
     // every language has the same blocks in the same order, so a block's number finds it again
     function blocks() { return Array.prototype.slice.call(document.querySelectorAll('main h1, main h2, main h3, main p, main li, main figure')); }
     function line() { var nav = document.getElementById('nav'); return (nav ? nav.offsetHeight : 0) + 12; }
