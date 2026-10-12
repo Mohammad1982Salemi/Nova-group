@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nova Group — emir akışına dayalı alım satım algoritmaları</title>
-<meta name="description" content="Nova Group, 2020’den beri piyasa emir akışı ve alım satım algoritmalarının geliştirilmesi üzerinde çalışıyor: piyasa derinliğindeki işlem ve emir verisi, bir emir gerçekleşme simülatörü ve tahmin modelleri.">
+<meta name="description" content="Nova Group, 2020’den beri piyasa emir akışı ve alım satım algoritmalarının geliştirilmesi üzerinde çalışıyor: piyasa derinliğindeki işlem ve emir verisi, bir emir gerçekleştirme simülatörü ve tahmin modelleri.">
 <link rel="canonical" href="https://novacapital.fund/tr/">
 <link rel="alternate" hreflang="en" href="https://novacapital.fund/">
 <link rel="alternate" hreflang="fr" href="https://novacapital.fund/fr/">
@@ -146,17 +146,17 @@
           <div class="tk-step">
             <span class="tk-cap"><span class="t-tr">Miktar</span></span>
             <span class="tk-ctl">
-              <button type="button" data-step="-1" data-of="size" aria-label="Daha küçük miktar">−</button>
-              <input class="tk-size" type="text" inputmode="numeric" maxlength="2" value="10" autocomplete="off" aria-label="Emir miktarı, sözleşme cinsinden">
-              <button type="button" data-step="1" data-of="size" aria-label="Daha büyük miktar">+</button>
+              <button type="button" data-step="-1" data-of="size" aria-label="Daha küçük büyüklük">−</button>
+              <input class="tk-size" type="text" inputmode="numeric" maxlength="2" value="10" autocomplete="off" aria-label="Emir büyüklükı, sözleşme cinsinden">
+              <button type="button" data-step="1" data-of="size" aria-label="Daha büyük büyüklük">+</button>
             </span>
           </div>
           <div class="tk-step tk-price">
             <span class="tk-cap"><span class="t-tr">Fiyat</span></span>
             <span class="tk-ctl">
-              <button type="button" data-step="-1" aria-label="Bir fiyat adımı aşağı">−</button>
+              <button type="button" data-step="-1" aria-label="Bir tick aşağı">−</button>
               <output class="tk-px"></output>
-              <button type="button" data-step="1" aria-label="Bir fiyat adımı yukarı">+</button>
+              <button type="button" data-step="1" aria-label="Bir tick yukarı">+</button>
             </span>
           </div>
         </div>
@@ -165,7 +165,7 @@
           <button type="button" class="mbo-btn is-sell" data-side="sell"><b><span class="t-tr">Sat</span></b><small></small></button>
         </div>
         <p class="mbo-say" aria-live="polite">
-          <span class="t-tr">Kendiniz deneyin: bir miktar ve bir emir türü seçin, ardından gönderin.</span>
+          <span class="t-tr">Kendiniz deneyin: bir büyüklük ve bir emir türü seçin, ardından gönderin.</span>
         </p>
         <div class="tk-stats" hidden>
           <div><span><span class="t-tr">Gerçekleşen</span></span><b data-s="filled"></b></div>
@@ -250,7 +250,7 @@
       <li class="glow reveal">
         <span class="layer-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="5" height="5" rx="1"/><rect x="9.5" y="5" width="5" height="5" rx="1"/><rect x="16" y="5" width="5" height="5" rx="1"/><rect x="3" y="14" width="5" height="5" rx="1"/><rect x="9.5" y="14" width="5" height="5" rx="1"/><path d="M17 16.5h4M19.5 14.5l2 2-2 2"/></svg></span>
         <span class="layer-tag"><span class="t-tr">Motor</span></span>
-        <h3><span class="t-tr">Derin bir emir gerçekleşme simülatörü</span></h3>
+        <h3><span class="t-tr">Derin bir emir gerçekleştirme simülatörü</span></h3>
         <p><span class="t-tr">Piyasanın emir gerçekleştirme motorunu yeniden kuruyoruz: emirler kuyruğa girer, sırasını bekler ve kısmen gerçekleşir.</span></p>
       </li>
       <li class="glow reveal">
@@ -301,7 +301,7 @@
 
   <article class="track glow reveal">
     <span class="track-tag">Taker</span>
-    <h3><span class="t-tr">Likidite alıcı bakışı</span></h3>
+    <h3><span class="t-tr">Likidite alıcısı bakışı</span></h3>
     <p><span class="t-tr">Likidite tüketmek ve işleme girmek: emrimiz alım satım farkını (spread) geçer ve bekleyen emirleri kuyruğun başından alır.</span></p>
 
     <!-- a small simulated book, filled in by main.js: our order arrives and sweeps the levels -->
@@ -422,7 +422,7 @@
     </div>
     <h3>TSETMC</h3>
     <p class="proj-sub">
-      <span class="t-tr">Tahran Borsası’nın emir akışı analizi; algoritmik bir portföy yönetim fonuna giden yolda</span>
+      <span class="t-tr">Tahran Borsası’nın emir akışı analizi; algoritmik bir para yönetim fonuna giden yolda</span>
     </p>
     <p class="proj-desc">
       <span class="t-tr">İran sermaye piyasasının on bir yılı, işlem işlem ve emir emir toplandı ve yeniden kuruldu. Modellerimizi bu geçmiş üzerinde kuruyor ve test ediyoruz.</span>
@@ -478,7 +478,7 @@
     </div>
     <h3><span class="t-tr">DeFi LP</span></h3>
     <p class="proj-sub">
-      <span class="t-tr">Merkeziyetsiz borsaların likidite havuzları için bir portföy yönetim algoritması; otomatik bir fona giden yolda</span>
+      <span class="t-tr">Merkeziyetsiz borsaların likidite havuzları için bir para yönetim algoritması; otomatik bir fona giden yolda</span>
     </p>
     <p class="proj-desc">
       <span class="t-tr">Dört blokzincir ağındaki 136 havuzun tüm geçmişi, her havuzun ilk gününden itibaren ve olay olay toplandı. Sermayenin bir havuzda durmasını ve havuzlar arasında taşınmasını, piyasanın kendisinin aslına yakın bir yeniden kurulumu içinde simüle ediyoruz.</span>

@@ -186,6 +186,64 @@ Market Maker · Market Making · Taker · Spread · Slippage · Drawdown · Tick
 
 عدد را آلمانی می‌نویسیم: جداکنندهٔ هزارگان نقطه و اعشار ویرگول — «1.000 µs»، «1,00». علامت نقل‌قول و خط تیرهٔ آلمانی رعایت شود. در ترکیب‌ها خط تیرهٔ نرم (U+00AD) که در فایل هست، بخشی از قالب است و دست نمی‌خورد.
 
+## بخش ۶ — ترکی
+
+منابع: کاربرد مالی و بازار سرمایه در ترکیه (بورس استانبول، انتشارات کارگزاری‌ها) و واژگان TDK برای نگارش.
+
+### ۶.۱ — واژه‌های تعیین‌شده
+
+| انگلیسی | ترکی | توضیح |
+|---|---|---|
+| market maker | **piyasa yapıcı** | |
+| market making | **piyasa yapıcılığı** | و «piyasa yapmak» فقط جایی که انگلیسی «making markets» است |
+| taker | **likidite alıcısı** | با «س» مالکیت؛ صورت فعلی «likidite alıcı» ناقص است |
+| liquidity provider | **likidite sağlayıcısı** | |
+| order book | **emir defteri** | |
+| limit order / market order | **limit emir / piyasa emri** | |
+| resting order | **bekleyen emir** | |
+| queue position | **kuyruk konumu** | |
+| order flow | **emir akışı** | |
+| depth | **derinlik** | |
+| tick | **tick** | وام‌واژه؛ «fiyat adımı» تنها برای اندازهٔ آن در تعریف می‌آید |
+| fill / partial fill | **gerçekleşme / kısmen gerçekleşme** | |
+| fill rate | **gerçekleşme oranı** | |
+| slippage | **kayma** | |
+| stop-loss | **zarar durdur** | و «stop» فقط جایی که انگلیسی هم «stop» می‌گوید |
+| take-profit | **kâr hedefi** | نه «kâr al» |
+| commission | **komisyon** | |
+| broker fee | **aracı kurum komisyonu** | |
+| break-even | **başa baş** | |
+| round turn | **gidiş-dönüş** | |
+| latency | **gecikme** | |
+| venue | **piyasa** | |
+| session / trading day | **seans / işlem günü** | این دو نباید یکی شوند |
+| drawdown | **düşüş** | |
+| profit factor | **kâr faktörü** | |
+| expectancy | **beklenti** | |
+| percent profitable | **kârlı işlem yüzdesi** | |
+| equity curve | **sermaye eğrisi** | |
+| recovery factor | **toparlanma faktörü** | |
+| MAE / MFE | **maksimum aleyhte hareket / maksimum lehte hareket** | در جمله‌های کوتاه هم همین شکل |
+| percentile / median / distribution | **yüzdelik / medyan / dağılım** | |
+| size (اندازهٔ سفارش) | **büyüklük** | نه «miktar»؛ «emir büyüklüğü» |
+| allocation | **tahsis** | |
+| exposure | **maruziyet** | |
+| block trade | **blok işlem** | |
+| backtest | **geriye dönük test (backtest)** | |
+| feature | **öznitelik** | |
+| price limit | **fiyat limiti** | |
+| heat map | **ısı haritası** | در گزارش‌ها «ısı tablosu» به‌عنوان اصطلاح تعریف‌شده می‌ماند |
+| toman | **Toman** | یکدست با سایت |
+
+### ۶.۲ — نگارش و دستور
+
+- **علامت درصد پیش از عدد** می‌آید: `%25`، `%0,05` — نه `25%`. در قالب‌های گزارشی هم `%{1}` نوشته می‌شود.
+- **جداکنندهٔ هزارگان نقطه و اعشار ویرگول** است: `1.000 µs`، `18.442.942`.
+- **پسوند پس از عدد و کلمهٔ مختصر** با هماهنگی مصوت: «16:00'a»، «%90'ının».
+- **جمع بعد از عدد نمی‌آید**: «24 şekil»، «136 havuz» — نه «24 şekiller».
+- **«dâhil»** با کلاه، یکدست در همه‌جا.
+- حرف İ/ı در ترکیب‌ها و پسوندها رعایت شود (مثل قاعدهٔ آلمانی که در گزارش‌ها رعایت شده).
+
 ## بخش ۴ — موارد باز
 
 - **`Latency` در برابر `Delay`**: هر دو مفهوم در انگلیسی جدا هستند، ولی باید با متن پارسی (مرجع) سنجیده شود که آیا دو مفهوم است یا یک مفهوم با دو نام. تصمیم در مرحلهٔ کنترل سایت گرفته می‌شود.

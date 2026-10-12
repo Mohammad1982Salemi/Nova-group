@@ -102,8 +102,8 @@
   "Risk-based sizing sizes a trade by its initial risk, and these had none (the stop was not beyond the entry).": "Riske dayalı boyutlandırma bir işlemi başlangıç riskine göre boyutlandırır ve bunların riski yoktu (stop girişin ötesinde değildi).",
   "(the stop was not beyond the entry price when it was placed).": "(stop, yerleştirildiğinde giriş fiyatının ötesinde değildi).",
   "They are in every money figure and are left out of the R figures (expectancy, R distribution, MAE / MFE).": "Bunlar tüm parasal rakamlara dâhildir ve R rakamlarının (beklenti, R dağılımı, MAE / MFE) dışında bırakılmıştır.",
-  "Money and R disagree in sign:": "Para ile R'nin işareti uyuşmuyor:",
-  "R divides each trade by its own stop distance, so trades with a close stop weigh more in R than in money.": "R, her işlemi kendi stop mesafesine böler; bu yüzden stopu yakın olan işlemler R'de, paradakinden daha ağır basar.",
+  "Money and R disagree in sign:": "Para ile R’nin işareti uyuşmuyor:",
+  "R divides each trade by its own stop distance, so trades with a close stop weigh more in R than in money.": "R, her işlemi kendi stop mesafesine böler; bu yüzden stopu yakın olan işlemler R’de, paradakinden daha ağır basar.",
   "The money figure is what the account earned.": "Parasal rakam, hesabın kazandığı tutardır.",
   "Total Number of Trades": "Toplam İşlem Sayısı",
   "Percent Profitable": "Kârlı İşlem Yüzdesi",
@@ -115,7 +115,7 @@
   "no drawdown": "düşüş yok",
   "n/a": "yok",
   "n/a (no loser)": "yok (kaybeden olmadı)",
-  "more than 100% of peak": "zirvenin 100%'ünden fazla",
+  "more than 100% of peak": "zirvenin %100’ünden fazla",
   "The sum of all closed trades after commission.": "Kapanmış tüm işlemlerin komisyon sonrası toplamı.",
   "The small figure is the return on the initial capital.": "Küçük rakam, başlangıç sermayesi üzerinden getiridir.",
   "Positions opened and closed.": "Açılıp kapatılmış pozisyonlar.",
@@ -196,7 +196,7 @@
   "Rolling Percent Profitable": "Kayan Kârlı İşlem Yüzdesi",
   "At every point, the share of winners among the most recent trades only.": "Her noktada, yalnızca en son işlemler içindeki kazananların payı.",
   "It shows whether the hit rate is stable or comes in good and bad stretches.": "İsabet oranının istikrarlı mı olduğunu, yoksa iyi ve kötü kesimler hâlinde mi geldiğini gösterir.",
-  "Compare it with the break-even line, not with 50%: stretches below that line lose money.": "Bunu 50% ile değil, başa baş çizgisiyle karşılaştırın: o çizginin altındaki kesimler para kaybeder.",
+  "Compare it with the break-even line, not with 50%: stretches below that line lose money.": "Bunu %50 ile değil, başa baş çizgisiyle karşılaştırın: o çizginin altındaki kesimler para kaybeder.",
   "Rolling Average Trade": "Kayan Ortalama İşlem",
   "At every point, the average net profit of the most recent trades only.": "Her noktada, yalnızca en son işlemlerin ortalama net kârı.",
   "Above zero that stretch made money, below zero it lost.": "Sıfırın üzerinde o kesim para kazandı, sıfırın altında kaybetti.",
@@ -207,7 +207,7 @@
   "Drawdown": "Düşüş",
   "USD below the previous high": "Önceki zirvenin altında, USD",
   "Percent profitable": "Kârlı işlem yüzdesi",
-  "Percent profitable, %": "Kârlı işlem yüzdesi, %",
+  "Percent profitable, %": "Kârlı işlem yüzdesi, %",
   "Closed trade number": "Kapanmış işlem numarası",
   "Average trade": "Ortalama işlem",
   "Average trade, USD": "Ortalama işlem, USD",
@@ -239,7 +239,7 @@
   "Weekly Returns Table": "Haftalık Getiri Tablosu",
   "For every week: the number of trades, the net profit and its share of the initial capital.": "Her hafta için: işlem sayısı, net kâr ve bunun başlangıç sermayesine oranı.",
   "The weekly cells above as a list, with the number of trades.": "Yukarıdaki haftalık hücreler, işlem sayısıyla birlikte liste hâlinde.",
-  "A lookup list: 2026-W05 is week 5 of 2026, Monday to Sunday.": "Bir başvuru listesi: 2026-W05, 2026'nın 5. haftasıdır; pazartesiden pazara.",
+  "A lookup list: 2026-W05 is week 5 of 2026, Monday to Sunday.": "Bir başvuru listesi: 2026-W05, 2026’nın 5. haftasıdır; pazartesiden pazara.",
   "week": "hafta",
   "trades": "işlem",
   "net profit": "net kâr",
@@ -260,8 +260,8 @@
   "1R is the trade's initial risk: the distance from the entry to the stop as it was placed.": "1R, işlemin başlangıç riskidir: girişten, yerleştirildiği andaki stopa kadar olan mesafe.",
   "log scale": "logaritmik ölçek",
   "How large the wins and the losses were, measured against what each trade planned to risk.": "Kazançların ve kayıpların, her işlemin riske etmeyi planladığı tutara göre ne kadar büyük olduğu.",
-  "For a strategy with a stop and a target the healthy picture is two columns: one at -1R (stopped where planned) and one at the target.": "Stopu ve hedefi olan bir strateji için sağlıklı görüntü iki sütundur: biri -1R'de (planlanan yerde stop oldu), diğeri hedefte.",
-  "Bars left of -1R are losses larger than planned.": "-1R'nin solundaki çubuklar planlanandan büyük zararlardır.",
+  "For a strategy with a stop and a target the healthy picture is two columns: one at -1R (stopped where planned) and one at the target.": "Stopu ve hedefi olan bir strateji için sağlıklı görüntü iki sütundur: biri -1R’de (planlanan yerde stop oldu), diğeri hedefte.",
+  "Bars left of -1R are losses larger than planned.": "-1R’nin solundaki çubuklar planlanandan büyük zararlardır.",
   "Switch to the log scale to see the thin tails.": "İnce kuyrukları görmek için logaritmik ölçeğe geçin.",
   "Maximum Adverse Excursion (MAE) vs. Trade Result": "Maksimum Aleyhte Hareket (MAE) Karşısında İşlem Sonucu",
   "One dot per trade": "İşlem başına bir nokta",
@@ -269,7 +269,7 @@
   "Up is the trade's final result in R, after commission.": "Dikey eksen, işlemin nihai sonucudur; R cinsinden, komisyon sonrası.",
   "For each trade, its worst moment against how it finally ended.": "Her işlem için, en kötü anına karşılık sonunda nasıl bittiği.",
   "With a stop that holds, losing dots pile up at (1R, -1R).": "Yerinde çalışan bir stopla kaybeden noktalar (1R, -1R) üzerinde yığılır.",
-  "Dots right of the dashed line went past the stop; dots on the diagonal lost as much as their worst move, i.e. the exit was filled at the worst price; dots far below -1R lost more than planned.": "Kesikli çizginin sağındaki noktalar stopu aşmıştır; köşegen üzerindeki noktalar en kötü hareketleri kadar kaybetmiştir, yani çıkış en kötü fiyattan gerçekleşmiştir; -1R'nin çok altındaki noktalar planlanandan fazla kaybetmiştir.",
+  "Dots right of the dashed line went past the stop; dots on the diagonal lost as much as their worst move, i.e. the exit was filled at the worst price; dots far below -1R lost more than planned.": "Kesikli çizginin sağındaki noktalar stopu aşmıştır; köşegen üzerindeki noktalar en kötü hareketleri kadar kaybetmiştir, yani çıkış en kötü fiyattan gerçekleşmiştir; -1R’nin çok altındaki noktalar planlanandan fazla kaybetmiştir.",
   "Maximum Favorable Excursion (MFE) vs. Trade Result": "Maksimum Lehte Hareket (MFE) Karşısında İşlem Sonucu",
   "Across is the furthest the price moved in the trade's favour, in R.": "Yatay eksen, fiyatın işlemin lehine yaptığı en uzak harekettir; R cinsinden.",
   "For each trade, its best moment against how it finally ended.": "Her işlem için, en iyi anına karşılık sonunda nasıl bittiği.",
@@ -284,7 +284,7 @@
   "The chart counts how many ticks worse (+) or better (-) than the signal price each entry was filled.": "Grafik, her girişin sinyal fiyatından kaç tick daha kötü (+) veya daha iyi (-) gerçekleştiğini sayar.",
   "Zero means filled exactly at the price asked.": "Sıfır, tam olarak istenen fiyattan gerçekleşti demektir.",
   "How the entry price compared with the signal price.": "Giriş fiyatının sinyal fiyatıyla karşılaştırması.",
-  "A resting limit order fills at its own price or better, so its bars sit at 0 and to the left.": "Bekleyen limit emir kendi fiyatından veya daha iyisinden gerçekleşir; bu yüzden çubukları 0'da ve solunda yer alır.",
+  "A resting limit order fills at its own price or better, so its bars sit at 0 and to the left.": "Bekleyen limit emir kendi fiyatından veya daha iyisinden gerçekleşir; bu yüzden çubukları 0’da ve solunda yer alır.",
   "A better entry price is not automatically good news: it often means the market traded through the order.": "Daha iyi bir giriş fiyatı kendiliğinden iyi haber değildir: çoğu zaman piyasanın emrin fiyatını geçerek işlem gördüğü anlamına gelir.",
   "Fewer than ten closed trades with a defined initial risk.": "Tanımlı başlangıç riski olan kapanmış işlem sayısı ondan az.",
   "Fewer than five closed trades with a defined initial risk and a recorded excursion.": "Tanımlı başlangıç riski ve kaydedilmiş bir hareketi olan kapanmış işlem sayısı beşten az.",
@@ -386,7 +386,7 @@
   "The hours beside each name are the UTC hours in which that session's signals were seen in this run.": "Her adın yanındaki saatler, bu çalıştırmada o seansın sinyallerinin görüldüğü UTC saatleridir.",
   "session": "seans",
   "Which part of the day earns and which loses.": "Günün hangi bölümünün kazandırdığı, hangisinin kaybettirdiği.",
-  "Compare net profit and profit factor between the rows; a row with a profit factor below 1 loses money.": "Satırlar arasında net kârı ve kâr faktörünü karşılaştırın; kâr faktörü 1'in altında olan bir satır para kaybeder.",
+  "Compare net profit and profit factor between the rows; a row with a profit factor below 1 loses money.": "Satırlar arasında net kârı ve kâr faktörünü karşılaştırın; kâr faktörü 1’in altında olan bir satır para kaybeder.",
   "By Signal": "Sinyale Göre",
   "The trades are grouped by the name their signal carried.": "İşlemler, sinyallerinin taşıdığı ada göre gruplanmıştır.",
   "signal": "sinyal",
@@ -517,7 +517,7 @@
   "Even Trades": "Başa Baş İşlemler",
   "Avg. Winning Trade": "Ort. Kazanan İşlem",
   "Avg. Losing Trade": "Ort. Kaybeden İşlem",
-  "Ratio Avg. Win : Avg. Loss": "Ort. Kazanç : Ort. Kayıp Oranı",
+  "Ratio Avg. Win : Avg. Loss": "Ort. Kazanç : Ort. Kayıp Oranı",
   "Largest Winning Trade": "En Büyük Kazanan İşlem",
   "Largest Losing Trade": "En Büyük Kaybeden İşlem",
   "Max. Consecutive Winning Trades": "Maks. Ardışık Kazanan İşlem",
@@ -588,7 +588,7 @@
   "Yeşil kâr, kırmızı zarardır; hücre ne kadar koyuysa tutar o kadar büyüktür (en koyusu: {1}).",
   "Grafik, taraf başına {1} komisyonla dönem boyunca kümülatif net kârı izler; gecikme başına bir çizgi.",
   "Her nokta, son {1} kapanmış işlem içindeki kazanan işlemlerin payıdır.",
-  "Kesikli çizgi, bu çalıştırmanın ortalama kazancı ve kaybıyla başa baş olmak için gereken orandır ({1}%).",
+  "Kesikli çizgi, bu çalıştırmanın ortalama kazancı ve kaybıyla başa baş olmak için gereken orandır (%{1}).",
   "Her nokta, son {1} kapanmış işlemde işlem başına ortalama net kârdır; dolar cinsinden.",
   "Her nokta, {1} işlem içindeki en derin değerdir.",
   "Her çubuk, {1} R genişliğindeki bir sonuç aralığına düşen işlemleri sayar; komisyon sonrası.",
@@ -622,7 +622,7 @@
   "Gecikme {1} (gecikme yok: en elverişli durum), taraf başına komisyon {2}: henüz kapanmış işlem yok.",
   "Gecikme {1}, taraf başına komisyon {2}: henüz kapanmış işlem yok.",
   "(başlangıç sermayesine göre {1}), {3} işlem gününde {2} kapanmış işlem üzerinden",
-  "Kârlı işlemlerin oranı {1}%[2|, ortalama kazanan işlem {2}][3|, ortalama kaybeden işlem {3}][4| (Kâr Faktörü {4})]",
+  "Kârlı işlemlerin oranı %{1}[2|, ortalama kazanan işlem {2}][3|, ortalama kaybeden işlem {3}][4| (Kâr Faktörü {4})]",
   "Maks. Düşüş {1} (zirve bakiyeye göre {2}).",
   "Maks. Düşüş {1}.",
   "{1} senaryonun her biri net kârla biter.",
@@ -636,12 +636,12 @@
   "ortalama işlem {1} iken beklenti {2} R.",
   "taraf başına {1} komisyon sonrası",
   "son bakiye {1}",
-  "{1} giriş emrinden ({2}% gerçekleşti)",
+  "{1} giriş emrinden (%{2} gerçekleşti)",
   "{1} açık",
   "maks. {1} sözleşme tutuldu",
   "{1} kazanan / {2} kaybeden / {3} başa baş",
-  "başa baş: {1}%",
-  "başa baş {1}%",
+  "başa baş: %{1}",
+  "başa baş %{1}",
   "brüt kâr {1} / brüt zarar {2}",
   "= sözleşme başına {1} tick",
   "ort. kazanç {1}",
@@ -653,7 +653,7 @@
   "dönemin {1} hafta içi gününde kapanmış işlem yoktu",
   "en iyi {1} ({2})",
   "en kötü {1} ({2})",
-  "zirveye göre {1}%",
+  "zirveye göre %{1}",
   "Her {1} işlem için bir nokta; bant, her adımın içindeki en düşük ve en yüksek değeri gösterir.",
   "{2} işlemin ardından {1} seviyesinde biter; bir zirveden en derin gerileme {3} oldu.",
   "{2} işlemin ardından {1} seviyesinde biter; hiçbir zaman bir zirvenin altına inmedi.",
@@ -666,7 +666,7 @@
   "her nokta, {1} işlem içindeki en derin değerdir",
   "Maks. düşüş {1} (zirve bakiyeye göre {2}), dip: {3}[4|; en uzun düşüş {4} sürdü][5| ve sonuna kadar toparlanmadı].",
   "Son {1} kapanmış işlem içindeki kazanan işlemler",
-  "kesikli çizgi: bu çalıştırmanın ortalama kazancı ve kaybıyla başa baş olmak için gereken oran ({1}%)",
+  "kesikli çizgi: bu çalıştırmanın ortalama kazancı ve kaybıyla başa baş olmak için gereken oran (%{1})",
   "Son {1} kapanmış işlemde işlem başına ortalama net kâr, USD",
   "{1} R genişliğindeki sonuç aralığı başına işlem sayısı (komisyon sonrası)",
   "ilk ve son çubuk, eksenin dışındaki {1} ve {2} işlemi de içerir (tüm işlemler: min. {3} R, medyan {4} R, maks. {5} R)",
@@ -706,7 +706,7 @@
   "zirve bakiyeye göre",
   "o zirvedeki bakiyeye göre",
   "bakiye sıfırın altına düşmüştü",
-  "100%'den fazla",
+  "%100’den fazla",
   "kapanmış işlem no.",
   "gelecek işlem no.",
   "çıkış sırasıyla",
@@ -725,8 +725,8 @@
   "toplam",
   "gün",
   "/",
-  "aleyhte en kötü hareket",
-  "lehte en iyi hareket",
+  "maksimum aleyhte hareket",
+  "maksimum lehte hareket",
   "eksenin dışında",
   "ve üzeri",
   "<",
@@ -769,7 +769,7 @@
   ],
   [
    "Gecikme (emir gecikmesi, latency)",
-   "Piyasa verisini görmemiz ile emrimizin borsaya ulaşması arasındaki süre. 1 ms = 1,000 µs = 1,000,000 ns."
+   "Piyasa verisini görmemiz ile emrimizin borsaya ulaşması arasındaki süre. 1 ms = 1.000 µs = 1.000.000 ns."
   ],
   [
    "Taraf başına komisyon",
@@ -817,7 +817,7 @@
   ],
   [
    "Kâr Faktörü (Profit Factor)",
-   "Brüt kârın brüt zarara bölümü, para cinsinden. 1'in üzeri kârlıdır; 1.00 başa baştır. “Kâr Faktörü (R)”, R-Multiple değerleri üzerinden hesaplanan aynı orandır."
+   "Brüt kârın brüt zarara bölümü, para cinsinden. 1’in üzeri kârlıdır; 1.00 başa baştır. “Kâr Faktörü (R)”, R-Multiple değerleri üzerinden hesaplanan aynı orandır."
   ],
   [
    "Kârlı İşlem Yüzdesi (Percent Profitable)",
@@ -828,7 +828,7 @@
    "Toplam net kârın kapanmış işlem sayısına bölümü."
   ],
   [
-   "Ort. Kazanç : Ort. Kayıp Oranı",
+   "Ort. Kazanç : Ort. Kayıp Oranı",
    "Ortalama kazanan işlemin ortalama kaybeden işleme bölümü (payoff ratio)."
   ],
   [
@@ -856,7 +856,7 @@
    "Zarar eden bir pozisyonun, zararı sınırlamak için kapatılacağı fiyat."
   ],
   [
-   "Hedef (kâr al, TP)",
+   "Kâr hedefi (TP)",
    "Kazanan bir pozisyonun, kârı almak için kapatıldığı fiyat."
   ],
   [
@@ -869,7 +869,7 @@
   ],
   [
    "SQN",
-   "System Quality Number: ortalama R bölü R'nin standart sapması, çarpı işlem sayısının karekökü."
+   "System Quality Number: ortalama R bölü R’nin standart sapması, çarpı işlem sayısının karekökü."
   ],
   [
    "Sermaye eğrisi (equity curve)",
@@ -905,11 +905,11 @@
   ],
   [
    "İşlem günü",
-   "CME işlem günü: Chicago saatiyle 17:00'den ertesi gün 16:00'ya kadar; bittiği günün tarihiyle adlandırılır. Bu sayfadaki tüm günlük rakamlar bunu kullanır."
+   "CME işlem günü: Chicago saatiyle 17:00’den ertesi gün 16:00’a kadar; bittiği günün tarihiyle adlandırılır. Bu sayfadaki tüm günlük rakamlar bunu kullanır."
   ],
   [
    "Sharpe Oranı (Sharpe Ratio)",
-   "Burada: başlangıç sermayesi üzerinden ortalama günlük getirinin kendi standart sapmasına bölümü, çarpı 252'nin karekökü. Seride dönemin her hafta içi günü için bir getiri vardır; kapanmış işlemi olmayan bir hafta içi gün sıfır sayılır. 20 günün altında gösterilmez."
+   "Burada: başlangıç sermayesi üzerinden ortalama günlük getirinin kendi standart sapmasına bölümü, çarpı 252’nin karekökü. Seride dönemin her hafta içi günü için bir getiri vardır; kapanmış işlemi olmayan bir hafta içi gün sıfır sayılır. 20 günün altında gösterilmez."
   ],
   [
    "Sortino Oranı (Sortino Ratio)",
@@ -925,7 +925,7 @@
   ],
   [
    "Yıllıklandırılmış oynaklık",
-   "Günlük getirinin standart sapması, çarpı 252'nin karekökü."
+   "Günlük getirinin standart sapması, çarpı 252’nin karekökü."
   ],
   [
    "Kayan (pencere)",
@@ -973,7 +973,7 @@
   ],
   [
    "10. / 50. / 90. yüzdelik",
-   "Simülasyonların 10%, 50% ve 90%'ının altında kaldığı değer."
+   "Simülasyonların %10, %50 ve %90’ının altında kaldığı değer."
   ],
   [
    "Seans",
@@ -981,7 +981,7 @@
   ],
   [
    "ISO haftası",
-   "Haftalar pazartesiden pazara sürer ve yıl boyunca 1'den 53'e kadar numaralanır; 2026-W05, 2026'nın 5. haftasıdır."
+   "Haftalar pazartesiden pazara sürer ve yıl boyunca 1’den 53’e kadar numaralanır; 2026-W05, 2026’nın 5. haftasıdır."
   ],
   [
    "Isı tablosu (heat table)",
