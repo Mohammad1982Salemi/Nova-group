@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr" data-lang="tr" data-sec="2">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fast Scalp — Chicago vadeli işlem piyasası için bir kısa vadeli alım satım algoritması | Nova Group</title>
+<meta name="description" content="Fast Scalp projesi: Chicago borsasının emir emir geçmişinden öğrenilen, makine öğrenmesine dayalı bir kısa vadeli alım satım algoritması.">
+<link rel="canonical" href="https://novacapital.fund/tr/projects/fast-scalp.html">
+<link rel="alternate" hreflang="en" href="https://novacapital.fund/projects/fast-scalp.html">
+<link rel="alternate" hreflang="fa" href="https://novacapital.fund/fa/projects/fast-scalp.html">
+<link rel="alternate" hreflang="fr" href="https://novacapital.fund/fr/projects/fast-scalp.html">
+<link rel="alternate" hreflang="de" href="https://novacapital.fund/de/projects/fast-scalp.html">
+<link rel="alternate" hreflang="tr" href="https://novacapital.fund/tr/projects/fast-scalp.html">
+<link rel="alternate" hreflang="x-default" href="https://novacapital.fund/projects/fast-scalp.html">
+<meta property="og:title" content="Fast Scalp — Chicago vadeli işlem piyasası için bir kısa vadeli alım satım algoritması | Nova Group">
+<meta property="og:description" content="Chicago vadeli işlem piyasası için ML tabanlı bir kısa vadeli alım satım algoritması; otomatik bir alım satım masasına giden yolda.">
+<meta property="og:url" content="https://novacapital.fund/tr/projects/fast-scalp.html">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:locale:alternate" content="fa_IR">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:locale:alternate" content="de_DE">
+<meta property="og:image" content="https://novacapital.fund/assets/img/og/fast-scalp-tr.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://novacapital.fund/assets/img/og/fast-scalp-tr.jpg">
+<meta name="author" content="Nova Group">
+<meta name="theme-color" content="#05080e">
+<meta name="color-scheme" content="dark light">
+<meta name="supported-color-schemes" content="dark light">
+<meta name="darkreader-lock">
+<meta property="og:site_name" content="Nova Group">
+<meta property="og:type" content="website">
+
+<link rel="icon" type="image/svg+xml" href="../../assets/img/nova-mark.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="../../assets/img/favicon-64.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../../assets/img/favicon-192.png">
+<link rel="apple-touch-icon" href="../../assets/img/favicon-192.png">
+
+<!-- The fonts are served from this site; the one this language needs first is fetched early. -->
+<link rel="preload" href="../../assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/inter-latin-ext-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/css/style.css?v=57">
+
+<!-- Runs before first paint: Samsung Internet flag, the reader's language, the page-transition direction. -->
+<script src="../../assets/js/early.js?v=57"></script>
+</head>
+<body>
+
+<a href="#main" class="skip-link"><span class="t-tr">İçeriğe geç</span></a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="../index.html" aria-label="Nova Group">
+      <img class="logo-mark" src="../../assets/img/nova-mark-512.png" alt="" width="512" height="512" fetchpriority="high">
+      <span class="logo-text t-tr"><b>NOVA</b> GROUP</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Ana menü">
+      <a href="../index.html"><span class="t-tr">Ana sayfa</span></a>
+      <a href="../about.html"><span class="t-tr">Hakkımızda</span></a>
+      <a href="../projects.html" aria-current="page"><span class="t-tr">Projeler</span></a>
+      <a href="../contact.html"><span class="t-tr">İletişim</span></a>
+    </nav>
+
+    <div class="nav-actions">
+      <details class="lang" id="lang">
+        <summary class="lang-btn" id="langBtn" aria-label="Dil: Türkçe"><img class="flag" src="../../assets/img/flags/tr.png" alt="" width="24" height="16"><span class="lang-name">Türkçe</span><svg class="lang-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <ul class="lang-menu" id="langMenu"><li><a href="../../projects/fast-scalp.html" hreflang="en" lang="en"><img class="flag" src="../../assets/img/flags/en.png" alt="" width="24" height="16" loading="lazy"><span>English</span></a></li><li><a href="../../fa/projects/fast-scalp.html" hreflang="fa" lang="fa"><img class="flag" src="../../assets/img/flags/fa.png" alt="" width="24" height="16" loading="lazy"><span>فارسی</span></a></li><li><a href="../../fr/projects/fast-scalp.html" hreflang="fr" lang="fr"><img class="flag" src="../../assets/img/flags/fr.png" alt="" width="24" height="16" loading="lazy"><span>Français</span></a></li><li><a href="../../de/projects/fast-scalp.html" hreflang="de" lang="de"><img class="flag" src="../../assets/img/flags/de.png" alt="" width="24" height="16" loading="lazy"><span>Deutsch</span></a></li><li><span class="lang-here" aria-current="true" lang="tr"><img class="flag" src="../../assets/img/flags/tr.png" alt="" width="24" height="16" loading="lazy"><span>Türkçe</span></span></li></ul>
+      </details>
+      <button class="burger" id="burger" type="button" aria-label="Menü" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="page-hero">
+  <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="wrap">
+    <nav class="crumbs reveal" aria-label="Sayfa yolu">
+      <a href="../projects.html"><span class="t-tr">Projeler</span></a>
+      <span aria-hidden="true">/</span>
+      <span><span class="t-tr">Fast Scalp</span></span>
+    </nav>
+
+    <h1 class="reveal"><span class="t-tr">Fast Scalp</span></h1>
+    <p class="page-lead reveal">
+      <span class="t-tr">Chicago vadeli işlem piyasası için ML tabanlı bir kısa vadeli alım satım algoritması; otomatik bir alım satım masasına giden yolda.</span>
+    </p>
+
+    <div class="cs-meta reveal">
+      <span class="status"><span class="t-tr">Test aşamasında</span></span>
+      <ul class="tags">
+        <li>Python</li><li>C#</li><li>Rust</li><li>MBO</li>
+        <li><span class="t-tr">Makine öğrenmesi</span></li>
+        <li><span class="t-tr">Scalping</span></li>
+        <li><span class="t-tr">Gerçekleşme simülatörü</span></li>
+      </ul>
+    </div>
+
+    <ul class="facts facts-glass">
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-tr">Veri</span></span>
+        <b><span class="t-tr">Her bir emir</span></b>
+        <p>
+          <span class="t-tr">Dünyanın en büyük vadeli işlem piyasalarından biri olan Chicago borsasının birkaç yıllık geçmişi.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-tr">Yöntem</span></span>
+        <b><span class="t-tr">Makine öğrenmesi</span></b>
+        <p>
+          <span class="t-tr">İstatistiksel analizle desteklenir; örüntüler gerçek piyasa örneklerinden öğrenilir.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-tr">Risk</span></span>
+        <b><span class="t-tr">Her işlemde stop</span></b>
+        <p>
+          <span class="t-tr">Giriş anından itibaren bellidir; raporlanan, nominal değil gerçek zarardır.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-tr">Teknoloji</span></span>
+        <b><span class="t-tr">3 dil, 3 rol</span></b>
+        <div class="fact-list">
+          <div><i>Python</i><span><span class="t-tr">Öğrenme modelleri</span></span></div>
+          <div><i>C#</i><span><span class="t-tr">Yeniden kurulum ve simülatör</span></span></div>
+          <div><i>Rust</i><span><span class="t-tr">Ham veri okuyucu</span></span></div>
+        </div>
+      </li>
+    </ul>
+
+    <nav class="toc reveal" aria-label="Bu sayfada">
+      <span class="toc-title"><span class="t-tr">Bu sayfada</span></span>
+      <a href="#intro"><span class="t-tr">Giriş</span></a>
+      <a href="#reports"><span class="t-tr">Raporlar</span></a>
+      <a href="#platform"><span class="t-tr">Platform</span></a>
+      <a href="#approach"><span class="t-tr">Yaklaşım</span></a>
+      <a href="#difference"><span class="t-tr">Öne çıkanlar</span></a>
+      <a href="#roadmap"><span class="t-tr">Önümüzdeki yol</span></a>
+      <a href="#technology"><span class="t-tr">Teknoloji</span></a>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+
+    <article class="cs-body">
+      <section class="cs-section" id="intro">
+        <h2><span><span class="t-tr">Giriş</span></span></h2>
+      <p class="detail-lead">
+        <span class="t-tr">Fiyat kendiliğinden hareket etmez. Bir hareket genellikle, bir trader’ın beklemeye razı olmadığı ve bir piyasa emriyle mevcut en iyi fiyatı kabul ettiği yerde başlar. Bu hareketlerin çoğu birkaç an içinde söner, yalnızca bir kısmı sürer. Scalping olarak bilinen kısa vadeli alım satım, tam da bu hareketlere eşlik etmek demektir: hızlı bir giriş, küçük bir hedef ve erken bir çıkış. Zorluk, hangi hareketin arkasında gerçek bir güç olduğunu, hangisinin hedefe ulaşmadan geri döneceğini ayırt etmektedir.</span>
+      </p>
+      <p>
+        <span class="t-tr">Bu yargıyı, onu piyasanın kendi emir akışından öğrenmiş bir algoritmaya bıraktık.</span>
+      </p>
+      <p>
+        <span class="t-tr">Fast Scalp projesi, dünyanın en büyük vadeli işlem piyasalarından biri olan Chicago borsasının birkaç yıllık geçmişini her bir emir düzeyinde topladı. Bu veriden, makine öğrenmesi (ML) ve istatistiksel analizle, borsanın kendisinin aslına yakın bir yeniden kurulumu içinde test edilen bir kısa vadeli alım satım algoritmasına ulaştık. Varış noktası, sermayeyi insanların anlık tepkileriyle değil, bu algoritmayla yöneten otomatik bir alım satım masasıdır.</span>
+      </p>
+      </section>
+
+      <section class="cs-section" id="reports">
+        <h2><span><span class="t-tr">Simülatör raporları</span></span></h2>
+        <p>
+          <span class="t-tr">Bu projenin, her piyasa için emir gerçekleşme simülatöründen alınmış bir tam raporu var. Her rapor algoritmayı, emrin borsaya ulaşmasında sıfırdan 100 ms’ye kadar beş gecikme seviyesinde aynı anda gösterir. İkisini de indirebilir, bizden bağımsız olarak okuyup değerlendirebilirsiniz.</span>
+        </p>
+        <ul class="reports">
+          <li class="glow reveal">
+            <div class="report-head">
+              <b>GC</b>
+              <span><span class="t-tr">Altın vadeli işlemleri</span></span>
+            </div>
+            <ul class="report-facts">
+              <li><b><span class="t-tr">Ara 2019 – Tem 2026</span></b><span><span class="t-tr">test dönemi</span></span></li>
+              <li><b><span class="t-tr">1.696</span></b><span><span class="t-tr">işlem günü</span></span></li>
+              <li><b><span class="t-tr">25.228</span></b><span><span class="t-tr">temel senaryoda simüle edilen işlem</span></span></li>
+              <li><b><span class="t-tr">5 senaryo</span></b><span><span class="t-tr">5 gecikme seviyesi, sıfırdan 100 ms’ye</span></span></li>
+            </ul>
+            <div class="report-actions">
+              <a class="btn btn-primary" href="../../assets/reports/gc-fast-scalp.html" download>
+                <svg class="arr-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
+                <span class="t-tr">Raporu indirin</span>
+              </a>
+              <a class="btn btn-ghost" href="../../assets/reports/gc-fast-scalp.html" target="_blank" rel="noopener">
+                <span class="t-tr">Tarayıcıda açın</span>
+              </a>
+            </div>
+            <p class="report-size"><span class="t-tr">Kendi kendine yeten tek bir HTML dosyası, 2,3 MB, Farsça ve İngilizce</span></p>
+          </li>
+          <li class="glow reveal">
+            <div class="report-head">
+              <b>NQ</b>
+              <span><span class="t-tr">Nasdaq-100 vadeli işlemleri</span></span>
+            </div>
+            <ul class="report-facts">
+              <li><b><span class="t-tr">May 2017 – Haz 2026</span></b><span><span class="t-tr">test dönemi</span></span></li>
+              <li><b><span class="t-tr">2.342</span></b><span><span class="t-tr">işlem günü</span></span></li>
+              <li><b><span class="t-tr">194.302</span></b><span><span class="t-tr">temel senaryoda simüle edilen işlem</span></span></li>
+              <li><b><span class="t-tr">5 senaryo</span></b><span><span class="t-tr">5 gecikme seviyesi, sıfırdan 100 ms’ye</span></span></li>
+            </ul>
+            <div class="report-actions">
+              <a class="btn btn-primary" href="../../assets/reports/nq-fast-scalp.html" download>
+                <svg class="arr-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
+                <span class="t-tr">Raporu indirin</span>
+              </a>
+              <a class="btn btn-ghost" href="../../assets/reports/nq-fast-scalp.html" target="_blank" rel="noopener">
+                <span class="t-tr">Tarayıcıda açın</span>
+              </a>
+            </div>
+            <p class="report-size"><span class="t-tr">Kendi kendine yeten tek bir HTML dosyası, 2,4 MB, Farsça ve İngilizce</span></p>
+          </li>
+        </ul>
+        <p class="report-note">
+          <span class="t-tr">Bunlar, kaydedilmiş piyasa verisi üzerindeki simülasyon sonuçlarıdır (geriye dönük test, backtest); gerçek alım satım değildir ve geleceğe dair bir garanti değildir.</span>
+        </p>
+      </section>
+
+      <section class="cs-section" id="platform">
+        <h2><span><span class="t-tr">Platformun içinden</span></span></h2>
+        <p>
+          <span class="t-tr">Bunlar temsili görseller değil, projenin platformundan alınmış gerçek ekranlardır. Her görünüm, aynı emir emir piyasa verisini farklı bir açıdan gösterir. Büyütmek için görsele tıklayın.</span>
+        </p>
+
+        <div class="shots reveal" data-shots>
+          <div class="shots-tabs" role="tablist" aria-label="Platform görünümleri">
+            <button type="button" role="tab" aria-selected="true" data-name="Quantia Rendering · S15 · Trade">
+              <b><span class="t-tr">Emir olayları</span></b>
+              <span>S15 · B / S · stop · target</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="Quantia Rendering · S15 · Delta">
+              <b><span class="t-tr">Hacim profili ve delta</span></b>
+              <span>VWAP · POC · PureReal Δ · Trade Δ</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="Quantia Rendering · S15 · Sweep">
+              <b><span class="t-tr">Sweep görünümü</span></b>
+              <span>Bar-Hollow-Sweep · TrdOrder</span>
+            </button>
+          </div>
+
+          <figure class="shot-frame">
+            <div class="shot-bar">
+              <i></i><i></i><i></i>
+              <span class="shot-name">Quantia Rendering · S15 · Trade</span>
+              <button type="button" class="shot-zoom" aria-label="Büyüt">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg>
+              </button>
+            </div>
+            <div class="shot-stage">
+              <img class="is-on" src="../../assets/img/projects/fast-scalp/order-events.webp" data-full="../../assets/img/projects/fast-scalp/order-events-full.webp" width="1400" height="742" alt="Alış ve satış olaylarının etiketleriyle on beş saniyelik çubuklar">
+              <img src="../../assets/img/projects/fast-scalp/profile-delta.webp" data-full="../../assets/img/projects/fast-scalp/profile-delta-full.webp" width="1400" height="742" loading="lazy" alt="Hacim profili, VWAP ve iki delta paneliyle on beş saniyelik çubuklar">
+              <img src="../../assets/img/projects/fast-scalp/sweeps.webp" data-full="../../assets/img/projects/fast-scalp/sweeps-full.webp" width="1400" height="742" loading="lazy" alt="Sweep görünümünde üçgen işaretçilerle on beş saniyelik çubuklar">
+            </div>
+            <figcaption>
+              <p class="shot-cap is-on">
+                <span class="t-tr">On beş saniyelik çubuklar ve her çubuğun üzerinde olaylarının etiketleri: alış ya da satış tarafı (B / S), miktar ve zarar durdur (stop) ile hedef (target) gibi işaretler.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-tr">Hacim profili, VWAP çizgisi ve POC, VAH ve VAL seviyeleriyle on beş saniyelik çubuklar; altlarında PureReal Delta ve Trade Delta panelleri.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-tr">Sweep görünümünde aynı çubuklar: her biri kendi sayısıyla, gerçekleştikleri çubuğun üzerinde mavi ve turuncu üçgenler.</span>
+              </p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="cs-section" id="approach">
+        <h2><span><span class="t-tr">Yaklaşım</span></span></h2>
+      <p>
+        <span class="t-tr">Algoritma piyasa verisinden öğrenir ve aynı piyasanın bir yeniden kurulumu içinde ölçülür. Çalışma üç aşamada yapıldı:</span>
+      </p>
+      <ol class="steps">
+        <li class="glow reveal">
+          <strong class="t-tr">Ham veriden piyasanın tam resmine</strong>
+          <p class="t-tr">İşlem ekranı piyasanın yalnızca bir özetini gösterir. Biz borsanın kaydettiği her mesajı işliyor ve bekleyen emirlerin listesini her an için yeniden kuruyoruz. Sonuç, her fiyat hareketinden önce piyasanın iki tarafında neler olduğunu gösteren bir resimdir.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-tr">Piyasanın resminden algoritmaya</strong>
+          <p class="t-tr">Makine öğrenmesinde bilgisayar, elle yazılmış kuralları izlemek yerine örüntüleri gerçek örneklerden öğrenir. Algoritmamız bu yolla ve istatistiksel analizin desteğiyle, kısa bir hareketin hangi durumlarda sürdüğünü, hangi durumlarda geri döndüğünü öğrendi. Çıktısı üç karardır: ne zaman girileceği, işlemin zarar durdur (stop) seviyesinin nereye konacağı ve ne zaman çıkılacağı.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-tr">Algoritmadan test edilmiş emir gerçekleştirmeye</strong>
+          <p class="t-tr">Bir piyasa emri kuyrukta beklemez ve borsaya ulaşır ulaşmaz gerçekleşir; ancak oraya ulaşması zaman alır. Bu arada en iyi fiyat gitmiş olabilir ve işlem, karar verilirken görülen fiyattan daha kötü bir fiyattan gerçekleşebilir. Simülatörümüz tam olarak bunu yeniden kurar; ölçüt de tüm maliyetlerden sonraki net finansal sonuçtur.</p>
+        </li>
+      </ol>
+      </section>
+
+      <section class="cs-section" id="difference">
+        <h2><span><span class="t-tr">Öne çıkanlar</span></span></h2>
+      <ul class="points">
+        <li class="glow reveal">
+          <strong class="t-tr">İnsanların kafasında değil, sistemde yaşayan bilgi.</strong>
+          <p class="t-tr">Kısa vadeli alım satım geleneksel olarak trader’ın gözüne ve tepkilerine yaslanır; yorgunluk ve duygu da sonucu doğrudan etkiler. Algoritmamız bildiklerini piyasa verisinden öğrendi ve bunu her işlemde aynı biçimde uygular. Bu bilgi kayıtlıdır, tekrarlanabilir ve yeniden eğitilebilir.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-tr">Art arda işlem değil, seçicilik.</strong>
+          <p class="t-tr">Kısa vadeli alım satımda her işlemin kârı küçüktür; maliyeti, yani komisyon ve alış ile satış fiyatı arasındaki fark ise her işlemde ödenir. Bu yüzden her harekette işlem yapmak zararla sonuçlanır; seçici olmayan girişi gerçek maliyetle ölçtük ve zarar etti. Algoritmanın değeri tam da buradadır: hangi harekete girmeye değeceğini, hangisinin geçip gitmesine izin verileceğini ayırt etmek.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-tr">Emir gerçekleştirmede de geçerliliğini koruyan bir sonuç.</strong>
+          <p class="t-tr">Birçok kısa vadeli strateji kâğıt üzerinde kârlıdır, pratikte değil; çünkü testleri bir emrin ekranda görünen fiyattan gerçekleştiğini varsayar. Simülatörümüzde bir emir geç ulaşır ve tam o anda mevcut olan hacimden gerçekleşir. Simülasyonun doğruluğu, borsanın ham verisinden yapılan bağımsız bir yeniden kurulumla karşılaştırılarak denetlendi.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-tr">Tanımlı risk, gerçekçi bir tahminle.</strong>
+          <p class="t-tr">Her işlemin giriş anından itibaren belirlenmiş bir zarar durdur seviyesi vardır ve işlemin ömrü kısadır. Bu seviye kesin bir tavan değildir: sert hareketlerde çıkış daha kötü bir fiyattan gerçekleşebilir. Simülatör bu durumu da görür ve raporlanan, nominal değil gerçek zarardır.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-tr">Gerçek bir bulguyu tesadüften ayırmak.</strong>
+          <p class="t-tr">Öğrenme modelleri, gelecek hakkında hiçbir şey öğrenmeden geçmişi ezberleyebilir. Bunu önlemek için algoritma, çalkantılı olanlar dahil, eğitimde görmediği dönemler üzerinde ölçülür. Ayrıca her bulgu, anlamlı her türlü örüntüden kasıtlı olarak arındırılmış veriyle yan yana konur; orada da ortaya çıkıyorsa elenir.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-tr">Altyapı ihtiyacını, parasını ödemeden önce bilmek.</strong>
+          <p class="t-tr">Kısa vadeli alım satımda kâr ile zarar arasındaki çizgiyi, bir emrin borsaya ulaşma hızı ve her işlemin komisyonu belirler; ikisinden herhangi birini iyileştirmek de pahalıdır. Algoritmayı bu koşulların bir dizisinde aynı anda test ediyoruz. Böylece herhangi bir finansal taahhütten önce, planın hangi koşullarda savunulabilir olduğu açıktır.</p>
+        </li>
+      </ul>
+      </section>
+
+      <section class="cs-section" id="roadmap">
+        <h2><span><span class="t-tr">Önümüzdeki yol</span></span></h2>
+      <ol class="phases">
+        <li class="is-done glow reveal">
+          <span class="phase-mark"><span class="t-tr">Tamamlandı</span></span>
+          <p class="t-tr">Veri altyapısı, piyasanın yeniden kurulumu, alım satım algoritması, emir gerçekleşme simülatörü ve raporlama sistemi kuruldu.</p>
+        </li>
+        <li class="is-now glow reveal">
+          <span class="phase-mark"><span class="t-tr">Şu anda</span></span>
+          <p class="t-tr">Bugün algoritmayı çok yıllık bir testte, farklı hız ve komisyon koşullarında ve birden fazla piyasada ölçüyoruz.</p>
+        </li>
+        <li class="glow reveal">
+          <span class="phase-mark"><span class="t-tr">Sırada</span></span>
+          <p class="t-tr">Ardından canlı veriye bağlantı, borsaya yakın konumda kurulum ve sınırlı sermayeyle bir deneme dönemi gelecek.</p>
+        </li>
+        <li class="glow reveal">
+          <span class="phase-mark"><span class="t-tr">Son adım</span></span>
+          <p class="t-tr">Son adım, otomatik bir masa olarak gerçek sermayeyle alım satımdır.</p>
+        </li>
+      </ol>
+      </section>
+
+      <section class="cs-section" id="technology">
+        <h2><span><span class="t-tr">Teknoloji</span></span></h2>
+      <p>
+        <span class="t-tr">Öğrenme modelleri Python ile kurulur ve bir grafik işlemcide eğitilir. Piyasa yeniden kurulum motoru ve emir gerçekleşme simülatörü C# ile, ham veri okuyucu ise Rust ile yazıldı. Her testin sonucu standart, iki dilli bir raporda sunulur; bir değişiklik de ancak önceki sürümle karşılaştırıldıktan ve otomatik testlerden geçtikten sonra kabul edilir.</span>
+      </p>
+      </section>
+    </article>
+
+  </div>
+</section>
+
+<section class="section ruled">
+  <div class="wrap">
+    <nav class="projnav reveal" aria-label="Diğer projeler">
+      <a class="projnav-card is-prev glow" href="../projects/cme-mm.html">
+        <span class="projnav-dir"><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="t-tr">Önceki proje</span></span>
+        <b><span class="t-tr">CME Market Maker</span></b>
+      </a>
+      <a class="projnav-card is-next glow" href="../projects/blocktrade.html">
+        <span class="projnav-dir"><span class="t-tr">Sonraki proje</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <b><span class="t-tr">BlockTrade</span></b>
+      </a>
+    </nav>
+  </div>
+  <div class="wrap cs-end">
+    <a class="link-arrow link-back" href="../projects.html">
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <span class="t-tr">Tüm projeler</span>
+    </a>
+    <a class="btn btn-ghost" href="../contact.html">
+      <span class="t-tr">İletişime geçin</span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top footer-panel">
+      <div class="footer-brand">
+        <a class="logo" href="../index.html" aria-label="Nova Group">
+          <img class="logo-mark" src="../../assets/img/nova-mark-512.png" alt="" width="512" height="512" loading="lazy">
+          <span class="logo-text t-tr"><b>NOVA</b> GROUP</span>
+        </a>
+        <p>
+          <span class="t-tr">Piyasa emir akışına dayalı alım satım algoritmaları araştırıyor ve geliştiriyoruz — 2020’den beri.</span>
+        </p>
+      </div>
+
+      <nav class="footer-col" aria-label="Alt bilgi">
+        <h2><span class="t-tr">Site</span></h2>
+        <a href="../index.html"><span class="t-tr">Ana sayfa</span></a>
+        <a href="../about.html"><span class="t-tr">Hakkımızda</span></a>
+        <a href="../projects.html"><span class="t-tr">Projeler</span></a>
+        <a href="../contact.html"><span class="t-tr">İletişim</span></a>
+      </nav>
+
+      <div class="footer-col footer-contact">
+        <h2><span class="t-tr">Bize ulaşın</span></h2>
+        <a class="footer-mail" href="mailto:info@novacapital.fund">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
+          <bdi>info@novacapital.fund</bdi>
+        </a>
+      </div>
+    </div>
+
+    <p class="footer-bottom">
+      <span class="t-tr">© 2026 Nova Group. Bu web sitesinin ve içeriğinin tüm hakları Nova Group’a aittir. Her türlü kötüye kullanım yasal işleme tabidir.</span>
+    </p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Başa dön"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
+
+<script src="../../assets/js/main.js?v=57"></script>
+</body>
+</html>

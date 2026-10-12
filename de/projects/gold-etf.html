@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr" data-lang="de" data-sec="2">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gold ETF Arbitrage – Wechsel zwischen den Goldfonds der Teheraner Börse | Nova Group</title>
+<meta name="description" content="Das Projekt Gold ETF Arbitrage: ein Algorithmus, der Kapital zwischen den Goldfonds der Teheraner Börse umschichtet, in der Simulation gegen das Halten von Gold getestet.">
+<link rel="canonical" href="https://novacapital.fund/de/projects/gold-etf.html">
+<link rel="alternate" hreflang="en" href="https://novacapital.fund/projects/gold-etf.html">
+<link rel="alternate" hreflang="fa" href="https://novacapital.fund/fa/projects/gold-etf.html">
+<link rel="alternate" hreflang="fr" href="https://novacapital.fund/fr/projects/gold-etf.html">
+<link rel="alternate" hreflang="de" href="https://novacapital.fund/de/projects/gold-etf.html">
+<link rel="alternate" hreflang="tr" href="https://novacapital.fund/tr/projects/gold-etf.html">
+<link rel="alternate" hreflang="x-default" href="https://novacapital.fund/projects/gold-etf.html">
+<meta property="og:title" content="Gold ETF Arbitrage – Wechsel zwischen den Goldfonds der Teheraner Börse | Nova Group">
+<meta property="og:description" content="Ein Algorithmus, der Kapital zwischen den Goldfonds der Teheraner Börse umschichtet, auf dem Weg zu einem automatisierten Goldportfolio.">
+<meta property="og:url" content="https://novacapital.fund/de/projects/gold-etf.html">
+<meta property="og:locale" content="de_DE">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:locale:alternate" content="fa_IR">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:locale:alternate" content="tr_TR">
+<meta property="og:image" content="https://novacapital.fund/assets/img/og/gold-etf-de.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://novacapital.fund/assets/img/og/gold-etf-de.jpg">
+<meta name="author" content="Nova Group">
+<meta name="theme-color" content="#05080e">
+<meta name="color-scheme" content="dark light">
+<meta name="supported-color-schemes" content="dark light">
+<meta name="darkreader-lock">
+<meta property="og:site_name" content="Nova Group">
+<meta property="og:type" content="website">
+
+<link rel="icon" type="image/svg+xml" href="../../assets/img/nova-mark.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="../../assets/img/favicon-64.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../../assets/img/favicon-192.png">
+<link rel="apple-touch-icon" href="../../assets/img/favicon-192.png">
+
+<!-- The fonts are served from this site; the one this language needs first is fetched early. -->
+<link rel="preload" href="../../assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/css/style.css?v=57">
+
+<!-- Runs before first paint: Samsung Internet flag, the reader's language, the page-transition direction. -->
+<script src="../../assets/js/early.js?v=57"></script>
+</head>
+<body>
+
+<a href="#main" class="skip-link"><span class="t-de">Zum Inhalt springen</span></a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="../index.html" aria-label="Nova Group">
+      <img class="logo-mark" src="../../assets/img/nova-mark-512.png" alt="" width="512" height="512" fetchpriority="high">
+      <span class="logo-text t-de"><b>NOVA</b> GROUP</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Hauptmenü">
+      <a href="../index.html"><span class="t-de">Start</span></a>
+      <a href="../about.html"><span class="t-de">Über uns</span></a>
+      <a href="../projects.html" aria-current="page"><span class="t-de">Projekte</span></a>
+      <a href="../contact.html"><span class="t-de">Kontakt</span></a>
+    </nav>
+
+    <div class="nav-actions">
+      <details class="lang" id="lang">
+        <summary class="lang-btn" id="langBtn" aria-label="Sprache: Deutsch"><img class="flag" src="../../assets/img/flags/de.png" alt="" width="24" height="16"><span class="lang-name">Deutsch</span><svg class="lang-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <ul class="lang-menu" id="langMenu"><li><a href="../../projects/gold-etf.html" hreflang="en" lang="en"><img class="flag" src="../../assets/img/flags/en.png" alt="" width="24" height="16" loading="lazy"><span>English</span></a></li><li><a href="../../fa/projects/gold-etf.html" hreflang="fa" lang="fa"><img class="flag" src="../../assets/img/flags/fa.png" alt="" width="24" height="16" loading="lazy"><span>فارسی</span></a></li><li><a href="../../fr/projects/gold-etf.html" hreflang="fr" lang="fr"><img class="flag" src="../../assets/img/flags/fr.png" alt="" width="24" height="16" loading="lazy"><span>Français</span></a></li><li><span class="lang-here" aria-current="true" lang="de"><img class="flag" src="../../assets/img/flags/de.png" alt="" width="24" height="16" loading="lazy"><span>Deutsch</span></span></li><li><a href="../../tr/projects/gold-etf.html" hreflang="tr" lang="tr"><img class="flag" src="../../assets/img/flags/tr.png" alt="" width="24" height="16" loading="lazy"><span>Türkçe</span></a></li></ul>
+      </details>
+      <button class="burger" id="burger" type="button" aria-label="Menü" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="page-hero">
+  <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="wrap">
+    <nav class="crumbs reveal" aria-label="Seitenpfad">
+      <a href="../projects.html"><span class="t-de">Projekte</span></a>
+      <span aria-hidden="true">/</span>
+      <span><span class="t-de">Gold ETF Arbitrage</span></span>
+    </nav>
+
+    <h1 class="reveal"><span class="t-de">Gold ETF Arbitrage</span></h1>
+    <p class="page-lead reveal">
+      <span class="t-de">Ein Algorithmus, der Kapital zwischen den Goldfonds der Teheraner Börse umschichtet, auf dem Weg zu einem automatisierten Goldportfolio, das darauf abzielt, mehr zu erzielen als das Halten von Gold.</span>
+    </p>
+
+    <div class="cs-meta reveal">
+      <span class="status"><span class="t-de">Im Test</span></span>
+      <ul class="tags">
+        <li>Python</li>
+        <li><span class="t-de">Goldfonds</span></li>
+        <li><span class="t-de">Teheraner Börse</span></li>
+        <li><span class="t-de">Relativer Wert</span></li>
+        <li><span class="t-de">Orderbuch</span></li>
+        <li><span class="t-de">Ausführungs­simulator</span></li>
+      </ul>
+    </div>
+
+    <ul class="facts facts-glass">
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-de">Daten</span></span>
+        <b><span class="t-de">36 Goldfonds</span></b>
+        <p>
+          <span class="t-de">Ihre Orderbücher und Trades über 995 Handelstage, von Juli 2022 bis September 2026.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-de">Simulation</span></span>
+        <b><span class="t-de">60.957 Trades</span></b>
+        <p>
+          <span class="t-de">Simulierte Trades im Basisszenario, über 395 Handelstage und 21 Fonds.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-de">Tests</span></span>
+        <b><span class="t-de">82 volle Simulationen</span></b>
+        <p>
+          <span class="t-de">Durchgeführt, um die Regel auf verschiedenen Zeiträumen, Gebührenstufen und Annahmen zu prüfen, bevor sie berichtet wird.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-de">Technologie</span></span>
+        <b><span class="t-de">1 Sprache</span></b>
+        <div class="fact-list">
+          <div><i>Python</i><span><span class="t-de">Daten, Simulator und Algorithmus</span></span></div>
+        </div>
+      </li>
+    </ul>
+
+    <nav class="toc reveal" aria-label="Auf dieser Seite">
+      <span class="toc-title"><span class="t-de">Auf dieser Seite</span></span>
+      <a href="#intro"><span class="t-de">Einführung</span></a>
+      <a href="#reports"><span class="t-de">Bericht</span></a>
+      <a href="#approach"><span class="t-de">Ansatz</span></a>
+      <a href="#difference"><span class="t-de">Was heraussticht</span></a>
+      <a href="#roadmap"><span class="t-de">Der weitere Weg</span></a>
+      <a href="#technology"><span class="t-de">Technologie</span></a>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+
+    <article class="cs-body">
+      <section class="cs-section" id="intro">
+        <h2><span><span class="t-de">Einführung</span></span></h2>
+      <p class="detail-lead">
+        <span class="t-de">Mehr als dreißig Fonds an der Teheraner Börse tun eines: Sie halten Gold. Sie halten dasselbe Gold, und doch wird jeder zu seinem eigenen Preis im Verhältnis zu dem gehandelt, was er besitzt. In jedem Moment ist ein Fonds etwas teuer und ein anderer etwas billig, und welcher teuer und welcher billig ist, ändert sich von Stunde zu Stunde. Die meisten Anleger wählen einen Fonds und bleiben darin. Die Unterschiede sind klein, sodass Gebühren und dünne Orderbücher sie verschlingen, sofern nicht beides genau gemessen wird.</span>
+      </p>
+      <p>
+        <span class="t-de">Wir haben beschlossen, alle Goldfonds als ein einziges Asset zu behandeln und dieses Asset über denjenigen Fonds zu halten, der zum jeweiligen Zeitpunkt am günstigsten zu besitzen ist, und nur dann zu wechseln, wenn der Wechsel seine eigenen Kosten deckt.</span>
+      </p>
+      <p>
+        <span class="t-de">Das Projekt verfügt über die Orderbücher und Trades von 36 Goldfonds von Juli 2022 bis September 2026, 995 Handelstage, zusammen mit dem veröffentlichten Netto­inventar­wert jedes Fonds. Auf diesen Aufzeichnungen haben wir einen Simulator gebaut, der die Börse Sekunde für Sekunde abspielt, und eine Wechselregel über 21 Fonds von Januar 2025 bis September 2026 getestet, bei vier Stufen der Brokergebühr. In dieser Simulation lag das Portfolio in 19 von 21 Monaten am Ende vor dem bloßen Halten des meistgehandelten Goldfonds. Das Ziel ist ein automatisiertes Goldportfolio, das in jedem Moment vollständig in Gold investiert ist und darauf abzielt, am Ende mehr Gold zu haben als am Anfang.</span>
+      </p>
+      </section>
+
+      <section class="cs-section" id="reports">
+        <h2><span><span class="t-de">Simulator­bericht</span></span></h2>
+        <p>
+          <span class="t-de">Der Bericht unten zeigt diesen Test in vier Szenarien. Zwischen ihnen variiert nur die Brokergebühr: kein Rabatt sowie 25 %, 35 % und 45 % Rabatt. Die Regel ist in allen vier dieselbe. Sie können den Bericht herunterladen und unabhängig von uns lesen und bewerten.</span>
+        </p>
+        <ul class="reports">
+          <li class="glow reveal">
+            <div class="report-head">
+              <b><span class="t-de">GOLD</span></b>
+              <span><span class="t-de">21 Goldfonds der Teheraner Börse</span></span>
+            </div>
+            <ul class="report-facts">
+              <li><b><span class="t-de">Jan. 2025 bis Sept. 2026</span></b><span><span class="t-de">Testzeitraum</span></span></li>
+              <li><b><span class="t-de">395</span></b><span><span class="t-de">Handelstage</span></span></li>
+              <li><b><span class="t-de">60.957</span></b><span><span class="t-de">simulierte Trades im Basisszenario</span></span></li>
+              <li><b><span class="t-de">4 Szenarien</span></b><span><span class="t-de">4 Gebührenstufen</span></span></li>
+            </ul>
+            <div class="report-actions">
+              <a class="btn btn-primary" href="../../assets/reports/gold-etf-report.html" download>
+                <svg class="arr-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
+                <span class="t-de">Bericht herunterladen</span>
+              </a>
+              <a class="btn btn-ghost" href="../../assets/reports/gold-etf-report.html" target="_blank" rel="noopener">
+                <span class="t-de">Im Browser öffnen</span>
+              </a>
+            </div>
+            <p class="report-size"><span class="t-de">Eine eigenständige HTML-Datei, 4,9 MB, auf Englisch</span></p>
+          </li>
+        </ul>
+        <p class="report-note">
+          <span class="t-de">Dies ist ein Simulations­ergebnis auf den aufgezeichneten Orderbüchern des Marktes, kein echter Handel und keine Garantie für die Zukunft. In dieser Simulation werden keine konkurrierenden Trader modelliert.</span>
+        </p>
+      </section>
+
+      <section class="cs-section" id="approach">
+        <h2><span><span class="t-de">Ansatz</span></span></h2>
+      <p>
+        <span class="t-de">Wir fragen nie, ob Gold steigen oder fallen wird; wir fragen nur, welcher Fonds gerade jetzt der günstigste Weg ist, es zu halten. Die Arbeit verläuft in drei Stufen:</span>
+      </p>
+      <ol class="steps">
+        <li class="glow reveal">
+          <strong class="t-de">Von Preisen und Netto­inventar­werten zu einem Maßstab für jeden Fonds</strong>
+          <p class="t-de">Der Preis eines Fonds allein sagt nichts, weil jeder Fonds eine andere Anteilsgröße und eine andere Mischung aus Goldbarren und Münzen hat. Wir setzen den Marktpreis jedes Fonds ins Verhältnis zum Wert dessen, was er hält, und zur selben Kennzahl des meistgehandelten Goldfonds, der unsere Benchmark ist. Das Ergebnis ist eine Zahl je Fonds, die sagt, wie teuer oder billig er im Vergleich zu seinem eigenen Normalzustand ist. Alle Fonds werden auf dieser einen Skala gelesen.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-de">Vom Maßstab zu einem Wechsel, der sich selbst trägt</strong>
+          <p class="t-de">Ein billiger Fonds ist noch kein Grund zu wechseln. Jeder Wechsel kostet eine Verkaufsgebühr, eine Kaufgebühr und die Spanne zwischen Käufern und Verkäufern in zwei Orderbüchern. Die Regel schichtet Kapital nur um, wenn der Unterschied deutlich größer ist als diese Kosten, und holt es zurück, wenn sich der Unterschied geschlossen hat. Ein Wechsel, der seine Kosten nicht wieder einspielen würde, wird nicht vorgenommen.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-de">Von der Entscheidung zur ausgeführten Order</strong>
+          <p class="t-de">Goldfonds außer dem größten werden nur dünn gehandelt, daher ist eine Entscheidung nur so viel wert, wie das Orderbuch tatsächlich ausführen kann. Der Algorithmus bemisst jede Order nach der Tiefe auf dem Bildschirm, bearbeitet die beiden Seiten eines Wechsels gemeinsam und hält das Konto durchgehend in Gold. Er verkauft nicht leer und nimmt keinen Kredit auf, um die Position zu vergrößern.</p>
+        </li>
+      </ol>
+      <p>
+        <span class="t-de">Der Simulator liegt unter allen drei Stufen. Er spielt die aufgezeichneten Orderbücher aller Fonds nebeneinander ab, Sekunde um Sekunde. Unsere Orders reihen sich in die Warte­schlange hinter den Orders ein, die bereits dort waren, werden teilweise oder gar nicht ausgeführt und nehmen die Liquidität weg, die sie verbrauchen. Marktdaten erreichen den Algorithmus einige Sekunden verspätet, und Orders brauchen Zeit, bis sie eintreffen, wie es in der Praxis der Fall wäre. Der Simulator führt auch das Konto selbst und weist jede Order zurück, die über das Intraday-Limit des Brokers hinaus Kredit aufnehmen würde, etwas verkaufen würde, das nicht gehalten wird, oder außerhalb der Preislimits des Tages handeln würde.</span>
+      </p>
+      <p>
+        <span class="t-de">Das Projekt begann innerhalb von <a href="../projects/tsetmc.html">TSETMC</a> und nutzt dieselben Markt­aufzeichnungen. Es ist ein eigenes Projekt, weil seine Fragestellung, sein Simulator und sein Ziel seine eigenen sind.</span>
+      </p>
+      </section>
+
+      <section class="cs-section" id="difference">
+        <h2><span><span class="t-de">Was heraussticht</span></span></h2>
+      <ul class="points">
+        <li class="glow reveal">
+          <strong class="t-de">Gemessen wird in Gold, nicht in Toman.</strong>
+          <p class="t-de">Gold selbst kann steigen oder fallen, und ein Goldfonds wird ihm folgen. Unsere Benchmark ist daher nicht Cash, sondern das bloße Halten des meistgehandelten Goldfonds. Jede Zahl, die wir berichten, ist das Portfolio geteilt durch das, was dasselbe Geld wert wäre, wenn es in diesem Fonds geblieben wäre. Ein Ergebnis von null bedeutet „nicht besser als das Halten von Gold“, nicht „kein Verlust“.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-de">Immer vollständig in Gold.</strong>
+          <p class="t-de">Das Portfolio liegt nie in Cash, um auf einen besseren Tag zu warten, und wettet nie gegen Gold. Zu jedem Handelsschluss hält es Goldfonds. In jeder Simulation der endgültigen Regel wurde kein geliehenes Geld über Nacht gehalten; der Simulator prüft das zu jedem Handelsschluss und hält es fest, falls es je vorkommt.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-de">Ein Simulator, der das Konto ehrlich führt.</strong>
+          <p class="t-de">Ein gewöhnlicher Backtest nimmt an, dass jede Order zum angezeigten Preis ausgeführt wird. Unserer spielt die aufgezeichneten Orderbücher Sekunde für Sekunde ab, stellt unsere Orders in die Warte­schlange und führt sie nur gegen Volumen aus, das wirklich vorhanden war. Das Basisszenario enthält 60.957 simulierte Trades über 395 Handelstage. Der Algorithmus sieht den Markt mit Verzögerung, und seine Orders treffen mit Verzögerung ein.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-de">Gebühren stehen von der ersten Zeile an in der Rechnung.</strong>
+          <p class="t-de">Der Vorteil eines Fonds gegenüber einem anderen ist klein, daher entscheidet die Brokergebühr, ob sich ein Wechsel lohnt. Wir haben die gesamte Simulation bei vier Gebührenstufen erneut laufen lassen, von keinem Rabatt bis zu 45 % Rabatt, mit unveränderter Regel. Der Bericht zeigt alle vier, sodass der Leser sehen kann, wie viel vom Ergebnis von der Gebühr abhängt.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-de">Getestet, wo sie scheitern konnte.</strong>
+          <p class="t-de">Eine Regel, die auf einem Zeitraum funktioniert, hatte vielleicht nur Glück. Wir haben die Logik der Regel an den Preisen von 2022 bis 2024 geprüft, einem Zeitraum, den keine Simulation verwendet hatte, und wir haben die beiden Hälften des Testzeitraums getrennt gelesen, weil die Börse zwischen ihnen ein Handelslimit geändert hat. Bei einer früheren Version der Regel haben wir außerdem den gewählten Fonds zu denselben Zeitpunkten durch einen zufällig gewählten ersetzt, und diese Version verlor Geld. Insgesamt stehen 82 Simulationen über den gesamten Zeitraum hinter dem berichteten Ergebnis.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-de">Ein Ergebnis, das Sie ohne uns lesen können.</strong>
+          <p class="t-de">Der Simulator­bericht ist eine Datei, die sich im Browser öffnet. Er zeigt das Portfolio gegenüber dem Halten von Gold Monat für Monat, die schlechteste Phase hinter Gold ebenso wie den besten Monat, und was die Gebühren gekostet haben. Er nennt auch seine eigenen Grenzen: Er ist eine Simulation, und er modelliert keine anderen Trader, die um dieselben Orders konkurrieren.</p>
+        </li>
+      </ul>
+      </section>
+
+      <section class="cs-section" id="roadmap">
+        <h2><span><span class="t-de">Der weitere Weg</span></span></h2>
+      <ol class="phases">
+        <li class="is-done glow reveal">
+          <span class="phase-mark"><span class="t-de">Erledigt</span></span>
+          <p class="t-de">Die Markt­aufzeichnungen, der Ausführungs­simulator und die Wechselregel sind gebaut, und die Regel wurde in der Simulation über 21 Fonds und vier Gebührenstufen getestet.</p>
+        </li>
+        <li class="is-now glow reveal">
+          <span class="phase-mark"><span class="t-de">Aktuell</span></span>
+          <p class="t-de">Klärung dessen, was die Simulation nicht wissen kann, etwa der realen Verzögerung der Live-Daten und unserer Orders, und die Vorbereitung darauf, den Algorithmus am Live-Markt laufen zu lassen, ohne Orders zu senden.</p>
+        </li>
+        <li class="glow reveal">
+          <span class="phase-mark"><span class="t-de">Als Nächstes</span></span>
+          <p class="t-de">Der Betrieb am Live-Markt auf dem Papier, der Vergleich jedes Tages mit der Wiedergabe desselben Tages im Simulator und danach ein kleiner Pilot, um reale Ausführungen an simulierten zu messen.</p>
+        </li>
+        <li class="glow reveal">
+          <span class="phase-mark"><span class="t-de">Letzter Schritt</span></span>
+          <p class="t-de">Automatische Verwaltung von Kapital als Goldportfolio, als Produkt neben dem Vermögens­verwaltungs­fonds.</p>
+        </li>
+      </ol>
+      </section>
+
+      <section class="cs-section" id="technology">
+        <h2><span><span class="t-de">Technologie</span></span></h2>
+      <p>
+        <span class="t-de">Das gesamte Projekt ist in Python geschrieben: die Aufbereitung der Markt­aufzeichnungen, der Ausführungs­simulator, der Algorithmus und die Analyse. Eine vollständige Simulation von 21 Fonds über 21 Monate, Sekunde für Sekunde, dauert auf einem Rechner etwa fünfzehn Minuten, und mehrere laufen nebeneinander. Keine Änderung wird angenommen, ohne 55 automatisierte Tests zu bestehen; einige davon wurden geschrieben, um einen früheren Fehler zu reproduzieren, damit er nicht zurückkehren kann.</span>
+      </p>
+      </section>
+    </article>
+
+  </div>
+</section>
+
+<section class="section ruled">
+  <div class="wrap">
+    <nav class="projnav reveal" aria-label="Weitere Projekte">
+      <a class="projnav-card is-prev glow" href="../projects/tsetmc.html">
+        <span class="projnav-dir"><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="t-de">Vorheriges Projekt</span></span>
+        <b><span class="t-de">TSETMC</span></b>
+      </a>
+      <a class="projnav-card is-next glow" href="../projects/defi-lp.html">
+        <span class="projnav-dir"><span class="t-de">Nächstes Projekt</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <b><span class="t-de">DeFi LP</span></b>
+      </a>
+    </nav>
+  </div>
+  <div class="wrap cs-end">
+    <a class="link-arrow link-back" href="../projects.html">
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <span class="t-de">Alle Projekte</span>
+    </a>
+    <a class="btn btn-ghost" href="../contact.html">
+      <span class="t-de">Kontakt aufnehmen</span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top footer-panel">
+      <div class="footer-brand">
+        <a class="logo" href="../index.html" aria-label="Nova Group">
+          <img class="logo-mark" src="../../assets/img/nova-mark-512.png" alt="" width="512" height="512" loading="lazy">
+          <span class="logo-text t-de"><b>NOVA</b> GROUP</span>
+        </a>
+        <p>
+          <span class="t-de">Erforschung und Entwicklung von Handels­algorithmen aus dem Orderflow des Marktes – seit 2020.</span>
+        </p>
+      </div>
+
+      <nav class="footer-col" aria-label="Fußzeile">
+        <h2><span class="t-de">Website</span></h2>
+        <a href="../index.html"><span class="t-de">Start</span></a>
+        <a href="../about.html"><span class="t-de">Über uns</span></a>
+        <a href="../projects.html"><span class="t-de">Projekte</span></a>
+        <a href="../contact.html"><span class="t-de">Kontakt</span></a>
+      </nav>
+
+      <div class="footer-col footer-contact">
+        <h2><span class="t-de">Kontakt</span></h2>
+        <a class="footer-mail" href="mailto:info@novacapital.fund">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
+          <bdi>info@novacapital.fund</bdi>
+        </a>
+      </div>
+    </div>
+
+    <p class="footer-bottom">
+      <span class="t-de">© 2026 Nova Group. Alle Rechte an dieser Website und ihren Inhalten liegen bei Nova Group. Jeder Missbrauch wird rechtlich verfolgt.</span>
+    </p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Nach oben"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
+
+<script src="../../assets/js/main.js?v=57"></script>
+</body>
+</html>

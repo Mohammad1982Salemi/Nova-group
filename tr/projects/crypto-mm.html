@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr" data-lang="tr" data-sec="2">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crypto Market Maker — kripto piyasasında veri altyapısı ve piyasa yapıcılığı | Nova Group</title>
+<meta name="description" content="Crypto Market Maker projesi: 16 küresel borsada 22 kripto paranın piyasası, her bir işlem ve emir düzeyinde, ve bunun üzerine kurulan bir piyasa yapıcılığı algoritması.">
+<link rel="canonical" href="https://novacapital.fund/tr/projects/crypto-mm.html">
+<link rel="alternate" hreflang="en" href="https://novacapital.fund/projects/crypto-mm.html">
+<link rel="alternate" hreflang="fa" href="https://novacapital.fund/fa/projects/crypto-mm.html">
+<link rel="alternate" hreflang="fr" href="https://novacapital.fund/fr/projects/crypto-mm.html">
+<link rel="alternate" hreflang="de" href="https://novacapital.fund/de/projects/crypto-mm.html">
+<link rel="alternate" hreflang="tr" href="https://novacapital.fund/tr/projects/crypto-mm.html">
+<link rel="alternate" hreflang="x-default" href="https://novacapital.fund/projects/crypto-mm.html">
+<meta property="og:title" content="Crypto Market Maker — kripto piyasasında veri altyapısı ve piyasa yapıcılığı | Nova Group">
+<meta property="og:description" content="Kripto piyasası için veri altyapısı ve bir piyasa yapıcılığı algoritması; otomatik bir piyasa yapıcılığı masasına giden yolda.">
+<meta property="og:url" content="https://novacapital.fund/tr/projects/crypto-mm.html">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:locale:alternate" content="fa_IR">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:locale:alternate" content="de_DE">
+<meta property="og:image" content="https://novacapital.fund/assets/img/og/crypto-mm-tr.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://novacapital.fund/assets/img/og/crypto-mm-tr.jpg">
+<meta name="author" content="Nova Group">
+<meta name="theme-color" content="#05080e">
+<meta name="color-scheme" content="dark light">
+<meta name="supported-color-schemes" content="dark light">
+<meta name="darkreader-lock">
+<meta property="og:site_name" content="Nova Group">
+<meta property="og:type" content="website">
+
+<link rel="icon" type="image/svg+xml" href="../../assets/img/nova-mark.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="../../assets/img/favicon-64.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../../assets/img/favicon-192.png">
+<link rel="apple-touch-icon" href="../../assets/img/favicon-192.png">
+
+<!-- The fonts are served from this site; the one this language needs first is fetched early. -->
+<link rel="preload" href="../../assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/inter-latin-ext-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/css/style.css?v=57">
+
+<!-- Runs before first paint: Samsung Internet flag, the reader's language, the page-transition direction. -->
+<script src="../../assets/js/early.js?v=57"></script>
+</head>
+<body>
+
+<a href="#main" class="skip-link"><span class="t-tr">İçeriğe geç</span></a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="../index.html" aria-label="Nova Group">
+      <img class="logo-mark" src="../../assets/img/nova-mark-512.png" alt="" width="512" height="512" fetchpriority="high">
+      <span class="logo-text t-tr"><b>NOVA</b> GROUP</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Ana menü">
+      <a href="../index.html"><span class="t-tr">Ana sayfa</span></a>
+      <a href="../about.html"><span class="t-tr">Hakkımızda</span></a>
+      <a href="../projects.html" aria-current="page"><span class="t-tr">Projeler</span></a>
+      <a href="../contact.html"><span class="t-tr">İletişim</span></a>
+    </nav>
+
+    <div class="nav-actions">
+      <details class="lang" id="lang">
+        <summary class="lang-btn" id="langBtn" aria-label="Dil: Türkçe"><img class="flag" src="../../assets/img/flags/tr.png" alt="" width="24" height="16"><span class="lang-name">Türkçe</span><svg class="lang-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <ul class="lang-menu" id="langMenu"><li><a href="../../projects/crypto-mm.html" hreflang="en" lang="en"><img class="flag" src="../../assets/img/flags/en.png" alt="" width="24" height="16" loading="lazy"><span>English</span></a></li><li><a href="../../fa/projects/crypto-mm.html" hreflang="fa" lang="fa"><img class="flag" src="../../assets/img/flags/fa.png" alt="" width="24" height="16" loading="lazy"><span>فارسی</span></a></li><li><a href="../../fr/projects/crypto-mm.html" hreflang="fr" lang="fr"><img class="flag" src="../../assets/img/flags/fr.png" alt="" width="24" height="16" loading="lazy"><span>Français</span></a></li><li><a href="../../de/projects/crypto-mm.html" hreflang="de" lang="de"><img class="flag" src="../../assets/img/flags/de.png" alt="" width="24" height="16" loading="lazy"><span>Deutsch</span></a></li><li><span class="lang-here" aria-current="true" lang="tr"><img class="flag" src="../../assets/img/flags/tr.png" alt="" width="24" height="16" loading="lazy"><span>Türkçe</span></span></li></ul>
+      </details>
+      <button class="burger" id="burger" type="button" aria-label="Menü" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="page-hero">
+  <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="wrap">
+    <nav class="crumbs reveal" aria-label="Sayfa yolu">
+      <a href="../projects.html"><span class="t-tr">Projeler</span></a>
+      <span aria-hidden="true">/</span>
+      <span><span class="t-tr">Crypto Market Maker</span></span>
+    </nav>
+
+    <h1 class="reveal"><span class="t-tr">Crypto Market Maker</span></h1>
+    <p class="page-lead reveal">
+      <span class="t-tr">Kripto piyasası için veri altyapısı ve bir piyasa yapıcılığı algoritması; otomatik bir piyasa yapıcılığı masasına giden yolda.</span>
+    </p>
+
+    <div class="cs-meta reveal">
+      <span class="status"><span class="t-tr">Geliştirme aşamasında</span></span>
+      <ul class="tags">
+        <li>Rust</li><li>C#</li>
+        <li><span class="t-tr">Kripto</span></li>
+        <li><span class="t-tr">Piyasa yapıcılığı</span></li>
+        <li><span class="t-tr">Veri altyapısı</span></li>
+        <li><span class="t-tr">Makine öğrenmesi</span></li>
+      </ul>
+    </div>
+
+    <ul class="facts facts-glass">
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-tr">Kapsam</span></span>
+        <b><span class="t-tr">22 kripto, 16 borsa</span></b>
+        <p>
+          <span class="t-tr">Spot ve vadeli işlem piyasaları, her bir işlem ve emir düzeyinde.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-tr">Kapsam</span></span>
+        <b><span class="t-tr">60 terabayt</span></b>
+        <p>
+          <span class="t-tr">Her kripto para için tam bir yıllık ham veri.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-tr">Veri bütünlüğü</span></span>
+        <b><span class="t-tr">376 milyon işlem</span></b>
+        <p>
+          <span class="t-tr">126 piyasadan alınan bir aylık örneklemde yeniden kuruldu; kaynakla hiçbir fark yok.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-tr">Teknoloji</span></span>
+        <b><span class="t-tr">2 dil, 2 rol</span></b>
+        <div class="fact-list">
+          <div><i>Rust</i><span><span class="t-tr">Toplama, depolama ve çekirdek</span></span></div>
+          <div><i>C#</i><span><span class="t-tr">Grafik</span></span></div>
+        </div>
+      </li>
+    </ul>
+
+    <nav class="toc reveal" aria-label="Bu sayfada">
+      <span class="toc-title"><span class="t-tr">Bu sayfada</span></span>
+      <a href="#intro"><span class="t-tr">Giriş</span></a>
+      <a href="#platform"><span class="t-tr">Platform</span></a>
+      <a href="#approach"><span class="t-tr">Yaklaşım</span></a>
+      <a href="#difference"><span class="t-tr">Öne çıkanlar</span></a>
+      <a href="#roadmap"><span class="t-tr">Önümüzdeki yol</span></a>
+      <a href="#technology"><span class="t-tr">Teknoloji</span></a>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+
+    <article class="cs-body">
+      <section class="cs-section" id="intro">
+        <h2><span><span class="t-tr">Giriş</span></span></h2>
+      <p class="detail-lead">
+        <span class="t-tr">Kripto piyasası hiç kapanmaz ve tek bir yerde de değildir. Her kripto para aynı anda onlarca borsada işlem görür ve bunların her birinde birinin her zaman almaya ve satmaya hazır olması gerekir. Bu her an hazır karşı taraf piyasa yapıcıdır: biraz daha ucuza alır, biraz daha pahalıya satar ve fiyatın hangi yöne gideceğini bilmesi gerekmez. Riski, büyük bir hareketin hemen öncesinde yanlış tarafta işlem yapmış olmaktır; birkaç borsaya yayılmış bir piyasada ise bu hareket çoğu zaman başka bir yerde başlar.</span>
+      </p>
+      <p>
+        <span class="t-tr">Algoritmayı yazmadan önce bu piyasanın tamamını kaydettik ve kaydetmeye devam ediyoruz.</span>
+      </p>
+      <p>
+        <span class="t-tr">Crypto Market Maker projesi, 16 küresel borsada yoğun işlem gören 22 kripto paranın piyasasını her bir işlem ve emir düzeyinde topluyor. Çalışmanın kapsamı her kripto para için tam bir yıl, yani 60 terabayt ham veridir. Varış noktası, sermayeyi aynı geçmiş üzerinde eğitilmiş ve test edilmiş bir algoritmayla yöneten otomatik bir piyasa yapıcılığı masasıdır.</span>
+      </p>
+      </section>
+
+      <section class="cs-section" id="platform">
+        <h2><span><span class="t-tr">Platformun içinden</span></span></h2>
+        <p>
+          <span class="t-tr">Bunlar temsili görseller değil, projenin platformundan alınmış gerçek ekranlardır. Üç görünüm de tek bir piyasayı gösterir: Binance’teki BTCUSDT sürekli vadeli sözleşmesi, Eylül 2026’nın 29 günü, arşivlenen işlemlerden oluşturulmuş 15 dakikalık çubuklarla. Büyütmek için görsele tıklayın.</span>
+        </p>
+
+        <div class="shots reveal" data-shots>
+          <div class="shots-tabs" role="tablist" aria-label="Platform görünümleri">
+            <button type="button" role="tab" aria-selected="true" data-name="BTCUSDT · binance perpetual · M15 · Bar-Band">
+              <b><span class="t-tr">Çubuklar ve bant</span></b>
+              <span>Bars: Bar-Band</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="BTCUSDT · binance perpetual · M15 · Volume · Δ candles">
+              <b><span class="t-tr">Hacim ve delta</span></b>
+              <span>Sub: Volume · Δ candles</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="BTCUSDT · binance perpetual · M15 · Cum Δ bars">
+              <b><span class="t-tr">Kümülatif delta</span></b>
+              <span>Bars: Line · Sub: Cum Δ bars</span>
+            </button>
+          </div>
+
+          <figure class="shot-frame">
+            <div class="shot-bar">
+              <i></i><i></i><i></i>
+              <span class="shot-name">BTCUSDT · binance perpetual · M15 · Bar-Band</span>
+              <button type="button" class="shot-zoom" aria-label="Büyüt">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg>
+              </button>
+            </div>
+            <div class="shot-stage">
+              <img class="is-on" src="../../assets/img/projects/crypto-mm/bar-band.webp" data-full="../../assets/img/projects/crypto-mm/bar-band-full.webp" width="1400" height="742" alt="Her çubuğun çevresindeki bantla 15 dakikalık BTCUSDT çubukları">
+              <img src="../../assets/img/projects/crypto-mm/volume-delta.webp" data-full="../../assets/img/projects/crypto-mm/volume-delta-full.webp" width="1400" height="742" loading="lazy" alt="Hacim paneli ve delta mumları paneliyle 15 dakikalık BTCUSDT çubukları">
+              <img src="../../assets/img/projects/crypto-mm/cum-delta.webp" data-full="../../assets/img/projects/crypto-mm/cum-delta-full.webp" width="1400" height="742" loading="lazy" alt="Kümülatif delta paneliyle çizgi grafik olarak BTCUSDT fiyatı">
+            </div>
+            <figcaption>
+              <p class="shot-cap is-on">
+                <span class="t-tr">Bar-Band görünümünde on beş dakikalık çubuklar: her çubuk, çevresindeki gölgeli bantla birlikte.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-tr">Aynı çubuklar ve altlarında iki panel: her çubuğun hacmi ve delta mumları (Δ candles).</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-tr">Çizgi olarak fiyat ve altında çubuklar hâlinde çizilmiş kümülatif delta (Cum Δ bars).</span>
+              </p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="cs-section" id="approach">
+        <h2><span><span class="t-tr">Yaklaşım</span></span></h2>
+      <p>
+        <span class="t-tr">Önce piyasayı eksiksiz ve doğru biçimde kaydediyor, sonra yeniden kuruyor ve algoritmayı aynı piyasanın bir yeniden kurulumu içinde eğitip ölçüyoruz. Çalışma üç aşamada ilerliyor:</span>
+      </p>
+      <ol class="steps">
+        <li class="glow reveal">
+          <strong class="t-tr">Piyasadan arşive</strong>
+          <p class="t-tr">Otomatik bir hat, 16 borsanın tamamının spot ve vadeli işlem verisini gün gün alır, sıkıştırır, doğrular ve depolar. Sonuç, her dosyası kaynakla karşılaştırılarak ölçülmüş tek biçimli bir arşivdir. Bu aşama kuruldu ve günün her saatinde çalışıyor.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-tr">Arşivden piyasanın tam resmine</strong>
+          <p class="t-tr">Platformumuz piyasanın her gününü tam olarak yaşandığı gibi yeniden kurar ve bir grafikte gösterir. İşlemler bölümü kuruldu ve test edildi. Emir defterinin, yani her andaki bekleyen emirler listesinin yeniden kurulması bir sonraki adım olacak.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-tr">Piyasanın resminden algoritmaya ve test edilmiş emir gerçekleştirmeye</strong>
+          <p class="t-tr">Piyasa yapıcılığı algoritması, makine öğrenmesi ve istatistiksel analizle, emrin nereye yerleştirileceğini, hangi işlemden kaçınılacağını ve ne zaman kenara çekilineceğini aynı veriden öğrenecek. Borsanın kendi davranışını yeniden kuran bir emir gerçekleşme simülatöründe test edilecek. Ölçüt, tüm maliyetlerden sonraki net finansal sonuç olacak.</p>
+        </li>
+      </ol>
+      <p>
+        <span class="t-tr">Piyasa yapıcılığının yanında kısa vadeli alım satım: kısa fiyat hareketlerine eşlik eden ikinci bir algoritma, aynı altyapı ve aynı simülatör üzerine kurulacak. İkisi de tek bir bilgiye yaslanır: hangi hareketin süreceğini ayırt etmek. Piyasa yapıcı bu bilgiyi kenara çekilmek için, kısa vadeli trader ise işleme girmek için kullanır.</span>
+      </p>
+      </section>
+
+      <section class="cs-section" id="difference">
+        <h2><span><span class="t-tr">Öne çıkanlar</span></span></h2>
+      <ul class="points">
+        <li class="glow reveal">
+          <strong class="t-tr">Gözetmen olmadan çalışan bir hat.</strong>
+          <p class="t-tr">16 kaynaktan onlarca terabayt toplamak, insan gözetimine bağlıysa, gecedeki ilk kesintide durur. Hattımız ağ kesintilerinden, kaynak hatalarından ve dolu diskten kendi kendine toparlanır; yalnızca kendiliğinden düzelmeyecek olanı bir kenara ayırır. Bu davranış 50’den fazla arıza senaryosuna karşı test edildi.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-tr">Doğruluğu kanıtlanmış veri.</strong>
+          <p class="t-tr">Eksik veriyle eğitilen bir algoritma, piyasanın örüntüleri yerine verinin hatalarını öğrenir. Dosyalarımızın her biri depolanmadan önce üç bağımsız ölçümle kaynakla karşılaştırılır; bir aylık bir örneklemde 126 piyasadan 376 milyon işlem yeniden kuruldu ve kaynakla hiçbir fark göstermedi. Kaynağın kendisinde bir boşluk bulunan her yerde bu boşluk adıyla kaydedilir ve takip edilir; gizli kalmaz.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-tr">Yarısından küçük boyut, tek bir rakam bile kaybetmeden.</strong>
+          <p class="t-tr">Onlarca terabaytı saklamanın ve taşımanın sürekli bir maliyeti vardır. Depolama biçimimiz aynı veriyi, kaynağın sıkıştırılmış boyutunun yarısından azında tutar ve özgün dosya bundan bayt bayt geri elde edilir. Depolama maliyeti ve aktarım süresi de aynı oranda düşer.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-tr">Tek bir borsanın ya da tek bir kripto paranın değil, tüm piyasanın resmi.</strong>
+          <p class="t-tr">Fiyat tek bir borsada oluşmaz; yalnızca kendi borsasını gören bir piyasa yapıcı, bir hareketi ancak kendisine ulaştığında anlar. Biz 16 borsanın tamamını tek bir biçimde ve tek bir saatle yan yana tutuyoruz. Algoritma yalnızca bir piyasadan değil, piyasalar arasındaki ilişkiden öğrenebilir.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-tr">Geleceği bilmeyen bir yeniden kurulum.</strong>
+          <p class="t-tr">Birçok test, o anda henüz ulaşmamış bilgiyi farkında olmadan kullanır. Her işlem için iki zaman kaydedilir: borsada gerçekleştiği an ve haberinin ulaştığı an. Platform her anda yalnızca o gün görülebilecek olanı gösterir ve çıktısı işlemci sayısı kaç olursa olsun aynıdır.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-tr">Sonucu emir gerçekleştirmede de geçerliliğini koruyan bir simülasyon.</strong>
+          <p class="t-tr">Birçok strateji kâğıt üzerinde kârlıdır, pratikte değil; çünkü testleri bir emrin ekranda görünen fiyattan hemen gerçekleştiğini varsayar. Simülatörümüzde bir emir borsaya gecikmeyle ulaşacak, kuyrukta sırasını alacak ve kısmen gerçekleşecek ya da kuyruğun sonunda kalacak. Algoritma bir dizi hız ve komisyon koşulunda test edilecek; böylece herhangi bir finansal taahhütten önce, planın hangi koşullarda savunulabilir olduğu açık olacak.</p>
+        </li>
+      </ul>
+      </section>
+
+      <section class="cs-section" id="roadmap">
+        <h2><span><span class="t-tr">Önümüzdeki yol</span></span></h2>
+      <ol class="phases">
+        <li class="is-done glow reveal">
+          <span class="phase-mark"><span class="t-tr">Tamamlandı</span></span>
+          <p class="t-tr">Otomatik toplama hattı, depolama biçimi, veri indirme paneli ve platformun işlemler bölümü kuruldu ve gerçek veri üzerinde test edildi.</p>
+        </li>
+        <li class="is-now glow reveal">
+          <span class="phase-mark"><span class="t-tr">Şu anda</span></span>
+          <p class="t-tr">Bugün toplama hattı kripto paraları birbiri ardına alıyor; biz de platformun sonraki bölümlerini kuruyoruz.</p>
+        </li>
+        <li class="glow reveal">
+          <span class="phase-mark"><span class="t-tr">Sırada</span></span>
+          <p class="t-tr">Ardından emir defterinin yeniden kurulması, emir gerçekleşme simülatörü ve önce piyasa yapıcılığı algoritmasının, sonra kısa vadeli alım satım algoritmasının geliştirilip test edilmesi gelecek.</p>
+        </li>
+        <li class="glow reveal">
+          <span class="phase-mark"><span class="t-tr">Son adım</span></span>
+          <p class="t-tr">Son adım, canlı veriye bağlanmak, sınırlı sermayeyle bir deneme dönemi ve borsanın motorunun yanındaki bir sunucuda gerçek sermayeyle piyasa yapıcılığıdır.</p>
+        </li>
+      </ol>
+      </section>
+
+      <section class="cs-section" id="technology">
+        <h2><span><span class="t-tr">Teknoloji</span></span></h2>
+      <p>
+        <span class="t-tr">Toplama hattı, depolama biçimi ve platformun çekirdeği Rust ile, grafik ise C# ile yazıldı. Veri işleme paraleldir: bir aylık 376 milyon işlem üç dakikadan kısa sürede oluşturulur ve kendi kendini denetler. Hiçbir sürüm, baştan sona eksiksiz ve hatasız tek bir çalıştırma yapılmadan yayımlanmaz.</span>
+      </p>
+      </section>
+    </article>
+
+  </div>
+</section>
+
+<section class="section ruled">
+  <div class="wrap">
+    <nav class="projnav reveal" aria-label="Diğer projeler">
+      <a class="projnav-card is-prev glow" href="../projects/defi-lp.html">
+        <span class="projnav-dir"><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="t-tr">Önceki proje</span></span>
+        <b><span class="t-tr">DeFi LP</span></b>
+      </a>
+      <a class="projnav-card is-next glow" href="../projects/cme-mm.html">
+        <span class="projnav-dir"><span class="t-tr">Sonraki proje</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <b><span class="t-tr">CME Market Maker</span></b>
+      </a>
+    </nav>
+  </div>
+  <div class="wrap cs-end">
+    <a class="link-arrow link-back" href="../projects.html">
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <span class="t-tr">Tüm projeler</span>
+    </a>
+    <a class="btn btn-ghost" href="../contact.html">
+      <span class="t-tr">İletişime geçin</span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top footer-panel">
+      <div class="footer-brand">
+        <a class="logo" href="../index.html" aria-label="Nova Group">
+          <img class="logo-mark" src="../../assets/img/nova-mark-512.png" alt="" width="512" height="512" loading="lazy">
+          <span class="logo-text t-tr"><b>NOVA</b> GROUP</span>
+        </a>
+        <p>
+          <span class="t-tr">Piyasa emir akışına dayalı alım satım algoritmaları araştırıyor ve geliştiriyoruz — 2020’den beri.</span>
+        </p>
+      </div>
+
+      <nav class="footer-col" aria-label="Alt bilgi">
+        <h2><span class="t-tr">Site</span></h2>
+        <a href="../index.html"><span class="t-tr">Ana sayfa</span></a>
+        <a href="../about.html"><span class="t-tr">Hakkımızda</span></a>
+        <a href="../projects.html"><span class="t-tr">Projeler</span></a>
+        <a href="../contact.html"><span class="t-tr">İletişim</span></a>
+      </nav>
+
+      <div class="footer-col footer-contact">
+        <h2><span class="t-tr">Bize ulaşın</span></h2>
+        <a class="footer-mail" href="mailto:info@novacapital.fund">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
+          <bdi>info@novacapital.fund</bdi>
+        </a>
+      </div>
+    </div>
+
+    <p class="footer-bottom">
+      <span class="t-tr">© 2026 Nova Group. Bu web sitesinin ve içeriğinin tüm hakları Nova Group’a aittir. Her türlü kötüye kullanım yasal işleme tabidir.</span>
+    </p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Başa dön"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
+
+<script src="../../assets/js/main.js?v=57"></script>
+</body>
+</html>

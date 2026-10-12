@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr" data-lang="tr" data-sec="0">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova Group — emir akışına dayalı alım satım algoritmaları</title>
+<meta name="description" content="Nova Group, 2020’den beri piyasa emir akışı ve alım satım algoritmalarının geliştirilmesi üzerinde çalışıyor: piyasa derinliğindeki işlem ve emir verisi, bir emir gerçekleşme simülatörü ve tahmin modelleri.">
+<link rel="canonical" href="https://novacapital.fund/tr/">
+<link rel="alternate" hreflang="en" href="https://novacapital.fund/">
+<link rel="alternate" hreflang="fa" href="https://novacapital.fund/fa/">
+<link rel="alternate" hreflang="fr" href="https://novacapital.fund/fr/">
+<link rel="alternate" hreflang="de" href="https://novacapital.fund/de/">
+<link rel="alternate" hreflang="tr" href="https://novacapital.fund/tr/">
+<link rel="alternate" hreflang="x-default" href="https://novacapital.fund/">
+<meta property="og:title" content="Nova Group — emir akışına dayalı alım satım algoritmaları">
+<meta property="og:description" content="Fiyat, emir akışının bir sonucudur.">
+<meta property="og:url" content="https://novacapital.fund/tr/">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:locale:alternate" content="fa_IR">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:locale:alternate" content="de_DE">
+<meta property="og:image" content="https://novacapital.fund/assets/img/og/nova-tr.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://novacapital.fund/assets/img/og/nova-tr.jpg">
+<meta name="author" content="Nova Group">
+<meta name="theme-color" content="#05080e">
+<meta name="color-scheme" content="dark light">
+<meta name="supported-color-schemes" content="dark light">
+<meta name="darkreader-lock">
+<meta property="og:site_name" content="Nova Group">
+<meta property="og:type" content="website">
+
+<link rel="icon" type="image/svg+xml" href="../assets/img/nova-mark.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/img/favicon-64.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/img/favicon-192.png">
+<link rel="apple-touch-icon" href="../assets/img/favicon-192.png">
+
+<!-- The fonts are served from this site; the one this language needs first is fetched early. -->
+<link rel="preload" href="../assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/inter-latin-ext-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/style.css?v=57">
+
+<!-- Runs before first paint: Samsung Internet flag, the reader's language, the page-transition direction. -->
+<script src="../assets/js/early.js?v=57"></script>
+</head>
+<body>
+
+<a href="#main" class="skip-link"><span class="t-tr">İçeriğe geç</span></a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="index.html" aria-label="Nova Group">
+      <img class="logo-mark" src="../assets/img/nova-mark-512.png" alt="" width="512" height="512" fetchpriority="high">
+      <span class="logo-text t-tr"><b>NOVA</b> GROUP</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Ana menü">
+      <a href="index.html" aria-current="page"><span class="t-tr">Ana sayfa</span></a>
+      <a href="about.html"><span class="t-tr">Hakkımızda</span></a>
+      <a href="projects.html"><span class="t-tr">Projeler</span></a>
+      <a href="contact.html"><span class="t-tr">İletişim</span></a>
+    </nav>
+
+    <div class="nav-actions">
+      <details class="lang" id="lang">
+        <summary class="lang-btn" id="langBtn" aria-label="Dil: Türkçe"><img class="flag" src="../assets/img/flags/tr.png" alt="" width="24" height="16"><span class="lang-name">Türkçe</span><svg class="lang-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <ul class="lang-menu" id="langMenu"><li><a href="../" hreflang="en" lang="en"><img class="flag" src="../assets/img/flags/en.png" alt="" width="24" height="16" loading="lazy"><span>English</span></a></li><li><a href="../fa/" hreflang="fa" lang="fa"><img class="flag" src="../assets/img/flags/fa.png" alt="" width="24" height="16" loading="lazy"><span>فارسی</span></a></li><li><a href="../fr/" hreflang="fr" lang="fr"><img class="flag" src="../assets/img/flags/fr.png" alt="" width="24" height="16" loading="lazy"><span>Français</span></a></li><li><a href="../de/" hreflang="de" lang="de"><img class="flag" src="../assets/img/flags/de.png" alt="" width="24" height="16" loading="lazy"><span>Deutsch</span></a></li><li><span class="lang-here" aria-current="true" lang="tr"><img class="flag" src="../assets/img/flags/tr.png" alt="" width="24" height="16" loading="lazy"><span>Türkçe</span></span></li></ul>
+      </details>
+      <button class="burger" id="burger" type="button" aria-label="Menü" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ===== hero ===== -->
+<section class="hero">
+  <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <div class="wrap hero-grid">
+
+    <div class="hero-copy">
+      <p class="hero-badge reveal">
+        <span class="live-dot"></span>
+        <span class="t-tr">Nova Group · 2020’den beri algoritmik araştırma</span>
+      </p>
+
+      <h1 class="reveal">
+        <span class="t-tr">Fiyat,<br><em>emir akışının</em><br>bir sonucudur.</span>
+      </h1>
+
+      <p class="hero-sub reveal">
+        <span class="t-tr">Piyasa derinliğindeki işlemleri ve emirleri seviye 1’den 3’e kadar topluyor, piyasanın emir gerçekleştirme motorunu hassas biçimde simüle ediyor ve bunun üzerinde alım satım algoritmaları geliştirip test ediyoruz.</span>
+      </p>
+
+      <div class="hero-cta reveal">
+        <a class="btn btn-primary" href="about.html#method">
+          <span class="t-tr">Yöntemimiz</span>
+          <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="projects.html">
+          <span class="t-tr">Projeler</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- A market-by-order book, simulated in the browser by main.js. Not market data. -->
+    <figure class="hero-visual reveal">
+      <div class="mbo" id="mbo" lang="en" aria-hidden="true">
+        <div class="mbo-head">
+          <span class="mbo-title">MBO <i>market by order</i></span>
+          <span class="mbo-live"><span class="live-dot"></span>SIMULATED</span>
+        </div>
+        <svg class="mbo-spark" viewBox="0 0 300 40" preserveAspectRatio="none"><polyline/><path/></svg>
+        <div class="mbo-cols"><span>Price</span><span>Queue · time priority →</span><span>Qty</span><span>Ord</span></div>
+        <div class="mbo-side mbo-asks"></div>
+        <div class="mbo-mid">
+          <span>Spread<b data-f="spread"></b></span>
+          <span>Mid<b data-f="mid"></b></span>
+          <span>Last<b data-f="last"></b></span>
+        </div>
+        <div class="mbo-side mbo-bids"></div>
+        <div class="mbo-tape"></div>
+      </div>
+      <!-- the visitor's own orders: main.js works them in the book like any other order -->
+      <div class="mbo-try">
+        <div class="tk-row">
+          <div class="tk-seg" data-k="type" role="group" aria-label="Emir türü">
+            <button type="button" data-v="market" aria-pressed="true"><span class="t-tr">Piyasa</span></button>
+            <button type="button" data-v="limit" aria-pressed="false"><span class="t-tr">Limit</span></button>
+          </div>
+          <div class="tk-seg" data-k="delay" role="group" aria-label="Emrin piyasaya ulaşmasından önceki gecikme">
+            <span class="tk-cap"><span class="t-tr">Gecikme</span></span>
+            <button type="button" data-v="0" aria-pressed="true"><span class="t-tr">Yok</span></button>
+            <button type="button" data-v="500" aria-pressed="false"><span class="t-tr">0,5 sn</span></button>
+            <button type="button" data-v="2000" aria-pressed="false"><span class="t-tr">2 sn</span></button>
+          </div>
+        </div>
+        <div class="tk-row">
+          <div class="tk-step">
+            <span class="tk-cap"><span class="t-tr">Miktar</span></span>
+            <span class="tk-ctl">
+              <button type="button" data-step="-1" data-of="size" aria-label="Daha küçük miktar">−</button>
+              <input class="tk-size" type="text" inputmode="numeric" maxlength="2" value="10" autocomplete="off" aria-label="Emir miktarı, sözleşme cinsinden">
+              <button type="button" data-step="1" data-of="size" aria-label="Daha büyük miktar">+</button>
+            </span>
+          </div>
+          <div class="tk-step tk-price">
+            <span class="tk-cap"><span class="t-tr">Fiyat</span></span>
+            <span class="tk-ctl">
+              <button type="button" data-step="-1" aria-label="Bir fiyat adımı aşağı">−</button>
+              <output class="tk-px"></output>
+              <button type="button" data-step="1" aria-label="Bir fiyat adımı yukarı">+</button>
+            </span>
+          </div>
+        </div>
+        <div class="mbo-btns">
+          <button type="button" class="mbo-btn is-buy" data-side="buy"><b><span class="t-tr">Al</span></b><small></small></button>
+          <button type="button" class="mbo-btn is-sell" data-side="sell"><b><span class="t-tr">Sat</span></b><small></small></button>
+        </div>
+        <p class="mbo-say" aria-live="polite">
+          <span class="t-tr">Kendiniz deneyin: bir miktar ve bir emir türü seçin, ardından gönderin.</span>
+        </p>
+        <div class="tk-stats" hidden>
+          <div><span><span class="t-tr">Gerçekleşen</span></span><b data-s="filled"></b></div>
+          <div><span><span class="t-tr">Ort. fiyat</span></span><b data-s="avg"></b></div>
+          <div><span><span class="t-tr">Fiyat hareketi</span></span><b data-s="moved"></b></div>
+          <div><span><span class="t-tr">Kayma</span></span><b data-s="slip"></b></div>
+        </div>
+        <ul class="tk-work" hidden aria-label="Bekleyen emirleriniz"></ul>
+        <p class="tk-pos" hidden>
+          <span class="tk-pos-text"></span>
+          <button type="button" class="tk-reset"><span class="t-tr">Sıfırla</span></button>
+        </p>
+      </div>
+      <figcaption>
+        <span class="t-tr">Emir düzeyinde (MBO) bir emir defteri — simülasyondur, piyasa verisi değildir.</span>
+      </figcaption>
+    </figure>
+
+  </div>
+
+  <div class="wrap">
+    <ul class="facts facts-glass">
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-tr">Geçmiş</span></span>
+        <b><span class="t-tr">2020’den beri</span></b>
+        <p>
+          <span class="t-tr">Finansal piyasaların incelenmesi ve alım satım algoritmalarının geliştirilmesi; o günden bugüne.</span>
+        </p>
+      </li>
+
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-tr">Veri</span></span>
+        <b><span class="t-tr">Fiyat, işlem, emir defteri</span></b>
+        <div class="fact-list">
+          <div><i>Price</i><span><span class="t-tr">Fiyat</span></span></div>
+          <div><i>Trades</i><span><span class="t-tr">İşlemler</span></span></div>
+          <div><i>Book</i><span><span class="t-tr">Derinlikteki emirler</span></span></div>
+        </div>
+      </li>
+
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-tr">Piyasalar</span></span>
+        <b><span class="t-tr">Üç tür piyasa</span></b>
+        <div class="fact-list">
+          <div><i>CME</i><span><span class="t-tr">Chicago vadeli işlemler &amp; opsiyonlar</span></span></div>
+          <div><i>Crypto</i><span><span class="t-tr">Merkezî &amp; merkeziyetsiz</span></span></div>
+          <div><i>TSETMC</i><span><span class="t-tr">Tahran hisse senetleri &amp; opsiyonlar</span></span></div>
+        </div>
+      </li>
+
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-tr">Yöntemler</span></span>
+        <b><span class="t-tr">Veri bilimi &amp; modeller</span></b>
+        <div class="fact-list">
+          <div><i>DS</i><span><span class="t-tr">Veri bilimi &amp; istatistik</span></span></div>
+          <div><i>ML·DL</i><span><span class="t-tr">ML ve derin öğrenme</span></span></div>
+          <div><i>RL</i><span><span class="t-tr">Pekiştirmeli öğrenme</span></span></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== method ===== -->
+<section class="section">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="eyebrow"><span class="t-tr">Yöntemimiz</span></p>
+      <h2><span class="t-tr">Üç katman, aşağıdan yukarıya</span></h2>
+      <p>
+        <span class="t-tr">Her proje bu üç katmanın üzerine kurulur. Üst katman, altındaki olmadan var olmaz.</span>
+      </p>
+    </header>
+
+    <ol class="layers layers-home">
+      <li class="glow reveal">
+        <span class="layer-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3Z"/><path d="M4 7v5c0 1.7 3.6 3 8 3s8-1.3 8-3V7"/><path d="M4 12v5c0 1.7 3.6 3 8 3s8-1.3 8-3v-5"/></svg></span>
+        <span class="layer-tag"><span class="t-tr">Temel</span></span>
+        <h3><span class="t-tr">Her projeye özel, bağımsız bir platform</span></h3>
+        <p><span class="t-tr">Her projenin, sıfırdan kurulan ve hiçbir hazır araca bağlı olmayan kendi veri ve emir gerçekleştirme platformu olur.</span></p>
+      </li>
+      <li class="glow reveal">
+        <span class="layer-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="5" height="5" rx="1"/><rect x="9.5" y="5" width="5" height="5" rx="1"/><rect x="16" y="5" width="5" height="5" rx="1"/><rect x="3" y="14" width="5" height="5" rx="1"/><rect x="9.5" y="14" width="5" height="5" rx="1"/><path d="M17 16.5h4M19.5 14.5l2 2-2 2"/></svg></span>
+        <span class="layer-tag"><span class="t-tr">Motor</span></span>
+        <h3><span class="t-tr">Derin bir emir gerçekleşme simülatörü</span></h3>
+        <p><span class="t-tr">Piyasanın emir gerçekleştirme motorunu yeniden kuruyoruz: emirler kuyruğa girer, sırasını bekler ve kısmen gerçekleşir.</span></p>
+      </li>
+      <li class="glow reveal">
+        <span class="layer-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4v16h16"/><path d="M7.5 15.5l4-5 3 3 5-7"/><circle cx="19.5" cy="6.5" r="1.4"/></svg></span>
+        <span class="layer-tag"><span class="t-tr">Zekâ</span></span>
+        <h3><span class="t-tr">Analiz, grafikler ve tahmin modelleri</span></h3>
+        <p><span class="t-tr">İşlem ve emir akışından, istatistik ve model eğitimi yoluyla bir tahmin algoritmasına.</span></p>
+      </li>
+    </ol>
+
+    <a class="link-arrow sec-foot reveal" href="about.html#method">
+      <span class="t-tr">Yöntemin tamamı</span>
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ===== two tracks ===== -->
+<section class="section section-tint">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="eyebrow"><span class="t-tr">İki kol</span></p>
+      <h2><span class="t-tr">Likiditeyi hem sağlıyoruz hem alıyoruz</span></h2>
+      <p>
+        <span class="t-tr">Her iki kol da aynı emir akışı anlayışından beslenir ve her birinin kendi projeleri vardır.</span>
+      </p>
+    </header>
+
+<div class="tracks">
+  <article class="track glow reveal">
+    <span class="track-tag">Maker</span>
+    <h3><span class="t-tr">Piyasa yapıcı bakışı</span></h3>
+    <p><span class="t-tr">Likidite sağlamak ve piyasa yapmak: emirlerimiz fiyatın iki yanında kuyrukta bekler, başkaları da bu emirlerin karşısında işlem yapar.</span></p>
+
+    <!-- a small simulated book, filled in by main.js: our quotes wait their turn on both sides -->
+    <div class="mbo mbo-mini" data-track="maker" lang="en" aria-hidden="true">
+      <div class="mbo-head">
+        <span class="mbo-title">MAKER <i>resting in the queue</i></span>
+        <span class="mbo-live"><span class="live-dot"></span>SIMULATED</span>
+      </div>
+      <div class="mbo-side mbo-asks"></div>
+      <div class="mbo-mid mbo-note"></div>
+      <div class="mbo-side mbo-bids"></div>
+      <div class="mbo-tape"></div>
+      <div class="mbo-legend"><span class="chip own">3</span>our order</div>
+    </div>
+  </article>
+
+  <article class="track glow reveal">
+    <span class="track-tag">Taker</span>
+    <h3><span class="t-tr">Likidite alıcı bakışı</span></h3>
+    <p><span class="t-tr">Likidite tüketmek ve işleme girmek: emrimiz alım satım farkını (spread) geçer ve bekleyen emirleri kuyruğun başından alır.</span></p>
+
+    <!-- a small simulated book, filled in by main.js: our order arrives and sweeps the levels -->
+    <div class="mbo mbo-mini" data-track="taker" lang="en" aria-hidden="true">
+      <div class="mbo-head">
+        <span class="mbo-title">TAKER <i>crossing the spread</i></span>
+        <span class="mbo-live"><span class="live-dot"></span>SIMULATED</span>
+      </div>
+      <div class="mbo-side mbo-asks"></div>
+      <div class="mbo-mid mbo-note"></div>
+      <div class="mbo-side mbo-bids"></div>
+      <div class="mbo-tape"></div>
+      <div class="mbo-legend"><span class="chip is-hit">3</span>taken by our order</div>
+    </div>
+  </article>
+</div>
+  </div>
+</section>
+
+<!-- ===== projects ===== -->
+<section class="section">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="eyebrow"><span class="t-tr">Projeler</span></p>
+      <h2><span class="t-tr">Üzerinde çalıştıklarımız</span></h2>
+    </header>
+
+    <div class="proj-list">
+<a class="proj glow reveal" href="projects/cme-mm.html">
+  <div class="proj-main">
+    <div class="proj-top">
+      <span class="status"><span class="t-tr">Test aşamasında</span></span>
+      <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v18M5 7h7M3 11h9M7 15h5M12 9h6M12 13h9M12 17h5"/></svg></span>
+    </div>
+    <h3><span class="t-tr">CME Market Maker</span></h3>
+    <p class="proj-sub">
+      <span class="t-tr">Chicago vadeli işlem piyasası için derin öğrenmeye dayalı bir piyasa yapıcılığı algoritması; otomatik bir piyasa yapıcılığı masasına giden yolda</span>
+    </p>
+    <p class="proj-desc">
+      <span class="t-tr">Chicago borsasının birkaç yıllık geçmişi, emir emir toplandı. Bu veriden, borsanın kendisinin aslına yakın bir yeniden kurulumu içinde test edilen bir piyasa yapıcılığı algoritmasına ulaştık.</span>
+    </p>
+    <div class="proj-foot">
+      <span class="proj-report is-on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg><span class="t-tr">İndirilebilir simülatör raporu</span></span>
+      <span class="link-arrow">
+      <span class="t-tr">Projeyi okuyun</span>
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </div>
+  </div>
+
+  <ul class="proj-facts">
+    <li><b><span class="t-tr">Çok yıllık</span></b><span><span class="t-tr">emir emir geçmiş</span></span></li>
+    <li><b><span class="t-tr">Derin öğrenme</span></b><span><span class="t-tr">yöntem</span></span></li>
+    <li><b><bdi>Python · C# · Rust</bdi></b><span><span class="t-tr">teknoloji</span></span></li>
+  </ul>
+</a>
+<a class="proj glow reveal" href="projects/fast-scalp.html">
+  <div class="proj-main">
+    <div class="proj-top">
+      <span class="status"><span class="t-tr">Test aşamasında</span></span>
+      <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 3 5 13h6l-1 8 8-10h-6l1-8z"/></svg></span>
+    </div>
+    <h3><span class="t-tr">Fast Scalp</span></h3>
+    <p class="proj-sub">
+      <span class="t-tr">Chicago vadeli işlem piyasası için ML tabanlı bir kısa vadeli alım satım algoritması; otomatik bir alım satım masasına giden yolda</span>
+    </p>
+    <p class="proj-desc">
+      <span class="t-tr">Chicago borsasının birkaç yıllık geçmişi, emir emir toplandı. Bu veriden, borsanın kendisinin aslına yakın bir yeniden kurulumu içinde test edilen bir kısa vadeli alım satım algoritmasına ulaştık.</span>
+    </p>
+    <div class="proj-foot">
+      <span class="proj-report is-on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg><span class="t-tr">İndirilebilir simülatör raporu</span></span>
+      <span class="link-arrow">
+      <span class="t-tr">Projeyi okuyun</span>
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </div>
+  </div>
+
+  <ul class="proj-facts">
+    <li><b><span class="t-tr">Çok yıllık</span></b><span><span class="t-tr">emir emir geçmiş</span></span></li>
+    <li><b><span class="t-tr">Makine öğrenmesi</span></b><span><span class="t-tr">yöntem</span></span></li>
+    <li><b><bdi>Python · C# · Rust</bdi></b><span><span class="t-tr">teknoloji</span></span></li>
+  </ul>
+</a>
+<a class="proj glow reveal" href="projects/blocktrade.html">
+  <div class="proj-main">
+    <div class="proj-top">
+      <span class="status"><span class="t-tr">Veri hizmeti çalışıyor</span></span>
+      <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 3h11v11H3zM16 16h5v5h-5zM16 9h5M9 16v5"/></svg></span>
+    </div>
+    <h3><span class="t-tr">BlockTrade</span></h3>
+    <p class="proj-sub">
+      <span class="t-tr">Chicago vadeli işlem piyasasındaki blok işlemlerin davranışsal analizi; büyük paranın izine dayanan alım satım ve yatırım algoritmalarına giden yolda</span>
+    </p>
+    <p class="proj-desc">
+      <span class="t-tr">Sunucumuz, Chicago borsasındaki her ürünün blok işlemlerini kesintisiz olarak alıp işler ve trader’ın grafiğine iletir. Bu işlemlerin geçmişi günden güne birikir.</span>
+    </p>
+    <div class="proj-foot">
+      <span class="proj-report"><span class="t-tr">Simülatör raporu yayımlanmadı</span></span>
+      <span class="link-arrow">
+      <span class="t-tr">Projeyi okuyun</span>
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </div>
+  </div>
+
+  <ul class="proj-facts">
+    <li><b><span class="t-tr">36 saniye</span></b><span><span class="t-tr">borsanın bildiriminden sonra her bloğun medyan ulaşma süresi</span></span></li>
+    <li><b><span class="t-tr">24 şekil</span></b><span><span class="t-tr">blok sınıflandırması</span></span></li>
+    <li><b><bdi>Python · C#</bdi></b><span><span class="t-tr">teknoloji</span></span></li>
+  </ul>
+</a>
+<a class="proj glow reveal" href="projects/tsetmc.html">
+  <div class="proj-main">
+    <div class="proj-top">
+      <span class="status"><span class="t-tr">Geliştirme aşamasında</span></span>
+      <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4v4M7 16v4M5 8h4v8H5zM17 3v3M17 14v7M15 6h4v8h-4z"/></svg></span>
+    </div>
+    <h3>TSETMC</h3>
+    <p class="proj-sub">
+      <span class="t-tr">Tahran Borsası’nın emir akışı analizi; algoritmik bir portföy yönetim fonuna giden yolda</span>
+    </p>
+    <p class="proj-desc">
+      <span class="t-tr">İran sermaye piyasasının on bir yılı, işlem işlem ve emir emir toplandı ve yeniden kuruldu. Modellerimizi bu geçmiş üzerinde kuruyor ve test ediyoruz.</span>
+    </p>
+    <div class="proj-foot">
+      <span class="proj-report"><span class="t-tr">Simülatör raporu yayımlanmadı</span></span>
+      <span class="link-arrow">
+      <span class="t-tr">Projeyi okuyun</span>
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </div>
+  </div>
+
+  <ul class="proj-facts">
+    <li><b><span class="t-tr">11 yıl</span></b><span><span class="t-tr">piyasa geçmişi</span></span></li>
+    <li><b><span class="t-tr">1.148</span></b><span><span class="t-tr">sembol</span></span></li>
+    <li><b><bdi>Python · C#</bdi></b><span><span class="t-tr">teknoloji</span></span></li>
+  </ul>
+</a>
+<a class="proj glow reveal" href="projects/gold-etf.html">
+  <div class="proj-main">
+    <div class="proj-top">
+      <span class="status"><span class="t-tr">Test aşamasında</span></span>
+      <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 12a4 4 0 1 0 8 0a4 4 0 1 0-8 0M4 12a8 8 0 0 1 13.7-5.7L20 8M20 12a8 8 0 0 1-13.7 5.7L4 16M20 4v4h-4M4 20v-4h4"/></svg></span>
+    </div>
+    <h3><span class="t-tr">Gold ETF Arbitrage</span></h3>
+    <p class="proj-sub">
+      <span class="t-tr">Sermayeyi Tahran Borsası’ndaki altın fonları arasında taşıyan bir algoritma; altın tutmaktan daha fazla kazanmayı amaçlayan otomatik bir altın portföyüne giden yolda</span>
+    </p>
+    <p class="proj-desc">
+      <span class="t-tr">Tahran Borsası’nın altın fonları, emir emir kaydedildi ve tek bir ölçütle ölçüldü. Fonlar arasında geçiş yapmayı, borsanın aslına yakın bir yeniden kurulumu içinde, yalnızca altın tutmaya karşı test ediyoruz.</span>
+    </p>
+    <div class="proj-foot">
+      <span class="proj-report is-on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg><span class="t-tr">İndirilebilir simülatör raporu</span></span>
+      <span class="link-arrow">
+        <span class="t-tr">Projeyi okuyun</span>
+        <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </div>
+  </div>
+
+  <ul class="proj-facts">
+    <li><b><span class="t-tr">21 altın fonu</span></b><span><span class="t-tr">tek bir ölçütle ölçüldü</span></span></li>
+    <li><b><span class="t-tr">395 işlem günü</span></b><span><span class="t-tr">simülatörde yeniden oynatıldı</span></span></li>
+    <li><b><bdi>Python</bdi></b><span><span class="t-tr">teknoloji</span></span></li>
+  </ul>
+</a>
+<a class="proj glow reveal" href="projects/defi-lp.html">
+  <div class="proj-main">
+    <div class="proj-top">
+      <span class="status"><span class="t-tr">İnceleme aşamasında</span></span>
+      <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 12a5.5 5.5 0 1 0 11 0a5.5 5.5 0 1 0-11 0M9.5 12a5.5 5.5 0 1 0 11 0a5.5 5.5 0 1 0-11 0"/></svg></span>
+    </div>
+    <h3><span class="t-tr">DeFi LP</span></h3>
+    <p class="proj-sub">
+      <span class="t-tr">Merkeziyetsiz borsaların likidite havuzları için bir portföy yönetim algoritması; otomatik bir fona giden yolda</span>
+    </p>
+    <p class="proj-desc">
+      <span class="t-tr">Dört blokzincir ağındaki 136 havuzun tüm geçmişi, her havuzun ilk gününden itibaren ve olay olay toplandı. Sermayenin bir havuzda durmasını ve havuzlar arasında taşınmasını, piyasanın kendisinin aslına yakın bir yeniden kurulumu içinde simüle ediyoruz.</span>
+    </p>
+    <div class="proj-foot">
+      <span class="proj-report"><span class="t-tr">Simülatör raporu yayımlanmadı</span></span>
+      <span class="link-arrow">
+      <span class="t-tr">Projeyi okuyun</span>
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </div>
+  </div>
+
+  <ul class="proj-facts">
+    <li><b><span class="t-tr">136 havuz</span></b><span><span class="t-tr">tüm geçmiş, olay olay</span></span></li>
+    <li><b><span class="t-tr">4 ağ</span></b><span><span class="t-tr">blokzincir</span></span></li>
+    <li><b><bdi>Python · C#</bdi></b><span><span class="t-tr">teknoloji</span></span></li>
+  </ul>
+</a>
+<a class="proj glow reveal" href="projects/crypto-mm.html">
+  <div class="proj-main">
+    <div class="proj-top">
+      <span class="status"><span class="t-tr">Geliştirme aşamasında</span></span>
+      <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg></span>
+    </div>
+    <h3><span class="t-tr">Crypto Market Maker</span></h3>
+    <p class="proj-sub">
+      <span class="t-tr">Kripto piyasası için veri altyapısı ve bir piyasa yapıcılığı algoritması; otomatik bir piyasa yapıcılığı masasına giden yolda</span>
+    </p>
+    <p class="proj-desc">
+      <span class="t-tr">16 küresel borsada yoğun işlem gören 22 kripto paranın piyasası, işlem işlem ve emir emir toplanıyor. Algoritmayı yazmadan önce bu piyasanın tamamını kaydettik ve kaydetmeye devam ediyoruz.</span>
+    </p>
+    <div class="proj-foot">
+      <span class="proj-report"><span class="t-tr">Simülatör raporu yayımlanmadı</span></span>
+      <span class="link-arrow">
+      <span class="t-tr">Projeyi okuyun</span>
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </div>
+  </div>
+
+  <ul class="proj-facts">
+    <li><b><span class="t-tr">22 kripto para</span></b><span><span class="t-tr">16 küresel borsada</span></span></li>
+    <li><b><span class="t-tr">60 terabayt</span></b><span><span class="t-tr">ham veri kapsamı</span></span></li>
+    <li><b><bdi>Rust · C#</bdi></b><span><span class="t-tr">teknoloji</span></span></li>
+  </ul>
+</a>
+    </div>
+
+    <a class="link-arrow sec-foot reveal" href="projects.html">
+      <span class="t-tr">Tüm projeler</span>
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ===== where we are ===== -->
+<section class="section">
+  <div class="wrap">
+    <div class="band band-slogan reveal">
+      <canvas class="flow" aria-hidden="true"></canvas>
+      <h2>
+        <span class="t-tr">Emir akışından <em>sermaye akışına.</em></span>
+      </h2>
+      <a class="btn btn-primary" href="contact.html">
+        <span class="t-tr">İletişime geçin</span>
+        <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top footer-panel">
+      <div class="footer-brand">
+        <a class="logo" href="index.html" aria-label="Nova Group">
+          <img class="logo-mark" src="../assets/img/nova-mark-512.png" alt="" width="512" height="512" loading="lazy">
+          <span class="logo-text t-tr"><b>NOVA</b> GROUP</span>
+        </a>
+        <p>
+          <span class="t-tr">Piyasa emir akışına dayalı alım satım algoritmaları araştırıyor ve geliştiriyoruz — 2020’den beri.</span>
+        </p>
+      </div>
+
+      <nav class="footer-col" aria-label="Alt bilgi">
+        <h2><span class="t-tr">Site</span></h2>
+        <a href="index.html"><span class="t-tr">Ana sayfa</span></a>
+        <a href="about.html"><span class="t-tr">Hakkımızda</span></a>
+        <a href="projects.html"><span class="t-tr">Projeler</span></a>
+        <a href="contact.html"><span class="t-tr">İletişim</span></a>
+      </nav>
+
+      <div class="footer-col footer-contact">
+        <h2><span class="t-tr">Bize ulaşın</span></h2>
+        <a class="footer-mail" href="mailto:info@novacapital.fund">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
+          <bdi>info@novacapital.fund</bdi>
+        </a>
+      </div>
+    </div>
+
+    <p class="footer-bottom">
+      <span class="t-tr">© 2026 Nova Group. Bu web sitesinin ve içeriğinin tüm hakları Nova Group’a aittir. Her türlü kötüye kullanım yasal işleme tabidir.</span>
+    </p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Başa dön"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
+
+<script src="../assets/js/main.js?v=57"></script>
+</body>
+</html>

@@ -4,27 +4,27 @@
    Samsung Internet (also used inside Telegram and WhatsApp) recolours pages in its dark mode; flag it early. */
 if (/SamsungBrowser/i.test(navigator.userAgent)) document.documentElement.classList.add('sb');
 
-/* Everyone meets the site in English. A reader who has chosen Persian (with the language button,
-   or a ?lang=fa in the address) is taken to the Persian page from then on. */
+/* Everyone meets the site in English. A reader who has chosen another language (in the language menu,
+   or with a ?lang=fr in the address) is taken to that language's page from then on. */
 (function () {
-  var d = document.documentElement, want = null, asked = /[?&]lang=(fa|en)\b/.exec(location.search);
+  var d = document.documentElement, want = null, asked = /[?&]lang=(en|fa|fr|de|tr)\b/.exec(location.search);
   try { if (asked) localStorage.setItem('nova-lang', asked[1]); want = localStorage.getItem('nova-lang'); } catch (e) {}
   if (asked) want = asked[1];
-  if (want !== 'fa') want = 'en';
+  if (!/^(fa|fr|de|tr)$/.test(want || '')) want = 'en';
   if (d.hasAttribute('data-both')) {
-    // the one page that carries both languages: under /fa/ it reads in Persian
-    var l = location.pathname.indexOf('/fa/') === 0 ? 'fa' : want;
+    // the one page that carries every language: under /fr/ it reads in French, and so on
+    var under = /^\/(fa|fr|de|tr)\//.exec(location.pathname), l = under ? under[1] : want;
     d.setAttribute('data-lang', l); d.lang = l; d.dir = l === 'fa' ? 'rtl' : 'ltr';
-  } else if (want === 'fa' && d.getAttribute('data-alt')) {
-    // an English address is the default one: a reader who chose Persian is sent on to the same page under /fa/
+  } else if (want !== 'en' && d.getAttribute('data-alt')) {
+    // an English address is the default one: a reader who chose another language is sent on to the same page under its code
     d.style.visibility = 'hidden';
     setTimeout(function () { d.style.visibility = ''; }, 2500);
-    location.replace(d.getAttribute('data-alt') + location.hash);
+    location.replace(d.getAttribute('data-alt').replace('*', want) + location.hash);
     return;
   }
   d.className += ' js';
   try {
-    // the same page in the other language: the reader is put back in place, so nothing plays its entrance again
+    // the same page in another language: the reader is put back in place, so nothing plays its entrance again
     if (sessionStorage.getItem('nova-place')) d.className += ' is-returning';
     // arriving from a project's card: its name travels into this page's heading, which must be there from the first frame
     var card = sessionStorage.getItem('nova-card');

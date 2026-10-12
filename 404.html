@@ -22,31 +22,34 @@
 <!-- The fonts are served from this site; the one this language needs first is fetched early. -->
 <link rel="preload" href="assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/style.css?v=56">
+<link rel="stylesheet" href="assets/css/style.css?v=57">
 
 <!-- Runs before first paint: Samsung Internet flag, the reader's language, the page-transition direction. -->
-<script src="assets/js/early.js?v=56"></script>
+<script src="assets/js/early.js?v=57"></script>
 </head>
 <body>
 
-<a href="#main" class="skip-link"><span class="t-fa">پرش به محتوا</span><span class="t-en">Skip to content</span></a>
+<a href="#main" class="skip-link"><span class="t-fa">پرش به محتوا</span><span class="t-en">Skip to content</span><span class="t-fr">Aller au contenu</span><span class="t-de">Zum Inhalt springen</span><span class="t-tr">İçeriğe geç</span></a>
 
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
     <a class="logo" href="index.html" aria-label="Nova Group">
-      <img class="logo-mark" src="assets/img/nova-mark-512.png" alt="" width="512" height="512">
-      <span class="logo-text t-fa"><b>نوا</b> گروپ</span><span class="logo-text t-en"><b>NOVA</b> GROUP</span>
+      <img class="logo-mark" src="assets/img/nova-mark-512.png" alt="" width="512" height="512" fetchpriority="high">
+      <span class="logo-text t-fa"><b>نوا</b> گروپ</span><span class="logo-text t-en"><b>NOVA</b> GROUP</span><span class="logo-text t-fr"><b>NOVA</b> GROUP</span><span class="logo-text t-de"><b>NOVA</b> GROUP</span><span class="logo-text t-tr"><b>NOVA</b> GROUP</span>
     </a>
 
     <nav class="nav-links" id="navLinks" aria-label="Main">
-      <a href="index.html"><span class="t-fa">خانه</span><span class="t-en">Home</span></a>
-      <a href="about.html"><span class="t-fa">درباره ما</span><span class="t-en">About</span></a>
-      <a href="projects.html"><span class="t-fa">پروژه‌ها</span><span class="t-en">Projects</span></a>
-      <a href="contact.html"><span class="t-fa">تماس</span><span class="t-en">Contact</span></a>
+      <a href="index.html"><span class="t-fa">خانه</span><span class="t-en">Home</span><span class="t-fr">Accueil</span><span class="t-de">Start</span><span class="t-tr">Ana sayfa</span></a>
+      <a href="about.html"><span class="t-fa">درباره ما</span><span class="t-en">About</span><span class="t-fr">À propos</span><span class="t-de">Über uns</span><span class="t-tr">Hakkımızda</span></a>
+      <a href="projects.html"><span class="t-fa">پروژه‌ها</span><span class="t-en">Projects</span><span class="t-fr">Projets</span><span class="t-de">Projekte</span><span class="t-tr">Projeler</span></a>
+      <a href="contact.html"><span class="t-fa">تماس</span><span class="t-en">Contact</span><span class="t-fr">Contact</span><span class="t-de">Kontakt</span><span class="t-tr">İletişim</span></a>
     </nav>
 
     <div class="nav-actions">
-      <button class="lang-btn" id="langBtn" type="button" aria-label="Change language"><span class="t-fa">EN</span><span class="t-en">فا</span></button>
+      <details class="lang" id="lang">
+        <summary class="lang-btn" id="langBtn" aria-label="Language"><span class="lang-face t-en" lang="en"><img class="flag" src="assets/img/flags/en.png" alt="" width="24" height="16"><span class="lang-name">English</span></span><span class="lang-face t-fa" lang="fa"><img class="flag" src="assets/img/flags/fa.png" alt="" width="24" height="16"><span class="lang-name">فارسی</span></span><span class="lang-face t-fr" lang="fr"><img class="flag" src="assets/img/flags/fr.png" alt="" width="24" height="16"><span class="lang-name">Français</span></span><span class="lang-face t-de" lang="de"><img class="flag" src="assets/img/flags/de.png" alt="" width="24" height="16"><span class="lang-name">Deutsch</span></span><span class="lang-face t-tr" lang="tr"><img class="flag" src="assets/img/flags/tr.png" alt="" width="24" height="16"><span class="lang-name">Türkçe</span></span><svg class="lang-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <ul class="lang-menu" id="langMenu"><li><button type="button" data-lang="en" lang="en"><img class="flag" src="assets/img/flags/en.png" alt="" width="24" height="16" loading="lazy"><span>English</span></button></li><li><button type="button" data-lang="fa" lang="fa"><img class="flag" src="assets/img/flags/fa.png" alt="" width="24" height="16" loading="lazy"><span>فارسی</span></button></li><li><button type="button" data-lang="fr" lang="fr"><img class="flag" src="assets/img/flags/fr.png" alt="" width="24" height="16" loading="lazy"><span>Français</span></button></li><li><button type="button" data-lang="de" lang="de"><img class="flag" src="assets/img/flags/de.png" alt="" width="24" height="16" loading="lazy"><span>Deutsch</span></button></li><li><button type="button" data-lang="tr" lang="tr"><img class="flag" src="assets/img/flags/tr.png" alt="" width="24" height="16" loading="lazy"><span>Türkçe</span></button></li></ul>
+      </details>
       <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span>
       </button>
@@ -59,17 +62,17 @@
   <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="wrap">
     <p class="lost-code reveal" aria-hidden="true">404</p>
-    <h1 class="reveal"><span class="t-fa">این صفحه پیدا نشد</span><span class="t-en">This page was not found</span></h1>
+    <h1 class="reveal"><span class="t-fa">این صفحه پیدا نشد</span><span class="t-en">This page was not found</span><span class="t-fr">Cette page est introuvable</span><span class="t-de">Diese Seite wurde nicht gefunden</span><span class="t-tr">Bu sayfa bulunamadı</span></h1>
     <p class="page-lead reveal">
       <span class="t-fa">نشانی‌ای که باز کردید در این سایت نیست، یا جابه‌جا شده است.</span>
-      <span class="t-en">The address you opened is not on this site, or it has moved.</span>
+      <span class="t-en">The address you opened is not on this site, or it has moved.</span><span class="t-fr">L’adresse que vous avez ouverte n’existe pas sur ce site, ou elle a été déplacée.</span><span class="t-de">Die aufgerufene Adresse gibt es auf dieser Website nicht, oder sie wurde verschoben.</span><span class="t-tr">Açtığınız adres bu sitede yok ya da taşınmış.</span>
     </p>
     <div class="hero-cta reveal">
       <a class="btn btn-primary" href="index.html">
-        <span class="t-fa">خانه</span><span class="t-en">Home</span>
+        <span class="t-fa">خانه</span><span class="t-en">Home</span><span class="t-fr">Accueil</span><span class="t-de">Start</span><span class="t-tr">Ana sayfa</span>
         <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a class="btn btn-ghost" href="projects.html"><span class="t-fa">پروژه‌ها</span><span class="t-en">Projects</span></a>
+      <a class="btn btn-ghost" href="projects.html"><span class="t-fa">پروژه‌ها</span><span class="t-en">Projects</span><span class="t-fr">Projets</span><span class="t-de">Projekte</span><span class="t-tr">Projeler</span></a>
     </div>
   </div>
 </section>
@@ -81,24 +84,24 @@
       <div class="footer-brand">
         <a class="logo" href="index.html" aria-label="Nova Group">
           <img class="logo-mark" src="assets/img/nova-mark-512.png" alt="" width="512" height="512" loading="lazy">
-          <span class="logo-text t-fa"><b>نوا</b> گروپ</span><span class="logo-text t-en"><b>NOVA</b> GROUP</span>
+          <span class="logo-text t-fa"><b>نوا</b> گروپ</span><span class="logo-text t-en"><b>NOVA</b> GROUP</span><span class="logo-text t-fr"><b>NOVA</b> GROUP</span><span class="logo-text t-de"><b>NOVA</b> GROUP</span><span class="logo-text t-tr"><b>NOVA</b> GROUP</span>
         </a>
         <p>
           <span class="t-fa">پژوهش و ساخت الگوریتم‌های معاملاتی بر پایه‌ی جریان سفارش بازار — از ۱۳۹۹.</span>
-          <span class="t-en">Researching and building trading algorithms from market order flow — since 2020.</span>
+          <span class="t-en">Researching and building trading algorithms from market order flow — since 2020.</span><span class="t-fr">Recherche et construction d’algorithmes de trading à partir du flux d’ordres du marché — depuis 2020.</span><span class="t-de">Erforschung und Entwicklung von Handels­algorithmen aus dem Orderflow des Marktes – seit 2020.</span><span class="t-tr">Piyasa emir akışına dayalı alım satım algoritmaları araştırıyor ve geliştiriyoruz — 2020’den beri.</span>
         </p>
       </div>
 
       <nav class="footer-col" aria-label="Footer">
-        <h2><span class="t-fa">سایت</span><span class="t-en">Site</span></h2>
-        <a href="index.html"><span class="t-fa">خانه</span><span class="t-en">Home</span></a>
-        <a href="about.html"><span class="t-fa">درباره ما</span><span class="t-en">About</span></a>
-        <a href="projects.html"><span class="t-fa">پروژه‌ها</span><span class="t-en">Projects</span></a>
-        <a href="contact.html"><span class="t-fa">تماس</span><span class="t-en">Contact</span></a>
+        <h2><span class="t-fa">سایت</span><span class="t-en">Site</span><span class="t-fr">Site</span><span class="t-de">Website</span><span class="t-tr">Site</span></h2>
+        <a href="index.html"><span class="t-fa">خانه</span><span class="t-en">Home</span><span class="t-fr">Accueil</span><span class="t-de">Start</span><span class="t-tr">Ana sayfa</span></a>
+        <a href="about.html"><span class="t-fa">درباره ما</span><span class="t-en">About</span><span class="t-fr">À propos</span><span class="t-de">Über uns</span><span class="t-tr">Hakkımızda</span></a>
+        <a href="projects.html"><span class="t-fa">پروژه‌ها</span><span class="t-en">Projects</span><span class="t-fr">Projets</span><span class="t-de">Projekte</span><span class="t-tr">Projeler</span></a>
+        <a href="contact.html"><span class="t-fa">تماس</span><span class="t-en">Contact</span><span class="t-fr">Contact</span><span class="t-de">Kontakt</span><span class="t-tr">İletişim</span></a>
       </nav>
 
       <div class="footer-col footer-contact">
-        <h2><span class="t-fa">ارتباط</span><span class="t-en">Connect</span></h2>
+        <h2><span class="t-fa">ارتباط</span><span class="t-en">Connect</span><span class="t-fr">Nous contacter</span><span class="t-de">Kontakt</span><span class="t-tr">Bize ulaşın</span></h2>
         <a class="footer-mail" href="mailto:info@novacapital.fund">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
           <bdi>info@novacapital.fund</bdi>
@@ -108,13 +111,13 @@
 
     <p class="footer-bottom">
       <span class="t-fa">© ۱۴۰۵ نوا گروپ. همه‌ی حقوق مادی و معنوی این وب‌سایت و محتوای آن متعلق به نوا گروپ است. هرگونه سوءاستفاده پیگرد قانونی دارد.</span>
-      <span class="t-en">© 2026 Nova Group. All rights to this website and its content belong to Nova Group. Any misuse is subject to legal action.</span>
+      <span class="t-en">© 2026 Nova Group. All rights to this website and its content belong to Nova Group. Any misuse is subject to legal action.</span><span class="t-fr">© 2026 Nova Group. Tous les droits sur ce site web et son contenu appartiennent à Nova Group. Toute utilisation abusive est passible de poursuites judiciaires.</span><span class="t-de">© 2026 Nova Group. Alle Rechte an dieser Website und ihren Inhalten liegen bei Nova Group. Jeder Missbrauch wird rechtlich verfolgt.</span><span class="t-tr">© 2026 Nova Group. Bu web sitesinin ve içeriğinin tüm hakları Nova Group’a aittir. Her türlü kötüye kullanım yasal işleme tabidir.</span>
     </p>
   </div>
 </footer>
 
 <button class="to-top" id="toTop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
 
-<script src="assets/js/main.js?v=56"></script>
+<script src="assets/js/main.js?v=57"></script>
 </body>
 </html>

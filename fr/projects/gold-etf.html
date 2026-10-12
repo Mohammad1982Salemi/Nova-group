@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" data-lang="fr" data-sec="2">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gold ETF Arbitrage — passage d’un fonds or à l’autre à la Bourse de Téhéran | Nova Group</title>
+<meta name="description" content="Le projet Gold ETF Arbitrage : un algorithme qui déplace le capital entre les fonds or de la Bourse de Téhéran, testé en simulation face à la détention d’or.">
+<link rel="canonical" href="https://novacapital.fund/fr/projects/gold-etf.html">
+<link rel="alternate" hreflang="en" href="https://novacapital.fund/projects/gold-etf.html">
+<link rel="alternate" hreflang="fa" href="https://novacapital.fund/fa/projects/gold-etf.html">
+<link rel="alternate" hreflang="fr" href="https://novacapital.fund/fr/projects/gold-etf.html">
+<link rel="alternate" hreflang="de" href="https://novacapital.fund/de/projects/gold-etf.html">
+<link rel="alternate" hreflang="tr" href="https://novacapital.fund/tr/projects/gold-etf.html">
+<link rel="alternate" hreflang="x-default" href="https://novacapital.fund/projects/gold-etf.html">
+<meta property="og:title" content="Gold ETF Arbitrage — passage d’un fonds or à l’autre à la Bourse de Téhéran | Nova Group">
+<meta property="og:description" content="Un algorithme qui déplace le capital entre les fonds or de la Bourse de Téhéran, en route vers un portefeuille or automatisé.">
+<meta property="og:url" content="https://novacapital.fund/fr/projects/gold-etf.html">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:locale:alternate" content="fa_IR">
+<meta property="og:locale:alternate" content="de_DE">
+<meta property="og:locale:alternate" content="tr_TR">
+<meta property="og:image" content="https://novacapital.fund/assets/img/og/gold-etf-fr.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://novacapital.fund/assets/img/og/gold-etf-fr.jpg">
+<meta name="author" content="Nova Group">
+<meta name="theme-color" content="#05080e">
+<meta name="color-scheme" content="dark light">
+<meta name="supported-color-schemes" content="dark light">
+<meta name="darkreader-lock">
+<meta property="og:site_name" content="Nova Group">
+<meta property="og:type" content="website">
+
+<link rel="icon" type="image/svg+xml" href="../../assets/img/nova-mark.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="../../assets/img/favicon-64.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../../assets/img/favicon-192.png">
+<link rel="apple-touch-icon" href="../../assets/img/favicon-192.png">
+
+<!-- The fonts are served from this site; the one this language needs first is fetched early. -->
+<link rel="preload" href="../../assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/css/style.css?v=57">
+
+<!-- Runs before first paint: Samsung Internet flag, the reader's language, the page-transition direction. -->
+<script src="../../assets/js/early.js?v=57"></script>
+</head>
+<body>
+
+<a href="#main" class="skip-link"><span class="t-fr">Aller au contenu</span></a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="../index.html" aria-label="Nova Group">
+      <img class="logo-mark" src="../../assets/img/nova-mark-512.png" alt="" width="512" height="512" fetchpriority="high">
+      <span class="logo-text t-fr"><b>NOVA</b> GROUP</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Menu principal">
+      <a href="../index.html"><span class="t-fr">Accueil</span></a>
+      <a href="../about.html"><span class="t-fr">À propos</span></a>
+      <a href="../projects.html" aria-current="page"><span class="t-fr">Projets</span></a>
+      <a href="../contact.html"><span class="t-fr">Contact</span></a>
+    </nav>
+
+    <div class="nav-actions">
+      <details class="lang" id="lang">
+        <summary class="lang-btn" id="langBtn" aria-label="Langue: Français"><img class="flag" src="../../assets/img/flags/fr.png" alt="" width="24" height="16"><span class="lang-name">Français</span><svg class="lang-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <ul class="lang-menu" id="langMenu"><li><a href="../../projects/gold-etf.html" hreflang="en" lang="en"><img class="flag" src="../../assets/img/flags/en.png" alt="" width="24" height="16" loading="lazy"><span>English</span></a></li><li><a href="../../fa/projects/gold-etf.html" hreflang="fa" lang="fa"><img class="flag" src="../../assets/img/flags/fa.png" alt="" width="24" height="16" loading="lazy"><span>فارسی</span></a></li><li><span class="lang-here" aria-current="true" lang="fr"><img class="flag" src="../../assets/img/flags/fr.png" alt="" width="24" height="16" loading="lazy"><span>Français</span></span></li><li><a href="../../de/projects/gold-etf.html" hreflang="de" lang="de"><img class="flag" src="../../assets/img/flags/de.png" alt="" width="24" height="16" loading="lazy"><span>Deutsch</span></a></li><li><a href="../../tr/projects/gold-etf.html" hreflang="tr" lang="tr"><img class="flag" src="../../assets/img/flags/tr.png" alt="" width="24" height="16" loading="lazy"><span>Türkçe</span></a></li></ul>
+      </details>
+      <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="page-hero">
+  <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="wrap">
+    <nav class="crumbs reveal" aria-label="Fil d’Ariane">
+      <a href="../projects.html"><span class="t-fr">Projets</span></a>
+      <span aria-hidden="true">/</span>
+      <span><span class="t-fr">Gold ETF Arbitrage</span></span>
+    </nav>
+
+    <h1 class="reveal"><span class="t-fr">Gold ETF Arbitrage</span></h1>
+    <p class="page-lead reveal">
+      <span class="t-fr">Un algorithme qui déplace le capital entre les fonds or de la Bourse de Téhéran, en route vers un portefeuille or automatisé qui vise à rapporter plus que la détention d’or.</span>
+    </p>
+
+    <div class="cs-meta reveal">
+      <span class="status"><span class="t-fr">En test</span></span>
+      <ul class="tags">
+        <li>Python</li>
+        <li><span class="t-fr">Fonds or</span></li>
+        <li><span class="t-fr">Bourse de Téhéran</span></li>
+        <li><span class="t-fr">Valeur relative</span></li>
+        <li><span class="t-fr">Carnet d’ordres</span></li>
+        <li><span class="t-fr">Simulateur d’exécution</span></li>
+      </ul>
+    </div>
+
+    <ul class="facts facts-glass">
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-fr">Données</span></span>
+        <b><span class="t-fr">36 fonds or</span></b>
+        <p>
+          <span class="t-fr">Leurs carnets d’ordres et leurs transactions sur 995 jours de bourse, de juillet 2022 à septembre 2026.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-fr">Simulation</span></span>
+        <b><span class="t-fr">60 957 transactions</span></b>
+        <p>
+          <span class="t-fr">Transactions simulées dans le scénario de base, sur 395 jours de bourse et 21 fonds.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-fr">Tests</span></span>
+        <b><span class="t-fr">82 simulations</span></b>
+        <p>
+          <span class="t-fr">Menées pour vérifier la règle sur différentes périodes, différents niveaux de frais et différentes hypothèses avant de la communiquer.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-fr">Technologie</span></span>
+        <b><span class="t-fr">1 langage</span></b>
+        <div class="fact-list">
+          <div><i>Python</i><span><span class="t-fr">Données, simulateur et algorithme</span></span></div>
+        </div>
+      </li>
+    </ul>
+
+    <nav class="toc reveal" aria-label="Sur cette page">
+      <span class="toc-title"><span class="t-fr">Sur cette page</span></span>
+      <a href="#intro"><span class="t-fr">Introduction</span></a>
+      <a href="#reports"><span class="t-fr">Rapport</span></a>
+      <a href="#approach"><span class="t-fr">Approche</span></a>
+      <a href="#difference"><span class="t-fr">Points saillants</span></a>
+      <a href="#roadmap"><span class="t-fr">Feuille de route</span></a>
+      <a href="#technology"><span class="t-fr">Technologie</span></a>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+
+    <article class="cs-body">
+      <section class="cs-section" id="intro">
+        <h2><span><span class="t-fr">Introduction</span></span></h2>
+      <p class="detail-lead">
+        <span class="t-fr">Plus de trente fonds de la Bourse de Téhéran font une seule chose : ils détiennent de l’or. Ils détiennent le même or, et pourtant chacun se négocie à son propre prix par rapport à ce qu’il possède. À tout moment, un fonds est un peu cher et un autre un peu bon marché, et lequel est lequel change d’heure en heure. La plupart des investisseurs choisissent un fonds et y restent. Les différences sont faibles, si bien que les frais et les carnets d’ordres peu profonds les engloutissent, à moins que les deux ne soient mesurés exactement.</span>
+      </p>
+      <p>
+        <span class="t-fr">Nous avons décidé de traiter tous les fonds or comme un seul actif, et de détenir cet actif à travers le fonds le moins cher à détenir sur le moment, en ne nous déplaçant que lorsque le déplacement couvre son propre coût.</span>
+      </p>
+      <p>
+        <span class="t-fr">Le projet détient les carnets d’ordres et les transactions de 36 fonds or de juillet 2022 à septembre 2026, soit 995 jours de bourse, ainsi que la valeur liquidative publiée de chaque fonds. Sur ces enregistrements, nous avons construit un simulateur qui rejoue la bourse seconde par seconde, et nous avons testé une règle de bascule sur 21 fonds, de janvier 2025 à septembre 2026, à quatre niveaux de frais de courtage. Dans cette simulation, le portefeuille a terminé devant la simple détention du fonds or le plus négocié 19 mois sur 21. La destination est un portefeuille or automatisé qui est entièrement en or à chaque instant et vise à finir avec plus d’or qu’au départ.</span>
+      </p>
+      </section>
+
+      <section class="cs-section" id="reports">
+        <h2><span><span class="t-fr">Rapport du simulateur</span></span></h2>
+        <p>
+          <span class="t-fr">Le rapport ci-dessous montre ce test dans quatre scénarios. Seuls les frais de courtage varient de l’un à l’autre : sans remise, puis avec 25 %, 35 % et 45 % de remise. La règle est la même dans les quatre. Vous pouvez télécharger le rapport, puis le lire et l’évaluer indépendamment de nous.</span>
+        </p>
+        <ul class="reports">
+          <li class="glow reveal">
+            <div class="report-head">
+              <b><span class="t-fr">GOLD</span></b>
+              <span><span class="t-fr">21 fonds or de la Bourse de Téhéran</span></span>
+            </div>
+            <ul class="report-facts">
+              <li><b><span class="t-fr">Janv. 2025 à sept. 2026</span></b><span><span class="t-fr">période de test</span></span></li>
+              <li><b><span class="t-fr">395</span></b><span><span class="t-fr">jours de bourse</span></span></li>
+              <li><b><span class="t-fr">60 957</span></b><span><span class="t-fr">transactions simulées dans le scénario de base</span></span></li>
+              <li><b><span class="t-fr">4 scénarios</span></b><span><span class="t-fr">4 niveaux de frais</span></span></li>
+            </ul>
+            <div class="report-actions">
+              <a class="btn btn-primary" href="../../assets/reports/gold-etf-report.html" download>
+                <svg class="arr-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
+                <span class="t-fr">Télécharger le rapport</span>
+              </a>
+              <a class="btn btn-ghost" href="../../assets/reports/gold-etf-report.html" target="_blank" rel="noopener">
+                <span class="t-fr">Ouvrir dans le navigateur</span>
+              </a>
+            </div>
+            <p class="report-size"><span class="t-fr">Un fichier HTML autonome, 4,9 Mo, en anglais</span></p>
+          </li>
+        </ul>
+        <p class="report-note">
+          <span class="t-fr">Il s’agit d’un résultat de simulation sur les carnets d’ordres enregistrés du marché, et non de trading réel ; il ne constitue aucune garantie pour l’avenir. Aucun trader concurrent n’est modélisé dans cette simulation.</span>
+        </p>
+      </section>
+
+      <section class="cs-section" id="approach">
+        <h2><span><span class="t-fr">Approche</span></span></h2>
+      <p>
+        <span class="t-fr">Nous ne demandons jamais si l’or va monter ou baisser ; nous demandons seulement quel fonds est, à l’instant présent, le moyen le moins cher de le détenir. Le travail se déroule en trois étapes :</span>
+      </p>
+      <ol class="steps">
+        <li class="glow reveal">
+          <strong class="t-fr">Des prix et des valeurs liquidatives à un étalon unique pour tous les fonds</strong>
+          <p class="t-fr">Le prix d’un fonds ne dit rien à lui seul, car chaque fonds a une taille de part différente et une composition différente en lingots et en pièces d’or. Nous rapportons le prix de marché de chaque fonds à la valeur de ce qu’il détient, puis au même chiffre pour le fonds or le plus négocié, qui est notre référence. Le résultat est un nombre par fonds, qui dit à quel point il est cher ou bon marché par rapport à sa propre normale. Tous les fonds sont lus sur cette même échelle.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fr">De l’étalon à une bascule qui couvre son coût</strong>
+          <p class="t-fr">Un fonds bon marché n’est pas encore une raison de bouger. Chaque bascule coûte des frais de vente, des frais d’achat et l’écart entre acheteurs et vendeurs dans deux carnets d’ordres. La règle ne déplace le capital que lorsque la différence est nettement supérieure à ce coût, et le ramène quand la différence s’est refermée. Une bascule qui ne récupérerait pas son coût n’est pas effectuée.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fr">De la décision à un ordre exécuté</strong>
+          <p class="t-fr">Les fonds or autres que le plus grand se négocient peu, de sorte qu’une décision ne vaut que ce que le carnet d’ordres peut réellement exécuter. L’algorithme dimensionne chaque ordre selon la profondeur affichée à l’écran, traite ensemble les deux côtés d’une bascule et maintient le compte en or tout du long. Il ne vend pas à découvert et n’emprunte pas pour augmenter la position.</p>
+        </li>
+      </ol>
+      <p>
+        <span class="t-fr">Le simulateur se trouve sous les trois étapes. Il rejoue côte à côte les carnets d’ordres enregistrés de tous les fonds, une seconde à la fois. Nos ordres rejoignent la file d’attente derrière les ordres qui s’y trouvaient déjà, sont exécutés partiellement ou pas du tout, et emportent la liquidité qu’ils consomment. Les données de marché parviennent à l’algorithme avec quelques secondes de retard et les ordres mettent du temps à arriver, comme ce serait le cas en pratique. Le simulateur tient aussi le compte lui-même, et refuse tout ordre qui emprunterait au-delà de la limite intrajournalière du courtier, vendrait ce qui n’est pas détenu, ou traiterait en dehors des limites de variation de cours du jour.</span>
+      </p>
+      <p>
+        <span class="t-fr">Le projet est né au sein de <a href="../projects/tsetmc.html">TSETMC</a> et utilise les mêmes enregistrements de marché. C’est un projet distinct parce que sa question, son simulateur et sa destination lui sont propres.</span>
+      </p>
+      </section>
+
+      <section class="cs-section" id="difference">
+        <h2><span><span class="t-fr">Points saillants</span></span></h2>
+      <ul class="points">
+        <li class="glow reveal">
+          <strong class="t-fr">Il est mesuré en or, et non en toman.</strong>
+          <p class="t-fr">L’or lui-même peut monter ou baisser, et un fonds or le suivra. Notre référence n’est donc pas le numéraire, mais la simple détention du fonds or le plus négocié. Chaque chiffre que nous communiquons est le portefeuille divisé par ce que vaudrait le même argent s’il était resté dans ce fonds. Un résultat de zéro signifie « pas mieux que détenir de l’or », et non « aucune perte ».</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fr">Toujours entièrement en or.</strong>
+          <p class="t-fr">Le portefeuille ne reste jamais en numéraire dans l’attente d’un jour meilleur et ne parie jamais contre l’or. Il détient des fonds or à chaque clôture. Dans toutes les simulations de la règle finale, aucun argent emprunté n’a été reporté au lendemain ; le simulateur le vérifie à chaque clôture et l’enregistre si cela vient à se produire.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fr">Un simulateur qui tient un compte honnête.</strong>
+          <p class="t-fr">Un backtest ordinaire suppose que chaque ordre est exécuté au prix affiché. Le nôtre rejoue les carnets d’ordres enregistrés seconde par seconde, place nos ordres dans la file d’attente et ne les exécute que face à un volume qui était réellement présent. Le scénario de base contient 60 957 transactions simulées sur 395 jours de bourse. L’algorithme voit le marché avec un délai et ses ordres arrivent avec un délai.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fr">Les frais sont dans le compte dès la première ligne.</strong>
+          <p class="t-fr">L’avantage d’un fonds sur un autre est faible, de sorte que les frais de courtage décident si une bascule vaut la peine d’être effectuée. Nous avons relancé toute la simulation à quatre niveaux de frais, de l’absence de remise à une remise de 45 %, sans changer la règle. Le rapport montre les quatre, afin que le lecteur puisse voir quelle part du résultat dépend des frais.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fr">Testé là où il pouvait échouer.</strong>
+          <p class="t-fr">Une règle qui fonctionne sur une période a peut-être seulement eu de la chance. Nous avons vérifié la logique de la règle sur les prix de 2022 à 2024, une période qu’aucune simulation n’avait utilisée, et nous avons lu séparément les deux moitiés de la période de test, parce que la bourse a modifié une limite de négociation entre les deux. Sur une version antérieure de la règle, nous avons aussi remplacé le fonds choisi par un fonds tiré au hasard aux mêmes instants, et cette version a perdu de l’argent. Au total, 82 simulations sur la période complète soutiennent le résultat communiqué.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fr">Un résultat que vous pouvez lire sans nous.</strong>
+          <p class="t-fr">Le rapport du simulateur est un fichier unique qui s’ouvre dans un navigateur. Il montre le portefeuille face à la détention d’or mois par mois, la pire période de retard sur l’or comme le meilleur mois, et ce que les frais ont prélevé. Il énonce aussi ses propres limites : c’est une simulation, et elle ne modélise pas les autres traders en concurrence pour les mêmes ordres.</p>
+        </li>
+      </ul>
+      </section>
+
+      <section class="cs-section" id="roadmap">
+        <h2><span><span class="t-fr">Feuille de route</span></span></h2>
+      <ol class="phases">
+        <li class="is-done glow reveal">
+          <span class="phase-mark"><span class="t-fr">Fait</span></span>
+          <p class="t-fr">Les enregistrements de marché, le simulateur d’exécution et la règle de bascule sont construits, et la règle a été testée en simulation sur 21 fonds et quatre niveaux de frais.</p>
+        </li>
+        <li class="is-now glow reveal">
+          <span class="phase-mark"><span class="t-fr">En cours</span></span>
+          <p class="t-fr">Établir ce que la simulation ne peut pas savoir, comme le délai réel des données en direct et de nos ordres, et préparer l’exécution de l’algorithme sur le marché en direct, sans envoi d’ordres.</p>
+        </li>
+        <li class="glow reveal">
+          <span class="phase-mark"><span class="t-fr">Ensuite</span></span>
+          <p class="t-fr">Le faire tourner sur le marché en direct, sur le papier, comparer chaque journée avec la même journée rejouée par le simulateur, puis mener un petit pilote pour mesurer les exécutions réelles face aux exécutions simulées.</p>
+        </li>
+        <li class="glow reveal">
+          <span class="phase-mark"><span class="t-fr">Dernière étape</span></span>
+          <p class="t-fr">Gérer le capital automatiquement sous la forme d’un portefeuille or, comme produit aux côtés du fonds de gestion.</p>
+        </li>
+      </ol>
+      </section>
+
+      <section class="cs-section" id="technology">
+        <h2><span><span class="t-fr">Technologie</span></span></h2>
+      <p>
+        <span class="t-fr">L’ensemble du projet est écrit en Python : préparation des enregistrements de marché, simulateur d’exécution, algorithme et analyse. Une simulation complète de 21 fonds sur 21 mois, seconde par seconde, prend environ quinze minutes sur une machine, et plusieurs tournent côte à côte. Aucune modification n’est acceptée sans avoir passé 55 tests automatisés, dont certains ont été écrits pour reproduire une erreur passée afin qu’elle ne puisse pas revenir.</span>
+      </p>
+      </section>
+    </article>
+
+  </div>
+</section>
+
+<section class="section ruled">
+  <div class="wrap">
+    <nav class="projnav reveal" aria-label="Autres projets">
+      <a class="projnav-card is-prev glow" href="../projects/tsetmc.html">
+        <span class="projnav-dir"><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="t-fr">Projet précédent</span></span>
+        <b><span class="t-fr">TSETMC</span></b>
+      </a>
+      <a class="projnav-card is-next glow" href="../projects/defi-lp.html">
+        <span class="projnav-dir"><span class="t-fr">Projet suivant</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <b><span class="t-fr">DeFi LP</span></b>
+      </a>
+    </nav>
+  </div>
+  <div class="wrap cs-end">
+    <a class="link-arrow link-back" href="../projects.html">
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <span class="t-fr">Tous les projets</span>
+    </a>
+    <a class="btn btn-ghost" href="../contact.html">
+      <span class="t-fr">Contactez-nous</span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top footer-panel">
+      <div class="footer-brand">
+        <a class="logo" href="../index.html" aria-label="Nova Group">
+          <img class="logo-mark" src="../../assets/img/nova-mark-512.png" alt="" width="512" height="512" loading="lazy">
+          <span class="logo-text t-fr"><b>NOVA</b> GROUP</span>
+        </a>
+        <p>
+          <span class="t-fr">Recherche et construction d’algorithmes de trading à partir du flux d’ordres du marché — depuis 2020.</span>
+        </p>
+      </div>
+
+      <nav class="footer-col" aria-label="Pied de page">
+        <h2><span class="t-fr">Site</span></h2>
+        <a href="../index.html"><span class="t-fr">Accueil</span></a>
+        <a href="../about.html"><span class="t-fr">À propos</span></a>
+        <a href="../projects.html"><span class="t-fr">Projets</span></a>
+        <a href="../contact.html"><span class="t-fr">Contact</span></a>
+      </nav>
+
+      <div class="footer-col footer-contact">
+        <h2><span class="t-fr">Nous contacter</span></h2>
+        <a class="footer-mail" href="mailto:info@novacapital.fund">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
+          <bdi>info@novacapital.fund</bdi>
+        </a>
+      </div>
+    </div>
+
+    <p class="footer-bottom">
+      <span class="t-fr">© 2026 Nova Group. Tous les droits sur ce site web et son contenu appartiennent à Nova Group. Toute utilisation abusive est passible de poursuites judiciaires.</span>
+    </p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Haut de page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
+
+<script src="../../assets/js/main.js?v=57"></script>
+</body>
+</html>

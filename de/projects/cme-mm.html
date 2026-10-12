@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr" data-lang="de" data-sec="2">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CME Market Maker – ein Market-Making-Algorithmus für den Chicagoer Futures-Markt | Nova Group</title>
+<meta name="description" content="Das Projekt CME Market Maker: ein Market-Making-Algorithmus auf Basis von Deep Learning, gelernt aus der Historie der Chicagoer Börse, Order für Order.">
+<link rel="canonical" href="https://novacapital.fund/de/projects/cme-mm.html">
+<link rel="alternate" hreflang="en" href="https://novacapital.fund/projects/cme-mm.html">
+<link rel="alternate" hreflang="fa" href="https://novacapital.fund/fa/projects/cme-mm.html">
+<link rel="alternate" hreflang="fr" href="https://novacapital.fund/fr/projects/cme-mm.html">
+<link rel="alternate" hreflang="de" href="https://novacapital.fund/de/projects/cme-mm.html">
+<link rel="alternate" hreflang="tr" href="https://novacapital.fund/tr/projects/cme-mm.html">
+<link rel="alternate" hreflang="x-default" href="https://novacapital.fund/projects/cme-mm.html">
+<meta property="og:title" content="CME Market Maker – ein Market-Making-Algorithmus für den Chicagoer Futures-Markt | Nova Group">
+<meta property="og:description" content="Ein Market-Making-Algorithmus auf Basis von Deep Learning für den Chicagoer Futures-Markt, auf dem Weg zu einem automatisierten Market-Making-Desk.">
+<meta property="og:url" content="https://novacapital.fund/de/projects/cme-mm.html">
+<meta property="og:locale" content="de_DE">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:locale:alternate" content="fa_IR">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:locale:alternate" content="tr_TR">
+<meta property="og:image" content="https://novacapital.fund/assets/img/og/cme-mm-de.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://novacapital.fund/assets/img/og/cme-mm-de.jpg">
+<meta name="author" content="Nova Group">
+<meta name="theme-color" content="#05080e">
+<meta name="color-scheme" content="dark light">
+<meta name="supported-color-schemes" content="dark light">
+<meta name="darkreader-lock">
+<meta property="og:site_name" content="Nova Group">
+<meta property="og:type" content="website">
+
+<link rel="icon" type="image/svg+xml" href="../../assets/img/nova-mark.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="../../assets/img/favicon-64.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../../assets/img/favicon-192.png">
+<link rel="apple-touch-icon" href="../../assets/img/favicon-192.png">
+
+<!-- The fonts are served from this site; the one this language needs first is fetched early. -->
+<link rel="preload" href="../../assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/css/style.css?v=57">
+
+<!-- Runs before first paint: Samsung Internet flag, the reader's language, the page-transition direction. -->
+<script src="../../assets/js/early.js?v=57"></script>
+</head>
+<body>
+
+<a href="#main" class="skip-link"><span class="t-de">Zum Inhalt springen</span></a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="../index.html" aria-label="Nova Group">
+      <img class="logo-mark" src="../../assets/img/nova-mark-512.png" alt="" width="512" height="512" fetchpriority="high">
+      <span class="logo-text t-de"><b>NOVA</b> GROUP</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Hauptmenü">
+      <a href="../index.html"><span class="t-de">Start</span></a>
+      <a href="../about.html"><span class="t-de">Über uns</span></a>
+      <a href="../projects.html" aria-current="page"><span class="t-de">Projekte</span></a>
+      <a href="../contact.html"><span class="t-de">Kontakt</span></a>
+    </nav>
+
+    <div class="nav-actions">
+      <details class="lang" id="lang">
+        <summary class="lang-btn" id="langBtn" aria-label="Sprache: Deutsch"><img class="flag" src="../../assets/img/flags/de.png" alt="" width="24" height="16"><span class="lang-name">Deutsch</span><svg class="lang-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <ul class="lang-menu" id="langMenu"><li><a href="../../projects/cme-mm.html" hreflang="en" lang="en"><img class="flag" src="../../assets/img/flags/en.png" alt="" width="24" height="16" loading="lazy"><span>English</span></a></li><li><a href="../../fa/projects/cme-mm.html" hreflang="fa" lang="fa"><img class="flag" src="../../assets/img/flags/fa.png" alt="" width="24" height="16" loading="lazy"><span>فارسی</span></a></li><li><a href="../../fr/projects/cme-mm.html" hreflang="fr" lang="fr"><img class="flag" src="../../assets/img/flags/fr.png" alt="" width="24" height="16" loading="lazy"><span>Français</span></a></li><li><span class="lang-here" aria-current="true" lang="de"><img class="flag" src="../../assets/img/flags/de.png" alt="" width="24" height="16" loading="lazy"><span>Deutsch</span></span></li><li><a href="../../tr/projects/cme-mm.html" hreflang="tr" lang="tr"><img class="flag" src="../../assets/img/flags/tr.png" alt="" width="24" height="16" loading="lazy"><span>Türkçe</span></a></li></ul>
+      </details>
+      <button class="burger" id="burger" type="button" aria-label="Menü" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="page-hero">
+  <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="wrap">
+    <nav class="crumbs reveal" aria-label="Seitenpfad">
+      <a href="../projects.html"><span class="t-de">Projekte</span></a>
+      <span aria-hidden="true">/</span>
+      <span><span class="t-de">CME Market Maker</span></span>
+    </nav>
+
+    <h1 class="reveal"><span class="t-de">CME Market Maker</span></h1>
+    <p class="page-lead reveal">
+      <span class="t-de">Ein Market-Making-Algorithmus auf Basis von Deep Learning für den Chicagoer Futures-Markt, auf dem Weg zu einem automatisierten Market-Making-Desk.</span>
+    </p>
+
+    <div class="cs-meta reveal">
+      <span class="status"><span class="t-de">Im Test</span></span>
+      <ul class="tags">
+        <li>Python</li><li>C#</li><li>Rust</li><li>MBO</li>
+        <li><span class="t-de">Deep Learning</span></li>
+        <li><span class="t-de">Market Making</span></li>
+        <li><span class="t-de">Ausführungs­simulator</span></li>
+      </ul>
+    </div>
+
+    <ul class="facts facts-glass">
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-de">Daten</span></span>
+        <b><span class="t-de">Jede einzelne Order</span></b>
+        <p>
+          <span class="t-de">Mehrere Jahre der Chicagoer Börse, eines der größten Futures-Märkte der Welt.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-de">Methode</span></span>
+        <b><span class="t-de">Deep Learning</span></b>
+        <p>
+          <span class="t-de">Gestützt auf statistische Analyse; die Muster werden aus realen Marktbeispielen gelernt.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-de">Maßstab</span></span>
+        <b><span class="t-de">Netto-Finanz­ergebnis</span></b>
+        <p>
+          <span class="t-de">Nach allen Kosten, über eine Bandbreite von Geschwindigkeits- und Gebühren­bedingungen.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-de">Technologie</span></span>
+        <b><span class="t-de">3 Sprachen, 3 Rollen</span></b>
+        <div class="fact-list">
+          <div><i>Python</i><span><span class="t-de">Lernmodelle</span></span></div>
+          <div><i>C#</i><span><span class="t-de">Nachbildung und Simulator</span></span></div>
+          <div><i>Rust</i><span><span class="t-de">Rohdaten-Reader</span></span></div>
+        </div>
+      </li>
+    </ul>
+
+    <nav class="toc reveal" aria-label="Auf dieser Seite">
+      <span class="toc-title"><span class="t-de">Auf dieser Seite</span></span>
+      <a href="#intro"><span class="t-de">Einführung</span></a>
+      <a href="#reports"><span class="t-de">Berichte</span></a>
+      <a href="#platform"><span class="t-de">Plattform</span></a>
+      <a href="#approach"><span class="t-de">Ansatz</span></a>
+      <a href="#difference"><span class="t-de">Was heraussticht</span></a>
+      <a href="#roadmap"><span class="t-de">Der weitere Weg</span></a>
+      <a href="#technology"><span class="t-de">Technologie</span></a>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+
+    <article class="cs-body">
+      <section class="cs-section" id="intro">
+        <h2><span><span class="t-de">Einführung</span></span></h2>
+      <p class="detail-lead">
+        <span class="t-de">Jeder Finanzmarkt beruht auf einer stillen Annahme: Wann immer jemand kaufen oder verkaufen will, steht eine Gegenpartei bereit. Diese Gegenpartei ist der Market Maker: ein Marktteilnehmer, der gleichzeitig einen Kaufpreis und einen Verkaufspreis stellt, etwas billiger kauft und etwas teurer verkauft und daran verdient, diese kleine Spanne über sehr viele Trades hinweg zu wiederholen. Er muss nicht wissen, in welche Richtung sich der Preis bewegen wird. Sein Risiko ist, kurz vor einer großen Bewegung auf der falschen Seite gehandelt zu haben.</span>
+      </p>
+      <p>
+        <span class="t-de">Wir haben diese Aufgabe einem Algorithmus übergeben, der sie vom Markt selbst gelernt hat.</span>
+      </p>
+      <p>
+        <span class="t-de">Das Projekt CME Market Maker hat mehrere Jahre der Chicagoer Börse, eines der größten Futures-Märkte der Welt, auf der Ebene jeder einzelnen Order zusammengetragen. Aus diesen Daten sind wir mit Deep Learning und statistischer Analyse zu einem Market-Making-Algorithmus gelangt, der in einer getreuen Nachbildung der Börse selbst getestet wird. Das Ziel ist ein automatisierter Market-Making-Desk, der Kapital mit diesem Algorithmus steuert, nicht mit dem Augenblicksurteil von Menschen.</span>
+      </p>
+      </section>
+
+      <section class="cs-section" id="reports">
+        <h2><span><span class="t-de">Simulator­berichte</span></span></h2>
+        <p>
+          <span class="t-de">Dieses Projekt hat zwei vollständige Berichte aus dem Ausführungs­simulator, einen je Markt. Jeder Bericht zeigt den Algorithmus in 25 Szenarien zugleich: fünf Stufen der Orderlatenz zur Börse, von null bis eine Millisekunde, bei fünf Gebührenstufen. Sie können beide herunterladen und unabhängig von uns lesen und bewerten.</span>
+        </p>
+        <ul class="reports">
+          <li class="glow reveal">
+            <div class="report-head">
+              <b>GC</b>
+              <span><span class="t-de">Gold-Futures</span></span>
+            </div>
+            <ul class="report-facts">
+              <li><b><span class="t-de">Dez. 2019 bis Juli 2026</span></b><span><span class="t-de">Testzeitraum</span></span></li>
+              <li><b><span class="t-de">1.608</span></b><span><span class="t-de">Handelstage</span></span></li>
+              <li><b><span class="t-de">1.905.921</span></b><span><span class="t-de">simulierte Trades im Basisszenario</span></span></li>
+              <li><b><span class="t-de">25 Szenarien</span></b><span><span class="t-de">5 Latenzstufen × 5 Gebührenstufen</span></span></li>
+            </ul>
+            <div class="report-actions">
+              <a class="btn btn-primary" href="../../assets/reports/gc-market-maker.html" download>
+                <svg class="arr-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
+                <span class="t-de">Bericht herunterladen</span>
+              </a>
+              <a class="btn btn-ghost" href="../../assets/reports/gc-market-maker.html" target="_blank" rel="noopener">
+                <span class="t-de">Im Browser öffnen</span>
+              </a>
+            </div>
+            <p class="report-size"><span class="t-de">Eine eigenständige HTML-Datei, 7,4 MB, Persisch und Englisch</span></p>
+          </li>
+          <li class="glow reveal">
+            <div class="report-head">
+              <b>NQ</b>
+              <span><span class="t-de">Nasdaq-100-Futures</span></span>
+            </div>
+            <ul class="report-facts">
+              <li><b><span class="t-de">Mai 2017 bis Juni 2026</span></b><span><span class="t-de">Testzeitraum</span></span></li>
+              <li><b><span class="t-de">2.310</span></b><span><span class="t-de">Handelstage</span></span></li>
+              <li><b><span class="t-de">2.792.780</span></b><span><span class="t-de">simulierte Trades im Basisszenario</span></span></li>
+              <li><b><span class="t-de">25 Szenarien</span></b><span><span class="t-de">5 Latenzstufen × 5 Gebührenstufen</span></span></li>
+            </ul>
+            <div class="report-actions">
+              <a class="btn btn-primary" href="../../assets/reports/nq-market-maker.html" download>
+                <svg class="arr-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
+                <span class="t-de">Bericht herunterladen</span>
+              </a>
+              <a class="btn btn-ghost" href="../../assets/reports/nq-market-maker.html" target="_blank" rel="noopener">
+                <span class="t-de">Im Browser öffnen</span>
+              </a>
+            </div>
+            <p class="report-size"><span class="t-de">Eine eigenständige HTML-Datei, 8,0 MB, Persisch und Englisch</span></p>
+          </li>
+        </ul>
+        <p class="report-note">
+          <span class="t-de">Dies sind Simulations­ergebnisse auf aufgezeichneten Marktdaten (ein Backtest), kein echter Handel und keine Garantie für die Zukunft. Jeder Bericht zeigt auch die verlustbringenden Szenarien.</span>
+        </p>
+      </section>
+
+      <section class="cs-section" id="platform">
+        <h2><span><span class="t-de">Einblick in die Plattform</span></span></h2>
+        <p>
+          <span class="t-de">Das sind echte Bildschirm­aufnahmen aus den Werkzeugen des Projekts, keine Mock-ups. Jede Ansicht zeigt dieselben Order für Order erfassten Marktdaten aus einem anderen Blickwinkel. Klicken Sie auf das Bild, um es zu vergrößern.</span>
+        </p>
+
+        <div class="shots reveal" data-shots>
+          <div class="shots-tabs" role="tablist" aria-label="Plattformansichten">
+            <button type="button" role="tab" aria-selected="true" data-name="CME · Limit orders">
+              <b><span class="t-de">Wartende Orders</span></b>
+              <span>Limit Orders Flow · NQ</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="Quantia Tape · GC">
+              <b><span class="t-de">Ereignis-Tape</span></b>
+              <span>raw → wire → engine</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="Quantia Rendering · 1Tick">
+              <b><span class="t-de">Tick-Chart</span></b>
+              <span>1Tick → M1 → H4</span>
+            </button>
+          </div>
+
+          <figure class="shot-frame">
+            <div class="shot-bar">
+              <i></i><i></i><i></i>
+              <span class="shot-name">CME · Limit orders</span>
+              <button type="button" class="shot-zoom" aria-label="Vergrößern">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg>
+              </button>
+            </div>
+            <div class="shot-stage">
+              <img class="is-on" src="../../assets/img/projects/cme-mm/limit-orders.webp" data-full="../../assets/img/projects/cme-mm/limit-orders-full.webp" width="1400" height="742" alt="Heatmap der bei jedem Preis wartenden Orders, mit Preisverlauf und Trade-Blasen">
+              <img src="../../assets/img/projects/cme-mm/tape.webp" data-full="../../assets/img/projects/cme-mm/tape-full.webp" width="1400" height="742" loading="lazy" alt="Tape der Marktereignisse in drei Bahnen: Rohdatensatz, nach dem Interpreter und die Engine">
+              <img src="../../assets/img/projects/cme-mm/rendering.webp" data-full="../../assets/img/projects/cme-mm/rendering-full.webp" width="1400" height="742" loading="lazy" alt="Ein-Tick-Preischart mit Ereignismarkern">
+            </div>
+            <figcaption>
+              <p class="shot-cap is-on">
+                <span class="t-de">Das Volumen der bei jedem Preis und in jedem Moment wartenden Orders als Heatmap, darüber der Preisverlauf und Blasen, die die Trades markieren.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-de">18.442.942 Ereignisse, einzeln durchlaufbar, in drei Bahnen: die rohen MBO-Datensätze, dieselben Datensätze nach dem Interpreter sowie die Knoten und Orderereignisse in der Engine.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-de">Ein Ein-Tick-Preischart mit Ereignismarkern an jedem Tick. Beim Herauszoomen steigt die Ansicht von Ticks auf eine Minute und bis zu vier Stunden.</span>
+              </p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="cs-section" id="approach">
+        <h2><span><span class="t-de">Ansatz</span></span></h2>
+      <p>
+        <span class="t-de">Der Algorithmus lernt aus Marktdaten und wird in einer Nachbildung desselben Marktes gemessen. Die Arbeit erfolgte in drei Stufen:</span>
+      </p>
+      <ol class="steps">
+        <li class="glow reveal">
+          <strong class="t-de">Von den Rohdaten zum vollständigen Bild des Marktes</strong>
+          <p class="t-de">Der Handelsbildschirm zeigt nur eine Zusammenfassung des Marktes. Wir verarbeiten jede Nachricht, die die Börse aufgezeichnet hat, und bilden die Liste der wartenden Orders für jeden Moment nach. Das Ergebnis ist ein Bild davon, wie viel Volumen bei jedem Preis wartet und in welcher Reihenfolge die Orders in der Warte­schlange stehen.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-de">Vom Bild des Marktes zum Algorithmus</strong>
+          <p class="t-de">Beim Deep Learning lernt der Computer Muster aus realen Beispielen, statt von Hand geschriebenen Regeln zu folgen. Auf diese Weise und gestützt auf statistische Analyse hat unser Algorithmus gelernt, in welchen Situationen der Trade eines Market Makers zu dessen Gunsten ausgeht und in welchen zu dessen Ungunsten. Sein Ergebnis sind drei Entscheidungen: wo eine Order zu platzieren ist, welcher Trade zu meiden ist und wann es gilt, zur Seite zu treten.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-de">Vom Algorithmus zur getesteten Ausführung</strong>
+          <p class="t-de">Eine richtige Entscheidung muss sich im realen Markt auch ausführen lassen. In unserem Simulator erreichen die Orders des Algorithmus die Börse mit Verzögerung, warten in der Warte­schlange, bis sie an der Reihe sind, und wirken auf den Markt, genau wie in der Realität. Der Maßstab ist das finanzielle Nettoergebnis nach allen Kosten.</p>
+        </li>
+      </ol>
+      </section>
+
+      <section class="cs-section" id="difference">
+        <h2><span><span class="t-de">Was heraussticht</span></span></h2>
+      <ul class="points">
+        <li class="glow reveal">
+          <strong class="t-de">Wissen, das im System liegt, nicht in den Köpfen von Menschen.</strong>
+          <p class="t-de">Traditionelles Market Making stützt sich auf die Intuition versierter Trader, und dieses Wissen geht verloren, wenn sie gehen. Unser Algorithmus hat, was er weiß, aus den Marktdaten selbst gelernt. Dieses Wissen ist festgehalten, wiederholbar und lässt sich neu trainieren.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-de">Auswahl, nicht ständige Präsenz im Markt.</strong>
+          <p class="t-de">Wir haben beidseitiges Quotieren ohne Auswahl zu realen Kosten gemessen, und es verlor Geld, denn ein Market Maker, der nicht auswählt, handelt meist dann, wenn der Preis kurz davor ist, sich gegen ihn zu bewegen. Genau dort liegt der Wert des Algorithmus: zu erkennen, welchen Trade man will und von welchem man Abstand nimmt.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-de">Ein Ergebnis, das auch in der Ausführung Bestand hat.</strong>
+          <p class="t-de">Viele Strategien sind auf dem Papier profitabel und in der Praxis nicht, weil ihr Test annimmt, dass eine Order sofort zum angezeigten Preis ausgeführt wird. In unserem Simulator nimmt eine Order denselben Weg wie im realen Markt, und die Korrektheit der Simulation wurde gegen eine unabhängige Nachbildung aus den Rohdaten der Börse geprüft.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-de">Eine echte Erkenntnis vom Zufall unterscheiden.</strong>
+          <p class="t-de">Lernmodelle können die Vergangenheit auswendig lernen, ohne etwas über die Zukunft gelernt zu haben. Um das zu vermeiden, wird der Algorithmus stets auf Zeiträumen gemessen, die er im Training nicht gesehen hat, turbulente eingeschlossen. Jede Erkenntnis wird außerdem neben Daten gestellt, denen gezielt jedes aussagekräftige Muster entzogen wurde, und wenn sie sich auch dort zeigt, wird sie verworfen.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-de">Den Infrastruktur­bedarf kennen, bevor man dafür bezahlt.</strong>
+          <p class="t-de">In diesem Feld entscheiden die Geschwindigkeit, mit der eine Order die Börse erreicht, und die Gebühr je Trade über die Grenze zwischen Gewinn und Verlust, und jedes von beiden zu verbessern ist teuer. Wir testen den Algorithmus über eine Bandbreite dieser Bedingungen zugleich. So ist vor jeder finanziellen Verpflichtung klar, unter welchen Bedingungen das Vorhaben gerechtfertigt ist.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-de">Standardisierte, lesbare Berichte.</strong>
+          <p class="t-de">Das Ergebnis jedes Tests wird auf einer Seite dargestellt, mit den branchenüblichen Kennzahlen und Bezeichnungen, auf Persisch und auf Englisch. Ein Investor oder sein Berater kann das Ergebnis unabhängig von uns lesen und bewerten.</p>
+        </li>
+      </ul>
+      </section>
+
+      <section class="cs-section" id="roadmap">
+        <h2><span><span class="t-de">Der weitere Weg</span></span></h2>
+      <ol class="phases">
+        <li class="is-done glow reveal">
+          <span class="phase-mark"><span class="t-de">Erledigt</span></span>
+          <p class="t-de">Die Daten­infrastruktur, die Marktnachbildung, der Market-Making-Algorithmus, der Ausführungs­simulator und das Berichtssystem sind gebaut.</p>
+        </li>
+        <li class="is-now glow reveal">
+          <span class="phase-mark"><span class="t-de">Aktuell</span></span>
+          <p class="t-de">Heute messen wir den Algorithmus in einem mehrjährigen Test, unter verschiedenen Geschwindigkeits- und Gebühren­bedingungen und auf mehr als einem Markt.</p>
+        </li>
+        <li class="glow reveal">
+          <span class="phase-mark"><span class="t-de">Als Nächstes</span></span>
+          <p class="t-de">Danach folgen die Anbindung an Live-Daten, die Bereitstellung in Börsennähe und eine Probephase mit begrenztem Kapital.</p>
+        </li>
+        <li class="glow reveal">
+          <span class="phase-mark"><span class="t-de">Letzter Schritt</span></span>
+          <p class="t-de">Der letzte Schritt ist Market Making mit echtem Kapital, als automatisierter Desk.</p>
+        </li>
+      </ol>
+      </section>
+
+      <section class="cs-section" id="technology">
+        <h2><span><span class="t-de">Technologie</span></span></h2>
+      <p>
+        <span class="t-de">Die Lernmodelle werden in Python gebaut und auf einem Grafikprozessor trainiert. Die Engine der Marktnachbildung und der Ausführungs­simulator sind in C# geschrieben, der Rohdaten-Reader in Rust. Eine Änderung wird erst angenommen, nachdem sie mit der vorherigen Version verglichen wurde und die automatisierten Tests bestanden hat.</span>
+      </p>
+      </section>
+    </article>
+
+  </div>
+</section>
+
+<section class="section ruled">
+  <div class="wrap">
+    <nav class="projnav reveal" aria-label="Weitere Projekte">
+      <a class="projnav-card is-prev glow" href="../projects/crypto-mm.html">
+        <span class="projnav-dir"><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="t-de">Vorheriges Projekt</span></span>
+        <b><span class="t-de">Crypto Market Maker</span></b>
+      </a>
+      <a class="projnav-card is-next glow" href="../projects/fast-scalp.html">
+        <span class="projnav-dir"><span class="t-de">Nächstes Projekt</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <b><span class="t-de">Fast Scalp</span></b>
+      </a>
+    </nav>
+  </div>
+  <div class="wrap cs-end">
+    <a class="link-arrow link-back" href="../projects.html">
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <span class="t-de">Alle Projekte</span>
+    </a>
+    <a class="btn btn-ghost" href="../contact.html">
+      <span class="t-de">Kontakt aufnehmen</span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top footer-panel">
+      <div class="footer-brand">
+        <a class="logo" href="../index.html" aria-label="Nova Group">
+          <img class="logo-mark" src="../../assets/img/nova-mark-512.png" alt="" width="512" height="512" loading="lazy">
+          <span class="logo-text t-de"><b>NOVA</b> GROUP</span>
+        </a>
+        <p>
+          <span class="t-de">Erforschung und Entwicklung von Handels­algorithmen aus dem Orderflow des Marktes – seit 2020.</span>
+        </p>
+      </div>
+
+      <nav class="footer-col" aria-label="Fußzeile">
+        <h2><span class="t-de">Website</span></h2>
+        <a href="../index.html"><span class="t-de">Start</span></a>
+        <a href="../about.html"><span class="t-de">Über uns</span></a>
+        <a href="../projects.html"><span class="t-de">Projekte</span></a>
+        <a href="../contact.html"><span class="t-de">Kontakt</span></a>
+      </nav>
+
+      <div class="footer-col footer-contact">
+        <h2><span class="t-de">Kontakt</span></h2>
+        <a class="footer-mail" href="mailto:info@novacapital.fund">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
+          <bdi>info@novacapital.fund</bdi>
+        </a>
+      </div>
+    </div>
+
+    <p class="footer-bottom">
+      <span class="t-de">© 2026 Nova Group. Alle Rechte an dieser Website und ihren Inhalten liegen bei Nova Group. Jeder Missbrauch wird rechtlich verfolgt.</span>
+    </p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Nach oben"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
+
+<script src="../../assets/js/main.js?v=57"></script>
+</body>
+</html>

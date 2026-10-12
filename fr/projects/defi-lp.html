@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" data-lang="fr" data-sec="2">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeFi LP — gestion de capitaux dans les pools de liquidité | Nova Group</title>
+<meta name="description" content="Le projet DeFi LP : un algorithme de gestion de capitaux pour les pools de liquidité des plateformes d’échange décentralisées, construit sur l’historique complet de 136 pools sur quatre réseaux.">
+<link rel="canonical" href="https://novacapital.fund/fr/projects/defi-lp.html">
+<link rel="alternate" hreflang="en" href="https://novacapital.fund/projects/defi-lp.html">
+<link rel="alternate" hreflang="fa" href="https://novacapital.fund/fa/projects/defi-lp.html">
+<link rel="alternate" hreflang="fr" href="https://novacapital.fund/fr/projects/defi-lp.html">
+<link rel="alternate" hreflang="de" href="https://novacapital.fund/de/projects/defi-lp.html">
+<link rel="alternate" hreflang="tr" href="https://novacapital.fund/tr/projects/defi-lp.html">
+<link rel="alternate" hreflang="x-default" href="https://novacapital.fund/projects/defi-lp.html">
+<meta property="og:title" content="DeFi LP — gestion de capitaux dans les pools de liquidité | Nova Group">
+<meta property="og:description" content="Un algorithme de gestion de capitaux pour les pools de liquidité des plateformes d’échange décentralisées, en route vers un fonds automatisé.">
+<meta property="og:url" content="https://novacapital.fund/fr/projects/defi-lp.html">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:locale:alternate" content="fa_IR">
+<meta property="og:locale:alternate" content="de_DE">
+<meta property="og:locale:alternate" content="tr_TR">
+<meta property="og:image" content="https://novacapital.fund/assets/img/og/defi-lp-fr.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://novacapital.fund/assets/img/og/defi-lp-fr.jpg">
+<meta name="author" content="Nova Group">
+<meta name="theme-color" content="#05080e">
+<meta name="color-scheme" content="dark light">
+<meta name="supported-color-schemes" content="dark light">
+<meta name="darkreader-lock">
+<meta property="og:site_name" content="Nova Group">
+<meta property="og:type" content="website">
+
+<link rel="icon" type="image/svg+xml" href="../../assets/img/nova-mark.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="../../assets/img/favicon-64.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../../assets/img/favicon-192.png">
+<link rel="apple-touch-icon" href="../../assets/img/favicon-192.png">
+
+<!-- The fonts are served from this site; the one this language needs first is fetched early. -->
+<link rel="preload" href="../../assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/css/style.css?v=57">
+
+<!-- Runs before first paint: Samsung Internet flag, the reader's language, the page-transition direction. -->
+<script src="../../assets/js/early.js?v=57"></script>
+</head>
+<body>
+
+<a href="#main" class="skip-link"><span class="t-fr">Aller au contenu</span></a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="../index.html" aria-label="Nova Group">
+      <img class="logo-mark" src="../../assets/img/nova-mark-512.png" alt="" width="512" height="512" fetchpriority="high">
+      <span class="logo-text t-fr"><b>NOVA</b> GROUP</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Menu principal">
+      <a href="../index.html"><span class="t-fr">Accueil</span></a>
+      <a href="../about.html"><span class="t-fr">À propos</span></a>
+      <a href="../projects.html" aria-current="page"><span class="t-fr">Projets</span></a>
+      <a href="../contact.html"><span class="t-fr">Contact</span></a>
+    </nav>
+
+    <div class="nav-actions">
+      <details class="lang" id="lang">
+        <summary class="lang-btn" id="langBtn" aria-label="Langue: Français"><img class="flag" src="../../assets/img/flags/fr.png" alt="" width="24" height="16"><span class="lang-name">Français</span><svg class="lang-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <ul class="lang-menu" id="langMenu"><li><a href="../../projects/defi-lp.html" hreflang="en" lang="en"><img class="flag" src="../../assets/img/flags/en.png" alt="" width="24" height="16" loading="lazy"><span>English</span></a></li><li><a href="../../fa/projects/defi-lp.html" hreflang="fa" lang="fa"><img class="flag" src="../../assets/img/flags/fa.png" alt="" width="24" height="16" loading="lazy"><span>فارسی</span></a></li><li><span class="lang-here" aria-current="true" lang="fr"><img class="flag" src="../../assets/img/flags/fr.png" alt="" width="24" height="16" loading="lazy"><span>Français</span></span></li><li><a href="../../de/projects/defi-lp.html" hreflang="de" lang="de"><img class="flag" src="../../assets/img/flags/de.png" alt="" width="24" height="16" loading="lazy"><span>Deutsch</span></a></li><li><a href="../../tr/projects/defi-lp.html" hreflang="tr" lang="tr"><img class="flag" src="../../assets/img/flags/tr.png" alt="" width="24" height="16" loading="lazy"><span>Türkçe</span></a></li></ul>
+      </details>
+      <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="page-hero">
+  <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="wrap">
+    <nav class="crumbs reveal" aria-label="Fil d’Ariane">
+      <a href="../projects.html"><span class="t-fr">Projets</span></a>
+      <span aria-hidden="true">/</span>
+      <span><span class="t-fr">DeFi LP</span></span>
+    </nav>
+
+    <h1 class="reveal"><span class="t-fr">DeFi LP</span></h1>
+    <p class="page-lead reveal">
+      <span class="t-fr">Un algorithme de gestion de capitaux pour les pools de liquidité des plateformes d’échange décentralisées, en route vers un fonds automatisé.</span>
+    </p>
+
+    <div class="cs-meta reveal">
+      <span class="status"><span class="t-fr">À l’étude</span></span>
+      <ul class="tags">
+        <li>Python</li><li>C#</li><li>DeFi</li>
+        <li><span class="t-fr">Pools de liquidité</span></li>
+        <li><span class="t-fr">Données on-chain</span></li>
+        <li><span class="t-fr">Simulateur de capital</span></li>
+      </ul>
+    </div>
+
+    <ul class="facts facts-glass">
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-fr">Données</span></span>
+        <b><span class="t-fr">136 pools, 4 réseaux</span></b>
+        <p>
+          <span class="t-fr">L’historique complet de chaque pool, de son premier jour à aujourd’hui, événement par événement.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-fr">Confronté à la réalité</span></span>
+        <b><span class="t-fr">Env. 44 000 positions</span></b>
+        <p>
+          <span class="t-fr">Les frais du simulateur comparés aux frais réellement perçus dans six pools ; un écart inférieur à un dixième de pour cent.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-fr">Tests</span></span>
+        <b><span class="t-fr">Plus de 450 tests</span></b>
+        <p>
+          <span class="t-fr">Une modification n’est acceptée qu’après avoir passé les tests automatisés.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-fr">Technologie</span></span>
+        <b><span class="t-fr">2 langages, 2 rôles</span></b>
+        <div class="fact-list">
+          <div><i>Python</i><span><span class="t-fr">Préparation des données</span></span></div>
+          <div><i>C#</i><span><span class="t-fr">Moteur d’analyse et simulateur</span></span></div>
+        </div>
+      </li>
+    </ul>
+
+    <nav class="toc reveal" aria-label="Sur cette page">
+      <span class="toc-title"><span class="t-fr">Sur cette page</span></span>
+      <a href="#intro"><span class="t-fr">Introduction</span></a>
+      <a href="#platform"><span class="t-fr">Plateforme</span></a>
+      <a href="#approach"><span class="t-fr">Approche</span></a>
+      <a href="#difference"><span class="t-fr">Points saillants</span></a>
+      <a href="#roadmap"><span class="t-fr">Feuille de route</span></a>
+      <a href="#technology"><span class="t-fr">Technologie</span></a>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+
+    <article class="cs-body">
+      <section class="cs-section" id="intro">
+        <h2><span><span class="t-fr">Introduction</span></span></h2>
+      <p class="detail-lead">
+        <span class="t-fr">Sur une plateforme d’échange décentralisée, acheteur et vendeur ne traitent pas l’un avec l’autre. La contrepartie de chaque transaction est un « pool » : du capital que plusieurs personnes ont mis en commun pour que d’autres puissent échanger contre lui et payer des frais en retour. Quiconque place de l’argent dans le pool reçoit une part de ces frais. Mais le pool qui offre le meilleur revenu ce mois-ci n’est pas nécessairement le même le mois suivant : les traders s’en vont, du capital frais arrive et la part de chacun diminue. La plupart des capitaux restent là où ils se sont placés le premier jour.</span>
+      </p>
+      <p>
+        <span class="t-fr">Nous avons décidé de déplacer le capital en suivant l’opportunité, et de peser chaque déplacement à l’aune des données du marché lui-même avant de l’effectuer.</span>
+      </p>
+      <p>
+        <span class="t-fr">Le projet DeFi LP a rassemblé l’historique complet de 136 pools sur quatre réseaux blockchain, du premier jour de chaque pool à aujourd’hui, au niveau de chaque événement. À partir de ces données, nous simulons le capital placé dans un pool, et son déplacement entre pools, au sein d’une reconstitution fidèle du marché lui-même, et nous avons vérifié le résultat par rapport à de l’argent réel. La destination est un fonds automatisé qui gère de l’argent et le déplace entre les pools, vers le meilleur rendement net.</span>
+      </p>
+      </section>
+
+      <section class="cs-section" id="platform">
+        <h2><span><span class="t-fr">À l’intérieur de la plateforme</span></span></h2>
+        <p>
+          <span class="t-fr">Ce sont de vraies captures d’écran de la plateforme du projet, et non des maquettes. Les trois vues montrent un seul pool : cbBTC/USDC avec des frais de 0,05 % sur Uniswap V4, sur le réseau Base. Cliquez sur l’image pour l’agrandir.</span>
+        </p>
+
+        <div class="shots reveal" data-shots>
+          <div class="shots-tabs" role="tablist" aria-label="Vues de la plateforme">
+            <button type="button" role="tab" aria-selected="true" data-name="cbBTC/USDC · Uniswap V4 (Base) · Heat: Zone">
+              <b><span class="t-fr">Vue Zone</span></b>
+              <span>Heat: Zone · Source: DEX</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="cbBTC/USDC · Uniswap V4 (Base) · Cum Δ">
+              <b><span class="t-fr">Mouvements et delta cumulé</span></b>
+              <span>Move: 4% · Sub: Cum Δ</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="cbBTC/USDC · Uniswap V4 (Base) · Heat: Yield">
+              <b><span class="t-fr">Vue Yield</span></b>
+              <span>Heat: Yield · Band: 1D v2</span>
+            </button>
+          </div>
+
+          <figure class="shot-frame">
+            <div class="shot-bar">
+              <i></i><i></i><i></i>
+              <span class="shot-name">cbBTC/USDC · Uniswap V4 (Base) · Heat: Zone</span>
+              <button type="button" class="shot-zoom" aria-label="Agrandir">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg>
+              </button>
+            </div>
+            <div class="shot-stage">
+              <img class="is-on" src="../../assets/img/projects/defi-lp/heat-zone.webp" data-full="../../assets/img/projects/defi-lp/heat-zone-full.webp" width="1400" height="742" alt="Barres de prix du pool cbBTC/USDC avec la vue thermique Zone autour du prix">
+              <img src="../../assets/img/projects/defi-lp/moves-delta.webp" data-full="../../assets/img/projects/defi-lp/moves-delta-full.webp" width="1400" height="742" loading="lazy" alt="Barres de prix du pool avec les cadres des mouvements de 4 % et le panneau du delta cumulé">
+              <img src="../../assets/img/projects/defi-lp/heat-yield.webp" data-full="../../assets/img/projects/defi-lp/heat-yield-full.webp" width="1400" height="742" loading="lazy" alt="La vue thermique Yield avec la bande journalière autour du prix">
+            </div>
+            <figcaption>
+              <p class="shot-cap is-on">
+                <span class="t-fr">Les barres de prix du pool de juin 2025 à août 2026 et, autour d’elles, la vue thermique Zone : des zones colorées sur les niveaux de prix.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-fr">Les mêmes barres avec les cadres des mouvements de 4 % et, en dessous, le panneau du delta cumulé en dollars.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-fr">Les trois derniers mois dans la vue thermique Yield, avec la bande journalière (Band: 1D) autour du prix.</span>
+              </p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="cs-section" id="approach">
+        <h2><span><span class="t-fr">Approche</span></span></h2>
+      <p>
+        <span class="t-fr">L’argent se place là où son bilan net est meilleur, et se déplace quand ce bilan change. Le travail se déroule en trois étapes :</span>
+      </p>
+      <ol class="steps">
+        <li class="glow reveal">
+          <strong class="t-fr">Des données brutes à l’image complète du pool</strong>
+          <p class="t-fr">Le tableau de bord d’un pool n’affiche que le prix et le volume échangé. Nous traitons chaque événement enregistré sur la chaîne et reconstituons l’état du pool à chaque instant. Le résultat est une image de la quantité de capital placée à chaque niveau de prix, et du moment où elle est arrivée ou repartie.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fr">De l’image du pool à la mesure de chaque pool</strong>
+          <p class="t-fr">Notre simulateur place une somme hypothétique dans ce même pool reconstitué et calcule les frais qu’elle aurait gagnés et la part que le mouvement du prix en aurait reprise. La sortie est un chiffre net et comparable pour chaque pool. Tous les pools sont mesurés avec un même étalon.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fr">De la mesure des pools à la gestion de capitaux</strong>
+          <p class="t-fr">En mettant ces chiffres côte à côte, l’algorithme prend trois décisions : dans quels pools l’argent se place, sur quelle fourchette de prix dans chacun, et quand il passe de l’un à l’autre. Cette étape est aujourd’hui à l’étude.</p>
+        </li>
+      </ol>
+      </section>
+
+      <section class="cs-section" id="difference">
+        <h2><span><span class="t-fr">Points saillants</span></span></h2>
+      <ul class="points">
+        <li class="glow reveal">
+          <strong class="t-fr">Un capital qui ne reste pas au même endroit.</strong>
+          <p class="t-fr">Sur ce marché, l’opportunité se déplace, et le capital immobile la manque. Un pool peut connaître des transactions aujourd’hui alors que le capital le quitte depuis des mois ; nous en avons vu et enregistré un cas réel dans nos données. L’algorithme compare en continu tous les pools qu’il surveille, et non une seule fois le premier jour.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fr">Un déplacement qui récupère son coût.</strong>
+          <p class="t-fr">Chaque déplacement a un coût : les frais de transaction et la différence de prix à la sortie et à l’entrée. Courir après chaque taux plus élevé dépense le profit dans ces coûts. Dans notre mesure, le coût du déplacement fait partie du bilan, et un déplacement qui ne le récupère pas n’est pas effectué.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fr">Le profit net, et non le taux affiché.</strong>
+          <p class="t-fr">Le taux affiché sur le tableau de bord d’un pool ne montre que les frais. Ce que nous communiquons, ce sont les frais après la perte due au mouvement du prix, le coût de transaction et la différence de prix à l’entrée. Chaque élément est présenté séparément, de sorte que l’on voit clairement d’où vient le profit et où il est parti.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fr">Une simulation confrontée à de l’argent réel.</strong>
+          <p class="t-fr">De nombreux calculs sur ce marché sont justes sur le papier mais pas en pratique. Nous avons comparé les frais que calcule le simulateur avec ceux qu’environ 44 000 positions réelles dans six pools ont perçus sur la chaîne. La différence totale dans le pire pool est inférieure à un dixième de pour cent.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fr">Des données rapprochées de la chaîne elle-même.</strong>
+          <p class="t-fr">Comparer des pools sur des données incomplètes conduit à une mauvaise décision, et des données incomplètes ne se signalent pas d’elles-mêmes. Pour l’ensemble des 136 pools, les événements archivés ont été comparés à la chaîne, et un certificat de santé a été émis pour chaque pool. Cinq types de pool sur quatre réseaux sont mesurés par un même moteur.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fr">Le capital dans le pool, sans intermédiaire.</strong>
+          <p class="t-fr">Une partie des pertes de ce marché ne venait pas du marché lui-même, mais de contrats intermédiaires qui détenaient le capital d’autrui. Dans notre conception, le capital sera placé dans le pool directement et au nom de son propriétaire. L’algorithme décidera seulement de sa destination.</p>
+        </li>
+      </ul>
+      </section>
+
+      <section class="cs-section" id="roadmap">
+        <h2><span><span class="t-fr">Feuille de route</span></span></h2>
+      <ol class="phases">
+        <li class="is-done glow reveal">
+          <span class="phase-mark"><span class="t-fr">Fait</span></span>
+          <p class="t-fr">L’infrastructure de données, la reconstitution des pools pour les cinq types, le simulateur de capital et le système de rapports sont construits et testés.</p>
+        </li>
+        <li class="is-done glow reveal">
+          <span class="phase-mark"><span class="t-fr">Fait</span></span>
+          <p class="t-fr">Les règles de placement et de déplacement du capital ont été mesurées sur des pools aux comportements différents ; nous n’avons encore déclaré aucune stratégie définitive.</p>
+        </li>
+        <li class="is-now glow reveal">
+          <span class="phase-mark"><span class="t-fr">En cours</span></span>
+          <p class="t-fr">Achever le filtrage des pools, tester la stratégie retenue sur des périodes non vues et réécrire le système pour un usage opérationnel.</p>
+        </li>
+        <li class="glow reveal">
+          <span class="phase-mark"><span class="t-fr">Dernière étape</span></span>
+          <p class="t-fr">La dernière étape est la connexion aux données en direct et la gestion d’argent réel, sous la forme d’un fonds automatisé.</p>
+        </li>
+      </ol>
+      </section>
+
+      <section class="cs-section" id="technology">
+        <h2><span><span class="t-fr">Technologie</span></span></h2>
+      <p>
+        <span class="t-fr">La préparation des données est écrite en Python, et le moteur d’analyse et le simulateur en C#. L’archive de 136 pools est conservée dans plus de six mille fichiers, et la copie du serveur est identique à la copie de sauvegarde, fichier par fichier. Une modification n’est acceptée qu’après avoir passé plus de 450 tests automatisés.</span>
+      </p>
+      </section>
+    </article>
+
+  </div>
+</section>
+
+<section class="section ruled">
+  <div class="wrap">
+    <nav class="projnav reveal" aria-label="Autres projets">
+      <a class="projnav-card is-prev glow" href="../projects/gold-etf.html">
+        <span class="projnav-dir"><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="t-fr">Projet précédent</span></span>
+        <b><span class="t-fr">Gold ETF Arbitrage</span></b>
+      </a>
+      <a class="projnav-card is-next glow" href="../projects/crypto-mm.html">
+        <span class="projnav-dir"><span class="t-fr">Projet suivant</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <b><span class="t-fr">Crypto Market Maker</span></b>
+      </a>
+    </nav>
+  </div>
+  <div class="wrap cs-end">
+    <a class="link-arrow link-back" href="../projects.html">
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <span class="t-fr">Tous les projets</span>
+    </a>
+    <a class="btn btn-ghost" href="../contact.html">
+      <span class="t-fr">Contactez-nous</span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top footer-panel">
+      <div class="footer-brand">
+        <a class="logo" href="../index.html" aria-label="Nova Group">
+          <img class="logo-mark" src="../../assets/img/nova-mark-512.png" alt="" width="512" height="512" loading="lazy">
+          <span class="logo-text t-fr"><b>NOVA</b> GROUP</span>
+        </a>
+        <p>
+          <span class="t-fr">Recherche et construction d’algorithmes de trading à partir du flux d’ordres du marché — depuis 2020.</span>
+        </p>
+      </div>
+
+      <nav class="footer-col" aria-label="Pied de page">
+        <h2><span class="t-fr">Site</span></h2>
+        <a href="../index.html"><span class="t-fr">Accueil</span></a>
+        <a href="../about.html"><span class="t-fr">À propos</span></a>
+        <a href="../projects.html"><span class="t-fr">Projets</span></a>
+        <a href="../contact.html"><span class="t-fr">Contact</span></a>
+      </nav>
+
+      <div class="footer-col footer-contact">
+        <h2><span class="t-fr">Nous contacter</span></h2>
+        <a class="footer-mail" href="mailto:info@novacapital.fund">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
+          <bdi>info@novacapital.fund</bdi>
+        </a>
+      </div>
+    </div>
+
+    <p class="footer-bottom">
+      <span class="t-fr">© 2026 Nova Group. Tous les droits sur ce site web et son contenu appartiennent à Nova Group. Toute utilisation abusive est passible de poursuites judiciaires.</span>
+    </p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Haut de page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
+
+<script src="../../assets/js/main.js?v=57"></script>
+</body>
+</html>

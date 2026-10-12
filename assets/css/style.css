@@ -1,11 +1,13 @@
 /* ==========================================================================
    Nova Group — site stylesheet
-   Dark, editorial, bilingual (fa RTL / en LTR). Logical properties throughout,
-   so one set of rules serves both directions.
+   Dark, editorial, five languages: Persian (right to left) and English, French, German and
+   Turkish (left to right). Logical properties throughout, so one set of rules serves both
+   directions; html[dir="ltr"] addresses the four Latin-script languages together.
    ========================================================================== */
 
-/* The three families are served from this site, one variable file each. The two Latin ones cover
-   the basic Latin range only; anything else in a line falls through to the next font in the stack. */
+/* The three families are served from this site as variable files. The two Latin ones come in two
+   parts: the basic range every Latin-script page needs, and the extended range (Turkish ş, ğ, İ ...),
+   which a browser fetches only for a page that uses such a letter. */
 @font-face {
   font-family: 'Vazirmatn'; font-style: normal; font-weight: 100 900; font-display: swap;
   src: url(../fonts/vazirmatn-var.woff2) format('woff2');
@@ -19,6 +21,16 @@
   font-family: 'Space Grotesk'; font-style: normal; font-weight: 300 700; font-display: swap;
   src: url(../fonts/space-grotesk-latin-var.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap;
+  src: url(../fonts/inter-latin-ext-var.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Space Grotesk'; font-style: normal; font-weight: 300 700; font-display: swap;
+  src: url(../fonts/space-grotesk-latin-ext-var.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
 :root {
@@ -48,7 +60,7 @@
   --font-mono: ui-monospace, 'Cascadia Code', 'SFMono-Regular', Consolas, monospace;
 }
 html[data-lang="fa"] { --font: var(--font-fa); --font-h: var(--font-fa);   --lh: 1.95; }
-html[data-lang="en"] { --font: var(--font-en); --font-h: var(--font-disp); --lh: 1.7; }
+html[dir="ltr"] { --font: var(--font-en); --font-h: var(--font-disp); --lh: 1.7; }
 
 /* ---------- reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
@@ -69,7 +81,7 @@ body::before {
 img, svg { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 h1, h2, h3 { font-family: var(--font-h); margin: 0; line-height: 1.25; font-weight: 700; }
-html[data-lang="en"] h1, html[data-lang="en"] h2 { letter-spacing: -.02em; }
+html[dir="ltr"] h1, html[dir="ltr"] h2 { letter-spacing: -.02em; }
 p { margin: 0; }
 ul, ol { margin: 0; padding: 0; list-style: none; }
 figure { margin: 0; }
@@ -77,10 +89,10 @@ button { font: inherit; color: inherit; cursor: pointer; }
 ::selection { background: rgba(59,130,246,.35); }
 :focus-visible { outline: 2px solid var(--accent-hi); outline-offset: 3px; border-radius: 6px; }
 
-/* Only the inactive language is hidden — never force a display value here,
-   since .t-fa / .t-en sit on headings and paragraphs as well as on spans. */
-html[data-lang="fa"] .t-en,
-html[data-lang="en"] .t-fa { display: none !important; }
+/* A page normally holds one language. Where it holds several (the not-found page), only the one being
+   read shows. Never force a display value here: these classes sit on headings and paragraphs as well as on spans. */
+html:not([data-lang="fa"]) .t-fa, html:not([data-lang="en"]) .t-en, html:not([data-lang="fr"]) .t-fr,
+html:not([data-lang="de"]) .t-de, html:not([data-lang="tr"]) .t-tr { display: none !important; }
 
 .wrap { width: min(100% - 40px, var(--wrap)); margin-inline: auto; }
 
@@ -99,7 +111,7 @@ html[data-lang="en"] .t-fa { display: none !important; }
   font-size: 13.5px; font-weight: 600; color: var(--accent-hi);
   margin-block-end: 20px;
 }
-html[data-lang="en"] .eyebrow { letter-spacing: .12em; text-transform: uppercase; font-size: 12.5px; }
+html[dir="ltr"] .eyebrow { letter-spacing: .12em; text-transform: uppercase; font-size: 12.5px; }
 
 .idx {
   display: inline-block;
@@ -190,9 +202,9 @@ html[data-lang="fa"] .tags li { font-family: var(--font-fa); }
 .logo-text b { font-weight: 700; color: #fff; }
 /* Persian must never be letter-spaced: it breaks the joins between the letters */
 html[data-lang="fa"] .logo-text { font-family: var(--font-fa); font-size: 18.5px; }
-html[data-lang="en"] .logo-text { font-family: var(--font-disp); font-size: 15px; letter-spacing: .2em; }
+html[dir="ltr"] .logo-text { font-family: var(--font-disp); font-size: 15px; letter-spacing: .2em; }
 html[data-lang="fa"] .nav .logo-text { font-size: 27px; }
-html[data-lang="en"] .nav .logo-text { font-size: 21px; letter-spacing: .18em; }
+html[dir="ltr"] .nav .logo-text { font-size: 21px; letter-spacing: .18em; }
 .nav .logo-text { color: #b9c8de; }
 .nav .logo-text b { font-weight: 800; }
 
@@ -209,13 +221,60 @@ html[data-lang="en"] .nav .logo-text { font-size: 21px; letter-spacing: .18em; }
 }
 
 .nav-actions { display: flex; align-items: center; gap: 12px; }
+/* the language menu: the page's language on the button, every language under it, each with its flag and its own name */
+.lang { position: relative; }
 .lang-btn {
-  display: inline-flex; align-items: center; justify-content: center;
-  min-width: 50px; height: 40px; padding: 0 16px;
-  background: var(--panel); border: 1px solid var(--line); border-radius: 999px;
-  font-size: 14.5px; font-weight: 600; transition: border-color .2s, color .2s;
+  display: inline-flex; align-items: center; gap: 9px; height: 40px; padding-inline: 11px 10px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 999px; cursor: pointer;
+  font-size: 14.5px; font-weight: 600; list-style: none; user-select: none; -webkit-user-select: none;
+  transition: border-color .2s, color .2s, background .2s;
 }
-.lang-btn:hover { border-color: var(--accent-hi); color: var(--accent-hi); }
+.lang-btn::-webkit-details-marker { display: none; }
+.lang-btn:hover, .lang[open] .lang-btn { border-color: var(--accent-hi); color: var(--accent-hi); }
+.lang-face { display: inline-flex; align-items: center; gap: 9px; }
+.flag { flex: none; width: 24px; height: 16px; border-radius: 3px; object-fit: cover; box-shadow: 0 0 0 1px rgba(255,255,255,.2); }
+.lang-caret { flex: none; width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; opacity: .75; transition: transform .2s; }
+.lang[open] .lang-caret { transform: rotate(180deg); }
+.lang-menu {
+  position: absolute; inset-block-start: calc(100% + 10px); inset-inline-end: 0; z-index: 5;
+  min-width: 196px; margin: 0; padding: 6px; list-style: none;
+  background: rgba(9,14,23,.97); border: 1px solid var(--line-2); border-radius: 14px;
+  box-shadow: 0 22px 60px rgba(0,0,0,.6), 0 0 0 1px rgba(56,213,245,.05);
+}
+.lang[open] .lang-menu { animation: lang-open .2s cubic-bezier(.2,.7,.2,1); }
+@keyframes lang-open { from { opacity: 0; transform: translateY(-6px); } }
+.lang-menu a, .lang-menu button, .lang-here {
+  display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px 12px;
+  background: none; border: 0; border-radius: 9px; text-align: start;
+  font-size: 15px; font-weight: 500; line-height: 1.4; color: var(--muted); transition: background .15s, color .15s;
+}
+.lang-menu a[href]:hover, .lang-menu button:hover { background: var(--panel-2); color: var(--text); }
+/* each name is set in its own script's font, whatever the page's language */
+.lang-menu [lang] span { font-family: var(--font-en); }
+.lang-menu [lang="fa"] span, .lang-face[lang="fa"] .lang-name { font-family: var(--font-fa); }
+/* the language being read: bright, with a small light at the end of its row */
+.lang-menu [aria-current="true"],
+html[data-both][data-lang="en"] .lang-menu [data-lang="en"], html[data-both][data-lang="fa"] .lang-menu [data-lang="fa"],
+html[data-both][data-lang="fr"] .lang-menu [data-lang="fr"], html[data-both][data-lang="de"] .lang-menu [data-lang="de"],
+html[data-both][data-lang="tr"] .lang-menu [data-lang="tr"] { color: var(--text); }
+.lang-menu [aria-current="true"]::after,
+html[data-both][data-lang="en"] .lang-menu [data-lang="en"]::after, html[data-both][data-lang="fa"] .lang-menu [data-lang="fa"]::after,
+html[data-both][data-lang="fr"] .lang-menu [data-lang="fr"]::after, html[data-both][data-lang="de"] .lang-menu [data-lang="de"]::after,
+html[data-both][data-lang="tr"] .lang-menu [data-lang="tr"]::after {
+  content: ''; flex: none; width: 7px; height: 7px; margin-inline-start: auto; border-radius: 50%;
+  background: var(--cyan); box-shadow: 0 0 10px rgba(56,213,245,.75);
+}
+@media (prefers-reduced-motion: reduce) { .lang[open] .lang-menu { animation: none; } .lang-caret { transition: none; } }
+/* the brand never gives way to the menu beside it */
+.nav .logo { flex: none; }
+.nav .logo-text { white-space: nowrap; }
+.nav-links a { white-space: nowrap; }
+/* where the header is short of room (a tablet, a phone) the flag alone stands on the button; the open menu still names every language */
+@media (max-width: 1000px) {
+  .lang-btn, .lang-face { gap: 6px; }
+  .lang-btn { padding-inline: 9px 7px; }
+  .lang-btn .lang-name { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
 .burger {
   display: none; width: 44px; height: 40px; padding: 0;
   background: var(--panel); border: 1px solid var(--line); border-radius: 11px;
@@ -378,7 +437,7 @@ html:not(.js) .hero-visual { display: none; }
 
 /* each tile: what it is about, a plain title, then the abbreviations spelled out */
 .facts-glass .fact-label { color: var(--cyan); font-size: 12.5px; font-weight: 600; margin-block-end: 8px; }
-html[data-lang="en"] .facts-glass .fact-label { font-family: var(--font-disp); font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; }
+html[dir="ltr"] .facts-glass .fact-label { font-family: var(--font-disp); font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; }
 .facts-glass b { font-size: 17.5px; margin-block-end: 14px; }
 .facts-glass p { color: var(--muted); font-size: 14.4px; line-height: 1.85; }
 /* a row is one line wherever its caption fits, so the rows sit at even steps; a longer caption wraps rather than being cut off */
@@ -462,7 +521,7 @@ html[data-lang="en"] .facts-glass .fact-label { font-family: var(--font-disp); f
 }
 .layer-ico svg { width: 24px; height: 24px; fill: none; stroke: #bfdcff; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .layer-tag { display: block; margin-block-end: 8px; font-size: 12.5px; font-weight: 600; color: var(--cyan); }
-html[data-lang="en"] .layer-tag { font-family: var(--font-disp); font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; }
+html[dir="ltr"] .layer-tag { font-family: var(--font-disp); font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; }
 .layers-home h3 { font-size: 18px; margin-block-end: 10px; }
 .layers-home p { font-size: 15px; }
 
@@ -480,7 +539,7 @@ html[data-lang="en"] .layer-tag { font-family: var(--font-disp); font-size: 11.5
 
 /* a path of steps, read in the page's own direction; the last step is the outcome */
 /* the path from raw flow to a prediction: four tiles across the text column, joined by moving dashes */
-.pipe { --gap: 46px; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); margin-block: 26px; }
+.pipe { --gap: 46px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); margin-block: 26px; }
 .pipe > span {
   position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
   min-height: 118px; padding: 18px 12px; text-align: center; border-radius: 16px;
@@ -490,7 +549,7 @@ html[data-lang="en"] .layer-tag { font-family: var(--font-disp); font-size: 11.5
 }
 .pipe > span:hover { transform: translateY(-4px); border-color: rgba(56,213,245,.6); box-shadow: 0 14px 34px rgba(0,0,0,.35), 0 0 26px rgba(56,213,245,.16); }
 .pipe svg { width: 26px; height: 26px; fill: none; stroke: var(--cyan); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.pipe b { font-size: 14.6px; font-weight: 600; line-height: 1.6; color: var(--text); }
+.pipe b { max-width: 100%; font-size: 14.6px; font-weight: 600; line-height: 1.6; color: var(--text); overflow-wrap: break-word; }
 .pipe bdi { font-family: var(--font-disp); font-size: 12px; letter-spacing: .06em; color: var(--accent-hi); }
 /* the connector sits in the gap before each tile: dashes travel toward it and end in an arrowhead */
 .pipe > span + span::before {
@@ -645,7 +704,7 @@ html.sb .pipe > .is-goal { background: url(../img/sb-button.png) center / 100% 1
 /* "on this page", as a row of chips under the facts */
 .toc { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-block-start: 30px; }
 .toc-title { margin-inline-end: 8px; font-size: 13px; color: var(--dim); }
-html[data-lang="en"] .toc-title { letter-spacing: .12em; text-transform: uppercase; font-size: 11.5px; }
+html[dir="ltr"] .toc-title { letter-spacing: .12em; text-transform: uppercase; font-size: 11.5px; }
 .toc a {
   padding: 7px 16px; border-radius: 999px; font-size: 13.8px; color: var(--muted);
   background: rgba(148,170,205,.06); border: 1px solid var(--line); transition: color .2s, border-color .2s, background .2s;
@@ -776,7 +835,7 @@ html[dir="rtl"] .contact-card strong { text-align: right; }
 .footer-brand p { color: var(--muted); font-size: 14.6px; max-width: 40ch; margin-block-start: 16px; }
 .footer-col { display: grid; align-content: start; gap: 9px; }
 .footer-col h2 { font-family: var(--font); font-size: 12.5px; font-weight: 600; color: var(--dim); margin-block-end: 6px; }
-html[data-lang="en"] .footer-col h2 { letter-spacing: .12em; text-transform: uppercase; font-size: 11.5px; }
+html[dir="ltr"] .footer-col h2 { letter-spacing: .12em; text-transform: uppercase; font-size: 11.5px; }
 .footer-col a { justify-self: start; color: var(--muted); font-size: 14.8px; transition: color .2s; }
 .footer-col a:hover { color: var(--text); }
 .footer-legal { margin-block-start: 44px; padding-block-start: 24px; border-block-start: 1px solid var(--line); color: var(--dim); font-size: 13.2px; max-width: 92ch; }
@@ -850,7 +909,7 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
   .logo-mark { width: 42px; height: 42px; }
   .nav .logo-mark { width: 48px; height: 48px; }
   html[data-lang="fa"] .nav .logo-text { font-size: 21px; }
-  html[data-lang="en"] .nav .logo-text { font-size: 15px; letter-spacing: .13em; }
+  html[dir="ltr"] .nav .logo-text { font-size: 15px; letter-spacing: .13em; }
   .nav-links {
     position: fixed; inset-block-start: var(--nav-h); inset-inline: 0;
     flex-direction: column; gap: 2px; margin: 0; padding: 12px 20px 20px;
@@ -897,7 +956,7 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
   .facts li, .facts li:nth-child(odd) { border-inline-start: 0; padding-inline: 0; }
   .facts li + li { border-block-start: 1px solid var(--line); }
   .page-mark { display: none; }
-  html[data-lang="en"] .logo-text { font-size: 13px; letter-spacing: .13em; }
+  html[dir="ltr"] .logo-text { font-size: 13px; letter-spacing: .13em; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -990,7 +1049,7 @@ html[lang="fa"] .band-slogan h2 { letter-spacing: 0; }
 @media (max-width: 480px) {
   .nav .logo-mark { width: 42px; height: 42px; }
   html[data-lang="fa"] .nav .logo-text { font-size: 19px; }
-  html[data-lang="en"] .nav .logo-text { font-size: 13px; }
+  html[dir="ltr"] .nav .logo-text { font-size: 13px; }
 }
 
 /* footer: one glass panel for brand, links and contact, then the rights line */
@@ -1015,7 +1074,7 @@ html[dir="ltr"] .footer-panel {
 .footer-brand .logo { gap: 16px; }
 .footer-brand .logo-mark { width: 60px; height: 60px; filter: drop-shadow(0 0 18px rgba(63,155,255,.5)); }
 html[data-lang="fa"] .footer-brand .logo-text { font-size: 25px; }
-html[data-lang="en"] .footer-brand .logo-text { font-size: 19px; letter-spacing: .18em; }
+html[dir="ltr"] .footer-brand .logo-text { font-size: 19px; letter-spacing: .18em; }
 .footer-brand .logo-text b { font-weight: 800; }
 .footer-brand p { margin-block-start: 20px; font-size: 15.4px; line-height: 1.95; max-width: 36ch; }
 .footer-col { gap: 4px; }
@@ -1066,7 +1125,7 @@ html[dir="rtl"] .footer-cta:hover .arr { transform: scaleX(-1) translateX(4px); 
   .footer-panel::before { inset-inline: 22px; }
   .footer-brand .logo-mark { width: 50px; height: 50px; }
   html[data-lang="fa"] .footer-brand .logo-text { font-size: 22px; }
-  html[data-lang="en"] .footer-brand .logo-text { font-size: 16px; }
+  html[dir="ltr"] .footer-brand .logo-text { font-size: 16px; }
   .footer-brand p { margin-block-start: 14px; max-width: none; }
   .footer-col:not(.footer-contact) { grid-template-columns: 1fr 1fr; column-gap: 18px; }
   .footer-col h2 { grid-column: 1 / -1; }
@@ -1133,8 +1192,8 @@ html[dir="rtl"] { --o-start: right; }
 .sec-head { margin-block-end: 58px; }
 .sec-head h2 { font-size: clamp(2rem, 4vw, 3.05rem); }
 .cs-section h2 { font-size: clamp(1.9rem, 3.7vw, 2.8rem); }
-html[data-lang="en"] .hero h1, html[data-lang="en"] .page-hero h1 { letter-spacing: -.035em; }
-html[data-lang="en"] .sec-head h2, html[data-lang="en"] .cs-section h2 { letter-spacing: -.03em; }
+html[dir="ltr"] .hero h1, html[dir="ltr"] .page-hero h1 { letter-spacing: -.035em; }
+html[dir="ltr"] .sec-head h2, html[dir="ltr"] .cs-section h2 { letter-spacing: -.03em; }
 .section { padding-block: 116px; }
 .sec-head .eyebrow { display: inline-flex; align-items: center; gap: 12px; }
 .sec-head .eyebrow::before { content: ''; width: 30px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, var(--accent), var(--cyan)); }
@@ -1305,7 +1364,7 @@ html.sb .lost-code { background: none; color: #6cc6ff; }
 @media print { .tocbar, .projnav, body::after { display: none; } }
 
 /* English captions in the fact tiles run longer than the Persian ones: set them a touch smaller so none is cut */
-html[data-lang="en"] .facts-glass .fact-list span { font-size: 13px; letter-spacing: -.012em; }
+html[dir="ltr"] .facts-glass .fact-list span { font-size: 13px; letter-spacing: -.012em; }
 
 /* between phone and tablet widths two tiles side by side are too narrow for their captions */
 @media (max-width: 640px) { .facts.facts-glass { grid-template-columns: 1fr; } }
@@ -1339,9 +1398,15 @@ html.is-returning .phases li::before { transition: none; }
   }
 }
 
-/* ---------- phones, English: justified lines in a narrow column may break a long word rather than open wide gaps ---------- */
+/* ---------- justified lines may break a long word rather than open wide gaps: on phones in every Latin-script
+   language, and in German at every width, where one compound can be as long as a line ---------- */
+html[lang="de"] :is(.prose p, .hero-sub, .page-lead, .split-side p, .layers p, .track p, .proj-desc, .sec-head p:not(.eyebrow), .band p, .callout p, .cs-section p) {
+  -webkit-hyphens: auto; hyphens: auto; hyphenate-limit-chars: 10 4 4;
+}
+/* and where a browser has no dictionary for it, a word longer than its line breaks rather than running out of its box */
+html[lang="de"] :is(p, li, h2, h3, figcaption, .shot-cap) { overflow-wrap: break-word; }
 @media (max-width: 760px) {
-  html[lang="en"] :is(.prose p, .hero-sub, .page-lead, .split-side p, .layers p, .track p, .proj-desc, .sec-head p:not(.eyebrow), .cs-section p) {
+  html[dir="ltr"] :is(.prose p, .hero-sub, .page-lead, .split-side p, .layers p, .track p, .proj-desc, .sec-head p:not(.eyebrow), .cs-section p) {
     -webkit-hyphens: auto; hyphens: auto; hyphenate-limit-chars: 7 3 3;
   }
 }
@@ -1398,7 +1463,7 @@ html:not(.js) .phases li.is-now::before, .phases li.is-now.is-in::before { backg
   border: 1px solid var(--line); background: rgba(148,170,205,.06);
 }
 .tk-cap { flex: none; padding-inline: 10px 4px; font-size: 12.4px; color: var(--dim); white-space: nowrap; }
-html[data-lang="en"] .tk-cap { font-family: var(--font-disp); font-size: 11.2px; letter-spacing: .1em; text-transform: uppercase; }
+html[dir="ltr"] .tk-cap { font-family: var(--font-disp); font-size: 11.2px; letter-spacing: .1em; text-transform: uppercase; }
 .tk-seg button {
   flex: 1; min-width: 0; height: 100%; padding: 0 6px; border: 0; border-radius: 8px; background: none;
   color: var(--muted); font-size: 13.2px; font-weight: 600; white-space: nowrap; transition: background .2s, color .2s, box-shadow .2s;
@@ -1462,7 +1527,7 @@ html[dir="rtl"] .tk-work li { padding: 4px 12px 4px 6px; }
 .tk-work b { flex: none; font-size: 12.4px; }
 .tk-work b.is-buy { color: #a9ccff; }
 .tk-work b.is-sell { color: #ffb3bf; }
-html[data-lang="en"] .tk-work b { text-transform: uppercase; letter-spacing: .06em; }
+html[dir="ltr"] .tk-work b { text-transform: uppercase; letter-spacing: .06em; }
 .tk-what { color: var(--text); font-weight: 600; white-space: nowrap; }
 .tk-ahead { color: #ffd166; white-space: nowrap; }
 .tk-done { margin-inline-start: auto; white-space: nowrap; }
@@ -1561,6 +1626,7 @@ html[dir="ltr"] .lightbox-nav.is-prev svg, html[dir="rtl"] .lightbox-nav.is-next
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 html[data-lang="fa"] .page-hero .facts-glass b { font-family: inherit; font-size: 23px; letter-spacing: 0; }
+html:is([lang="fr"], [lang="de"], [lang="tr"]) .page-hero .facts-glass b { font-size: 20px; }
 .page-hero .facts-glass b::after {
   content: ""; position: absolute; inset-inline-start: 0; bottom: 0; width: 100%; height: 2px; border-radius: 2px;
   background: linear-gradient(90deg, #3b82f6, #38d6f5 70%, rgba(56,214,245,0));
@@ -1573,7 +1639,7 @@ html.is-returning .page-hero .facts-glass b::after { transform: none; }
 @media (prefers-reduced-motion: reduce) { .page-hero .facts-glass b::after { transform: none; transition: none; } }
 /* Samsung Internet's dark mode darkens gradient text: plain bright blue there */
 html.sb .page-hero .facts-glass b { background: none; color: #6cc6ff; }
-@media (max-width: 460px) { .page-hero .facts-glass b { font-size: 21px; } html[data-lang="fa"] .page-hero .facts-glass b { font-size: 20px; } }
+@media (max-width: 460px) { .page-hero .facts-glass b { font-size: 21px; } html[data-lang="fa"] .page-hero .facts-glass b { font-size: 20px; } html:is([lang="fr"], [lang="de"], [lang="tr"]) .page-hero .facts-glass b { font-size: 20px; } }
 
 /* ---------- the two track books share a trade: the taker's order crosses to the maker's quote ---------- */
 .cross-chip {

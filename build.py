@@ -3,17 +3,22 @@
 Run `python build.py` after editing anything under src/. The generated pages are
 committed, because GitHub Pages serves the repository as-is.
 
-Every page is written twice from one source: in English at its own address (English is
-the language a visitor meets first) and in Persian under /fa/. A source keeps both
-languages side by side, in elements classed t-fa and t-en; the build keeps the one that
-belongs and drops the other.
+Every page is written once per language from one source: in English at its own address
+(English is the language a visitor meets first) and in every other language under /<code>/.
+
+Two languages are written in the sources themselves, side by side, in elements classed
+t-fa and t-en: Persian and English. The build keeps the one that belongs and drops the other.
+The remaining languages (French, German, Turkish) are translations of the English: each has a
+catalogue, src/i18n/<code>.json, that maps an English text to its translation. A page in such
+a language is the English page with every t-en text looked up. The build stops, and lists what
+is missing, when an English text has no translation yet - so no page can fall behind.
 
 A page source starts with comment lines, then <body>:
   <!-- section: name -->     which nav link is the current one (required, first line)
-  <!-- title.fa: ... -->     <title>, per language (title.en likewise)
-  <!-- desc.fa: ... -->      meta description, per language
-  <!-- og.fa: ... -->        the line under the title in a link preview, per language
-  <!-- both: yes -->         one page carrying both languages (the not-found page only)
+  <!-- title.fa: ... -->     <title>, per written language (title.en likewise)
+  <!-- desc.fa: ... -->      meta description, per written language
+  <!-- og.fa: ... -->        the line under the title in a link preview, per written language
+  <!-- both: yes -->         one page carrying every language (the not-found page only)
 
 Tokens a page or a partial may use:
   @@NAME@@          contents of src/partials/name.html
@@ -23,18 +28,30 @@ Tokens a page or a partial may use:
   @@A:key@@         aria-current="page" when the page's section is key
   @@L:فارسی||English@@   the text for the page's language, for use inside attributes
   @@PROJNAV@@       on a project page: links to the previous and the next project (order below)
-  @@LANGBTN@@       the link to the same page in the other language
+  @@LANGBTN@@       the language menu: the same page in every language
 """
+import json
+import os
+import sys
 import re
 import time
 from datetime import date
 from html.parser import HTMLParser
 from pathlib import Path
 
-VERSION = "56"  # bump whenever assets/css/style.css or assets/js/main.js changes
+VERSION = "57"  # bump whenever assets/css/style.css or assets/js/main.js changes
 SITE = "https://novacapital.fund/"
-LANGS = ("fa", "en")
-MAIN = "en"     # the language served at the site's root; the other one lives under /<its code>/
+LANGS = ("en", "fa", "fr", "de", "tr")    # in the order of the language menu
+MAIN = "en"     # the language served at the site's root; every other one lives under /<its code>/
+RTL = ("fa",)
+NAMES = {"en": "English", "fa": "فارسی", "fr": "Français", "de": "Deutsch", "tr": "Türkçe"}   # each in its own language
+MENU_LABEL = {"en": "Language", "fa": "زبان", "fr": "Langue", "de": "Sprache", "tr": "Dil"}
+LOCALE = {"en": "en_GB", "fa": "fa_IR", "fr": "fr_FR", "de": "de_DE", "tr": "tr_TR"}
+# fonts fetched early, per language: Turkish needs the extended Latin range from its first line
+FONTS = {"fa": ["vazirmatn-var"], "en": ["inter-latin-var", "space-grotesk-latin-var"],
+         "fr": ["inter-latin-var", "space-grotesk-latin-var"], "de": ["inter-latin-var", "space-grotesk-latin-var"],
+         "tr": ["inter-latin-var", "inter-latin-ext-var", "space-grotesk-latin-var"]}
+DRAFT = os.environ.get("NOVA_DRAFT") == "1"   # a draft build shows the English where a translation is missing
 MENU = {"home": 0, "about": 1, "projects": 2, "contact": 3}   # the order of the menu: pages come in from the side they lie on
 
 # the order of the project cards; a project page links to its neighbours in this list
@@ -52,6 +69,8 @@ VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "met
 
 ROOT = Path(__file__).parent
 PAGES = ROOT / "src" / "pages"
+I18N = ROOT / "src" / "i18n"
+CARET = '<svg class="lang-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>'
 PARTIALS = {p.stem.upper(): p.read_text(encoding="utf-8").rstrip("\n")
             for p in (ROOT / "src" / "partials").glob("*.html")}
 
@@ -75,14 +94,15 @@ def projnav(slug):
             + '    </nav>')
 
 
-class Cutter(HTMLParser):
-    """Finds every element that carries one class, so it can be cut out of the text whole."""
+class Finder(HTMLParser):
+    """Finds every outermost element that carries one class: where its opening tag starts and ends,
+    and where its closing tag starts and ends."""
 
     def __init__(self, text, cls):
         super().__init__(convert_charrefs=False)
         self.text, self.cls = text, cls
         self.lines = [0] + [m.end() for m in re.finditer("\n", text)]
-        self.open, self.start, self.cuts = [], None, []
+        self.open, self.start, self.found = [], None, []
         self.feed(text)
         self.close()
 
@@ -95,24 +115,25 @@ class Cutter(HTMLParser):
             return
         first = self.start is None and self.cls in (dict(attrs).get("class") or "").split()
         if first:
-            self.start = self.here()
+            at = self.here()
+            self.start = (at, at + len(self.get_starttag_text()))
         self.open.append((tag, first))
 
     def handle_endtag(self, tag):
         for i in range(len(self.open) - 1, -1, -1):
             if self.open[i][0] == tag:
                 if any(first for _, first in self.open[i:]):
-                    self.cuts.append((self.start, self.text.index(">", self.here()) + 1))
+                    at = self.here()
+                    self.found.append((*self.start, at, self.text.index(">", at) + 1))
                     self.start = None
                 del self.open[i:]
                 return
 
 
-def only(text, lang):
-    """The text with every element of the other language removed."""
-    other = "t-en" if lang == "fa" else "t-fa"
+def without(text, cls):
+    """The text with every element of one class removed."""
     out, at = [], 0
-    for a, b in Cutter(text, other).cuts:
+    for a, _, _, b in Finder(text, cls).found:
         line_a = text.rfind("\n", 0, a) + 1
         line_b = text.find("\n", b)
         line_b = len(text) if line_b < 0 else line_b
@@ -120,6 +141,57 @@ def only(text, lang):
             a, b = line_a, min(len(text), line_b + 1)
         out.append(text[at:a])
         at = b
+    out.append(text[at:])
+    return "".join(out)
+
+
+def norm(s):
+    return re.sub(r"\s+", " ", s).strip()
+
+
+class Catalogue:
+    """One language's translations of the English texts, from src/i18n/<code>.json."""
+
+    def __init__(self, lang):
+        self.lang, self.used, self.missing = lang, set(), []
+        path = I18N / f"{lang}.json"
+        self.texts = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+
+    def __call__(self, english):
+        key = norm(english)
+        if not key:
+            return english
+        if key in self.texts:
+            self.used.add(key)
+            return self.texts[key]
+        if key not in self.missing:
+            self.missing.append(key)
+        return key
+
+
+def reclass(tag, lang):
+    """An opening tag classed t-en, classed for another language instead."""
+    return re.sub(r'(class="[^"]*?)\bt-en\b', rf"\1t-{lang}", tag, count=1)
+
+
+def translated(text, say, lang):
+    """The English text of a page, with every t-en element put into another language."""
+    out, at = [], 0
+    for a, b, c, d in Finder(text, "t-en").found:
+        out += [text[at:a], reclass(text[a:b], lang), say(text[b:c]), text[c:d]]
+        at = d
+    out.append(text[at:])
+    return "".join(out)
+
+
+def every_language(text, says):
+    """For the one page that carries all languages: after each t-en element, its twin in each translated language."""
+    out, at = [], 0
+    for a, b, c, d in Finder(text, "t-en").found:
+        out.append(text[at:d])
+        for lang, say in says.items():
+            out.append(reclass(text[a:b], lang) + say(text[b:c]) + text[c:d])
+        at = d
     out.append(text[at:])
     return "".join(out)
 
@@ -135,25 +207,26 @@ def address(rel, lang):
     return SITE + ("" if lang == MAIN else lang + "/") + path
 
 
-def head_meta(rel, meta, lang, both):
+def head_meta(rel, meta, lang, both, say):
     if both:
         return "\n".join(['<base href="/">', f'<title>{esc(meta["title." + MAIN])}</title>',
                           '<meta name="robots" content="noindex">'])
-    other = "en" if lang == "fa" else "fa"
+
+    def own(key):       # a line of the page's metadata, in this page's language
+        return meta[f"{key}.{lang}"] if f"{key}.{lang}" in meta else say(meta[f"{key}.en"])
+
     image = SITE + f"assets/img/og/{rel.stem if rel.parts[0] == 'projects' else 'nova'}-{lang}.jpg"
-    locale = {"fa": "fa_IR", "en": "en_US"}
     return "\n".join([
-        f'<title>{esc(meta["title." + lang])}</title>',
-        f'<meta name="description" content="{esc(meta["desc." + lang])}">',
+        f'<title>{esc(own("title"))}</title>',
+        f'<meta name="description" content="{esc(own("desc"))}">',
         f'<link rel="canonical" href="{address(rel, lang)}">',
-        f'<link rel="alternate" hreflang="fa" href="{address(rel, "fa")}">',
-        f'<link rel="alternate" hreflang="en" href="{address(rel, "en")}">',
+        *[f'<link rel="alternate" hreflang="{l}" href="{address(rel, l)}">' for l in LANGS],
         f'<link rel="alternate" hreflang="x-default" href="{address(rel, MAIN)}">',
-        f'<meta property="og:title" content="{esc(meta["title." + lang])}">',
-        f'<meta property="og:description" content="{esc(meta["og." + lang])}">',
+        f'<meta property="og:title" content="{esc(own("title"))}">',
+        f'<meta property="og:description" content="{esc(own("og"))}">',
         f'<meta property="og:url" content="{address(rel, lang)}">',
-        f'<meta property="og:locale" content="{locale[lang]}">',
-        f'<meta property="og:locale:alternate" content="{locale[other]}">',
+        f'<meta property="og:locale" content="{LOCALE[lang]}">',
+        *[f'<meta property="og:locale:alternate" content="{LOCALE[l]}">' for l in LANGS if l != lang],
         f'<meta property="og:image" content="{image}">',
         '<meta property="og:image:width" content="1200">',
         '<meta property="og:image:height" content="630">',
@@ -162,10 +235,33 @@ def head_meta(rel, meta, lang, both):
     ])
 
 
+def flag(code, lazy=False):
+    return (f'<img class="flag" src="@@R@@assets/img/flags/{code}.png" alt="" width="24" height="16"'
+            + (' loading="lazy"' if lazy else "") + ">")
+
+
+def langmenu(lang, both, link):
+    """The language menu: a button showing the page's language, and under it the same page in every language,
+    each with its flag and its name in its own words. It opens without script (details / summary)."""
+    if both:    # the not-found page changes language in place: buttons, and the button's face once per language
+        face = "".join(f'<span class="lang-face t-{l}" lang="{l}">{flag(l)}<span class="lang-name">{NAMES[l]}</span></span>' for l in LANGS)
+        items = "".join(f'<li><button type="button" data-lang="{l}" lang="{l}">{flag(l, True)}<span>{NAMES[l]}</span></button></li>' for l in LANGS)
+        label = "Language"
+    else:
+        face = f'{flag(lang)}<span class="lang-name">{NAMES[lang]}</span>'
+        # the page's own language is a row that is not a link: there is nowhere to go
+        items = "".join((f'<li><span class="lang-here" aria-current="true" lang="{l}">{flag(l, True)}<span>{NAMES[l]}</span></span></li>' if l == lang else
+                         f'<li><a href="{link(l)}" hreflang="{l}" lang="{l}">{flag(l, True)}<span>{NAMES[l]}</span></a></li>') for l in LANGS)
+        label = f"{MENU_LABEL[lang]}: {NAMES[lang]}"
+    return (f'<details class="lang" id="lang">\n'
+            f'        <summary class="lang-btn" id="langBtn" aria-label="{label}">{face}{CARET}</summary>\n'
+            f'        <ul class="lang-menu" id="langMenu">{items}</ul>\n'
+            f'      </details>')
+
+
 def preload(lang):
-    fonts = {"fa": ["vazirmatn-var"], "en": ["inter-latin-var", "space-grotesk-latin-var"]}[lang]
     return "\n".join(f'<link rel="preload" href="@@R@@assets/fonts/{f}.woff2" as="font" type="font/woff2" crossorigin>'
-                     for f in fonts)
+                     for f in FONTS[lang])
 
 
 def write(path, text):
@@ -193,7 +289,9 @@ def read(page):
 
 
 def main():
+    sys.stdout.reconfigure(errors="backslashreplace")      # a Windows console may not hold every letter of every language
     sitemap = []
+    says = {lang: Catalogue(lang) for lang in LANGS if lang not in ("fa", "en")}
     for page in sorted(PAGES.rglob("*.html")):
         rel = page.relative_to(PAGES)
         meta, source = read(page)
@@ -205,33 +303,37 @@ def main():
             if name != "HEAD":
                 source = source.replace(f"@@{name}@@", body)
         source = re.sub(r"@@A:(\w+)@@", lambda m: ' aria-current="page"' if m.group(1) == meta["section"] else "", source)
+        here = rel.as_posix()
+        here = here[:-len("index.html")] if here.endswith("index.html") else here
 
         for lang in ((MAIN,) if both else LANGS):
-            other = "en" if lang == "fa" else "fa"
+            say = says.get(lang)
             up = "" if both else "../" * depth                      # back to this language's root
             top = up + ("" if lang == MAIN else "../")              # back to the site's root
-            here = rel.as_posix()
-            here = here[:-len("index.html")] if here.endswith("index.html") else here
-            alt = (top + other + "/" + here) if lang == MAIN else (top + here or "./")
-            attrs = f'lang="{lang}" dir="{"rtl" if lang == "fa" else "ltr"}" data-lang="{lang}"'
+            attrs = f'lang="{lang}" dir="{"rtl" if lang in RTL else "ltr"}" data-lang="{lang}"'
             if meta["section"] in MENU:
                 attrs += f' data-sec="{MENU[meta["section"]]}"'
-
             if both:
-                button = ('<button class="lang-btn" id="langBtn" type="button" aria-label="Change language">'
-                          '<span class="t-fa">EN</span><span class="t-en">فا</span></button>')
                 attrs += ' data-both'
-            else:
-                button = (f'<a class="lang-btn" id="langBtn" href="{alt}" hreflang="{other}" lang="{other}" '
-                          f'aria-label="@@L:EN — English||فا — فارسی@@">@@L:EN||فا@@</a>')
-                if lang == MAIN:
-                    attrs += f' data-alt="{alt}"'                   # where the same page lives in the other language
+            elif lang == MAIN:
+                attrs += f' data-alt="{top}*/{here}"'               # where the same page lives in another language (* = its code)
 
-            head = PARTIALS["HEAD"].replace("@@META@@", head_meta(rel, meta, lang, both)).replace("@@PRELOAD@@", preload(lang))
-            text = f'<!DOCTYPE html>\n<html {attrs}>\n<head>\n{head}\n</head>\n' + source.replace("@@LANGBTN@@", button)
-            text = re.sub(r"@@L:(.*?)\|\|(.*?)@@", lambda m: m.group(1 if lang == "fa" else 2), text)
-            if not both:
-                text = only(text, lang)
+            def link(to):       # the same page in another language, from this one
+                return (top + ("" if to == MAIN else to + "/") + here) or "./"
+
+            head = PARTIALS["HEAD"].replace("@@META@@", head_meta(rel, meta, lang, both, say)).replace("@@PRELOAD@@", preload(lang))
+            text = f'<!DOCTYPE html>\n<html {attrs}>\n<head>\n{head}\n</head>\n' + source
+            text = re.sub(r"@@L:(.*?)\|\|(.*?)@@",
+                          lambda m: m.group(1) if lang == "fa" else say(m.group(2)) if say else m.group(2), text)
+            if both:
+                text = every_language(text, says)
+            elif lang == "fa":
+                text = without(text, "t-en")
+            else:
+                text = without(text, "t-fa")
+                if say:
+                    text = translated(text, say, lang)
+            text = text.replace("@@LANGBTN@@", langmenu(lang, both, link))     # after the texts: the menu is the same in every language
             text = text.replace("@@R@@assets/", top + "assets/").replace("@@R@@", up).replace("@@V@@", VERSION)
             if "@@" in text:
                 raise SystemExit(f"{rel}: unresolved token near {text[text.index('@@'):][:40]!r}")
@@ -258,6 +360,21 @@ def main():
           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
           + "\n".join(sorted(sitemap, key=lambda s: (s.count("/"), s))) + "\n</urlset>\n")
     print("built sitemap.xml")
+
+    # every English text must exist in every translated language; a text no page uses any more is only reported
+    lacking = {lang: say.missing for lang, say in says.items() if say.missing}
+    for lang, say in says.items():
+        stale = [k for k in say.texts if k not in say.used]
+        if stale:
+            print(f"note: src/i18n/{lang}.json holds {len(stale)} text(s) no page uses any more, e.g. {stale[0][:60]!r}")
+    if lacking:
+        write(I18N / "_missing.json", json.dumps(lacking, ensure_ascii=False, indent=1) + "\n")
+        for lang, keys in lacking.items():
+            print(f"MISSING in src/i18n/{lang}.json: {len(keys)} text(s), e.g. {keys[0][:70]!r}")
+        if not DRAFT:
+            raise SystemExit("Translations are missing (listed in src/i18n/_missing.json). Add them, then build again.")
+    elif (I18N / "_missing.json").exists():
+        (I18N / "_missing.json").unlink()
 
 
 if __name__ == "__main__":

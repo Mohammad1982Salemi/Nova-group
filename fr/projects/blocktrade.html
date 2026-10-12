@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" data-lang="fr" data-sec="2">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlockTrade — analyse comportementale des transactions de bloc sur le marché à terme de Chicago | Nova Group</title>
+<meta name="description" content="Le projet BlockTrade : un service de données pour les transactions de bloc de la Bourse de Chicago et leur analyse comportementale, en route vers des algorithmes de trading et d’investissement.">
+<link rel="canonical" href="https://novacapital.fund/fr/projects/blocktrade.html">
+<link rel="alternate" hreflang="en" href="https://novacapital.fund/projects/blocktrade.html">
+<link rel="alternate" hreflang="fa" href="https://novacapital.fund/fa/projects/blocktrade.html">
+<link rel="alternate" hreflang="fr" href="https://novacapital.fund/fr/projects/blocktrade.html">
+<link rel="alternate" hreflang="de" href="https://novacapital.fund/de/projects/blocktrade.html">
+<link rel="alternate" hreflang="tr" href="https://novacapital.fund/tr/projects/blocktrade.html">
+<link rel="alternate" hreflang="x-default" href="https://novacapital.fund/projects/blocktrade.html">
+<meta property="og:title" content="BlockTrade — analyse comportementale des transactions de bloc sur le marché à terme de Chicago | Nova Group">
+<meta property="og:description" content="Analyse comportementale des transactions de bloc sur le marché à terme de Chicago, en route vers des algorithmes de trading et d’investissement fondés sur la trace des gros capitaux.">
+<meta property="og:url" content="https://novacapital.fund/fr/projects/blocktrade.html">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:locale:alternate" content="fa_IR">
+<meta property="og:locale:alternate" content="de_DE">
+<meta property="og:locale:alternate" content="tr_TR">
+<meta property="og:image" content="https://novacapital.fund/assets/img/og/blocktrade-fr.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://novacapital.fund/assets/img/og/blocktrade-fr.jpg">
+<meta name="author" content="Nova Group">
+<meta name="theme-color" content="#05080e">
+<meta name="color-scheme" content="dark light">
+<meta name="supported-color-schemes" content="dark light">
+<meta name="darkreader-lock">
+<meta property="og:site_name" content="Nova Group">
+<meta property="og:type" content="website">
+
+<link rel="icon" type="image/svg+xml" href="../../assets/img/nova-mark.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="../../assets/img/favicon-64.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../../assets/img/favicon-192.png">
+<link rel="apple-touch-icon" href="../../assets/img/favicon-192.png">
+
+<!-- The fonts are served from this site; the one this language needs first is fetched early. -->
+<link rel="preload" href="../../assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/css/style.css?v=57">
+
+<!-- Runs before first paint: Samsung Internet flag, the reader's language, the page-transition direction. -->
+<script src="../../assets/js/early.js?v=57"></script>
+</head>
+<body>
+
+<a href="#main" class="skip-link"><span class="t-fr">Aller au contenu</span></a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="../index.html" aria-label="Nova Group">
+      <img class="logo-mark" src="../../assets/img/nova-mark-512.png" alt="" width="512" height="512" fetchpriority="high">
+      <span class="logo-text t-fr"><b>NOVA</b> GROUP</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Menu principal">
+      <a href="../index.html"><span class="t-fr">Accueil</span></a>
+      <a href="../about.html"><span class="t-fr">À propos</span></a>
+      <a href="../projects.html" aria-current="page"><span class="t-fr">Projets</span></a>
+      <a href="../contact.html"><span class="t-fr">Contact</span></a>
+    </nav>
+
+    <div class="nav-actions">
+      <details class="lang" id="lang">
+        <summary class="lang-btn" id="langBtn" aria-label="Langue: Français"><img class="flag" src="../../assets/img/flags/fr.png" alt="" width="24" height="16"><span class="lang-name">Français</span><svg class="lang-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <ul class="lang-menu" id="langMenu"><li><a href="../../projects/blocktrade.html" hreflang="en" lang="en"><img class="flag" src="../../assets/img/flags/en.png" alt="" width="24" height="16" loading="lazy"><span>English</span></a></li><li><a href="../../fa/projects/blocktrade.html" hreflang="fa" lang="fa"><img class="flag" src="../../assets/img/flags/fa.png" alt="" width="24" height="16" loading="lazy"><span>فارسی</span></a></li><li><span class="lang-here" aria-current="true" lang="fr"><img class="flag" src="../../assets/img/flags/fr.png" alt="" width="24" height="16" loading="lazy"><span>Français</span></span></li><li><a href="../../de/projects/blocktrade.html" hreflang="de" lang="de"><img class="flag" src="../../assets/img/flags/de.png" alt="" width="24" height="16" loading="lazy"><span>Deutsch</span></a></li><li><a href="../../tr/projects/blocktrade.html" hreflang="tr" lang="tr"><img class="flag" src="../../assets/img/flags/tr.png" alt="" width="24" height="16" loading="lazy"><span>Türkçe</span></a></li></ul>
+      </details>
+      <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="page-hero">
+  <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="wrap">
+    <nav class="crumbs reveal" aria-label="Fil d’Ariane">
+      <a href="../projects.html"><span class="t-fr">Projets</span></a>
+      <span aria-hidden="true">/</span>
+      <span><span class="t-fr">BlockTrade</span></span>
+    </nav>
+
+    <h1 class="reveal"><span class="t-fr">BlockTrade</span></h1>
+    <p class="page-lead reveal">
+      <span class="t-fr">Analyse comportementale des transactions de bloc sur le marché à terme de Chicago, en route vers des algorithmes de trading et d’investissement fondés sur la trace des gros capitaux.</span>
+    </p>
+
+    <div class="cs-meta reveal">
+      <span class="status"><span class="t-fr">Service de données actif</span></span>
+      <ul class="tags">
+        <li>Python</li><li>C#</li><li>Linux</li>
+        <li><span class="t-fr">Transactions de bloc</span></li>
+        <li><span class="t-fr">Service de données</span></li>
+        <li><span class="t-fr">Analyse comportementale</span></li>
+        <li><span class="t-fr">Simulateur</span></li>
+      </ul>
+    </div>
+
+    <ul class="facts facts-glass">
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-fr">Vitesse</span></span>
+        <b><span class="t-fr">Médiane de 36 s</span></b>
+        <p>
+          <span class="t-fr">Le temps que met chaque bloc à atteindre le graphique, après l’avis de la bourse.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-fr">Couverture</span></span>
+        <b><span class="t-fr">Tous les produits</span></b>
+        <p>
+          <span class="t-fr">Les transactions de bloc de tous les produits de la Bourse de Chicago, reçues et traitées sans interruption.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-fr">Classification</span></span>
+        <b><span class="t-fr">24 formes</span></b>
+        <p>
+          <span class="t-fr">Du contrat unique aux combinaisons d’options à plusieurs jambes, chacune clairement définie.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-fr">Technologie</span></span>
+        <b><span class="t-fr">2 langages, 2 rôles</span></b>
+        <div class="fact-list">
+          <div><i>Python</i><span><span class="t-fr">Réception, traitement, livraison</span></span></div>
+          <div><i>C#</i><span><span class="t-fr">Outil d’affichage</span></span></div>
+        </div>
+      </li>
+    </ul>
+
+    <nav class="toc reveal" aria-label="Sur cette page">
+      <span class="toc-title"><span class="t-fr">Sur cette page</span></span>
+      <a href="#intro"><span class="t-fr">Introduction</span></a>
+      <a href="#platform"><span class="t-fr">Outil d’affichage</span></a>
+      <a href="#approach"><span class="t-fr">Approche</span></a>
+      <a href="#difference"><span class="t-fr">Points saillants</span></a>
+      <a href="#roadmap"><span class="t-fr">Feuille de route</span></a>
+      <a href="#technology"><span class="t-fr">Technologie</span></a>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+
+    <article class="cs-body">
+      <section class="cs-section" id="intro">
+        <h2><span><span class="t-fr">Introduction</span></span></h2>
+      <p class="detail-lead">
+        <span class="t-fr">Les plus grosses transactions du marché à terme ne se font pas à l’écran. Deux grandes institutions s’accordent sur le prix et la taille en dehors du carnet d’ordres, et le marché ne l’apprend que quelques minutes plus tard, dans un bref avis. On les appelle des transactions de bloc. Elles ne laissent aucune trace dans les barres et le volume que le trader voit sur le graphique, et peu de gens se demandent ce que font ces gros capitaux et comment le marché se comporte ensuite.</span>
+      </p>
+      <p>
+        <span class="t-fr">Nous avons décidé de comprendre comment ces transactions se comportent et, pour cela, nous sommes d’abord devenus nous-mêmes le fournisseur de leurs données.</span>
+      </p>
+      <p>
+        <span class="t-fr">Le projet BlockTrade dispose d’un service de données en fonctionnement. Notre serveur reçoit et traite sans interruption les transactions de bloc de tous les produits de la Bourse de Chicago et les livre sur le graphique du trader. Chaque bloc arrive, en médiane, 36 secondes après l’avis de la bourse, et l’historique s’accumule jour après jour. La destination, ce sont des algorithmes de trading et d’investissement construits sur l’analyse comportementale de ces mêmes blocs.</span>
+      </p>
+      </section>
+
+      <section class="cs-section" id="platform">
+        <h2><span><span class="t-fr">À l’intérieur de l’outil d’affichage</span></span></h2>
+        <p>
+          <span class="t-fr">Ce sont de vraies captures d’écran de l’outil d’affichage du projet, et non des maquettes. Chaque cercle est une transaction de bloc placée sur le graphique 15 minutes de son propre actif, et sa couleur indique la forme de la transaction. Cliquez sur l’image pour l’agrandir.</span>
+        </p>
+
+        <div class="shots reveal" data-shots>
+          <div class="shots-tabs" role="tablist" aria-label="Vues du graphique">
+            <button type="button" role="tab" aria-selected="true" data-name="GC 12-26 · Gold Futures · 15 Minute">
+              <b><span class="t-fr">Contrats à terme sur l’or</span></b>
+              <span>GC 12-26 · 816 blocks</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="ZW 12-26 · 15 Minute">
+              <b><span class="t-fr">Contrats à terme sur le blé</span></b>
+              <span>ZW 12-26 · 57 blocks</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="6E 12-26 · Euro FX Futures · 15 Minute">
+              <b><span class="t-fr">Contrats à terme Euro FX</span></b>
+              <span>6E 12-26 · 81 blocks</span>
+            </button>
+          </div>
+
+          <figure class="shot-frame">
+            <div class="shot-bar">
+              <i></i><i></i><i></i>
+              <span class="shot-name">GC 12-26 · Gold Futures · 15 Minute</span>
+              <button type="button" class="shot-zoom" aria-label="Agrandir">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg>
+              </button>
+            </div>
+            <div class="shot-stage">
+              <img class="is-on" src="../../assets/img/projects/blocktrade/gold.webp" data-full="../../assets/img/projects/blocktrade/gold-full.webp" width="1400" height="742" alt="Graphique 15 minutes des contrats à terme sur l’or avec les cercles des transactions de bloc et la légende des formes">
+              <img src="../../assets/img/projects/blocktrade/wheat.webp" data-full="../../assets/img/projects/blocktrade/wheat-full.webp" width="1400" height="742" loading="lazy" alt="Graphique 15 minutes des contrats à terme sur le blé avec les cercles des transactions de bloc">
+              <img src="../../assets/img/projects/blocktrade/euro.webp" data-full="../../assets/img/projects/blocktrade/euro-full.webp" width="1400" height="742" loading="lazy" alt="Graphique 15 minutes des contrats à terme Euro FX avec les cercles des transactions de bloc">
+            </div>
+            <figcaption>
+              <p class="shot-cap is-on">
+                <span class="t-fr">Contrats à terme sur l’or : 816 blocs enregistrés, dont 101 tracés sur cet intervalle. La légende à côté du graphique présente les formes par groupes : contrats à terme seuls, options seules, et combinaisons des deux.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-fr">Contrats à terme sur le blé : 57 blocs enregistrés, dont 7 tracés sur cet intervalle.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-fr">Contrats à terme Euro FX : 81 blocs enregistrés, dont 15 tracés sur cet intervalle.</span>
+              </p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="cs-section" id="approach">
+        <h2><span><span class="t-fr">Approche</span></span></h2>
+      <p>
+        <span class="t-fr">Nous faisons d’abord nôtres les données, puis nous apprenons à connaître le comportement, et enfin nous construisons des algorithmes sur cette connaissance.</span>
+      </p>
+      <ol class="steps">
+        <li class="glow reveal">
+          <strong class="t-fr">Du marché à nos propres données</strong>
+          <p class="t-fr">Notre serveur dédié reçoit les avis de la bourse tout au long de la séance, les enregistre exactement tels quels et les livre aux consommateurs par une passerelle dédiée. À cette étape, nous sommes le fournisseur des données, et non leur client. Cette étape est construite et fonctionne.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fr">Des données à l’analyse comportementale</strong>
+          <p class="t-fr">Chaque bloc reçoit une identité fixe, entre dans l’une des 24 formes définies et est rattaché à son propre actif. Chaque correction, chaque retrait et chaque retour d’une transaction est également enregistré, avec son heure exacte. Sur cette base, nous mesurons dans quelle situation apparaît chaque forme de bloc et ce que fait le marché ensuite.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fr">De l’analyse comportementale à l’algorithme</strong>
+          <p class="t-fr">Les constats qui résistent aux tests sur l’historique seront transformés en règles de trading et d’investissement. Comme dans tous nos projets, ils sont testés dans un simulateur et au coût réel, et non sur le papier. Ces algorithmes seront alimentés par la même passerelle que celle qui alimente le graphique.</p>
+        </li>
+      </ol>
+      </section>
+
+      <section class="cs-section" id="difference">
+        <h2><span><span class="t-fr">Points saillants</span></span></h2>
+      <ul class="points">
+        <li class="glow reveal">
+          <strong class="t-fr">Le but est de comprendre le comportement, et non d’afficher des données.</strong>
+          <p class="t-fr">Voir un bloc sur le graphique ne fait pas, à lui seul, une décision. Ce que nous recherchons, c’est le schéma qui se répète : quelle forme de grosse transaction, dans quelle situation, s’accompagne de quelle conséquence. L’outil d’affichage est le premier résultat de ce parcours, et non sa fin.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fr">Nous fournissons les données ; nous n’en sommes pas le client.</strong>
+          <p class="t-fr">L’analyse comportementale a besoin de données complètes, à l’heure et entre nos propres mains. Nous avons construit et nous exploitons nous-mêmes la chaîne, de la réception à la livraison. La qualité et le délai de ce qui parvient à l’analyse et à l’algorithme sont sous notre contrôle.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fr">Nous avons le comportement du marché, et pas seulement la liste de fin de journée.</strong>
+          <p class="t-fr">La liste de fin de journée ne dit pas ce qui a été corrigé, retiré, ou ce qui est parti puis revenu en cours de journée. Notre service conserve tout cela, et ces détails sont la matière première de l’analyse comportementale. Cet historique grandit chaque jour et ne peut pas être enregistré de nouveau plus tard.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fr">Un langage commun pour les grosses transactions.</strong>
+          <p class="t-fr">Les transactions de bloc vont du contrat unique aux combinaisons d’options à plusieurs jambes. Nous les avons classées en 24 formes clairement définies, et cette classification a été testée sur l’ensemble des données enregistrées. Sans ce langage, il n’est pas possible de comparer le comportement des blocs.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fr">Une analyse qui ne repose pas sur une supposition cachée.</strong>
+          <p class="t-fr">Une transaction de bloc réunit son acheteur et son vendeur, et aucune direction n’est annoncée pour elle. Notre service indique le type de transaction et n’invente pas de direction ; chaque fois qu’il ne peut pas reconnaître un bloc, il le dit précisément. Toute lecture directionnelle dans notre analyse viendra séparément, sous l’appellation « indice ».</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-fr">Une infrastructure prête pour plusieurs consommateurs.</strong>
+          <p class="t-fr">Plusieurs machines indépendantes sont alimentées par un même flux, chacune avec son propre accès. Chaque nuit, les données partent vers un stockage extérieur au serveur et les deux copies sont comparées l’une à l’autre. Ajouter un algorithme comme nouveau consommateur ne demande aucun nouveau travail d’infrastructure.</p>
+        </li>
+      </ul>
+      </section>
+
+      <section class="cs-section" id="roadmap">
+        <h2><span><span class="t-fr">Feuille de route</span></span></h2>
+      <ol class="phases">
+        <li class="is-done glow reveal">
+          <span class="phase-mark"><span class="t-fr">Fait</span></span>
+          <p class="t-fr">Le serveur de réception, la couche de traitement et de classification, la passerelle de livraison, la sauvegarde et l’outil d’affichage sont construits et testés.</p>
+        </li>
+        <li class="is-done glow reveal">
+          <span class="phase-mark"><span class="t-fr">Fait</span></span>
+          <p class="t-fr">Les règles de reconnaissance du comportement ont été complétées par l’observation du marché en direct, et l’historique s’accumule jour après jour.</p>
+        </li>
+        <li class="is-now glow reveal">
+          <span class="phase-mark"><span class="t-fr">En cours</span></span>
+          <p class="t-fr">L’analyse comportementale des blocs et le test d’hypothèses de trading sur ce même historique.</p>
+        </li>
+        <li class="glow reveal">
+          <span class="phase-mark"><span class="t-fr">Dernière étape</span></span>
+          <p class="t-fr">La dernière étape, ce sont des algorithmes de trading et d’investissement qui utilisent la trace des gros capitaux dans leurs décisions.</p>
+        </li>
+      </ol>
+      </section>
+
+      <section class="cs-section" id="technology">
+        <h2><span><span class="t-fr">Technologie</span></span></h2>
+      <p>
+        <span class="t-fr">La couche de réception, le traitement et la passerelle de livraison sont écrits en Python sur un serveur Linux dédié, et l’outil d’affichage en C#. Le service fonctionne sans interruption et enregistre son propre état de santé toutes les dix minutes. Chaque modification passe par les tests automatisés, et chaque nuit la sauvegarde est comparée à l’original.</span>
+      </p>
+      </section>
+    </article>
+
+  </div>
+</section>
+
+<section class="section ruled">
+  <div class="wrap">
+    <nav class="projnav reveal" aria-label="Autres projets">
+      <a class="projnav-card is-prev glow" href="../projects/fast-scalp.html">
+        <span class="projnav-dir"><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="t-fr">Projet précédent</span></span>
+        <b><span class="t-fr">Fast Scalp</span></b>
+      </a>
+      <a class="projnav-card is-next glow" href="../projects/tsetmc.html">
+        <span class="projnav-dir"><span class="t-fr">Projet suivant</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <b><span class="t-fr">TSETMC</span></b>
+      </a>
+    </nav>
+  </div>
+  <div class="wrap cs-end">
+    <a class="link-arrow link-back" href="../projects.html">
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <span class="t-fr">Tous les projets</span>
+    </a>
+    <a class="btn btn-ghost" href="../contact.html">
+      <span class="t-fr">Contactez-nous</span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top footer-panel">
+      <div class="footer-brand">
+        <a class="logo" href="../index.html" aria-label="Nova Group">
+          <img class="logo-mark" src="../../assets/img/nova-mark-512.png" alt="" width="512" height="512" loading="lazy">
+          <span class="logo-text t-fr"><b>NOVA</b> GROUP</span>
+        </a>
+        <p>
+          <span class="t-fr">Recherche et construction d’algorithmes de trading à partir du flux d’ordres du marché — depuis 2020.</span>
+        </p>
+      </div>
+
+      <nav class="footer-col" aria-label="Pied de page">
+        <h2><span class="t-fr">Site</span></h2>
+        <a href="../index.html"><span class="t-fr">Accueil</span></a>
+        <a href="../about.html"><span class="t-fr">À propos</span></a>
+        <a href="../projects.html"><span class="t-fr">Projets</span></a>
+        <a href="../contact.html"><span class="t-fr">Contact</span></a>
+      </nav>
+
+      <div class="footer-col footer-contact">
+        <h2><span class="t-fr">Nous contacter</span></h2>
+        <a class="footer-mail" href="mailto:info@novacapital.fund">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
+          <bdi>info@novacapital.fund</bdi>
+        </a>
+      </div>
+    </div>
+
+    <p class="footer-bottom">
+      <span class="t-fr">© 2026 Nova Group. Tous les droits sur ce site web et son contenu appartiennent à Nova Group. Toute utilisation abusive est passible de poursuites judiciaires.</span>
+    </p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Haut de page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
+
+<script src="../../assets/js/main.js?v=57"></script>
+</body>
+</html>

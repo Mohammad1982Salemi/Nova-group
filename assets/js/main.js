@@ -1,41 +1,83 @@
 /* Nova Group — shared page behaviour. Each language has its own page; which one a
-   reader lands on is settled by the inline script in <head>, before first paint. */
+   reader lands on is settled by early.js in <head>, before first paint. */
 (function () {
   'use strict';
 
   var html = document.documentElement;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var fa = html.lang === 'fa';
-  var returning = false;      // arrived from the same page in the other language, at the same place
+  var lang = html.lang, fa = lang === 'fa';
+  var returning = false;      // arrived from the same page in another language, at the same place
 
-  /* The language button is a plain link to the same page in the other language. Here the choice is
+  /* The few labels this script writes itself, in the page's language. */
+  var WORDS = {
+    en: { pinned: 'On this page, pinned', close: 'Close', prev: 'Previous view', next: 'Next view',
+          zoomTouch: 'Zoom: pinch or double tap', zoomMouse: 'Zoom: click or wheel' },
+    fa: { pinned: 'در این صفحه، سنجاق‌شده', close: 'بستن', prev: 'نمای قبلی', next: 'نمای بعدی',
+          zoomTouch: 'بزرگ‌نمایی: دو انگشت یا دو ضربه', zoomMouse: 'بزرگ‌نمایی: کلیک یا چرخ موس' },
+    fr: { pinned: 'Sur cette page, épinglé', close: 'Fermer', prev: 'Vue précédente', next: 'Vue suivante',
+          zoomTouch: 'Zoom : pincer ou toucher deux fois', zoomMouse: 'Zoom : clic ou molette' },
+    de: { pinned: 'Auf dieser Seite, angeheftet', close: 'Schließen', prev: 'Vorherige Ansicht', next: 'Nächste Ansicht',
+          zoomTouch: 'Zoom: Finger spreizen oder doppelt tippen', zoomMouse: 'Zoom: Klick oder Mausrad' },
+    tr: { pinned: 'Bu sayfada, sabitlendi', close: 'Kapat', prev: 'Önceki görünüm', next: 'Sonraki görünüm',
+          zoomTouch: 'Yakınlaştırma: iki parmak veya çift dokunuş', zoomMouse: 'Yakınlaştırma: tıklama veya fare tekerleği' }
+  };
+  function word(key) { return (WORDS[lang] || WORDS.en)[key]; }
+
+  /* The language menu lists the same page in every language, as plain links. Here the choice is
      remembered, and the reader is put back at the paragraph they were reading. */
   function initLang() {
-    var btn = document.getElementById('langBtn');
-    if (!btn) return;
+    var box = document.getElementById('lang'), btn = document.getElementById('langBtn');
+    if (!box || !btn) return;
 
-    if (btn.tagName !== 'A') {      // the not-found page carries both languages and switches in place
-      var apply = function () {
-        var lang = html.getAttribute('data-lang') === 'fa' ? 'en' : 'fa';
-        html.setAttribute('data-lang', lang);
-        html.lang = lang;
-        html.dir = lang === 'fa' ? 'rtl' : 'ltr';
-        try { localStorage.setItem('nova-lang', lang); } catch (e) { /* storage blocked */ }
+    function shut(refocus) {
+      if (!box.open) return;
+      box.open = false;
+      if (refocus) btn.focus();
+    }
+    document.addEventListener('click', function (e) { if (!box.contains(e.target)) shut(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') shut(box.contains(document.activeElement)); });
+    box.addEventListener('focusout', function (e) { if (e.relatedTarget && !box.contains(e.relatedTarget)) shut(); });
+
+    if (html.hasAttribute('data-both')) {      // the not-found page carries every language and switches in place
+      var own = Array.prototype.slice.call(document.querySelectorAll('a[href]')).filter(function (a) {
+        return !/^(?:[a-z][a-z0-9+.-]*:|#|\/)/i.test(a.getAttribute('href'));
+      });
+      own.forEach(function (a) { a.setAttribute('data-to', a.getAttribute('href')); });
+      var point = function () {                // the page's links lead into the language being read
+        var l = html.lang;
+        own.forEach(function (a) { a.setAttribute('href', (l === 'en' ? '' : l + '/') + a.getAttribute('data-to')); });
       };
-      btn.addEventListener('click', function () {
+      point();
+      box.addEventListener('click', function (e) {
+        var pick = e.target.closest('button[data-lang]');
+        if (!pick) return;
+        var to = pick.getAttribute('data-lang');
+        var apply = function () {
+          html.setAttribute('data-lang', to);
+          html.lang = lang = to;
+          fa = to === 'fa';
+          html.dir = fa ? 'rtl' : 'ltr';
+          try { localStorage.setItem('nova-lang', to); } catch (err) { /* storage blocked */ }
+          point();
+        };
+        shut(true);
+        if (to === html.lang) return;
         if (!reduceMotion && document.startViewTransition) document.startViewTransition(apply);
         else apply();
       });
       return;
     }
 
-    var KEY = 'nova-place', to = btn.getAttribute('hreflang'), dest = btn.href;
-    // both languages have the same blocks in the same order, so a block's number finds it again
+    var KEY = 'nova-place', dests = {};
+    Array.prototype.forEach.call(box.querySelectorAll('a[hreflang]'), function (a) { dests[a.getAttribute('hreflang')] = a.href; });
+    // every language has the same blocks in the same order, so a block's number finds it again
     function blocks() { return Array.prototype.slice.call(document.querySelectorAll('main h1, main h2, main h3, main p, main li, main figure')); }
     function line() { var nav = document.getElementById('nav'); return (nav ? nav.offsetHeight : 0) + 12; }
 
-    btn.addEventListener('click', function (e) {
-      var kept = true, list = blocks(), top = line(), i, r;
+    box.addEventListener('click', function (e) {
+      var a = e.target.closest('a[hreflang]');
+      if (!a) return;
+      var to = a.getAttribute('hreflang'), kept = true, list = blocks(), top = line(), i, r;
       try { localStorage.setItem('nova-lang', to); } catch (err) { kept = false; }
       for (i = 0; i < list.length; i++) {
         r = list[i].getBoundingClientRect();
@@ -46,7 +88,7 @@
       if (!kept) {                  // nothing can be remembered in this browser: carry the choice in the address
         e.preventDefault();
         e.stopImmediatePropagation();
-        window.location.href = dest + '?lang=' + to;
+        window.location.href = dests[to] + '?lang=' + to;
       }
     });
 
@@ -107,10 +149,13 @@
       links.classList.remove('is-open');
       burger.setAttribute('aria-expanded', 'false');
     }
+    var langBox = document.getElementById('lang');      // the two menus of the header do not stand open together
     burger.addEventListener('click', function () {
       var open = links.classList.toggle('is-open');
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (open && langBox) langBox.open = false;
     });
+    if (langBox) langBox.addEventListener('toggle', function () { if (langBox.open) closeMenu(); });
     links.addEventListener('click', function (e) { if (e.target.closest('a')) closeMenu(); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
     window.addEventListener('resize', function () { if (window.innerWidth > 760) closeMenu(); });
@@ -157,7 +202,7 @@
       inner.className = 'wrap';
       fill.className = 'tocbar-fill';
       copy.classList.remove('reveal', 'is-in');
-      copy.setAttribute('aria-label', fa ? 'در این صفحه، سنجاق‌شده' : 'On this page, pinned');
+      copy.setAttribute('aria-label', word('pinned'));
       inner.appendChild(copy);
       bar.appendChild(inner);
       bar.appendChild(fill);
@@ -584,6 +629,128 @@
         cancel: 'لغو این سفارش',
         position: function (p, avg, pnl) {
           return 'موقعیت: ' + (p ? signed(p) + ' قرارداد با میانگین ' + avg : 'بدون موقعیت باز') + ' · سود و زیان به واحد قیمت: ' + pnl;
+        }
+      } : lang === 'fr' ? {
+        buy: 'achat', sell: 'vente', market: 'au marché', now: 'exécuté aussitôt', queue: 'entre dans la file', best: 'meilleur prix',
+        lots: function (n) { return b(num(n)) + (n === 1 ? ' contrat' : ' contrats'); },
+        ord: function (buy, limit) { return 'ordre ' + (buy ? 'd’achat' : 'de vente') + (limit ? ' à cours limité' : ''); },
+        flying: 'Ordre en route…', cancelled: 'Ordre annulé.', noRoom: 'Trois ordres au plus peuvent attendre en même temps ; annulez-en un d’abord.',
+        self: ' Votre propre ordre en attente de l’autre côté a d’abord été annulé, pour que vous ne traitiez pas avec vous-même.',
+        waits: { 500: '0,5 s', 2000: '2 s' },
+        late: function (w) { return ' Il est arrivé sur le marché ' + T.waits[w] + ' après son envoi.'; },
+        swept: function (o, moved) {
+          return o.levels ? ' ' + b(num(o.levels)) + (o.levels > 1 ? ' niveaux de prix se sont vidés' : ' niveau de prix s’est vidé') +
+                            ' et le prix a ' + (o.buy ? 'monté' : 'baissé') + ' de ' + b(num(moved, 2)) + '.'
+                          : ' La file a raccourci, mais le prix n’a pas bougé.';
+        },
+        filled: function (o, side, avg, moved) {
+          return 'Votre ' + T.ord(o.buy, o.limit) + ' a été exécuté' + (o.limit ? ' aussitôt' : '') + ' : ' + T.lots(o.got) +
+            ' au prix moyen de ' + avg + '.' + T.swept(o, moved);
+        },
+        part: function (o, side, avg) {
+          return T.lots(o.got) + ' de votre ' + T.ord(o.buy, true) + (o.got === 1 ? ' a été exécuté' : ' ont été exécutés') +
+            ' aussitôt au prix moyen de ' + avg + ' ; le reste (' + b(num(o.rested)) + ') a rejoint la file à ' + cash(o.px) + '.';
+        },
+        rests: function (o, side, ahead) {
+          var head = 'Votre ' + T.ord(o.buy, true) + ' pour ' + T.lots(o.rested) + ' ';
+          if (ahead === null) return head + 'à ' + cash(o.px) + ' est enregistré ; ce prix est hors du carnet visible.';
+          return head + 'a rejoint la file à ' + cash(o.px) +
+            (ahead ? ' ; ' + T.lots(ahead) + (ahead === 1 ? ' le précède.' : ' le précèdent.') : ' et il est le premier de la file.');
+        },
+        hitPart: function (w, q, px) {
+          return T.lots(q) + ' de votre ' + T.ord(w.buy) + ' en attente ' + (q === 1 ? 'a été traité' : 'ont été traités') + ' à ' + cash(px) +
+            ' ; ' + b(num(w.chip.q)) + (w.chip.q === 1 ? ' attend encore.' : ' attendent encore.');
+        },
+        hitAll: function (w, px) {
+          return 'Votre ' + T.ord(w.buy) + ' en attente est exécuté en totalité : ' + T.lots(w.size) + ' à ' + cash(px) + '.';
+        },
+        row: function (w) { return w.chip.q + ' à ' + fmt(w.px); },
+        ahead: function (n) { return n === null ? 'hors du carnet visible' : 'devant : ' + n; },
+        done: function (w) { return 'exécuté : ' + w.filled + ' sur ' + w.size; },
+        cancel: 'Annuler cet ordre',
+        position: function (p, avg, pnl) {
+          return 'Position : ' + (p ? signed(p) + (Math.abs(p) === 1 ? ' contrat' : ' contrats') + ' au prix moyen de ' + avg : 'aucune') +
+            ' · Résultat en points de prix : ' + pnl;
+        }
+      } : lang === 'de' ? {
+        buy: 'Kauf', sell: 'Verkauf', market: 'zum Marktpreis', now: 'sofort ausgeführt', queue: 'reiht sich ein', best: 'bester Preis',
+        lots: function (n) { return b(num(n)) + (n === 1 ? ' Kontrakt' : ' Kontrakte'); },
+        ord: function (buy, limit) { return (buy ? 'Kauf' : 'Verkaufs') + (limit ? '-Limit-Order' : 'order'); },
+        flying: 'Order ist unterwegs …', cancelled: 'Order storniert.', noRoom: 'Höchstens drei Orders können gleichzeitig warten; stornieren Sie zuerst eine.',
+        self: ' Ihre eigene wartende Order auf der Gegenseite wurde zuerst storniert, damit Sie nicht mit sich selbst handeln.',
+        waits: { 500: '0,5 s', 2000: '2 s' },
+        late: function (w) { return ' Sie erreichte den Markt ' + T.waits[w] + ' nach dem Absenden.'; },
+        swept: function (o, moved) {
+          return o.levels ? ' ' + b(num(o.levels)) + (o.levels > 1 ? ' Preisstufen wurden geleert' : ' Preisstufe wurde geleert') +
+                            ' und der Preis ' + (o.buy ? 'stieg' : 'fiel') + ' um ' + b(num(moved, 2)) + '.'
+                          : ' Die Warteschlange wurde kürzer, aber der Preis bewegte sich nicht.';
+        },
+        filled: function (o, side, avg, moved) {
+          return 'Ihre ' + T.ord(o.buy, o.limit) + ' wurde ' + (o.limit ? 'sofort ' : '') + 'ausgeführt: ' + T.lots(o.got) +
+            ' zum Durchschnittspreis von ' + avg + '.' + T.swept(o, moved);
+        },
+        part: function (o, side, avg) {
+          return 'Von Ihrer ' + T.ord(o.buy, true) + (o.got === 1 ? ' wurde ' : ' wurden ') + T.lots(o.got) + ' sofort zum Durchschnittspreis von ' +
+            avg + ' ausgeführt; der Rest (' + b(num(o.rested)) + ') reihte sich bei ' + cash(o.px) + ' in die Warteschlange ein.';
+        },
+        rests: function (o, side, ahead) {
+          var head = 'Ihre ' + T.ord(o.buy, true) + ' über ' + T.lots(o.rested) + ' ';
+          if (ahead === null) return head + 'bei ' + cash(o.px) + ' ist platziert; dieser Preis liegt außerhalb des sichtbaren Orderbuchs.';
+          return head + 'reihte sich bei ' + cash(o.px) + ' in die Warteschlange ein' +
+            (ahead ? '; ' + T.lots(ahead) + (ahead === 1 ? ' steht' : ' stehen') + ' davor.' : ' und steht an erster Stelle.');
+        },
+        hitPart: function (w, q, px) {
+          return 'Von Ihrer wartenden ' + T.ord(w.buy) + (q === 1 ? ' wurde ' : ' wurden ') + T.lots(q) + ' bei ' + cash(px) + ' gehandelt; ' +
+            b(num(w.chip.q)) + (w.chip.q === 1 ? ' wartet' : ' warten') + ' noch.';
+        },
+        hitAll: function (w, px) {
+          return 'Ihre wartende ' + T.ord(w.buy) + ' ist vollständig ausgeführt: ' + T.lots(w.size) + ' bei ' + cash(px) + '.';
+        },
+        row: function (w) { return w.chip.q + ' bei ' + fmt(w.px); },
+        ahead: function (n) { return n === null ? 'außerhalb des sichtbaren Orderbuchs' : 'davor: ' + n; },
+        done: function (w) { return 'ausgeführt: ' + w.filled + ' von ' + w.size; },
+        cancel: 'Diese Order stornieren',
+        position: function (p, avg, pnl) {
+          return 'Position: ' + (p ? signed(p) + (Math.abs(p) === 1 ? ' Kontrakt' : ' Kontrakte') + ' zum Durchschnitt von ' + avg : 'keine') +
+            ' · Gewinn/Verlust in Preispunkten: ' + pnl;
+        }
+      } : lang === 'tr' ? {
+        buy: 'alış', sell: 'satış', market: 'piyasa fiyatından', now: 'hemen gerçekleşir', queue: 'kuyruğa girer', best: 'en iyi fiyat',
+        lots: function (n) { return b(num(n)) + ' sözleşme'; },
+        flying: 'Emir yolda…', cancelled: 'Emir iptal edildi.', noRoom: 'Aynı anda en fazla üç emir bekleyebilir; önce birini iptal edin.',
+        self: ' Kendinizle işlem yapmamanız için karşı taraftaki bekleyen emriniz önce iptal edildi.',
+        waits: { 500: '0,5 sn', 2000: '2 sn' },
+        late: function (w) { return ' Emir, gönderildikten ' + T.waits[w] + ' sonra piyasaya ulaştı.'; },
+        swept: function (o, moved) {
+          return o.levels ? ' ' + b(num(o.levels)) + ' fiyat seviyesi boşaldı ve fiyat ' + b(num(moved, 2)) + (o.buy ? ' yükseldi.' : ' düştü.')
+                          : ' Kuyruk kısaldı, ancak fiyat değişmedi.';
+        },
+        filled: function (o, side, avg, moved) {
+          return (o.limit ? 'Limit ' + side : (o.buy ? 'Alış' : 'Satış')) + ' emriniz' + (o.limit ? ' hemen' : '') + ' gerçekleşti: ' +
+            avg + ' ortalama fiyatla ' + T.lots(o.got) + '.' + T.swept(o, moved);
+        },
+        part: function (o, side, avg) {
+          return 'Limit ' + side + ' emrinizin ' + b(num(o.got)) + ' sözleşmelik kısmı hemen ' + avg + ' ortalama fiyatla gerçekleşti; kalan ' +
+            T.lots(o.rested) + ' ' + cash(o.px) + ' fiyatından kuyruğa girdi.';
+        },
+        rests: function (o, side, ahead) {
+          var head = b(num(o.rested)) + ' sözleşmelik limit ' + side + ' emriniz ' + cash(o.px) + ' fiyatından ';
+          if (ahead === null) return head + 'kaydedildi; bu fiyat görünen defterin dışında.';
+          return head + 'kuyruğa girdi' + (ahead ? '; önünde ' + T.lots(ahead) + ' var.' : ' ve kuyruğun başında.');
+        },
+        hitPart: function (w, q, px) {
+          return 'Bekleyen ' + (w.buy ? T.buy : T.sell) + ' emrinizin ' + b(num(q)) + ' sözleşmelik kısmı ' + cash(px) + ' fiyatından gerçekleşti; ' +
+            T.lots(w.chip.q) + ' hâlâ bekliyor.';
+        },
+        hitAll: function (w, px) {
+          return 'Bekleyen ' + (w.buy ? T.buy : T.sell) + ' emriniz tamamen gerçekleşti: ' + cash(px) + ' fiyatından ' + T.lots(w.size) + '.';
+        },
+        row: function (w) { return w.chip.q + ' @ ' + fmt(w.px); },
+        ahead: function (n) { return n === null ? 'görünen defterin dışında' : 'önünde: ' + n; },
+        done: function (w) { return 'gerçekleşen: ' + w.filled + ' / ' + w.size; },
+        cancel: 'Bu emri iptal et',
+        position: function (p, avg, pnl) {
+          return 'Pozisyon: ' + (p ? signed(p) + ' sözleşme, ortalama ' + avg : 'açık pozisyon yok') + ' · Fiyat puanı cinsinden kâr/zarar: ' + pnl;
         }
       } : {
         buy: 'buy', sell: 'sell', market: 'at market', now: 'fills at once', queue: 'joins the queue', best: 'best price',
@@ -1163,9 +1330,9 @@
         return n;
       }
       var layer = make('div', 'lightbox'), view = make('div', 'lightbox-view'), big = make('img');
-      var close = make('button', 'lightbox-close', fa ? 'بستن' : 'Close');
-      var prev = make('button', 'lightbox-nav is-prev', fa ? 'نمای قبلی' : 'Previous view');
-      var next = make('button', 'lightbox-nav is-next', fa ? 'نمای بعدی' : 'Next view');
+      var close = make('button', 'lightbox-close', word('close'));
+      var prev = make('button', 'lightbox-nav is-prev', word('prev'));
+      var next = make('button', 'lightbox-nav is-next', word('next'));
       var bar = make('div', 'lightbox-bar'), count = make('span', 'lightbox-count'), cap = make('span', 'lightbox-cap'), hint = make('span', 'lightbox-hint');
       var at = current, k = 1, x = 0, y = 0, ratio = 1, held = {}, fingers = 0, grab = null, moved = 0, lastTap = 0;
       var rest = each.call(document.body.children).filter(function (n) { return n.tagName !== 'SCRIPT'; });
@@ -1174,9 +1341,7 @@
       layer.setAttribute('aria-modal', 'true');
       close.textContent = '×';
       prev.innerHTML = next.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>';
-      hint.textContent = window.matchMedia('(pointer: coarse)').matches
-        ? (fa ? 'بزرگ‌نمایی: دو انگشت یا دو ضربه' : 'Zoom: pinch or double tap')
-        : (fa ? 'بزرگ‌نمایی: کلیک یا چرخ موس' : 'Zoom: click or wheel');
+      hint.textContent = word(window.matchMedia('(pointer: coarse)').matches ? 'zoomTouch' : 'zoomMouse');
       if (tabs.length < 2) prev.hidden = next.hidden = true;
       bar.appendChild(count); bar.appendChild(cap); bar.appendChild(hint);
       view.appendChild(big);
@@ -1397,21 +1562,25 @@
 
   /* ---------------------------------------------------------------
      Headline figures count up from zero the first time they are seen.
-     The figure keeps its own digits (Persian or Latin), separators and
-     decimals; years and dates are left alone.
+     The figure keeps its own digits (Persian or Latin) and the separators
+     its language writes; years and dates are left alone.
      --------------------------------------------------------------- */
   function initCount() {
     if (reduceMotion || returning || !('IntersectionObserver' in window)) return;
     var FA = '۰۱۲۳۴۵۶۷۸۹';
-    var NUM = /[0-9۰-۹]+(?:[,٬][0-9۰-۹]{3})*(?:[.٫][0-9۰-۹]+)?/g;
+    // how the page's language writes a figure: what separates the thousands, and what marks the decimals
+    var GROUP = { fa: '[,٬]', de: '\\.', tr: '\\.', fr: '[\\u202f\\u00a0]' }[lang] || ',';
+    var POINT = { fa: '[.٫]', de: ',', tr: ',', fr: ',' }[lang] || '\\.';
+    var NUM = new RegExp('[0-9۰-۹]+(?:' + GROUP + '[0-9۰-۹]{3})*(?:' + POINT + '[0-9۰-۹]+)?', 'g');
+    var group = new RegExp(GROUP), groups = new RegExp(GROUP, 'g'), point = new RegExp(POINT);
     function value(s) {
-      return parseFloat(s.replace(/[٬,]/g, '').replace('٫', '.').replace(/[۰-۹]/g, function (c) { return FA.indexOf(c); }));
+      return parseFloat(s.replace(groups, '').replace(point, '.').replace(/[۰-۹]/g, function (c) { return FA.indexOf(c); }));
     }
     function write(v, like) {
-      var decimals = (like.split(/[.٫]/)[1] || '').length, parts = v.toFixed(decimals).split('.');
-      if (/[,٬]/.test(like)) parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-      var s = parts.join('.');
-      if (/[۰-۹]/.test(like)) s = s.replace(/,/g, '٬').replace('.', '٫').replace(/\d/g, function (d) { return FA.charAt(d); });
+      var decimals = (like.split(point)[1] || '').length, parts = v.toFixed(decimals).split('.'), sep = like.match(group);
+      if (sep) parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, sep[0]);
+      var s = parts.join(decimals ? like.match(point)[0] : '');
+      if (/[۰-۹]/.test(like)) s = s.replace(/\d/g, function (d) { return FA.charAt(d); });
       return s;
     }
     var jobs = [];
@@ -1420,7 +1589,7 @@
       while ((node = walk.nextNode())) {
         var found = node.nodeValue.match(NUM);
         if (!found) continue;
-        var dated = found.some(function (m) { var v = value(m); return !/[,٬.٫]/.test(m) && v >= 1300 && v <= 2100; });
+        var dated = found.some(function (m) { var v = value(m); return !group.test(m) && !point.test(m) && v >= 1300 && v <= 2100; });
         if (!dated) mine.push({ node: node, text: node.nodeValue });
       }
       if (mine.length) jobs.push({ el: el, parts: mine });

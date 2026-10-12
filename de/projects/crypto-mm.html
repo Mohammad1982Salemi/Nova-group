@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr" data-lang="de" data-sec="2">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crypto Market Maker – Dateninfrastruktur und Market Making im Kryptomarkt | Nova Group</title>
+<meta name="description" content="Das Projekt Crypto Market Maker: der Markt von 22 Kryptowährungen an 16 globalen Börsen, auf der Ebene jedes einzelnen Trades und jeder einzelnen Order, und ein darauf aufbauender Market-Making-Algorithmus.">
+<link rel="canonical" href="https://novacapital.fund/de/projects/crypto-mm.html">
+<link rel="alternate" hreflang="en" href="https://novacapital.fund/projects/crypto-mm.html">
+<link rel="alternate" hreflang="fa" href="https://novacapital.fund/fa/projects/crypto-mm.html">
+<link rel="alternate" hreflang="fr" href="https://novacapital.fund/fr/projects/crypto-mm.html">
+<link rel="alternate" hreflang="de" href="https://novacapital.fund/de/projects/crypto-mm.html">
+<link rel="alternate" hreflang="tr" href="https://novacapital.fund/tr/projects/crypto-mm.html">
+<link rel="alternate" hreflang="x-default" href="https://novacapital.fund/projects/crypto-mm.html">
+<meta property="og:title" content="Crypto Market Maker – Dateninfrastruktur und Market Making im Kryptomarkt | Nova Group">
+<meta property="og:description" content="Daten­infrastruktur und ein Market-Making-Algorithmus für den Kryptomarkt, auf dem Weg zu einem automatisierten Market-Making-Desk.">
+<meta property="og:url" content="https://novacapital.fund/de/projects/crypto-mm.html">
+<meta property="og:locale" content="de_DE">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:locale:alternate" content="fa_IR">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:locale:alternate" content="tr_TR">
+<meta property="og:image" content="https://novacapital.fund/assets/img/og/crypto-mm-de.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://novacapital.fund/assets/img/og/crypto-mm-de.jpg">
+<meta name="author" content="Nova Group">
+<meta name="theme-color" content="#05080e">
+<meta name="color-scheme" content="dark light">
+<meta name="supported-color-schemes" content="dark light">
+<meta name="darkreader-lock">
+<meta property="og:site_name" content="Nova Group">
+<meta property="og:type" content="website">
+
+<link rel="icon" type="image/svg+xml" href="../../assets/img/nova-mark.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="../../assets/img/favicon-64.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../../assets/img/favicon-192.png">
+<link rel="apple-touch-icon" href="../../assets/img/favicon-192.png">
+
+<!-- The fonts are served from this site; the one this language needs first is fetched early. -->
+<link rel="preload" href="../../assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/css/style.css?v=57">
+
+<!-- Runs before first paint: Samsung Internet flag, the reader's language, the page-transition direction. -->
+<script src="../../assets/js/early.js?v=57"></script>
+</head>
+<body>
+
+<a href="#main" class="skip-link"><span class="t-de">Zum Inhalt springen</span></a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="../index.html" aria-label="Nova Group">
+      <img class="logo-mark" src="../../assets/img/nova-mark-512.png" alt="" width="512" height="512" fetchpriority="high">
+      <span class="logo-text t-de"><b>NOVA</b> GROUP</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Hauptmenü">
+      <a href="../index.html"><span class="t-de">Start</span></a>
+      <a href="../about.html"><span class="t-de">Über uns</span></a>
+      <a href="../projects.html" aria-current="page"><span class="t-de">Projekte</span></a>
+      <a href="../contact.html"><span class="t-de">Kontakt</span></a>
+    </nav>
+
+    <div class="nav-actions">
+      <details class="lang" id="lang">
+        <summary class="lang-btn" id="langBtn" aria-label="Sprache: Deutsch"><img class="flag" src="../../assets/img/flags/de.png" alt="" width="24" height="16"><span class="lang-name">Deutsch</span><svg class="lang-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <ul class="lang-menu" id="langMenu"><li><a href="../../projects/crypto-mm.html" hreflang="en" lang="en"><img class="flag" src="../../assets/img/flags/en.png" alt="" width="24" height="16" loading="lazy"><span>English</span></a></li><li><a href="../../fa/projects/crypto-mm.html" hreflang="fa" lang="fa"><img class="flag" src="../../assets/img/flags/fa.png" alt="" width="24" height="16" loading="lazy"><span>فارسی</span></a></li><li><a href="../../fr/projects/crypto-mm.html" hreflang="fr" lang="fr"><img class="flag" src="../../assets/img/flags/fr.png" alt="" width="24" height="16" loading="lazy"><span>Français</span></a></li><li><span class="lang-here" aria-current="true" lang="de"><img class="flag" src="../../assets/img/flags/de.png" alt="" width="24" height="16" loading="lazy"><span>Deutsch</span></span></li><li><a href="../../tr/projects/crypto-mm.html" hreflang="tr" lang="tr"><img class="flag" src="../../assets/img/flags/tr.png" alt="" width="24" height="16" loading="lazy"><span>Türkçe</span></a></li></ul>
+      </details>
+      <button class="burger" id="burger" type="button" aria-label="Menü" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="page-hero">
+  <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="wrap">
+    <nav class="crumbs reveal" aria-label="Seitenpfad">
+      <a href="../projects.html"><span class="t-de">Projekte</span></a>
+      <span aria-hidden="true">/</span>
+      <span><span class="t-de">Crypto Market Maker</span></span>
+    </nav>
+
+    <h1 class="reveal"><span class="t-de">Crypto Market Maker</span></h1>
+    <p class="page-lead reveal">
+      <span class="t-de">Daten­infrastruktur und ein Market-Making-Algorithmus für den Kryptomarkt, auf dem Weg zu einem automatisierten Market-Making-Desk.</span>
+    </p>
+
+    <div class="cs-meta reveal">
+      <span class="status"><span class="t-de">In Entwicklung</span></span>
+      <ul class="tags">
+        <li>Rust</li><li>C#</li>
+        <li><span class="t-de">Krypto</span></li>
+        <li><span class="t-de">Market Making</span></li>
+        <li><span class="t-de">Daten­infrastruktur</span></li>
+        <li><span class="t-de">Maschinelles Lernen</span></li>
+      </ul>
+    </div>
+
+    <ul class="facts facts-glass">
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-de">Abdeckung</span></span>
+        <b><span class="t-de">22 Coins, 16 Börsen</span></b>
+        <p>
+          <span class="t-de">Spot- und Futures-Märkte, auf der Ebene jedes einzelnen Trades und jeder einzelnen Order.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-de">Umfang</span></span>
+        <b><span class="t-de">60 Terabyte</span></b>
+        <p>
+          <span class="t-de">Rohdaten eines vollen Jahres für jede Krypto­währung.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-de">Datenintegrität</span></span>
+        <b><span class="t-de">376 Millionen Trades</span></b>
+        <p>
+          <span class="t-de">In einer einmonatigen Stichprobe aus 126 Märkten nachgebildet, ohne Abweichung von der Quelle.</span>
+        </p>
+      </li>
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-de">Technologie</span></span>
+        <b><span class="t-de">2 Sprachen, 2 Rollen</span></b>
+        <div class="fact-list">
+          <div><i>Rust</i><span><span class="t-de">Erfassung, Speicherung und Kern</span></span></div>
+          <div><i>C#</i><span><span class="t-de">Charting</span></span></div>
+        </div>
+      </li>
+    </ul>
+
+    <nav class="toc reveal" aria-label="Auf dieser Seite">
+      <span class="toc-title"><span class="t-de">Auf dieser Seite</span></span>
+      <a href="#intro"><span class="t-de">Einführung</span></a>
+      <a href="#platform"><span class="t-de">Plattform</span></a>
+      <a href="#approach"><span class="t-de">Ansatz</span></a>
+      <a href="#difference"><span class="t-de">Was heraussticht</span></a>
+      <a href="#roadmap"><span class="t-de">Der weitere Weg</span></a>
+      <a href="#technology"><span class="t-de">Technologie</span></a>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+
+    <article class="cs-body">
+      <section class="cs-section" id="intro">
+        <h2><span><span class="t-de">Einführung</span></span></h2>
+      <p class="detail-lead">
+        <span class="t-de">Der Kryptomarkt schließt nie, und er ist auch nicht an einem Ort. Jede Krypto­währung wird gleichzeitig an Dutzenden Börsen gehandelt, und an jeder von ihnen muss immer jemand bereit sein, zu kaufen und zu verkaufen. Diese stets präsente Gegenpartei ist der Market Maker: Er kauft etwas billiger, verkauft etwas teurer und muss nicht wissen, in welche Richtung sich der Preis bewegen wird. Sein Risiko ist, kurz vor einer großen Bewegung auf der falschen Seite gehandelt zu haben; und in einem Markt, der sich über mehrere Börsen verteilt, beginnt diese Bewegung oft anderswo.</span>
+      </p>
+      <p>
+        <span class="t-de">Vor dem Schreiben des Algorithmus haben wir diesen gesamten Markt aufgezeichnet, und wir zeichnen ihn weiter auf.</span>
+      </p>
+      <p>
+        <span class="t-de">Das Projekt Crypto Market Maker trägt den Markt von 22 stark gehandelten Krypto­währungen an 16 globalen Börsen zusammen, auf der Ebene jedes einzelnen Trades und jeder einzelnen Order. Der Umfang der Arbeit ist ein volles Jahr für jede Krypto­währung, das heißt 60 Terabyte Rohdaten. Das Ziel ist ein automatisierter Market-Making-Desk, der Kapital mit einem auf genau dieser Historie trainierten und getesteten Algorithmus steuert.</span>
+      </p>
+      </section>
+
+      <section class="cs-section" id="platform">
+        <h2><span><span class="t-de">Einblick in die Plattform</span></span></h2>
+        <p>
+          <span class="t-de">Das sind echte Bildschirm­aufnahmen aus der Plattform des Projekts, keine Mock-ups. Alle drei Ansichten zeigen einen Markt: den BTCUSDT-Perpetual-Kontrakt auf Binance, 29 Tage des September 2026, mit 15-Minuten-Kerzen, gebildet aus den archivierten Trades. Klicken Sie auf das Bild, um es zu vergrößern.</span>
+        </p>
+
+        <div class="shots reveal" data-shots>
+          <div class="shots-tabs" role="tablist" aria-label="Plattformansichten">
+            <button type="button" role="tab" aria-selected="true" data-name="BTCUSDT · binance perpetual · M15 · Bar-Band">
+              <b><span class="t-de">Kerzen und Band</span></b>
+              <span>Bars: Bar-Band</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="BTCUSDT · binance perpetual · M15 · Volume · Δ candles">
+              <b><span class="t-de">Volumen und Delta</span></b>
+              <span>Sub: Volume · Δ candles</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-name="BTCUSDT · binance perpetual · M15 · Cum Δ bars">
+              <b><span class="t-de">Kumulatives Delta</span></b>
+              <span>Bars: Line · Sub: Cum Δ bars</span>
+            </button>
+          </div>
+
+          <figure class="shot-frame">
+            <div class="shot-bar">
+              <i></i><i></i><i></i>
+              <span class="shot-name">BTCUSDT · binance perpetual · M15 · Bar-Band</span>
+              <button type="button" class="shot-zoom" aria-label="Vergrößern">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg>
+              </button>
+            </div>
+            <div class="shot-stage">
+              <img class="is-on" src="../../assets/img/projects/crypto-mm/bar-band.webp" data-full="../../assets/img/projects/crypto-mm/bar-band-full.webp" width="1400" height="742" alt="15-Minuten-Kerzen von BTCUSDT mit dem Band um jede Kerze">
+              <img src="../../assets/img/projects/crypto-mm/volume-delta.webp" data-full="../../assets/img/projects/crypto-mm/volume-delta-full.webp" width="1400" height="742" loading="lazy" alt="15-Minuten-Kerzen von BTCUSDT mit dem Volumen-Panel und dem Panel der Delta-Kerzen">
+              <img src="../../assets/img/projects/crypto-mm/cum-delta.webp" data-full="../../assets/img/projects/crypto-mm/cum-delta-full.webp" width="1400" height="742" loading="lazy" alt="BTCUSDT-Preis als Linienchart mit dem Panel des kumulativen Deltas">
+            </div>
+            <figcaption>
+              <p class="shot-cap is-on">
+                <span class="t-de">Fünfzehn-Minuten-Kerzen in der Bar-Band-Ansicht: jede Kerze mit dem schattierten Band um sie herum.</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-de">Dieselben Kerzen, und darunter zwei Panels: das Volumen jeder Kerze und die Delta-Kerzen (Δ candles).</span>
+              </p>
+              <p class="shot-cap">
+                <span class="t-de">Der Preis als Linie, und darunter das kumulative Delta, als Kerzen gezeichnet (Cum Δ bars).</span>
+              </p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="cs-section" id="approach">
+        <h2><span><span class="t-de">Ansatz</span></span></h2>
+      <p>
+        <span class="t-de">Zuerst zeichnen wir den Markt vollständig und korrekt auf, dann bilden wir ihn nach, und wir trainieren und messen den Algorithmus in einer Nachbildung desselben Marktes. Die Arbeit verläuft in drei Stufen:</span>
+      </p>
+      <ol class="steps">
+        <li class="glow reveal">
+          <strong class="t-de">Vom Markt zum Archiv</strong>
+          <p class="t-de">Eine automatisierte Pipeline empfängt, komprimiert, verifiziert und speichert Tag für Tag die Spot- und Futures-Daten aller 16 Börsen. Das Ergebnis ist ein einheitliches Archiv, in dem jede Datei an der Quelle gemessen wurde. Diese Stufe ist gebaut und läuft rund um die Uhr.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-de">Vom Archiv zum vollständigen Bild des Marktes</strong>
+          <p class="t-de">Unsere Plattform bildet jeden Tag des Marktes genau so nach, wie er abgelaufen ist, und zeigt ihn auf einem Chart. Ihr Trades-Teil ist gebaut und getestet. Die Nachbildung des Orderbuchs, der Liste der wartenden Orders in jedem Moment, wird der nächste Schritt sein.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-de">Vom Bild des Marktes zum Algorithmus und zur getesteten Ausführung</strong>
+          <p class="t-de">Mit maschinellem Lernen und statistischer Analyse wird der Market-Making-Algorithmus aus genau diesen Daten lernen, wo eine Order zu platzieren ist, welcher Trade zu meiden ist und wann es gilt, zur Seite zu treten. Er wird in einem Ausführungs­simulator getestet werden, der das Verhalten der Börse selbst nachbildet. Der Maßstab wird das finanzielle Nettoergebnis nach allen Kosten sein.</p>
+        </li>
+      </ol>
+      <p>
+        <span class="t-de">Neben dem Market Making der kurzfristige Handel: Ein zweiter Algorithmus, der kurze Preisbewegungen mitgeht, wird auf derselben Infrastruktur und demselben Simulator gebaut werden. Beide stützen sich auf ein und dasselbe Wissen: zu erkennen, welche Bewegung sich fortsetzen wird. Der Market Maker nutzt es, um zur Seite zu treten, und der kurzfristige Trader nutzt es, um einzusteigen.</span>
+      </p>
+      </section>
+
+      <section class="cs-section" id="difference">
+        <h2><span><span class="t-de">Was heraussticht</span></span></h2>
+      <ul class="points">
+        <li class="glow reveal">
+          <strong class="t-de">Eine Pipeline, die ohne Aufsicht arbeitet.</strong>
+          <p class="t-de">Das Zusammentragen von Dutzenden Terabyte aus 16 Quellen bleibt beim ersten nächtlichen Ausfall stehen, wenn es von menschlicher Betreuung abhängt. Unsere Pipeline erholt sich von selbst von Netzwerkausfällen, Fehlern der Quelle und einer vollen Festplatte und legt nur das beiseite, was sich nicht von selbst behebt. Dieses Verhalten wurde gegen mehr als 50 Ausfallszenarien getestet.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-de">Daten, deren Korrektheit nachgewiesen ist.</strong>
+          <p class="t-de">Ein Algorithmus, der auf unvollständigen Daten trainiert wurde, lernt die Fehler der Daten statt der Muster des Marktes. Jede unserer Dateien wird vor dem Speichern anhand von drei unabhängigen Messungen mit der Quelle verglichen; in einer einmonatigen Stichprobe wurden 376 Millionen Trades aus 126 Märkten nachgebildet und zeigten keine Abweichung von der Quelle. Wo die Quelle selbst eine Lücke hat, wird diese namentlich festgehalten und nachverfolgt und bleibt nicht verborgen.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-de">Weniger als die halbe Größe, ohne eine Ziffer zu verlieren.</strong>
+          <p class="t-de">Dutzende Terabyte aufzubewahren und zu bewegen, verursacht laufende Kosten. Unser Speicherformat hält dieselben Daten in weniger als der Hälfte der komprimierten Größe der Quelle, und die Originaldatei lässt sich daraus Byte für Byte zurückgewinnen. Die Speicherkosten und die Übertragungszeit sinken im selben Verhältnis.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-de">Das Bild des gesamten Marktes, nicht einer Börse und nicht eines Coins.</strong>
+          <p class="t-de">Der Preis entsteht nicht an einer einzigen Börse, und ein Market Maker, der nur seine eigene Börse sieht, versteht eine Bewegung erst, wenn sie ihn bereits erreicht hat. Wir halten alle 16 Börsen nebeneinander, in einem Format und auf einer Uhr. Der Algorithmus kann aus der Beziehung zwischen den Märkten lernen, nicht nur aus einem einzigen.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-de">Eine Nachbildung, die die Zukunft nicht kennt.</strong>
+          <p class="t-de">Viele Tests nutzen unbeabsichtigt Informationen, die in jenem Moment noch nicht eingetroffen waren. Für jeden Trade sind zwei Zeiten festgehalten: der Moment, in dem er an der Börse stattfand, und der Moment, in dem die Nachricht davon eintraf. In jedem Moment zeigt die Plattform nur, was an jenem Tag zu sehen war, und ihre Ausgabe ist mit jeder Anzahl von Prozessoren dieselbe.</p>
+        </li>
+        <li class="glow reveal">
+          <strong class="t-de">Eine Simulation, deren Ergebnis auch in der Ausführung Bestand hat.</strong>
+          <p class="t-de">Viele Strategien sind auf dem Papier profitabel und in der Praxis nicht, weil ihr Test annimmt, dass eine Order sofort zum angezeigten Preis ausgeführt wird. In unserem Simulator wird eine Order die Börse mit Verzögerung erreichen, in der Warte­schlange warten, bis sie an der Reihe ist, und teilweise ausgeführt werden oder am Ende der Warte­schlange bleiben. Der Algorithmus wird über eine Bandbreite von Geschwindigkeiten und Gebühren getestet werden, damit vor jeder finanziellen Verpflichtung klar ist, unter welchen Bedingungen das Vorhaben gerechtfertigt ist.</p>
+        </li>
+      </ul>
+      </section>
+
+      <section class="cs-section" id="roadmap">
+        <h2><span><span class="t-de">Der weitere Weg</span></span></h2>
+      <ol class="phases">
+        <li class="is-done glow reveal">
+          <span class="phase-mark"><span class="t-de">Erledigt</span></span>
+          <p class="t-de">Die automatisierte Erfassungs-Pipeline, das Speicherformat, das Panel für den Daten-Download und der Trades-Teil der Plattform sind gebaut und auf realen Daten getestet.</p>
+        </li>
+        <li class="is-now glow reveal">
+          <span class="phase-mark"><span class="t-de">Aktuell</span></span>
+          <p class="t-de">Heute nimmt sich die Erfassungs-Pipeline die Krypto­währungen eine nach der anderen vor, und wir bauen die nächsten Teile der Plattform.</p>
+        </li>
+        <li class="glow reveal">
+          <span class="phase-mark"><span class="t-de">Als Nächstes</span></span>
+          <p class="t-de">Danach folgen die Nachbildung des Orderbuchs, der Ausführungs­simulator sowie Entwicklung und Test des Market-Making-Algorithmus und anschließend des Algorithmus für kurzfristigen Handel.</p>
+        </li>
+        <li class="glow reveal">
+          <span class="phase-mark"><span class="t-de">Letzter Schritt</span></span>
+          <p class="t-de">Der letzte Schritt ist die Anbindung an Live-Daten, eine Probephase mit begrenztem Kapital und Market Making mit echtem Kapital auf einem Server neben der Engine der Börse.</p>
+        </li>
+      </ol>
+      </section>
+
+      <section class="cs-section" id="technology">
+        <h2><span><span class="t-de">Technologie</span></span></h2>
+      <p>
+        <span class="t-de">Die Erfassungs-Pipeline, das Speicherformat und der Kern der Plattform sind in Rust geschrieben, der Chart in C#. Die Verarbeitung läuft parallel: Die 376 Millionen Trades eines Monats werden in unter drei Minuten aufgebaut und einer Selbstprüfung unterzogen. Keine Version wird freigegeben, außer nach einem vollständigen, fehlerfreien Durchlauf von Anfang bis Ende.</span>
+      </p>
+      </section>
+    </article>
+
+  </div>
+</section>
+
+<section class="section ruled">
+  <div class="wrap">
+    <nav class="projnav reveal" aria-label="Weitere Projekte">
+      <a class="projnav-card is-prev glow" href="../projects/defi-lp.html">
+        <span class="projnav-dir"><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="t-de">Vorheriges Projekt</span></span>
+        <b><span class="t-de">DeFi LP</span></b>
+      </a>
+      <a class="projnav-card is-next glow" href="../projects/cme-mm.html">
+        <span class="projnav-dir"><span class="t-de">Nächstes Projekt</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <b><span class="t-de">CME Market Maker</span></b>
+      </a>
+    </nav>
+  </div>
+  <div class="wrap cs-end">
+    <a class="link-arrow link-back" href="../projects.html">
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <span class="t-de">Alle Projekte</span>
+    </a>
+    <a class="btn btn-ghost" href="../contact.html">
+      <span class="t-de">Kontakt aufnehmen</span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top footer-panel">
+      <div class="footer-brand">
+        <a class="logo" href="../index.html" aria-label="Nova Group">
+          <img class="logo-mark" src="../../assets/img/nova-mark-512.png" alt="" width="512" height="512" loading="lazy">
+          <span class="logo-text t-de"><b>NOVA</b> GROUP</span>
+        </a>
+        <p>
+          <span class="t-de">Erforschung und Entwicklung von Handels­algorithmen aus dem Orderflow des Marktes – seit 2020.</span>
+        </p>
+      </div>
+
+      <nav class="footer-col" aria-label="Fußzeile">
+        <h2><span class="t-de">Website</span></h2>
+        <a href="../index.html"><span class="t-de">Start</span></a>
+        <a href="../about.html"><span class="t-de">Über uns</span></a>
+        <a href="../projects.html"><span class="t-de">Projekte</span></a>
+        <a href="../contact.html"><span class="t-de">Kontakt</span></a>
+      </nav>
+
+      <div class="footer-col footer-contact">
+        <h2><span class="t-de">Kontakt</span></h2>
+        <a class="footer-mail" href="mailto:info@novacapital.fund">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
+          <bdi>info@novacapital.fund</bdi>
+        </a>
+      </div>
+    </div>
+
+    <p class="footer-bottom">
+      <span class="t-de">© 2026 Nova Group. Alle Rechte an dieser Website und ihren Inhalten liegen bei Nova Group. Jeder Missbrauch wird rechtlich verfolgt.</span>
+    </p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Nach oben"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
+
+<script src="../../assets/js/main.js?v=57"></script>
+</body>
+</html>

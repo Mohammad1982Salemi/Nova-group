@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr" data-lang="de" data-sec="0">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova Group – Handelsalgorithmen auf Basis des Orderflows</title>
+<meta name="description" content="Nova Group arbeitet seit 2020 am Orderflow des Marktes und an der Entwicklung von Handelsalgorithmen: Trade- und Orderdaten in der Markttiefe, ein Simulator der Orderausführung und Prognosemodelle.">
+<link rel="canonical" href="https://novacapital.fund/de/">
+<link rel="alternate" hreflang="en" href="https://novacapital.fund/">
+<link rel="alternate" hreflang="fa" href="https://novacapital.fund/fa/">
+<link rel="alternate" hreflang="fr" href="https://novacapital.fund/fr/">
+<link rel="alternate" hreflang="de" href="https://novacapital.fund/de/">
+<link rel="alternate" hreflang="tr" href="https://novacapital.fund/tr/">
+<link rel="alternate" hreflang="x-default" href="https://novacapital.fund/">
+<meta property="og:title" content="Nova Group – Handelsalgorithmen auf Basis des Orderflows">
+<meta property="og:description" content="Der Preis ist eine Folge des Orderflows.">
+<meta property="og:url" content="https://novacapital.fund/de/">
+<meta property="og:locale" content="de_DE">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:locale:alternate" content="fa_IR">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:locale:alternate" content="tr_TR">
+<meta property="og:image" content="https://novacapital.fund/assets/img/og/nova-de.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://novacapital.fund/assets/img/og/nova-de.jpg">
+<meta name="author" content="Nova Group">
+<meta name="theme-color" content="#05080e">
+<meta name="color-scheme" content="dark light">
+<meta name="supported-color-schemes" content="dark light">
+<meta name="darkreader-lock">
+<meta property="og:site_name" content="Nova Group">
+<meta property="og:type" content="website">
+
+<link rel="icon" type="image/svg+xml" href="../assets/img/nova-mark.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/img/favicon-64.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/img/favicon-192.png">
+<link rel="apple-touch-icon" href="../assets/img/favicon-192.png">
+
+<!-- The fonts are served from this site; the one this language needs first is fetched early. -->
+<link rel="preload" href="../assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/space-grotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/style.css?v=57">
+
+<!-- Runs before first paint: Samsung Internet flag, the reader's language, the page-transition direction. -->
+<script src="../assets/js/early.js?v=57"></script>
+</head>
+<body>
+
+<a href="#main" class="skip-link"><span class="t-de">Zum Inhalt springen</span></a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="index.html" aria-label="Nova Group">
+      <img class="logo-mark" src="../assets/img/nova-mark-512.png" alt="" width="512" height="512" fetchpriority="high">
+      <span class="logo-text t-de"><b>NOVA</b> GROUP</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Hauptmenü">
+      <a href="index.html" aria-current="page"><span class="t-de">Start</span></a>
+      <a href="about.html"><span class="t-de">Über uns</span></a>
+      <a href="projects.html"><span class="t-de">Projekte</span></a>
+      <a href="contact.html"><span class="t-de">Kontakt</span></a>
+    </nav>
+
+    <div class="nav-actions">
+      <details class="lang" id="lang">
+        <summary class="lang-btn" id="langBtn" aria-label="Sprache: Deutsch"><img class="flag" src="../assets/img/flags/de.png" alt="" width="24" height="16"><span class="lang-name">Deutsch</span><svg class="lang-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <ul class="lang-menu" id="langMenu"><li><a href="../" hreflang="en" lang="en"><img class="flag" src="../assets/img/flags/en.png" alt="" width="24" height="16" loading="lazy"><span>English</span></a></li><li><a href="../fa/" hreflang="fa" lang="fa"><img class="flag" src="../assets/img/flags/fa.png" alt="" width="24" height="16" loading="lazy"><span>فارسی</span></a></li><li><a href="../fr/" hreflang="fr" lang="fr"><img class="flag" src="../assets/img/flags/fr.png" alt="" width="24" height="16" loading="lazy"><span>Français</span></a></li><li><span class="lang-here" aria-current="true" lang="de"><img class="flag" src="../assets/img/flags/de.png" alt="" width="24" height="16" loading="lazy"><span>Deutsch</span></span></li><li><a href="../tr/" hreflang="tr" lang="tr"><img class="flag" src="../assets/img/flags/tr.png" alt="" width="24" height="16" loading="lazy"><span>Türkçe</span></a></li></ul>
+      </details>
+      <button class="burger" id="burger" type="button" aria-label="Menü" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ===== hero ===== -->
+<section class="hero">
+  <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <div class="wrap hero-grid">
+
+    <div class="hero-copy">
+      <p class="hero-badge reveal">
+        <span class="live-dot"></span>
+        <span class="t-de">Nova Group · algorithmische Forschung seit 2020</span>
+      </p>
+
+      <h1 class="reveal">
+        <span class="t-de">Der Preis ist<br>eine Folge des<br><em>Orderflows.</em></span>
+      </h1>
+
+      <p class="hero-sub reveal">
+        <span class="t-de">Wir sammeln die Trades und Orders in der Markttiefe auf Level 1 bis 3, simulieren die Ausführungs-Engine des Handelsplatzes präzise und entwickeln und testen darauf Handels­algorithmen.</span>
+      </p>
+
+      <div class="hero-cta reveal">
+        <a class="btn btn-primary" href="about.html#method">
+          <span class="t-de">Unsere Methode</span>
+          <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="projects.html">
+          <span class="t-de">Projekte</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- A market-by-order book, simulated in the browser by main.js. Not market data. -->
+    <figure class="hero-visual reveal">
+      <div class="mbo" id="mbo" lang="en" aria-hidden="true">
+        <div class="mbo-head">
+          <span class="mbo-title">MBO <i>market by order</i></span>
+          <span class="mbo-live"><span class="live-dot"></span>SIMULATED</span>
+        </div>
+        <svg class="mbo-spark" viewBox="0 0 300 40" preserveAspectRatio="none"><polyline/><path/></svg>
+        <div class="mbo-cols"><span>Price</span><span>Queue · time priority →</span><span>Qty</span><span>Ord</span></div>
+        <div class="mbo-side mbo-asks"></div>
+        <div class="mbo-mid">
+          <span>Spread<b data-f="spread"></b></span>
+          <span>Mid<b data-f="mid"></b></span>
+          <span>Last<b data-f="last"></b></span>
+        </div>
+        <div class="mbo-side mbo-bids"></div>
+        <div class="mbo-tape"></div>
+      </div>
+      <!-- the visitor's own orders: main.js works them in the book like any other order -->
+      <div class="mbo-try">
+        <div class="tk-row">
+          <div class="tk-seg" data-k="type" role="group" aria-label="Orderart">
+            <button type="button" data-v="market" aria-pressed="true"><span class="t-de">Market</span></button>
+            <button type="button" data-v="limit" aria-pressed="false"><span class="t-de">Limit</span></button>
+          </div>
+          <div class="tk-seg" data-k="delay" role="group" aria-label="Verzögerung, bis die Order den Markt erreicht">
+            <span class="tk-cap"><span class="t-de">Verzögerung</span></span>
+            <button type="button" data-v="0" aria-pressed="true"><span class="t-de">Keine</span></button>
+            <button type="button" data-v="500" aria-pressed="false"><span class="t-de">0,5 s</span></button>
+            <button type="button" data-v="2000" aria-pressed="false"><span class="t-de">2 s</span></button>
+          </div>
+        </div>
+        <div class="tk-row">
+          <div class="tk-step">
+            <span class="tk-cap"><span class="t-de">Größe</span></span>
+            <span class="tk-ctl">
+              <button type="button" data-step="-1" data-of="size" aria-label="Größe verringern">−</button>
+              <input class="tk-size" type="text" inputmode="numeric" maxlength="2" value="10" autocomplete="off" aria-label="Ordergröße in Kontrakten">
+              <button type="button" data-step="1" data-of="size" aria-label="Größe erhöhen">+</button>
+            </span>
+          </div>
+          <div class="tk-step tk-price">
+            <span class="tk-cap"><span class="t-de">Preis</span></span>
+            <span class="tk-ctl">
+              <button type="button" data-step="-1" aria-label="Einen Tick tiefer">−</button>
+              <output class="tk-px"></output>
+              <button type="button" data-step="1" aria-label="Einen Tick höher">+</button>
+            </span>
+          </div>
+        </div>
+        <div class="mbo-btns">
+          <button type="button" class="mbo-btn is-buy" data-side="buy"><b><span class="t-de">Kaufen</span></b><small></small></button>
+          <button type="button" class="mbo-btn is-sell" data-side="sell"><b><span class="t-de">Verkaufen</span></b><small></small></button>
+        </div>
+        <p class="mbo-say" aria-live="polite">
+          <span class="t-de">Probieren Sie es selbst: Wählen Sie Größe und Orderart und senden Sie die Order ab.</span>
+        </p>
+        <div class="tk-stats" hidden>
+          <div><span><span class="t-de">Ausgeführt</span></span><b data-s="filled"></b></div>
+          <div><span><span class="t-de">Ø-Preis</span></span><b data-s="avg"></b></div>
+          <div><span><span class="t-de">Preisbewegung</span></span><b data-s="moved"></b></div>
+          <div><span><span class="t-de">Slippage</span></span><b data-s="slip"></b></div>
+        </div>
+        <ul class="tk-work" hidden aria-label="Ihre wartenden Orders"></ul>
+        <p class="tk-pos" hidden>
+          <span class="tk-pos-text"></span>
+          <button type="button" class="tk-reset"><span class="t-de">Zurücksetzen</span></button>
+        </p>
+      </div>
+      <figcaption>
+        <span class="t-de">Ein Orderbuch auf Order-Ebene (MBO) – eine Simulation, keine Marktdaten.</span>
+      </figcaption>
+    </figure>
+
+  </div>
+
+  <div class="wrap">
+    <ul class="facts facts-glass">
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-de">Hintergrund</span></span>
+        <b><span class="t-de">Seit 2020</span></b>
+        <p>
+          <span class="t-de">Finanzmärkte untersuchen und Handels­algorithmen entwickeln, von damals bis heute.</span>
+        </p>
+      </li>
+
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-de">Daten</span></span>
+        <b><span class="t-de">Preise, Trades, Orderbuch</span></b>
+        <div class="fact-list">
+          <div><i>Price</i><span><span class="t-de">Preis</span></span></div>
+          <div><i>Trades</i><span><span class="t-de">Trades</span></span></div>
+          <div><i>Book</i><span><span class="t-de">Orders in der Markttiefe</span></span></div>
+        </div>
+      </li>
+
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-de">Märkte</span></span>
+        <b><span class="t-de">Drei Arten von Märkten</span></b>
+        <div class="fact-list">
+          <div><i>CME</i><span><span class="t-de">Chicagoer Futures &amp; Optionen</span></span></div>
+          <div><i>Crypto</i><span><span class="t-de">Zentral &amp; dezentral</span></span></div>
+          <div><i>TSETMC</i><span><span class="t-de">Teheraner Aktien &amp; Optionen</span></span></div>
+        </div>
+      </li>
+
+      <li class="glow reveal">
+        <span class="fact-label"><span class="t-de">Methoden</span></span>
+        <b><span class="t-de">Data Science &amp; Modelle</span></b>
+        <div class="fact-list">
+          <div><i>DS</i><span><span class="t-de">Data Science &amp; Statistik</span></span></div>
+          <div><i>ML·DL</i><span><span class="t-de">ML und Deep Learning</span></span></div>
+          <div><i>RL</i><span><span class="t-de">Reinforcement Learning</span></span></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== method ===== -->
+<section class="section">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="eyebrow"><span class="t-de">Unsere Methode</span></p>
+      <h2><span class="t-de">Drei Schichten, von unten nach oben</span></h2>
+      <p>
+        <span class="t-de">Jedes Projekt ist auf diesen drei Schichten aufgebaut. Die obere Schicht existiert nicht ohne die Schicht darunter.</span>
+      </p>
+    </header>
+
+    <ol class="layers layers-home">
+      <li class="glow reveal">
+        <span class="layer-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3Z"/><path d="M4 7v5c0 1.7 3.6 3 8 3s8-1.3 8-3V7"/><path d="M4 12v5c0 1.7 3.6 3 8 3s8-1.3 8-3v-5"/></svg></span>
+        <span class="layer-tag"><span class="t-de">Fundament</span></span>
+        <h3><span class="t-de">Eine unabhängige Plattform, je Projekt eigens gebaut</span></h3>
+        <p><span class="t-de">Jedes Projekt erhält seine eigene Daten- und Ausführungs­plattform, von Grund auf gebaut und unabhängig von jedem fertigen Werkzeug.</span></p>
+      </li>
+      <li class="glow reveal">
+        <span class="layer-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="5" height="5" rx="1"/><rect x="9.5" y="5" width="5" height="5" rx="1"/><rect x="16" y="5" width="5" height="5" rx="1"/><rect x="3" y="14" width="5" height="5" rx="1"/><rect x="9.5" y="14" width="5" height="5" rx="1"/><path d="M17 16.5h4M19.5 14.5l2 2-2 2"/></svg></span>
+        <span class="layer-tag"><span class="t-de">Engine</span></span>
+        <h3><span class="t-de">Ein tiefgehender Simulator der Order­ausführung</span></h3>
+        <p><span class="t-de">Wir bilden die Ausführungs-Engine des Handelsplatzes nach: Orders reihen sich in die Warte­schlange ein, warten, bis sie an der Reihe sind, und werden teilweise ausgeführt.</span></p>
+      </li>
+      <li class="glow reveal">
+        <span class="layer-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4v16h16"/><path d="M7.5 15.5l4-5 3 3 5-7"/><circle cx="19.5" cy="6.5" r="1.4"/></svg></span>
+        <span class="layer-tag"><span class="t-de">Intelligenz</span></span>
+        <h3><span class="t-de">Analysen, Charts und Prognosemodelle</span></h3>
+        <p><span class="t-de">Vom Fluss der Trades und Orders über Statistik und Modell­training zu einem Prognose­algorithmus.</span></p>
+      </li>
+    </ol>
+
+    <a class="link-arrow sec-foot reveal" href="about.html#method">
+      <span class="t-de">Die Methode im Detail</span>
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ===== two tracks ===== -->
+<section class="section section-tint">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="eyebrow"><span class="t-de">Zwei Spuren</span></p>
+      <h2><span class="t-de">Wir stellen Liquidität, und wir nehmen sie</span></h2>
+      <p>
+        <span class="t-de">Beide Spuren schöpfen aus demselben Verständnis des Orderflows, und jede hat ihre eigenen Projekte.</span>
+      </p>
+    </header>
+
+<div class="tracks">
+  <article class="track glow reveal">
+    <span class="track-tag">Maker</span>
+    <h3><span class="t-de">Die Market-Maker-Sicht</span></h3>
+    <p><span class="t-de">Liquidität bereitstellen und Market Making betreiben: Unsere Orders warten auf beiden Seiten des Preises in der Warte­schlange, und andere handeln gegen sie.</span></p>
+
+    <!-- a small simulated book, filled in by main.js: our quotes wait their turn on both sides -->
+    <div class="mbo mbo-mini" data-track="maker" lang="en" aria-hidden="true">
+      <div class="mbo-head">
+        <span class="mbo-title">MAKER <i>resting in the queue</i></span>
+        <span class="mbo-live"><span class="live-dot"></span>SIMULATED</span>
+      </div>
+      <div class="mbo-side mbo-asks"></div>
+      <div class="mbo-mid mbo-note"></div>
+      <div class="mbo-side mbo-bids"></div>
+      <div class="mbo-tape"></div>
+      <div class="mbo-legend"><span class="chip own">3</span>our order</div>
+    </div>
+  </article>
+
+  <article class="track glow reveal">
+    <span class="track-tag">Taker</span>
+    <h3><span class="t-de">Die Taker-Sicht</span></h3>
+    <p><span class="t-de">Liquidität entnehmen und Trades eingehen: Unsere Order überquert den Spread und nimmt die wartenden Orders vom Anfang der Warte­schlange.</span></p>
+
+    <!-- a small simulated book, filled in by main.js: our order arrives and sweeps the levels -->
+    <div class="mbo mbo-mini" data-track="taker" lang="en" aria-hidden="true">
+      <div class="mbo-head">
+        <span class="mbo-title">TAKER <i>crossing the spread</i></span>
+        <span class="mbo-live"><span class="live-dot"></span>SIMULATED</span>
+      </div>
+      <div class="mbo-side mbo-asks"></div>
+      <div class="mbo-mid mbo-note"></div>
+      <div class="mbo-side mbo-bids"></div>
+      <div class="mbo-tape"></div>
+      <div class="mbo-legend"><span class="chip is-hit">3</span>taken by our order</div>
+    </div>
+  </article>
+</div>
+  </div>
+</section>
+
+<!-- ===== projects ===== -->
+<section class="section">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="eyebrow"><span class="t-de">Projekte</span></p>
+      <h2><span class="t-de">Woran wir arbeiten</span></h2>
+    </header>
+
+    <div class="proj-list">
+<a class="proj glow reveal" href="projects/cme-mm.html">
+  <div class="proj-main">
+    <div class="proj-top">
+      <span class="status"><span class="t-de">Im Test</span></span>
+      <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v18M5 7h7M3 11h9M7 15h5M12 9h6M12 13h9M12 17h5"/></svg></span>
+    </div>
+    <h3><span class="t-de">CME Market Maker</span></h3>
+    <p class="proj-sub">
+      <span class="t-de">Ein Market-Making-Algorithmus auf Basis von Deep Learning für den Chicagoer Futures-Markt, auf dem Weg zu einem automatisierten Market-Making-Desk</span>
+    </p>
+    <p class="proj-desc">
+      <span class="t-de">Mehrere Jahre der Chicagoer Börse, Order für Order zusammengetragen. Aus diesen Daten sind wir zu einem Market-Making-Algorithmus gelangt, der in einer getreuen Nachbildung der Börse selbst getestet wird.</span>
+    </p>
+    <div class="proj-foot">
+      <span class="proj-report is-on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg><span class="t-de">Simulator­bericht zum Download</span></span>
+      <span class="link-arrow">
+      <span class="t-de">Zum Projekt</span>
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </div>
+  </div>
+
+  <ul class="proj-facts">
+    <li><b><span class="t-de">Mehrere Jahre</span></b><span><span class="t-de">Historie, Order für Order</span></span></li>
+    <li><b><span class="t-de">Deep Learning</span></b><span><span class="t-de">Methode</span></span></li>
+    <li><b><bdi>Python · C# · Rust</bdi></b><span><span class="t-de">Technologie</span></span></li>
+  </ul>
+</a>
+<a class="proj glow reveal" href="projects/fast-scalp.html">
+  <div class="proj-main">
+    <div class="proj-top">
+      <span class="status"><span class="t-de">Im Test</span></span>
+      <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 3 5 13h6l-1 8 8-10h-6l1-8z"/></svg></span>
+    </div>
+    <h3><span class="t-de">Fast Scalp</span></h3>
+    <p class="proj-sub">
+      <span class="t-de">Ein ML-basierter Algorithmus für kurzfristigen Handel am Chicagoer Futures-Markt, auf dem Weg zu einem automatisierten Trading-Desk</span>
+    </p>
+    <p class="proj-desc">
+      <span class="t-de">Mehrere Jahre der Chicagoer Börse, Order für Order zusammengetragen. Aus diesen Daten sind wir zu einem Algorithmus für kurzfristigen Handel gelangt, der in einer getreuen Nachbildung der Börse selbst getestet wird.</span>
+    </p>
+    <div class="proj-foot">
+      <span class="proj-report is-on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg><span class="t-de">Simulator­bericht zum Download</span></span>
+      <span class="link-arrow">
+      <span class="t-de">Zum Projekt</span>
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </div>
+  </div>
+
+  <ul class="proj-facts">
+    <li><b><span class="t-de">Mehrere Jahre</span></b><span><span class="t-de">Historie, Order für Order</span></span></li>
+    <li><b><span class="t-de">Maschinelles Lernen</span></b><span><span class="t-de">Methode</span></span></li>
+    <li><b><bdi>Python · C# · Rust</bdi></b><span><span class="t-de">Technologie</span></span></li>
+  </ul>
+</a>
+<a class="proj glow reveal" href="projects/blocktrade.html">
+  <div class="proj-main">
+    <div class="proj-top">
+      <span class="status"><span class="t-de">Datendienst in Betrieb</span></span>
+      <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 3h11v11H3zM16 16h5v5h-5zM16 9h5M9 16v5"/></svg></span>
+    </div>
+    <h3><span class="t-de">BlockTrade</span></h3>
+    <p class="proj-sub">
+      <span class="t-de">Verhaltens­analyse der Blocktrades am Chicagoer Futures-Markt, auf dem Weg zu Handels- und Anlagealgorithmen, die auf der Spur des großen Geldes aufbauen</span>
+    </p>
+    <p class="proj-desc">
+      <span class="t-de">Unser Server empfängt und verarbeitet ohne Unterbrechung die Blocktrades jedes Produkts der Chicagoer Börse und liefert sie auf den Chart des Traders. Ihre Historie baut sich Tag für Tag auf.</span>
+    </p>
+    <div class="proj-foot">
+      <span class="proj-report"><span class="t-de">Kein Simulator­bericht veröffentlicht</span></span>
+      <span class="link-arrow">
+      <span class="t-de">Zum Projekt</span>
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </div>
+  </div>
+
+  <ul class="proj-facts">
+    <li><b><span class="t-de">36 Sekunden</span></b><span><span class="t-de">Median bis zum Eintreffen jedes Blocks nach der Meldung der Börse</span></span></li>
+    <li><b><span class="t-de">24 Formen</span></b><span><span class="t-de">Klassifizierung der Blöcke</span></span></li>
+    <li><b><bdi>Python · C#</bdi></b><span><span class="t-de">Technologie</span></span></li>
+  </ul>
+</a>
+<a class="proj glow reveal" href="projects/tsetmc.html">
+  <div class="proj-main">
+    <div class="proj-top">
+      <span class="status"><span class="t-de">In Entwicklung</span></span>
+      <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4v4M7 16v4M5 8h4v8H5zM17 3v3M17 14v7M15 6h4v8h-4z"/></svg></span>
+    </div>
+    <h3>TSETMC</h3>
+    <p class="proj-sub">
+      <span class="t-de">Orderflow-Analyse der Teheraner Börse, auf dem Weg zu einem algorithmischen Vermögens­verwaltungs­fonds</span>
+    </p>
+    <p class="proj-desc">
+      <span class="t-de">Elf Jahre des iranischen Kapitalmarkts, Trade für Trade und Order für Order zusammengetragen und nachgebildet. Auf dieser Historie entwickeln und testen wir unsere Modelle.</span>
+    </p>
+    <div class="proj-foot">
+      <span class="proj-report"><span class="t-de">Kein Simulator­bericht veröffentlicht</span></span>
+      <span class="link-arrow">
+      <span class="t-de">Zum Projekt</span>
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </div>
+  </div>
+
+  <ul class="proj-facts">
+    <li><b><span class="t-de">11 Jahre</span></b><span><span class="t-de">Markthistorie</span></span></li>
+    <li><b><span class="t-de">1.148</span></b><span><span class="t-de">Symbole</span></span></li>
+    <li><b><bdi>Python · C#</bdi></b><span><span class="t-de">Technologie</span></span></li>
+  </ul>
+</a>
+<a class="proj glow reveal" href="projects/gold-etf.html">
+  <div class="proj-main">
+    <div class="proj-top">
+      <span class="status"><span class="t-de">Im Test</span></span>
+      <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 12a4 4 0 1 0 8 0a4 4 0 1 0-8 0M4 12a8 8 0 0 1 13.7-5.7L20 8M20 12a8 8 0 0 1-13.7 5.7L4 16M20 4v4h-4M4 20v-4h4"/></svg></span>
+    </div>
+    <h3><span class="t-de">Gold ETF Arbitrage</span></h3>
+    <p class="proj-sub">
+      <span class="t-de">Ein Algorithmus, der Kapital zwischen den Goldfonds der Teheraner Börse umschichtet, auf dem Weg zu einem automatisierten Goldportfolio, das darauf abzielt, mehr zu erzielen als das Halten von Gold</span>
+    </p>
+    <p class="proj-desc">
+      <span class="t-de">Die Goldfonds der Teheraner Börse, Order für Order aufgezeichnet und an einem Maßstab gemessen. Den Wechsel zwischen ihnen testen wir in einer getreuen Nachbildung der Börse, im Vergleich zum bloßen Halten von Gold.</span>
+    </p>
+    <div class="proj-foot">
+      <span class="proj-report is-on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg><span class="t-de">Simulator­bericht zum Download</span></span>
+      <span class="link-arrow">
+        <span class="t-de">Zum Projekt</span>
+        <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </div>
+  </div>
+
+  <ul class="proj-facts">
+    <li><b><span class="t-de">21 Goldfonds</span></b><span><span class="t-de">an einem Maßstab gemessen</span></span></li>
+    <li><b><span class="t-de">395 Handelstage</span></b><span><span class="t-de">im Simulator abgespielt</span></span></li>
+    <li><b><bdi>Python</bdi></b><span><span class="t-de">Technologie</span></span></li>
+  </ul>
+</a>
+<a class="proj glow reveal" href="projects/defi-lp.html">
+  <div class="proj-main">
+    <div class="proj-top">
+      <span class="status"><span class="t-de">In Untersuchung</span></span>
+      <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 12a5.5 5.5 0 1 0 11 0a5.5 5.5 0 1 0-11 0M9.5 12a5.5 5.5 0 1 0 11 0a5.5 5.5 0 1 0-11 0"/></svg></span>
+    </div>
+    <h3><span class="t-de">DeFi LP</span></h3>
+    <p class="proj-sub">
+      <span class="t-de">Ein Algorithmus zur Vermögens­verwaltung für die Liquiditäts­pools dezentraler Börsen, auf dem Weg zu einem automatisierten Fonds</span>
+    </p>
+    <p class="proj-desc">
+      <span class="t-de">Die vollständige Historie von 136 Pools auf vier Blockchain-Netzwerken, ab dem ersten Tag jedes Pools und Ereignis für Ereignis zusammengetragen. Wir simulieren, wie Kapital in einem Pool liegt und zwischen Pools wechselt, in einer getreuen Nachbildung des Marktes selbst.</span>
+    </p>
+    <div class="proj-foot">
+      <span class="proj-report"><span class="t-de">Kein Simulator­bericht veröffentlicht</span></span>
+      <span class="link-arrow">
+      <span class="t-de">Zum Projekt</span>
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </div>
+  </div>
+
+  <ul class="proj-facts">
+    <li><b><span class="t-de">136 Pools</span></b><span><span class="t-de">vollständige Historie, Ereignis für Ereignis</span></span></li>
+    <li><b><span class="t-de">4 Netzwerke</span></b><span><span class="t-de">Blockchain</span></span></li>
+    <li><b><bdi>Python · C#</bdi></b><span><span class="t-de">Technologie</span></span></li>
+  </ul>
+</a>
+<a class="proj glow reveal" href="projects/crypto-mm.html">
+  <div class="proj-main">
+    <div class="proj-top">
+      <span class="status"><span class="t-de">In Entwicklung</span></span>
+      <span class="proj-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg></span>
+    </div>
+    <h3><span class="t-de">Crypto Market Maker</span></h3>
+    <p class="proj-sub">
+      <span class="t-de">Daten­infrastruktur und ein Market-Making-Algorithmus für den Kryptomarkt, auf dem Weg zu einem automatisierten Market-Making-Desk</span>
+    </p>
+    <p class="proj-desc">
+      <span class="t-de">Der Markt von 22 stark gehandelten Krypto­währungen an 16 globalen Börsen, Trade für Trade und Order für Order zusammengetragen. Vor dem Schreiben des Algorithmus haben wir diesen gesamten Markt aufgezeichnet, und wir zeichnen ihn weiter auf.</span>
+    </p>
+    <div class="proj-foot">
+      <span class="proj-report"><span class="t-de">Kein Simulator­bericht veröffentlicht</span></span>
+      <span class="link-arrow">
+      <span class="t-de">Zum Projekt</span>
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </div>
+  </div>
+
+  <ul class="proj-facts">
+    <li><b><span class="t-de">22 Krypto­währungen</span></b><span><span class="t-de">an 16 globalen Börsen</span></span></li>
+    <li><b><span class="t-de">60 Terabyte</span></b><span><span class="t-de">Umfang der Rohdaten</span></span></li>
+    <li><b><bdi>Rust · C#</bdi></b><span><span class="t-de">Technologie</span></span></li>
+  </ul>
+</a>
+    </div>
+
+    <a class="link-arrow sec-foot reveal" href="projects.html">
+      <span class="t-de">Alle Projekte</span>
+      <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ===== where we are ===== -->
+<section class="section">
+  <div class="wrap">
+    <div class="band band-slogan reveal">
+      <canvas class="flow" aria-hidden="true"></canvas>
+      <h2>
+        <span class="t-de">Vom Orderflow <em>zum Kapitalfluss.</em></span>
+      </h2>
+      <a class="btn btn-primary" href="contact.html">
+        <span class="t-de">Kontakt aufnehmen</span>
+        <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top footer-panel">
+      <div class="footer-brand">
+        <a class="logo" href="index.html" aria-label="Nova Group">
+          <img class="logo-mark" src="../assets/img/nova-mark-512.png" alt="" width="512" height="512" loading="lazy">
+          <span class="logo-text t-de"><b>NOVA</b> GROUP</span>
+        </a>
+        <p>
+          <span class="t-de">Erforschung und Entwicklung von Handels­algorithmen aus dem Orderflow des Marktes – seit 2020.</span>
+        </p>
+      </div>
+
+      <nav class="footer-col" aria-label="Fußzeile">
+        <h2><span class="t-de">Website</span></h2>
+        <a href="index.html"><span class="t-de">Start</span></a>
+        <a href="about.html"><span class="t-de">Über uns</span></a>
+        <a href="projects.html"><span class="t-de">Projekte</span></a>
+        <a href="contact.html"><span class="t-de">Kontakt</span></a>
+      </nav>
+
+      <div class="footer-col footer-contact">
+        <h2><span class="t-de">Kontakt</span></h2>
+        <a class="footer-mail" href="mailto:info@novacapital.fund">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
+          <bdi>info@novacapital.fund</bdi>
+        </a>
+      </div>
+    </div>
+
+    <p class="footer-bottom">
+      <span class="t-de">© 2026 Nova Group. Alle Rechte an dieser Website und ihren Inhalten liegen bei Nova Group. Jeder Missbrauch wird rechtlich verfolgt.</span>
+    </p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Nach oben"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11.5 12 5.5l6 6"/></svg></button>
+
+<script src="../assets/js/main.js?v=57"></script>
+</body>
+</html>
