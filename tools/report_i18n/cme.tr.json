@@ -724,12 +724,12 @@
   "ortalama",
   "toplam",
   "gün",
-  "/",
+  ",",
   "maksimum aleyhte hareket",
   "maksimum lehte hareket",
   "eksenin dışında",
   "ve üzeri",
-  "<",
+  "altında",
   "dâhil:",
   "tick",
   "veya daha az",
@@ -756,7 +756,7 @@
   "gün",
   "net",
   "bundan sonraki her rakam hesabın yeniden fonlandığını varsayar",
-  "@"
+  "-"
  ],
  "gloss": [
   [
@@ -817,7 +817,7 @@
   ],
   [
    "Kâr Faktörü (Profit Factor)",
-   "Brüt kârın brüt zarara bölümü, para cinsinden. 1’in üzeri kârlıdır; 1.00 başa baştır. “Kâr Faktörü (R)”, R-Multiple değerleri üzerinden hesaplanan aynı orandır."
+   "Brüt kârın brüt zarara bölümü, para cinsinden. 1’in üzeri kârlıdır; 1,00 başa baştır. “Kâr Faktörü (R)”, R-Multiple değerleri üzerinden hesaplanan aynı orandır."
   ],
   [
    "Kârlı İşlem Yüzdesi (Percent Profitable)",
