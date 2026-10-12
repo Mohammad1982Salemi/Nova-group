@@ -41,7 +41,7 @@ from pathlib import Path
 
 VERSION = "57"  # bump whenever assets/css/style.css or assets/js/main.js changes
 SITE = "https://novacapital.fund/"
-LANGS = ("en", "fa", "fr", "de", "tr")    # in the order of the language menu
+LANGS = ("en", "fr", "de", "tr", "fa")    # in the order of the language menu: Persian closes the list
 MAIN = "en"     # the language served at the site's root; every other one lives under /<its code>/
 RTL = ("fa",)
 NAMES = {"en": "English", "fa": "فارسی", "fr": "Français", "de": "Deutsch", "tr": "Türkçe"}   # each in its own language
@@ -235,9 +235,8 @@ def head_meta(rel, meta, lang, both, say):
     ])
 
 
-def flag(code, lazy=False):
-    return (f'<img class="flag" src="@@R@@assets/img/flags/{code}.png" alt="" width="24" height="16"'
-            + (' loading="lazy"' if lazy else "") + ">")
+def flag(code):
+    return f'<img class="flag" src="@@R@@assets/img/flags/{code}.png" alt="" width="24" height="16">'
 
 
 def langmenu(lang, both, link):
@@ -245,13 +244,13 @@ def langmenu(lang, both, link):
     each with its flag and its name in its own words. It opens without script (details / summary)."""
     if both:    # the not-found page changes language in place: buttons, and the button's face once per language
         face = "".join(f'<span class="lang-face t-{l}" lang="{l}">{flag(l)}<span class="lang-name">{NAMES[l]}</span></span>' for l in LANGS)
-        items = "".join(f'<li><button type="button" data-lang="{l}" lang="{l}">{flag(l, True)}<span>{NAMES[l]}</span></button></li>' for l in LANGS)
+        items = "".join(f'<li><button type="button" data-lang="{l}" lang="{l}">{flag(l)}<span>{NAMES[l]}</span></button></li>' for l in LANGS)
         label = "Language"
     else:
         face = f'{flag(lang)}<span class="lang-name">{NAMES[lang]}</span>'
         # the page's own language is a row that is not a link: there is nowhere to go
-        items = "".join((f'<li><span class="lang-here" aria-current="true" lang="{l}">{flag(l, True)}<span>{NAMES[l]}</span></span></li>' if l == lang else
-                         f'<li><a href="{link(l)}" hreflang="{l}" lang="{l}">{flag(l, True)}<span>{NAMES[l]}</span></a></li>') for l in LANGS)
+        items = "".join((f'<li><span class="lang-here" aria-current="true" lang="{l}">{flag(l)}<span>{NAMES[l]}</span></span></li>' if l == lang else
+                         f'<li><a href="{link(l)}" hreflang="{l}" lang="{l}">{flag(l)}<span>{NAMES[l]}</span></a></li>') for l in LANGS)
         label = f"{MENU_LABEL[lang]}: {NAMES[lang]}"
     return (f'<details class="lang" id="lang">\n'
             f'        <summary class="lang-btn" id="langBtn" aria-label="{label}">{face}{CARET}</summary>\n'

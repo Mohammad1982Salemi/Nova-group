@@ -1,12 +1,12 @@
 # Nova Group · نوا گروپ
 
 وب‌سایت معرفی نوا گروپ — پژوهش الگوریتمی از ۱۳۹۹ روی جریان سفارش‌های بازار.
-پنج‌زبانه (انگلیسی، فارسی، فرانسوی، آلمانی، ترکی)، چندصفحه‌ای، بدون سرور.
+پنج‌زبانه (انگلیسی، فرانسوی، آلمانی، ترکی، فارسی)، چندصفحه‌ای، بدون سرور.
 
 Website for Nova Group — algorithmic research into market order flow since 2020.
-Five languages (English, Persian, French, German, Turkish), multi-page, fully static.
+Five languages (English, French, German, Turkish, Persian), multi-page, fully static.
 
-**Live:** https://novacapital.fund/ (English) · [/fa/](https://novacapital.fund/fa/) (فارسی) · [/fr/](https://novacapital.fund/fr/) (Français) · [/de/](https://novacapital.fund/de/) (Deutsch) · [/tr/](https://novacapital.fund/tr/) (Türkçe)
+**Live:** https://novacapital.fund/ (English) · [/fr/](https://novacapital.fund/fr/) (Français) · [/de/](https://novacapital.fund/de/) (Deutsch) · [/tr/](https://novacapital.fund/tr/) (Türkçe) · [/fa/](https://novacapital.fund/fa/) (فارسی)
 
 ---
 
