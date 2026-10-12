@@ -45,7 +45,8 @@ src/pages/      one file per page; folders become URL folders
 src/i18n/       fr.json, de.json, tr.json: each English text and its translation
 build.py        src -> the .html files at the repo root and under fa/ fr/ de/ tr/, plus sitemap.xml
 assets/         css, js, fonts, images, reports (not generated — edit directly)
-tools/          make_og.py draws the link-preview images, make_flags.py the flags of the language menu
+tools/          make_og.py draws the link-preview images, make_flags.py the flags of the language menu,
+                make_reports.py gives the simulator reports their five languages (its parts are in tools/report_i18n/)
 ```
 
 **هیچ‌وقت فایل‌های `.html` ریشه، `fa/`، `fr/`، `de/`، `tr/` یا `en/` را مستقیم ویرایش نکنید** — با ساخت بعدی بازنویسی می‌شوند.
@@ -127,6 +128,16 @@ A reader who picks a language in the language menu (a flag and the full name of 
 taken from any English address to the same page under that language's code from then on. An address
 under `/fa/`, `/fr/`, `/de/` or `/tr/` is always in that language, and `?lang=fa|fr|de|tr|en` makes
 the choice explicit and remembers it.
+
+### گزارش‌های شبیه‌ساز · The simulator reports
+
+گزارش‌های `assets/reports/` را شبیه‌ساز می‌نویسد (انگلیسی؛ چهار گزارش CME با واژه‌نامه‌ی فارسی درون خود). `python tools/make_reports.py` نسخه‌ی اصلی هر گزارش را از `_originals/reports/` می‌خواند و نسخه‌ی پنج‌زبانه‌اش را در `assets/reports/` می‌نویسد: همان منوی زبان (پرچم + نام کامل) در هر پنج گزارش، بدون تغییر هیچ عدد یا نموداری. هر بار که شبیه‌ساز گزارشی را از نو نوشت، همین فرمان را دوباره اجرا کنید. پیوند «باز کردن در مرورگر» در هر صفحه، گزارش را به زبان همان صفحه باز می‌کند (`?lang=`).
+
+The reports in `assets/reports/` are written by the simulator (in English; the four CME reports carry a Persian
+dictionary of their own). `python tools/make_reports.py` reads each report as the simulator wrote it from
+`_originals/reports/` and writes its five-language copy into `assets/reports/`: the same language menu (a flag and
+the full name) in all five, with no figure and no chart changed. Run it again whenever the simulator writes a
+report anew. The "Open in the browser" link on a page opens the report in that page's language (`?lang=`).
 
 ### کش مرورگر · Cache busting
 

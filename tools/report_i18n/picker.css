@@ -1,0 +1,15 @@
+/* the language menu: the same in every report (it reads each report's own colours, with a fallback) */
+#langbar{direction:ltr;display:flex;justify-content:flex-end;margin:0 0 6px;position:relative;z-index:40}
+.lp{position:relative;font:13px/1.3 "Segoe UI",Tahoma,Arial,sans-serif;--lp-bg:var(--surface,var(--surface-1,#151C25));--lp-up:var(--raised,#1B2430);--lp-line:var(--border,#2A3849);--lp-ink:var(--text,var(--text-primary,#ECF2F8));--lp-dim:var(--muted,var(--text-secondary,#94A3B8));--lp-hi:var(--accent,var(--series-1,#38B7FF))}
+.lp-btn{display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 10px 0 9px;border:1px solid var(--lp-line);border-radius:17px;background:var(--lp-bg);color:var(--lp-ink);font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.lp-btn:hover,.lp.open .lp-btn{border-color:var(--lp-hi)}
+.lp-flag{display:block;flex:none;width:21px;height:14px;border-radius:2px;box-shadow:0 0 0 1px rgba(128,128,128,.4)}
+.lp-caret{flex:none;width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;opacity:.7;transition:transform .15s}
+.lp.open .lp-caret{transform:rotate(180deg)}
+.lp-menu{position:absolute;top:calc(100% + 6px);right:0;min-width:172px;margin:0;padding:5px;list-style:none;background:var(--lp-bg);border:1px solid var(--lp-line);border-radius:10px;box-shadow:0 14px 34px rgba(0,0,0,.35);display:none}
+.lp.open .lp-menu{display:block}
+.lp-menu button{display:flex;align-items:center;gap:10px;width:100%;padding:8px 10px;border:0;border-radius:7px;background:none;color:var(--lp-dim);font:inherit;font-size:13.5px;font-weight:500;text-align:left;cursor:pointer}
+.lp-menu button:hover{background:var(--lp-up);color:var(--lp-ink)}
+.lp-menu button[aria-current=true]{color:var(--lp-ink);font-weight:600}
+.lp-menu button[aria-current=true]::after{content:"";flex:none;width:6px;height:6px;margin-left:auto;border-radius:50%;background:var(--lp-hi)}
+@media print{#langbar{display:none}}

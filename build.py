@@ -39,7 +39,7 @@ from datetime import date
 from html.parser import HTMLParser
 from pathlib import Path
 
-VERSION = "59"  # bump whenever assets/css/style.css or assets/js/main.js changes
+VERSION = "60"  # bump whenever assets/css/style.css or assets/js/main.js changes
 SITE = "https://novacapital.fund/"
 LANGS = ("en", "fr", "de", "tr", "fa")    # in the order of the language menu: Persian closes the list
 MAIN = "en"     # the language served at the site's root; every other one lives under /<its code>/
@@ -333,6 +333,8 @@ def main():
                 if say:
                     text = translated(text, say, lang)
             text = text.replace("@@LANGBTN@@", langmenu(lang, both, link))     # after the texts: the menu is the same in every language
+            # a simulator report opened from a page opens in that page's language (the reports carry all five themselves)
+            text = re.sub(r'(assets/reports/[\w-]+\.html)(" target="_blank")', rf"\1?lang={lang}\2", text)
             text = text.replace("@@R@@assets/", top + "assets/").replace("@@R@@", up).replace("@@V@@", VERSION)
             if "@@" in text:
                 raise SystemExit(f"{rel}: unresolved token near {text[text.index('@@'):][:40]!r}")
