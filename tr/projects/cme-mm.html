@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CME Market Maker — Chicago vadeli işlem piyasası için bir piyasa yapıcılığı algoritması | Nova Group</title>
-<meta name="description" content="CME Market Maker projesi: Chicago borsasının emir emir geçmişinden öğrenilen, derin öğrenmeye dayalı bir piyasa yapıcılığı algoritması.">
+<meta name="description" content="CME Market Maker projesi: Chicago borsasının emir düzeyindeki geçmişinden öğrenilen, derin öğrenmeye dayalı bir piyasa yapıcılığı algoritması.">
 <link rel="canonical" href="https://novacapital.fund/tr/projects/cme-mm.html">
 <link rel="alternate" hreflang="en" href="https://novacapital.fund/projects/cme-mm.html">
 <link rel="alternate" hreflang="fr" href="https://novacapital.fund/fr/projects/cme-mm.html">
@@ -99,7 +99,7 @@
         <li>Python</li><li>C#</li><li>Rust</li><li>MBO</li>
         <li><span class="t-tr">Derin öğrenme</span></li>
         <li><span class="t-tr">Piyasa yapıcılığı</span></li>
-        <li><span class="t-tr">Gerçekleşme simülatörü</span></li>
+        <li><span class="t-tr">Emir gerçekleştirme simülatörü</span></li>
       </ul>
     </div>
 
@@ -162,7 +162,7 @@
         <span class="t-tr">Bu işi, onu piyasanın kendisinden öğrenmiş bir algoritmaya bıraktık.</span>
       </p>
       <p>
-        <span class="t-tr">CME Market Maker projesi, dünyanın en büyük vadeli işlem piyasalarından biri olan Chicago borsasının birkaç yıllık geçmişini her bir emir düzeyinde topladı. Bu veriden, derin öğrenme ve istatistiksel analizle, borsanın kendisinin aslına yakın bir yeniden kurulumu içinde test edilen bir piyasa yapıcılığı algoritmasına ulaştık. Varış noktası, sermayeyi insanların anlık yargısıyla değil, bu algoritmayla yöneten otomatik bir piyasa yapıcılığı masasıdır.</span>
+        <span class="t-tr">CME Market Maker projesi, dünyanın en büyük vadeli işlem piyasalarından biri olan Chicago borsasının birkaç yıllık geçmişini her bir emir düzeyinde topladı. Bu veriden, derin öğrenme ve istatistiksel analizle, borsanın kendisinin aslına yakın bir yeniden kurulması içinde test edilen bir piyasa yapıcılığı algoritmasına ulaştık. Varış noktası, sermayeyi insanların anlık yargısıyla değil, bu algoritmayla yöneten otomatik bir piyasa yapıcılığı masasıdır.</span>
       </p>
       </section>
 
@@ -225,7 +225,7 @@
       <section class="cs-section" id="platform">
         <h2><span><span class="t-tr">Platformun içinden</span></span></h2>
         <p>
-          <span class="t-tr">Bunlar temsili görseller değil, projenin araçlarından alınmış gerçek ekranlardır. Her görünüm, aynı emir emir piyasa verisini farklı bir açıdan gösterir. Büyütmek için görsele tıklayın.</span>
+          <span class="t-tr">Bunlar temsili görseller değil, projenin araçlarından alınmış gerçek ekranlardır. Her görünüm, aynı emir bazında piyasa verisini farklı bir açıdan gösterir. Büyütmek için görsele tıklayın.</span>
         </p>
 
         <div class="shots reveal" data-shots>
@@ -255,7 +255,7 @@
             <div class="shot-stage">
               <img class="is-on" src="../../assets/img/projects/cme-mm/limit-orders.webp" data-full="../../assets/img/projects/cme-mm/limit-orders-full.webp" width="1400" height="742" alt="Her fiyatta bekleyen emirlerin ısı haritası; fiyat yolu ve işlem baloncuklarıyla">
               <img src="../../assets/img/projects/cme-mm/tape.webp" data-full="../../assets/img/projects/cme-mm/tape-full.webp" width="1400" height="742" loading="lazy" alt="Üç şeritte piyasa olayları bandı: ham kayıt, yorumlayıcıdan sonra ve motor">
-              <img src="../../assets/img/projects/cme-mm/rendering.webp" data-full="../../assets/img/projects/cme-mm/rendering-full.webp" width="1400" height="742" loading="lazy" alt="Olay işaretçileriyle bir tick’lik fiyat grafiği">
+              <img src="../../assets/img/projects/cme-mm/rendering.webp" data-full="../../assets/img/projects/cme-mm/rendering-full.webp" width="1400" height="742" loading="lazy" alt="Olay işaretçileriyle bir ticklik fiyat grafiği">
             </div>
             <figcaption>
               <p class="shot-cap is-on">
@@ -265,7 +265,7 @@
                 <span class="t-tr">Tek tek adımlanabilen 18.442.942 olay, üç şeritte: ham MBO kayıtları, aynı kayıtların yorumlayıcıdan sonraki hâli ve motorun içindeki düğümler ile emir olayları.</span>
               </p>
               <p class="shot-cap">
-                <span class="t-tr">Her tick üzerinde olay işaretçileri bulunan bir tick’lik fiyat grafiği. Uzaklaştırıldıkça görünüm tick’lerden bir dakikaya ve dört saate kadar çıkar.</span>
+                <span class="t-tr">Her tick üzerinde olay işaretçileri bulunan bir ticklik fiyat grafiği. Uzaklaştırıldıkça görünüm ticklerden bir dakikaya ve dört saate kadar çıkar.</span>
               </p>
             </figcaption>
           </figure>
@@ -275,7 +275,7 @@
       <section class="cs-section" id="approach">
         <h2><span><span class="t-tr">Yaklaşım</span></span></h2>
       <p>
-        <span class="t-tr">Algoritma piyasa verisinden öğrenir ve aynı piyasanın bir yeniden kurulumu içinde ölçülür. Çalışma üç aşamada yapıldı:</span>
+        <span class="t-tr">Algoritma piyasa verisinden öğrenir ve aynı piyasanın bir yeniden kurulması içinde ölçülür. Çalışma üç aşamada yapıldı:</span>
       </p>
       <ol class="steps">
         <li class="glow reveal">
@@ -306,7 +306,7 @@
         </li>
         <li class="glow reveal">
           <strong class="t-tr">Emir gerçekleştirmede de geçerliliğini koruyan bir sonuç.</strong>
-          <p class="t-tr">Birçok strateji kâğıt üzerinde kârlıdır, pratikte değil; çünkü testleri bir emrin ekranda görünen fiyattan hemen gerçekleştiğini varsayar. Simülatörümüzde bir emir, gerçek piyasadakiyle aynı yolu izler; simülasyonun doğruluğu da borsanın ham verisinden yapılan bağımsız bir yeniden kurulumla karşılaştırılarak denetlendi.</p>
+          <p class="t-tr">Birçok strateji kâğıt üzerinde kârlıdır, pratikte değil; çünkü testleri bir emrin ekranda görünen fiyattan hemen gerçekleştiğini varsayar. Simülatörümüzde bir emir, gerçek piyasadakiyle aynı yolu izler; simülasyonun doğruluğu da borsanın ham verisinden yapılan bağımsız bir yeniden kurmala karşılaştırılarak denetlendi.</p>
         </li>
         <li class="glow reveal">
           <strong class="t-tr">Gerçek bir bulguyu tesadüften ayırmak.</strong>
@@ -328,7 +328,7 @@
       <ol class="phases">
         <li class="is-done glow reveal">
           <span class="phase-mark"><span class="t-tr">Tamamlandı</span></span>
-          <p class="t-tr">Veri altyapısı, piyasanın yeniden kurulumu, piyasa yapıcılığı algoritması, emir gerçekleştirme simülatörü ve raporlama sistemi kuruldu.</p>
+          <p class="t-tr">Veri altyapısı, piyasanın yeniden kurulması, piyasa yapıcılığı algoritması, emir gerçekleştirme simülatörü ve raporlama sistemi kuruldu.</p>
         </li>
         <li class="is-now glow reveal">
           <span class="phase-mark"><span class="t-tr">Şu anda</span></span>
@@ -348,7 +348,7 @@
       <section class="cs-section" id="technology">
         <h2><span><span class="t-tr">Teknoloji</span></span></h2>
       <p>
-        <span class="t-tr">Öğrenme modelleri Python ile kurulur ve bir grafik işlemcide eğitilir. Piyasa yeniden kurulum motoru ve emir gerçekleştirme simülatörü C# ile, ham veri okuyucu ise Rust ile yazıldı. Bir değişiklik, ancak önceki sürümle karşılaştırıldıktan ve otomatik testlerden geçtikten sonra kabul edilir.</span>
+        <span class="t-tr">Öğrenme modelleri Python ile kurulur ve bir grafik işlemcide eğitilir. Piyasa yeniden kurma motoru ve emir gerçekleştirme simülatörü C# ile, ham veri okuyucu ise Rust ile yazıldı. Bir değişiklik, ancak önceki sürümle karşılaştırıldıktan ve otomatik testlerden geçtikten sonra kabul edilir.</span>
       </p>
       </section>
     </article>

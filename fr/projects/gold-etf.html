@@ -121,7 +121,7 @@
       </li>
       <li class="glow reveal">
         <span class="fact-label"><span class="t-fr">Tests</span></span>
-        <b><span class="t-fr">82 simulations</span></b>
+        <b><span class="t-fr">82 simulations complètes</span></b>
         <p>
           <span class="t-fr">Menées pour vérifier la règle sur différentes périodes, différents niveaux de frais et différentes hypothèses avant de la communiquer.</span>
         </p>
@@ -160,7 +160,7 @@
         <span class="t-fr">Nous avons décidé de traiter tous les fonds adossés à l’or comme un seul actif, et de détenir cet actif par le fonds le moins cher à détenir sur le moment, en ne nous déplaçant que lorsque le déplacement paie son propre coût.</span>
       </p>
       <p>
-        <span class="t-fr">Le projet détient les carnets d’ordres et les transactions de 36 fonds adossés à l’or de juillet 2022 à septembre 2026, soit 995 jours de bourse, ainsi que la valeur liquidative publiée de chaque fonds. Sur ces enregistrements, nous avons construit un simulateur qui rejoue la bourse seconde par seconde, et nous avons testé une règle de réallocation sur 21 fonds, de janvier 2025 à septembre 2026, à quatre niveaux de frais de courtage. Dans cette simulation, le portefeuille a terminé devant la simple détention du fonds adossé à l’or le plus négocié 19 mois sur 21. L’objectif est un portefeuille automatisé investi en or qui est entièrement en or à chaque instant et vise à finir avec plus d’or qu’au départ.</span>
+        <span class="t-fr">Le projet détient les carnets d’ordres et les transactions de 36 fonds adossés à l’or de juillet 2022 à septembre 2026, soit 995 jours de bourse, ainsi que la valeur liquidative publiée de chaque fonds. Sur ces enregistrements, nous avons construit un simulateur qui rejoue la bourse seconde par seconde, et nous avons testé une règle de déplacement sur 21 fonds, de janvier 2025 à septembre 2026, à quatre niveaux de frais de courtage. Dans cette simulation, le portefeuille a terminé devant la simple détention du fonds adossé à l’or le plus négocié 19 mois sur 21. L’objectif est un portefeuille automatisé investi en or qui est entièrement en or à chaque instant et vise à finir avec plus d’or qu’au départ.</span>
       </p>
       </section>
 
@@ -214,7 +214,7 @@
         </li>
         <li class="glow reveal">
           <strong class="t-fr">De la décision à un ordre exécuté</strong>
-          <p class="t-fr">Les fonds adossés à l’or autres que le plus grand se négocient peu, de sorte qu’une décision ne vaut que ce que le carnet d’ordres peut réellement exécuter. L’algorithme dimensionne chaque ordre selon la profondeur affichée à l’écran, traite ensemble les deux côtés d’une réallocation et maintient le compte en or tout du long. Il ne vend pas à découvert et n’emprunte pas pour augmenter la position.</p>
+          <p class="t-fr">Les fonds adossés à l’or autres que le plus grand se négocient peu, de sorte qu’une décision ne vaut que ce que le carnet d’ordres peut réellement exécuter. L’algorithme dimensionne chaque ordre selon la profondeur affichée à l’écran, traite ensemble les deux côtés d’une déplacement et maintient le compte en or tout du long. Il ne vend pas à découvert et n’emprunte pas pour augmenter la position.</p>
         </li>
       </ol>
       <p>
@@ -242,7 +242,7 @@
         </li>
         <li class="glow reveal">
           <strong class="t-fr">Des frais présents dans le compte dès la première ligne.</strong>
-          <p class="t-fr">L’avantage d’un fonds sur un autre est faible, de sorte que les frais de courtage décident si une réallocation vaut la peine d’être effectuée. Nous avons relancé toute la simulation à quatre niveaux de frais, de l’absence de remise à une remise de 45 %, sans changer la règle. Le rapport montre les quatre, afin que le lecteur puisse voir quelle part du résultat dépend des frais.</p>
+          <p class="t-fr">L’avantage d’un fonds sur un autre est faible, de sorte que les frais de courtage décident si une déplacement vaut la peine d’être effectuée. Nous avons relancé toute la simulation à quatre niveaux de frais, de l’absence de remise à une remise de 45 %, sans changer la règle. Le rapport montre les quatre, afin que le lecteur puisse voir quelle part du résultat dépend des frais.</p>
         </li>
         <li class="glow reveal">
           <strong class="t-fr">Testé là où il pouvait échouer.</strong>
@@ -260,7 +260,7 @@
       <ol class="phases">
         <li class="is-done glow reveal">
           <span class="phase-mark"><span class="t-fr">Réalisé</span></span>
-          <p class="t-fr">Les enregistrements de marché, le simulateur d’exécution et la règle de réallocation sont construits, et la règle a été testée en simulation sur 21 fonds et quatre niveaux de frais.</p>
+          <p class="t-fr">Les enregistrements de marché, le simulateur d’exécution et la règle de déplacement sont construits, et la règle a été testée en simulation sur 21 fonds et quatre niveaux de frais.</p>
         </li>
         <li class="is-now glow reveal">
           <span class="phase-mark"><span class="t-fr">En cours</span></span>

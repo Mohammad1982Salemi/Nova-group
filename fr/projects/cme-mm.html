@@ -119,7 +119,7 @@
       </li>
       <li class="glow reveal">
         <span class="fact-label"><span class="t-fr">Critère d’évaluation</span></span>
-        <b><span class="t-fr">Résultat financier net</span></b>
+        <b><span class="t-fr">Résultat net</span></b>
         <p>
           <span class="t-fr">Après tous les coûts, sur une gamme de conditions de vitesse et de frais.</span>
         </p>
@@ -279,15 +279,15 @@
       <ol class="steps">
         <li class="glow reveal">
           <strong class="t-fr">Des données brutes à l’image complète du marché</strong>
-          <p class="t-fr">L’écran de trading ne présente qu’une synthèse du marché. Nous traitons chaque message enregistré par la bourse pour reconstituer, à chaque instant, le carnet des ordres au repos. Nous obtenons ainsi le volume disponible à chaque niveau de prix et la priorité de chaque ordre dans la file d’attente.</p>
+          <p class="t-fr">L’écran de trading ne présente qu’une synthèse du marché. Nous traitons chaque message enregistré par la bourse pour reconstituer, à chaque instant, la liste des ordres en attente. Nous obtenons ainsi le volume disponible à chaque niveau de prix et la priorité de chaque ordre dans la file d’attente.</p>
         </li>
         <li class="glow reveal">
           <strong class="t-fr">De l’image du marché à l’algorithme</strong>
-          <p class="t-fr">En apprentissage profond, le modèle identifie des régularités à partir de données réelles plutôt que d’appliquer uniquement des règles prédéfinies. Avec l’appui de l’analyse statistique, notre algorithme apprend à distinguer les situations favorables et défavorables à une opération de tenue de marché. Il détermine où placer un ordre, quelles transactions éviter et quand suspendre la cotation.</p>
+          <p class="t-fr">En apprentissage profond, l’ordinateur apprend des schémas à partir d’exemples réels au lieu de suivre des règles écrites à la main. Avec l’appui de l’analyse statistique, notre algorithme apprend à distinguer les situations favorables et défavorables à une transaction de teneur de marché. Il détermine où placer un ordre, quelles transactions éviter et quand suspendre la cotation.</p>
         </li>
         <li class="glow reveal">
           <strong class="t-fr">De l’algorithme à l’exécution testée</strong>
-          <p class="t-fr">Une bonne décision doit aussi être exécutable sur le marché réel. Dans notre simulateur, les ordres de l’algorithme atteignent la bourse avec un délai, prennent leur tour dans la file d’attente et influent sur le marché, exactement comme ils le feraient dans la réalité. L’étalon est le résultat financier net après tous les coûts.</p>
+          <p class="t-fr">Une bonne décision doit aussi être exécutable sur le marché réel. Dans notre simulateur, les ordres de l’algorithme atteignent la bourse avec un délai, prennent leur tour dans la file d’attente et influent sur le marché, exactement comme ils le feraient dans la réalité. Le critère d’évaluation est le résultat financier net après tous les coûts.</p>
         </li>
       </ol>
       </section>
@@ -296,15 +296,15 @@
         <h2><span><span class="t-fr">Points clés</span></span></h2>
       <ul class="points">
         <li class="glow reveal">
-          <strong class="t-fr">Un savoir qui réside dans le système, et non dans la tête des personnes.</strong>
-          <p class="t-fr">La tenue de marché traditionnelle repose sur l’expérience et l’intuition des traders, un savoir qui peut disparaître avec leur départ. Notre algorithme apprend à partir des données de marché. Les connaissances acquises sont conservées dans le système, les résultats sont reproductibles et le modèle peut être réentraîné.</p>
+          <strong class="t-fr">Un savoir qui réside dans le système, et et non dans la tête des gens.</strong>
+          <p class="t-fr">La tenue de marché traditionnelle repose sur l’intuition de traders expérimentés, et ce savoir se perd avec leur départ. Notre algorithme a appris ce qu’il sait des données de marché elles-mêmes. Les connaissances acquises sont conservées dans le système, les résultats sont reproductibles et le modèle peut être réentraîné.</p>
         </li>
         <li class="glow reveal">
           <strong class="t-fr">Une cotation sélective plutôt qu’une présence permanente.</strong>
           <p class="t-fr">Nous avons évalué une cotation bilatérale systématique en intégrant les coûts réels : elle s’est révélée déficitaire. Sans sélection, le teneur de marché s’expose à la sélection adverse, en étant exécuté juste avant une évolution défavorable du prix. L’algorithme vise précisément à distinguer les transactions à rechercher de celles à éviter.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fr">Une performance évaluée dans des conditions d’exécution réalistes.</strong>
+          <strong class="t-fr">Un résultat qui tient aussi à l’exécution.</strong>
           <p class="t-fr">De nombreuses stratégies sont rentables sur le papier mais pas en pratique, parce que leur test suppose qu’un ordre est exécuté immédiatement au prix affiché. Dans notre simulateur, un ordre suit le même chemin que sur le marché réel, et l’exactitude de la simulation a été vérifiée par rapport à une reconstitution indépendante réalisée à partir des données brutes de la bourse.</p>
         </li>
         <li class="glow reveal">

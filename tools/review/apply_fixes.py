@@ -38,10 +38,16 @@ def main():
     for fix in fixes:
         key = by_key.get(norm(fix["en"]))
         if key is None:
-            unmatched.append(fix["en"][:70])
+            unmatched.append(f"no such key: {fix['en'][:70]}")
             continue
         old = catalogue[key]
-        new = typography(fix["new"])
+        if "old" in fix:
+            if fix["old"] not in old:
+                unmatched.append(f"text has moved: {fix['en'][:60]} — {old[:60]!r}")
+                continue
+            new = typography(old.replace(fix["old"], fix["new"]))
+        else:
+            new = typography(fix["new"])
         if old != new:
             catalogue[key] = new
             applied.append((key, old, new))

@@ -244,6 +244,32 @@ Market Maker · Market Making · Taker · Spread · Slippage · Drawdown · Tick
 - **«dâhil»** با کلاه، یکدست در همه‌جا.
 - حرف İ/ı در ترکیب‌ها و پسوندها رعایت شود (مثل قاعدهٔ آلمانی که در گزارش‌ها رعایت شده).
 
+## بخش ۷ — اصلاحات پاس بازبینی مستقل
+
+پس از انتشار، سه بازخوان مستقل واژه‌نامه‌ها را با منابع بیرونی سنجیدند. نتیجه:
+
+**فرانسه**
+- **long / short → «position longue / position courte»** — این درست است، نه «position acheteuse/vendeuse». مرجع: AMF («positions courtes nettes»)، La finance pour tous.
+- take-profit → **«prise de bénéfice»** (OQLF) یا وام‌واژهٔ «take profit/TP»؛ «prise de profit» درست نیست.
+- slippage: وام‌واژهٔ «slippage» در کارگزاران فرانسه رایج است و «glissement (de prix)» شکل نهادی؛ هر دو پذیرفته.
+- block trade: Euronext «négociation de bloc» می‌نویسد؛ «transaction de bloc» هم درست است.
+- افزوده شد: backtest، session → séance، trading day → jour de bourse، portfolio → portefeuille، venue: «plateforme de négociation» (رسمی) و «place de marché» (متن روان).
+- break-even: «seuil de rentabilité» در متن عمومی، و «stop à l'équilibre» برای استاپی که به قیمت ورود آورده شده.
+
+**آلمانی**
+- قاعدهٔ «spread را همیشه Spread بنویس» بیش از حد گسترده بود: **«Geld-Brief-Spanne»** برای فاصلهٔ خرید و فروش و **«Spanne»** در متن روان درست است؛ «Spread» برای مفهوم آماری.
+- «Recovery-Faktor» وام‌واژه است، نه معادل آلمانی؛ «Session» و «Trailing-Stop» هم فقط وام‌واژه‌اند (از فهرست ۵.۱ به ۵.۲ منتقل شدند).
+- take-profit در کارگزاران آلمانی با خودِ «Take-Profit» شناخته می‌شود؛ «Kursziel» بیش‌تر معنای هدف تحلیلی دارد.
+- افزوده شد: Profitfaktor، Warteschlange، Markttiefe، Trade، Nettogewinn، Anfangskapital، Bruttogewinn.
+
+**ترکی**
+- **venue → «pazar yeri»** (بازتاب ESMA در بورس استانبول)، نه «piyasa» که با market یکی می‌شود.
+- take-profit: «kâr hedefi» برای هدف و «kâr al» برای خودِ سفارش — هر دو در جای خودشان.
+- «zarar durdur» برچسب فشرده ماند؛ نام کامل سفارش در کارگزاران «zararı durdurma emri» است و در واژه‌نامه ثبت شد.
+- افزوده شد: bid-ask spread («alım satım farkı (spread)»)، likidite havuzu، alış/satış tarafı، çubuk/mum، kotasyon، net aktif değeri، izleyen stop، isabet oranı.
+
+**اصلاحات متنی که این پاس در متن‌ها هم لازم دانست** در بخش «پاس بازبینی» فایل پیگیری آمده است.
+
 ## بخش ۴ — موارد باز
 
 - **`Latency` در برابر `Delay`**: هر دو مفهوم در انگلیسی جدا هستند، ولی باید با متن پارسی (مرجع) سنجیده شود که آیا دو مفهوم است یا یک مفهوم با دو نام. تصمیم در مرحلهٔ کنترل سایت گرفته می‌شود.

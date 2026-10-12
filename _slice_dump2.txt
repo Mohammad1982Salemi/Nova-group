@@ -1,0 +1,855 @@
+[291] EN: Result of the trade, R (after commission); each label is the lower edge of its bar
+    TR: İşlem sonucu, R (komisyon sonrası); her etiket kendi çubuğunun alt sınırıdır
+    FA: نتیجهٔ معامله، R (پس از کمیسیون)؛ هر برچسب لبهٔ پایینِ میلهٔ خودش است
+[292] EN: Largest move against the trade (MAE), R
+    TR: İşlemin aleyhine en büyük hareket (MAE), R
+    FA: بزرگ‌ترین حرکت بر ضدِ معامله (MAE)، R
+[293] EN: Trade result, R (after commission)
+    TR: İşlem sonucu, R (komisyon sonrası)
+    FA: نتیجهٔ معامله، R (پس از کمیسیون)
+[294] EN: stop (1R)
+    TR: stop (1R)
+    FA: حدِ ضرر (1R)
+[295] EN: planned loss (-1R)
+    TR: planlanan zarar (-1R)
+    FA: زیانِ برنامه‌ای (‎-1R)
+[296] EN: result = -MAE
+    TR: sonuç = -MAE
+    FA: نتیجه = ‎-MAE
+[297] EN: Largest move in favour of the trade (MFE), R
+    TR: İşlemin lehine en büyük hareket (MFE), R
+    FA: بزرگ‌ترین حرکت به نفعِ معامله (MFE)، R
+[298] EN: Exit reason (TP = profit target, SL = stop-loss; hover for the others)
+    TR: Çıkış nedeni (TP = kâr hedefi, SL = zarar durdur; diğerleri için imleci üzerine getirin)
+    FA: دلیلِ خروج (TP = حدِ سود، SL = حدِ ضرر؛ بقیه با نشانگر)
+[299] EN: Entry slippage, ticks (positive = worse than the signal price)
+    TR: Giriş kayması, tick (pozitif = sinyal fiyatından daha kötü)
+    FA: لغزشِ ورود، تیک (مثبت = بدتر از قیمتِ سیگنال)
+[300] EN: ended with a profit
+    TR: kârla kapandı
+    FA: با سود تمام شد
+[301] EN: ended with a loss
+    TR: zararla kapandı
+    FA: با زیان تمام شد
+[302] EN: result
+    TR: sonuç
+    FA: نتیجه
+[303] EN: Drawdown Figures
+    TR: Düşüş Rakamları
+    FA: عددهای افتِ سرمایه
+[304] EN: These figures follow the balance of closed trades; open positions are not marked to market. A percent is always measured against the balance at the high the fall started from.
+    TR: Bu rakamlar kapanmış işlemlerin bakiyesini izler; açık pozisyonlar piyasa fiyatıyla değerlenmez. Yüzde her zaman, gerilemenin başladığı zirvedeki bakiyeye göre ölçülür.
+    FA: موجودیِ معاملاتِ بسته (پوزیشنِ باز به قیمتِ روز ارزش‌گذاری نمی‌شود)؛ هر درصد نسبت به موجودیِ قله‌ای است که افت از آن شروع شد
+[305] EN: The size, the date and the length of the falls from a high.
+    TR: Bir zirveden gerilemelerin büyüklüğü, tarihi ve uzunluğu.
+    FA: اندازه، تاریخ و طولِ افت‌ها از قله.
+[306] EN: Compare the max. drawdown with the net profit (recovery factor) and with the initial capital: it is the pain needed to earn the result.
+    TR: Maks. düşüşü net kârla (toparlanma faktörü) ve başlangıç sermayesiyle karşılaştırın: sonucu kazanmak için katlanılması gereken acı budur.
+    FA: بیشترین افت را با سودِ خالص (ضریبِ بازیابی) و با سرمایهٔ اولیه بسنجید: این دردی است که برای رسیدن به نتیجه لازم بود.
+[307] EN: figure
+    TR: rakam
+    FA: عدد
+[308] EN: value
+    TR: değer
+    FA: مقدار
+[309] EN: Max. Drawdown (Trade Close to Trade Close)
+    TR: Maks. Düşüş (İşlem Kapanışından İşlem Kapanışına)
+    FA: بیشترین افتِ سرمایه (از بسته‌شدنِ معامله تا بسته‌شدنِ معامله)
+[310] EN: Date of Max. Drawdown
+    TR: Maks. Düşüş Tarihi
+    FA: تاریخِ بیشترین افت
+[311] EN: Max. Drawdown Relative (largest percent of the peak)
+    TR: Maks. Göreli Düşüş (zirvenin en büyük yüzdesi)
+    FA: بیشترین افتِ نسبی (بزرگ‌ترین درصد از قله)
+[312] EN: Longest Drawdown (peak to recovery)
+    TR: En Uzun Düşüş (zirveden toparlanmaya)
+    FA: طولانی‌ترین افت (از قله تا بازیابی)
+[313] EN: Recovery Factor (net profit / max. drawdown)
+    TR: Toparlanma Faktörü (net kâr / maks. düşüş)
+    FA: ضریبِ بازیابی (سودِ خالص ÷ بیشترین افت)
+[314] EN: Largest Drawdown within One Trading Day (closed trades, from the day's high)
+    TR: Tek İşlem Günü İçindeki En Büyük Düşüş (kapanmış işlemler, günün zirvesinden)
+    FA: بزرگ‌ترین افت درونِ یک روزِ معاملاتی (معاملاتِ بسته، از اوجِ همان روز)
+[315] EN: Drawdown Episodes
+    TR: Düşüş Evreleri
+    FA: تعدادِ دوره‌های افت
+[316] EN: Max. Contracts Held
+    TR: Maks. Tutulan Sözleşme
+    FA: بیشترین قراردادِ هم‌زمان
+[317] EN: Max. Consecutive Losing Trades / Losing Days
+    TR: Maks. Ardışık Kaybeden İşlem / Kaybeden Gün
+    FA: بیشترین معاملهٔ زیان‌دهِ پیاپی / روزِ زیان‌دهِ پیاپی
+[318] EN: Monte Carlo Projection (block bootstrap)
+    TR: Monte Carlo Projeksiyonu (blok bootstrap)
+    FA: پیش‌نگریِ مونت‌کارلو (بوت‌استرپِ بلوکی)
+[319] EN: 10th pct.
+    TR: 10. yüzdelik
+    FA: صدکِ ۱۰
+[320] EN: 50th pct.
+    TR: 50. yüzdelik
+    FA: صدکِ ۵۰
+[321] EN: 90th pct.
+    TR: 90. yüzdelik
+    FA: صدکِ ۹۰
+[322] EN: 99th pct.
+    TR: 99. yüzdelik
+    FA: صدکِ ۹۹
+[323] EN: Projected net profit
+    TR: Öngörülen net kâr
+    FA: سودِ خالصِ پیش‌نگری‌شده
+[324] EN: A projected drawdown equal to the realized one means the same past episode was drawn whole (a block is long enough to hold it).
+    TR: Gerçekleşen düşüşe eşit öngörülen bir düşüş, aynı geçmiş evrenin bütün hâlinde çekildiği anlamına gelir (bir blok onu içine alacak kadar uzundur).
+    FA: افتِ پیش‌نگری‌شدهٔ برابر با افتِ واقعی یعنی همان دورهٔ گذشته یک‌جا کشیده شده (بلوک آن‌قدر بلند است که جایش بدهد).
+[325] EN: Probability of a net loss over that horizon:
+    TR: Bu ufukta net zarar olasılığı:
+    FA: احتمالِ زیانِ خالص در آن افق:
+[326] EN: the projection starts from a balance that is not positive
+    TR: projeksiyon pozitif olmayan bir bakiyeden başlıyor
+    FA: پیش‌نگری از موجودی‌ای شروع می‌شود که مثبت نیست
+[327] EN: What the same number of future trades could look like if the future resembles this sample.
+    TR: Gelecek bu örnekleme benzerse, aynı sayıda gelecek işlemin nasıl görünebileceği.
+    FA: همین تعداد معاملهٔ آینده چه شکلی می‌تواند باشد، اگر آینده شبیهِ این نمونه باشد.
+[328] EN: Each simulation draws past blocks at random, so some past days appear twice and others not at all.
+    TR: Her simülasyon geçmiş blokları rastgele çeker; bu yüzden bazı geçmiş günler iki kez görünür, bazıları hiç görünmez.
+    FA: هر شبیه‌سازی بلوک‌های گذشته را تصادفی می‌کشد، پس بعضی روزهای گذشته دو بار می‌آیند و بعضی اصلاً نمی‌آیند.
+[329] EN: The spread between the percentiles is what chance in which blocks are drawn, and in what order, can do.
+    TR: Yüzdelikler arasındaki açıklık, hangi blokların hangi sırayla çekildiğindeki şansın yapabildiğidir.
+    FA: فاصلهٔ صدک‌ها همان کاری است که شانس، در این‌که کدام بلوک‌ها و به چه ترتیبی کشیده شوند، می‌تواند بکند.
+[330] EN: It cannot foresee a change in the market or in execution.
+    TR: Piyasadaki veya emir gerçekleştirmedeki bir değişikliği öngöremez.
+    FA: تغییرِ بازار یا اجرا را نمی‌تواند پیش‌بینی کند.
+[331] EN: Monte Carlo Projection: three simulated paths
+    TR: Monte Carlo Projeksiyonu: simüle edilmiş üç yol
+    FA: پیش‌نگریِ مونت‌کارلو: سه مسیرِ شبیه‌سازی‌شده
+[332] EN: Zero is today's balance.
+    TR: Sıfır, bugünkü bakiyedir.
+    FA: ۰ = موجودیِ امروز
+[333] EN: Three of the simulated futures, drawn in full: a poor one, the middle one and a good one.
+    TR: Simüle edilmiş geleceklerden üçü, tam olarak çizilmiş: kötü bir tanesi, ortadaki ve iyi bir tanesi.
+    FA: سه تا از آینده‌های شبیه‌سازی‌شده، کامل کشیده شده: یک بد، یک میانه و یک خوب.
+[334] EN: They are single paths, not envelopes: the lines may cross.
+    TR: Bunlar tekil yollardır, zarf değil: çizgiler kesişebilir.
+    FA: تک‌مسیرند نه پوش: خط‌ها ممکن است همدیگر را قطع کنند.
+[335] EN: Read the final values and how rough the way there is.
+    TR: Nihai değerleri ve oraya giden yolun ne kadar engebeli olduğunu okuyun.
+    FA: مقدارِ نهایی و ناهمواریِ راه را بخوانید.
+[336] EN: Distribution of Drawdown Depth
+    TR: Düşüş Derinliği Dağılımı
+    FA: توزیعِ عمقِ افت
+[337] EN: Each fall from a high until the next new high is one episode, counted once at its deepest point.
+    TR: Bir zirveden sonraki yeni zirveye kadar olan her gerileme tek bir evredir ve en derin noktasında bir kez sayılır.
+    FA: هر افت از قله تا قلهٔ تازهٔ بعدی یک دوره است و یک بار در عمیق‌ترین نقطه‌اش شمرده می‌شود
+[338] EN: How deep the falls from a high were.
+    TR: Bir zirveden gerilemelerin ne kadar derin olduğu.
+    FA: افت‌ها از قله چقدر عمیق بودند.
+[339] EN: Many shallow episodes and few deep ones is normal.
+    TR: Çok sayıda sığ evre ve az sayıda derin evre normaldir.
+    FA: دوره‌های کم‌عمقِ زیاد و عمیقِ کم طبیعی است.
+[340] EN: Read the deep end: how many times the account gave back a large amount.
+    TR: Derin ucu okuyun: hesabın kaç kez büyük bir tutarı geri verdiği.
+    FA: سرِ عمیق را بخوانید: حساب چند بار مبلغِ بزرگی پس داد.
+[341] EN: The count axis is logarithmic so that single deep episodes stay visible.
+    TR: Tekil derin evreler görünür kalsın diye sayı ekseni logaritmiktir.
+    FA: محورِ تعداد لگاریتمی است تا تک‌دوره‌های عمیق دیده شوند.
+[342] EN: Distribution of the Largest Drawdown within each Trading Day
+    TR: Her İşlem Günü İçindeki En Büyük Düşüşün Dağılımı
+    FA: توزیعِ بزرگ‌ترین افت درونِ هر روزِ معاملاتی
+[343] EN: For every trading day the chart takes the deepest fall from that day's own high. Each day starts at zero, and a day that never fell sits in the first bar.
+    TR: Grafik, her işlem günü için o günün kendi zirvesinden en derin gerilemeyi alır. Her gün sıfırdan başlar ve hiç gerilemeyen bir gün ilk çubukta yer alır.
+    FA: برای هر روزِ معاملاتی، عمیق‌ترین افت از اوجِ همان روز (هر روز از صفر شروع می‌شود؛ روزی که هیچ نیفتاد در میلهٔ اول است)
+[344] EN: How bad a day gets before it ends.
+    TR: Bir günün bitmeden önce ne kadar kötüleştiği.
+    FA: یک روز پیش از پایانش چقدر بد می‌شود.
+[345] EN: These are falls from the day's HIGH: the days a trailing intraday limit would have stopped.
+    TR: Bunlar günün ZİRVESİNDEN gerilemelerdir: gün içi izleyen bir limitin durduracağı günler.
+    FA: این‌ها افت از «اوجِ» روزند: روزهایی که یک حدِ درون‌روزیِ متحرک متوقفشان می‌کرد.
+[346] EN: A loss limit counted from the day's start is hit less often.
+    TR: Günün başlangıcından itibaren sayılan bir zarar limitine daha seyrek ulaşılır.
+    FA: حدِ زیانی که از آغازِ روز شمرده شود کمتر می‌خورد.
+[347] EN: 90th percentile path
+    TR: 90. yüzdelik yolu
+    FA: مسیرِ صدکِ ۹۰
+[348] EN: 50th percentile path (median)
+    TR: 50. yüzdelik yolu (medyan)
+    FA: مسیرِ صدکِ ۵۰ (میانه)
+[349] EN: 10th percentile path
+    TR: 10. yüzdelik yolu
+    FA: مسیرِ صدکِ ۱۰
+[350] EN: today
+    TR: bugün
+    FA: امروز
+[351] EN: Projected net profit from today, USD
+    TR: Bugünden itibaren öngörülen net kârı, USD
+    FA: سودِ خالصِ پیش‌نگری‌شده از امروز، دلار
+[352] EN: Future trade number
+    TR: Gelecek işlem numarası
+    FA: شمارهٔ معاملهٔ آینده
+[353] EN: Simulations ranked by final value
+    TR: Nihai değere göre sıralanmış simülasyonlar
+    FA: شبیه‌سازی‌ها به ترتیبِ مقدارِ نهایی
+[354] EN: No closed trade to project from.
+    TR: Projeksiyonun dayanacağı kapanmış işlem yok.
+    FA: معاملهٔ بسته‌ای برای پیش‌نگری نیست.
+[355] EN: The Monte Carlo projection is computed when the run ends.
+    TR: Monte Carlo projeksiyonu çalıştırma bittiğinde hesaplanır.
+    FA: پیش‌نگریِ مونت‌کارلو در پایانِ ران حساب می‌شود.
+[356] EN: Not computed for this scenario (a very large run computes it for the first scenario only).
+    TR: Bu senaryo için hesaplanmadı (çok büyük bir çalıştırma bunu yalnızca ilk senaryo için hesaplar).
+    FA: برای این سناریو حساب نشده (رانِ خیلی بزرگ فقط برای سناریوی اول حسابش می‌کند).
+[357] EN: Number of episodes (log scale)
+    TR: Evre sayısı (logaritmik ölçek)
+    FA: تعدادِ دوره‌ها (مقیاسِ لگاریتمی)
+[358] EN: Number of days (log scale)
+    TR: Gün sayısı (logaritmik ölçek)
+    FA: تعدادِ روزها (مقیاسِ لگاریتمی)
+[359] EN: Depth, USD (shallow to deep; each label is the lower edge of its bar)
+    TR: Derinlik, USD (sığdan derine; her etiket kendi çubuğunun alt sınırıdır)
+    FA: عمق، دلار (کم‌عمق به عمیق؛ هر برچسب لبهٔ پایینِ میلهٔ خودش است)
+[360] EN: No drawdown episode yet.
+    TR: Henüz düşüş evresi yok.
+    FA: هنوز دورهٔ افتی نیست.
+[361] EN: Asian session
+    TR: Asya seansı
+    FA: سشنِ آسیا
+[362] EN: European session
+    TR: Avrupa seansı
+    FA: سشنِ اروپا
+[363] EN: Europe-US overlap
+    TR: Avrupa-ABD çakışması
+    FA: هم‌پوشانیِ اروپا و آمریکا
+[364] EN: US session
+    TR: ABD seansı
+    FA: سشنِ آمریکا
+[365] EN: Outside the sessions
+    TR: Seansların dışında
+    FA: بیرون از سشن‌ها
+[366] EN: % profitable
+    TR: % kârlı
+    FA: ٪ سودده
+[367] EN: avg. trade
+    TR: ort. işlem
+    FA: میانگینِ معامله
+[368] EN: profit factor
+    TR: kâr faktörü
+    FA: ضریبِ سود
+[369] EN: expectancy (R)
+    TR: beklenti (R)
+    FA: امیدِ ریاضی (R)
+[370] EN: avg. time in trade
+    TR: ort. işlemde kalma süresi
+    FA: میانگینِ ماندن در معامله
+[371] EN: max. drawdown
+    TR: maks. düşüş
+    FA: بیشترین افت
+[372] EN: gross profit / gross loss, in money
+    TR: brüt kâr / brüt zarar, para cinsinden
+    FA: سودِ ناخالص ÷ زیانِ ناخالص، به پول
+[373] EN: of this set's own cumulative result
+    TR: bu kümenin kendi kümülatif sonucu üzerinden
+    FA: از نتیجهٔ تجمعیِ خودِ همین دسته
+[374] EN: No closed trade in this split.
+    TR: Bu kırılımda kapanmış işlem yok.
+    FA: در این تفکیک معاملهٔ بسته‌ای نیست.
+[375] EN: Long / Short
+    TR: Uzun / Kısa (Long / Short)
+    FA: خرید / فروش (Long / Short)
+[376] EN: Long
+    TR: Uzun
+    FA: خرید
+[377] EN: Short
+    TR: Kısa
+    FA: فروش
+[378] EN: Long positions gain when the price rises; short positions gain when it falls.
+    TR: Uzun (long) pozisyonlar fiyat yükseldiğinde, kısa (short) pozisyonlar fiyat düştüğünde kazanır.
+    FA: Long = پوزیشنی که با بالا رفتنِ قیمت سود می‌کند؛ Short = پوزیشنی که با پایین آمدنش سود می‌کند
+[379] EN: side
+    TR: yön
+    FA: سمت
+[380] EN: The same figures for the two directions.
+    TR: İki yön için aynı rakamlar.
+    FA: همان عددها برای دو جهت.
+[381] EN: A large gap between the rows means the result depends on market direction rather than on the strategy.
+    TR: Satırlar arasındaki büyük bir fark, sonucun stratejiden çok piyasa yönüne bağlı olduğu anlamına gelir.
+    FA: فاصلهٔ زیاد میانِ دو ردیف یعنی نتیجه به جهتِ بازار بسته است نه به استراتژی.
+[382] EN: By Session
+    TR: Seansa Göre
+    FA: به تفکیکِ سشن
+[383] EN: The trades are grouped by the session in which their entry order was sent.
+    TR: İşlemler, giriş emirlerinin gönderildiği seansa göre gruplanmıştır.
+    FA: معامله‌ها بر اساسِ سشنی که سفارشِ ورود در آن فرستاده شد
+[384] EN: The hours beside each name are the UTC hours in which that session's signals were seen in this run.
+    TR: Her adın yanındaki saatler, bu çalıştırmada o seansın sinyallerinin görüldüğü UTC saatleridir.
+    FA: ساعت‌های کنارِ هر نام، ساعت‌های UTC است که سیگنال‌های آن سشن در این ران دیده شده
+[385] EN: session
+    TR: seans
+    FA: سشن
+[386] EN: Which part of the day earns and which loses.
+    TR: Günün hangi bölümü kazandırır, hangisi kaybettirir.
+    FA: کدام بخشِ روز سود می‌دهد و کدام زیان.
+[387] EN: Compare net profit and profit factor between the rows; a row with a profit factor below 1 loses money.
+    TR: Satırlar arasında net kârı ve kâr faktörünü karşılaştırın; kâr faktörü 1’in altında olan bir satır para kaybeder.
+    FA: سودِ خالص و ضریبِ سودِ ردیف‌ها را مقایسه کنید؛ ردیفی با ضریبِ سودِ زیرِ ۱ زیان می‌دهد.
+[388] EN: By Signal
+    TR: Sinyale Göre
+    FA: به تفکیکِ سیگنال
+[389] EN: The trades are grouped by the name their signal carried.
+    TR: İşlemler, sinyallerinin taşıdığı ada göre gruplanmıştır.
+    FA: معامله‌ها بر اساسِ نامی که سیگنال داشت
+[390] EN: signal
+    TR: sinyal
+    FA: سیگنال
+[391] EN: The result of each kind of signal.
+    TR: Her sinyal türünün sonucu.
+    FA: نتیجهٔ هر نوع سیگنال.
+[392] EN: One row per signal name; the rows add up to the run.
+    TR: Sinyal adı başına bir satır; satırların toplamı çalıştırmayı verir.
+    FA: هر ردیف یک نامِ سیگنال؛ جمعِ ردیف‌ها کلِ ران است.
+[393] EN: Compare the profit factor and the average trade between the rows.
+    TR: Satırlar arasında kâr faktörünü ve ortalama işlemi karşılaştırın.
+    FA: ضریبِ سود و میانگینِ معاملهٔ ردیف‌ها را مقایسه کنید.
+[394] EN: (no name)
+    TR: (adsız)
+    FA: (بی‌نام)
+[395] EN: By Exit Reason
+    TR: Çıkış Nedenine Göre
+    FA: به تفکیکِ دلیلِ خروج
+[396] EN: The trades are grouped by what closed them.
+    TR: İşlemler, onları kapatan şeye göre gruplanmıştır.
+    FA: معامله‌ها بر اساسِ چیزی که آن‌ها را بست
+[397] EN: exit reason
+    TR: çıkış nedeni
+    FA: دلیلِ خروج
+[398] EN: A stop-loss row whose average loss is much larger than the average win of the target row means the stops are filled far beyond their price.
+    TR: Ortalama kaybı, hedef satırının ortalama kazancından çok daha büyük olan bir zarar durdur satırı, stopların kendi fiyatlarının çok ötesinde gerçekleştiği anlamına gelir.
+    FA: ردیفِ حدِ ضرری که میانگینِ زیانش خیلی بزرگ‌تر از میانگینِ سودِ ردیفِ حدِ سود است یعنی حدِ ضررها خیلی دورتر از قیمتشان پر می‌شوند.
+[399] EN: The table gives every figure for all trades, for long trades and for short trades.
+    TR: Tablo her rakamı tüm işlemler, uzun işlemler ve kısa işlemler için verir.
+    FA: همهٔ معاملات، معاملاتِ خرید و معاملاتِ فروش
+[400] EN: Money is after commission.
+    TR: Parasal tutarlar komisyon sonrasıdır.
+    FA: پول پس از کمیسیون است
+[401] EN: The R figures divide each trade by its own initial risk.
+    TR: R rakamları her işlemi kendi başlangıç riskine böler.
+    FA: عددهای R هر معامله را بر ریسکِ اولیهٔ خودش تقسیم می‌کنند
+[402] EN: Times are UTC and days are CME trading days.
+    TR: Saatler UTC, günler CME işlem günleridir.
+    FA: زمان‌ها UTC و روزها روزِ معاملاتیِ CME‌اند
+[403] EN: all trades
+    TR: tüm işlemler
+    FA: همهٔ معاملات
+[404] EN: long trades
+    TR: uzun işlemler
+    FA: معاملاتِ خرید
+[405] EN: short trades
+    TR: kısa işlemler
+    FA: معاملاتِ فروش
+[406] EN: Every figure of this scenario in one table, in the layout of a standard strategy performance report.
+    TR: Bu senaryonun tüm rakamları tek tabloda, standart bir strateji performans raporu düzeninde.
+    FA: همهٔ عددهای این سناریو در یک جدول، به چیدمانِ گزارشِ استانداردِ عملکردِ استراتژی.
+[407] EN: A lookup table, not a story.
+    TR: Bir başvuru tablosu, hikâye değil.
+    FA: جدولِ مراجعه است، نه داستان.
+[408] EN: Money rows are after commission; rows marked (R) divide each trade by its own initial risk; the long and short columns are filled where a figure can be split by direction.
+    TR: Para satırları komisyon sonrasıdır; (R) ile işaretli satırlar her işlemi kendi başlangıç riskine böler; uzun ve kısa sütunları, bir rakamın yöne göre ayrılabildiği yerlerde doludur.
+    FA: ردیف‌های پولی پس از کمیسیون‌اند؛ ردیف‌های (R) هر معامله را بر ریسکِ اولیهٔ خودش تقسیم می‌کنند؛ ستون‌های خرید و فروش جایی پر شده‌اند که عدد به تفکیکِ جهت معنا دارد.
+[409] EN: Trade List
+    TR: İşlem Listesi
+    FA: فهرستِ معاملات
+[410] EN: The id is the ledger's id.
+    TR: Kimlik, işlem defterindeki kimliktir.
+    FA: شناسه همان شناسهٔ دفتر است.
+[411] EN: Prices are in price points, the R columns in units of the initial risk (empty = no defined risk; MAE is printed as a size), money after commission.
+    TR: Fiyatlar fiyat puanı cinsindendir, R sütunları başlangıç riski birimindedir (boş = tanımlı risk yok; MAE büyüklük olarak yazılır), para komisyon sonrasıdır.
+    FA: قیمت‌ها به واحدِ قیمت‌اند، ستون‌های R به واحدِ ریسکِ اولیه (خالی = ریسکِ معلوم ندارد؛ MAE به شکلِ اندازه نوشته شده)، پول پس از کمیسیون.
+[412] EN: No ledger file was written with this export; a headless run writes the complete list beside its report.
+    TR: Bu dışa aktarımla birlikte işlem defteri dosyası yazılmadı; arayüzsüz (headless) bir çalıştırma tam listeyi raporunun yanına yazar.
+    FA: با این خروجی فایلِ دفتری نوشته نشده؛ رانِ هدلس فهرستِ کامل را کنارِ گزارشش می‌نویسد.
+[413] EN: One row per trade, in the order the entries were filled.
+    TR: İşlem başına bir satır, girişlerin gerçekleşme sırasıyla.
+    FA: هر ردیف یک معامله، به ترتیبِ پرشدنِ ورودها.
+[414] EN: Use it to check a single trade against a chart: the id is the same as in the ledger file.
+    TR: Tek bir işlemi bir grafikle karşılaştırmak için kullanın: kimlik, işlem defteri dosyasındakiyle aynıdır.
+    FA: برای تطبیقِ یک معامله با چارت: شناسه همان شناسهٔ فایلِ دفتر است.
+[415] EN: Type in the filter to find a side, an outcome, an exit reason or a date.
+    TR: Bir yön, sonuç, çıkış nedeni veya tarih bulmak için filtreye yazın.
+    FA: در فیلتر بنویسید تا سمت، نتیجه، دلیلِ خروج یا تاریخ را پیدا کنید.
+[416] EN: filter the listed rows: signal, side, outcome, exit reason, date
+    TR: listelenen satırları filtrele: sinyal, yön, sonuç, çıkış nedeni, tarih
+    FA: فیلترِ ردیف‌ها: سیگنال، سمت، نتیجه، دلیلِ خروج، تاریخ
+[417] EN: id
+    TR: kimlik
+    FA: شناسه
+[418] EN: the trade's id in the run's ledger
+    TR: işlemin, çalıştırmanın işlem defterindeki kimliği
+    FA: شناسهٔ معامله در دفترِ ران
+[419] EN: status
+    TR: durum
+    FA: وضعیت
+[420] EN: outcome
+    TR: sonuç
+    FA: نتیجه
+[421] EN: signal time (UTC)
+    TR: sinyal zamanı (UTC)
+    FA: زمانِ سیگنال (UTC)
+[422] EN: entry time (UTC)
+    TR: giriş zamanı (UTC)
+    FA: زمانِ ورود (UTC)
+[423] EN: exit time (UTC)
+    TR: çıkış zamanı (UTC)
+    FA: زمانِ خروج (UTC)
+[424] EN: entry price
+    TR: giriş fiyatı
+    FA: قیمتِ ورود
+[425] EN: stop, as placed
+    TR: stop, yerleştirilen
+    FA: حدِ ضررِ اولیه
+[426] EN: stop, final
+    TR: stop, nihai
+    FA: حدِ ضررِ نهایی
+[427] EN: target
+    TR: hedef
+    FA: حدِ سود
+[428] EN: exit price
+    TR: çıkış fiyatı
+    FA: قیمتِ خروج
+[429] EN: contracts
+    TR: sözleşme
+    FA: قرارداد
+[430] EN: result (R)
+    TR: sonuç (R)
+    FA: نتیجه (R)
+[431] EN: entry slippage (ticks)
+    TR: giriş kayması (tick)
+    FA: لغزشِ ورود (تیک)
+[432] EN: time in trade
+    TR: işlemde kalma süresi
+    FA: ماندن در معامله
+[433] EN: Closed
+    TR: Kapanmış
+    FA: بسته
+[434] EN: Open
+    TR: Açık
+    FA: باز
+[435] EN: Win
+    TR: Kazanç
+    FA: سود
+[436] EN: Loss
+    TR: Kayıp
+    FA: زیان
+[437] EN: Even
+    TR: Başa baş
+    FA: صفر
+[438] EN: Total Net Profit: latency x commission
+    TR: Toplam Net Kâr: gecikme x komisyon
+    FA: سودِ خالصِ کل: تأخیر × کمیسیون
+[439] EN: Each cell is the net profit in dollars over the whole period.
+    TR: Her hücre, tüm dönem boyunca dolar cinsinden net kârdır.
+    FA: دلار در کلِ دوره
+[440] EN: Click a cell to open that scenario's own report.
+    TR: O senaryonun kendi raporunu açmak için bir hücreye tıklayın.
+    FA: روی هر خانه بزنید تا گزارشِ همان سناریو باز شود
+[441] EN: The break-even commission is the commission per side per contract at which that latency's fills net to exactly zero.
+    TR: Başa baş komisyonu, o gecikmenin gerçekleşmelerinin netinin tam olarak sıfır olduğu, sözleşme başına taraf başına komisyondur.
+    FA: کمیسیونِ سربه‌سر = کمیسیونِ هر طرفِ هر قرارداد که در آن، پرشدن‌های آن تأخیر به صفر می‌رسند
+[442] EN: this table is futures money at the order size; the scenario reports use risk-based sizing, so their money differs
+    TR: bu tablo, emir büyüklüğü üzerinden vadeli işlem (futures) parasını gösterir; senaryo raporları riske dayalı boyutlandırma kullanır, bu yüzden parasal tutarları farklıdır
+    FA: این جدول پولِ فیوچرز با حجمِ سفارش است؛ گزارشِ سناریوها حجم‌دهیِ ریسک‌محور دارد، پس پولشان فرق می‌کند
+[443] EN: latency (order delay) \ commission per side
+    TR: gecikme (emir gecikmesi) \ taraf başına komisyon
+    FA: تأخیرِ سفارش \ کمیسیونِ هر طرف
+[444] EN: break-even commission per side
+    TR: taraf başına başa baş komisyonu
+    FA: کمیسیونِ سربه‌سرِ هر طرف
+[445] EN: none: negative before commission
+    TR: yok: komisyon öncesi negatif
+    FA: ندارد: پیش از کمیسیون هم منفی است
+[446] EN: One simulation per cell: the same signals with one order delay (row) and one commission level (column).
+    TR: Hücre başına bir simülasyon: aynı sinyaller, tek bir emir gecikmesi (satır) ve tek bir komisyon seviyesiyle (sütun).
+    FA: هر خانه یک شبیه‌سازی: همان سیگنال‌ها با یک تأخیرِ سفارش (ردیف) و یک سطحِ کمیسیون (ستون).
+[447] EN: Top-left is the most favourable case.
+    TR: Sol üst, en elverişli durumdur.
+    FA: گوشهٔ بالا-چپ مساعدترین حالت است.
+[448] EN: Going down the orders arrive later, going right each fill costs more.
+    TR: Aşağı indikçe emirler daha geç ulaşır, sağa gittikçe her gerçekleşme daha pahalıya gelir.
+    FA: به سمتِ پایین سفارش‌ها دیرتر می‌رسند و به سمتِ راست هر پرشدن گران‌تر می‌شود.
+[449] EN: Where green turns red is where the strategy stops working.
+    TR: Yeşilin kırmızıya döndüğü yer, stratejinin çalışmayı bıraktığı yerdir.
+    FA: جایی که سبز قرمز می‌شود، همان‌جاست که استراتژی از کار می‌افتد.
+[450] EN: Commission changes no fill, so along a row only the bookkeeping changes; latency changes which orders fill and at what price.
+    TR: Komisyon hiçbir gerçekleşmeyi değiştirmez, bu yüzden bir satır boyunca yalnızca muhasebe değişir; gecikme ise hangi emirlerin hangi fiyattan gerçekleştiğini değiştirir.
+    FA: کمیسیون هیچ پرشدنی را عوض نمی‌کند، پس در طولِ یک ردیف فقط حساب‌وکتاب عوض می‌شود؛ تأخیر عوض می‌کند کدام سفارش‌ها و به چه قیمتی پر شوند.
+[451] EN: Net Profit vs. Latency
+    TR: Gecikmeye Göre Net Kâr
+    FA: سودِ خالص در برابرِ تأخیر
+[452] EN: Each line is one commission level.
+    TR: Her çizgi bir komisyon seviyesidir.
+    FA: هر خط یک سطحِ کمیسیون
+[453] EN: the horizontal axis is the real latency, to scale
+    TR: yatay eksen gerçek gecikmedir, ölçekli
+    FA: محورِ افقی تأخیرِ واقعی است، به مقیاس
+[454] EN: the horizontal axis is the real latency, on a log scale (the levels are too far apart for a linear one)
+    TR: yatay eksen, logaritmik ölçekte gerçek gecikmedir (seviyeler doğrusal bir ölçek için birbirinden çok uzak)
+    FA: محورِ افقی تأخیرِ واقعی است، با مقیاسِ لگاریتمی (سطح‌ها برای مقیاسِ خطی زیادی از هم دورند)
+[455] EN: How fast the profit decays as the orders arrive later.
+    TR: Emirler daha geç ulaştıkça kârın ne kadar hızlı eridiği.
+    FA: با دیرتر رسیدنِ سفارش‌ها سود با چه سرعتی آب می‌رود.
+[456] EN: A steep fall means the strategy depends on being fast.
+    TR: Dik bir iniş, stratejinin hızlı olmaya bağlı olduğu anlamına gelir.
+    FA: افتِ تند یعنی استراتژی به سریع‌بودن وابسته است.
+[457] EN: Where a line crosses zero is the delay the strategy can afford at that commission.
+    TR: Bir çizginin sıfırı kestiği yer, stratejinin o komisyonda kaldırabildiği gecikmedir.
+    FA: جایی که خط از صفر رد می‌شود تأخیری است که استراتژی با آن کمیسیون تاب می‌آورد.
+[458] EN: Net Profit vs. Commission
+    TR: Komisyona Göre Net Kâr
+    FA: سودِ خالص در برابرِ کمیسیون
+[459] EN: Each line is one latency.
+    TR: Her çizgi bir gecikmedir.
+    FA: هر خط یک تأخیر
+[460] EN: Commission changes no fill, so every line is straight.
+    TR: Komisyon hiçbir gerçekleşmeyi değiştirmez; bu yüzden her çizgi düzdür.
+    FA: کمیسیون هیچ پرشدنی را عوض نمی‌کند، پس هر خط راست است
+[461] EN: What each extra cent of commission costs.
+    TR: Komisyondaki her ek sentin maliyeti.
+    FA: هر سنتِ اضافهٔ کمیسیون چقدر خرج دارد.
+[462] EN: The slope of a line is two fees per contract times the contracts traded.
+    TR: Bir çizginin eğimi, sözleşme başına iki ücret çarpı işlem gören sözleşme sayısıdır.
+    FA: شیبِ خط دو کمیسیون برای هر قرارداد ضرب در تعدادِ قراردادِ معامله‌شده است.
+[463] EN: Where a line crosses zero is that latency's break-even commission.
+    TR: Bir çizginin sıfırı kestiği yer, o gecikmenin başa baş komisyonudur.
+    FA: جایی که خط از صفر رد می‌شود کمیسیونِ سربه‌سرِ آن تأخیر است.
+[464] EN: Commission per side for the cards below
+    TR: Aşağıdaki kartlar için taraf başına komisyon
+    FA: کمیسیونِ هر طرف برای کارت‌های زیر
+[465] EN: Equity Curves by Latency
+    TR: Gecikmeye Göre Sermaye Eğrileri
+    FA: منحنی‌های سرمایه به تفکیکِ تأخیر
+[466] EN: The time axis is exchange time, in UTC.
+    TR: Zaman ekseni UTC cinsinden borsa saatidir.
+    FA: ساعتِ بورس، UTC
+[467] EN: The same strategy through time at each order delay.
+    TR: Aynı stratejinin her emir gecikmesinde zaman içindeki seyri.
+    FA: همان استراتژی در گذرِ زمان با هر تأخیرِ سفارش.
+[468] EN: If the lines separate early and steadily, the delay hurts all the time; if they separate in a few steps, it hurts on particular days.
+    TR: Çizgiler erken ve istikrarlı biçimde ayrılıyorsa gecikme her zaman zarar verir; birkaç adımda ayrılıyorsa belirli günlerde zarar verir.
+    FA: اگر خط‌ها زود و یکنواخت از هم جدا شوند تأخیر همیشه ضرر می‌زند؛ اگر در چند پله جدا شوند، در روزهای خاصی ضرر می‌زند.
+[469] EN: Execution by Latency
+    TR: Gecikmeye Göre Emir Gerçekleştirme
+    FA: اجرا به تفکیکِ تأخیر
+[470] EN: Every row has the same signals, with the orders arriving later and later.
+    TR: Her satırda aynı sinyaller vardır; emirler giderek daha geç ulaşır.
+    FA: همان سیگنال‌ها، با سفارش‌هایی که دیرتر می‌رسند
+[471] EN: For slippage, a positive number is worse.
+    TR: Kaymada pozitif sayı daha kötüdür.
+    FA: لغزش: مثبت = بدتر
+[472] EN: Hover over a column header to read its definition.
+    TR: Tanımını okumak için imleci bir sütun başlığının üzerine getirin.
+    FA: برای تعریفِ هر ستون نشانگر را روی سرستون ببرید
+[473] EN: What the delay does to the orders.
+    TR: Gecikmenin emirlere ne yaptığı.
+    FA: تأخیر با سفارش‌ها چه می‌کند.
+[474] EN: Read down a column.
+    TR: Bir sütunu yukarıdan aşağıya okuyun.
+    FA: هر ستون را از بالا به پایین بخوانید.
+[475] EN: Fewer fills and a worse stop slippage with a longer delay are the two usual costs of being late.
+    TR: Daha uzun gecikmeyle daha az gerçekleşme ve daha kötü stop kayması, geç kalmanın iki olağan maliyetidir.
+    FA: پرشدنِ کمتر و لغزشِ بدترِ حدِ ضرر با تأخیرِ بیشتر، دو هزینهٔ معمولِ دیر رسیدن‌اند.
+[476] EN: latency
+    TR: gecikme
+    FA: تأخیر
+[477] EN: entry orders
+    TR: giriş emirleri
+    FA: سفارشِ ورود
+[478] EN: filled
+    TR: gerçekleşen
+    FA: پرشده
+[479] EN: fill rate
+    TR: gerçekleşme oranı
+    FA: نرخِ پرشدن
+[480] EN: cancelled
+    TR: iptal edilen
+    FA: لغوشده
+[481] EN: entry orders withdrawn before they filled, whatever the cause
+    TR: nedeni ne olursa olsun, gerçekleşmeden önce geri çekilen giriş emirleri
+    FA: سفارش‌های ورودی که پیش از پرشدن پس گرفته شدند، به هر دلیل
+[482] EN: not filled at the slippage limit
+    TR: kayma sınırında gerçekleşmeyen
+    FA: پرنشده در سقفِ لغزش
+[483] EN: closed trades
+    TR: kapanmış işlemler
+    FA: معاملاتِ بسته
+[484] EN: open
+    TR: açık
+    FA: باز
+[485] EN: average; positive = worse than the signal price
+    TR: ortalama; pozitif = sinyal fiyatından daha kötü
+    FA: میانگین؛ مثبت = بدتر از قیمتِ سیگنال
+[486] EN: stop slippage (ticks)
+    TR: stop kayması (tick)
+    FA: لغزشِ حدِ ضرر (تیک)
+[487] EN: average ticks beyond the stop price at which stop exits were filled; positive = worse
+    TR: stop çıkışlarının stop fiyatının ötesinde gerçekleştiği ortalama tick sayısı; pozitif = daha kötü
+    FA: میانگینِ تیک‌هایی که خروج با حدِ ضرر دورتر از قیمتِ حد پر شد؛ مثبت = بدتر
+[488] EN: profit before commission
+    TR: komisyon öncesi kâr
+    FA: سود پیش از کمیسیون
+[489] EN: Total net profit, USD
+    TR: Toplam net kâr, USD
+    FA: سودِ خالصِ کل، دلار
+[490] EN: Latency (order delay), log scale
+    TR: Gecikme (emir gecikmesi), logaritmik ölçek
+    FA: تأخیرِ سفارش، مقیاسِ لگاریتمی
+[491] EN: Commission per side per contract, USD
+    TR: Sözleşme başına taraf başına komisyon, USD
+    FA: کمیسیونِ هر طرفِ هر قرارداد، دلار
+[492] EN: Date (exchange time, UTC)
+    TR: Tarih (borsa saati, UTC)
+    FA: تاریخ (ساعتِ بورس، UTC)
+[493] EN: initial capital
+    TR: başlangıç sermayesi
+    FA: سرمایهٔ اولیه
+[494] EN: No closed trade in any scenario yet.
+    TR: Henüz hiçbir senaryoda kapanmış işlem yok.
+    FA: هنوز در هیچ سناریویی معاملهٔ بسته‌ای نیست.
+[495] EN: A single run: there is no latency x commission grid.
+    TR: Tek bir çalıştırma: gecikme x komisyon ızgarası yok.
+    FA: تک‌ران: شبکهٔ تأخیر × کمیسیون ندارد.
+[496] EN: Give several values in the Latency or the Commission setting.
+    TR: Gecikme veya Komisyon ayarında birden çok değer verin.
+    FA: در تنظیمِ تأخیر یا کمیسیون چند مقدار بدهید.
+[497] EN: The table above holds its figures.
+    TR: Rakamları yukarıdaki tablodadır.
+    FA: عددهایش در جدولِ بالاست.
+[498] EN: Profit
+    TR: Kâr
+    FA: سود
+[499] EN: R-Multiples (1R = initial risk: entry to the stop as placed)
+    TR: R-Multiple (1R = başlangıç riski: girişten, yerleştirildiği andaki stopa)
+    FA: R-Multiple (1R = ریسکِ اولیه: ورود تا حدِ ضررِ گذاشته‌شده)
+[500] EN: Drawdown (closed trades; open positions are not marked to market)
+    TR: Düşüş (kapanmış işlemler; açık pozisyonlar piyasa fiyatıyla değerlenmez)
+    FA: افتِ سرمایه (معاملاتِ بسته؛ پوزیشنِ باز به قیمتِ روز ارزش‌گذاری نمی‌شود)
+[501] EN: Periodic (CME trading days, 17:00 to 16:00 Chicago)
+    TR: Dönemsel (CME işlem günleri, Chicago saatiyle 17:00 - 16:00)
+    FA: دوره‌ای (روزهای معاملاتیِ CME، ۱۷:۰۰ تا ۱۶:۰۰ شیکاگو)
+[502] EN: Exposure
+    TR: Maruziyet
+    FA: در معرضِ بازار بودن
+[503] EN: Execution
+    TR: Emir Gerçekleştirme
+    FA: اجرا
+[504] EN: Gross Profit
+    TR: Brüt Kâr
+    FA: سودِ ناخالص
+[505] EN: Gross Loss
+    TR: Brüt Zarar
+    FA: زیانِ ناخالص
+[506] EN: Total Commission
+    TR: Toplam Komisyon
+    FA: کمیسیونِ کل
+[507] EN: Profit before Commission
+    TR: Komisyon Öncesi Kâr
+    FA: سود پیش از کمیسیون
+[508] EN: Commission per Side per Contract
+    TR: Sözleşme Başına Taraf Başına Komisyon
+    FA: کمیسیونِ هر طرفِ هر قرارداد
+[509] EN: Round-Turn Commission (ticks)
+    TR: Gidiş-Dönüş Komisyonu (tick)
+    FA: کمیسیونِ رفت‌وبرگشت (تیک)
+[510] EN: Initial Capital
+    TR: Başlangıç Sermayesi
+    FA: سرمایهٔ اولیه
+[511] EN: Ending Balance
+    TR: Son Bakiye
+    FA: موجودیِ پایانی
+[512] EN: Open Trades (not in the figures)
+    TR: Açık İşlemler (rakamlara dâhil değil)
+    FA: معاملاتِ باز (در عددها نیستند)
+[513] EN: Winning Trades
+    TR: Kazanan İşlemler
+    FA: معاملاتِ سودده
+[514] EN: Losing Trades
+    TR: Kaybeden İşlemler
+    FA: معاملاتِ زیان‌ده
+[515] EN: Even Trades
+    TR: Başa Baş İşlemler
+    FA: معاملاتِ صفر
+[516] EN: Avg. Winning Trade
+    TR: Ort. Kazanan İşlem
+    FA: میانگینِ معاملهٔ سودده
+[517] EN: Avg. Losing Trade
+    TR: Ort. Kaybeden İşlem
+    FA: میانگینِ معاملهٔ زیان‌ده
+[518] EN: Ratio Avg. Win : Avg. Loss
+    TR: Ort. Kazanç : Ort. Kayıp Oranı
+    FA: نسبتِ میانگینِ سود به میانگینِ زیان
+[519] EN: Largest Winning Trade
+    TR: En Büyük Kazanan İşlem
+    FA: بزرگ‌ترین معاملهٔ سودده
+[520] EN: Largest Losing Trade
+    TR: En Büyük Kaybeden İşlem
+    FA: بزرگ‌ترین معاملهٔ زیان‌ده
+[521] EN: Max. Consecutive Winning Trades
+    TR: Maks. Ardışık Kazanan İşlem
+    FA: بیشترین معاملهٔ سوددهِ پیاپی
+[522] EN: Max. Consecutive Losing Trades
+    TR: Maks. Ardışık Kaybeden İşlem
+    FA: بیشترین معاملهٔ زیان‌دهِ پیاپی
+[523] EN: Avg. Time in Trade
+    TR: Ort. İşlemde Kalma Süresi
+    FA: میانگینِ ماندن در معامله
+[524] EN: Avg. Time in Winning Trades
+    TR: Kazanan İşlemlerde Ort. Kalma Süresi
+    FA: میانگینِ ماندن در معاملاتِ سودده
+[525] EN: Avg. Time in Losing Trades
+    TR: Kaybeden İşlemlerde Ort. Kalma Süresi
+    FA: میانگینِ ماندن در معاملاتِ زیان‌ده
+[526] EN: Contracts Traded (round turns)
+    TR: İşlem Gören Sözleşme (gidiş-dönüş)
+    FA: قراردادِ معامله‌شده (رفت‌وبرگشت)
+[527] EN: Excluded Trades (no initial risk: no result under risk-based sizing)
+    TR: Hariç Tutulan İşlemler (başlangıç riski yok: riske dayalı boyutlandırmada sonuç yok)
+    FA: معاملاتِ کنارگذاشته (بی‌ریسکِ اولیه: در حجم‌دهیِ ریسک‌محور نتیجه ندارند)
+[528] EN: Trades with a Defined Initial Risk
+    TR: Tanımlı Başlangıç Riski Olan İşlemler
+    FA: معاملاتِ دارای ریسکِ اولیهٔ معلوم
+[529] EN: Trades without a Defined Initial Risk (in the P&L, no R)
+    TR: Tanımlı Başlangıç Riski Olmayan İşlemler (kâr/zarara dâhil, R yok)
+    FA: معاملاتِ بی‌ریسکِ اولیهٔ معلوم (در سود و زیان هستند، R ندارند)
+[530] EN: Avg. Initial Risk (ticks)
+    TR: Ort. Başlangıç Riski (tick)
+    FA: میانگینِ ریسکِ اولیه (تیک)
+[531] EN: Avg. Winning Trade (R)
+    TR: Ort. Kazanan İşlem (R)
+    FA: میانگینِ معاملهٔ سودده (R)
+[532] EN: Avg. Losing Trade (R)
+    TR: Ort. Kaybeden İşlem (R)
+    FA: میانگینِ معاملهٔ زیان‌ده (R)
+[533] EN: Total R
+    TR: Toplam R
+    FA: جمعِ R
+[534] EN: Profit Factor (R)
+    TR: Kâr Faktörü (R)
+    FA: ضریبِ سود (R)
+[535] EN: Mean R / Std. Dev. R (per trade)
+    TR: Ortalama R / Std. Sapma R (işlem başına)
+    FA: میانگینِ R ÷ انحرافِ معیارِ R (هر معامله)
+[536] EN: SQN (sqrt(N) x Mean R / Std. Dev. R)
+    TR: SQN (sqrt(N) x Ortalama R / Std. Sapma R)
+    FA: SQN (جذرِ N × میانگینِ R ÷ انحرافِ معیارِ R)
+[537] EN: Avg. MFE / MAE of Winning Trades (R)
+    TR: Kazanan İşlemlerin Ort. MFE / MAE Değeri (R)
+    FA: میانگینِ MFE / MAE ِ معاملاتِ سودده (R)
+[538] EN: Avg. MFE / MAE of Losing Trades (R)
+    TR: Kaybeden İşlemlerin Ort. MFE / MAE Değeri (R)
+    FA: میانگینِ MFE / MAE ِ معاملاتِ زیان‌ده (R)
+[539] EN: Avg. End Trade Drawdown (R; MFE minus the trade's result)
+    TR: Ort. İşlem Sonu Düşüşü (R; MFE eksi işlemin sonucu)
+    FA: میانگینِ پس‌دادنِ پایانِ معامله (R؛ MFE منهای نتیجهٔ معامله)
+[540] EN: Risk per Trade (risk-based sizing)
+    TR: İşlem Başına Risk (riske dayalı boyutlandırma)
+    FA: ریسکِ هر معامله (حجم‌دهیِ ریسک‌محور)
+[541] EN: Balance Reached Zero
+    TR: Bakiye Sıfıra Ulaştı
+    FA: موجودی به صفر رسید
+[542] EN: Trading Period (first signal to last exit)
+    TR: İşlem Dönemi (ilk sinyalden son çıkışa)
+    FA: بازهٔ معامله (اولین سیگنال تا آخرین خروج)
+[543] EN: Trading Days with Trades
+    TR: İşlem Yapılan İşlem Günleri
+    FA: روزهای معاملاتیِ دارای معامله
+[544] EN: Losing Days
+    TR: Kaybeden Günler
+    FA: روزهای زیان‌ده
+[545] EN: Best Day
+    TR: En İyi Gün
+    FA: بهترین روز
+[546] EN: Worst Day
+    TR: En Kötü Gün
+    FA: بدترین روز
+[547] EN: Avg. Net Profit per Day with Trades
+    TR: İşlem Yapılan Gün Başına Ort. Net Kâr
+    FA: میانگینِ سودِ خالصِ هر روزِ دارای معامله
+[548] EN: Avg. Number of Trades per Day with Trades
+    TR: İşlem Yapılan Gün Başına Ort. İşlem Sayısı
+    FA: میانگینِ تعدادِ معامله در هر روزِ دارای معامله
+[549] EN: Max. Consecutive Winning Days
+    TR: Maks. Ardışık Kazanan Gün
+    FA: بیشترین روزِ سوددهِ پیاپی
+[550] EN: Max. Consecutive Losing Days
+    TR: Maks. Ardışık Kaybeden Gün
+    FA: بیشترین روزِ زیان‌دهِ پیاپی
+[551] EN: Winning Months
+    TR: Kazanan Aylar
+    FA: ماه‌های سودده
+[552] EN: Best Month
+    TR: En İyi Ay
+    FA: بهترین ماه
+[553] EN: Worst Month
+    TR: En Kötü Ay
+    FA: بدترین ماه
+[554] EN: Avg. Monthly Net Profit
+    TR: Ort. Aylık Net Kâr
+    FA: میانگینِ سودِ خالصِ ماهانه
+[555] EN: Return on Initial Capital
+    TR: Başlangıç Sermayesi Getirisi
+    FA: بازدهِ سرمایهٔ اولیه
+[556] EN: Annualised Volatility (std. dev. of the daily return x sqrt(252))
+    TR: Yıllıklandırılmış Oynaklık (günlük getirinin std. sapması x sqrt(252))
+    FA: نوسانِ سالانه (انحرافِ معیارِ بازدهِ روزانه × جذرِ ۲۵۲)
+[557] EN: Sortino Ratio (the same returns over their downside deviation, x sqrt(252))
+    TR: Sortino Oranı (aynı getiriler bölü aşağı yönlü sapmaları, x sqrt(252))
+    FA: نسبتِ سورتینو (همان بازده‌ها بر انحرافِ نزولی، × جذرِ ۲۵۲)
+[558] EN: Calmar Ratio (annualised return / max. drawdown relative)
+    TR: Calmar Oranı (yıllıklandırılmış getiri / maks. göreli düşüş)
+    FA: نسبتِ کالمار (بازدهِ سالانه ÷ بیشترین افتِ نسبی)
+[559] EN: Max. Net Long / Net Short (contracts)
+    TR: Maks. Net Uzun / Net Kısa (sözleşme)
+    FA: بیشترین خالصِ خرید / خالصِ فروش (قرارداد)
+[560] EN: Percent of Time in the Market
+    TR: Piyasada Kalınan Süre Yüzdesi
+    FA: درصدِ زمانِ حضور در بازار
+[561] EN: Entry Orders Sent
+    TR: Gönderilen Giriş Emirleri
+    FA: سفارش‌های ورودِ فرستاده‌شده
+[562] EN: Filled Entry Orders (fill rate)
+    TR: Gerçekleşen Giriş Emirleri (gerçekleşme oranı)
+    FA: سفارش‌های ورودِ پرشده (نرخِ پرشدن)
+[563] EN: Cancelled Entry Orders
+    TR: İptal Edilen Giriş Emirleri
+    FA: سفارش‌های ورودِ لغوشده
+[564] EN: Entry Orders Not Filled at the Slippage Limit
+    TR: Kayma Sınırında Gerçekleşmeyen Giriş Emirleri
+    FA: سفارش‌های ورودِ پرنشده در سقفِ لغزش
+[565] EN: Cancel-to-Fill Ratio
+    TR: İptal / Gerçekleşme Oranı
+    FA: نسبتِ لغو به پرشدن
+[566] EN: Avg. Entry Slippage (ticks; + = worse than the signal price)
+    TR: Ort. Giriş Kayması (tick; + = sinyal fiyatından daha kötü)
+    FA: میانگینِ لغزشِ ورود (تیک؛ + = بدتر از قیمتِ سیگنال)
+[567] EN: Avg. Stop Slippage (ticks beyond the stop price; + = worse)
+    TR: Ort. Stop Kayması (stop fiyatının ötesindeki tick; + = daha kötü)
+    FA: میانگینِ لغزشِ حدِ ضرر (تیک دورتر از قیمتِ حد؛ + = بدتر)
+[568] EN: Validity Score
+    TR: Geçerlilik Puanı
+    FA: امتیازِ اعتبار
+[569] EN: Simulations x Horizon
+    TR: Simülasyon x Ufuk
+    FA: شبیه‌سازی × افق
+[570] EN: Projected Net Profit - 10th / 50th / 90th percentile
+    TR: Öngörülen Net Kârı - 10. / 50. / 90. yüzdelik
+    FA: سودِ خالصِ پیش‌نگری‌شده - صدکِ ۱۰ / ۵۰ / ۹۰
+[571] EN: Projected Max. Drawdown - 50th / 90th / 99th percentile
+    TR: Öngörülen Maks. Düşüşü - 50. / 90. / 99. yüzdelik
+    FA: بیشترین افتِ پیش‌نگری‌شده - صدکِ ۵۰ / ۹۰ / ۹۹
+[572] EN: Probability of a Net Loss
+    TR: Net Zarar Olasılığı
+    FA: احتمالِ زیانِ خالص
+[573] EN: n/a (no losing trade)
+    TR: yok (kaybeden işlem olmadı)
+    FA: ندارد (بی‌معاملهٔ زیان‌ده)
+[574] EN: episodes
+    TR: evre
+    FA: دوره
+[575] EN: days
+    TR: gün
+    FA: روز

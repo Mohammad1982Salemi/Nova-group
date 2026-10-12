@@ -229,7 +229,7 @@
         </li>
         <li class="glow reveal">
           <strong class="t-fr">De la mesure des pools à la gestion de capitaux</strong>
-          <p class="t-fr">À partir de ces résultats, l’algorithme détermine les pools auxquels allouer le capital, la plage de prix de chaque position et le moment des réallocations. Cette étape fait actuellement l’objet de recherches.</p>
+          <p class="t-fr">À partir de ces résultats, l’algorithme détermine les pools auxquels allouer le capital, la plage de prix de chaque position et le moment des déplacements. Cette étape fait actuellement l’objet de recherches.</p>
         </li>
       </ol>
       </section>
@@ -242,19 +242,19 @@
           <p class="t-fr">Sur ce marché, l’opportunité se déplace, et le capital immobile la manque. Un pool peut connaître des transactions aujourd’hui alors que le capital le quitte depuis des mois ; nous en avons vu et enregistré un cas réel dans nos données. L’algorithme compare en continu tous les pools qu’il surveille, et non une seule fois le premier jour.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fr">Une réallocation qui couvre ses coûts.</strong>
+          <strong class="t-fr">Un déplacement qui couvre son coût.</strong>
           <p class="t-fr">Chaque déplacement a un coût : les frais de transaction et l’écart de prix à la sortie comme à l’entrée. Courir après chaque taux plus élevé dépense le profit en frais. Dans notre mesure, le coût du déplacement fait partie du compte, et un déplacement qui ne le rattrape pas n’est pas effectué.</p>
         </li>
         <li class="glow reveal">
           <strong class="t-fr">Le bénéfice net, et non le taux affiché.</strong>
-          <p class="t-fr">Le taux affiché sur le tableau de bord d’un pool ne montre que les frais. Ce que nous rapportons, c’est le revenu net de la perte due au mouvement de prix, du coût de transaction et de l’écart de prix à l’entrée. Chaque composante est présentée séparément, pour que l’on voie d’où le gain vient et où il est parti.</p>
+          <p class="t-fr">Le taux affiché sur le tableau de bord d’un pool ne montre que les frais. Ce que nous rapportons, c’est les frais nets de la perte due au mouvement de prix, du coût de transaction et de l’écart de prix à l’entrée. Chaque composante est présentée séparément, pour que l’on voie d’où le gain vient et où il est parti.</p>
         </li>
         <li class="glow reveal">
           <strong class="t-fr">Une simulation confrontée à de l’argent réel.</strong>
           <p class="t-fr">Dans ce marché, de nombreux calculs sont justes sur le papier et ne le sont pas en pratique. Nous avons comparé les frais calculés par le simulateur à ceux qu’environ 44 000 positions réelles ont effectivement perçus sur la chaîne, dans six pools. Même dans le pool le plus défavorable, l’écart total reste inférieur à un dixième de pour cent.</p>
         </li>
         <li class="glow reveal">
-          <strong class="t-fr">Des données vérifiées par rapprochement avec la blockchain.</strong>
+          <strong class="t-fr">Des données vérifiées par rapprochement avec la chaîne.</strong>
           <p class="t-fr">Comparer des pools sur des données incomplètes conduit à une mauvaise décision, et des données incomplètes ne se signalent pas d’elles-mêmes. Pour l’ensemble des 136 pools, les événements archivés ont été comparés à la chaîne, et un rapport de contrôle d’intégrité a été émis pour chaque pool. Cinq types de pool sur quatre réseaux sont mesurés par un même moteur.</p>
         </li>
         <li class="glow reveal">
