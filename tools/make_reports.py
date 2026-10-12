@@ -9,7 +9,8 @@ every language) and the same way of remembering the reader's choice:
     python tools/make_reports.py some/folder     reads the simulator's files from another folder
 
 Run it again whenever the simulator writes a report anew. It changes no figure and no chart: only the words, and
-for Persian the direction of the page. It stops, saying what it missed, if a report no longer has the shape it expects.
+for Persian the direction of the page. From the gold report it also drops each run's internal label, which
+names a parameter of the rule and is shown nowhere on the page. It stops, saying what it missed, if a report no longer has the shape it expects.
 
 What it puts in comes from tools/report_i18n/:
     picker.css, picker.js     the language menu, the same in every report
@@ -19,6 +20,7 @@ What it puts in comes from tools/report_i18n/:
 """
 import base64
 import json
+import re
 import sys
 import time
 from pathlib import Path
@@ -115,6 +117,13 @@ def gold(text, css, menu):
     text = once(text, '<label>Highlight <select id="fund" aria-label="Fund"></select></label>',
                 '<label><span id="lab_high">Highlight </span><select id="fund" aria-label="Fund"></select></label>', "the highlight label")
     # the script: the figures (const D = ...) stay; the code after them is the one that knows the five languages
+    a = text.index("let A = D.scen[0], P = A.present;")
+    # each run carries the simulator's own label for it, which names a parameter of the rule. The page never shows the
+    # label and nothing reads it, so it does not travel with the published page.
+    figures, labels = re.subn(r'("run":\{)"name":"[^"]*",', r"\1", text[:a])
+    if not labels or labels != figures.count('"run":{') or '"name":' in figures[figures.index("const D = {"):]:
+        raise SystemExit("the gold report's run labels were not found where expected; nothing was written.")
+    text = figures + text[a:]
     a = text.index("let A = D.scen[0], P = A.present;")
     if not text[:a].rstrip().endswith(";") or "const D = {" not in text[max(0, a - 200000):a]:
         raise SystemExit("the gold report's figures were not found where expected; nothing was written.")
